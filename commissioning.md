@@ -15,7 +15,8 @@ here through BOSS rather than assuming one.
 | C-04 | EC step per single dose, per EC-moving channel | S-15. Same reason as C-03 | Owner | C-02, probes live |
 | C-05 | Head discharge pressure against a flowing manifold | Only needed if a pressure-based option is ever chosen. Not currently needed | Owner | Not scheduled |
 | C-06 | Whether the head holds against back-siphon with the jug above the inlet | Decides whether flooded suction is safe, and whether an anti-siphon device is required | Owner, with PUMP-BOXES stating what the head is | Jug placement |
-| C-07 | Loop turnover time, day tank through manifold and back | Feeds C-02 and the O-01 sequencing | Owner or derived by WATER from tank volume and circulation flow | Loop plumbed |
+| C-07 | Loop turnover time, day tank through manifold and back | Feeds C-02 as a FLOOR only. One turnover is not mixing to homogeneity, and the multiplier between them is a property of this tank's mixing that no agent will quote | Owner or derived by WATER from tank volume and circulation flow | Loop plumbed |
+| C-08 | pH and EC noise and drift band on this build, measured over a window at least as long as the settling interval | Added 2026-08-30. C-03 and C-04 both require a band to compare against and nothing scheduled it. Without it a measured change cannot be turned into a verdict, only into a timer. Caught by CONTROL-SOFTWARE reading commissioning.md, not by BOSS | Owner | Probes live, loop circulating, no dose in flight |
 
 Not on this list, deliberately: anything that can be read off a datasheet the
 owner pastes in. This file is only for what the build itself has to tell us.

@@ -53,6 +53,11 @@ INTERCONNECT.
 - Behaviour of every output at Pi power-up and during boot, before software
   runs. Nothing may pull in a relay or step a driver because a pin floats.
 - Box layout, heat, and screen reach, M-03.
+- Whether the box provides a clock that survives a power cut. Raised by
+  CONTROL-SOFTWARE 2026-08-30, which asserted nothing either way. All of its
+  settle-window logic is interval arithmetic, and until this is answered any
+  window spanning a restart must be treated as void rather than have an elapsed
+  time computed for it that cannot be trusted. Adjacent to S-12.
 
 ## Waiting on
 

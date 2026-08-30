@@ -86,6 +86,17 @@ memory. Return the requirement and a search term. Do not invent a steps per
 millilitre figure, not even as a placeholder: nothing downstream measures it, so
 a wrong number is invisible until plants die.
 
+## F-004 answer, 2026-08-30
+
+Returned in subsystems/control-software-f004.md. Stopped part-way, not declared
+finished. The verification logic is not written and will not be written until
+C-02 exists, per D-012, because a placeholder in this code is invisible until it
+is wrong and nothing downstream can check it.
+
+What it produced that is now BOSS-held: commissioning row C-08, the missing probe
+noise and drift band; interface S-18, the chiller as a contaminant of settle
+windows; and findings F-005, the S-15 wording tension.
+
 ## Search record, 2026-08-30, interface S-14
 
 CONTROL-SOFTWARE was invoked with source access to answer what the fault

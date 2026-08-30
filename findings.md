@@ -11,6 +11,7 @@ mean the design has been checked. Almost nothing has been checked.
 | F-001 | Owner, before any subsystem was invoked | Between DOSING, PUMP-BOXES and CONTROL-SOFTWARE | No per-channel dose verification exists, and none at rest | Open design question, routed. Options returned, see subsystems/dosing-verification-options.md. Nothing decided. No sensor added | 2026-08-30 |
 | F-002 | DOSING, answering F-001 | The jug end of the wet path, Z3 and Z4 | A jug reconnected to the wrong channel after a change produces the exact F-001 symptom, a batch completing with one nutrient missing. No flow-measuring option catches it: eight healthy flow readings are fully consistent with two jugs swapped | Left open. It is a physical identity problem, not an instrument problem. The options that address it, O-09 identity at all three ends and O-11 keyed couplings, are among the cheapest on the list and neither is decided | 2026-08-30 |
 | F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | ASSIGNED 2026-08-30 by D-016. WATER primary, MAIN-PANEL the other end. No longer in the gap | 2026-08-30 |
+| F-005 | CONTROL-SOFTWARE, reading S-15 against F-004 | Interface row S-15, BOSS's own wording | S-15 says the EC check is "valid only during a dose". F-004 says the observable arrives after the dose. Taken literally together they define a window in which the evidence cannot appear | Not fixed. CONTROL-SOFTWARE reported it rather than acting on it, which is correct: S-15 is a FROZEN row and BOSS's. The reading it worked to is that the window is anchored to the dose and extends past it by the settling interval, but that is a reading, not what the row says. Owner to rule | 2026-08-30 |
 | F-004 | Owner, from the S-16 constraints | Every implicit verification in the system | All of them read the day tank after recirculation, because the probes are upstream of every injection point. Each is therefore delayed by an interval nobody has measured. Named for pH at S-16, but it applies equally to the EC check at S-15 and was not stated when S-15 was frozen | Open and routed to DOSING and CONTROL-SOFTWARE between them. Not fixable by either alone and not a defect in either | 2026-08-30 |
 
 ## F-001 in full
@@ -119,3 +120,23 @@ and the two things that catch it sit at the bottom of the cost list.
 
 O-19 is off the table, D-014. Matched identity at head, tube and jug, and keyed
 couplings, come back as their own proposal, separate from the nineteen, D-015.
+
+## F-005 in full
+
+S-15 as frozen: EC rise during a dose is the whole-loop check, "valid only
+during a dose".
+
+F-004: the probe reads the day tank, so the change appears only after the dose
+has circulated back and mixed.
+
+Literally, the check is valid only in a window during which its evidence cannot
+have arrived. The row as written excludes the moment it is supposed to describe.
+
+CONTROL-SOFTWARE built its answer on the reading that the window is anchored to
+the dose and extends past the last step by the settling interval. It flagged that
+this is an interpretation rather than what the row says, and did not act on it
+further. That is the correct behaviour for a boundary defect.
+
+This is the second consequence of T-005 to surface from the same freeze. The row
+needs rewording and the rewording is a decision, not a costless fix, so BOSS has
+not made it.
