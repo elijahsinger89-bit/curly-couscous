@@ -115,3 +115,103 @@ dose that has not arrived yet, and it will report healthy doses as failures.
 The general shape: a constraint that is frozen and correct, G-10, has a
 consequence somewhere else that nobody wrote down. Freezing a row is not the
 same as understanding what the row costs. See findings.md F-004.
+
+# Traps carried in from prior work on THIS EXACT HARDWARE
+
+Supplied by the owner 2026-08-30. These are not hypotheticals and not general
+wisdom. Each cost several sessions. They are written here so the next agent
+recognises one rather than finding it the slow way.
+
+## T-006 An open-collector device sinks and cannot source
+
+A ULN2003 or any open-collector device SINKS. If it drives a coil, the coil
+positive comes from the supply and the device takes the RETURN.
+
+Getting it backwards produces a coil that can never operate, **and every check
+still passes**, because each end looks correct in isolation.
+
+Live relevance: DISPLAY-BOX's logic board drives relay and contactor coils that
+belong to MAIN-PANEL, interfaces S-07 and S-09. Both ends of that crossing must
+state which side is the supply and which is the return before either is built.
+
+## T-007 An open-collector driver on a remote board needs a shared common
+
+No shared common conductor back to the supply it switches against means no
+current flows. **Both ends of the wire can land correctly and the circuit still
+does nothing.** Trace the loop by hand.
+
+Live relevance: the logic board is in the display box and the coils are in the
+main panel, 4 ft apart. That is exactly the remote-board case.
+
+## T-008 A cable declared as N conductors is not N landed conductors
+
+Count LANDINGS, never the jacket. Cables declared six and landed two happened
+twice.
+
+## T-009 A terminal carrying exactly one conductor is an open circuit, not a spare
+
+## T-010 Count clamps against conductors
+
+Two bus terminals landed twelve conductors on eight clamps for months.
+
+## T-011 Colour is not identity unless it is unique in the jacket
+
+Two conductors in one jacket cannot share a colour. A colour that changes at a
+terminal must be documented, or a builder assumes it is an error and "fixes" it.
+
+## T-012 A quantity asserted rather than derived
+
+It will be correct until the data moves, **and nothing will tell you when it
+stops being correct.** Seven separate instances occurred.
+
+The fix is always the same: **derive it, or make the check an identity rather than
+a bound.** A bound passes while the number drifts. An identity fails the moment
+the two sides disagree.
+
+## T-013 A procedure step that names a terminal by list index
+
+It follows the index and not the meaning when the data behind it changes. One such
+step instructed a builder to verify a short across a 5 V supply and tick the box.
+
+Names, never positions. This is the same disease as the positional channel list
+forbidden in channel-token.md.
+
+## T-014 A check whose condition is a literal True
+
+It passes forever and hides exactly what it names. A green check is evidence of
+nothing until you have read what it tests.
+
+## T-015 The most expensive class: a part substitution that looks like a naming problem
+
+The package was designed for an opto-isolated driver. A non-isolated CMOS breakout
+was bought. That single substitution produced:
+
+- wrong pin names
+- a missing logic supply
+- two returns bonded on one pin
+- a parallel return path
+- a ground loop
+
+**They were reported as six findings and they were one cause.**
+
+How to recognise it: several findings appear at once, in different subsystems,
+each individually plausible and individually small, and each fix is a rename or a
+rewire. Stop and ask what part the design assumed. Six symptoms with one
+substitution behind them is cheaper to fix once than six times.
+
+**LIVE RIGHT NOW.** The Adafruit 6121 IS a non-isolated CMOS breakout with screw
+terminals, a separate VDD logic supply, no differential pairs and no opto. See
+parts.md. Anything in this project that was drafted assuming an opto-isolated
+differential step and direction interface is already wrong and must be re-read
+against the real pin list before it is built. Interfaces S-10 and P-06.
+
+## The method that found most of them
+
+**Not review, and not auditing a document against itself.** Every serious defect
+surfaced when one subsystem had to BUILD against another and could not proceed
+until it knew what a real part actually does.
+
+**A model checked against itself is self-consistent, not verified.**
+
+This is the same method already recorded under T-002, arrived at independently
+from real build experience. Two separate lines of evidence for one rule.

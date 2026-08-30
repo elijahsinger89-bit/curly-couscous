@@ -235,3 +235,42 @@ written the row said the EC check is valid only during a dose, which is a window
 in which its own evidence cannot exist. The row now says the window is anchored
 to the dose and extends past the last step by the settling interval. The
 correction is recorded here rather than made silently, because S-15 is frozen.
+
+**D-025 The S-18 reassessment, against the temperature facts now on file.**
+The owner asked BOSS to check whether the setpoint changes the S-18 reasoning. It
+does, and it changes it against D-023 rather than for it.
+
+The facts: setpoint 66 F, pull down at 68, stop at 64, room 62 to 65. The chiller
+only cools. So the tank's natural drift is toward a room that sits BELOW the
+pull-down point, and the chiller has very little work to do. That is exactly the
+case WATER predicted would make most of S-18 moot.
+
+What that does to each side of the trade:
+
+| | Effect |
+|---|---|
+| WATER's objection 1, starts per hour | WEAKENS. A compressor that rarely runs is rarely truncated mid-run by a hold-off, so the cycle fragmentation WATER objected to mostly does not arise |
+| WATER's objection 2, G-12 stops the loop pump too | UNCHANGED, and now unconditional. The loop pump runs whenever the contactor is closed, regardless of what the compressor is doing. And the submersible is IN THE DAY TANK, F-012, so holding the chiller off removes a mixing source from the tank during the settle window |
+| The BENEFIT of D-023, avoiding temperature steps in the trace | SHRINKS in proportion to how rarely the compressor runs. There are fewer steps to avoid |
+
+**So D-023 mostly switches off a mixing pump to avoid a temperature step that
+mostly is not happening.** The benefit shrank and the cost did not.
+
+One thing that pulls the other way and must be checked rather than assumed: the
+circulation submersible puts essentially all of its electrical input into the water
+it sits in, and it runs continuously through a settle window. **The moment the
+chiller is MOST likely to be called is during extended circulation, which is
+exactly when the settle windows are.** So "the chiller rarely runs" may not hold
+during the window, which is the only time S-18 is about. Nobody has measured that.
+It is a question for C-02's trace and for WATER, not something BOSS will assume in
+either direction.
+
+D-023 is therefore put back to the owner rather than confirmed. BOSS's
+recommendation, stated as a recommendation: drop the hold-off, let C-02 and C-08
+measure whether a compressor cycle actually appears in the trace at this setpoint,
+and reinstate the hold-off only if it does. That keeps the mixing source, and it
+replaces an assumed disturbance with a measured one.
+
+**D-026 parts.md is authoritative.** Every figure in it came from the owner with
+the part in hand or the datasheet open. No agent may contradict a line in it and
+no agent may extend it from memory. Anything not in it is not known.

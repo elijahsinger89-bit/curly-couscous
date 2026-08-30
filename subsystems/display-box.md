@@ -34,9 +34,13 @@ INTERCONNECT.
 
 - Pi 5, display, three EZO circuits and two ISCCB-2 carriers are bought.
 - EZO circuits are read over I2C.
-- Three EZO circuits sit on two carriers, so one carrier holds more than one.
-  Confirm the addressing consequence from the ISCCB-2 datasheet the owner
-  supplies. Do not assume it.
+- **CLOSED by parts.md: EZO pH on one ISCCB-2, EZO EC on the other, EZO RTD on NO
+  carrier.** pH and EC share a solution and must be isolated from each other; a
+  resistance measurement has no solution ground path, so there is nothing to
+  isolate.
+- **The EZO circuits SHIP IN UART MODE, not I2C. Each must be manually switched
+  with a jumper procedure before the Pi can see it, and the mode pin differs by
+  circuit type.** Commissioning C-14, and it must happen before the box is closed.
 
 ## Open, owned by DISPLAY-BOX
 
@@ -52,6 +56,21 @@ INTERCONNECT.
   separately.
 - Behaviour of every output at Pi power-up and during boot, before software
   runs. Nothing may pull in a relay or step a driver because a pin floats.
+  **Sharpened 2026-08-30: EN unwired leaves the 6121 ENABLED, so the driver's
+  power-up default is on, not off.** Interface P-09.
+- **The Pi is powered independently and nothing in the panel can power cycle it,
+  so a watchdog is the only recovery path.** That is a display-box hardware
+  question as much as a software one.
+- **The box is NEMA 4X polycarbonate with a gasketed display cutout, so it offers
+  no bonding path. Every equipment ground lands on a ground bar, not on the box.**
+- Read traps.md T-006 and T-007 before drafting any coil drive. An open-collector
+  device sinks and cannot source, and a remote open-collector driver needs a
+  shared common back to the supply it switches against. The coils are in the main
+  panel, 4 ft away, which is exactly the remote-board case.
+- **F-011: the two contacts feeding this box, S-03 and S-08, are below the
+  minimum switching load of the contacts that produce them.** An oxidised aux
+  contact on S-08 fails intermittently, and an intermittently open readback either
+  reports a welded contactor that is fine or misses one that is not.
 - Box layout, heat, and screen reach, M-03.
 - Whether the box provides a clock that survives a power cut. Raised by
   CONTROL-SOFTWARE 2026-08-30, which asserted nothing either way. All of its

@@ -121,6 +121,29 @@ in commissioning.md.
 
 Revisit the coupling after C-09 exists and the jug procedure is in use.
 
+## Unblocked 2026-08-30 by parts.md
+
+F-05 and F-06 are closed on size: 3/16 in straight barb mating PharMed BPT B25,
+4.8 mm ID by 8.0 mm OD, 1.6 mm wall. The F-002 proposal was blocked on F-06 and is
+no longer blocked on size. Tubing selection is still DOSING's: chemical
+compatibility per product, and translucency under D-019.
+
+**The fixed-tube null head shapes the jug path and it matches what DOSING
+proposed.** The installed BPT loop is short and external tubing joins at its ends,
+so the break point at the jug, and any keyed coupling if one is ever taken, sits on
+external tubing and never on the pump tube. Confirmed, not assumed.
+
+**New and unowned: interface F-10, the pump tube itself.** PharMed BPT B25, wetted,
+a consumable at about 1000 h, inside PUMP-BOXES' head and part of DOSING's wet
+path. D-006 gave DOSING the wet path and stopped PUMP-BOXES at the barb, which
+leaves the tube between them. Answer jointly with PUMP-BOXES. Whoever owns it also
+owns the change interval, the change procedure, and telling CONTROL-SOFTWARE that
+C-01 is void for that channel.
+
+**A worn tube is F-001 arriving slowly.** It delivers less per revolution while
+every instrument reads healthy, and the back-pressure calibration drifts across
+tube life. The re-measure trigger is a tube change, not a date.
+
 ## Waiting on
 
 | From | What |
