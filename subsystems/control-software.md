@@ -109,6 +109,29 @@ What it produced that is now BOSS-held: commissioning row C-08, the missing prob
 noise and drift band; interface S-18, the chiller as a contaminant of settle
 windows; and findings F-005, the S-15 wording tension.
 
+## P-09 answer, 2026-08-30
+
+subsystems/control-software-p09.md. Stopped part-way. Nothing buildable: P-09,
+S-07 and S-08 are all OPEN.
+
+The framing that changes everything else: **the permissive drops on ordinary
+shutdown too, so this handler runs on the NORMAL path several times a day, most
+often with nothing in flight. It is not an exception handler.** A handler that
+raises a loud fault on every shutdown gets switched off. Severity splits;
+the record never does.
+
+Three things to carry forward regardless of what P-09 settles:
+- **The delivered fraction is a bound structure, not a number.** commanded,
+  ceiling from write-ahead, floor = zero. The step index at the halt is a
+  COMMANDED count and is not evidence of delivery.
+- **The asymmetric readback discipline.** An apparent drop is qualified over
+  samples; an apparent WELD latches on a single sample and never clears. An
+  oxidising contact then produces false stops and never a missed weld, which is
+  D-017's chosen direction of error applied to a different signal.
+- **The watchdog is fed from the sequencer loop, never from an independent timer
+  thread.** A timer that keeps ticking while the sequencer is wedged is T-014 in
+  the most expensive place on this build.
+
 ## Search record, 2026-08-30, interface S-14
 
 CONTROL-SOFTWARE was invoked with source access to answer what the fault
