@@ -516,6 +516,16 @@ If it needs a file it was not given, saying so is itself a finding: **a picture 
 cannot be checked without a document nobody handed you is a finding about the
 picture.**
 
+**D-041 AUDIT runs per return, pairwise, not per batch.** Written into agents.md as
+its invocation rule. It finds things by comparing two parties on one fact: two
+returns and it compares them, six and it summarises them, which is worth much less
+and costs more. Each run gets the return that just landed, the frozen rows it
+builds against, and any earlier return touching the same fact. Nothing else.
+
+It had nothing to compare until two subsystems had reported on overlapping ground,
+which is why it had not run before 2026-08-30. That was correct. From here it runs
+on every return that touches a frozen row or another subsystem's slice.
+
 **INTERCONNECT is deliberately NOT invoked yet.** It needs the pin map and the panel
 layout and both are in flight. Invoking it now would have it build against two
 moving targets, which is the same mistake as designing a UI against a moving fault

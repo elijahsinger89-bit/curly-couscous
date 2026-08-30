@@ -48,6 +48,22 @@ output is questions, not assertions, and it cannot silently fix what it finds.
 It exists because a subsystem that passes its own checks is self-consistent, not
 verified.
 
+### When AUDIT runs, and it is not on a schedule
+
+**Invoke it after every subsystem return that touches a frozen row or another
+subsystem's slice. Not on a schedule and not on a batch.**
+
+The reason is what it is for: **it finds things by comparing two parties on one
+fact. Give it two returns and it compares them. Give it six and it summarises
+them, which is worth much less and costs more.**
+
+Each time, hand it exactly: **the return that just landed, the frozen rows that
+return builds against, and any earlier return that touches the same fact. Nothing
+else.** No general access to the tree.
+
+A run scoped to one fact across two or three parties is the unit. A run scoped to
+"everything so far" is not an audit, it is a summary.
+
 ## INTEGRATOR
 
 Mandatory now that a shared tree exists. Its only job is to take a finished
