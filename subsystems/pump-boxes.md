@@ -74,9 +74,11 @@ non-isolated CMOS breakout.
 - **Thermal, C-15.** Four motor bodies and four drivers in one sealed plastic box.
   G-06, one pump at a time, is a THERMAL constraint and the only thing that could
   ever relax it is that measurement.
-- **The pump tube, interface F-10.** PharMed BPT B25, wetted, a consumable at
-  about 1000 h, inside your head and part of DOSING's wet path. Nobody owns it.
-  Answer jointly with DOSING.
+- **The pump tube is NOT yours.** Interface F-10 closed by D-028: DOSING owns it,
+  including the change interval and procedure. Your head is a mechanical mount
+  that happens to have a tube in it, and you stop at the barb per D-006. What you
+  do owe DOSING is whatever the head requires of a tube change: access, clearance,
+  and whether the box must be opened to do it.
 
 ## Previously open, now closed by parts.md
 

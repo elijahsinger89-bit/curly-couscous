@@ -274,3 +274,49 @@ replaces an assumed disturbance with a measured one.
 **D-026 parts.md is authoritative.** Every figure in it came from the owner with
 the part in hand or the datasheet open. No agent may contradict a line in it and
 no agent may extend it from memory. Anything not in it is not known.
+
+**D-027 D-023 IS REVERSED. The chiller is NOT held off across settle windows.**
+Both entries stay on file, per the rule that a reversed decision keeps both and
+says why.
+
+D-023 said: hold the chiller off across settle windows, because chiller cycling
+moves temperature and temperature moves both readings. Reason it was made: read
+cleanliness beats a small temperature excursion.
+
+Why it is reversed, 2026-08-30, after the setpoint facts arrived:
+
+- At a 66 F setpoint in a 62 to 65 F room the compressor rarely runs, so a
+  hold-off mostly prevents a temperature step that mostly is not happening.
+- G-12 guarantees the hold-off always stops the chiller loop submersible, and
+  F-012 established that submersible is in the day tank. So it always removes a
+  mixing source.
+- **That is paying a certain cost for an occasional benefit.**
+- And the thing BOSS refused to assume in either direction is the reason to
+  reverse rather than keep it conditionally: if extended circulation is what heats
+  the tank enough to call the chiller, then the settle windows are exactly when
+  the chiller is most likely to run AND exactly when losing the loop pump hurts
+  most. **Both effects concentrate in the same window, which makes the hold-off
+  worst precisely where it was supposed to help.** Nobody has measured it.
+
+**What replaces it: record the chiller state with every reading.** The Pi commands
+the contactor, so it knows. Every pH, EC and temperature sample is tagged with
+whether the chiller was commanded on. It costs nothing, it keeps the mixing pump
+running, and it turns a contaminant into a known variable that can be filtered
+later if it turns out to matter.
+
+If C-02 and C-08 show the chiller genuinely corrupts a reading, revisit with data.
+D-023 stays on file as declined-with-reason so it is not rediscovered from
+scratch.
+
+Note the shape, because it is the second time: the chiller state is COMMANDED
+state, not measured state. Tagging a sample with it is legitimate because it
+records what the Pi asked for. It is not evidence the compressor was running, and
+no code may present it as such. parts.md's rule stands: software never reports
+commanded state as measured state.
+
+**D-028 The pump tube belongs to DOSING.** Interface F-10 closed. It is wetted, it
+is a consumable, and it is in the path DOSING already owns end to end.
+PUMP-BOXES stops at the barb by D-006. **The head is a mechanical mount that
+happens to have a tube in it.** DOSING therefore also owns the change interval,
+the change procedure, and telling CONTROL-SOFTWARE that C-01 is void for that
+channel after a change.

@@ -58,6 +58,29 @@ This is the same rule already in agents.md for stalled threads, promoted to a
 method: reviewing finds nothing, using finds everything. It applies to seams that
 are missing, not only to seams that are contested.
 
+### The second method, from the third instance
+
+The third instance was the pump tube, interface F-10. PharMed BPT B25: wetted, a
+consumable at about 1000 hours, living inside PUMP-BOXES' head and forming part of
+DOSING's wet path. D-006 gave DOSING the wet path and stopped PUMP-BOXES at the
+barb, and the tube fell between them.
+
+**It did not surface from reading the table. It surfaced when an external fact
+arrived** - a manufacturer spec sheet naming a consumable nobody had known was
+there. Nothing in the tree implied it, because nothing in the tree knew the head
+had a serviceable tube in it.
+
+So there are two methods, not one:
+
+1. **Assign work that cannot proceed without crossing the gap.** Found instances
+   one and two.
+2. **Re-read the seams every time an external fact arrives.** A new datasheet, a
+   measured figure, a part in hand. New facts create seams that did not exist when
+   the table was written, and they expose seams the table never had words for.
+   Found instance three.
+
+Both are cheap. Neither is inspection.
+
 ## T-003 Asserting from absence
 
 Not yet hit in this project. Seeded because BOSS's own instructions name it as

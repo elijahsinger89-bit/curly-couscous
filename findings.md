@@ -12,6 +12,7 @@ mean the design has been checked. Almost nothing has been checked.
 | F-002 | DOSING, answering F-001 | The jug end of the wet path, Z3 and Z4 | A jug reconnected to the wrong channel after a change produces the exact F-001 symptom, a batch completing with one nutrient missing. No flow-measuring option catches it: eight healthy flow readings are fully consistent with two jugs swapped | Left open. It is a physical identity problem, not an instrument problem. The options that address it, O-09 identity at all three ends and O-11 keyed couplings, are among the cheapest on the list and neither is decided | 2026-08-30 |
 | F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | ASSIGNED 2026-08-30 by D-016. WATER primary, MAIN-PANEL the other end. No longer in the gap | 2026-08-30 |
 | F-010 | Owner, in parts.md | The 24 V rail, and everything on it | **The rail is not 24 V. It is whatever the NDR-240-24's front panel trimmer is set to: 23.76 to 28.28 V, with OVP not tripping until 29 V, and nothing fixes the trim position.** Every device on that rail sees whatever it is at, including eight driver VM inputs and two 24 Vdc contactor coils | Not fixed. Nobody has stated the 6121's VM range from its datasheet, and BOSS will not state it from memory. Routed to PUMP-BOXES to return the range, to MAIN-PANEL to set and record the trim, and to commissioning C-16 to record where it was left | 2026-08-30 |
+| F-013 | BOSS, reading parts.md against S-08 | MAIN-PANEL, the permissive readback contact | parts.md records the 22.32 as **2 NO, 25 A**, and lists no auxiliary block. The permissive readback at S-08 needs a contact. If the second NO pole is being used as the readback, then a 25 A power pole is switching a 3.3 V logic input, which is the textbook dry-circuit oxidation case and makes F-011 much worse than a general caution. BOSS does not know which pole is intended and is not assuming | Open, and a question to the owner: is there an auxiliary contact block on the 22.32 that is not in the parts list, or is the readback the second NO pole? | 2026-08-30 |
 | F-011 | Owner, in parts.md | MAIN-PANEL contacts feeding the Pi | Minimum switching load differs by part: the 55.34 needs 300 mW at 5 V and 5 mA, the 22.32 needs 1000 mW at 10 V and 10 mA, and a contact switching below its minimum oxidises. **The two contacts that feed the Pi are exactly the low-current case:** S-03, the day tank fill-in-progress dry contact, and S-08, the permissive auxiliary readback. A 3.3 V logic input draws far less than either minimum | Not fixed. It is MAIN-PANEL's contact and DISPLAY-BOX's input circuit, and the fix is a choice between them. Reported because an oxidised contact fails intermittently and INTERMITTENTLY OPEN ON S-08 MEANS THE READBACK REPORTS A WELDED CONTACTOR THAT IS FINE, OR MISSES ONE THAT IS NOT | 2026-08-30 |
 | F-012 | BOSS, against its own tree | The chiller loop submersible's tank | The owner stated in his second message that the second submersible sits IN THE DAY TANK. BOSS never wrote it down. WATER then searched F-08, P-05, water.md and dosing-f004-wet-side.md, correctly reported that no file stated it, and had to leave F-008 conditional on it | Fixed now, in parts.md and water.md. Recorded as a finding rather than quietly corrected, because the failure is BOSS's and it is the exact failure the tree exists to prevent: a fact stated once in conversation and never written down is a fact nobody has. It cost WATER a conditional it did not need to carry | 2026-08-30 |
 | F-008 | WATER, on S-18 | Between G-12 and D-023 | G-12 puts the chiller and its loop pump on ONE contactor. So "hold the chiller off across settle windows" also stops the chiller loop submersible. If that pump sits in the day tank, D-023 removes a mixing source during exactly the window in which we are waiting for the tank to mix, and **lengthens the very interval it is applied across.** It buys read cleanliness with settle time | Not fixed. No file states which tank the chiller loop submersible sits in: WATER checked F-08, P-05, its own file and DOSING's. That placement is WATER's open item and is now load-bearing on t_settle in a way it was not before | 2026-08-30 |
@@ -244,3 +245,32 @@ recommends W-1, the temperature step at the probes when the standing column is
 displaced, plus W-5, the operator's eyes at the return drop, because both are free
 and neither forecloses anything, and holding the flow element pending the return
 drop geometry. That is D-019's pattern applied again.
+
+## Search terms for F-010 and F-011, requested by the owner 2026-08-30
+
+BOSS states no figure for any of these. These are lookups, and the answers go into
+parts.md when they come back.
+
+**F-010, the 6121's VM range against a rail that can sit at 28.28 V:**
+- Adafruit 6121 TMC2209 stepper driver breakout datasheet motor supply voltage range
+- Adafruit TMC2209 breakout pinout VM VDD specifications
+- TMC2209 datasheet absolute maximum ratings motor supply voltage
+- TMC2209 recommended operating VM range
+
+What is wanted is two numbers: the recommended maximum VM and the absolute maximum
+VM, so the 28.28 V worst case can be checked against both rather than against one.
+The absolute maximum is not a design limit, and a rail sitting near it is not the
+same as a rail transiently reaching it.
+
+**F-011 and F-013, whether the Finder contacts suit the two Pi-facing circuits:**
+- Finder 22.32 datasheet auxiliary contact block accessory
+- Finder 22.32 technical data minimum switching load
+- Finder 55.34 minimum switching load gold plated contact option
+- Finder 55.34 AgNi versus gold contact low level signal dry circuit
+- relay contact dry circuit switching gold plated low level signal
+
+What is wanted: whether either part is available with, or already has, a contact
+material suited to a dry-circuit load, and whether the 22.32 takes an auxiliary
+block at all. If the readback is the second 25 A NO pole, the question becomes
+whether that pole can be made reliable at logic-level current or whether the
+readback must be taken somewhere else entirely.

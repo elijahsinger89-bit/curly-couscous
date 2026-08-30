@@ -140,6 +140,13 @@ leaves the tube between them. Answer jointly with PUMP-BOXES. Whoever owns it al
 owns the change interval, the change procedure, and telling CONTROL-SOFTWARE that
 C-01 is void for that channel.
 
+**F-10 is CLOSED: DOSING owns the pump tube.** D-028. It is wetted, it is a
+consumable, and it is in the path DOSING already owns end to end. The head is a
+mechanical mount that happens to have a tube in it, and PUMP-BOXES stops at the
+barb per D-006. DOSING therefore also owns the change interval, the change
+procedure, and telling CONTROL-SOFTWARE that C-01 is void for that channel after a
+change.
+
 **A worn tube is F-001 arriving slowly.** It delivers less per revolution while
 every instrument reads healthy, and the back-pressure calibration drifts across
 tube life. The re-measure trigger is a tube change, not a date.
