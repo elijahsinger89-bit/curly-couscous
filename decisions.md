@@ -69,6 +69,7 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
+| G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design** |
 | G-26 | **THE PANEL RUNS WITHOUT THE PI.** Fills, transfer, circulation and chiller all operate on float and interlock logic with no computer involved. **The Pi adds dosing and removes driver power. If it dies, the water system keeps running and only dosing stops** | Frozen 2026-08-30, D-052. Deliberate, and recorded as a property rather than left to be rediscovered |
 | G-27 | **A COMPLEMENTARY PAIR IS A FAIL-DETECT, and the construction rule is: BOTH LEGS AT THE SAME POTENTIAL, ON THE SAME CABLE.** Then a severed conductor makes them contradict, and **any state where both agree is a broken sense path** | Frozen 2026-08-30, D-053. Free wherever two legs of one changeover are already bought. It converts a fail-safe into a fail-detected, which is T-012's rule arriving in hardware |
 | G-28 | **RELAYS ARE NOT INTERCHANGEABLE ONCE BOUGHT. Which relay goes in which socket is a BUILD FACT, labelled BY NAME and never by position** | Frozen 2026-08-30, D-054. Dry-circuit duty and receptacle duty want different contact materials, and using a dry-circuit contact at high current destroys the property it was bought for. T-013 |
@@ -769,3 +770,60 @@ And an operational consequence to make visible rather than discovered: **a latch
 dry-run trip now stops circulation until a human presses RESET, and the Pi cannot
 restart it.** It can log and alert, since it never loses power, but it cannot
 recover. Consistent with G-26's philosophy.
+
+**D-061 The DIR question is answered, and D-055's thesis is proved: it was a routing
+question.** G-29 frozen.
+
+**Segment 5 is good news and it is fixed by the board.** At the driver terminal
+block DIR's two physical neighbours are STEP and EN, **and neither is an energised
+rail.** VDD is six terminals away and VM eight. **So the two worst adjacencies in
+this build - F-031's VDD-to-VM closest approach, and DIR's exposure - sit at
+opposite ends of one part and do not interact.** Nothing needs doing there and
+nothing can be done: the order is the board's.
+
+**With DIR paired to its own return, the two G-22 failures stop being opposite and
+converge on one state.** F-033's limit was correct for sixteen conductors in a
+common jacket and is dissolved by construction.
+
+**The frequency argument transfers, and PUMP-BOXES said precisely where it
+weakens.** It holds cleanly in the cable: the mechanisms that cause insulation
+failure to a specific energised neighbour - abrasion, crush, over-temperature,
+chemical attack, UV, flexing - **are none of them present** on a 4 ft indoor
+wall-mounted run at 62 to 65 F. **And the strongest evidence is not generic
+reliability data, it is traps.md: T-008 to T-011 are ALL termination failures, all
+recorded because they actually bit this owner on this kind of work.**
+
+**It weakens at the terminations**, where the short mechanism is not insulation but a
+stray strand, **and the landing field the fix requires ADDS whisker opportunities.**
+That reinforces the soldered-carrier option against the terminal-strip option on
+this specific ground, and **makes ferrules on every stranded conductor a requirement
+rather than a preference.**
+
+**And one severing mechanism nobody had named: the lid is a heavy serviceable
+assembly carrying four motors, lifted with its wiring attached every time the box is
+opened. A recurring strain event applied directly to interior terminations, on a
+schedule, with no short-circuit counterpart.**
+
+**PUMP-BOXES' honest qualification, kept because it is the part that stops this
+being a rule of thumb: frequency is not the only axis. The two outcomes are not
+symmetric in consequence. Choosing on frequency is right HERE only because pairing
+lets the likelier failure and the safe state coincide. It would not have been
+sufficient on frequency alone.**
+
+**D-062 THE GATE, and it has a deadline.** Findings F-049.
+
+**Links (a) DIR level to rotation and (b) rotation to flow through the head as
+mounted are settled BEFORE the S-10 cable is bought and before any resistor is
+fitted.** Link (c), which flow direction is safe, is established and was correctly
+not reopened.
+
+The reason it is a gate and not a preference: **the convergence is an amplifier.**
+Pairing makes both failures produce one level, which is a win only if that level is
+safe. **If DIR low is the backwards direction, pairing makes it worse rather than
+better, because both failures would then give the unsafe rotation instead of one of
+them.** And F-030 already says the pairing is cheaper before the cable is bought, so
+**the cable decision and the polarity decision collide on the same missing fact.**
+
+If they resolve against low being safe, D-043 and F-030 are revisited by the owner,
+not worked around by an agent. PUMP-BOXES refused to substitute a pull-up on its own
+initiative for exactly that reason, twice now.
