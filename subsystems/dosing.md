@@ -68,10 +68,20 @@ Answer three things for your path, manifold to head to jug:
 - what it would cost
 - where it would land physically
 
-Return options with a requirement and a search term each. Do not pick a part, do
-not add a sensor, do not change the manifold. The owner decides. He expects to
-decline a flow meter per channel and wants the option written down anyway so
-declining it is a decision rather than a gap.
+ANSWERED 2026-08-30. Nineteen options are in
+subsystems/dosing-verification-options.md, ranked by cost, each with a
+requirement, a search term, the numbers it needs, its physical landing and its
+crossings. O-19, a flow meter per channel, is written down honestly costed and
+neither softened nor advocated. Nothing is decided and nothing was changed.
+
+Two things came out of that answer and are now BOSS-held:
+- findings.md F-002, a jug reconnected to the wrong channel, which no
+  flow-measuring option catches.
+- interface-table.md S-16, the pH probe appearing to cover two of the three
+  channels F-001 calls EC-invisible. That extends FROZEN row S-15, so it is the
+  owner's decision.
+
+DOSING did not declare itself finished and BOSS has not declared it finished.
 
 ## Waiting on
 
