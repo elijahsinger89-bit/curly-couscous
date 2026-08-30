@@ -91,6 +91,15 @@ the unsafe direction is a defect, not a tolerance.**
 Include the outputs. A severed coil drive is a different question from an input,
 and a step or direction line to a driver whose EN defaults ENABLED is a third.
 
+**EXTENDED 2026-08-30 by D-039: TWO COLUMNS PER SIGNAL.** The severed case is one
+failure mode. **The other is a SHORT, and for outputs it is often the dangerous
+one.** A severed step line stops a pump; a step line shorted to the 5 V rail
+asserts it permanently, and with EN defaulting enabled that is a driver being
+clocked or held by something other than the Pi. **The adjacent conductor in a duct
+or a jacket is the realistic short, not ground in the abstract, so the answer must
+say what each signal is actually next to.** This may confirm the pair and class
+work rather than find anything, which is a fine outcome.
+
 ## Waiting on
 
 | From | What |

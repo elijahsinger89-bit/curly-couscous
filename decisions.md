@@ -69,7 +69,7 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
-| G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE.** For every Pi input, without exception, the question is asked deliberately: what does a severed cable read as, and is that reading the safe one. An input that fails in the unsafe direction is a DEFECT, not a tolerance | Frozen 2026-08-30. See D-036. The check is cheap and it is asked of every input, not only of the two that already have circuits |
+| G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE.** For every signal, without exception, TWO questions are asked deliberately: **what does a SEVERED conductor do, and what does a SHORT TO THE NEAREST ADJACENT RAIL do.** A signal that fails in the unsafe direction either way is a DEFECT, not a tolerance | Frozen 2026-08-30, extended the same day by D-039. **For outputs the short is often the dangerous one**, and **the adjacent conductor in a duct or a jacket is the realistic short, not ground in the abstract** |
 | G-23 | **A minimum switching load belongs to a CONTACT, not to a circuit.** No figure is carried from one contact to another. The 22.32's minimum and the 55.34's minimum are sized independently, always | Frozen 2026-08-30. See D-035 |
 | G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
 
@@ -483,3 +483,40 @@ and not a side effect.**
 
 That second pole is interface S-20, a third instance of S-03's circuit shape, which
 had no row until now.
+
+**D-039 The sweep takes TWO columns per signal, not one.** G-22 extended the same
+day it was frozen.
+
+The severed case is one failure mode. **The other is a SHORT, and for outputs it is
+often the dangerous one. A severed step line stops a pump. A step line shorted to
+the 5 V rail asserts it permanently, and with EN defaulting ENABLED under G-21 that
+is a driver being clocked or held by something other than the Pi.**
+
+Two constraints on how the second column is answered:
+
+- **In a duct or a jacket the adjacent conductor is the realistic short, not ground
+  in the abstract. So the answer must say what each signal is actually NEXT TO**,
+  against the real cable and duct arrangement. Where a subsystem does not know what
+  a signal is next to, it says so and names who owns that answer rather than
+  assuming a neighbour.
+- **This may CONFIRM the pair assignments, the colour work and the class separation
+  rather than find anything, and that is a fine outcome.** A confirmation stated as
+  one is worth having. No agent manufactures a finding to justify a pass.
+
+**D-040 AUDIT is invoked, and INTERCONNECT is not.**
+
+AUDIT had never run. Every other subsystem had reported at least once, and there
+were frozen rows, rulings and four agents' returns that nothing had cross-read.
+Invoked 2026-08-30 with access to exactly five files and no general access to the
+tree: the two returns from DISPLAY-BOX and MAIN-PANEL, plus interface-table.md,
+decisions.md and traps.md. **Its output is questions, not assertions, and its job is
+whether the pictures AGREE, not whether the work is good.**
+
+If it needs a file it was not given, saying so is itself a finding: **a picture that
+cannot be checked without a document nobody handed you is a finding about the
+picture.**
+
+**INTERCONNECT is deliberately NOT invoked yet.** It needs the pin map and the panel
+layout and both are in flight. Invoking it now would have it build against two
+moving targets, which is the same mistake as designing a UI against a moving fault
+model.
