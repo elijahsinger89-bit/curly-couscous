@@ -708,3 +708,64 @@ attribute to BOSS, who writes it there. **The declaration's rule is narrowed
 accordingly: an attribute is recorded ONCE, in the register, and a subsystem file
 may reference it but not restate it.** Four files holding four attributes was close
 to the thing the declaration's own forbidden list calls a table in any medium.
+
+**D-058 The relay shortfall does not survive G-26. ZERO definite additional
+relays.** MAIN-PANEL recounted against the corrected topology.
+
+**Four states, four relays, an exact and MINIMAL fit** - not an arithmetic
+coincidence, because none of the four can be merged: K-FILL-S and K-FILL-D are two
+tanks with two float sets under G-03; K-DRY cannot fold into K-PERM, which is
+T-017, MAIN-PANEL's own deadlock finding; and K-PERM cannot fold into anything
+because it is the only thing RESET re-arms. K-CIRC is deleted, circulation being a
+pole on K-DRY.
+
+**But the constraint moved rather than vanished, and the order is still gated.**
+
+**It is now CONTACT DUTY, and it binds on TWO relays instead of one.** K-FILL-D
+carries the transfer pump and the S-03 and D-042 SELV pair. **K-DRY now carries the
+circulation pump AND the interlock contact to the Pi, which is new and was created
+by G-26 moving circulation onto it.** Under G-28 those are different duties bought
+as different parts. **If either the mixed-voltage socket question or the mixed-duty
+contact question binds, it forces TWO slaves, not one.**
+
+**So the order is gated by two LOOKUPS, not by the count:** the 55.34's contact
+material options and what current a dry-circuit version may carry, and the socket's
+rated insulation between poles plus whether both legs of a changeover may be loaded
+simultaneously. **Order range: zero additional relays if both come back permissive,
+two if either binds, plus one timing element if S-05 is flow-proving. Zero
+interposers, on the browser package's evidence that a ULN2003 with SUP-1 already
+drives that coil on this hardware.**
+
+**MAIN-PANEL's recommendation, marked as one: order margin. Four states in four
+relays is an exact fit with no spare coil, and at least one unresolved item, the
+chiller's command path, could still turn into a state.**
+
+Also noted and not taken: **K-PERM's 120 V bus pole may not be needed**, since the
+pumps' coils already sit on the permissive's 24 V bus. Dropping it frees a pole and
+removes a contact that would otherwise carry the sum of every 120 V load plus two
+motor inrushes. Keeping it puts two contacts in series between the permissive and
+each pump, so a single welded pole cannot keep a pump running. **Given that G-09
+exists entirely because of welded contacts, that redundancy may be worth the pole.**
+Owner's pick.
+
+**D-059 Interface S-18 is REOPENED.** Findings F-043. It was closed by D-027 on a
+mechanism G-26 has removed. **A closed row whose premise has been withdrawn is not
+closed, and reopening it is cheaper than discovering at commissioning that no sample
+carries a chiller state.**
+
+**D-060 The dry-run bypass timing element is promoted from contingent to
+DEFINITE-IF-FLOW-PROVING.** With circulation as a pole on K-DRY, **K-DRY cannot
+start itself from a flow contact: the pump only runs when K-DRY is energised, K-DRY
+only holds when flow is proved, and flow only exists when the pump runs. That is
+T-017's deadlock again, now INSIDE A SINGLE RELAY instead of inside the permissive
+string.** RESET alone does not solve it, because a momentary close cannot survive
+the interval before flow establishes.
+
+So the S-05 fork now costs a device as well as a capability: flow-proving means a
+timing element is definite and circulation verification stays possible; level-based
+means no timing element and **circulation verification is foreclosed permanently.**
+
+And an operational consequence to make visible rather than discovered: **a latched
+dry-run trip now stops circulation until a human presses RESET, and the Pi cannot
+restart it.** It can log and alert, since it never loses power, but it cannot
+recover. Consistent with G-26's philosophy.
