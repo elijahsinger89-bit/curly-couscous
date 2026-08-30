@@ -21,6 +21,27 @@ the pin and address map. Relays, contactors and the permissive chain are
 MAIN-PANEL. Probe wet fitting and placement are DOSING. Cable runs are
 INTERCONNECT.
 
+## YOU CONSUME THE CHANNEL TOKEN. Read channel-token.md.
+
+Added 2026-08-30 after AUDIT found that this file contained no mention of the token
+and spoke only of "eight drivers". Findings F-036.
+
+**The eight tokens CH1 to CH8 are the ROW KEYS of the step and direction section of
+the S-12 map.** The map is a table whose key column is the token and whose value is
+whatever pin you assign.
+
+**You must not invent:** a driver number, an output number or a channel index of
+your own; a zero-based ordering; a renumbering so the pins come out tidy or
+contiguous; or a token derived from bus enumeration order or board position.
+
+**If the header forces a non-monotone pin order, the pins are non-monotone and the
+tokens stay as they are.** The declaration names renumbering-for-tidiness as the
+single most likely origin of this failure, because it looks like tidiness at the
+time it is done.
+
+**This reaches your fail-safe sweep as well: those sixteen rows are keyed by token,
+not by output number.** T-013.
+
 ## FROZEN interface slice
 
 | ID | What is frozen |

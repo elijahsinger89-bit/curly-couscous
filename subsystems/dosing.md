@@ -155,7 +155,7 @@ tube life. The re-measure trigger is a tube change, not a date.
 
 | From | What |
 |---|---|
-| PUMP-BOXES | Head barb form and size, F-05 and F-06. Lid penetration, C-05 |
+| PUMP-BOXES | Head barb form and size, F-05 and F-06. Lid penetration, CBL-05 |
 | DISPLAY-BOX | Probe cable termination and length limits, S-11 |
 | WATER | Union type at F-03 and F-04, and circulation pump flow through the manifold |
 

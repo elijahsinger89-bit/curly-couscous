@@ -18,6 +18,32 @@ enclosure.
 The inside of any enclosure. What any signal means. Which device a chain
 contains.
 
+## YOU CONSUME THE CHANNEL TOKEN. Read channel-token.md.
+
+Added 2026-08-30 after AUDIT found that this file contained no mention of the token
+at all, so INTERCONNECT did not know it was a consumer. Findings F-036.
+
+CONTROL-SOFTWARE declares what channel N is, S-19 and D-021. **You are handed the
+eight tokens, CH1 to CH8, to be applied as the conductor identity at BOTH ends of
+every core carrying a per-channel signal.**
+
+**You must not invent:** a per-cable restart if the eight are split across more than
+one cable; a renumbering to match a connector's pin order or a core's position in a
+bundle; or a channel token for a spare core. **A spare is a spare. There is no ninth
+channel.**
+
+**Where your own conductor-labelling scheme applies a code, the channel token
+appears IN ADDITION, and the two are never merged or abbreviated into each other.**
+
+Your "Out of scope: what any signal means" line does not exempt you from this.
+Applying an identity is not interpreting a meaning.
+
+One question the declaration puts to you and nobody else, and BOSS has flagged that
+it may not be yours alone: **whether a monotone ascending run of CH1 to CH8, read
+from the operator's standing position, is achievable across the wall you
+arbitrate.** If it is not, that is reported to CONTROL-SOFTWARE as a defect in the
+declaration and **is never solved locally by reversing a row.**
+
 ## FROZEN interface slice
 
 | ID | What is frozen |
