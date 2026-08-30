@@ -111,6 +111,12 @@ once the products are assigned.
 
 ## Forbidden
 
+**Where the one record lives, D-057: channel-register.md at the root.** Each
+subsystem returns its attribute to BOSS, who writes it there. **An attribute is
+recorded ONCE, in the register. A subsystem file may reference it and may not
+restate it.** Four files holding four attributes was close to the thing the list
+below forbids.
+
 The line to hold: **a table binding attributes to one token is required. A table
 mapping one identity to a different identity is the defect.** "CH3's pin is X,
 CH3's core is Y, CH3's box is B, CH3's product is P" is the correct shape, and
@@ -159,9 +165,12 @@ Universal rules for every case:
 - The change is made in ONE place first, the channel's record, and every carrier
   is brought into agreement in the same working session. No overnight partial
   state.
-- While software and the wall may disagree, the channel is **OUT OF SERVICE**:
-  software refuses to command it, and a batch that requires it STOPS and tells the
-  operator. It does not substitute, skip or reorder. That is G-16 applied to a
+- While software and the wall may disagree, the channel is **OUT OF SERVICE: THE
+  SEQUENCER SKIPS IT.** Corrected 2026-08-30 by D-056 after AUDIT A7. **This is not a
+  hardware disable and does not rely on one: G-21 says software has no per-driver
+  disable, permanently, and that stays true. Skipping is the sequencer declining to
+  issue steps, which needs no hardware at all.** A batch that requires the channel
+  STOPS and tells the operator. It does not substitute, skip or reorder. That is G-16 applied to a
   labelling change rather than to a check result, and for the same reason: the
   only safe direction of error is the loud one.
 - **C-09 is re-run for all eight channels, never for the one that changed.** A

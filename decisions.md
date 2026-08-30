@@ -69,6 +69,9 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
+| G-26 | **THE PANEL RUNS WITHOUT THE PI.** Fills, transfer, circulation and chiller all operate on float and interlock logic with no computer involved. **The Pi adds dosing and removes driver power. If it dies, the water system keeps running and only dosing stops** | Frozen 2026-08-30, D-052. Deliberate, and recorded as a property rather than left to be rediscovered |
+| G-27 | **A COMPLEMENTARY PAIR IS A FAIL-DETECT, and the construction rule is: BOTH LEGS AT THE SAME POTENTIAL, ON THE SAME CABLE.** Then a severed conductor makes them contradict, and **any state where both agree is a broken sense path** | Frozen 2026-08-30, D-053. Free wherever two legs of one changeover are already bought. It converts a fail-safe into a fail-detected, which is T-012's rule arriving in hardware |
+| G-28 | **RELAYS ARE NOT INTERCHANGEABLE ONCE BOUGHT. Which relay goes in which socket is a BUILD FACT, labelled BY NAME and never by position** | Frozen 2026-08-30, D-054. Dry-circuit duty and receptacle duty want different contact materials, and using a dry-circuit contact at high current destroys the property it was bought for. T-013 |
 | G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE, AS FAR AS THE TOPOLOGY ALLOWS.** For every signal, TWO questions: what does a SEVERED conductor do, and what does a SHORT TO ITS REALISTIC NEIGHBOUR do. **AMENDED by D-049: on a two-state sense loop the two fail in OPPOSITE directions and both cannot be made safe. The SEVERED case is chosen safe, on frequency. The SHORT case is then managed by ADJACENCY - the wiring plan - and not by circuit design** | Frozen 2026-08-30, extended the same day by D-039. **For outputs the short is often the dangerous one**, and **the adjacent conductor in a duct or a jacket is the realistic short, not ground in the abstract** |
 | G-23 | **A minimum switching load belongs to a CONTACT, not to a circuit.** No figure is carried from one contact to another. The 22.32's minimum and the 55.34's minimum are sized independently, always | Frozen 2026-08-30. See D-035 |
 | G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
@@ -641,3 +644,67 @@ different rows.**
 Findings F-032. A return that stays on disk arguing for something since frozen reads
 as an open request when it is an answered one. G-24 and G-25 both came out of
 MAIN-PANEL's return and its text still asks for them.
+
+**D-052 S-09 IS CORRECTED. THE PI DRIVES ONE COIL.** F-027 closed. The owner
+answered from the browser package, the same hardware built to a different set of
+documents.
+
+**What the Pi drives:** the driver permissive contactor coil, and nothing else. One
+output, BCM 18, through a ULN2003 sinking the coil return, with SUP-1 across the
+coil. It reads that contactor's auxiliary contact back on a separate input so it can
+tell commanded state from actual state.
+
+**What it does not drive:** the day tank fill coil, hardwired float seal-in; the
+storage fill coil, same construction, separate relay; **the transfer pump, which is
+a POLE on the day tank fill relay and not its own coil; the circulation pump, which
+is a POLE on the dry-run interlock relay; and the chiller, which is a CONTACTOR on
+its own circuit.**
+
+**What it observes:** one dry contact from the day tank fill relay saying a fill is
+in progress. The only level information it has, and F-017 is why its polarity
+matters.
+
+**Where the error came from, recorded because provenance matters:** the owner's
+original project description said the Pi commands relays for the transfer pump, the
+circulation pump and the chiller. **That was loose. It commands a permissive that
+GATES those circuits; it does not command them.** MAIN-PANEL's table listing only
+K-CIRC was closer to the truth than S-09 and still not right.
+
+**G-26 is the property that falls out of it and it is deliberate: the panel runs
+without the Pi.**
+
+**A consequence BOSS is routing rather than computing: the pole budget may have
+changed.** MAIN-PANEL built its shortfall on five independently commanded states
+including K-CIRC as its own relay. **Circulation is now a pole on the dry-run
+interlock relay, not a relay of its own.** Whether the shortfall survives that is
+MAIN-PANEL's to answer before anything is ordered.
+
+**D-053 The complementary-pair fail-detect is kept, and the construction rule is
+frozen as G-27:** both legs at the same potential, on the same cable. That rule is
+what makes it work and it is what would be lost if only the outcome were recorded.
+
+**D-054 Relays are labelled by name, never by position, G-28.** A labelling
+requirement on the sheet, not a note.
+
+**D-055 The DIR question is a ROUTING question, not an electrical one.** No resistor
+at the driver end makes DIR safe against both failures, and exactly one of the two
+gives the backwards head whichever way it is chosen. PUMP-BOXES was right to refuse
+to substitute a pull-up on its own initiative.
+
+**So the question is not which resistor. It is WHICH FAILURE IS MORE LIKELY IN THIS
+CABLE.** Routed to PUMP-BOXES: which conductor is DIR physically adjacent to, and is
+a short to it more or less likely than a severed conductor. **Then choose the pull
+direction against that answer, and RECORD THE OTHER FAILURE AS ACCEPTED AND NAMED.**
+
+**D-056 AUDIT's A7 is settled and G-21 is untouched.** Both statements were true and
+they are not the same thing. **G-21 is about the EN pin and a HARDWARE disable.
+Refusing to command a channel is the SEQUENCER skipping it, which needs no hardware
+at all.** The change procedure in channel-token.md is corrected to say the sequencer
+skips the channel.
+
+**D-057 AUDIT's B11 is settled: ONE FILE holds the token's attributes.**
+channel-register.md at the root is the one record. Each subsystem returns its own
+attribute to BOSS, who writes it there. **The declaration's rule is narrowed
+accordingly: an attribute is recorded ONCE, in the register, and a subsystem file
+may reference it but not restate it.** Four files holding four attributes was close
+to the thing the declaration's own forbidden list calls a table in any medium.

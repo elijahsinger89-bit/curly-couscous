@@ -225,6 +225,20 @@ panel does.
 - **Nothing in the panel can power cycle the Pi.** It reboots by software or by
   killing the panel, **so a watchdog is the only recovery path.**
 
+## What the Pi drives, from the browser package
+
+**ONE coil: the driver permissive contactor.** One output, **BCM 18**, through a
+**ULN2003 sinking the coil return**, with **SUP-1 across the coil**. Nothing else.
+
+**THE PANEL RUNS WITHOUT THE PI**, G-26. Fills, transfer, circulation and chiller
+all operate on float and interlock logic with no computer involved. The Pi adds
+dosing and removes driver power. **If it dies, the water system keeps running and
+only dosing stops.**
+
+Note the topology this fixes: the transfer pump is a POLE on the day tank fill
+relay, the circulation pump is a POLE on the dry-run interlock relay, and the
+chiller is a CONTACTOR on its own circuit. None of the three is a Pi-driven coil.
+
 ## The permissive readback
 
 The Pi drives the driver-permissive contactor coil AND reads back a real auxiliary
