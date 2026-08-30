@@ -53,7 +53,7 @@ contains.
 
 | From | What |
 |---|---|
-| All four enclosure owners | Gland positions and entry sides, C-01 to C-04 |
+| All four enclosure owners | Gland positions and entry sides, CBL-01 to CBL-04 |
 | MAIN-PANEL | Which runs are line voltage |
 | DISPLAY-BOX | Probe cable length limit and step and direction cable requirements |
 | WATER | Field device positions: floats, solenoid, leak sensors, pump cords |

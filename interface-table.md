@@ -86,13 +86,13 @@ the terminal it lands on. BOSS holds the row until both halves are in.
 
 | ID | End A | End B | Status | Owner of the open item |
 |---|---|---|---|---|
-| C-01 | MAIN-PANEL: glands | INTERCONNECT: cable runs on the wall | OPEN | INTERCONNECT owns the run, MAIN-PANEL owns what is inside its gland |
-| C-02 | PUMP-BOXES: glands | INTERCONNECT: cable runs | OPEN | as C-01 |
-| C-03 | DISPLAY-BOX: glands | INTERCONNECT: cable runs | OPEN | as C-01 |
-| C-04 | WATER: field devices, floats, solenoid, leak sensors, pump cords | INTERCONNECT: field cable runs | OPEN | as C-01 |
-| C-06 | MAIN-PANEL: leak console, 24 V in, Form C dry contact out | INTERCONNECT: the leak console cable | OPEN. **The console is POWERED, not a passive float. Its contact legs sit in the 120 V chain, so EVERY conductor in its cable must be insulated for 600 V**, including the 24 V supply pair sharing that jacket | INTERCONNECT selects the cable, MAIN-PANEL states the legs |
-| C-07 | All four enclosures | INTERCONNECT: equipment grounding | OPEN. **The display box is polycarbonate and the pump boxes are plastic, so there is no bonding path through any of them. Every equipment ground lands on a ground bar, not on a box** | MAIN-PANEL provides the bar, INTERCONNECT lands the runs |
-| C-05 | PUMP-BOXES: lid penetrations for the heads | DOSING: tubing passing the lid | OPEN | PUMP-BOXES owns the penetration, DOSING owns the tubing through it |
+| CBL-01 | MAIN-PANEL: glands | INTERCONNECT: cable runs on the wall | OPEN | INTERCONNECT owns the run, MAIN-PANEL owns what is inside its gland |
+| CBL-02 | PUMP-BOXES: glands | INTERCONNECT: cable runs | OPEN | as CBL-01 |
+| CBL-03 | DISPLAY-BOX: glands | INTERCONNECT: cable runs | OPEN | as CBL-01 |
+| CBL-04 | WATER: field devices, floats, solenoid, leak sensors, pump cords | INTERCONNECT: field cable runs | OPEN | as CBL-01 |
+| CBL-06 | MAIN-PANEL: leak console, 24 V in, Form C dry contact out | INTERCONNECT: the leak console cable | OPEN. **The console is POWERED, not a passive float. Its contact legs sit in the 120 V chain, so EVERY conductor in its cable must be insulated for 600 V**, including the 24 V supply pair sharing that jacket | INTERCONNECT selects the cable, MAIN-PANEL states the legs |
+| CBL-07 | All four enclosures | INTERCONNECT: equipment grounding | OPEN. **The display box is polycarbonate and the pump boxes are plastic, so there is no bonding path through any of them. Every equipment ground lands on a ground bar, not on a box** | MAIN-PANEL provides the bar, INTERCONNECT lands the runs |
+| CBL-05 | PUMP-BOXES: lid penetrations for the heads | DOSING: tubing passing the lid | OPEN | PUMP-BOXES owns the penetration, DOSING owns the tubing through it |
 
 ## Mechanical and placement crossings
 

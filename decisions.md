@@ -69,7 +69,7 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
-| G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE.** For every signal, without exception, TWO questions are asked deliberately: **what does a SEVERED conductor do, and what does a SHORT TO THE NEAREST ADJACENT RAIL do.** A signal that fails in the unsafe direction either way is a DEFECT, not a tolerance | Frozen 2026-08-30, extended the same day by D-039. **For outputs the short is often the dangerous one**, and **the adjacent conductor in a duct or a jacket is the realistic short, not ground in the abstract** |
+| G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE, AS FAR AS THE TOPOLOGY ALLOWS.** For every signal, TWO questions: what does a SEVERED conductor do, and what does a SHORT TO ITS REALISTIC NEIGHBOUR do. **AMENDED by D-049: on a two-state sense loop the two fail in OPPOSITE directions and both cannot be made safe. The SEVERED case is chosen safe, on frequency. The SHORT case is then managed by ADJACENCY - the wiring plan - and not by circuit design** | Frozen 2026-08-30, extended the same day by D-039. **For outputs the short is often the dangerous one**, and **the adjacent conductor in a duct or a jacket is the realistic short, not ground in the abstract** |
 | G-23 | **A minimum switching load belongs to a CONTACT, not to a circuit.** No figure is carried from one contact to another. The 22.32's minimum and the 55.34's minimum are sized independently, always | Frozen 2026-08-30. See D-035 |
 | G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
 
@@ -557,6 +557,18 @@ driver has screw terminals and no board space of its own.**
 **A severed DIR producing a head that runs backwards while the books decrement
 forward is the worst outcome in the whole sweep**, and the S-10 row says so.
 
+**ANNOTATED 2026-08-30, findings F-035: this decision says pull-DOWN, and whether
+DOWN is the safe direction for DIR is not established by anybody.** It needs three
+links and only one is a datasheet: which DIR level gives which rotation, which
+rotation gives which flow through the head as mounted, and which flow direction is
+safe. **If DIR low is the direction that draws from the manifold toward the jug,
+the wording is fail-unsafe and must be revisited.** PUMP-BOXES correctly refused to
+substitute a pull-up on its own initiative.
+
+**And findings F-033: no resistor at the driver end can close both of G-22's
+questions on DIR.** The severed and shorted cases define opposite levels. D-043
+closes the severed case only.
+
 **D-044 Buy the relays. The panel is not designed around a shortage.**
 
 Definite now, one: **the dry-run interlock relay, K-DRY.** Five independently
@@ -595,3 +607,37 @@ about the E-stop, the reset and the lamps, because it may change the parts.**
 
 **D-048 S-06 is CLOSED. The panel-face E-stop satisfies it and there is no second
 remote E-stop.** F-024 closed.
+
+**D-049 G-22 is amended: severed is answered by the circuit, shorted is answered by
+the wiring plan.** Findings F-028.
+
+DISPLAY-BOX established, working the second column, that **for an optocoupler sense
+loop severed and shorted-to-an-energised-neighbour fail in opposite directions,
+always. Severed extinguishes the LED, a short to a live neighbour lights it. You can
+choose which is safe. You cannot make both safe.** No two-state sense line can
+report three states.
+
+So G-22 as originally worded promised what the topology cannot deliver, and the
+honest form is:
+
+- **The SEVERED case is chosen safe, on frequency.** A pulled cable, a broken
+  strand, a backed-out terminal and a corroded crimp are ordinary. An insulation
+  failure to one specific energised neighbour is not.
+- **The SHORT case is managed by ADJACENCY, not by circuit design.** Which conductor
+  sits next to which, in which jacket, in which duct.
+
+**That makes MAIN-PANEL's duct plan and INTERCONNECT's cable schedule load-bearing
+on a safety rule rather than merely tidy**, which is a different status than either
+had before, and both should be told so.
+
+**D-050 The C-nn namespace collision is fixed by renaming.** Findings F-026. The
+interface table's cable and enclosure crossings are now CBL-01 to CBL-07 and every
+reference in the tree is updated. Costless and certain to fix a real defect, so BOSS
+made it under rule 5 rather than asking. **It was T-013's shape: a thing named by an
+index in a namespace that was not its own, cited by two returns meaning two
+different rows.**
+
+**D-051 BOSS annotates a return in place when a decision is made out of it.**
+Findings F-032. A return that stays on disk arguing for something since frozen reads
+as an open request when it is an answered one. G-24 and G-25 both came out of
+MAIN-PANEL's return and its text still asks for them.
