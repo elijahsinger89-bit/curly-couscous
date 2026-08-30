@@ -80,6 +80,17 @@ non-isolated CMOS breakout.
   do owe DOSING is whatever the head requires of a tube change: access, clearance,
   and whether the box must be opened to do it.
 
+## P-09 answered as far as the project's own facts reach, 2026-08-30
+
+subsystems/pump-boxes-p09.md. Q1, Q2, Q3 and Q6 are unanswered because no
+datasheet is in the tree, and PUMP-BOXES returned requirements and search terms
+instead of guesses. Q4 and Q5 are answered to the edge of what is known and both
+are gated on the same two documents plus one ruling that is the owner's: whether
+VDD falls inside G-09's word "power", findings F-014.
+
+**Two documents are needed, not one: the TMC2209 chip datasheet AND the Adafruit
+6121 board schematic. A silkscreen name is a net name, not a chip pin name.**
+
 ## Previously open, now closed by parts.md
 
 - Head barb form and size: 3/16 in straight connector mating 4.8 mm ID tube. F-05
@@ -91,8 +102,9 @@ non-isolated CMOS breakout.
   datasheet the owner supplies. P-06 is blocked on this.
 - Motor requirement for the heads: what each head needs to turn against its
   own load. Return a requirement and a search term. Do not pick a motor.
-- Driver current setting method on the 6121 and whether it is set in hardware or
-  over the driver's own interface.
+- CLOSED by parts.md: driver current is set by the Vref pot, with a meter, before
+  any power. Hardware, by pot. Reinforced by there being no printed UART pin, so
+  there is no serial route to set it.
 - Enclosure heat with four drivers in a closed plastic box, and whether the box
   needs venting given the room is 62 to 65 F and under 60 percent humidity.
 - Head barb form and size, returned to DOSING for F-05 and F-06.
