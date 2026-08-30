@@ -47,3 +47,25 @@ is questions rather than assertions. Any agent that writes an absence claim must
 name what it read to establish it.
 
 Move this entry's first line when it is hit for real.
+
+## T-004 A capability that exists only in the description
+
+Hit on 2026-08-30, in the project description itself.
+
+A "no-circulation fault" was named as something the Pi has, alongside a flow
+cell "so the Pi knows whether the loop is moving". The flow cell turned out to
+be a PVC body that holds the probes in the stream. It is a fitting, not an
+instrument: no output, no contact, no wire. No sensor was ever specified. What
+raises the named fault, or whether anything does, is still not established.
+
+How to recognise it: a capability stated as a fact, sitting next to a physical
+thing whose name sounds like an instrument. Flow cell, sight glass, sensor well.
+Ask what wire leaves it. If nothing leaves it, no software can read it.
+
+Cost of not catching it: DOSING would have built a section around a sensor that
+does not exist, and CONTROL-SOFTWARE would have written a fault handler for a
+signal that never arrives. Both would have passed their own checks.
+
+What saved it: refusing to write the row. BOSS did not assert that nothing
+existed, and did not assume something did. The row stayed OPEN and the question
+went to the owner. See interface-table.md S-13 and S-14.

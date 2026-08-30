@@ -96,3 +96,25 @@ not decided and no agent may assume one.
 | Under 60 percent humidity, not wet, but water moves tank to tank | owner |
 | Four enclosures, cables run between them on a wall | owner |
 | 36 plants served downstream of V3 | owner, out of scope |
+
+**D-007 There is no flow signal into the Pi. The flow cell is a fitting, not an
+instrument.** No output, no contact, no wire, no sensor ever specified. Reason:
+established by the owner 2026-08-30 after BOSS refused to write interface S-13
+in either direction. Interface S-13 is closed as a signal.
+
+**D-008 The named "no-circulation fault" is unverified.** What raises it, or
+whether anything does, is not established. Routed to CONTROL-SOFTWARE to answer
+from the code rather than from anyone's memory. Recorded as neither present nor
+absent. Interface S-14. Nothing builds against it.
+
+**D-009 EC rise during a dose is the accepted whole-loop check, and it is
+implicit rather than instrumented.** Reason: it is real, it costs nothing, and
+it already exists. Frozen as interface S-15 with its three limits written into
+findings.md F-001 so no agent mistakes it for per-channel verification or for a
+check that works at rest.
+
+**D-010 No sensor is added for per-channel dose verification.** The gap is
+logged as findings.md F-001 and routed as an open design question: what it would
+take, what it would cost, where it would land. DOSING answers for its path. If
+the answer is a flow meter per channel the owner expects to decline it, and
+wants that recorded as a decision he made rather than a gap nobody named.

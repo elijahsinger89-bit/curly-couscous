@@ -36,6 +36,8 @@ on to do it.
 | G-01, G-02 | No level sensing. The only level input is one dry contact, day tank fill in progress |
 | G-07, G-13 | A leak, an E-stop or a lost interlock drops power in hardware. Software neither causes nor prevents it, and must behave correctly when power vanishes mid-dose |
 | G-10 | Probes read upstream of all injection. A reading reflects the tank, not the dose just injected |
+| D-007 | There is no flow signal into the Pi. No code may wait on, poll or time out against one |
+| D-009, S-15 | EC rise during a dose is the whole-loop check. It is valid only during a dose, it cannot attribute a change to a channel, and it does not move for pH up, pH down or fulvic. Read findings.md F-001 before writing any verification logic |
 
 ## Settled
 
@@ -57,13 +59,17 @@ on to do it.
 - What is logged and where it survives a power cut.
 - Whether a dose may start while a day tank fill is in progress, S-03. This is a
   question for the owner, not a choice for this agent.
+- S-14: what the fault registry actually contains, and what raises any
+  circulation fault today. Answer from the code. If there is no code yet, say
+  where the code lives and that you looked. Do not answer from memory and do not
+  claim absence without naming what you read.
 
 ## Waiting on
 
 | From | What |
 |---|---|
 | DISPLAY-BOX | The pin and address map, S-12. Nothing may be built against it until BOSS freezes it |
-| DOSING and BOSS | S-13, how the loop is known to be moving. The no-circulation fault cannot be written until that is established |
+| Nothing | S-13 is closed. There is no flow signal into the Pi and there never was one. D-007 |
 | Owner | Whether dosing during a fill is permitted |
 
 ## Do not

@@ -51,12 +51,27 @@ WATER.
 - Manifold orientation and mounting on the dosing wall, M-02, jointly with
   PUMP-BOXES.
 
-## Open question routed to BOSS, not to be answered by DOSING
+## Settled 2026-08-30: the flow cell is a fitting, not an instrument
 
-The owner states a flow cell sits upstream of the injection ports and that a
-no-circulation fault exists. How the Pi learns the loop is moving has not been
-established. BOSS has not checked this against any device and is not asserting
-that nothing exists. Interface S-13 is OPEN and nothing may be built against it.
+There is no flow signal into the Pi. The flow cell is a PVC body that holds the
+probes in the moving stream. No output, no contact, no wire. Decision D-007,
+interface S-13. Do not build a sensor pocket, a tapping or a wire route for it.
+
+## Open design question routed to DOSING, answer only, change nothing
+
+Read findings.md F-001 first. The only verification that exists is EC rising
+during a dose, which confirms the manifold flowed but not which of the eight
+heads delivered, and does nothing at rest or for pH up, pH down and fulvic.
+
+Answer three things for your path, manifold to head to jug:
+- what would it take to confirm a per-channel dose actually moved
+- what it would cost
+- where it would land physically
+
+Return options with a requirement and a search term each. Do not pick a part, do
+not add a sensor, do not change the manifold. The owner decides. He expects to
+decline a flow meter per channel and wants the option written down anyway so
+declining it is a decision rather than a gap.
 
 ## Waiting on
 
