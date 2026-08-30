@@ -67,7 +67,8 @@ Printed pins, and this is the complete list:
 - **VDD is a separate logic supply pin, 3.3 to 5 V. The motor terminal block does
   not generate it. With VDD unconnected the driver does not respond to STEP or DIR
   at all.**
-- **EN unwired leaves the driver ENABLED.** Default state is on, not off.
+- **EN unwired leaves the driver ENABLED.** Default state is on, not off, **and
+  by D-032 it STAYS unwired.** Software therefore has no per-driver disable, ever.
 - Set the Vref pot with a meter before any power is applied.
 - Each driver needs a stick-on heatsink.
 
@@ -81,6 +82,9 @@ Printed pins, and this is the complete list:
 ## 24 V supply: Mean Well NDR-240-24
 
 24 Vdc, 10 A, 240 W.
+
+**VDD is fed from the display box 5 V rail, which is the Pi's own supply, and is
+NOT switched by the permissive.** D-031. The permissive removes MOTOR supply only.
 
 **It has a front panel output trimmer with a 24 to 28 V adjustment range and plus
 or minus 1 percent tolerance, so the rail is settable anywhere from 23.76 to
@@ -142,6 +146,33 @@ it is one carrier each for pH and EC, and none for RTD, for a stated reason.
 **Plastic gives no bonding path, so every equipment ground lands on a ground bar
 rather than on the box.**
 
+## The main panel face, as decided
+
+**Door-mounted devices, all five on the TOP FACE of the main panel, five 22 mm
+holes, step drilled. Nothing else penetrates that face. Every cord grip is on the
+BOTTOM face.**
+
+| Device | Type | Function |
+|---|---|---|
+| E-STOP | momentary, normally closed | Breaks the permissive string |
+| RESET | momentary, normally open | Latches the master permissive relay |
+| PL-G | green pilot lamp | Filling |
+| PL-R | red pilot lamp | Permissive lost |
+| PL-Y | yellow pilot lamp | Healthy |
+
+**The E-stop and reset are hardware, not software.** The Pi cannot override the
+E-stop and cannot re-close the permissive. Only the reset button does that.
+
+**The three lamps are driven from RELAY POLES, not from the Pi. So the panel tells
+you its state with no computer involved, and that is deliberate.**
+
+That is the whole panel face.
+
+Consequence for MAIN-PANEL, routed rather than decided: three lamps driven from
+relay poles is a claim on the pole budget, alongside the fill chains, the seal-ins
+and the interlocks. Which pole drives PL-Y "healthy", and what "healthy" means as
+a contact rather than as a word, is MAIN-PANEL's to answer.
+
 ## Cable runs, measured on the wall and already doubled for slack
 
 | From | To | Length |
@@ -191,6 +222,41 @@ It exists specifically to catch a welded contact, where the Pi commands the rail
 off and eight drivers stay live.
 
 **Do not let software report commanded state as measured state anywhere.**
+
+### The readback circuit, as built. Given by the owner, not derived.
+
+**There is no auxiliary contact block on the 22.32. None is in the parts list and
+none was ever bought.**
+
+| Pole | Terminals | Use |
+|---|---|---|
+| 1 | 1 and 2 | Carries the 24 V rail out to both pump boxes. **One pole for VM distribution, not two: both pump box feeds come off one terminal downstream of it** |
+| 2 | 3 and 4 | Was unwired and free. **The readback was granted onto it** |
+
+So a 25 A power pole is the readback contact. **But it is not a bare 3.3 V logic
+input, and that is what saves it.**
+
+The circuit: pole 2 is wetted from 24 V. Two parallel branches sit across the
+contact, one carrying an optocoupler LED through a series resistor and one a bare
+burden resistor, **sized together so the contact sees 45 to 55 mA against the
+22.32's 1000 mW minimum switching load.** The optocoupler transistor pulls a Pi
+input low.
+
+**The burden sits in the MAIN PANEL, not at the Pi.** So the contact stays wetted
+even if the cable is unplugged or a conductor breaks. Two reasons, both stated by
+the owner: a power contact left switching 14 mA oxidises, and **the failure of the
+cable must not degrade the contact it senses.**
+
+**The sense reads INVERTED: contact closed means LED on means the Pi input goes
+LOW.**
+
+Do not re-derive this circuit. It is recorded as given.
+
+BOSS's observation from the stated design, offered for MAIN-PANEL and DISPLAY-BOX
+to confirm rather than asserted: a broken cable or a dead LED leaves the Pi input
+high, which reads as contact open, which reads as a permissive drop. That is the
+false-stop direction, which is the same chosen direction of error as D-017 and
+D-030. Worth confirming deliberately rather than inheriting by luck.
 
 ## Not known, and not to be invented
 

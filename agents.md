@@ -74,6 +74,14 @@ not land rather than reshaping it to fit.
 - To find a seam nobody owns, do not review the interface table. Assign work
   that cannot proceed without crossing it. See traps.md T-002.
 
+## Held, by the owner
+
+**The operator interface on the touch screen.** The owner holds a set of
+requirements and is withholding them deliberately: the fault model is still
+moving, and he will not have a UI designed against a moving target. **No agent
+designs a UI and no agent asks for the requirements.** They arrive when the fault
+behaviour is settled.
+
 ## What has actually worked, recorded as evidence rather than as theory
 
 2026-08-30. CONTROL-SOFTWARE and DOSING were invoked in parallel on two different

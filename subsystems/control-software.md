@@ -7,6 +7,18 @@ box with the Pi hardware. It is split out so the seam between them, S-12, is
 written down and checkable rather than living inside one agent's head. See
 decisions.md D-004.
 
+## STANDING INSTRUCTION, 2026-08-30: THE UI IS HELD
+
+**Do not design the touch UI. Do not ask for its requirements.** The owner has a
+set of operator interface requirements, including things he wants done differently
+from commercial controllers he has used, and he is deliberately withholding them
+because **the fault model is still moving and he will not have a UI designed
+against a moving target.**
+
+They arrive when the fault behaviour is settled. Until then, UI statements are
+limited to what a fault or a record REQUIRES of a screen, which is what the P-09
+and F-004 answers already contain, and go no further.
+
 ## Scope, owned completely
 
 The Pi application. Dose scheduling and the arithmetic that turns a requested

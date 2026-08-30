@@ -55,7 +55,7 @@ changed reports to BOSS and does not act.
 | G-06 | Only one dosing pump turns at a time, mandatory in software | Holds until a thermal measurement says otherwise |
 | G-07 | The permissive chain is a hardwired series string. A leak, an E-stop or a lost interlock drops everything independent of the Pi | Safety is not in software |
 | G-08 | The leak detection console is wired into the permissive chain and drops power in hardware | As G-07 |
-| G-09 | The permissive contactor removes power from every stepper driver at once, and the Pi reads back an auxiliary contact | So a welded contact is detected rather than assumed |
+| G-09 | **AMENDED 2026-08-30 by D-031: the permissive contactor removes MOTOR SUPPLY (VM) from every stepper driver at once.** It does NOT remove VDD, the driver's logic supply, which stays live. The original wording said "power" and was written when everyone believed a stepper driver had one supply. That belief is now known to be false, so the row says which supply. The Pi reads back a contact on the contactor | So a welded contact is detected rather than assumed, and so the two supplies are never confused again |
 | G-10 | Probes sit first in line in a vertical manifold section, ahead of every injection point | So a bubble cannot corrupt a reading and no injectate reaches a probe before mixing |
 | G-11 | The circulation submersible takes suction at the day tank bottom | So the tank mixes |
 | G-12 | The chiller and its loop pump are switched together by one contactor on their own circuit | The chiller has no internal pump |
@@ -65,6 +65,9 @@ changed reports to BOSS and does not act.
 | G-16 | **NO AUTOMATIC RE-DOSE. EVER.** Software never tops up, retries, re-doses or corrects on its own on the strength of any reading of any check. If a check reports no movement, the batch STOPS and tells the operator. The operator decides. **AND THE LAUNDERED VERSION IS ALSO FORBIDDEN: no "resume dose" button. A remainder computed from an unknown fraction is an automatic re-dose with a human as its trigger.** What the operator may do is command a FRESH dose of a volume they choose, which is an ordinary dose. That distinction is the whole rule. **G-16 has no crash exemption either: a watchdog reset may not resume anything** | Frozen 2026-08-30 as a RULE, not a parameter. Not a configurable retry count, not a threshold anyone can turn up. See D-017, extended by the P-09 pass |
 | G-17 | Jugs are dedicated per channel for life. Not interchangeable vessels. A jug is refilled with the same product forever or it is retired | Frozen 2026-08-30. See D-018 |
 | G-18 | The jug change break point is at the jug. The tube stays with the channel and is never moved between channels | Frozen 2026-08-30. See D-020 |
+| G-19 | **No progress bar on an interrupted dose, and no delivered-fraction percentage anywhere.** A percentage computed from step index renders a commanded count as a delivered fraction | Frozen 2026-08-30. It is the confident-wrong-answer shape and the one thing a tired operator will believe |
+| G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
+| G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
 
 ## Parts the owner already has
 
@@ -320,3 +323,97 @@ PUMP-BOXES stops at the barb by D-006. **The head is a mechanical mount that
 happens to have a tube in it.** DOSING therefore also owns the change interval,
 the change procedure, and telling CONTROL-SOFTWARE that C-01 is void for that
 channel after a change.
+
+**D-029 F-013 is resolved, and it is confirmed rather than a caution.** There is no
+auxiliary block on the 22.32 and none was ever bought. Pole 1 carries the 24 V
+rail out to both pump boxes, one pole for VM distribution, and pole 2 was unwired
+and free and now carries the readback. **So a 25 A power pole is the readback
+contact.** S-08 has a source and everything both agents wrote at P-09 is
+implementable.
+
+What saves it is that it is not a bare logic input. The wetting circuit is
+recorded in parts.md as given: pole 2 wetted from 24 V, an optocoupler branch and
+a bare burden branch in parallel, sized together for 45 to 55 mA against the
+22.32's 1000 mW minimum, the burden in the MAIN PANEL rather than at the Pi, and
+the sense inverted so contact closed means the Pi input goes low.
+
+Two reasons for the burden's position, both worth carrying as principles:
+- A power contact left switching 14 mA oxidises.
+- **The failure of the cable must not degrade the contact it senses.**
+
+**F-011 therefore stands as a caution and not as a defect ON THIS CIRCUIT.** Note
+carefully what that does and does not cover: the wetting circuit was designed for
+S-08. **S-03, the day tank fill-in-progress contact, has not been addressed and
+F-011 still stands against it unresolved.**
+
+**D-030 The asymmetric readback discipline is approved, and it is recorded as the
+same choice as D-017 rather than as a new idea.**
+- An apparent DROP, readback open while commanded on, is qualified over
+  consecutive samples before acting. Worst case is a nuisance stop, which is loud
+  and safe.
+- An apparent WELD, readback closed while commanded off, **latches on a SINGLE
+  sample and is never cleared because later samples read open.** A long
+  qualification there is a filter that hides exactly the failure G-09 was built to
+  catch.
+- So an oxidising contact produces false stops and never a missed weld.
+
+**The guard is kept verbatim: software may not solve F-011 by lengthening the
+filter until the nuisance stops.** That change also hides a real drop, it looks
+like tuning, and it will be proposed by whoever is tired of the false stops. The
+fix is at the contact.
+
+**D-031 F-014 is ruled: VDD IS NOT "POWER" UNDER G-09.** The permissive removes
+motor supply. VDD stays live. G-09 is amended to say motor supply explicitly.
+
+The reasons, in the owner's order:
+
+1. **VDD comes from the display box 5 V rail, which is the Pi's own supply, and
+   the Pi is deliberately not on the permissive.** Making VDD follow the permissive
+   would mean routing a second switched supply to both pump boxes: new conductors,
+   new terminals and a new failure mode, to switch off a few milliamps.
+2. **Worse, it would create a state the drivers must never see: buffer outputs at
+   5 V driving STEP and DIR pins whose VDD is at zero, which is an overdrive
+   through the input protection diodes on all eight drivers, on every permissive
+   drop.** The reason VDD is fed from the same board that drives the logic is that
+   they cannot then mismatch.
+3. **Logic staying alive is better on its own merits.** The Pi is awake through a
+   drop, the drivers keep their logic reference, and DIAG and INDEX stay
+   meaningful.
+
+Worth recording: reason 2 is exactly the mirror case PUMP-BOXES named as the
+argument against its own option B, arrived at independently by the owner from the
+other direction. Two lines of evidence, one conclusion.
+
+**What P-09's remaining question actually is, now that this is settled:** not
+whether VDD should be removed, but **what a 6121 does with STEP asserted and VM
+absent, and what the software must do so it is not clocking into a dead rail.**
+Still open, and PUMP-BOXES is right that it needs the datasheet.
+
+**D-032 EN STAYS UNWIRED.** It is unwired on the built package and it defaults
+enabled.
+
+Reason: F-015. A de-energised stepper holds differently from an energised one, and
+C-06 tests holding against back-siphon. **Do not trade a tested hold for a
+theoretical safety improvement.**
+
+This overrules PUMP-BOXES, which argued EN must be wired and held disabled at
+power-up. The residual cost is recorded rather than argued away: **software has no
+per-driver disable, permanently, and never will.** The only protection against a
+stuck or floating STEP is the permissive chain removing VM from all eight at once,
+which is a chain-level backstop and not a per-channel one. CONTROL-SOFTWARE's
+standing request, to be told if EN is ever landed on a Pi output, is answered: it
+will not be. Its drop handler abstains rather than acts, permanently.
+
+C-06 records two numbers, energised and de-energised, as PUMP-BOXES proposed.
+
+**D-033 The watchdog is fed from the sequencer and state loop, never from an
+independent timer thread.** Approved as written. A timer that keeps ticking while
+the sequencer is wedged is a check whose condition is effectively a literal True:
+it passes forever and hides exactly what it names. T-014 in the most expensive
+place on this build.
+
+**D-034 A run that turns a head records whether it COMPLETED, and a calibration
+that did not complete is DISCARDED, not scaled.** F-016. This covers doses,
+primes, purges, operator tests and C-01 calibration runs alike. A calibration run
+cut short by a permissive drop and recorded as complete corrupts the figure every
+dose in this system divides by, and G-04 guarantees nothing notices.

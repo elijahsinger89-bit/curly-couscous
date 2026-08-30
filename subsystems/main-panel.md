@@ -63,6 +63,34 @@ sense element placement. Neither may assume the other has it. See decisions.md
 D-016 and interface row S-05, which is already open on what the dry run
 interlock senses.
 
+## Panel face decided 2026-08-30, lay out against it
+
+Read parts.md. Five 22 mm step-drilled holes on the TOP face: E-stop momentary
+NC, reset momentary NO, and three pilot lamps, green filling, red permissive lost,
+yellow healthy. Nothing else penetrates that face. **Every cord grip is on the
+BOTTOM face.**
+
+The lamps are driven from relay poles and not from the Pi, deliberately, so the
+panel states its condition with no computer involved.
+
+## Open, added or sharpened 2026-08-30
+
+- **The pole budget.** Three lamps on relay poles is a claim on the same poles as
+  the fill chains, the seal-ins and the interlocks. **And the 22.32's poles are
+  now both spoken for: pole 1 carries the 24 V rail out to both pump boxes, pole 2
+  is the readback.** What drives PL-Y "healthy", and what healthy means as a
+  contact rather than as a word, is yours.
+- **The S-08 readback circuit is decided and is recorded in parts.md as given.**
+  The aux exists: it is pole 2 of the 22.32. Do not re-derive the wetting circuit.
+  Build to it.
+- **S-03 is NOT covered by that decision.** The wetting circuit was designed for
+  S-08. The day tank fill-in-progress contact feeding the Pi has not been
+  addressed and F-011 still stands against it unresolved.
+- **G-09 is amended, D-031: the permissive removes MOTOR SUPPLY only.** VDD is fed
+  from the display box 5 V rail and is not switched by you.
+- Read traps.md T-006 and T-007 before wiring any coil driven from the display
+  box. The logic board is 4 ft away and that is exactly the remote-board case.
+
 ## Waiting on
 
 | From | What |
