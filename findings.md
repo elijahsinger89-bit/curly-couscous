@@ -11,6 +11,8 @@ mean the design has been checked. Almost nothing has been checked.
 | F-001 | Owner, before any subsystem was invoked | Between DOSING, PUMP-BOXES and CONTROL-SOFTWARE | No per-channel dose verification exists, and none at rest | Open design question, routed. Options returned, see subsystems/dosing-verification-options.md. Nothing decided. No sensor added | 2026-08-30 |
 | F-002 | DOSING, answering F-001 | The jug end of the wet path, Z3 and Z4 | A jug reconnected to the wrong channel after a change produces the exact F-001 symptom, a batch completing with one nutrient missing. No flow-measuring option catches it: eight healthy flow readings are fully consistent with two jugs swapped | Left open. It is a physical identity problem, not an instrument problem. The options that address it, O-09 identity at all three ends and O-11 keyed couplings, are among the cheapest on the list and neither is decided | 2026-08-30 |
 | F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | ASSIGNED 2026-08-30 by D-016. WATER primary, MAIN-PANEL the other end. No longer in the gap | 2026-08-30 |
+| F-008 | WATER, on S-18 | Between G-12 and D-023 | G-12 puts the chiller and its loop pump on ONE contactor. So "hold the chiller off across settle windows" also stops the chiller loop submersible. If that pump sits in the day tank, D-023 removes a mixing source during exactly the window in which we are waiting for the tank to mix, and **lengthens the very interval it is applied across.** It buys read cleanliness with settle time | Not fixed. No file states which tank the chiller loop submersible sits in: WATER checked F-08, P-05, its own file and DOSING's. That placement is WATER's open item and is now load-bearing on t_settle in a way it was not before | 2026-08-30 |
+| F-009 | WATER, reading commissioning.md in full | Commissioning | Two rows presupposed figures that no row produced: C-07 assumes a circulation flow number, and DOSING's derivation assumes a day tank working volume and fill band. Same shape as the C-08 gap | FIXED by adding C-10 and C-11. Recorded because it is the third instance of one pattern: a row that compares against a figure nothing schedules. Every instance was found by an agent reading the file, never by BOSS, who wrote it | 2026-08-30 |
 | F-006 | DOSING, reading the whole interface table | Between CONTROL-SOFTWARE, DISPLAY-BOX, INTERCONNECT, PUMP-BOXES and DOSING | There was no interface row for channel identity or channel numbering. Four subsystems each own a fragment of one token and none owned the token | Opened as interface S-19 rather than left. Not fixed: the scheme, the carriers and the index belong to different agents and BOSS assigns none of them alone. The only check that closes it is C-09 | 2026-08-30 |
 | F-007 | DOSING, from what makes the settling time drift | Probes, across DOSING and DISPLAY-BOX | No probe calibration or cleaning interval exists anywhere on file. DOSING read commissioning.md and all subsystem files; none names one. A fouled bulb or coated cell slows the response and widens the noise band, so a check calibrated at commissioning slowly becomes a false-fail generator, and a false-fail generator is what an operator switches off | Left open. Recorded as a re-measure trigger in commissioning.md, but the interval itself is nobody's yet | 2026-08-30 |
 | F-005 | CONTROL-SOFTWARE, reading S-15 against F-004 | Interface row S-15, BOSS's own wording | S-15 says the EC check is "valid only during a dose". F-004 says the observable arrives after the dose. Taken literally together they define a window in which the evidence cannot appear | Not fixed. CONTROL-SOFTWARE reported it rather than acting on it, which is correct: S-15 is a FROZEN row and BOSS's. The reading it worked to is that the window is anchored to the dose and extends past it by the settling interval, but that is a reading, not what the row says. Owner to rule | 2026-08-30 |
@@ -187,3 +189,51 @@ heads.
 
 This is the second time T-002's shape has appeared: a thing that sits between
 scopes and shows up in the interface table as nothing at all. Recorded there.
+
+## F-008 in full
+
+D-023 holds the chiller off across settle windows so that temperature does not
+ride into the pH and compensated EC readings. WATER confirmed the direction and
+then found what the decision did not say.
+
+G-12 is frozen: the chiller and its loop pump are on one contactor, because the
+chiller has no internal pump. There is no way to stop one without the other. So
+the decision as written also stops a submersible.
+
+If that submersible sits in the day tank, its return is a second mixing jet in a
+tank whose only agitation is the circulation pump's bottom suction and the return
+drop's plunge. F-004 leg 5 names mixing as the dominant leg of the settling time.
+Switching a mixing source off for the duration of a settle window lengthens the
+settling time being waited out.
+
+The offsetting effect, also WATER's, is real and pulls the other way: the chiller
+stratifies the tank, stratification suppresses convection and makes mixing worse,
+and holding it off reduces stratification during the window. Which effect
+dominates is not knowable from any file and is a matter for C-02 to measure, with
+the chiller in its held-off state.
+
+Nobody has decided which tank the chiller loop submersible sits in. Until that is
+decided this finding cannot be closed, and it is now one of the inputs to that
+placement rather than a consequence of it.
+
+## F-003 status, 2026-08-30: the reframe
+
+WATER's answer changed the question rather than answering it, and the reframe is
+worth more than any of the options.
+
+**No sense element can verify a stopped pump.** At rest a flow switch reads
+no-flow, a current switch reads no-current and a pressure switch reads
+no-pressure, and all three are the correct readings for a healthy idle pump. They
+are also the correct readings for a dead one.
+
+So the first half of F-003 is not a sensing question, it is a SCHEDULING
+question. The only way to know a stopped pump is alive is to run it. An exercise
+run on a rest interval, and unconditionally at batch start before the first dose,
+costs nothing and adds nothing. Sensing only ever answers what witnesses the
+exercise.
+
+Options and their honest costs are in subsystems/water-s18-f003.md. WATER
+recommends W-1, the temperature step at the probes when the standing column is
+displaced, plus W-5, the operator's eyes at the return drop, because both are free
+and neither forecloses anything, and holding the flow element pending the return
+drop geometry. That is D-019's pattern applied again.

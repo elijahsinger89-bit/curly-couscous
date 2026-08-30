@@ -68,6 +68,40 @@ S-05, where WATER already owes what the dry run interlock senses. Whether at-res
 circulation verification and dry run protection are one question or two is for
 WATER and MAIN-PANEL to answer. BOSS has not checked and is not assuming.
 
+## Answered 2026-08-30, first invocation, nothing finished
+
+subsystems/water-s18-f003.md. S-18 conditionally confirmed with two objections.
+F-003 reframed: no sensor verifies a stopped pump, so the first half is a
+scheduling question and the exercise run is free. S-05 and F-003 established as
+two questions, and the S-05 sensing method deliberately held so that answering it
+early does not foreclose the shared flow-based solution.
+
+Three numbers returned as methods rather than figures, now commissioning C-10,
+C-11 and C-12.
+
+## Open, added or sharpened by that pass
+
+- **Which tank the chiller loop submersible sits in.** No file states it. It is now
+  load-bearing on the settling time through F-008, and coupled to S-18 and C-02.
+- **The return drop family: (a) free air-gap drop, visible failure, entrains air,
+  limited aiming; or (b) submerged return with an anti-siphon vent hole, better
+  mixing and less air, but the siphon break depends on a small hole staying clear
+  and that hole fouls shut silently.** WATER will not take (b) without a ruling,
+  on D-019's reasoning: trading a visible failure for an invisible one is the
+  wrong trade.
+- **Aim the return jet tangentially.** WATER calls this the highest-value free
+  decision available on the whole settling-time problem, and it costs a bracket
+  angle.
+- **Position held by fixture, not by cord.** The drop rigidly clamped, the
+  submersible in a cradle or fastened, both cords strain-relieved so they carry no
+  positioning duty, and both positions marked on the tank so a displacement is
+  visible without measuring. A cord-hung pump is a pump whose position is a
+  suggestion. M-01 work.
+- **The acceptance criterion for whatever geometry is chosen already exists:**
+  C-02's trace. An overshoot then fall-back means a slug reached the probe before
+  the tank was uniform, and a t_settle materially faster than one turnover means a
+  short-circuit path exists.
+
 ## Waiting on
 
 | From | What |
