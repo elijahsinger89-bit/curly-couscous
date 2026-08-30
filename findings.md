@@ -10,7 +10,8 @@ mean the design has been checked. Almost nothing has been checked.
 |---|---|---|---|---|---|
 | F-001 | Owner, before any subsystem was invoked | Between DOSING, PUMP-BOXES and CONTROL-SOFTWARE | No per-channel dose verification exists, and none at rest | Open design question, routed. Options returned, see subsystems/dosing-verification-options.md. Nothing decided. No sensor added | 2026-08-30 |
 | F-002 | DOSING, answering F-001 | The jug end of the wet path, Z3 and Z4 | A jug reconnected to the wrong channel after a change produces the exact F-001 symptom, a batch completing with one nutrient missing. No flow-measuring option catches it: eight healthy flow readings are fully consistent with two jugs swapped | Left open. It is a physical identity problem, not an instrument problem. The options that address it, O-09 identity at all three ends and O-11 keyed couplings, are among the cheapest on the list and neither is decided | 2026-08-30 |
-| F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | Left open pending routing to WATER and MAIN-PANEL. Recorded now so it does not vanish between the two agents that could each assume the other has it | 2026-08-30 |
+| F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | ASSIGNED 2026-08-30 by D-016. WATER primary, MAIN-PANEL the other end. No longer in the gap | 2026-08-30 |
+| F-004 | Owner, from the S-16 constraints | Every implicit verification in the system | All of them read the day tank after recirculation, because the probes are upstream of every injection point. Each is therefore delayed by an interval nobody has measured. Named for pH at S-16, but it applies equally to the EC check at S-15 and was not stated when S-15 was frozen | Open and routed to DOSING and CONTROL-SOFTWARE between them. Not fixable by either alone and not a defect in either | 2026-08-30 |
 
 ## F-001 in full
 
@@ -83,3 +84,38 @@ and DOSING owns neither.
 So the limit that started this whole thread is the one still unrouted. Recorded
 here now, before either WATER or MAIN-PANEL is invoked, because it sits exactly
 between them and each could reasonably assume the other has it.
+
+## F-004 in full
+
+The probes sit first in line, ahead of every injection point, per G-10. That is
+correct and it is frozen: it stops injectate corrupting a reading. Its
+consequence was not written down until now.
+
+A probe therefore reads the day tank, never the manifold. Any change caused by a
+dose appears only after that dose has travelled the manifold, entered the tank,
+and mixed. Every implicit verification in this system is delayed by that
+interval, and nobody has measured it.
+
+This was named for pH when S-16 was frozen. It applies equally to the EC check
+at S-15, which was frozen as the accepted whole-loop check without the delay
+being stated. S-15 is now extended to say so.
+
+What it changes: a check read too early reads flat and reports a healthy dose as
+a failure. A check with no settling discipline at all cannot distinguish a dose
+that failed from a dose that has not arrived yet. Both produce a verification
+that is worse than none, which is the same shape as the stuck sight indicator
+and the latched pressure switch in the option list.
+
+Routed, not solved. DOSING and CONTROL-SOFTWARE between them return: what
+settling time these checks require, what sets it, and whether it can be derived
+from day tank volume and loop flow rate or has to be measured at commissioning.
+If it is a measurement it goes on commissioning.md.
+
+## F-002 status, 2026-08-30
+
+Owner ruling: F-002 outranks the option list. The finding is the inversion. A
+jug on the wrong channel defeats every instrument in the list including O-19,
+and the two things that catch it sit at the bottom of the cost list.
+
+O-19 is off the table, D-014. Matched identity at head, tube and jug, and keyed
+couplings, come back as their own proposal, separate from the nineteen, D-015.

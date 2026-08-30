@@ -38,6 +38,9 @@ on to do it.
 | G-10 | Probes read upstream of all injection. A reading reflects the tank, not the dose just injected |
 | D-007 | There is no flow signal into the Pi. No code may wait on, poll or time out against one |
 | D-009, S-15 | EC rise during a dose is the whole-loop check. It is valid only during a dose, it cannot attribute a change to a channel, and it does not move for pH up, pH down or fulvic. Read findings.md F-001 before writing any verification logic |
+| D-011, S-16 | The pH probe attributes the pH up and pH down channels. Two constraints are part of the row and are not optional. First: those two channels cannot be attributed at the same time. If both fire in one batch the movements cancel and pH shows the net. Attribute whichever was commanded, and treat a batch that fires both as a FAULT CONDITION that must not read as passing. Second: it is a delayed check, see F-004 |
+| D-012, F-004 | Every implicit verification reads the day tank after recirculation, so all of them are delayed by an interval nobody has measured. A check read too early reports a healthy dose as a failure. No verification logic is written until the settling time is settled |
+| D-013, S-17 | Fulvic is unattributed and stays that way. Do not solve it, do not warn about it as if it were a defect |
 
 ## Settled
 
@@ -59,6 +62,10 @@ on to do it.
 - What is logged and where it survives a power cut.
 - Whether a dose may start while a day tank fill is in progress, S-03. This is a
   question for the owner, not a choice for this agent.
+- F-004 jointly with DOSING: what settling time the tank-read checks require,
+  what sets it, and whether it can be derived from day tank volume and loop flow
+  rate or must be measured at commissioning. If it is a measurement it goes on
+  commissioning.md as C-02.
 - S-14: what the fault registry actually contains, and what raises any
   circulation fault today. Answer from the code. If there is no code yet, say
   where the code lives and that you looked. Do not answer from memory and do not

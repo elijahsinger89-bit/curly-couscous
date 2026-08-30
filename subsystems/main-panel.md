@@ -54,6 +54,15 @@ enclosures.
 - Enclosure heat rise with the NDR-240-24 inside a closed box at 62 to 65 F.
 - Terminal and gland plan. Terminal numbers are assigned late, not now.
 
+## Assigned 2026-08-30: findings.md F-003, second end
+
+Nothing verifies that the circulation submersible is alive at rest. MAIN-PANEL
+owns the relay that switches it and the dry run interlock chain, so it holds the
+electrical end of this. WATER is primary and owns the pump, the tank and any
+sense element placement. Neither may assume the other has it. See decisions.md
+D-016 and interface row S-05, which is already open on what the dry run
+interlock senses.
+
 ## Waiting on
 
 | From | What |

@@ -118,3 +118,50 @@ logged as findings.md F-001 and routed as an open design question: what it would
 take, what it would cost, where it would land. DOSING answers for its path. If
 the answer is a flow meter per channel the owner expects to decline it, and
 wants that recorded as a decision he made rather than a gap nobody named.
+
+**D-011 The pH probe attributes the pH up and pH down channels. S-15 is extended
+and S-16 is frozen.** Reason: free, the hardware is bought and read
+continuously, and it is the only per-channel attribution in the option list that
+costs nothing. Two constraints are part of the decision and are not to be
+recorded as clean:
+- pH up and pH down cannot be attributed at the same time. If both fire in one
+  batch the movements cancel and pH shows the net. Only one runs in a given
+  correction, so attribute whichever was commanded. A batch that fires both is a
+  fault condition and the check must not read as passing.
+- The probes are upstream of every injection point and read the day tank, not
+  the manifold. The change appears only after the dose has circulated back and
+  mixed. This is a delayed check with a settling time, and nobody has measured
+  it.
+
+**D-012 Every implicit verification in this system is delayed by an unmeasured
+interval.** The second constraint on D-011 applies to the EC check as well and
+was not named when S-15 was frozen. All of it reads the tank after
+recirculation. Logged as findings.md F-004 and routed to DOSING and
+CONTROL-SOFTWARE between them: what settling time the checks require, what sets
+it, and whether it can be derived from tank volume and loop flow or must be
+measured at commissioning. If it is a measurement it goes on commissioning.md.
+
+**D-013 Fulvic stays unattributed.** It moves neither EC nor pH meaningfully.
+One unattributed channel out of eight, recorded, is acceptable. Nobody solves it.
+Interface S-17 is closed on that basis.
+
+**D-014 O-19, a flow meter on every dosing line, is off the table.** Not to be
+brought back unless something changes. Reason: it is the most expensive option
+in every column and it does not catch F-002, which a matched label and a keyed
+coupling do. G-04 already forbade it; this is the owner declining it knowingly,
+which is what D-010 asked for. The gap is now a decision he made rather than a
+gap nobody named.
+
+**D-015 F-002 outranks the option list.** The finding is the inversion, not the
+failure: the cheapest options catch the failure the most expensive one cannot.
+Matched identity at head, tube and jug, and keyed couplings, are to come back as
+their own proposal, separate from the nineteen. Routed to DOSING.
+
+**D-016 F-003 is assigned, not left in the gap.** Nothing verifies anything at
+rest. WATER holds it as primary because it owns the circulation submersible, the
+day tank and the placement of any sense element. MAIN-PANEL holds the other end
+because it owns the relay and the dry run interlock chain. Neither may assume
+the other has it. BOSS's note, not a design instruction: this sits next to the
+already-open S-05, where WATER owes what the dry run interlock senses. Whether
+those are one question or two is for WATER and MAIN-PANEL to answer, not for
+BOSS to assume.

@@ -69,3 +69,26 @@ signal that never arrives. Both would have passed their own checks.
 What saved it: refusing to write the row. BOSS did not assert that nothing
 existed, and did not assume something did. The row stayed OPEN and the question
 went to the owner. See interface-table.md S-13 and S-14.
+
+## T-005 Freezing a check without writing down what makes it late
+
+Hit on 2026-08-30, by BOSS, freezing interface S-15.
+
+EC rise during a dose was frozen as the accepted whole-loop check, with its three
+limits attached: only during a dose, not per-channel, and blind to pH up, pH down
+and fulvic. All true. What was not written is that the probes sit upstream of
+every injection point, per G-10, so a probe reads the day tank and not the
+manifold. Every one of these checks is therefore delayed by the time it takes a
+dose to circulate back and mix, and nobody has measured that interval.
+
+The owner named it when the same row was extended to pH. It applies identically
+to the EC check that had already been frozen.
+
+How to recognise it: a check is frozen with its limits listed, and every limit
+answers "what can it not see" while none answers "when does it see". A
+verification with no settling discipline cannot tell a dose that failed from a
+dose that has not arrived yet, and it will report healthy doses as failures.
+
+The general shape: a constraint that is frozen and correct, G-10, has a
+consequence somewhere else that nobody wrote down. Freezing a row is not the
+same as understanding what the row costs. See findings.md F-004.

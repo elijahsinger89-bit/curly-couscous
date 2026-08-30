@@ -52,6 +52,22 @@ INTERCONNECT. The manifold itself and everything on it is DOSING.
   the return drop pass.
 - Return drop must break the siphon path back to the tank. Confirm how.
 
+## Assigned 2026-08-30: findings.md F-003, primary owner
+
+Nothing in this system verifies anything at rest. Between batches the loop is
+still and EC sits flat whether the circulation submersible is healthy or dead.
+The first anyone knows is at the start of the next batch.
+
+WATER holds this because it owns the circulation submersible, the day tank and
+the placement of any sense element. MAIN-PANEL holds the other end because it
+owns the relay and the dry run interlock chain. Neither may assume the other has
+it. See decisions.md D-016.
+
+BOSS's note, not a design instruction and not a conclusion: this sits next to
+S-05, where WATER already owes what the dry run interlock senses. Whether at-rest
+circulation verification and dry run protection are one question or two is for
+WATER and MAIN-PANEL to answer. BOSS has not checked and is not assuming.
+
 ## Waiting on
 
 | From | What |

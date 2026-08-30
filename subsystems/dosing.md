@@ -83,6 +83,23 @@ Two things came out of that answer and are now BOSS-held:
 
 DOSING did not declare itself finished and BOSS has not declared it finished.
 
+## Owner rulings on that answer, 2026-08-30
+
+| Ruling | Effect on DOSING |
+|---|---|
+| D-011 | pH attributes pH up and pH down. S-16 frozen with two constraints |
+| D-013 | Fulvic stays unattributed. Do not solve it |
+| D-014 | O-19, a flow meter per channel, is off the table. Do not bring it back unless something changes |
+| D-015 | F-002 outranks the option list. O-09 and O-11 come back as their own proposal, separate from the nineteen |
+| D-012, F-004 | Every tank-read check is delayed by an unmeasured interval. DOSING and CONTROL-SOFTWARE answer the settling time between them |
+
+## Two tasks now open on DOSING
+
+1. The F-002 proposal: matched identity at head, tube and jug, and keyed or
+   coded couplings, as one proposal for the wrong-jug failure. Not a menu.
+2. The wet side of F-004: what sets the settling time, and whether it is
+   derivable from day tank volume and loop flow or has to be measured.
+
 ## Waiting on
 
 | From | What |
