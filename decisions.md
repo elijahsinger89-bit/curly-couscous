@@ -67,6 +67,8 @@ changed reports to BOSS and does not act.
 | G-18 | The jug change break point is at the jug. The tube stays with the channel and is never moved between channels | Frozen 2026-08-30. See D-020 |
 | G-19 | **No progress bar on an interrupted dose, and no delivered-fraction percentage anywhere.** A percentage computed from step index renders a commanded count as a delivered fraction | Frozen 2026-08-30. It is the confident-wrong-answer shape and the one thing a tired operator will believe |
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
+| G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
+| G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
 | G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE.** For every Pi input, without exception, the question is asked deliberately: what does a severed cable read as, and is that reading the safe one. An input that fails in the unsafe direction is a DEFECT, not a tolerance | Frozen 2026-08-30. See D-036. The check is cheap and it is asked of every input, not only of the two that already have circuits |
 | G-23 | **A minimum switching load belongs to a CONTACT, not to a circuit.** No figure is carried from one contact to another. The 22.32's minimum and the 55.34's minimum are sized independently, always | Frozen 2026-08-30. See D-035 |
 | G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
@@ -461,3 +463,23 @@ real options rather than defining healthy in the abstract.
 The pole budget is the useful half of this. Three lamps, both 22.32 poles already
 spoken for, and the fill chains and seal-ins all competing. **That constraint may
 be the thing that decides what the lamps can say.**
+
+**D-038 MAIN-PANEL's F-003 ruling, accepted and frozen as G-25.** A no-flow
+condition at the discharge may drop the pump in hardware. A circulation
+verification failure may not.
+
+The reason BOSS would not give up either, of the five MAIN-PANEL gave: **a hardware
+drop is SILENT, and every check downstream is a delayed tank reading.** If the pump
+is dropped in hardware the Pi still believes the loop is turning, and S-15, S-16 and
+F-004 go on comparing tank readings taken from a still tank. That is the
+confident-wrong-answer shape this project has already been bitten by twice. A batch
+stop is loud. A pump that quietly went away is not.
+
+If one flow element serves both duties: the contact goes to K-DRY with dry-run
+timing, **K-DRY latches and does not auto-restart when flow returns**, and a second
+pole goes to the Pi for the software judgement. One element, one relay, two poles,
+two consequences, two reset paths. **WATER's line is now satisfied: it is a decision
+and not a side effect.**
+
+That second pole is interface S-20, a third instance of S-03's circuit shape, which
+had no row until now.
