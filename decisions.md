@@ -62,6 +62,9 @@ changed reports to BOSS and does not act.
 | G-13 | E-stop and manual reset are in the permissive chain and are not software | As G-07 |
 | G-14 | UL listing is not gating. Hobby build, no electrical inspection | Owner's stated condition. It does not license unsafe work |
 | G-15 | The owner does all part lookups. Agents return a requirement and a search term and stop | No agent states a part number or a spec from memory |
+| G-16 | **NO AUTOMATIC RE-DOSE. EVER.** Software never tops up, retries, re-doses or corrects on its own on the strength of any reading of any check. If a check reports no movement, the batch STOPS and tells the operator. The operator decides | Frozen 2026-08-30 as a RULE, not a parameter. Not a configurable retry count, not a threshold anyone can turn up. See D-017 |
+| G-17 | Jugs are dedicated per channel for life. Not interchangeable vessels. A jug is refilled with the same product forever or it is retired | Frozen 2026-08-30. See D-018 |
+| G-18 | The jug change break point is at the jug. The tube stays with the channel and is never moved between channels | Frozen 2026-08-30. See D-020 |
 
 ## Parts the owner already has
 
@@ -165,3 +168,70 @@ the other has it. BOSS's note, not a design instruction: this sits next to the
 already-open S-05, where WATER owes what the dry run interlock senses. Whether
 those are one question or two is for WATER and MAIN-PANEL to answer, not for
 BOSS to assume.
+
+**D-017 NO AUTOMATIC RE-DOSE. Frozen as a rule before any code exists.**
+G-16. Reason, and it is CONTROL-SOFTWARE's reasoning accepted whole: every other
+error in this software is recoverable, and a double dose is not. Nothing measures
+the excess, G-04. The books record only what was commanded, G-05. On the two pH
+channels the excess leaves through V3 and is gone. The tank and the books diverge
+in a direction nobody can ever see.
+
+It is a rule and not a parameter. No configurable retry count. No threshold
+anyone can turn up. No reading of any check may cause software to top up. If a
+check reports no movement the batch stops and tells the operator, and the
+operator decides.
+
+**The direction of error is chosen, not accidental.** With this rule in place a
+timing error in the settle window can only produce a FALSE STOP, which is loud
+and safe. It cannot produce a silent overdose. That is why the whole class of
+settle-window bugs stops being dangerous, and it is the reason to write the rule
+before the code rather than after.
+
+**D-018 Jugs are dedicated per channel for life.** G-17. The channel token goes
+on the jug body permanently. A jug is refilled with the same product forever or
+it is retired. This is the cheap half of F-002 and it costs a label and a
+decision. It also resolves the departure DOSING proposed: with dedicated jugs the
+station carries the channel token AND the jug body carries it too, belt and
+braces, which is only safe because the vessel never moves channel.
+
+**D-019 The keyed coupling is NOT taken yet.** Reason: once jugs are dedicated
+the coupling is worth less than it looked, and DOSING's air-ingress warning is
+the reason to hold it. On a suction line a bad seal does not drip, it draws air,
+the head turns, the books decrement and nothing is delivered. Trading a visible
+failure for an invisible one is the wrong trade.
+
+Taken instead, both free, both preconditions DOSING already named: translucent
+tubing, O-03, and the jug end in the operator's sightline, O-04. Both make air
+ingress visible.
+
+Revisit the coupling after C-09 exists and the jug procedure is in use. Not
+declined, held.
+
+**D-020 The jug change procedure is defined.** G-18. The break point is at the
+jug. The tube stays with the channel. The tube is never moved between channels.
+Written that way the key becomes optional rather than load-bearing, which is the
+whole reason D-019 can hold the coupling without leaving F-002 open.
+
+**D-021 The channel token gets an OWNER, not a row.** CONTROL-SOFTWARE is the
+definitional end: it declares what channel N is, and every other subsystem
+consumes that declaration and matches it. DISPLAY-BOX, INTERCONNECT, PUMP-BOXES
+and DOSING carry it, none of them defines it.
+
+Reason: as a shared row with four contributors it was lost twice. One agent
+declares, everyone else matches. Interface S-19 is rewritten on that basis.
+
+**D-022 C-09 goes FIRST in the commissioning order.** Before anything that
+depends on a channel meaning what it says. It is free, it needs no hardware, and
+it is the only check that catches a build-time labelling error. Every measurement
+after it is worthless if channel N is not what the wall says it is.
+
+**D-023 The chiller is held off across settle windows.** S-18. Read cleanliness
+beats a small temperature excursion on a 40 gal tank over a window measured in
+minutes. Routed to WATER to confirm that nothing about the chiller's duty cycle
+makes holding it off unsafe. Provisional until WATER answers.
+
+**D-024 S-15 is corrected rather than carrying an interpretation.** F-005. As
+written the row said the EC check is valid only during a dose, which is a window
+in which its own evidence cannot exist. The row now says the window is anchored
+to the dose and extends past the last step by the settling interval. The
+correction is recorded here rather than made silently, because S-15 is frozen.

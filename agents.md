@@ -71,3 +71,19 @@ not land rather than reshaping it to fit.
   Using finds everything.
 - When BOSS and a subsystem disagree, establish who has read what before
   arguing about who is right.
+- To find a seam nobody owns, do not review the interface table. Assign work
+  that cannot proceed without crossing it. See traps.md T-002.
+
+## What has actually worked, recorded as evidence rather than as theory
+
+2026-08-30. CONTROL-SOFTWARE and DOSING were invoked in parallel on two different
+questions, with different scopes and no knowledge of each other. Both
+independently found the same missing commissioning row: the probe noise and drift
+band that C-03 and C-04 compare against and that nothing scheduled. Both found it
+by reading commissioning.md. BOSS did not find it either time, and BOSS wrote the
+file.
+
+Two agents with different scopes converging on the same missing row is what this
+arrangement is for. It is also the argument for writing state to disk rather than
+holding it in one head: neither agent could have found it if the gap had lived in
+BOSS's context instead of in a file they could both read.

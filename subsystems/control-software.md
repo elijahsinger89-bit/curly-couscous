@@ -41,6 +41,9 @@ on to do it.
 | D-011, S-16 | The pH probe attributes the pH up and pH down channels. Two constraints are part of the row and are not optional. First: those two channels cannot be attributed at the same time. If both fire in one batch the movements cancel and pH shows the net. Attribute whichever was commanded, and treat a batch that fires both as a FAULT CONDITION that must not read as passing. Second: it is a delayed check, see F-004 |
 | D-012, F-004 | Every implicit verification reads the day tank after recirculation, so all of them are delayed by an interval nobody has measured. A check read too early reports a healthy dose as a failure. No verification logic is written until the settling time is settled |
 | D-013, S-17 | Fulvic is unattributed and stays that way. Do not solve it, do not warn about it as if it were a defect |
+| **G-16, D-017** | **NO AUTOMATIC RE-DOSE. EVER.** Software never tops up, retries, re-doses or corrects on its own, on any reading of any check. If a check reports no movement the batch STOPS and tells the operator, and the operator decides. This is a RULE, not a parameter: no configurable retry count, no threshold anyone can turn up, no code path that can be enabled later. It is frozen before any code exists so it cannot be argued into existence by a plausible-looking edge case. Consequence to hold on to: with this rule in place a settle-window timing error can only produce a FALSE STOP, which is loud and safe. The direction of error is chosen, not accidental |
+| **D-021, S-19** | CONTROL-SOFTWARE is the DEFINITIONAL end of the channel token. It declares what channel N is. DISPLAY-BOX, INTERCONNECT, PUMP-BOXES and DOSING consume that declaration and match it. Nobody else defines it, and there is no translation table anywhere on the chain |
+| D-024, S-15 | The EC check window is anchored to the dose and extends past the last commanded step by the settling interval. The old wording is corrected, not interpreted |
 
 ## Settled
 
@@ -62,6 +65,11 @@ on to do it.
 - What is logged and where it survives a power cut.
 - Whether a dose may start while a day tank fill is in progress, S-03. This is a
   question for the owner, not a choice for this agent.
+- S-19: declare the channel token. One identity that rides software index, pin
+  map, cable core, driver, head, box, barb, tube, jug station, jug and product,
+  with no translation at any point. Declare it so the other four can consume it.
+  It does not need PUMP-BOXES' box division to exist first: the definition comes
+  first and the box division consumes it.
 - F-004 jointly with DOSING: what settling time the tank-read checks require,
   what sets it, and whether it can be derived from day tank volume and loop flow
   rate or must be measured at commissioning. If it is a measurement it goes on

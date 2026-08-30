@@ -42,9 +42,21 @@ Four subsystems owned a fragment each and none owned the token. Same shape, same
 reason it survived, and BOSS did not catch it the second time either. Now
 interface S-19 and findings F-006.
 
-The lesson from the recurrence: an interface table cannot show a missing owner,
-only a disagreeing one. Reading the table finds neither. The thing that found it
-both times was an agent asked to BUILD something that had to cross the gap.
+### The method, and this is the lesson rather than the token
+
+An interface table cannot show a missing owner. It can only show a disagreeing
+one. Reading the table finds neither, and the table was read carefully both
+times by BOSS and both times the gap was invisible.
+
+**To find an unowned seam, do not review the interface table. Assign work that
+cannot proceed without crossing it.** Both times the gap was found by an agent
+told to build something that had to reach across it: DOSING asked to own the wet
+path found the jug and suction gap, and DOSING asked to propose channel identity
+found that nobody defined a channel. Neither was found by inspection.
+
+This is the same rule already in agents.md for stalled threads, promoted to a
+method: reviewing finds nothing, using finds everything. It applies to seams that
+are missing, not only to seams that are contested.
 
 ## T-003 Asserting from absence
 

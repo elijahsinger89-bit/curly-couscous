@@ -176,3 +176,28 @@ and reads healthy. G-05 decrements the wrong jug, so the remainder warnings are
 wrong too, and the jug that actually empties does so without warning.
 
 Recorded by BOSS as interface S-19 and findings F-006.
+
+
+## OWNER RULINGS, 2026-08-30. This section overrides the proposal above where they differ.
+
+| Ruling | Effect on this proposal |
+|---|---|
+| G-17, D-018 | Jugs are dedicated per channel for life. DOSING's station-versus-jug split is resolved in favour of BOTH: the station carries the channel token and the jug body carries it too, permanently. That is only safe because the vessel never changes channel, which is exactly what dedication guarantees. The jug still carries product name and fill date |
+| G-18, D-020 | The jug change break point is AT THE JUG. The tube stays with the channel. The tube is never moved between channels. This is the design commitment DOSING said was needed, and it is now made: the break point is defined rather than left to habit |
+| D-019 | The keyed coupling is HELD, not taken and not declined. With dedicated jugs and a fixed break point the key was buying less than it looked, and DOSING's own air-ingress warning is the reason to wait. Revisit after C-09 exists and the procedure is in use |
+| D-019 | Translucent tubing, O-03, and the jug end in the sightline from Z5, O-04, ARE taken. Both free. Both were named by DOSING as the preconditions without which the coupling trades a detectable failure for an undetectable one, and they stand on their own merit without it |
+| D-021 | The channel token is DEFINED by CONTROL-SOFTWARE, S-19. Everything in the identity section above is a CARRIER requirement. DOSING does not choose the numbering |
+| D-022 | C-09 is first in the commissioning order |
+
+**The jug change procedure, as decided.** The break point is the jug end. The
+tube belongs to the channel and stays with it. Nothing on the wet path is ever
+moved from one channel to another. The residual hole DOSING named stays open and
+named: a correctly stationed, correctly labelled jug that somebody filled from the
+wrong drum is still F-002, and no mechanism here catches it. Product identity on
+the jug and the fill date are what stand between that failure and the tank.
+
+**What is no longer required by this proposal:** coupling chemical compatibility,
+key code count, seal wear scheduling, dead volume and prime burden, parking
+points for disconnected halves, and the coupling's own leak and air-ingress
+failure modes. All of that returns if and when the coupling is revisited. It is
+recorded rather than deleted so that the cost is not rediscovered from scratch.

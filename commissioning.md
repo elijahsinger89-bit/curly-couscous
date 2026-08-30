@@ -7,6 +7,11 @@ that arrives without a measurement behind it is not a figure.
 BOSS owns this file. An agent that needs a number it cannot derive adds a row
 here through BOSS rather than assuming one.
 
+**C-09 IS FIRST.** D-022. Nothing below it is worth measuring until channel N is
+proven to be what the wall says it is. A measurement taken against a mislabelled
+channel is not a wrong number, it is a right number filed against the wrong
+thing, and every later check confirms it.
+
 | # | Measurement | Why it is needed | Who measures | Blocked on |
 |---|---|---|---|---|
 | C-01 | Delivered volume per head, per unit time and per step | Steps per millilitre. Nothing in the system measures delivered volume, so a wrong figure is invisible. G-04 | Owner | Heads mounted, tubing chosen |

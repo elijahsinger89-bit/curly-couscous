@@ -108,10 +108,18 @@ end-to-end trace; commissioning C-08 restated as an in-situ measurement, found
 independently of CONTROL-SOFTWARE; and the C-02 ordering circularity, now fixed
 in commissioning.md.
 
-Two owner decisions the proposal forces and DOSING refused to make: whether jugs
-are dedicated per channel for life or interchangeable vessels, and whether the
-jug change procedure is defined so the break point IS the keyed joint. Without
-the second, the key is decorative.
+## Owner rulings on the F-002 proposal, 2026-08-30
+
+| Ruling | Effect |
+|---|---|
+| G-17, D-018 | Jugs are DEDICATED per channel for life. Not interchangeable vessels. A jug is refilled with the same product forever or it is retired. So the channel token goes on the jug body permanently, as well as on the station |
+| G-18, D-020 | The jug change break point is AT THE JUG. The tube stays with the channel and is NEVER moved between channels. This makes the key optional rather than load-bearing |
+| D-019 | The keyed coupling is NOT taken yet. Held, not declined. DOSING's air-ingress warning is the reason: on a suction line a bad seal does not drip, it draws air, the head turns, the books decrement and nothing is delivered. Trading a visible failure for an invisible one is the wrong trade, and dedicated jugs plus a fixed break point already remove most of what the key was buying |
+| D-019 | TAKEN INSTEAD, both free, both preconditions DOSING itself named: translucent tubing O-03, and the jug end in the operator's sightline from Z5, O-04. Both make air ingress visible |
+| D-021 | The channel token is DEFINED by CONTROL-SOFTWARE. DOSING carries it on the tube, the jug station and the jug body. DOSING does not define it and does not invent a numbering |
+| D-022 | C-09, the end-to-end trace, is FIRST in the commissioning order |
+
+Revisit the coupling after C-09 exists and the jug procedure is in use.
 
 ## Waiting on
 
