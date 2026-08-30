@@ -530,3 +530,68 @@ on every return that touches a frozen row or another subsystem's slice.
 layout and both are in flight. Invoking it now would have it build against two
 moving targets, which is the same mistake as designing a UI against a moving fault
 model.
+
+**D-042 NO DOSE DURING A FILL, and F-017 is closed BY INVERSION rather than by
+logic.**
+
+The interlock's reasons: a fill changes tank volume while a dose is being computed
+against it, and **every verification in this system is a delayed tank reading, so a
+fill inside a settle window corrupts the measurement the same way the chiller would
+have.**
+
+**The fix is the normally closed contact.** Wire it so CLOSED means no fill in
+progress and OPEN means filling. Then a severed cable reads as filling, dosing is
+inhibited, and the failure is a stop rather than a permission. Same 55.34, same
+wetting circuit, same current, different pole.
+
+**That is G-22 satisfied by WIRING rather than by software, which is where it
+should be satisfied. Software cannot make a severed cable safe. Contact selection
+can.** The general form is traps.md T-016.
+
+**D-043 The STEP and DIR pull-downs belong to PUMP-BOXES, not to DISPLAY-BOX.**
+F-018. A pull at the display end does nothing once the conductor is cut, so the
+part is per-driver, at the driver input, inside the pump boxes. Routed with two
+questions PUMP-BOXES owns: what value, and **where it physically lands, given the
+driver has screw terminals and no board space of its own.**
+
+**A severed DIR producing a head that runs backwards while the books decrement
+forward is the worst outcome in the whole sweep**, and the S-10 row says so.
+
+**D-044 Buy the relays. The panel is not designed around a shortage.**
+
+Definite now, one: **the dry-run interlock relay, K-DRY.** Five independently
+commanded states are required as a floor and four relays exist.
+
+Contingent, up to four more, each decided by a named question rather than by
+guesswork:
+
+| Contingency | How many | What decides it |
+|---|---|---|
+| Interposers for the two 22.32 contactor coils | 2 | Whether the logic board can drive a 22.32 coil directly: DISPLAY-BOX's sink capability per channel and in total against the 22.32's coil pull-in and hold current at the trim voltage C-16 records. Interfaces S-07 and S-09, both OPEN |
+| Splitting K-FILL-D | 1 | Whether one 55.34 in a 94.74SMA socket may carry a 120 V receptacle load and a roughly 12.5 mA SELV sense pole on adjacent poles. If not, it splits |
+| A timing relay for the dry-run start-up bypass | 1 | Whether the bypass is implemented as a separate timing relay rather than within K-DRY. It must be shorter than the pump's dry-run tolerance and longer than flow establishment, and neither number exists yet |
+
+**Of what: the same 55.34 already in use, and each added relay needs its 94.74SMA
+socket. Coil suppression is a requirement on every coil regardless of who drives
+it**, because an open-collector output switching an inductive load without it fails
+slowly and looks like something else. MAIN-PANEL returns the coil and suppression
+requirement with search terms; BOSS states no part number.
+
+**D-045 PL-Y is a lamp across the outgoing 24 V rail, downstream of the permissive
+contactor.** Accepted as MAIN-PANEL proposed it. Measured rather than commanded,
+costs no coil, and **the impossible state is diagnostic: PL-R and PL-Y both on
+means the contactor is welded.** It also forces PL-Y to be 24 V class specifically,
+which decides the top-face routing question.
+
+**D-046 The receptacles are PANEL MOUNTED in the enclosure face and the cords plug
+into them from outside.** They are not fed through cord grips. F-023 closed.
+MAIN-PANEL places them.
+
+**D-047 The top face is treated as needing GASKETED DEVICES.** F-025 stands open on
+the enclosure's own rating, which the owner has not chosen. The room is not wet but
+it carries water tank to tank, and five upward-facing penetrations is the right
+objection. **Routed to MAIN-PANEL: say what gasketed-device selection constrains
+about the E-stop, the reset and the lamps, because it may change the parts.**
+
+**D-048 S-06 is CLOSED. The panel-face E-stop satisfies it and there is no second
+remote E-stop.** F-024 closed.

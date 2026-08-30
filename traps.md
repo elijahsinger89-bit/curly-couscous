@@ -238,3 +238,55 @@ until it knew what a real part actually does.
 
 This is the same method already recorded under T-002, arrived at independently
 from real build experience. Two separate lines of evidence for one rule.
+
+## T-016 A sense path that fails to the wrong state: reach for the other contact, not more logic
+
+Hit on 2026-08-30. S-03, the day tank fill-in-progress contact.
+
+The contact was wired so that closed meant a fill was in progress. So contact open
+meant no fill, and a severed cable read as **permission to dose**. With dosing
+during a fill forbidden, that is the unsafe direction: the failure grants the
+permission instead of withdrawing it.
+
+The reflex fix is software: qualify the input, cross-check it, add a timeout, treat
+a suspiciously long "no fill" as suspect. **Every one of those is logic added to
+compensate for a contact chosen the wrong way round, and none of them makes a
+severed cable safe.**
+
+The actual fix was the other contact. Use the normally closed contact, so closed
+means no fill and open means filling. Then a severed cable reads as filling, dosing
+is inhibited, and the failure is a stop rather than a permission. Same relay, same
+wetting circuit, same current, different pole.
+
+**The general form: when a sense path fails to the wrong state, the first fix to
+reach for is THE OTHER CONTACT, not more logic. Software cannot make a severed
+cable safe. Contact selection can.**
+
+G-22 is satisfied by wiring, which is where it should be satisfied.
+
+## T-017 The chain that can never start
+
+Found on 2026-08-30 by MAIN-PANEL, tracing rather than inspecting. Not built, and
+caught before it was.
+
+The panel is short of coils, so the cheapest fix was to put the dry-run element
+straight into the permissive series string, which costs zero relays and looks
+obviously correct.
+
+**A flow-proving element reads open at rest and open through every start-up
+transient. In the string: the permissive cannot latch until there is flow. There is
+no flow until the pump runs. The pump needs the permissive.**
+
+A chain that can never start. Every element in it is individually correct and the
+loop is dead.
+
+How to recognise it: a condition is added to an enabling chain, and the condition
+is itself produced by something the chain enables. **Ask of every element in a
+permissive or interlock string: what makes this element true, and does the string
+have to be closed first for that to happen.** A state diagram will not show it. Only
+tracing the loop by hand does, which is the same discipline T-007 demands of an
+open-collector return.
+
+This is T-007's shape applied to a chain rather than to a coil, and it is worth its
+own entry because the string version is the one that gets designed in for free
+under budget pressure.

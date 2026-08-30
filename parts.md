@@ -166,6 +166,18 @@ E-stop and cannot re-close the permissive. Only the reset button does that.
 **The three lamps are driven from RELAY POLES, not from the Pi. So the panel tells
 you its state with no computer involved, and that is deliberate.**
 
+**Decided 2026-08-30: PL-Y is a lamp across the outgoing 24 V rail, downstream of
+the permissive contactor**, D-045. It shows that motor supply actually ARRIVED,
+which is measured rather than commanded, and it costs no coil. **PL-R and PL-Y both
+on is an impossible state: if you see it, the contactor is welded.** It forces PL-Y
+to be 24 V class specifically.
+
+**The receptacles are PANEL MOUNTED in the enclosure face and cords plug in from
+outside**, D-046. They are not fed through cord grips.
+
+**The top face is treated as needing GASKETED DEVICES**, D-047. The enclosure's own
+rating is still unchosen, F-025.
+
 That is the whole panel face.
 
 Consequence for MAIN-PANEL, routed rather than decided: three lamps driven from
