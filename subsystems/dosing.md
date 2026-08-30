@@ -93,12 +93,25 @@ DOSING did not declare itself finished and BOSS has not declared it finished.
 | D-015 | F-002 outranks the option list. O-09 and O-11 come back as their own proposal, separate from the nineteen |
 | D-012, F-004 | Every tank-read check is delayed by an unmeasured interval. DOSING and CONTROL-SOFTWARE answer the settling time between them |
 
-## Two tasks now open on DOSING
+## Both tasks answered 2026-08-30, neither finished
 
-1. The F-002 proposal: matched identity at head, tube and jug, and keyed or
-   coded couplings, as one proposal for the wrong-jug failure. Not a menu.
-2. The wet side of F-004: what sets the settling time, and whether it is
-   derivable from day tank volume and loop flow or has to be measured.
+1. F-002 proposal: subsystems/dosing-f002-proposal.md. Blocked from being built
+   on F-06, which is OPEN, and on DOSING's own open items: tubing selection, jug
+   placement, the siphon question.
+2. Wet side of F-004: subsystems/dosing-f004-wet-side.md. Blocked on WATER
+   returning circulation flow at F-03, DISPLAY-BOX returning probe response, and
+   DOSING's own manifold volumes.
+
+Four things DOSING found and did not fix, now BOSS-held: interface S-19 and
+findings F-006, the channel token nobody owned; commissioning C-09, the
+end-to-end trace; commissioning C-08 restated as an in-situ measurement, found
+independently of CONTROL-SOFTWARE; and the C-02 ordering circularity, now fixed
+in commissioning.md.
+
+Two owner decisions the proposal forces and DOSING refused to make: whether jugs
+are dedicated per channel for life or interchangeable vessels, and whether the
+jug change procedure is defined so the break point IS the keyed joint. Without
+the second, the key is decorative.
 
 ## Waiting on
 

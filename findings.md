@@ -11,6 +11,8 @@ mean the design has been checked. Almost nothing has been checked.
 | F-001 | Owner, before any subsystem was invoked | Between DOSING, PUMP-BOXES and CONTROL-SOFTWARE | No per-channel dose verification exists, and none at rest | Open design question, routed. Options returned, see subsystems/dosing-verification-options.md. Nothing decided. No sensor added | 2026-08-30 |
 | F-002 | DOSING, answering F-001 | The jug end of the wet path, Z3 and Z4 | A jug reconnected to the wrong channel after a change produces the exact F-001 symptom, a batch completing with one nutrient missing. No flow-measuring option catches it: eight healthy flow readings are fully consistent with two jugs swapped | Left open. It is a physical identity problem, not an instrument problem. The options that address it, O-09 identity at all three ends and O-11 keyed couplings, are among the cheapest on the list and neither is decided | 2026-08-30 |
 | F-003 | BOSS, from DOSING's answer | F-001 limit 1, nothing verifies at rest | Unrouted. The circulation submersible sitting dead between batches is WATER's device on a MAIN-PANEL relay, not on DOSING's path. DOSING correctly declined it | ASSIGNED 2026-08-30 by D-016. WATER primary, MAIN-PANEL the other end. No longer in the gap | 2026-08-30 |
+| F-006 | DOSING, reading the whole interface table | Between CONTROL-SOFTWARE, DISPLAY-BOX, INTERCONNECT, PUMP-BOXES and DOSING | There was no interface row for channel identity or channel numbering. Four subsystems each own a fragment of one token and none owned the token | Opened as interface S-19 rather than left. Not fixed: the scheme, the carriers and the index belong to different agents and BOSS assigns none of them alone. The only check that closes it is C-09 | 2026-08-30 |
+| F-007 | DOSING, from what makes the settling time drift | Probes, across DOSING and DISPLAY-BOX | No probe calibration or cleaning interval exists anywhere on file. DOSING read commissioning.md and all subsystem files; none names one. A fouled bulb or coated cell slows the response and widens the noise band, so a check calibrated at commissioning slowly becomes a false-fail generator, and a false-fail generator is what an operator switches off | Left open. Recorded as a re-measure trigger in commissioning.md, but the interval itself is nobody's yet | 2026-08-30 |
 | F-005 | CONTROL-SOFTWARE, reading S-15 against F-004 | Interface row S-15, BOSS's own wording | S-15 says the EC check is "valid only during a dose". F-004 says the observable arrives after the dose. Taken literally together they define a window in which the evidence cannot appear | Not fixed. CONTROL-SOFTWARE reported it rather than acting on it, which is correct: S-15 is a FROZEN row and BOSS's. The reading it worked to is that the window is anchored to the dose and extends past it by the settling interval, but that is a reading, not what the row says. Owner to rule | 2026-08-30 |
 | F-004 | Owner, from the S-16 constraints | Every implicit verification in the system | All of them read the day tank after recirculation, because the probes are upstream of every injection point. Each is therefore delayed by an interval nobody has measured. Named for pH at S-16, but it applies equally to the EC check at S-15 and was not stated when S-15 was frozen | Open and routed to DOSING and CONTROL-SOFTWARE between them. Not fixable by either alone and not a defect in either | 2026-08-30 |
 
@@ -112,6 +114,22 @@ settling time these checks require, what sets it, and whether it can be derived
 from day tank volume and loop flow rate or has to be measured at commissioning.
 If it is a measurement it goes on commissioning.md.
 
+ANSWERED 2026-08-30, both sides. subsystems/control-software-f004.md and
+subsystems/dosing-f004-wet-side.md. It must be measured, not derived. It is two
+times, not one: t_first, before which a check is guaranteed flat, and t_settle,
+before which a magnitude cannot be judged.
+
+The sharpest thing to come out of it, and it is not about timing:
+
+**The settling number's dominant input is the one thing this design cannot
+observe, by choice.** Tank mixing is set by circulation flow. Nothing measures
+flow: D-007 closed S-13, G-04 forbids meters. So flow degradation from a fouled
+impeller, an intake screen, biofilm or scale lengthens the settling time
+silently, and the check that depends on it drifts toward reporting healthy doses
+as failures. That is not an argument for adding a meter. It is the reason the
+re-measure trigger list in commissioning.md exists and is an event list rather
+than a calendar.
+
 ## F-002 status, 2026-08-30
 
 Owner ruling: F-002 outranks the option list. The finding is the inversion. A
@@ -140,3 +158,32 @@ further. That is the correct behaviour for a boundary defect.
 This is the second consequence of T-005 to surface from the same freeze. The row
 needs rewording and the rewording is a decision, not a costless fix, so BOSS has
 not made it.
+
+## F-006 in full
+
+The chain is: software channel index, logic board output S-12, cable core,
+driver, head in one of two boxes, head barb, tube, keyed coupling, jug station,
+jug, product. One token has to ride all of it with no translation at any point,
+because the operator's real workflow is "the UI says channel N is low, walk to
+the wall, find N", and a translation step is performed by a person, at night,
+from memory.
+
+Until DOSING read the whole interface table, no row covered it. PUMP-BOXES owned
+how the two boxes divide the channels. INTERCONNECT owned a labelling scheme for
+conductors. DISPLAY-BOX owned the pin map. CONTROL-SOFTWARE owned the channel
+index. Four fragments, no token.
+
+What it costs if the ends disagree: a head labelled N but driven by software
+channel N+1 doses the wrong product every batch, permanently, with no jug ever
+touched. And it passes every check in the system. S-16 attributes a pH movement
+to the channel that was commanded, so the pH check confirms a movement that came
+from the wrong pump and reads healthy. G-05 decrements the wrong jug, so the
+remainder warnings are wrong too and the jug that actually empties does so
+without warning.
+
+Opened as interface S-19. The only thing that catches it is C-09, the end-to-end
+trace, which costs nothing and is possible only because G-06 serialises the
+heads.
+
+This is the second time T-002's shape has appeared: a thing that sits between
+scopes and shows up in the interface table as nothing at all. Recorded there.

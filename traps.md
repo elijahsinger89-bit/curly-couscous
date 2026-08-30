@@ -35,6 +35,17 @@ interface table. It appears as nothing at all, which is why it survives.
 
 Corrected by giving the whole wet path to DOSING. See decisions.md D-006.
 
+RECURRED 2026-08-30, found by DOSING, not by BOSS. The channel token: one
+identity that has to ride from the software channel index through the pin map,
+the cable, the driver, the head, the tube and the coupling to the jug station.
+Four subsystems owned a fragment each and none owned the token. Same shape, same
+reason it survived, and BOSS did not catch it the second time either. Now
+interface S-19 and findings F-006.
+
+The lesson from the recurrence: an interface table cannot show a missing owner,
+only a disagreeing one. Reading the table finds neither. The thing that found it
+both times was an agent asked to BUILD something that had to cross the gap.
+
 ## T-003 Asserting from absence
 
 Not yet hit in this project. Seeded because BOSS's own instructions name it as
