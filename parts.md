@@ -252,11 +252,36 @@ LOW.**
 
 Do not re-derive this circuit. It is recorded as given.
 
-BOSS's observation from the stated design, offered for MAIN-PANEL and DISPLAY-BOX
-to confirm rather than asserted: a broken cable or a dead LED leaves the Pi input
-high, which reads as contact open, which reads as a permissive drop. That is the
-false-stop direction, which is the same chosen direction of error as D-017 and
-D-030. Worth confirming deliberately rather than inheriting by luck.
+**The fail direction is a CHOSEN PROPERTY, not an inheritance.** A broken cable or
+a dead LED leaves the Pi input high, which reads as contact open, which reads as a
+drop. That is the false-stop direction, the same one D-017 and D-030 chose. It
+holds for S-08 and for S-03. See G-22.
+
+### The S-03 sense circuit: same topology, DIFFERENT NUMBERS. Do not copy S-08.
+
+Same shape: a dry contact wetted at 24 V, one branch through an optocoupler LED
+and series resistor, **the burden in the MAIN PANEL**, an isolated input at the
+Pi, sense inverted. Same two reasons verbatim: a contact left below its minimum
+switching load oxidises, and a cable failure must not degrade the contact it
+senses.
+
+**Different numbers, and that is why it is not a copy:**
+
+| Contact | Minimum switching load | At 24 V |
+|---|---|---|
+| Finder 22.32, S-08 | 1000 mW at 10 V and 10 mA | about 41.7 mA |
+| Finder 55.34, S-03 | 300 mW at 5 V and 5 mA | about 12.5 mA |
+
+**S-03 needs roughly a third of the current, and that difference is what makes
+S-08 need two parallel branches and S-03 not.** At 42 mA an optocoupler LED is
+near its continuous rating, so S-08 splits into a sense branch and a bare burden
+branch. At 12.5 mA a single series branch carries the whole loop and the LED sits
+in its normal operating band. **S-03 is the simpler circuit, and copying S-08's
+two-branch arrangement onto it would add a part for nothing.**
+
+MAIN-PANEL gets both minimums explicitly and sizes each independently. **Neither
+figure may be carried from the other. Both are RELAY properties, not circuit
+properties: a minimum switching load belongs to a contact.**
 
 ## Not known, and not to be invented
 

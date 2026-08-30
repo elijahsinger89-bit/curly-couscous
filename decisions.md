@@ -67,6 +67,8 @@ changed reports to BOSS and does not act.
 | G-18 | The jug change break point is at the jug. The tube stays with the channel and is never moved between channels | Frozen 2026-08-30. See D-020 |
 | G-19 | **No progress bar on an interrupted dose, and no delivered-fraction percentage anywhere.** A percentage computed from step index renders a commanded count as a delivered fraction | Frozen 2026-08-30. It is the confident-wrong-answer shape and the one thing a tired operator will believe |
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
+| G-22 | **EVERY FAILURE OF A SENSE PATH MUST READ AS THE SAFE STATE.** For every Pi input, without exception, the question is asked deliberately: what does a severed cable read as, and is that reading the safe one. An input that fails in the unsafe direction is a DEFECT, not a tolerance | Frozen 2026-08-30. See D-036. The check is cheap and it is asked of every input, not only of the two that already have circuits |
+| G-23 | **A minimum switching load belongs to a CONTACT, not to a circuit.** No figure is carried from one contact to another. The 22.32's minimum and the 55.34's minimum are sized independently, always | Frozen 2026-08-30. See D-035 |
 | G-21 | **EN stays unwired and the drivers default enabled. Software has no per-driver disable, permanently** | Frozen 2026-08-30. See D-032. The cost is recorded, not argued away |
 
 ## Parts the owner already has
@@ -417,3 +419,45 @@ that did not complete is DISCARDED, not scaled.** F-016. This covers doses,
 primes, purges, operator tests and C-01 calibration runs alike. A calibration run
 cut short by a permissive drop and recorded as complete corrupts the figure every
 dose in this system divides by, and G-04 guarantees nothing notices.
+
+**D-035 S-03 gets the same topology as S-08 with different numbers, and it is not
+a copy.** Recorded in parts.md as given. Same shape, same two reasons verbatim.
+Different current because the minimum belongs to the contact: about 41.7 mA for
+the 22.32 at 24 V against about 12.5 mA for the 55.34.
+
+**That difference is the design.** At 42 mA an optocoupler LED is near its
+continuous rating, so S-08 splits into a sense branch and a bare burden branch. At
+12.5 mA a single series branch carries the whole loop and the LED sits in its
+normal band. **Copying S-08's two-branch arrangement onto S-03 would add a part
+for nothing.**
+
+MAIN-PANEL gets both minimums explicitly and sizes each independently. G-23.
+
+**D-036 The fail-safe direction of every sense path is a chosen design property.**
+G-22. A broken cable or a dead LED leaves the Pi input high, reads as contact
+open, reads as a drop. That is the false-stop direction and the same choice as
+D-017 and D-030. It is written into the S-08 and S-03 rows as a property rather
+than left to be inherited by luck.
+
+**And the third case is checked rather than assumed.** For every Pi input
+anywhere, the question is asked: what does a severed cable read as, and is that
+the safe reading. **An input that fails in the other direction is a defect.**
+Routed to DISPLAY-BOX, which owns every Pi input through the logic board, to
+enumerate them and answer for each.
+
+**D-037 PL-Y is not a lamp question.** "Healthy" as a word is a summary, and a lamp
+driven from a relay pole can only show a contact. **So the real question is which
+single contact means healthy, and the owner does not think one exists.**
+
+Candidates he named: the master permissive latched, which PL-R already shows the
+inverse of, and the driver permissive contactor closed, which is a different
+thing.
+
+Routed to MAIN-PANEL, and the shape of the answer is specified: **report what
+contacts are actually available on the pole budget after the fill chains and the
+seal-ins, and what each would MEAN if a lamp were on it.** The owner picks from
+real options rather than defining healthy in the abstract.
+
+The pole budget is the useful half of this. Three lamps, both 22.32 poles already
+spoken for, and the fill chains and seal-ins all competing. **That constraint may
+be the thing that decides what the lamps can say.**

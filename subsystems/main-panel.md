@@ -91,6 +91,30 @@ panel states its condition with no computer involved.
 - Read traps.md T-006 and T-007 before wiring any coil driven from the display
   box. The logic board is 4 ft away and that is exactly the remote-board case.
 
+## Assigned 2026-08-30: the pole budget and PL-Y, D-037
+
+**PL-Y is not a lamp question.** A lamp driven from a relay pole can only show a
+CONTACT, and the owner does not think a single contact meaning "healthy" exists.
+He will not define it in the abstract and will pick from real options.
+
+Work out the pole budget first, accounting for every pole the design already
+needs, and note that **both 22.32 poles are spoken for: pole 1 carries the 24 V
+rail to both pump boxes, pole 2 is the S-08 readback.** Say plainly if the poles do
+not add up, and what is short. Then list what contacts are actually available and
+what a lamp on each would MEAN, in plain sentences.
+
+**The pole budget is the useful half of this. It may be the thing that decides
+what the lamps can say.**
+
+## Both sense circuits are given, not yours to derive
+
+parts.md records S-08 and S-03 as built. Build to them. **Size each independently:
+the 22.32's minimum is about 41.7 mA at 24 V, the 55.34's is about 12.5 mA, and
+G-23 says a minimum switching load belongs to a contact and no figure is carried
+from the other.** S-08 needs two branches because at 42 mA an opto LED is near its
+continuous rating. S-03 does not, and copying the two-branch arrangement onto it
+would add a part for nothing.
+
 ## Waiting on
 
 | From | What |

@@ -78,6 +78,19 @@ INTERCONNECT.
   window spanning a restart must be treated as void rather than have an elapsed
   time computed for it that cannot be trusted. Adjacent to S-12.
 
+## Assigned 2026-08-30: the fail-safe sweep, G-22 and D-036
+
+Every failure of a sense path must read as the safe state. Two circuits have it by
+design, S-08 and S-03. **Enumerate EVERY signal crossing the logic board in both
+directions, inputs the Pi reads and outputs it drives, and for each one answer
+what a severed cable reads as or does, whether that is the safe state, and what
+safe means for that particular signal.** An input that reports a fault falsely is
+safe. An output that energises something falsely is not. **An input that fails in
+the unsafe direction is a defect, not a tolerance.**
+
+Include the outputs. A severed coil drive is a different question from an input,
+and a step or direction line to a driver whose EN defaults ENABLED is a third.
+
 ## Waiting on
 
 | From | What |
