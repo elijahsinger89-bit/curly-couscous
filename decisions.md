@@ -69,6 +69,8 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
+| G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
+| G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
 | G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design** |
 | G-26 | **THE PANEL RUNS WITHOUT THE PI.** Fills, transfer, circulation and chiller all operate on float and interlock logic with no computer involved. **The Pi adds dosing and removes driver power. If it dies, the water system keeps running and only dosing stops** | Frozen 2026-08-30, D-052. Deliberate, and recorded as a property rather than left to be rediscovered |
 | G-27 | **A COMPLEMENTARY PAIR IS A FAIL-DETECT, and the construction rule is: BOTH LEGS AT THE SAME POTENTIAL, ON THE SAME CABLE.** Then a severed conductor makes them contradict, and **any state where both agree is a broken sense path** | Frozen 2026-08-30, D-053. Free wherever two legs of one changeover are already bought. It converts a fail-safe into a fail-detected, which is T-012's rule arriving in hardware |
@@ -885,3 +887,92 @@ level, and that is a win only if the level is safe.
 reasoning being reused where it does not hold:** frequency is not the only axis, the
 consequences are not symmetric, and choosing on frequency is right HERE only because
 pairing makes the likelier failure and the safe state coincide.
+
+**D-067 The mixed-duty question is settled, and NOT by plating. G-30 frozen.**
+
+The debris path decides it: all four poles share one volume, the plug-in is dust
+protected and not wash tight, and a power break throws silver vapour, oxide and
+carbon onto the quiet pole. **Gold plating on a quiet pole survives AND the contact
+still degrades, by a path that is not the one being argued about. No contact
+material and no burden value addresses it.**
+
+**So MAIN-PANEL's two gates are answered from a direction neither of them was
+pointing.** It offered the mixed-VOLTAGE socket question and the mixed-DUTY contact
+question, both to be settled by lookups. **The lookups came back and the answer is
+that the duty question does not depend on either: a relay carrying a power pole and
+a sense pole degrades regardless.**
+
+**Both relays that G-26 left carrying both duties are affected: K-FILL-D, which
+carries the transfer pump plus the S-03 and D-042 SELV pair, and K-DRY, which
+carries the circulation pump plus the interlock contact to the Pi.** BOSS is routing
+the conclusion to MAIN-PANEL with the fact in hand rather than drawing it, because
+it is a purchase and the split is MAIN-PANEL's to draw. **What it points to is two
+slaves.**
+
+Also settled and worth keeping: **gold cannot be mixed pole by pole. Option 5 is the
+whole relay**, and gold is consumed by switching above roughly 30 V and 100 mA after
+which the AgNi floor returns. So a gold relay used for a power pole stops being a
+gold relay.
+
+**D-068 G-31: a minimum switching load is one power requirement.** The V/mA pair is a
+reference coordinate. **The roughly 12.5 mA at 24 V already on file for the 55.34 is
+the correct figure, so S-03's, S-20's and D-042's sizing all stand unchanged** - but
+they are AT the floor, not above it, and nothing on file should read as though they
+carried margin.
+
+**D-069 F-018 is NARROWED by the schematic, and only DIR survives it.**
+
+**EN has an explicit 20k board pulldown, R3. STEP has a board pulldown plus an LED
+load. So a floating STEP is pulled low by the board and a floating EN leaves ENN low,
+which is the enabled state parts.md already recorded.** The "floating CMOS input"
+premise of F-018 is therefore **wrong for STEP and for EN**.
+
+**DIR is the one that survives, and it survives differently than anyone assumed:
+there is NO board pull on DIR at all. What sits on it is two indicator LEDs, which is
+loading and not a defined logic pull. Its defined level comes from the CHIP's
+internal pulldown, DI(pd).**
+
+**So a severed DIR converges LOW, and D-062's remaining question is unchanged and is
+not a datasheet question: whether DIR low is the safe rotation on these heads. That
+is a pump fact.**
+
+What is NOT settled by this: whether the chip's internal pulldown is strong enough
+against the coupled noise F-018 describes, which is the second of PUMP-BOXES' four
+bounds and the one it said no datasheet can close. **The level is defined. The noise
+immunity is not.** D-043's external pull-down is therefore no longer needed to DEFINE
+the level and may still be needed to HOLD it. Routed to PUMP-BOXES.
+
+**D-070 P-09 CANNOT BE CLOSED FROM DOCUMENTATION.** The datasheet neither allows,
+forbids, sequences nor characterises VS absent while VCC_IO is live. No leakage
+figure, no clamp current, no STEP or UART behaviour in that state.
+
+**It closes by MEASUREMENT or by REMOVING THE STATE.** Those are the only two, and
+they are the owner's:
+- **Measure it**, which is commissioning C-18, deliberately entering the state and
+  observing. C-18 was written blocked on the datasheet saying whether entering it is
+  safe. **The datasheet will not say. So running C-18 is itself the decision to
+  accept an uncharacterised state on purpose, once, under observation.**
+- **Remove the state**, which means VDD follows the permissive after all. **D-031
+  rejected that for three reasons and its reason 2 was the overdrive at STEP and
+  DIR** - which is now a different question, because the board's own pulldowns and
+  the chip's internal pull change what those pins do when VCC_IO is absent. Reopening
+  D-031 would need that re-argued, not merely re-decided.
+
+**And one thing the datasheet does say that bears on the watchdog: cycling any of VS,
+5VOUT or VCC_IO resets the chip to power-on defaults, and it says VCC_IO is easiest
+and safest to cycle.** That is a recovery path nobody had, and it is the opposite end
+of P-09 from the hazard.
+
+**D-071 The rail's ceiling and the board's ceiling are the same number, and the
+margin is in the WIRING rather than in the setting.** The board publishes 5 to 29 V
+DC, labelled neither recommended nor absolute, with no VM regulator and no clamp. The
+rail is settable to 28.28 V and OVP does not trip until 29 V.
+
+**So at the top of its range the rail sits exactly at the board's published ceiling
+with nothing between them.** And the abs-max footnote says the real hazard is not the
+DC level: **stray inductance in GND and VS rings the supply when driving an inductive
+load, and a meter reading 28 V can ring toward 32.**
+
+**That makes it a wiring requirement, not a voltage setting: keep VS and its return
+short and paired, and the local bulk cap is what absorbs the ring.** C-16 records the
+trim, but **the trim reading is not the number that matters, and C-16 should say so.**

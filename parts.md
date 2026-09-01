@@ -72,6 +72,102 @@ Printed pins, and this is the complete list:
 - Set the Vref pot with a meter before any power is applied.
 - Each driver needs a stick-on heatsink.
 
+### The Adafruit 6121 schematic, Rev A, 2024-12-18. Eagle .sch and .brd published.
+
+**Adafruit published the SCHEMATIC, not only a pinout. The mapping below is read
+from it.**
+
+Header JP4, a 2x5. Silkscreen to chip pin:
+
+| Silk | JP4 | Chip net | QFN |
+|---|---|---|---|
+| VDD | 1 | **VCC_IO** | 15 |
+| GND | 2 | GND | 3, 18, 25, paddle |
+| DIR | 3 | DIR | 19 |
+| STEP | 4 | STEP | 16 |
+| MS1 | 5 | MS1_AD0 | 9 |
+| MS2 | 6 | MS2_AD1 | 10 |
+| DIAG | 7 | DIAG | 11 |
+| INDEX | 8 | INDEX | 12 |
+| UART | 9 | PDN_UART | 14 |
+| EN | 10 | **ENN** | 2 |
+
+Terminal block JP1, component side left to right, silk reads **+ - 2B 2A 1A 1B**:
+
+| Silk | Chip net | QFN |
+|---|---|---|
+| **+** | **VS** | 22 and 28 |
+| **-** | GND | |
+| 2B | OB2 | 1 |
+| 2A | OB1 | 26 |
+| 1A | OA1 | 24 |
+| 1B | OA2 | 21 |
+
+**NOTE THE TERMINAL BLOCK SILK IS "+" AND "-", NOT "VM". Any subsystem calling that
+pin VM is using a chip-adjacent name rather than what is printed. Confirm against a
+board in hand before it goes on a build sheet.** See findings F-051.
+
+**VDD ON SILK IS ONLY VCC_IO. Motor + is only VS. They are not tied together.**
+
+Other chip pins on the board, not brought out: **CLK** QFN 13 hard-tied to GND,
+internal oscillator. **STDBY** QFN 20 left open. **SPREAD** QFN 7 to solder jumper
+SPRD / SJ1, open floats and closed ties to VDD. **VREF** QFN 17 from the ILimit pot,
+**scaled off 5VOUT QFN 8, NOT off VDD.** Charge pump CPO-CPI 22 nF, VCP to VS,
+BRA/BRB through 0.05 ohm.
+
+### Board pulls, read from the Eagle nets. THIS IS THE D-062 ANSWER.
+
+| Pin | What is actually there | Chip type |
+|---|---|---|
+| **EN / ENN** | **EXPLICIT 20k PULLDOWN, R3, EN to GND. No LED on EN. Left open, ENN is low, DRIVER ENABLED** | DI only, **NO internal pull** |
+| **STEP** | **BOARD PULLDOWN plus an LED load.** R5 20k pack: one section STEP to 20k to GND, a DC pulldown; one section STEP to 20k to a yellow LED, silk S, to GND. **Floating STEP is pulled low. The LED is load when STEP is high, not a pull-up** | DI only, **NO internal pull** |
+| **DIR** | **NO DEDICATED PULL-UP OR PULLDOWN RESISTOR ON THE BOARD.** What is on DIR is two indicator LEDs: DIR to red LED silk B to 20k to GND, conducting when DIR is high; and VDD to 20k to green LED silk F to DIR, conducting when DIR is low. **That is LED loading, not a defined logic pull** | **DI (pd), INTERNAL PULLDOWN** |
+
+**So a floating DIR goes LOW, via the CHIP's internal pulldown rather than via
+anything on the board. EN and STEP have real board pulldowns. DIR does not, and its
+defined level comes from inside the chip.**
+
+### VS and VCC_IO sequencing: the datasheet is SILENT, and that is the result
+
+Checked TMC2209 rev 1.09, the PDF Adafruit ships, and 1.08. **THERE IS NO REQUIRED
+POWER-UP OR POWER-DOWN ORDER between VS and VCC_IO.**
+
+What it does state: **VCC_IO is the 3.3 to 5 V IO supply for all digital pins and
+DOES NOT SUPPLY THE IC LOGIC PART.** Logic and the 5 V regulator are sourced from
+VS. Separate undervoltage and reset detectors on VS, 5VOUT and VCC_IO, and cycling
+any of the three resets the chip to power-on defaults, **the datasheet saying it is
+easiest and safest to cycle VCC_IO.** Absolute max and operating ranges treat VS and
+VCC_IO as independent rails. The standby chapter says VCC_IO shall remain active
+while STDBY shuts the internal regulator, **which is VS PRESENT, not VS absent.**
+
+**IT DOES NOT ALLOW, FORBID, SEQUENCE OR CHARACTERISE "VS ABSENT WHILE VCC_IO IS
+LIVE." No pin leakage figure, no clamp current, no STEP or UART behaviour in that
+state.** All it implies is that with VS below its undervoltage threshold the VS
+detector is in reset and the core regulator has no input.
+
+**That is not a sequencing rule and it is not a characterisation. P-09 CANNOT BE
+CLOSED FROM DOCUMENTATION. It closes by MEASUREMENT or by REMOVING THE STATE.**
+
+### VS range
+
+| Source | Figure |
+|---|---|
+| TMC2209 operating, internal 5 V regulator | 5.5 to 29 V |
+| Absolute max with inductive load | 32 V |
+| Absolute max supply and bridge spike | 33 V |
+| **Adafruit 6121 board, the only VM figure published, labelled neither recommended nor absolute** | **5 to 29 V DC** |
+
+**No VM regulator and no clamp on the board.** The 22 uF 35 V bulk cap is above 29 V
+so it does not pull the limit down.
+
+**And the abs-max footnote that matters more than the number: stray inductance in
+GND and VS rings the supply when driving an inductive load, from fast switching
+slopes plus body diode reverse recovery, and even small trace inductance generates
+several volts of overshoot. A METER READING 28 V DC CAN RING TOWARD 32.**
+
+**That is a WIRING requirement, not a voltage setting: keep VS and its return short
+and paired, and the local bulk cap is what absorbs the ring.** See F-052.
+
 ## Motor current
 
 - 1.0 A per driver, which is 71 percent of the part's rating.
@@ -102,6 +198,49 @@ The rail is not 24 V. It is whatever the trimmer is at. See findings F-010.
 
 **Minimum switching load matters and differs between them. A contact switching
 below its minimum load oxidises.** See findings F-011.
+
+### How to read a minimum switching load, established 2026-09-01
+
+**IT IS A POWER REQUIREMENT. THE V/mA PAIR IS A REFERENCE COORDINATE, NOT AN
+OPERATING POINT.**
+
+The 55.34 AgNi publishes 300 mW (5/5), **and 5 V times 5 mA is 25 mW, so the pair
+cannot be a legal operating point.** Finder's own worked examples: at 5 V you need
+60 mA; **at 24 V you need 12.5 mA**; at 5 mA you need 60 V. The 22.32 publishes
+1000 mW (10/10) and reads the same way.
+
+**So there is ONE requirement per contact, not three independent floors. A current
+figure that clears its reference coordinate is not a margin.** The roughly 12.5 mA
+at 24 V already on file for the 55.34 is the correct figure and it clears 300 mW
+exactly, so it is a floor and not a margin.
+
+**The mechanism, class behaviour and not Finder-specific: Holm fritting.** Silver
+and AgNi grow sulfide and oxide films. **A-fritting is voltage punching a channel
+through the film. B-fritting is current heating that channel until the film displaces
+and a metal bridge forms. Power is how makers package both into one published
+region.** Wipe helps and cannot be relied on at dry-circuit levels on a power
+contact.
+
+**Gold variants.** Option 5 on the 55.34 is AgNi plus hard gold, **whole relay, poles
+cannot be mixed at order time.** Gold floor is 50 mW at 5 V and 2 mA. **Gold is
+consumed by switching above roughly 30 V and 100 mA, after which the contact reverts
+to AgNi and the 300 mW floor returns.**
+
+### THE THING THAT KILLS MIXED DUTY IS NOT THE PLATING
+
+**The 55.34 plug-in is RT I, dust protected and NOT wash tight, and ALL FOUR POLES
+SHARE ONE VOLUME. A 7 A break throws silver vapour, oxide and carbon into that
+volume and it lands on the quiet pole.** Zettler states it for the class: very
+different loads, high load and measuring signal, shall not be switched by the same
+relay, because erosion from switching high loads may pollute the low level contacts.
+**That is not Finder, and Finder is silent on mixed poles.**
+
+**So the gold plating on a quiet pole survives AND the contact still degrades. The
+failure arrives by a path that is not the one being argued about.**
+
+**IF ANY RELAY CARRIES BOTH A POWER POLE AND A SENSE POLE, THE DEBRIS PATH APPLIES,
+AND NO CONTACT MATERIAL OR BURDEN VALUE ADDRESSES IT.** That is why the browser
+build DELETED its low-level contact rather than improving it. See G-30.
 
 ## Chiller: JBJ Arctica DBE-200
 
