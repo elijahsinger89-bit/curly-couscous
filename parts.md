@@ -115,6 +115,34 @@ SPRD / SJ1, open floats and closed ties to VDD. **VREF** QFN 17 from the ILimit 
 **scaled off 5VOUT QFN 8, NOT off VDD.** Charge pump CPO-CPI 22 nF, VCP to VS,
 BRA/BRB through 0.05 ohm.
 
+### Board in hand, 2026-09-01. Photograph, read by BOSS.
+
+**This is the confirmation F-051 asked for, and it both confirms and corrects.**
+
+Observed, and marked as read from a photograph rather than from a board on a bench:
+
+| What is printed | Note |
+|---|---|
+| Terminal block silk: **a circled plus and a circled minus symbol, then 2B 2A 1A 1B** | **F-051 CONFIRMED and sharpened: the part does not say VM, and it does not say the WORDS plus and minus either. It carries two SYMBOLS.** A build sheet cannot quote a symbol, so it must name the terminal by position and by what it does |
+| Header silk, two staggered rows of five. Top: **VDD DIR MS1 DIAG UART**. Bottom: **GND STEP MS2 INDEX EN** | Reading down the columns gives VDD/GND, DIR/STEP, MS1/MS2, DIAG/INDEX, UART/EN, **which matches the JP4 1-to-10 mapping exactly.** Confirmed in situ |
+| **ILimit 0->2A**, printed beside the pot | **The board prints a current range on itself.** 1.0 A per driver is therefore half of what the board's own silk advertises, which is consistent with the 71 percent of the part's rating already on file, and it is worth knowing that the printed range and the part's rating are two different numbers |
+| **SPRD** solder jumper, silk visible | Matches the schematic's SJ1 |
+| **F, B, S** silk beside three LEDs | Matches the schematic: green F conducts when DIR is low, red B when DIR is high, yellow S on STEP |
+| 22 uF 35 V electrolytic | Matches the bulk cap already recorded |
+
+**AND ONE CORRECTION THAT MATTERS TO A DECISION IN FLIGHT.**
+
+parts.md has said since 2026-08-30 that the 6121 is "a TMC2209 breakout with SCREW
+TERMINALS". **That is true of JP1, the power and motor block, and it is NOT true of
+the logic side. The logic side is a 0.1 in header footprint, and the photograph shows
+a 10-pin header strip supplied LOOSE and UNSOLDERED.**
+
+**So the drivers ship with the logic connector not fitted. Soldering it is a build
+step nobody had.** And it changes the landing analysis PUMP-BOXES is mid-flight on:
+it ruled out putting a resistor lead into the driver's own screw terminal on T-009
+and T-010 grounds, **but there is no screw terminal on the logic side to rule out.**
+The real options there are a soldered pad, a header pin, or a socket. See F-054.
+
 ### Board pulls, read from the Eagle nets. THIS IS THE D-062 ANSWER.
 
 | Pin | What is actually there | Chip type |
