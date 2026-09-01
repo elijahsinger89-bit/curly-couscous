@@ -69,6 +69,7 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
+| G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
 | G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design** |
@@ -1185,3 +1186,75 @@ circuits are affected.
 order.md also lists what the order does NOT cover, so nothing reads as complete: the
 gasketed devices, the hood, the receptacles, the lamps and their burdens, the ground
 bar, and the terminals, duct and rail.
+
+**D-083 S-16 IS DIRECTION-AWARE, and it was required before F-063 was written.**
+
+CONTROL-SOFTWARE answered from what the check MUST do, not from what it does, and said
+so: S-14 is still open, no source is in reach, and D-012 means no verification logic
+ships until C-02 exists. **Written into the specification today it costs nothing.
+Retrofitted onto a magnitude-only implementation it changes the outcome set, every
+operator message and the commissioning reference data. The same argument as freezing
+G-16 before any code existed.**
+
+**The reason is not the token adjacency. It is what the check is FOR. S-16 exists to
+ATTRIBUTE. A check that reports only "pH moved" attributes nothing: it confirms the
+loop moved and something arrived, which is exactly what S-15 already provides through
+EC. A MAGNITUDE-ONLY pH CHECK IS A DUPLICATE OF S-15 WEARING S-16'S NAME.** The only
+thing that makes pH an attribution mechanism is that the two channels move the
+observable in OPPOSITE directions. Discard the sign and D-011's entire reason is
+discarded.
+
+**What it costs, none of it presented as free.** Settling time: nothing, same window
+and same C-02, the comparison is against a signed prediction instead of an absolute
+one. Commissioning data: nothing new, because C-03 already reads pH up and pH down
+SEPARATELY, and measuring them separately is measuring them signed. Baseline handling:
+a real tightening, because a signed check is exposed to drift's DIRECTION where a
+magnitude check treated drift as noise that only ever adds, **so the drift half of
+C-08, which could have been advisory, becomes load-bearing. No new row; a row that was
+optional becomes mandatory.**
+
+**Three outcomes become FOUR, and the fourth must not be folded into failure:** pass;
+fail, no movement; indeterminate; and **WRONG DIRECTION.** Two reasons it stays
+separate. **It sends the operator somewhere different** - no-movement points at the
+pump, the tube and the jug level, wrong-direction points at which product stands on
+which station, which is F-063's failure exactly. **And under G-04 they mean different
+things about the tank: no-movement means the tank probably received nothing;
+wrong-direction means the tank DEFINITELY received something and it was the wrong
+chemical, already mixed, already partly downstream of V3, unmeasurable and
+irreversible.**
+
+**Two costs that come with the loudness.** A loud wrong-direction alarm **invites
+exactly the action the frozen rules forbid**: the operator's instinct is to command the
+opposing pH channel to correct it, which is the overshoot pattern already named,
+lands inside an open window, and is forbidden by S-16 constraint 1 and G-16. **The UI
+must not offer it and the corrective path must be structurally incapable of it, not
+merely discouraged. Making the check louder makes this failure more likely, not less.**
+And a signed check adds a new false mode: **saying the sign was wrong when it was
+right**, from a fill diluting the tank, another channel still settling, or the chiller.
+**A false "wrong chemical" alarm is far more alarming than a false "no movement", and
+by the credibility argument already on file it is the fastest route to the check being
+switched off. So window-validity gating gets MORE load-bearing, not less.**
+
+**What it does to F-063: it removes the INVISIBILITY, not the failure. F-063 shrinks in
+SEVERITY, from a permanent invisible mis-dose to a bounded one-dose error followed by a
+loud stop, and does NOT shrink in kind.**
+
+Four things it does not remove: **it is a detector, not a preventer, and it acts a dose
+too late** - the wrong chemical reaches the tank once, in full, before anything is
+known, while DOSING's station measures act at the moment of the swap, **so they are
+complements at different times and not alternatives**; small trim doses stay below the
+band and a swap discovered only through them stays invisible; a swap present at
+commissioning is baked into the reference; and **it generalises nowhere else, because
+for the six nutrient channels EC moves the same way for all of them and a crossed pair
+still confirms itself completely.**
+
+**CONTROL-SOFTWARE explicitly refused to conclude that this makes DOSING's wall length
+unnecessary. What it supports is that the damage of a swap is bounded to one dose plus
+a stop, which changes how much wall length is worth spending. That trade is DOSING's
+proposal and the owner's decision.**
+
+And the convergence worth recording: **CH5-versus-CH6 is the ONE confusion on this
+build where direction is a discriminator at all, because those two products are the
+only pair that move a probe in opposite directions.** F-064 narrowed the confusion to
+exactly that pair from the physical side, and this answer lands on it from the software
+side, independently.
