@@ -15,6 +15,10 @@ requires. It is not a table mapping one identity to another, which the declarati
 forbids. The distinction is that every row is keyed by the token and no column is an
 identity of its own.
 
+**Read the Jug column carefully: it is the container's NOMINAL CAPACITY. It is not
+the full-jug volume G-05 decrements against, which is what was actually poured and is
+entered by the operator at fill time.**
+
 | Token | Role | Jug | STEP pin | DIR pin | Cable core | Box | Product | Steps per ml, C-01 |
 |---|---|---|---|---|---|---|---|---|
 | CH1 | nutrient | 4000 mL | | | | | UNASSIGNED | |
@@ -64,7 +68,7 @@ and it is marked as one.**
 | Cable core | INTERCONNECT | Not invoked yet, deliberately |
 | Box | PUMP-BOXES | Its own decision, and the Position axis |
 | Product | Owner | Five of eight are unnamed in any file |
-| Full-jug volume | Owner, per G-05 | Jug volume undecided |
+| **Filled volume, per G-05** | Owner, AT FILL TIME | **Not the same quantity as the Jug column. The Jug column is the container's NOMINAL CAPACITY, which is now known per channel. G-05's arithmetic runs on WHAT WAS POURED, which is not known and is entered at fill time.** DOSING caught BOSS recording the first as though it settled the second |
 | Steps per ml | Owner measures, C-01 after C-17 | Both open |
 
 **A channel is retired by marking the row retired. The row is never deleted, because

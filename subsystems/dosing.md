@@ -4,6 +4,11 @@ Read first: agents.md, interface-table.md, decisions.md, traps.md.
 
 ## Scope, owned completely
 
+**THE JUG STATION is DOSING's, and this scope list did not say so until 2026-09-01.**
+AUDIT's C22 asked whether DOSING knew it owed eight fixed, ordered, tokened stations;
+DOSING confirmed it owns them and that the word appeared only in its F-002 proposal
+and in the rulings written on top of it. Corrected here by BOSS, whose file it is.
+
 The PVC dosing manifold as a physical assembly: the vertical probe section, the
 probe wet fittings, the flow cell, every injection port, and the manifold body
 between the two unions. The entire wet path from the manifold back to the pump
