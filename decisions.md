@@ -976,3 +976,84 @@ load, and a meter reading 28 V can ring toward 32.**
 **That makes it a wiring requirement, not a voltage setting: keep VS and its return
 short and paired, and the local bulk cap is what absorbs the ring.** C-16 records the
 trim, but **the trim reading is not the number that matters, and C-16 should say so.**
+
+**D-072 G-30 forces both splits unconditionally, and the dividing line moves from
+VOLTAGE to ARCING DUTY.**
+
+Both prior gates are **moot rather than answered**: the plating question because gold
+survives and the contact degrades anyway, the insulation question because insulation
+is not the failure path. **T-015's shape in miniature: the argument was being had
+about the wrong property.** The mixed-voltage socket question stays separately open
+and now decides nothing about the split.
+
+**The line asks one question of each pole: does it break a load that arcs. Voltage is
+not the variable.**
+
+| Tier | Poles | Debris |
+|---|---|---|
+| 1, arcing loads | transfer pump, circulation pump, fill solenoid, the 120 V permissive bus | The source. Must be isolated |
+| 2, suppressed coil switching | seal-ins, latches, the 24 V coil bus, any slave-coil drive | Mild, and only if suppression is AT THE COIL |
+| 3, quiet | S-03, the D-042 inhibit, the K-DRY contact to the Pi, every lamp | What must be protected |
+
+**Two places the line moves, and both matter. The fill solenoid crosses to the power
+side even if it is a 24 V coil** - it is an inductive load being broken, and under the
+old voltage line it would have sat with the quiet group. **The lamps cross to the
+quiet side even though they are 24 V** - under the voltage line PL-R sat happily
+beside a 120 V bus pole.
+
+MAIN-PANEL placed tier 2 with tier 3 **and flagged it as a judgement rather than a
+rule, refusing to extend a frozen rule past its words.** Two conditions on that:
+suppression sits at the coil, not at the driving contact, **and the point is now to
+keep arc energy out of the quiet envelope rather than only to protect the driver**;
+and the coil current is checked against the gold-consumption threshold.
+
+**Parallel coils, not cascade.** Each split pair's two coils are driven from one point.
+It frees a pole in each pair, largely removes F-039, and removes a coil-switching pole
+from the quiet envelope. **The right description, and it answers whether the count
+reasoning survives: a duty-split pair is ONE STATE IN TWO ENVELOPES. It adds no
+state. The four-state topology is untouched; what grew is the envelope count.**
+
+**A dead end named before anyone spends a lookup on it: a sealed or wash-tight relay
+does not solve this. The debris is generated inside the shared volume, not admitted
+from outside. A tighter seal traps it better.**
+
+**And two independent routes to one conclusion: gold is a whole-relay order option
+and cannot be mixed pole by pole, so even with no debris fact, gold-not-mixable would
+have forced duty separation by relay.**
+
+**D-073 The order: two to four additional 55.34s, and TWO GATES THE OWNER CLEARS IN A
+MINUTE DECIDE IT.**
+
+**Gate 1, and nothing on file states it: which contact option the four relays in hand
+are.** Gold is a whole-relay option. **If the four in hand are standard they become
+the power envelopes and the order is GOLD. If they are gold they become the quiet
+envelopes and the order is STANDARD.** And never use a gold relay as a power
+envelope: the gold is consumed above roughly 30 V and 100 mA and the relay reverts to
+AgNi with the 300 mW floor back, **so you would pay for a property and destroy it in
+service.**
+
+**Gate 2: which fill PL-G means, which now costs a relay.** Day-tank-only leaves
+K-FILL-S a single power envelope. Either-fill splits it and adds a quiet envelope,
+because a PL-G pole in the storage chain cannot sit beside the fill solenoid.
+
+Six envelopes minimum, three quiet and three power: K-PERM quiet with the latch, the
+coil bus and PL-R; K-FILL-S power with the seal-in and solenoid; K-FILL-D-Q quiet with
+the seal-in, the S-03 and D-042 changeover pair and PL-G; K-FILL-D-P power with the
+transfer pump; K-DRY-Q quiet with the seal-in and the G-27 complementary pair to the
+Pi; K-DRY-P power with the circulation pump. **Eight at maximum if both gates bind,
+which resolves to a clean statement: four states, each in two envelopes, one quiet and
+one power.**
+
+**G-28 applies AT DELIVERY, not at installation: label each relay by name to its
+envelope the moment it is unpacked. Once the two types are in the same panel and look
+alike, a swapped pair is a defect that passes every check - the quiet relay silently
+degrades and the power relay is over-specified and nobody sees either.**
+
+**Zero interposers**, on the browser package's evidence.
+
+**And a conflict that decides a relay: fast-release suppression and arc-quenching
+suppression pull in opposite directions, and they pull on exactly the two relays where
+both properties matter, K-PERM and K-DRY. Splitting K-PERM resolves it** - the coil
+bus goes to an AgNi envelope where arc energy is tolerable and fast release is free,
+and PL-R stays in a gold envelope that switches nothing but a lamp. **Two independent
+reasons now favour splitting K-PERM, and MAIN-PANEL leans toward buying for it.**
