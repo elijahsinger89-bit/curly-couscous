@@ -1102,3 +1102,56 @@ Set by pins, the same reset restores the same configuration and becomes idempote
 does not supply the IC logic part and logic is sourced from VS.** In the P-09 state VS
 is absent, so the logic core has no supply and register-based status is questionable
 at best. **UART is a richer channel in every state EXCEPT the one P-09 is about.**
+
+**D-077 The five products are DELIBERATELY UNASSIGNED UNTIL COMMISSIONING, and that
+is a decision not made rather than a gap in a file.** The owner checked rather than
+reconstructing: the controller config names every channel "Channel 1" to "Channel 8"
+and says on its own line that nothing there knows what is plugged into which channel.
+**No subsystem holds a row open for them and no subsystem assumes a product to get on
+with its own work. C-09 is where a token is bound to a product, with the jugs
+physically present.**
+
+Recorded in channel-register.md, along with what the software does know: **six
+nutrient channels and two pH; the two 1000 mL channels are the pH adjusters; CH5 is
+marked pH-down through the blocked-channels path, which is a ROLE and not a product;
+and pH channels are excluded from every injection plan by construction.** CH6 is the
+other pH channel by elimination, marked as an inference.
+
+**BOSS searched every markdown file for a channel-to-product list. There is none.** The
+only product-like names in the tree are channel-token.md's own FORBIDDEN examples.
+Nothing to strike, and the search is recorded so nobody repeats it.
+
+**D-078 The jug sizes are not uniform and that is now a constraint, not a detail.**
+CH1 to CH4 are 4000 mL, CH5 and CH6 are 1000 mL, CH7 and CH8 are 3785 mL. **If the jug
+station, the coupling or the tubing was specified against one container size it is
+wrong for two of the eight.** Routed to DOSING to check rather than assume, and it
+lands on jug placement, height relative to the head, and how a jug is changed - all of
+which DOSING already owns and none of which was drawn against three sizes.
+
+**D-079 The relay order is settled by the owner's two answers. The four 55.34s in hand
+are STANDARD contact, not the option 5 gold variant. PL-G means the DAY TANK fill, not
+storage.**
+
+So the four in hand become the POWER envelopes and the order is GOLD, per D-073's gate
+1. And per gate 2, **K-FILL-S does not split**: it stays a single power envelope with
+the seal-in and the fill solenoid, and PL-G sits in K-FILL-D's quiet envelope where it
+was already placed.
+
+Routed to MAIN-PANEL to state the final list rather than computed here, because it is
+a purchase and the envelope split is MAIN-PANEL's to draw. **What it points to: three
+gold envelopes, K-PERM, K-FILL-D-Q and K-DRY-Q, against three power envelopes covered
+by relays already in hand with one standard spare, plus a fourth gold if K-PERM
+splits.**
+
+**D-080 F-062 is taken. Microstepping is set by PINS, never over UART.** Already frozen
+as D-075 and now confirmed by the owner in the same terms: **a UART-set factor
+reverting to the pin default on a rail dip, mid-batch, with every instrument reading
+healthy, is invisible by construction. Pins reset to the same configuration the same
+reset produces.**
+
+**D-081 F-061's safety consequence is recorded as a commissioning hazard in its own
+right**, C-22, not as a footnote to a procedure. **Setting Vref requires the permissive
+closed and 24 V live in the box while a person has a screwdriver on a pot beside four
+motors.** And the good news in the same finding is kept: **VREF is scaled off 5VOUT
+rather than off VS, so motor current is to first order independent of the trim, and the
+trim does not propagate into the flow calibration.**
