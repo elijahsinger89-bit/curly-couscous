@@ -1155,3 +1155,33 @@ closed and 24 V live in the box while a person has a screwdriver on a pot beside
 motors.** And the good news in the same finding is kept: **VREF is scaled off 5VOUT
 rather than off VS, so motor current is to first order independent of the trim, and the
 trim does not propagate into the flow calibration.**
+
+**D-082 The order is complete and is written to order.md.** Six envelopes minimum,
+seven if K-PERM splits. **Buy four gold 55.34s and three sockets**, on MAIN-PANEL's
+recommendation.
+
+**The decisive argument for the fourth gold is not the split. It is that a standard
+relay cannot substitute for a gold one under G-30, so at the minimum the panel has one
+standard spare and ZERO GOLD SPARES - and the envelopes with no spare are exactly the
+ones carrying every Pi-facing signal and both contact-driven lamps. The fourth gold is
+used either way: as K-PERM-Q if the split happens, or as the only gold spare if it
+does not.**
+
+Two things in the list that are absences with reasons rather than omissions: zero
+interposers, and zero suppression for the permissive contactor coil because SUP-1 is
+already across it in the corrected package and is taken as given rather than
+respecified.
+
+**G-28 is sharpened to apply AT DELIVERY: label each relay by name to its envelope the
+moment it is unpacked. The two types look alike, and a swapped pair is a defect that
+passes every check** - the gold relay silently degrades in a power envelope and the
+standard one carries the Pi-facing signals with the 300 mW floor and no gold.
+
+**And one thing must be settled before the lamp burdens are chosen and it is not in
+the order: F-056's sizing at the bottom of the trim range.** S-08 survives it because
+it was specified as a window. S-03 does not because it was specified as a point. Five
+circuits are affected.
+
+order.md also lists what the order does NOT cover, so nothing reads as complete: the
+gasketed devices, the hood, the receptacles, the lamps and their burdens, the ground
+bar, and the terminals, duct and rail.
