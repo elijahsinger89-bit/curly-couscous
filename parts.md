@@ -69,7 +69,16 @@ Printed pins, and this is the complete list:
   at all.**
 - **EN unwired leaves the driver ENABLED.** Default state is on, not off, **and
   by D-032 it STAYS unwired.** Software therefore has no per-driver disable, ever.
-- Set the Vref pot with a meter before any power is applied.
+- Vref: **the instruction as first written, "set the pot with a meter before any power
+  is applied", is UNEXECUTABLE. See findings F-061. VREF is scaled off 5VOUT and the
+  5 V regulator is sourced from VS, so with no power there is nothing to measure. The
+  rail that must be present is VS.** Not rewritten here, because the two-step reading
+  is a reading and not the owner's stated intent.
+- **One piece of good news that falls out of the same fact: because VREF is referenced
+  to the regulated 5VOUT rather than to VS, the motor current setting is to first
+  order INDEPENDENT of the 23.76 to 28.28 V trim. Turning the trim does not walk the
+  current, so C-16's trim position does not propagate into C-01's arithmetic** - one
+  less coupling than F-010 implies. Worth confirming against 5VOUT's regulation spec.
 - Each driver needs a stick-on heatsink.
 
 ### The Adafruit 6121 schematic, Rev A, 2024-12-18. Eagle .sch and .brd published.
@@ -136,6 +145,15 @@ parts.md has said since 2026-08-30 that the 6121 is "a TMC2209 breakout with SCR
 TERMINALS". **That is true of JP1, the power and motor block, and it is NOT true of
 the logic side. The logic side is a 0.1 in header footprint, and the photograph shows
 a 10-pin header strip supplied LOOSE and UNSOLDERED.**
+
+**JP4 SHIPS AS BARE PADS with the strip loose. That answers the gate PUMP-BOXES
+named: it is soldered flying leads or a soldered connector of the builder's choosing,
+not a plug-on assembly out of the box.**
+
+**And the photograph confirms PUMP-BOXES' correction to its own segment-5 answer: the
+top header row reads VDD DIR MS1 DIAG UART left to right, so VDD AND DIR ARE
+PHYSICALLY ADJACENT ON THE BOARD.** DIR's nearest opposite-potential neighbour is not
+four feet away in a cable. It is on the connector, where G-29's pairing cannot reach.
 
 **So the drivers ship with the logic connector not fitted. Soldering it is a build
 step nobody had.** And it changes the landing analysis PUMP-BOXES is mid-flight on:

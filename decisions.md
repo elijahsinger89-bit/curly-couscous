@@ -1057,3 +1057,48 @@ both properties matter, K-PERM and K-DRY. Splitting K-PERM resolves it** - the c
 bus goes to an AgNi envelope where arc energy is tolerable and fast release is free,
 and PL-R stays in a gold envelope that switches nothing but a lamp. **Two independent
 reasons now favour splitting K-PERM, and MAIN-PANEL leans toward buying for it.**
+
+**D-074 The VCC_IO cycle is recorded as a candidate recovery path and is NOT built.**
+
+Why it is worth more than it looks, and the reason is about this build rather than
+the chip: **the Pi currently has no recovery action on a driver at all.** EN is
+unwired for ever under G-21 so there is no disable, the permissive is hardware-latched
+and only a manual button re-closes it, **so the Pi's entire influence on a driver is
+STEP and DIR. A VCC_IO cycle would be the only software-reachable recovery action on
+a driver anywhere in this system**, and the first candidate answer to "the Pi is
+awake, it has detected something, and it can do nothing".
+
+**It composes with D-075: with MS1 and MS2 set by pins, a reset restores the same
+configuration, so the recovery is idempotent. Set over UART it would not be.**
+
+Against it, honestly: VCC_IO feeds all eight from one unswitched rail, so a cycle is
+all-eight or all-four-per-box unless eight switched elements go inside sealed boxes.
+**It puts a switching element in the Pi's OWN 5 V rail, which F-020 already names as a
+conductor that can brown out the controller from six feet away.** And cycling VCC_IO
+with VS present and a motor mid-step is **its own uncharacterised transient**: the
+datasheet calling VCC_IO easiest and safest of the three to cycle is a COMPARATIVE
+statement, not a characterisation of the bridge during the reset. **Doing it safely
+means doing it with VS absent, which is the state D-070 says nobody has
+characterised. Circular, and it resolves the same way everything here does, through
+C-18.**
+
+**It is a THIRD option on P-09, neither D-031's always-live nor D-070's
+follows-the-permissive: momentary, commanded, software-initiated.** Recorded as such
+so it is not mistaken for either. If it ever becomes a design feature, DISPLAY-BOX is
+told because it is a new output, a new S-12 row and a switched element in the Pi's own
+supply, and **CONTROL-SOFTWARE is told because it is an automatic corrective action,
+and D-017's reasoning should be applied to it before any code exists rather than
+after. A reset is not a re-dose, but a reset mid-batch that silently resumes is the
+same family.**
+
+**D-075 MS1 and MS2 are set in HARDWARE, and the existence of a UART route is a reason
+to be more careful rather than a new option.** Findings F-062. Reached with no
+datasheet figure, from a statement already on file: cycling any rail resets the chip
+to power-on defaults, **so a UART-set microstep factor silently reverts mid-batch on a
+rail dip while every instrument reads healthy, and G-04 and G-05 make it invisible.
+Set by pins, the same reset restores the same configuration and becomes idempotent.**
+
+**D-076 UART does not rescue P-09 Q3, and the datasheet's own words are why: VCC_IO
+does not supply the IC logic part and logic is sourced from VS.** In the P-09 state VS
+is absent, so the logic core has no supply and register-based status is questionable
+at best. **UART is a richer channel in every state EXCEPT the one P-09 is about.**

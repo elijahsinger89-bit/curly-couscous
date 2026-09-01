@@ -102,9 +102,10 @@ VDD falls inside G-09's word "power", findings F-014.
   datasheet the owner supplies. P-06 is blocked on this.
 - Motor requirement for the heads: what each head needs to turn against its
   own load. Return a requirement and a search term. Do not pick a motor.
-- CLOSED by parts.md: driver current is set by the Vref pot, with a meter, before
-  any power. Hardware, by pot. Reinforced by there being no printed UART pin, so
-  there is no serial route to set it.
+- Driver current is set by the Vref pot. **RETRACTED 2026-09-01: the reinforcement
+  that there is no printed UART pin is VOID. UART is JP4 pin 9 to PDN_UART, so a
+  serial route exists.** The pot may still be the chosen method; the reason given for
+  it is gone. And the "before any power" half is unexecutable, F-061.
 - Enclosure heat with four drivers in a closed plastic box, and whether the box
   needs venting given the room is 62 to 65 F and under 60 percent humidity.
 - Head barb form and size, returned to DOSING for F-05 and F-06.
