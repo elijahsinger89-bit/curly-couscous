@@ -827,3 +827,61 @@ them.** And F-030 already says the pairing is cheaper before the cable is bought
 If they resolve against low being safe, D-043 and F-030 are revisited by the owner,
 not worked around by an agent. PUMP-BOXES refused to substitute a pull-up on its own
 initiative for exactly that reason, twice now.
+
+## 2026-09-01
+
+**D-063 The circulation pump is INTERMITTENT, not continuous.** It runs when the
+system needs the tank mixed or moving: during a batch, during dosing, and through a
+settle window. Between batches it is off. **The dry-run interlock is a PERMISSION
+for it to run, not a command that it should.**
+
+Three consequences, all favourable:
+
+1. **F-003's exercise run does not dissolve. It is needed**, and needed precisely
+   because a pump that is off between batches is exactly the case where nobody knows
+   it still works.
+2. **WATER's free witness survives and gets BETTER.** The column standing in the
+   vertical probe section drifts to room temperature while the tank is chilled, so on
+   start the PT-1000 sees a step. **That works hardest after a long rest, and long
+   rests are now the normal state rather than an edge case.**
+3. **D-025's premise survives.** Continuous pump heat was the thing that might have
+   called the chiller more than the setpoint suggests. An intermittent pump does not
+   put continuous heat into the tank.
+
+**And one gain nobody asked for: the settle window now sits INSIDE a running period
+rather than spanning a transition**, which matters for the C-02 timing
+measurements. A window that spans a start or a stop measures two regimes.
+
+**What remains from F-045: the exercise run still has no command path.** The Pi
+cannot command the circulation pump under G-26. That is a real gap and it is
+separate from the question of whether the exercise is needed.
+
+**D-064 The chiller contactor coil's driver is an OPEN QUESTION, and it is the
+owner's to settle.** Findings F-044.
+
+MAIN-PANEL's plain absence is confirmed: nothing on file says what energises that
+coil. The owner does not have an answer and is not inventing one. **Candidates named,
+not chosen: a thermostat, a float or interlock chain, or a manual switch.**
+
+**Routed as an open question and NOT as a design task. No subsystem designs around
+it.** It is the one state in the panel whose driver is unaccounted for, and a
+subsystem that assumes a driver in order to get on with its own work would bury the
+hole rather than leave it visible.
+
+**Until it is settled, S-18 stays OPEN and D-027's sample tagging cannot be
+implemented as written, because there is no chiller state to tag with.**
+
+**D-065 The order stays stopped, on the owner's instruction.** Not against a stale
+count, which is now corrected, and not now that the constraint has moved from count
+to contact duty. **Two lookups gate it and G-28 makes the type irreversible once
+bought.**
+
+**D-066 The datasheets are with the owner and D-062's gate stands.** The TMC2209
+chip datasheet and the Adafruit 6121 board schematic, before the S-10 cable is
+bought. The framing is accepted: pairing is an amplifier, both failures give one
+level, and that is a win only if the level is safe.
+
+**And PUMP-BOXES' qualification is kept verbatim, because it is what stops the
+reasoning being reused where it does not hold:** frequency is not the only axis, the
+consequences are not symmetric, and choosing on frequency is right HERE only because
+pairing makes the likelier failure and the safe state coincide.
