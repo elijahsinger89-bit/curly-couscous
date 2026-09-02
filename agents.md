@@ -82,6 +82,13 @@ not land rather than reshaping it to fit.
   that cannot reach a coherent state in one sitting is not started.
 - Any artifact in the tree that nobody can account for is discarded, not
   repaired. Restore from a known good state and redo the work.
+- **An agent writing a document writes it in ONE pass at the end, never
+  incrementally.** Proved useful 2026-09-02: a container restart killed the agent
+  writing the software specification mid-task. **The working tree was clean and there
+  was nothing to discard, because the file was to be written atomically.** Had it been
+  built up section by section, the discard rule would have had to be applied to a
+  half-written document that looked plausible - and provenance you cannot establish is
+  worse than work you have to repeat.
 - When a thread stalls, assign a subsystem that has to BUILD against the
   interface and cannot proceed without an answer. Reviewing finds nothing.
   Using finds everything.
