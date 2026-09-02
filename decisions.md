@@ -1300,8 +1300,10 @@ and used in small volumes, but the config does not say it and the containers are
 decided.**
 
 Three things are marked as resting on that inference rather than on a stated container:
-**F-064's claim that the size axis separates the pH pair from the six nutrients for
-free, which was the narrowing of F-063; F-066's argument that the two smallest
+**the size-axis narrowing of F-063, which BOSS had wrongly filed under F-064's label
+and which is now F-071, withdrawn by its author - NOTE that F-064 ITSELF, the
+sequence-versus-spacing opening, depends on no volume, is unqualified, and is what
+D-085 soundly spends; F-066's argument that the two smallest
 containers are handled most often; and DOSING's three depth classes for the suction
 pickup.**
 
@@ -1318,3 +1320,32 @@ INSTRUCTION survives - nothing should be specified against a single container si
 but the three sizes it named are seeds. DOSING's finding that the suction pickup is
 UNSPECIFIED rather than mis-specified is unaffected and is the durable half of that
 pass.**
+
+**D-088 F-064 and F-071 are separated, at DOSING's request, and it caught a record
+defect BOSS created.**
+
+BOSS filed DOSING's size-axis NARROWING of F-063 under F-064's label. **F-064 as
+written is the sequence-versus-spacing OPENING, which is a reading of the ordering rule
+and depends on no volume at all.** The narrowing was a separate claim made in prose.
+
+**Why it mattered rather than being tidy-up: D-085 spends F-064 in the other direction
+- "take whatever spacing the existing station run gives" relies on F-064 being sound.
+With the narrowing filed under F-064's label and marked as resting on a retracted
+inference, a later reader could have withdrawn the OPENING along with the NARROWING and
+lost the free half of the decision that had just been made.**
+
+The narrowing is now F-071 and is withdrawn by its author. F-064 stands unqualified.
+
+**DOSING withdrew three things of its own without being asked to: the size-axis
+narrowing, the three depth classes with the per-size riser lever and the levelled-band
+argument that O-04 and O-05 would have ridden on, and F-066's direction. On the last it
+noted that it had already refused to estimate the consumption rates, and that what it
+had not noticed was that the VESSEL half of that argument was no firmer than the rate
+half.**
+
+What it kept, with the reason each survives: F-065, because the grep found what it
+found regardless of any volume; its own self-audit, because three places drawn against
+one container stay drawn against one container whatever the containers are; **anything
+keyed to ROLE rather than to volume, which is why its hazard rule stands - no acid or
+base container stationed where breaking or lifting it puts it above the operator's
+forearms**; and F-064.
