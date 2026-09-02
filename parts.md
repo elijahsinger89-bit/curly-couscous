@@ -370,6 +370,31 @@ relay poles is a claim on the pole budget, alongside the fill chains, the seal-i
 and the interlocks. Which pole drives PL-Y "healthy", and what "healthy" means as
 a contact rather than as a word, is MAIN-PANEL's to answer.
 
+## The wall
+
+**8 ft by 8 ft. That is the layout envelope. Everything mounts on that one wall: four
+enclosures, the manifold, the tubing raceway and the jug stations.**
+
+Z5, M-02 and the station run are all consequences of how those are placed inside it.
+
+## Cable runs, measured on the wall, and the CUT LENGTHS
+
+**Cut length is the wall run PLUS 3 FT: 6 in drip loop per grip, 12 in service per
+end.**
+
+| From | To | Wall run | **Cut** |
+|---|---|---|---|
+| Panel | Pump box A | 6 ft | **9 ft** |
+| Panel | Pump box B | 8 ft | **11 ft** |
+| Panel | Display box | 4 ft | **7 ft** |
+| Display | Pump box A | 4 ft | **7 ft** |
+| Display | Pump box B | 6 ft | **9 ft** |
+
+**The probe run is within 6 ft of the display box, the same run as the tank.**
+
+**T-020 applies to this table when it reaches a build procedure: the allowance is
+folded into the cut step and never stated after it.**
+
 ## Cable runs, measured on the wall and already doubled for slack
 
 | From | To | Length |
@@ -399,6 +424,9 @@ It takes 24 V and returns a Form C dry contact into the permissive string.
 
 **Its contact legs sit in the 120 V chain, so every conductor in its cable must be
 insulated for 600 V.**
+
+**The part is a Winland WaterBug WB200.** And the float switches are **LS-1 through
+LS-8, pilot duty. NOBODY HAS TRACED THAT CHAIN AGAINST THE ACTUAL SJE PART.**
 
 ## The Pi is powered independently of everything else
 

@@ -1382,3 +1382,44 @@ kind to see.**
 And two rules frozen out of the same turn: **G-33**, the three-quantity separation as the
 standing shape, and **G-34**, prefer a role to a dimension, established by what survived
 the retraction rather than argued for.
+
+**D-090 The wall is 8 ft by 8 ft, and cut length is the wall run plus 3 ft.** Recorded
+in parts.md. **Z5, M-02 and the station run are consequences of how the four
+enclosures, the manifold, the raceway and the jug stations are placed inside that
+envelope, not independent unknowns.**
+
+**D-091 F-057 is ANSWERED, and the answer is that nothing commands intermittent
+circulation.** The pump is a pole on the dry-run interlock relay and the Pi does not
+command it: it runs when the interlock is made and the relay is energised, and it is
+off between batches.
+
+**So there is no command path, and the F-003 exercise run cannot happen as designed
+until one exists or the design changes.** That is a CLOSED QUESTION WITH AN OPEN
+CONSEQUENCE, which is a different thing from an open question, and the file says so.
+
+**D-092 The main enclosure is treated as UNRATED AS ASSEMBLED, and the design sheds
+rather than seals.** F-025 stays the owner's, but the design does not wait on the
+number.
+
+The reasoning, taken as given: **five upward-facing 22 mm holes and four receptacles
+whose cord caps do not seal mean the assembly's rating is set by its worst penetration
+regardless of what is fitted above.** So the answer will be a shield or a slope on the
+top face rather than gasketed devices, **because a surface that sheds needs no seal and
+a gasket is the youngest part in the assembly.**
+
+**Design to shed. Do not wait on the number.**
+
+**D-093 P-09 is closed BY MEASUREMENT and the fault model proceeds.** The datasheet is
+silent, C-18 is the decision to accept an uncharacterised state once under observation,
+and that is the only path. **CONTROL-SOFTWARE proceeds on that basis rather than
+holding the fault model open behind it.**
+
+**D-094 The work order, in the owner's order.** Document 12, the software
+specification, which is unblocked and is real output. Then three lookups the owner
+runs. Then the colour map proposal. **NOTHING IN THE GENERATED SET IS STARTED: the wire
+table is downstream of a schematic that is downstream of what is still with the owner,
+and starting it now means building on rows that will move.**
+
+**The seven audits are accepted as the right set, and audit 7, the seed audit tracing
+every figure to the world or to a file that had to contain something, is named as the
+one nobody else has. They get built when there is something to run them against.**
