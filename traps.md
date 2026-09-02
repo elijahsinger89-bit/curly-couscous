@@ -322,4 +322,105 @@ contain something.**
 
 The register now separates three quantities that were being treated as one: the seed,
 the container's capacity, and the volume actually poured. **Only the third is what the
-jug arithmetic runs on, and none of the three was the same number.**
+jug arithmetic runs on, and none of the three was the same number.** That separation is
+frozen as G-33 and is the standing shape, not a local fix.
+
+**Three more from the parallel build, supplied by the owner 2026-09-02, all caught by
+the same question and all later treated as measurements: a 41.7 mA loop current, a
+24 AWG resistance constant, and an optocoupler forward voltage. All three were figures a
+file had to contain.**
+
+## T-019 Partial scepticism
+
+Hit on 2026-09-01 by DOSING, and caught by DOSING itself the next day.
+
+It argued that the two smallest containers are the pH channels, so the pair the system
+most wants left alone is the pair handled most often. **In the same argument it
+explicitly REFUSED to estimate the consumption rates, because nobody has them.** What it
+did not notice is that **the VESSEL half of the argument was no firmer than the rate
+half** - both were seeds.
+
+**Careful about one input and credulous about another, in the same sentence.**
+
+How to recognise it: a paragraph that names one term as unavailable and refuses to
+estimate it, while treating a second term of the same argument as given. **The
+scepticism is real and it is aimed at one term only.** The refusal even makes the
+argument LOOK rigorous, which is what lets the other half through.
+
+The test: **when you decline to estimate a term, ask what quality of evidence the OTHER
+terms in that same argument rest on. If any of them is weaker than the one you just
+refused, the refusal was not scepticism, it was selective.**
+
+## T-020 A correction stated after the step it modifies
+
+From the parallel build, and it cost stock rather than rework.
+
+A build procedure said at step 7 "cut each cable to the length recorded", and at step 8
+"add 100 mm at each end before cutting". **A builder running in order cuts at 7 and
+reads 8 too late. Five cables, 200 mm short each, and a cut cable cannot be un-cut.**
+
+**Every other ordering defect in that read cost rework. That one cost stock.**
+
+The general form: **any step that states an allowance, an offset, a correction or a
+precondition must not come after the step it modifies.**
+
+And the fix that matters more than the ordering: **the answer was not to swap the two
+steps. It was to FOLD THE ALLOWANCE INTO THE CUT STEP, because two steps that must be
+read in order is what produced the defect.** Swapping them leaves the same mechanism in
+place for the next reader.
+
+## T-021 The question to ask of a file depends on what kind of file it is
+
+From the parallel build, learned by reading three software files in sequence.
+
+**A file that holds a STATE MACHINE produces two families:**
+- **UNTESTED JOINS.** The parts are correct and individually tested, and the thing
+  joining them is never exercised.
+- **HALF-WIRED MECHANISMS.** Created, connected at one end, never connected at the
+  other. **An event created and read and never set. A function returning None into
+  callers that do arithmetic on it. A refcount that nothing holds.**
+
+**A file that is a ROUTING LAYER produces NEITHER, because it holds no mechanisms. Its
+defects are the defects of a boundary: wrong assumptions about what is on the other
+side, and stale references to things deleted elsewhere.**
+
+**So asking the state-machine question of a routing layer finds nothing**, and a clean
+result there is not evidence of anything. **Classify the file first, then choose the
+question.** A review that asks one question of every file is a review that is looking in
+the wrong place most of the time and reporting silence as health.
+
+## T-022 A withdrawn claim filed under a surviving claim's label
+
+Hit on 2026-09-02, by BOSS, and caught by DOSING.
+
+DOSING made two separate points in one return: an OPENING, that the ordering rule
+constrains sequence and not spacing, and a NARROWING, that the size axis already
+separates the pH pair for free. **BOSS filed both under F-064's label.** When the
+narrowing was retracted, the qualification landed on the label - and the label was
+carrying the opening too.
+
+**Why it was not tidy-up: a decision made the same day, D-085, spends the OPENING. Take
+whatever spacing the existing run already gives. A later reader finding F-064 marked as
+resting on a retracted inference would have withdrawn the opening along with the
+narrowing, and lost the free half of a decision, leaving only the expensive half on the
+table.**
+
+**The consequence is in the future, which is the hardest kind to see.** Nothing is
+wrong today. The defect is a landmine set for whoever reads next.
+
+How to recognise it: **a return makes more than one claim and one label goes on top of
+all of them.** Ask of every retraction: **what ELSE is filed under the label I am about
+to qualify, and does any of it survive?** If it does, split before qualifying, not after.
+
+## What survived the seed retraction, and why it is a rule
+
+**Anything keyed to ROLE rather than to VOLUME survived intact.** CH5 is pH-down because
+the controller marks it so, not because of a number. DOSING's hazard rule - no acid or
+base container stationed where breaking or lifting it puts it above the operator's
+forearms - survived for the same reason.
+
+**A rule keyed to what a thing IS outlives a rule keyed to how big it is.** Sizes are
+provisional until something is bought. Roles are decided earlier and change less.
+**Where a rule can be written against a role rather than against a dimension, it should
+be.**
+

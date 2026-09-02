@@ -90,6 +90,17 @@ not land rather than reshaping it to fit.
 - To find a seam nobody owns, do not review the interface table. Assign work
   that cannot proceed without crossing it. See traps.md T-002.
 
+## Classify before you question
+
+**T-021: the question to ask of a file depends on what kind of file it is.** A state
+machine produces untested joins and half-wired mechanisms. A routing layer produces
+neither, because it holds no mechanisms; its defects are the defects of a boundary.
+**Asking the state-machine question of a routing layer finds nothing, and reporting that
+silence as health is worse than not having looked.**
+
+This bears directly on how AUDIT runs are scoped and on how any agent reads a file it
+did not write. **Classify the artifact first, then choose the question.**
+
 ## Held, by the owner
 
 **The operator interface on the touch screen.** The owner holds a set of

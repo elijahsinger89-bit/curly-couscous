@@ -70,6 +70,8 @@ changed reports to BOSS and does not act.
 | G-20 | **Any run that turns a head records whether it completed. A calibration that did not complete is DISCARDED, not scaled** | Frozen 2026-08-30. See D-034 and findings F-016 |
 | G-24 | **THE MINIMUM SWITCHING LOAD QUESTION IS ASKED OF EVERY CONTACT, not only of the two that feed the Pi.** Lamps on relay poles included. An under-loaded contact oxidises, and an oxidised lamp contact gives you an indicator that works until it does not | Frozen 2026-08-30, findings F-022. The same promotion G-22 made for the severed-cable question |
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
+| G-33 | **THE SEED, THE CAPACITY AND THE POURED VOLUME ARE THREE DIFFERENT QUANTITIES AND ARE NEVER ONE COLUMN.** A seed is what a file had to contain. A capacity is what a vessel holds. A poured volume is what the arithmetic runs on. **None of the three was the same number and all three were one column** | Frozen 2026-09-02, the standing shape rather than a local fix. See T-018 and D-086 |
+| G-34 | **WHERE A RULE CAN BE WRITTEN AGAINST A ROLE RATHER THAN AGAINST A DIMENSION, IT SHOULD BE.** A rule keyed to what a thing IS outlives a rule keyed to how big it is | Frozen 2026-09-02. Established by what survived the seed retraction: everything keyed to volume fell, everything keyed to role stood |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -1349,3 +1351,34 @@ one container stay drawn against one container whatever the containers are; **an
 keyed to ROLE rather than to volume, which is why its hazard rule stands - no acid or
 base container stationed where breaking or lifting it puts it above the operator's
 forearms**; and F-064.
+
+**D-089 Four traps recorded from the owner, T-019 to T-022, and T-018 extended.**
+
+T-018 gains three more instances from the parallel build, all caught by the same
+question and all later treated as measurements: **a 41.7 mA loop current, a 24 AWG
+resistance constant, and an optocoupler forward voltage. All three were figures a file
+had to contain.** The question that catches them: **did this come from the world, or
+from a file that had to contain something.**
+
+**T-019 PARTIAL SCEPTICISM**, DOSING's self-correction generalised. Refusing to estimate
+one term while accepting another that rests on the same quality of evidence, in the same
+argument. **The refusal even makes the argument look rigorous, which is what lets the
+other half through.**
+
+**T-020 A CORRECTION STATED AFTER THE STEP IT MODIFIES.** From the parallel build, and it
+cost stock rather than rework, because a cut cable cannot be un-cut. **The fix that
+matters is not swapping the steps: it is folding the allowance INTO the cut step,
+because two steps that must be read in order is what produced it.**
+
+**T-021 THE QUESTION DEPENDS ON THE KIND OF FILE.** A state machine produces untested
+joins and half-wired mechanisms. A routing layer produces neither, because it holds no
+mechanisms; its defects are boundary defects. **Asking the state-machine question of a
+routing layer finds nothing, and a clean result there is evidence of nothing.**
+
+**T-022 A WITHDRAWN CLAIM FILED UNDER A SURVIVING CLAIM'S LABEL**, which is BOSS's own
+defect from D-088, generalised. **Its consequence is in the future, which is the hardest
+kind to see.**
+
+And two rules frozen out of the same turn: **G-33**, the three-quantity separation as the
+standing shape, and **G-34**, prefer a role to a dimension, established by what survived
+the retraction rather than argued for.
