@@ -1423,3 +1423,46 @@ and starting it now means building on rows that will move.**
 **The seven audits are accepted as the right set, and audit 7, the seed audit tracing
 every figure to the world or to a file that had to contain something, is named as the
 one nobody else has. They get built when there is something to run them against.**
+
+**D-095 Document 12 exists. software-spec.md, 1154 lines, twelve sections, written in
+one pass on the third attempt after two container restarts killed the first two.**
+
+**It is the first builder-facing document in the project and it is PARTIAL in a stated
+way**, which is the right shape: what is implementable today, what is blocked with the
+blocker named, and - the distinction that matters most - **what is STRUCTURALLY
+IMPOSSIBLE rather than pending, so nobody reads it later as a gap waiting to close.**
+Three things are in that last category: positive confirmation that a settle window was
+valid, attribution for six of the eight channels, and any measurement of delivered
+volume.
+
+**BOSS checked rather than trusting the report:** swept the file for pins, addresses,
+timing figures, resistances and steps-per-millilitre and found none; read section 10 and
+confirmed every row names a source and no row states a value; read section 12 and
+confirmed the partial status is specific rather than a hedge.
+
+**BOSS has NOT declared it finished, and neither did CONTROL-SOFTWARE.** Under rule 7
+that waits until another agent has built against it and found nothing, and the physical
+half of that begins at C-09.
+
+**What the document does that is worth recording beyond its contents:**
+
+**It withdraws one of its author's own prior conclusions inside itself.** The
+window-validity precondition in control-software-f004.md rested on the Pi commanding
+the circulation relay, which G-26 and D-052 removed. F-070 is addressed rather than
+left as a finding: section 6.4 states the four things window validity CAN do with the
+inputs that exist and the five it cannot, **including that D-063's requirement that a
+window sit inside a running period is a procedural condition on the operator and on the
+C-02 measurement and is NOT ENFORCEABLE IN SOFTWARE.**
+
+**It applied T-022 to itself**, splitting the S-03-based claim, which stands, from the
+S-20-based claim, which may be withdrawn if S-05 goes level-based under D-060, and
+stating that the first does not depend on the second.
+
+**It applied T-019 to itself**, in its own words: having refused the settling interval
+for want of evidence, it checked the other terms in the same paragraph and refused the
+band, the magnitudes, the margin, the qualification length and the write-ahead
+granularity on the same grounds.
+
+**And it declined two decisions rather than inventing them:** whether an INDETERMINATE
+outcome stops the remainder of a batch, and whether a low-jug warning blocks a plan.
+Both are in section 11 as blockers rather than in the body as choices.
