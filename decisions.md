@@ -62,6 +62,7 @@ changed reports to BOSS and does not act.
 | G-13 | E-stop and manual reset are in the permissive chain and are not software | As G-07 |
 | G-14 | UL listing is not gating. Hobby build, no electrical inspection | Owner's stated condition. It does not license unsafe work |
 | G-15 | The owner does all part lookups. Agents return a requirement and a search term and stop | No agent states a part number or a spec from memory |
+| G-16a | **A LOUDER ALARM INVITES EXACTLY THE FORBIDDEN CORRECTION. Making a check louder makes that failure MORE likely, not less.** The operator's instinct on "pH went up when you asked for down" is to command the opposing pH channel. **The UI must not offer it and the corrective path must be structurally incapable of it, not merely discouraged** | Moved here 2026-09-02 at the owner's instruction, from the check's own file, because it belongs beside G-16 rather than inside one check |
 | G-16 | **NO AUTOMATIC RE-DOSE. EVER.** Software never tops up, retries, re-doses or corrects on its own on the strength of any reading of any check. If a check reports no movement, the batch STOPS and tells the operator. The operator decides. **AND THE LAUNDERED VERSION IS ALSO FORBIDDEN: no "resume dose" button. A remainder computed from an unknown fraction is an automatic re-dose with a human as its trigger.** What the operator may do is command a FRESH dose of a volume they choose, which is an ordinary dose. That distinction is the whole rule. **G-16 has no crash exemption either: a watchdog reset may not resume anything** | Frozen 2026-08-30 as a RULE, not a parameter. Not a configurable retry count, not a threshold anyone can turn up. See D-017, extended by the P-09 pass |
 | G-17 | Jugs are dedicated per channel for life. Not interchangeable vessels. A jug is refilled with the same product forever or it is retired | Frozen 2026-08-30. See D-018 |
 | G-18 | The jug change break point is at the jug. The tube stays with the channel and is never moved between channels | Frozen 2026-08-30. See D-020 |
@@ -1258,3 +1259,62 @@ build where direction is a discriminator at all, because those two products are 
 only pair that move a probe in opposite directions.** F-064 narrowed the confusion to
 exactly that pair from the physical side, and this answer lands on it from the software
 side, independently.
+
+## 2026-09-02
+
+**D-084 The token carrier is specified against THREE DUTY CLASSES, and the residual is
+recorded as ACCEPTED rather than closed.** DOSING's proposal, taken.
+
+Specify against acid, base and generic nutrient-concentrate duty. **The union cannot be
+computed because five products are unassigned, and waiting for them means waiting for a
+decision the owner makes at commissioning. Three duty classes covers the real
+chemistry: something strongly acidic, something strongly alkaline, and salt
+solutions.**
+
+**The residual, in the owner's words: a product outside those three classes arriving on
+any channel invalidates the carrier specification, and NOTHING WILL DETECT THAT AT
+ASSIGNMENT TIME.**
+
+**D-085 NO EXTRA WALL LENGTH for the CH5 and CH6 gap. The free axes only.**
+
+**Recorded as a decision with its reason and not as a deferral: the gap was justified
+when a swap was permanently invisible. The signed check made it a bounded one-dose
+error followed by a loud stop, so the physical remedy is no longer worth wall length.**
+Wall length is finite and the manifold and the raceway share that wall.
+
+Taken instead, both free: **non-neighbouring colours on the two tokens, which the
+colour axis already allows, and whatever spacing the existing station run gives without
+enlarging it.** F-064 established that spacing is free WITHIN the sequence, so use what
+is there and do not create more.
+
+**IF THE SIGNED CHECK IS EVER REMOVED, THIS REOPENS.**
+
+**D-086 THE JUG FIGURES ARE DEFAULTS, NOT CONTAINERS, AND THREE CONCLUSIONS RESTED ON
+THEM.** The 1000, 3785 and 4000 in config.yaml are seed values, each overwritten per
+channel with the volume the owner enters. **CH7 and CH8 carry 3785 because it was the
+closest seed to a US gallon and nothing more.**
+
+**So the reasoning that the two pH channels are the two 1000 mL containers is an
+inference from a DEFAULT. It is probably right, because pH adjusters are concentrated
+and used in small volumes, but the config does not say it and the containers are not
+decided.**
+
+Three things are marked as resting on that inference rather than on a stated container:
+**F-064's claim that the size axis separates the pH pair from the six nutrients for
+free, which was the narrowing of F-063; F-066's argument that the two smallest
+containers are handled most often; and DOSING's three depth classes for the suction
+pickup.**
+
+What does NOT rest on it: **CH5 is marked pH-down through the blocked-channels path,
+which is a ROLE marking and not a default.**
+
+Recorded in channel-register.md beside the capacity column as a THIRD quantity - a seed
+that is neither the container's capacity nor the volume poured - and in traps.md as
+T-018. **The owner will state the actual containers when he buys them.**
+
+**D-087 D-078 is qualified, not withdrawn.** It said the jug sizes are a constraint and
+that anything specified against one container size is wrong for two of eight. **The
+INSTRUCTION survives - nothing should be specified against a single container size -
+but the three sizes it named are seeds. DOSING's finding that the suction pickup is
+UNSPECIFIED rather than mis-specified is unaffected and is the durable half of that
+pass.**

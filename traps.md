@@ -290,3 +290,36 @@ open-collector return.
 This is T-007's shape applied to a chain rather than to a coil, and it is worth its
 own entry because the string version is the one that gets designed in for free
 under budget pressure.
+
+
+## T-018 A seed value read as a measurement of the world
+
+Hit on 2026-09-02, by BOSS, and it propagated into three conclusions and one decision
+before the owner caught it.
+
+config.yaml carries a per-channel volume: 4000, 1000, 3785. **They are DEFAULTS. Every
+one is a seed that gets overwritten on the Pumps screen with the volume the owner
+actually enters. CH7 and CH8 carry 3785 because that was the closest seed to a US
+gallon, and for no other reason.**
+
+BOSS read them as container sizes, recorded them as facts in the channel register, and
+built on them: that the two 1000 mL channels are the pH adjusters, so the size axis
+separates the pH pair from the six nutrients for free; that the smallest containers are
+therefore handled most often; and three depth classes for a suction pickup nobody has
+specified. **DOSING then did honest work against all three.**
+
+How to recognise it: **a number that came out of a configuration file, a template or a
+fixture, being cited as though someone had measured something.** The tell is that it is
+suspiciously round, or suspiciously conventional, or the same across several entries
+that have no reason to agree. 3785 is a US gallon in millilitres. **A number that is a
+unit conversion is a number somebody typed, not a number somebody measured.**
+
+The general form, and it is one step past T-012: **T-012 says a quantity asserted
+rather than derived will be correct until the data moves. This says a quantity may be
+neither asserted nor derived but SEEDED, and a seed is not evidence about the world at
+all. Ask of any figure: did this come from the world, or from a file that had to
+contain something.**
+
+The register now separates three quantities that were being treated as one: the seed,
+the container's capacity, and the volume actually poured. **Only the third is what the
+jug arithmetic runs on, and none of the three was the same number.**

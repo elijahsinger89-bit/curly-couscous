@@ -15,9 +15,31 @@ requires. It is not a table mapping one identity to another, which the declarati
 forbids. The distinction is that every row is keyed by the token and no column is an
 identity of its own.
 
-**Read the Jug column carefully: it is the container's NOMINAL CAPACITY. It is not
-the full-jug volume G-05 decrements against, which is what was actually poured and is
-entered by the operator at fill time.**
+## READ THE JUG COLUMN CAREFULLY. THERE ARE THREE DIFFERENT QUANTITIES HERE.
+
+Corrected 2026-09-02 by the owner, D-086.
+
+| Quantity | What it is | Status |
+|---|---|---|
+| **The Jug column below** | **A SEED VALUE in config.yaml. NOT a container.** Every one is a default that gets overwritten per channel on the Pumps screen with the actual full-jug volume the owner enters. **CH7 and CH8 carry 3785 because that was the closest seed to a US gallon and nothing more** | **A default. It is not a measurement of the world** |
+| Container nominal capacity | What the vessel holds | **NOT DECIDED. The owner will state the actual containers when he buys them** |
+| Filled volume | What was actually poured, which is what G-05's arithmetic decrements against | Entered at fill time |
+
+**The Jug column is a seed that is neither of the other two.** See traps.md T-018.
+
+**Three conclusions on file rest on an INFERENCE FROM A DEFAULT, not on a stated
+container, and are marked as such:**
+
+1. **That the two 1000 mL channels are the pH adjusters, and therefore that the size
+   axis separates the pH pair from the six nutrients "for free".** F-064's narrowing of
+   F-063 rests on this. **The inference is probably right, because pH adjusters are
+   concentrated and used in small volumes, but the config does not say it.**
+2. **F-066**, that the two smallest containers are handled most often.
+3. **DOSING's three depth classes for the suction pickup**, which are being derived
+   from numbers that are not container sizes.
+
+**What does NOT rest on it: CH5 is marked pH-down through the controller's
+blocked-channels path, which is a ROLE marking and not a default.**
 
 | Token | Role | Jug | STEP pin | DIR pin | Cable core | Box | Product | Steps per ml, C-01 |
 |---|---|---|---|---|---|---|---|---|
