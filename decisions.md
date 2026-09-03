@@ -2217,3 +2217,201 @@ stopping the fill.**
 unverified. **BOSS adopts nothing, sizes nothing and names no part.** Put to the
 owner as one question, with the tree's own sentence beside it.
 
+## 2026-09-03, later still. S-05 closes, and the float pass restarts from requirements.
+
+**D-118 F-090 IS CONFIRMED: parts.md's LS ROSTER IS 1ST EDITION LINEAGE, AND IT IS
+STRUCK.** Owner's answer. **The roster in parts.md came from the same body of work
+as the document set, not from an independent arrival.** So the authoritative file
+was holding a 1st Edition fact under "established facts about real parts", and
+confirming a float proposal against it would have been checking a document against
+itself. **G-37's second-source illusion, confirmed inside parts.md.**
+
+**Marked in place under G-40's terms rather than deleted**, so a later reader sees
+what was there and why it went.
+
+**THE FLOAT PASS RESTARTS FROM REQUIREMENTS: ask what a float must DO at each
+position, then find a part. The old roster is ONE CANDIDATE and carries no priority
+for having been there first.** F-089 goes into the requirement rather than into a
+part comparison: **the 1st Edition floats switch a 120 VAC coil, this build's
+control voltage is 24 V, and under G-31 that is a fifth of the contact power at the
+same current.**
+
+**The owner's note on why this is the best finding of the pass, recorded because it
+is a standard rather than a compliment: IT STOPPED WORK RATHER THAN PRODUCING
+IT.** An audit that prevents a circular confirmation has produced nothing visible
+and saved the pass.
+
+**D-119 S-05 CLOSES LEVEL-BASED. THE DRY-RUN INTERLOCK SENSES LEVEL, NOT FLOW.**
+Owner's decision, 2026-09-03. **Everything in this system is level switches. There
+is no flow element anywhere and there is not going to be one.**
+
+**The decision arrives from the owner and NOT from the 1st Edition set.** D-116's
+GUARD 1 refused the adoption and was correct to: the same answer arriving as a
+decision is a different thing from the same answer arriving as an inheritance.
+**Recorded that way deliberately, because a later reader must not conclude the
+guard was pedantic.**
+
+**TWO CONSEQUENCES, BOTH TAKEN KNOWINGLY BY THE OWNER:**
+
+**1. THE SHARED SOLUTION IS CLOSED.** A level element cannot subsume circulation
+verification: **it reads healthy through a fouled impeller, an air-locked volute, a
+blocked intake or a shut valve.** WATER established that and it is why S-05 was
+held open. It is now spent deliberately rather than by default.
+
+**2. CIRCULATION VERIFICATION DOES NOT VANISH, AND D-060'S OVERSTATEMENT MUST NOT
+RETURN HERE.** The owner's instruction, in his words: what is gone is **the free
+version.** Three routes survive and all three are already on file:
+
+| Route | Status |
+|---|---|
+| F-003 | **Separately assigned** under D-016, WATER primary, MAIN-PANEL the other end |
+| C-12, the W-1 temperature-step witness | **Free.** C-12 calls it the only F-003 option that costs nothing and adds nothing |
+| S-20 | **Exists on either fork**, because circulation is a pole on K-DRY under D-058 |
+
+**This is T-024's exact shape being refused at the moment it would have recurred.**
+D-060 said level-based means circulation verification is foreclosed permanently.
+That clause was withdrawn by D-103. **The fork it described has now actually been
+taken, and the withdrawn clause does not come back with it.** A claim about one
+route stays a claim about one route even when that route is the one chosen.
+
+**And D-060's OTHER half stands and is now spent: level-based means NO TIMING
+ELEMENT.** The device D-060 priced is not bought.
+
+**D-120 THE FLOAT ROSTER FROM THE 1ST EDITION DRAWINGS IS RECORDED AS OBSERVED AND
+UNVERIFIED. THE HEIGHTS ARE NOT ADOPTED.** Owner's transcription, and it corrects
+what he says he would otherwise have told BOSS from memory.
+
+| Tank | Float | Function | Height as drawn |
+|---|---|---|---|
+| Day | LS-2 | high-high | **30 in** |
+| Day | LS-5 | fill stop | not stated on the pages seen |
+| Day | LS-1 | fill start | **11 in** |
+| Day | LS-4 | low-low | **8 in** |
+| Storage | LS-6 | fill start | not stated |
+| Storage | LS-7 | fill stop | not stated |
+| Storage | unnumbered | **STORAGE LOW pump-down float, not in the LS series** | not stated |
+
+**LS-3 is captioned as being in storage. LS-8 is unaccounted for on the pages
+seen.**
+
+**THE HEIGHTS ARE T-018 CANDIDATES AND ARE NOT ADOPTED. 30, 11 and 8 inches are not
+to be used by anything.** The owner names the reason and it is the strongest one
+available: **height is exactly the class of figure the old set contradicts itself
+on** - AUDIT found one float with two different trip heights across five documents,
+and two different measurement datums used with the same numbers. **A number that
+disagrees with itself inside its own source is not a seed, it is noise.**
+
+**What the roster IS useful for: it names the POSITIONS a design has to have an
+answer for.** Four on the day tank, two plus a pump-down on storage, and two
+unaccounted-for numbers that are themselves a question. **Positions are a
+requirement. Heights are a measurement nobody has taken on this build.**
+
+**D-121 THE STANDPIPE IS ADOPTED AS THE MOUNTING METHOD. NOT AS A DIMENSION.**
+Owner, D-117 accepted.
+
+**One rigid pipe per tank carrying every float and every cord, hung off the rim,
+with nothing hanging off a float body.**
+
+**NO DIMENSION, NO MATERIAL, NO ATTACHMENT DETAIL, NO COUNT.** The owner's words
+and they are the whole scope of the adoption. **What is adopted is a rule about
+what holds what.**
+
+**Why it can be adopted from a non-authoritative source when nothing else can: it
+carries no figure, so it survives every number in the old set being wrong.** G-34
+exactly - a rule keyed to what a thing IS rather than to how big it is - arriving
+from a source where every dimension is suspect.
+
+**The tree already held the principle and had not applied it here.** water.md, on
+the submersibles: **"Position held by fixture, not by cord. A cord-hung pump is a
+pump whose position is a suggestion."** It applies harder to a float: **nothing in
+this system measures a level, so a float that has moved is invisible, and under
+D-114 the fill-stop float is the only thing stopping the fill.**
+
+**It unblocks S-01, S-02 and CBL-04 together**, because a cord route is a
+consequence of a mounting method.
+
+**D-122 THE ROLE VOCABULARY: EXACTLY TWO IS NOT ENFORCED, AND THE RULE IS
+CONDITIONAL RATHER THAN COUNTED.** Owner, answering the question D-105 opened.
+
+**Zero pH channels is legal. One is legal. Three is legal and foolish, and software
+does not prevent it.**
+
+**What must hold is CONDITIONAL, not counted: the signed attribution works from the
+ROLE, not from the pair, so it works with one pH channel or with two.** That is the
+property that makes the count irrelevant, and it is why the count does not have to
+be defended.
+
+**THE REWRITE, and it is a form rather than a judgement call.** The 25 items AUDIT
+found assuming a pair are rewritten so that **"the opposing pH channel" becomes "a
+channel with the opposing pH role, IF ONE IS ASSIGNED."**
+
+**Anything that CANNOT be written that way is a real dependency on the pair, and is
+LISTED SEPARATELY rather than forced into the form.** That instruction is the
+valuable half: **the rewrite is a test, and the items that fail it are the finding.**
+CONTROL-SOFTWARE returns that list.
+
+**FULVIC IS A PRODUCT, NOT A ROLE, AND THERE IS NO FULVIC CHANNEL.** F-084 is
+answered. **Fulvic is a NUTRIENT by role. Its property - that it does not move EC
+meaningfully - is a PRODUCT ATTRIBUTE and lives in the channel register.**
+
+**"The fulvic channel" is struck from all four files.** There is a channel whose
+assigned product happens to be fulvic. **The distinction is not pedantry: a fixed
+identity in four files is exactly what D-105 removed, and leaving one product's
+identity keyed to a channel would have reintroduced the thing the decision
+dissolved.** And it puts D-013's premise where G-33 says it belongs - **an
+attribute of the product, recorded once, in the register.**
+
+**D-123 F-081 IS FIXED BY RULE: ANY ROLE CHANGE VOIDS EVERY ROLE-DEPENDENT RECORDED
+FIGURE.** Owner's instruction. **C-03 and C-04 are voided by a role change exactly
+as C-01 is voided by a driver change or a tube change.**
+
+**The owner's diagnosis is the part worth keeping: the voiding was applied to the
+figure whose wrongness is LOUD, and not to the one whose wrongness makes the check
+CONFIRM the error.** A wrong steps-per-millilitre shows up as a dose that looks
+wrong. **A wrong signed reference makes the signed check expect the wrong direction,
+so a wrong-role dose scores PASS.** The quiet failure was the one left unguarded.
+
+**Three things follow and CONTROL-SOFTWARE implements all three, since D-112 found
+three separate absences:** a role change becomes **a case in the change procedures**
+- channel-token.md's cases, the re-measure trigger table, and software-spec 3.4's
+OUT OF SERVICE causes; **an invalidation**, voiding C-03 and C-04 for that channel;
+and **a re-measure trigger row** so the void has a route back. **C-09 is the test
+and it now has an event that schedules it.**
+
+**D-124 F-082: UNBIND. DO NOT REBIND.** Owner's ruling and it is the right shape.
+
+**Colour was frozen to token and role became free, so the frozen colour map was
+constraining which tokens may take the pH roles. Backwards.**
+
+**Nothing physical is keyed to it and nothing was bought** - order.md and parts.md
+carry no marker, colour or label line, checked by AUDIT. **So the binding is broken
+at zero cost.**
+
+| Before | After |
+|---|---|
+| Colour separation was a property of the CH5-CH6 pair | **Colour identifies the CHANNEL. Nothing more** |
+| The pH separation rule constrained the colour map | **The pH separation is a rule at ASSIGNMENT: whatever two tokens take the pH roles must not have neighbouring colours** |
+| Checked nowhere | **Checked at C-09** |
+| The carrier lookup had to protect the CH5-CH6 binding first | **The carrier lookup runs against eight distinguishable colours with NO PAIR PRIVILEGED** |
+
+**That last row is what the unbinding buys.** The owner's carrier-availability
+lookup was going to spend the strongest separation in a reduced palette on a pair
+that no longer means anything. **It now runs against a plain requirement: eight
+colours that a person can tell apart.**
+
+**And it dissolves F-082's other half for free.** channel-token.md forbidden item 4
+required the permitted token pairs be written out rather than computed. **With the
+binding broken there is no permitted-pairs set to enumerate: there is a rule
+checked against whatever assignment exists.** A rule is not a set.
+
+**D-125 F-086: THE CHILLER LOOP PUMP MAY BE SUPPLIED WITH THE CHILLER. OBSERVED,
+UNVERIFIED, AND NOBODY DESIGNS AROUND IT EITHER WAY.** The 1st Edition drawing
+shows it as a submersible that comes with the unit.
+
+**If that holds it is not a separate load at all, and G-12 is wrong about there
+being a loop pump to switch** - which would close F-086 by removing its subject
+rather than by answering it.
+
+**The owner will check his own hardware.** Under G-40 the drawing is a citation and
+not a source. **F-086 stays OPEN and no subsystem designs for either outcome.**
+

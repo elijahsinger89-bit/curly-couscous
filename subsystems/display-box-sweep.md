@@ -333,3 +333,23 @@ RTC and whether it needs a battery fitted is a hardware fact it will not state.
   half and it is available now.
 - Whether the Pi has any network path at all is not stated in any file, so time
   arriving from a network after a boot cannot be assumed.
+
+---
+
+> **ANNOTATION 2026-09-03, D-122. NOT A REWRITE OF WHAT DISPLAY-BOX RETURNED.**
+>
+> **This file says "the fulvic channel" twice, at the two places about a silent
+> no-delivery. There is no fulvic channel.** Under D-105 role is a per-channel
+> setting and under D-122 fulvic is a PRODUCT, not a role: it is a nutrient by
+> role, and not moving EC meaningfully is a product attribute in the channel
+> register.
+>
+> **So the sentences stand in substance and their subject moves: the channel that
+> is silent is whichever channel is ASSIGNED fulvic, and which channel that is
+> comes from C-09.** The finding those sentences carry - that a severed STEP there
+> is a silent no-delivery, and that nothing else catches under-delivery on it - is
+> unaffected and is not softened by this.
+>
+> **The file is left as DISPLAY-BOX returned it because a returned answer is a
+> record of what an agent said, not a working document. BOSS annotates and does not
+> edit.** The corrected wording is in interface-table.md S-17.

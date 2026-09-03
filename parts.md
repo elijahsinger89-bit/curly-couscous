@@ -517,8 +517,27 @@ It takes 24 V and returns a Form C dry contact into the permissive string.
 **Its contact legs sit in the 120 V chain, so every conductor in its cable must be
 insulated for 600 V.**
 
-**The part is a Winland WaterBug WB200.** And the float switches are **LS-1 through
-LS-8, pilot duty. NOBODY HAS TRACED THAT CHAIN AGAINST THE ACTUAL SJE PART.**
+**The part is a Winland WaterBug WB200.**
+
+> **THE FLOAT ROSTER THAT STOOD HERE IS 1ST EDITION LINEAGE, UNVERIFIED. STRUCK
+> 2026-09-03 BY D-118, ON THE OWNER'S CONFIRMATION.**
+>
+> This file said "the float switches are LS-1 through LS-8, pilot duty, nobody has
+> traced that chain against the actual SJE part". **The owner confirms that roster
+> came from the same body of work as the 1st Edition document set. It is not an
+> independent arrival.** So it was a 1ST EDITION FACT sitting under "established
+> facts about real parts", and checking it against the 1st Edition drawings would
+> have been checking a document against itself. **G-37 confirmed inside the
+> authoritative file.** F-090.
+>
+> **It is not the incumbent. THE FLOAT PASS RESTARTS FROM REQUIREMENTS: ask what a
+> float must DO at each position, then find a part. The old roster is ONE CANDIDATE
+> among others and carries no priority for having been here first.**
+>
+> **And the requirement carries F-089 with it: the 1st Edition floats switch a
+> 120 VAC coil and this build's control voltage is 24 V. Under G-31 that is a fifth
+> of the contact power at the same current. That belongs in the REQUIREMENT, not in
+> a part comparison.**
 
 ## The Pi is powered independently of everything else
 

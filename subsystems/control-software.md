@@ -369,3 +369,52 @@ TAKE THE pH ROLES. Forbidden item 4 requires that set be written out, not
 computed.** Enumerate it.
 
 Write in ONE pass at the end.
+
+## THE ROLE VOCABULARY IS SETTLED, D-122 THROUGH D-124. FOUR INSTRUCTIONS.
+
+**1. EXACTLY TWO IS NOT ENFORCED. The rule is CONDITIONAL, not counted.** Zero pH
+channels is legal, one is legal, three is legal and foolish, **and software does
+not prevent it.** What makes the count irrelevant is already true of your design:
+**the signed attribution works from the ROLE, not from the pair, so it works with
+one pH channel or with two.**
+
+**Rewrite the 25 pair-assuming items to this form: "the opposing pH channel"
+becomes "a channel with the opposing pH role, IF ONE IS ASSIGNED."**
+
+**And the instruction that matters more than the rewrite: ANYTHING THAT CANNOT BE
+WRITTEN THAT WAY IS A REAL DEPENDENCY ON THE PAIR. List those separately rather
+than forcing them into the form. The rewrite is a TEST, and the items that fail it
+are the finding.** Return that list.
+
+**2. FULVIC IS A PRODUCT, NOT A ROLE. THERE IS NO FULVIC CHANNEL.** F-084 answered.
+It is a **nutrient by role**, and not moving EC meaningfully is a **product
+attribute in the channel register** under G-33.
+
+**Struck from the files BOSS owns: interface-table.md S-17, commissioning.md C-04,
+findings.md F-050 and F-078. subsystems/display-box-sweep.md is ANNOTATED, not
+edited, because a returned answer is a record of what an agent said.** Strike it
+from anything of yours. **Leaving one product's identity keyed to a channel would
+have reintroduced exactly what D-105 dissolved.**
+
+**3. D-123: ANY ROLE CHANGE VOIDS EVERY ROLE-DEPENDENT RECORDED FIGURE.** C-03 and
+C-04 are voided by a role change exactly as C-01 is voided by a driver or tube
+change. **The owner's diagnosis, and keep it in the implementation note: the
+voiding was applied to the figure whose wrongness is LOUD and not to the one whose
+wrongness makes the check CONFIRM the error.**
+
+All three of D-112's absences get closed, not one: **a case in the change
+procedures** - channel-token.md's cases, the re-measure trigger table, and your 3.4
+OUT OF SERVICE causes; **the invalidation itself**; and **a re-measure trigger row
+so the void has a route back.** C-09 is the test and it now has an event that
+schedules it.
+
+**4. D-124: UNBIND THE COLOUR, DO NOT REBIND IT.** F-082 resolved the right way.
+**Colour identifies the CHANNEL and nothing more.** The pH separation becomes a
+rule at ASSIGNMENT - **whatever two tokens take the pH roles must not have
+neighbouring colours - checked at C-09.**
+
+**And forbidden item 4's enumeration requirement dissolves with it.** There is no
+permitted-pairs set to write out; **there is a rule checked against whatever
+assignment exists. A rule is not a set.** Restate channel-token.md accordingly.
+
+Write in ONE pass at the end.

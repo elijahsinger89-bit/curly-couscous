@@ -272,3 +272,71 @@ makes the fill-stop float the only thing stopping the fill.**
 
 **It is a proposal, not a decision. It is with the owner.** Do not size a pipe, do
 not choose a mounting, do not name a part.
+
+## S-05 IS CLOSED, THE STANDPIPE IS ADOPTED, AND THE FLOAT PASS RESTARTS. 2026-09-03.
+
+**1. S-05 CLOSES LEVEL-BASED, D-119, BY THE OWNER.** Everything in this system is
+level switches. **There is no flow element anywhere and there is not going to be
+one.**
+
+**Your guard held and it mattered.** The same answer arrived from the 1st Edition
+set the day before and was refused. **A decision is not an inheritance**, and the
+record says so, so nobody later reads the refusal as pedantry.
+
+**The shared solution is spent DELIBERATELY.** Your reasoning was right and is not
+withdrawn: a level element reads healthy through a fouled impeller, an air-locked
+volute, a blocked intake and a shut valve.
+
+**AND CIRCULATION VERIFICATION DOES NOT VANISH. Do not let D-060's withdrawn
+overstatement come back now that the fork is taken.** Three routes stand: **F-003
+is separately assigned to you under D-016; C-12's W-1 temperature-step witness is
+free; S-20 exists on either fork** because circulation is a pole on K-DRY. **What
+is gone is the free version.** F-003 is now yours to answer on its own, without a
+shared device to pay for it.
+
+**2. THE STANDPIPE IS ADOPTED AS THE MOUNTING METHOD, D-121. METHOD ONLY.** One
+rigid pipe per tank carrying every float and every cord, hung off the rim, nothing
+hanging off a float body.
+
+**NO DIMENSION, NO MATERIAL, NO ATTACHMENT DETAIL, NO COUNT.** Those are the
+owner's words and they are the whole scope. **It unblocks S-01, S-02 and CBL-04
+together, because a cord route is a consequence of a mounting method.**
+
+**3. THE FLOAT PASS RESTARTS FROM REQUIREMENTS, D-118.** parts.md's LS-1 to LS-8
+roster is **1st Edition lineage, confirmed by the owner, and struck.** It is one
+candidate with **no priority for having been there first.**
+
+**Ask what a float must DO at each position. Then find a part. In that order.**
+Two things go into the requirement before any part is looked at:
+
+- **F-089: the contact must switch a 24 V control circuit.** The old set's floats
+  were rated for a 120 VAC coil, and under G-31 a minimum switching load is one
+  POWER requirement, so this is **a fifth of the contact power at the same
+  current.** G-24 has never been asked of a float before.
+- **The positions the design must answer for**, which is all the old roster is good
+  for: **four on the day tank - high-high, fill stop, fill start, low-low - and on
+  storage a fill start, a fill stop, and a separate STORAGE LOW pump-down float
+  that is not in the LS series.** Two of the old numbers are themselves a question:
+  LS-3 is captioned as being in storage, and LS-8 is unaccounted for.
+
+**HEIGHTS ARE NOT ADOPTED FROM ANY SOURCE. 30, 11 and 8 inches are not to be used
+by anything.** Height is the exact class of figure the old set contradicts itself
+on - one float with two trip heights across five documents, and two different
+datums used with the same numbers. **A number that disagrees with itself inside its
+own source is not a seed, it is noise.**
+
+**4. TWO THINGS NEITHER PACKAGE HAS, F-091, and they are with the owner as
+questions.** An **overflow bulkhead to a floor drain**, marked mandatory on the old
+storage tank, and an **air gap above the fill rim.** Do not design either. **What
+you may return is what they would COST you if they became requirements** - the
+overflow's landing point interacts with your plumbing, and D-114 makes the
+fill-stop float the only thing stopping the fill, **so its failure currently has no
+second line at all.** The 6 in figure is a T-018 candidate and is not adopted.
+
+**5. F-092, a probe gland candidate where the tree had none.** Observed in the 1st
+Edition set, unverified, **selected against a different set of probes for a
+different controller.** Not a choice. **Carry one thing into any evaluation of it:
+our pipe is 3/4 SCHEDULE 80 per D-109, so thread engagement and insertion depth
+differ from Sch 40** - a gland chosen against Sch 40 wall may bottom, may not
+engage enough thread, or may sit the sensing element in a different part of the
+bore.

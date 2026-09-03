@@ -3,6 +3,40 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-027 Proximity in a file is not a dependency. Twice now.
+
+Hit twice, 2026-09-02 and 2026-09-03, and it is a pattern because it is twice.
+
+**F-064 sits next to F-063 in findings.md. It is a reading of the Position axis:
+volume-independent, role-independent, and about neither the jug sizes nor the pH
+pair.** It has now twice been at risk of being withdrawn along with a neighbour it
+does not depend on.
+
+| When | What nearly took it |
+|---|---|
+| 2026-09-02 | **BOSS filed DOSING's withdrawn narrowing under F-064's label.** DOSING caught it. The narrowing was withdrawn; the opening stands. T-022, split into F-071 and F-064 |
+| 2026-09-03 | **D-105 dissolved F-063.** Applying that dissolution to what was filed near it would have taken F-064 with it - and D-085 spends F-064 in the other direction, so **the free half would have been lost a second time** |
+
+**The mechanism.** A file is a one-dimensional list and a dependency graph is not.
+**Two items land next to each other because they were written on the same day or
+about the same area, which is a fact about the AUTHOR's attention, not about the
+items.** When one is withdrawn, the reader's eye supplies a relationship the file
+never asserted.
+
+**It is worse in a findings file than anywhere else**, because a finding is written
+at the moment of noticing, so **filing order is chronological, and chronological
+order is the strongest possible generator of accidental adjacency.**
+
+**The recognition test.** When you withdraw, dissolve or narrow an item, do not
+look at what is NEAR it. **Search for what CITES it.** If nothing cites the
+neighbour, the neighbour is not affected, however similar it looks. **And if you
+find yourself saying "and the one below it too", stop: that sentence has no
+argument in it.**
+
+**What caught it both times was an agent that had the item's own argument in hand.**
+DOSING the first time, AUDIT's dependency trace the second. **Neither found it by
+reading carefully. Both found it by asking what the item actually rests on.**
+
 ## T-026 The deciding property was not the first thing either of us looked at
 
 Hit on 2026-09-03, by the owner, on his own part choice, and caught by him within
