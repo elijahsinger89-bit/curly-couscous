@@ -131,3 +131,30 @@ Nothing is being asked of you and S-05 is not being reopened. **This is here so 
 if S-05 comes back to you, you decide it against D-060's real price and not against
 a capability someone had written off.** T-023 is why it is worth telling you at all:
 nobody pays for a door they have been told is bricked up.
+
+## SECOND TIME IN ONE DAY, 2026-09-03, D-103. S-05 AGAIN, AND THIS TIME IT IS IN THE FROZEN FILE.
+
+This morning you were told document 12 had written off circulation verification.
+**AUDIT then graded decisions.md itself and found that D-060 - the entry BOSS
+cited as the authority for saying the door was open - overstates in the same
+direction.** F-076.
+
+Your own S-05 row says a LEVEL element forecloses **the shared solution**: that
+this element cannot subsume circulation verification. **D-060 escalated that to
+"circulation verification is foreclosed permanently", which is a claim about every
+route rather than about one element.** Three things on the table say otherwise:
+
+- **F-003 is separately assigned** by D-016, to you, with MAIN-PANEL at the other
+  end. S-05's row says S-05 must not be answered before F-003 is.
+- **C-12's W-1 transient** - the standing probe-section column at room temperature
+  against a chilled tank - which C-12 calls the only F-003 option that costs
+  nothing and adds nothing.
+- **S-20 exists on EITHER fork.** Circulation is a pole on K-DRY under D-058, so
+  the Pi can read whether the pump was energised no matter how S-05 resolves.
+
+D-060 is annotated, not rewritten. **S-05 stays open and BOSS is not answering it.**
+
+What is asked of you, and only this: **when S-05 does come back, decide it against
+D-060's real price - one timing element for the flow-proving fork - and against
+what F-003 and C-12 and S-20 actually leave open.** Not against a foreclosure that
+was written more strongly than your own row supports. T-023.

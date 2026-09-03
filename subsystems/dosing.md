@@ -168,3 +168,59 @@ tube life. The re-measure trigger is a tube change, not a date.
 
 Do not decide port count, manifold diameter, tubing size or jug volume from
 memory. Counts come back when the requirement is known.
+
+## OPEN, routed 2026-09-03 by D-103. TWO ITEMS, AND NEITHER IS A REVERSAL.
+
+**1. D-084's residual, and the sentence is the OWNER'S, not BOSS's.** F-077.
+
+D-084 records: "a product outside those three duty classes arriving on any channel
+invalidates the carrier specification, and **NOTHING WILL DETECT THAT AT ASSIGNMENT
+TIME.**"
+
+AUDIT's observation: **D-077 makes assignment time BE commissioning, and C-09 is a
+commissioning row that already confirms which product is on which channel by eye -
+first in the order under D-022, free, jugs in hand.** So there is a place to look
+where the entry says there is none.
+
+**What is offered, and it is one question:** add to C-09's script, per channel, is
+this product an acid, a base, or a salt solution. **The three duty classes D-084
+specifies against are exactly the three answers, so the test is already sized by
+the specification it protects.**
+
+**Return whether that question is SUFFICIENT** - whether a product can fall outside
+all three classes while still answering one of them, and whether an operator can
+answer it correctly from a label. **Do not return whether the residual is
+accepted. That is the owner's and it stays his.**
+
+**2. F-078, for your information and not for action.** D-013's premise, "fulvic
+moves neither EC nor pH meaningfully", has no measurement named anywhere AUDIT
+searched, and C-04 is scoped "per EC-moving channel" so the assumption excludes
+the channel from the test that would check it. **Fulvic stays unattributed - the
+owner froze that twice and O-19 does not come back.** This is recorded so that if
+you ever measure a fulvic dose for another reason, you know the premise underneath
+S-17 was never measured.
+
+## GATED TO C-02, routed 2026-09-03 by D-104. YOUR FILE IS A COMMISSIONING PROCEDURE AND IT INSTRUCTS THE IMPOSSIBLE.
+
+**subsystems/dosing-f004-wet-side.md says the settling timer must be gated on the
+circulation pump being COMMANDED ON.** commissioning.md names that file as C-02's
+FULL PROCEDURE.
+
+**Under G-26 and D-052 the Pi commands one coil, the driver permissive, and nothing
+else. There is no circulation-commanded signal. There never will be one while G-26
+stands.** The claim it inherited traces back through control-software-f004.md to
+S-09 as first written, and S-09 as first written came from the owner's original
+project description, which D-052 records verbatim as "That was loose." F-079.
+
+**This is the highest-priority item in the sweep and the reason is not severity, it
+is audience: it is an instruction to a PERSON standing at the tank with a
+stopwatch, not a claim in a document nobody executes.** C-23 governs the same
+measurement and says the operator is the only enforcement. Your file says something
+different, and the two are read by the same person on the same day.
+
+C-02's row now carries a flag pointing here. **Rewrite the procedure so the
+condition is what the operator can actually verify** - look at the pump, confirm it
+is running, confirm it will still be running at the end of the window - **and not a
+signal state. Nothing else in the procedure is in question.**
+
+Write in ONE pass at the end.

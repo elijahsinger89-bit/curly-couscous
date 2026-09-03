@@ -73,12 +73,12 @@ changed reports to BOSS and does not act.
 | G-33 | **THE SEED, THE CAPACITY AND THE POURED VOLUME ARE THREE DIFFERENT QUANTITIES AND ARE NEVER ONE COLUMN.** A seed is what a file had to contain. A capacity is what a vessel holds. A poured volume is what the arithmetic runs on. **None of the three was the same number and all three were one column** | Frozen 2026-09-02, the standing shape rather than a local fix. See T-018 and D-086 |
 | G-34 | **WHERE A RULE CAN BE WRITTEN AGAINST A ROLE RATHER THAN AGAINST A DIMENSION, IT SHOULD BE.** A rule keyed to what a thing IS outlives a rule keyed to how big it is | Frozen 2026-09-02. Established by what survived the seed retraction: everything keyed to volume fell, everything keyed to role stood |
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
-| G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023 |
+| G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
-| G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design** |
+| G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design**. **ANNOTATED 2026-09-03, D-103: THE RULE STANDS AND THE DISSOLUTION CLAIM DOES NOT HOLD FOR DIR.** D-096 reversed the convergence - severed goes HIGH by the board, shorted to a return-paired neighbour goes LOW - so F-033's limit is live again on that signal. BOSS annotated D-069, D-095 and F-053 with that reversal and MISSED this row and D-061. **G-29 is a construction rule and is still correct. What is withdrawn is that DIR satisfies it for free** |
 | G-26 | **THE PANEL RUNS WITHOUT THE PI.** Fills, transfer, circulation and chiller all operate on float and interlock logic with no computer involved. **The Pi adds dosing and removes driver power. If it dies, the water system keeps running and only dosing stops** | Frozen 2026-08-30, D-052. Deliberate, and recorded as a property rather than left to be rediscovered |
 | G-27 | **A COMPLEMENTARY PAIR IS A FAIL-DETECT, and the construction rule is: BOTH LEGS AT THE SAME POTENTIAL, ON THE SAME CABLE.** Then a severed conductor makes them contradict, and **any state where both agree is a broken sense path** | Frozen 2026-08-30, D-053. Free wherever two legs of one changeover are already bought. It converts a fail-safe into a fail-detected, which is T-012's rule arriving in hardware |
 | G-28 | **RELAYS ARE NOT INTERCHANGEABLE ONCE BOUGHT. Which relay goes in which socket is a BUILD FACT, labelled BY NAME and never by position** | Frozen 2026-08-30, D-054. Dry-circuit duty and receptacle duty want different contact materials, and using a dry-circuit contact at high current destroys the property it was bought for. T-013 |
@@ -775,6 +775,14 @@ So the S-05 fork now costs a device as well as a capability: flow-proving means 
 timing element is definite and circulation verification stays possible; level-based
 means no timing element and **circulation verification is foreclosed permanently.**
 
+**SUPERSEDED IN PART 2026-09-03 BY D-103. THAT LAST CLAUSE OVERSTATES, AND IT IS THE WORST INSTANCE IN THE FILE.** S-05's frozen row says a level element forecloses THE SHARED SOLUTION - that this element cannot subsume circulation verification. **D-060 escalated that to circulation verification being foreclosed PERMANENTLY, which is a claim about every route rather than about one element.** Three things on the table would change it:
+
+- **F-003 is separately assigned** by D-016 to WATER with MAIN-PANEL at the other end, and S-05's own row says S-05 must not be answered before F-003 is.
+- **C-12's W-1 transient**, which C-12 itself calls the only F-003 option that costs nothing and adds nothing.
+- **S-20 exists on EITHER fork**, because circulation is a pole on K-DRY under D-058, so the Pi can read whether the pump was energised regardless of how S-05 resolves.
+
+**Declining to pay makes it true retroactively, and this is the strongest form of it in the tree: D-060 is the entry that F-074, D-101 and C-23's correction all cite as the authority for saying the door is open.** T-023's mechanism running on T-023's own cited source.
+
 And an operational consequence to make visible rather than discovered: **a latched
 dry-run trip now stops circulation until a human presses RESET, and the Pi cannot
 restart it.** It can log and alert, since it never loses power, but it cannot
@@ -782,6 +790,8 @@ recover. Consistent with G-26's philosophy.
 
 **D-061 The DIR question is answered, and D-055's thesis is proved: it was a routing
 question.** G-29 frozen.
+
+**ANNOTATED 2026-09-03 BY D-103, AND IT SHOULD HAVE BEEN ANNOTATED THE SAME MORNING.** D-096 reversed the DIR convergence and F-072 records that G-29's severed-versus-shorted convergence is BROKEN AGAIN on this signal. **So "the DIR question is answered" is no longer true, and "F-033's limit is dissolved" is no longer true for DIR.** BOSS annotated D-069, D-095 and F-053 and missed this entry and G-29's own row. **This one has a clock on it: D-062 is a gate before the S-10 cable is bought and before any resistor is fitted, and D-043's pull-down is now load-bearing for the level per F-072. An unannotated entry saying the question is answered is exactly what gets read by whoever buys the cable.**
 
 **Segment 5 is good news and it is fixed by the board.** At the driver terminal
 block DIR's two physical neighbours are STEP and EN, **and neither is an energised
@@ -1531,6 +1541,15 @@ datasheet; neither can this. **No agent may build a permissive-drop detection on
 DIAG on the strength of the word "diagnostic".** C-18 is now the only route, and
 C-18 already carries the ruling that running it IS the decision.
 
+**CORRECTED 2026-09-03 BY D-103, HOURS AFTER IT WAS WRITTEN, AND IT IS D-101 ITEM 2's SHAPE LANDING ON BOSS'S OWN NEXT ENTRY.** Two different questions were run together in one sentence:
+
+| Question | Grade |
+|---|---|
+| What a driver DOES with VM absent while VCC_IO is live | **STRUCTURAL** as far as documentation goes, per D-070, and C-18 is the only route |
+| Whether the Pi can KNOW the permissive dropped | **CURRENT, and already answered.** S-08 is pole 2 of the 22.32 whose pole 1 carries the 24 V rail to both pump boxes, wetted from 24 V and reported to the Pi, with contact open reading as a drop |
+
+**So C-18 is the only route to the FIRST question and never was the only route to the second.** What stands unchanged: DIAG is not a specified detector for VM absent, uv_cp and VUV_VS are different things, and no agent may build detection on the word "diagnostic".
+
 **D-098 THE PI 5 PAD DEFAULTS ARE RECORDED, WITH THEIR PROVENANCE, AND THE
 EXTERNAL PULL IS AUTHORITATIVE.** In parts.md. GPIO0-8 come up pulled UP, GPIO9-27
 pulled DOWN, pad pull about 50 k. **GPIO2 and GPIO3 are held strongly high by
@@ -1683,3 +1702,159 @@ instances.**
 **T-023 is exported to the parallel build at the owner's instruction.** Recorded
 here because an export is a fact about the trap, and because the parallel build has
 had three traps come the other way.
+
+**D-103 THE GRADING RUN AGAINST decisions.md IS ACCEPTED. THE FROZEN FILE GRADES
+WORSE THAN THE DOCUMENT DID, WHICH IS WHAT THE OWNER PREDICTED.**
+audit/2026-09-03-decisions-impossibility-grading.md.
+
+| | Count |
+|---|---|
+| Claims graded | 60 |
+| STRUCTURAL | 37 |
+| CURRENT | 19 |
+| MIXED, two grades in one sentence | 4 |
+| Could not be settled from the tree | 6 |
+| **FLAGGED: would stop a purchase, a measurement or a capability** | **8** |
+| **Of those, SELF-FULFILLING if declined** | **4** |
+
+**Seven entries grade themselves correctly in place** - D-014, G-06's reason
+column, D-070, D-074, D-085, D-091 and D-102. Recorded because it shows the
+standard was already being practised here before it was a rule, so G-36 is a
+promotion rather than an import.
+
+**THE FOUR THAT MAKE THEMSELVES TRUE IF DECLINED.** These are the ones the G-36
+amendment exists for.
+
+**1. D-060, and it is the worst thing in the file.** Annotated above.
+"Circulation verification is foreclosed permanently" overstates S-05's own row,
+which says a level element forecloses the SHARED SOLUTION. **D-060 is the entry
+BOSS cited this morning as the authority for reversing document 12's structural
+claim. The authority overstates in the same direction as the claim it was used to
+correct.** F-076.
+
+**2. D-061, and this one has a clock.** Annotated above. D-096 reversed the DIR
+convergence and BOSS annotated D-069, D-095 and F-053 and **missed D-061 and
+G-29's own row** - the two entries that say the question is answered. D-062 gates
+the S-10 cable purchase and D-043's pull-down is now load-bearing for the level.
+**An entry saying "the DIR question is answered" is exactly what gets read by
+whoever buys the cable.** T-020's form.
+
+**3. D-084's residual: "NOTHING WILL DETECT THAT AT ASSIGNMENT TIME."** In the
+owner's words, so it is not reversed here, it is put back to him. **D-077 makes
+assignment time BE commissioning, and C-09 is a commissioning row that already
+confirms which product is on which channel by eye, first in the order, free, jugs
+in hand.** So there is a detection opportunity: one question added to C-09's
+script - is this product an acid, a base, or a salt solution. That is the whole
+test, and the three duty classes D-084 specifies against are exactly its three
+answers. F-077. **Routed to DOSING, which owns the carrier, and to the owner,
+because the sentence is his.**
+
+**4. D-013 and S-17, fulvic.** The DECISION is structural and stays: the owner
+froze it, twice, and said not to bring O-19 back unless something changes. **What
+is flagged is the PREMISE, "it moves neither EC nor pH meaningfully", for which
+AUDIT searched D-013, S-17, C-03, C-04, C-08 and F-001 and found no measurement
+named.** And the loop closes on itself: **C-04 is scoped "per EC-moving channel",
+so the assumption excludes the channel from the test that would check it.** F-078.
+The decision is not reopened. The premise is marked as unmeasured, which is all
+G-36 asks.
+
+**THE OTHER FOUR FLAGS, expensive but RECOVERABLE**, in AUDIT's order: D-097,
+corrected above; D-095's two surviving structural items, which are structural by
+RULE - G-04 and G-05 - and not by physics, and one of which document 12 itself
+grades as current at 11.16; D-064's chiller tagging, bounded because the owner
+measures C-02 and C-08 by hand and can record chiller state by looking; and
+D-049 with G-22, true for a single two-state line and softened by G-27 the very
+next entry, which D-053 calls free wherever both changeover legs are already
+bought. **Soft deadline at the order.**
+
+**G-36 IS AMENDED, above, and the amendment is what this run bought.** A current
+claim now also says whether declining to pay makes it true. AUDIT's closing
+observation is the reason: the tree had no marking distinguishing an expensive
+recoverable claim from a self-fulfilling one, and G-36 as first frozen did not
+require one.
+
+**ROUTED:**
+
+| To | What |
+|---|---|
+| WATER, and to the owner | **D-060.** S-05's fork was described in the frozen file as closing a door that F-003, C-12 and S-20 all leave open. Second time in one day that S-05 has been found carrying a cost it was not told about, and this time the overstatement is in decisions.md rather than in a document |
+| PUMP-BOXES | D-061 and G-29's row are now annotated. Nothing changes in what was already routed by D-096; this removes the two entries that contradicted it |
+| DOSING, and to the owner | **D-084.** One question at C-09 tests all three duty classes. The sentence is the owner's, so DOSING returns whether the question is sufficient, not whether the residual is accepted |
+| CONTROL-SOFTWARE | D-095's surviving structural items are structural by rule and not by physics, and 11.16 is its own model for how to say so |
+
+**Not routed:** the six AUDIT could not settle from the tree. They are listed in
+the audit file with what it read to try, and they stay there until something
+arrives that would settle them. **BOSS states no grade for any of the six.**
+
+**D-104 THE SECOND-SOURCE SWEEP IS ACCEPTED AND IT ANSWERS THE OWNER'S QUESTION
+WITH A NUMBER INSTEAD OF A RECOLLECTION.** audit/2026-09-03-second-source-sweep.md.
+33 files read in full, 42 cross-file citation chains followed to a terminus.
+
+| Classification | Count |
+|---|---|
+| CONFIRMED second-source illusion | 6 |
+| SUSPECTED | 2 |
+| CLEAN-BUT-FRAGILE | 3 |
+
+**So the answer to "does anything else in the tree have that shape" is YES, six
+times, and F-074 was not the exception.**
+
+**THE WORST, AND IT REACHES A COMMISSIONING PROCEDURE. "The Pi commands the
+circulation relay."** F-079.
+
+subsystems/control-software-f004.md cites S-09 for it. **S-09 as first written came
+from the owner's original project description, which D-052 records verbatim as
+"That was loose."** So the chain terminates in a description rather than an origin,
+and F-027, D-052 and G-26 killed the claim on 2026-08-30.
+
+**It is still live in five files, and F-070 covers exactly one of them.** The three
+unflagged instances are control-software-f004.md, control-software-p09.md step 6
+"commanded circulation and chiller states alongside", and control-software.md's own
+"Settled" bullet.
+
+**The bite, and it is why this is F-074's class and not a documentation defect:
+subsystems/dosing-f004-wet-side.md tells the reader the settling timer must be
+gated on the circulation pump being COMMANDED ON. That file is named in
+commissioning.md as C-02's full procedure.** The person running C-02 is told to
+gate on a signal that does not exist and cannot exist under G-26. **C-23 already
+says the operator is the only enforcement; the procedure C-23 governs says
+something different.**
+
+**THE OTHER FIVE CONFIRMED:**
+
+| | Claim | Terminus | Verdict |
+|---|---|---|---|
+| 2 | The VDD-to-VM adjacency, in F-031, D-061 and display-box-short-column.md | Each other | **F-051 already says the terminal is a circled plus and minus and not VM.** Documentation defect around a claim whose true form is recorded |
+| 3 | **"CH5 and CH6 are the pH pair"** | **CH5 has a real origin in the controller config, per D-086. CH6's runs through a RETRACTED SEED** | **UNSETTLED, and D-099 is frozen on it.** Six files state it flat; only channel-register.md's header and software-spec.md 3.2 mark it as an inference |
+| 4 | "Auxiliary contact", for what D-029 established is a 25 A power pole | Five files plus parts.md | **F-051's shape again: a part named by a name not on it.** Not renamed silently, per F-051's own standing instruction |
+| 5 | commissioning.md instructing chiller-state tagging three times, per D-027 | D-027, whose mechanism G-26 removed | **D-064 says it cannot be done as written, and D-103 grades that CURRENT: S-18's row names a Pi READ as the first exit.** The instruction may survive; its mechanism has no source |
+| 6 | The Vref "before any power is applied" instruction, in pump-boxes.md | Copied past its own correction | **C-22 already records that the instruction is unexecutable.** The corrected form did not propagate to the copy |
+
+**D-099 IS NOT REOPENED AND ONE GATE IS ADDED, which costs nothing.** The colour
+map stands. **But its hardest constraint is CH5 and CH6 maximally separated, and
+CH6's claim to be the second pH channel rests on a seed that T-018 and D-086
+retracted.** Nothing binds a token to a product before C-09.
+
+**So: THE CHANNEL MARKERS ARE NOT MADE UNTIL C-09 HAS BOUND TOKENS TO PRODUCTS.**
+Before C-09 that is free. After the markers exist it is eight relabels. Nothing
+required them to be made early, and rule 5 covers a change that costs nothing and
+prevents a wrong build. **If C-09 confirms the pair, the map is unchanged and the
+gate cost nothing.**
+
+**AND THE RUN NUMBERING IS DROPPED.** Two parallel runs both called themselves
+"AUDIT run 4". **The sweep recognised it as F-026's shape - a namespace collision
+between two things that never met - and declined to take a number rather than
+guessing one.** That is the right instinct and it becomes the rule: **audit runs
+are identified by date and topic, which the filenames already carry, and never by
+an ordinal.** An ordinal assigned by whoever finished first is not an identifier.
+
+**ROUTED:**
+
+| To | What |
+|---|---|
+| **DOSING, and it is gated to C-02** | **dosing-f004-wet-side.md is C-02's named procedure and it gates the settling timer on circulation-commanded-on, which does not exist under G-26.** Highest priority of anything in this sweep because it is an instruction to a person, not a claim in a document |
+| CONTROL-SOFTWARE | The three unflagged instances in its own files, which F-070 does not cover. And confirmed 5: whether chiller tagging survives on S-18's Pi-read exit, per D-103 |
+| PUMP-BOXES | Confirmed 6. The Vref instruction in pump-boxes.md was copied past the correction C-22 records |
+| The owner | **Confirmed 4.** "Auxiliary contact" for a 25 A power pole is in parts.md, which is AUTHORITATIVE under D-026. **F-051 says such a thing is not renamed silently, so BOSS has not touched it** |
+| Nobody yet | The 2 SUSPECTED and 3 CLEAN-BUT-FRAGILE are in the audit file. **CLEAN-BUT-FRAGILE means correctly sourced today but only one file carries the origin, so if it moved nothing would flag the copies. That is a watch item, not a defect** |
+
