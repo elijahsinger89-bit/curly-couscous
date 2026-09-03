@@ -75,6 +75,7 @@ changed reports to BOSS and does not act.
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
+| G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -1761,8 +1762,7 @@ G-36 asks.
 **THE OTHER FOUR FLAGS, expensive but RECOVERABLE**, in AUDIT's order: D-097,
 corrected above; D-095's two surviving structural items, which are structural by
 RULE - G-04 and G-05 - and not by physics, and one of which document 12 itself
-grades as current at 11.16; D-064's chiller tagging, bounded because the owner
-measures C-02 and C-08 by hand and can record chiller state by looking; and
+grades as current at 11.16; D-064's chiller tagging - **REGRADED 2026-09-03 by D-108: the CURRENT grade rested on S-18's Pi-read exit, and there is no chiller contactor to read, so the claim is STRUCTURAL. The requirement survives anyway because the owner records chiller state by LOOKING** - and
 D-049 with G-22, true for a single two-state line and softened by G-27 the very
 next entry, which D-053 calls free wherever both changeover legs are already
 bought. **Soft deadline at the order.**
@@ -1932,4 +1932,160 @@ measurement is named for that anywhere, and C-04 is scoped "per EC-moving channe
 - so the assumption removes the channel from the only measurement that could
 falsify it.** F-078. **A premise nobody measured, protected from measurement by
 itself.**
+
+## 2026-09-03, later. The owner's four answers.
+
+**D-108 THE CHILLER IS ENTIRELY SELF-CONTAINED. F-044 CLOSES, AND WHAT IT FORCES
+IS A SEPARATE OPEN ITEM UNDER G-35.**
+
+It plugs in, it senses its own water with its own built-in sensor, and it cycles
+its own compressor. **Nothing in the panel energises a chiller contactor coil,
+because there is no chiller contactor to energise.** The one state in the panel
+whose driver was unaccounted for was unaccounted for because it does not exist.
+
+**CONSEQUENCE 1, and it is the big one: the Pi's day tank temperature reading is
+for the DOSE, not for control.** It compensates the pH and EC measurements. **It is
+not a control input to anything** and no subsystem may treat it as one.
+
+**CONSEQUENCE 2: THE SAMPLE-TAGGING CHAIN IS DEAD AS DESIGNED, AND IT DIES ONE
+LEVEL DEEPER THAN D-064 THOUGHT.** D-027 replaced the chiller hold-off with
+sample tagging. Its mechanism was "the Pi commands the contactor, so it knows".
+G-26 removed that, D-059 reopened S-18, and D-064 said it could not be implemented
+as written. **S-18's first way out was for the Pi to READ a contact on the chiller
+contactor, needing a spare pole on the 22.32. There is no chiller contactor, so
+there is no contact and no pole. That exit is gone, not merely unbuilt.** D-103
+graded D-064's claim as CURRENT on the strength of that exit. **THAT GRADE IS NOW
+WRONG AND THE CLAIM IS STRUCTURAL: the Pi cannot know the chiller's state because
+nothing in the system is wired to the chiller at all.**
+
+What survives, and it is enough: **the owner measures C-02 and C-08 by hand and
+can record chiller state by LOOKING.** D-027's requirement was that chiller state
+be recorded against every sample, not that software record it. **The requirement
+stands and its mechanism is a human eye.** C-02 and C-08 already say "recorded
+against every sample"; nothing there needs changing.
+
+**CONSEQUENCE 3, AND IT IS AN OPEN ITEM, NOT AN ANSWER. G-12 IS A FROZEN RULE AND
+IT SAYS: "The chiller and its loop pump are switched together by one contactor on
+their own circuit", with the reason "The chiller has no internal pump."**
+
+**If there is no contactor, nothing on file switches the LOOP PUMP.** The chiller
+controlling itself says nothing about what moves water through it. **This is G-35
+exactly: F-044 answered NO, and what the NO forces is a separate open item with
+its own ID.** F-086. **BOSS is not deciding whether G-12 is wrong, whether the
+loop pump is on its own switch, whether it runs continuously, or whether the
+chiller in fact has a pump. That is the owner's and it is one question.**
+
+**D-109 ALL PVC IS 3/4 INCH SCHEDULE 80.** Owner's answer. **The manifold diameter
+is 3/4 in and the port arrangement is downstream of it.**
+
+**Schedule 80, not 40**, so wall thickness and inside diameter differ from the
+common case **and any threaded port is into a thicker wall.** Recorded here rather
+than reasoned about: **no agent derives a port count, a spacing, a thread depth or
+a pressure drop from this.** It is one dimension and a schedule, and what follows
+from it is WATER's and DOSING's to return with search terms.
+
+**D-110 THE ENCLOSURE IS IP65 FOR ALL INTENTS AND PURPOSES. F-025 CLOSES AT THAT
+LEVEL, AND THE DESIGN-TO-SHED PRINCIPLE IS KEPT ANYWAY.**
+
+The owner's reasoning, recorded because it is the part that outlives the rating:
+**five upward-facing holes and four cord caps mean the ASSEMBLY's rating is set by
+its worst penetration, regardless of what the box is rated.** So the box being
+IP65 closes the question of the box and does not close the question of the top
+face. **D-047's treatment of the top face as needing gasketed devices stands
+unchanged, and the requirement for each 22 mm device's rating IN THAT ORIENTATION
+is still live.** F-025 is closed on the enclosure and its top-face half is
+re-filed as its own item rather than carried inside a closed finding. G-35.
+
+**D-111 THE FILL VALVE IS A MOTORIZED BALL VALVE, NOT A SOLENOID, AND THE
+DIFFERENCE IS A FAIL-STATE DIFFERENCE.** The owner confirms it was missing and
+names the distinction: **a solenoid is energise-to-open and springs closed on power
+loss. A motorized ball valve drives open and drives closed, holds position without
+power, and takes seconds rather than milliseconds.**
+
+**NOTHING IS CHOSEN AND BOSS NAMES NO PART.** The requirement and the search terms
+are in findings.md under F-087. **Four things must come back from the datasheet
+before any subsystem designs around this valve, and the first is the one that
+touches a frozen rule:**
+
+| | What must be known | Why it is not a detail |
+|---|---|---|
+| 1 | **What it does on power loss** | Most stay where they are. **That is a different fail state from a solenoid and it means A FILL CAN BE LEFT OPEN BY A POWER FAILURE unless the valve is spring-return.** G-22 asks what a severed conductor does; this asks what a dead PANEL does, and no row in the tree asks that of an actuator |
+| 2 | How it is driven | Two-wire, three-wire and five-wire types exist and need **different relay arrangements**. Some need a MAINTAINED signal, some a PULSE. The relay count and the contact arrangement both depend on the answer, so **the order cannot be finalised without it** |
+| 3 | Whether it reports position | Many have auxiliary limit switches. **If this one does, that is a signal the panel could read and NOBODY HAS CONSIDERED IT.** It would be the only direct confirmation in the water path that a commanded thing actually moved |
+| 4 | Travel time | **It is not instant.** Anything assuming a fill starts or stops promptly needs the number, and the float logic is the first thing to check against it |
+
+**Item 1 is raised to the owner as a hazard question and not as a lookup**, because
+a fill left open by a power failure is a flood, and the answer decides whether that
+is a purchasing constraint rather than a wiring one.
+
+**D-112 THE ROLE REACH SWEEP IS ACCEPTED. EIGHT PLACES BEYOND THE OWNER'S FOUR, AND
+NOTHING IS BUILT AGAINST D-105 UNTIL THE FIVE BREAKS ARE ANSWERED.**
+audit/2026-09-03-role-reach-sweep.md. 41 items: **5 BREAK, 24 REQUIRE CHANGE, 8
+DISSOLVE, 4 SURVIVE unchanged.**
+
+**The owner's four were right and they were not the whole list.** The five breaks
+are one family and F-081 is the sharpest: **C-03 and C-04 are role-dependent
+recorded data with no re-measure trigger for a role change**, while the voiding
+mechanism sits in the same document and is applied to C-01 on a driver or tube
+change. **Applied to the figure whose wrongness is loud, not to the one whose
+wrongness makes the check confirm the error.**
+
+**THE POST-C-09 GAP IS REAL AND IT IS A SCHEDULING GAP, NOT A CAPABILITY GAP.**
+C-09's new question (b) is a sufficient TEST and catches a wrong role whenever it
+runs. **Nothing schedules it.** Three separate absences: **no trigger** - no file
+names a role change as an event, not channel-token.md's four change cases, not the
+eleven re-measure trigger rows, not software-spec.md 3.4's OUT OF SERVICE causes;
+**no invalidation** - C-03 is not voided the way C-01 is; **and no detection** -
+under G-32 as amended the signed check scores a wrong-role dose as PASS, because
+the prediction moved with the error. **BOSS designs no mechanism. The gap is
+stated and routed.**
+
+**What did NOT reach, and it is worth as much as what did: nothing physical is
+keyed to the pH pair being adjacent.** No cable core, insulation colour, duct,
+gland or wall position, across twelve files named in the sweep. **And no frozen
+interface row keys behaviour to a channel number** - S-15, S-16, S-17 and S-19 all
+check clean. **So D-105 is a software and commissioning change, not a hardware
+one**, which is why it can be taken this late without cost.
+
+The other six: F-083, G-34's printed reason now false; F-084, "the fulvic channel"
+against a role set fulvic is not in; F-085, six count-as-property claims; where
+role definitionally LIVES, the register under D-057 or the controller's
+blocked-channels path that no file in this tree shows; the acid-and-base physical
+items that follow the assignment while the stations are fixed; and **"opposing" is
+now a TIME-VARYING SET while an open window records which CHANNEL, not the role it
+was opened under.**
+
+**D-113 THE CH6 DEPENDENCY TRACE IS ACCEPTED. F-063 TRULY DISSOLVES, AND THE ONE
+THING THAT SURVIVES IT SHOULD NOT.** audit/2026-09-03-ch6-dependency-trace.md. 63
+items graded. **PAIR-IS-pH 25, PAIR-IS-ADJACENT 6, IDENTITY-OF-CH6 14, none of the
+three 18. SURVIVES 25, NEVER-ABOUT-CH6 18, MUST-BE-REWRITTEN 13, DISSOLVES 7.**
+
+**F-063 was TESTED claim by claim rather than assumed to dissolve**, and it is four
+claims: the non-adjacency rule was never F-063's and traces cleanly to S-16; the
+pair being CH5 and CH6 and adjacent dissolves; the 1000 mL compounding was already
+withdrawn as F-071; and "not fixable by renumbering" has its premise removed,
+because renumbering was only the sole fix while the pair was fixed to numbers.
+**No residual smaller version. It dissolves.**
+
+**WHAT SURVIVES THAT SHOULD NOT: D-099's frozen colour binding. F-082, and the
+constraint has REVERSED DIRECTION.** Colour is bound to token and frozen. Role is
+free at assignment. **So the frozen colour map now constrains WHICH TOKEN PAIRS MAY
+BE GIVEN THE pH ROLES, and nobody has written that set out** - which
+channel-token.md forbidden item 4 requires, since a set may not be computed. **And
+the owner's carrier-availability lookup is still owed; the proposal says a reduced
+palette protects the CH5-CH6 binding first, which would spend the strongest
+separation on a pair that no longer means anything.**
+
+**Nothing needs CH6 specifically going forward.** All 14 identity items dissolve or
+rename to a role. **Nothing has been bought against it** - order.md and parts.md
+carry no channel marker, colour or label line, checked. So the only cost of D-099
+having been frozen on CH6 is a commitment, not a purchase.
+
+**AND THE TRACE CAUGHT A SECOND-ORDER THING WORTH THE RUN ON ITS OWN: F-064 WAS
+NEVER ABOUT CH6.** It is a reading of the Position axis, volume-independent and
+role-independent, and it sits next to F-063 in the file. **D-088 and T-022 fought
+once to keep it separate from F-071. D-105 is the second occasion that separation
+paid.** Applying F-063's dissolution to everything filed near it would have lost
+D-085's free half a second time. **Proximity in a file is not a dependency, and
+this tree has now twice tried to treat it as one.**
 

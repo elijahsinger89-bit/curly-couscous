@@ -158,3 +158,50 @@ What is asked of you, and only this: **when S-05 does come back, decide it again
 D-060's real price - one timing element for the flow-proving fork - and against
 what F-003 and C-12 and S-20 actually leave open.** Not against a foreclosure that
 was written more strongly than your own row supports. T-023.
+
+## THREE ANSWERS AND ONE NEW OPEN ITEM, 2026-09-03. D-108 THROUGH D-111.
+
+**1. THE CHILLER IS ENTIRELY SELF-CONTAINED, D-108.** It plugs in, senses its own
+water with its own built-in sensor, and cycles its own compressor. **F-044 closes:
+there is no chiller contactor.**
+
+**The Pi's day tank temperature reading is for the DOSE, not for control.** It
+compensates pH and EC. **It is not a control input to anything.**
+
+**2. AND THAT FORCES YOUR NEW ITEM, F-086.** G-12 is frozen and says the chiller
+and its LOOP PUMP are switched together by one contactor, with the reason "the
+chiller has no internal pump". **No contactor means nothing on file switches the
+loop pump.** The chiller controlling itself says nothing about what moves water
+through it.
+
+**BOSS has not chosen between the four possibilities and neither should you: G-12
+wrong about the internal pump, the loop pump on its own switch nobody recorded, it
+runs continuously, or it is on the chiller's own cord.** It is one question and it
+is with the owner. **Do not design around any of the four.**
+
+**3. ALL PVC IS 3/4 INCH SCHEDULE 80, D-109.** That is the manifold diameter and
+**the port arrangement is downstream of it. Schedule 80, not 40**, so wall
+thickness and inside diameter differ from the common case and **any threaded port
+is into a thicker wall.**
+
+**Derive nothing from it and return search terms instead.** What follows - port
+count, spacing, thread engagement, pressure drop, and whether C-10's catch-and-time
+method is affected by the bore - is yours to ask for, not to compute. **One
+dimension and a schedule is not a hydraulic model.**
+
+**4. THE FILL VALVE IS A MOTORIZED BALL VALVE, NOT A SOLENOID, D-111 and F-087.**
+The owner confirms it was missing.
+
+**It drives open and drives closed, HOLDS POSITION WITHOUT POWER, and takes seconds
+rather than milliseconds.** A solenoid springs closed on power loss. This does not.
+
+**The item that touches you first is TRAVEL TIME: anything in your fill or transfer
+logic that assumes a fill starts or stops promptly needs that number, and the float
+bands are the first thing to check against it.** A valve that takes seconds to
+close changes what a float's switching point means in litres.
+
+**And the one nobody has considered: many of these carry auxiliary limit switches.
+If this one does, it is a POSITION signal the panel could read - the only direct
+confirmation anywhere in the water path that a commanded thing actually moved.**
+Say whether you would use it and for what, so the owner's lookup knows whether to
+treat it as a requirement or a bonus. **Name no part.**

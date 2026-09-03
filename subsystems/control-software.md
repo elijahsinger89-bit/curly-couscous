@@ -320,3 +320,52 @@ the role and not only the product.
   direction.
 
 Write in ONE pass at the end, and not before the reach sweep reports.
+
+## THE REACH SWEEP REPORTED, D-112. FIVE BREAKS. START HERE, NOT AT THE OWNER'S FOUR.
+
+audit/2026-09-03-role-reach-sweep.md. 41 items: 5 BREAK, 24 REQUIRE CHANGE, 8
+DISSOLVE, 4 SURVIVE. **The owner's four were right and were not the whole list.**
+
+**THE SHARPEST, F-081, and it is in your own document.** C-03's signed pH step and
+C-04's EC step are **role-dependent recorded data with no re-measure trigger for a
+role change.** Your 2.1.8 and 2.1.9 already void C-01 on a driver change or a tube
+change. **The mechanism exists and is applied to the figure whose wrongness is
+LOUD, not to the one whose wrongness makes the check CONFIRM the error.**
+
+**THE POST-C-09 GAP, and it is a SCHEDULING gap rather than a capability one.**
+C-09's new question (b) is a sufficient test whenever it runs. Nothing schedules
+it. Three absences, and they need three different answers:
+
+| | Absence |
+|---|---|
+| No trigger | **A role change is not a case in ANY change procedure** - not channel-token.md's four cases, not the eleven re-measure trigger rows, not your 3.4 OUT OF SERVICE causes. **It lands on top of F-075, already open with D-102's deadline** |
+| No invalidation | C-03 is not voided the way C-01 is |
+| No detection | **Under G-32 as amended the signed check scores a wrong-role dose as PASS**, because the prediction moved with the error |
+
+**BOSS has designed no mechanism and will not.** Return one.
+
+**Four more from the sweep that are yours:**
+
+- **F-085.** Section 12's "attribution for six of the eight channels" is a COUNT
+  WRITTEN AS A PROPERTY and it is graded structurally impossible. Under D-105 the
+  count is a consequence of assignment, so it is CURRENT. **G-38 is frozen out of
+  this: a grade is only true against the tree it was graded on. Five more
+  count-as-property claims are listed in the sweep.**
+- **F-084.** "The fulvic channel" is a fixed identity in four files and **fulvic is
+  not a value in D-105's role set.** Do not add a role value - fulvic is a PRODUCT.
+  **The question is where product-specific behaviour lives now that role is its own
+  field, and the owner is settling the role vocabulary. Wait for it.**
+- **"Opposing" is now a TIME-VARYING SET.** An open window records which CHANNEL,
+  not the role it was opened under. G-16a forbids offering the opposing channel;
+  that set can change while a window is open.
+- **Where role definitionally LIVES**: the register under D-057, or the
+  controller's blocked-channels path, which no file in this tree shows. **Two homes
+  for the field the signed check reads is one too many.**
+
+**And F-082, which is yours because channel-token.md is yours.** The colour
+constraint has REVERSED DIRECTION: colour is bound to token and frozen, role is
+free at assignment, **so the frozen colour map now constrains WHICH TOKEN PAIRS MAY
+TAKE THE pH ROLES. Forbidden item 4 requires that set be written out, not
+computed.** Enumerate it.
+
+Write in ONE pass at the end.
