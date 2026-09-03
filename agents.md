@@ -36,6 +36,36 @@ no subsystem, and picks no parts.
 8. Assert nothing from absence. "There is no X" requires having looked and
    naming what you read. Otherwise say you have not checked.
 9. Nothing may be built against an OPEN row in interface-table.md.
+10. **NAME THE GRADE OF EVERY IMPOSSIBILITY, per G-36.** STRUCTURAL means it
+    follows from a frozen rule or from physics and no addition could change it.
+    CURRENT means it follows from what has been bought, wired or decided so far,
+    and **a current claim must NAME WHAT WOULD CHANGE IT.** If you cannot name
+    what would change it, you have not established that nothing would. An
+    unqualified "impossible" is a claim nobody can check.
+11. **A CITATION IS NOT A SOURCE.** Cite the frozen row, not the document that
+    quotes it. Two files where one cites the other and neither cites the source
+    is a second-source illusion, and it reads as corroboration. G-37.
+
+### The one worth saying out loud to all of you
+
+**PUMP-BOXES was asked for the DIR level and refused to state one.** It named the
+exact three numbers that would settle it - the internal pull-down value, the LED
+forward voltage, and the threshold - and stopped. F-059.
+
+The owner's lookup came back and **the answer was the OPPOSITE of what the tree
+had recorded.** A floating DIR floats HIGH.
+
+**The correction cost one line.** D-069's closing sentence, and two resolution
+cells. Nothing built on it had to be torn out, because nothing had been built on a
+guess. **The agent that got it right got it right by declining to guess.**
+
+Compare what a guess costs. F-074: an impossibility asserted without being
+established, banked in a decision, copied into a commissioning row citing the
+document that asserted it, and it would have foreclosed the S-05 fork by removing
+the reason to pay for it. Same tree, same week, opposite outcome.
+
+**Refusing to answer is a real answer when you name what would let you answer.**
+Rule 3 is usually read as a rule about part numbers. It is not. It is this.
 
 ## AUDIT
 

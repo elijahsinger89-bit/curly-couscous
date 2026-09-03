@@ -251,3 +251,32 @@ permissive faults and N-14 all run on the contact F-055 is about.
 
 Write the correction in ONE pass at the end, per the invocation rule. State no
 value, no pin and no part number from memory.
+
+## F-075 HAS A DEADLINE NOW, D-102. IT DOES NOT WAIT BEHIND THE REST.
+
+Pulled out from behind the audit backlog at the owner's instruction. **Settle it
+before C-01 is ever run.**
+
+The defect, again: **3.4 states how a channel enters OUT OF SERVICE and never how
+it leaves, and 5.2's admission check is a live token plus a non-void C-01 and C-17
+and does not include C-09.**
+
+**Why the deadline is C-01 specifically.** Before C-01 runs, a channel measured
+against the wrong channel is a mistake nobody has recorded. **After C-01 runs it is
+an entry in channel-register.md with a token, a date and a measurement procedure
+behind it, and nothing downstream can distinguish it from a correct one.** G-05
+then decrements that jug against it forever, and S-19 and D-022 both say this is
+the one failure that passes every other check in the system.
+
+C-01's preconditions in commissioning.md now carry the gate.
+
+Two things to return, and BOSS is not writing either:
+
+1. **The exit condition from OUT OF SERVICE.** A state with an entry and no exit is
+   the shape that gets exited by hand.
+2. **Whether C-09 joins the admission check**, and if it does not, what else
+   catches a driver replacement that voided C-01 for the wrong channel. C-09 is
+   free, needs no hardware and is already a re-measure trigger for any rewiring or
+   renumbering.
+
+Write in ONE pass at the end.

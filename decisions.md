@@ -74,6 +74,7 @@ changed reports to BOSS and does not act.
 | G-34 | **WHERE A RULE CAN BE WRITTEN AGAINST A ROLE RATHER THAN AGAINST A DIMENSION, IT SHOULD BE.** A rule keyed to what a thing IS outlives a rule keyed to how big it is | Frozen 2026-09-02. Established by what survived the seed retraction: everything keyed to volume fell, everything keyed to role stood |
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023 |
+| G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -1646,3 +1647,39 @@ observed exactly by a document that had every incentive to assert an absence.
 **Not routed and left as AUDIT filed it:** 1.11, where document 12 is AHEAD of
 channel-register.md on G-33. Reported by AUDIT because it runs the other way, which
 is the right instinct and is recorded here so it is not lost as a non-defect.
+
+**D-102 F-075 IS PULLED OUT FROM BEHIND THE GRADING AND GIVEN A DEADLINE. IT MUST
+BE SETTLED BEFORE C-01 IS EVER RUN.** Owner's instruction, and the reason is the
+deadline rather than the severity.
+
+The defect: **software-spec.md 3.4 states how a channel enters OUT OF SERVICE and
+never how it leaves, and 5.2's admission check is a live token plus a non-void
+C-01 and C-17 and does NOT include C-09.**
+
+**Why the deadline is C-01 and not later.** A channel readmitted on a C-01 that was
+measured against the wrong channel is the exact failure S-19 and D-022 both say
+passes every other check in the system. **Before C-01 runs, the wrong number does
+not exist. After C-01 runs, the wrong number is in channel-register.md and looks
+like data** - it has a token, a date and a measurement procedure behind it, and
+nothing downstream can tell it from a right one. G-05 then decrements a jug against
+it forever.
+
+**This is T-012's shape with a clock on it: correct until the data moves, with
+nothing to say when it stopped. The difference is that here the moment it stops
+being correct is a scheduled event we control, so it can be gated instead of
+discovered.**
+
+C-01's preconditions now carry the gate. **CONTROL-SOFTWARE owns the fix** - the
+exit condition from OUT OF SERVICE, and whether C-09 joins the admission check. It
+is a state with an entry and no exit, which is also the shape that gets exited by
+hand.
+
+**G-37 is frozen out of the same finding**, and BOSS is answering the owner's
+question about whether the shape appears elsewhere by looking rather than by
+recall. Routed to AUDIT as its own sweep, separate from the grading run. **Until
+that sweep reports, BOSS asserts nothing about whether the tree has other
+instances.**
+
+**T-023 is exported to the parallel build at the owner's instruction.** Recorded
+here because an export is a fact about the trap, and because the parallel build has
+had three traps come the other way.
