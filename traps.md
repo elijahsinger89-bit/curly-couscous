@@ -3,6 +3,41 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-026 The deciding property was not the first thing either of us looked at
+
+Hit on 2026-09-03, by the owner, on his own part choice, and caught by him within
+one exchange.
+
+He named the fill valve a motorized ball valve, reasoned about it for a paragraph -
+wiring types, travel time, position feedback, four consequences to work through -
+and then withdrew it. **The deciding property was the fail state, and it was not
+what either of us examined first.**
+
+**A motorized ball valve holds position with no power. On a valve that fills a
+tank, hold-last is a flood.** Nothing in the paragraph of consequences reached
+that; the paragraph was about how to drive it and how to read it.
+
+**Why this is a trap and not just a correction.** The properties that are easy to
+reason about are the ones with numbers and options: voltage, wire count, travel
+time, feedback contacts. **The fail state has no options. It is one word, it is
+often not on the front page of a datasheet, and it does not generate any
+interesting design work - which is exactly why the reasoning went elsewhere
+first.** An hour of good thinking about relay arrangements is an hour spent on a
+part that was already wrong.
+
+**The recognition test.** If you are choosing an actuator and you have started
+reasoning about how to WIRE it, stop: you skipped a step. **Ask what it does with
+no power. If you cannot answer in one word, you are not ready to think about
+anything else.**
+
+Frozen as G-39, beside G-22 deliberately. **G-22 asks what a severed conductor does
+and what a short to a neighbour does. Neither asks what a DEAD PANEL does, and an
+actuator is the only class of device where that is a different question.**
+
+**And the reversal cost one exchange because he had not built anything on it yet.**
+Same shape as F-059 and the DIR level: the cheapness of a correction is set by how
+much was built on the guess, not by how wrong the guess was.
+
 ## T-025 Knowing a pattern does not stop you producing it. The interval was four entries.
 
 **Put at the top at the owner's instruction, 2026-09-03, and it belongs there.**

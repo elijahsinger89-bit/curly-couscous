@@ -35,7 +35,7 @@ mean the design has been checked. Almost nothing has been checked.
 | F-084 | AUDIT, role reach sweep | "The fulvic channel", in four files, against D-105's role set | **D-105's roles are nutrient, pH-up and pH-down. FULVIC IS NOT A VALUE IN THAT SET, and "the fulvic channel" is used as a fixed identity in four files.** So the role field cannot say which channel S-17 applies to | Not fixed and **NOT a reason to add a role value.** Fulvic is a PRODUCT, and D-013 and S-17 make it the one product deliberately unattributed. **The question it raises is where product-specific behaviour lives now that role is a separate field, and that is one of two things the owner must settle about the role vocabulary.** Routed to the owner with the exactly-two question | 2026-09-03 |
 | F-085 | AUDIT, role reach sweep | software-spec.md section 12's "attribution for six of the eight channels" | **A COUNT WRITTEN AS A PROPERTY, and it is graded STRUCTURALLY IMPOSSIBLE. Under D-105 the count of nutrient channels is a consequence of assignment, so the claim is CURRENT and a role setting is what would change it** | Not fixed. **This is a grading error the DECISION created rather than one the document made: section 12 was correct when written.** **It is the first instance of G-36 needing to be re-run over a document because a decision moved underneath it, and that is a cadence fact worth more than the row: a grade is only true against the tree it was graded on.** Five more count-as-property claims are listed in the sweep | 2026-09-03 |
 | F-086 | BOSS, from D-108, under G-35 | The chiller loop pump, against frozen G-12 | **G-12 says the chiller and its loop pump are switched together by ONE CONTACTOR on their own circuit, with the reason "the chiller has no internal pump". D-108 establishes there is no chiller contactor. So NOTHING ON FILE SWITCHES THE LOOP PUMP** | Not fixed and **not for BOSS to fix.** The chiller controlling itself says nothing about what moves water through it. **Four possibilities and BOSS chooses none: G-12 is wrong about the internal pump, the loop pump has its own switch nobody has recorded, it runs continuously, or it is on the chiller's own cord.** **This is F-044's answer forcing a separate item rather than closing with it, which is G-35 working as intended the first time it is used on a real closure** | 2026-09-03 |
-| F-087 | Owner, 2026-09-03, D-111 | The fill valve. It is a MOTORIZED BALL VALVE and it was missing | **Not a solenoid, and the difference is a FAIL-STATE difference: a solenoid is energise-to-open and springs closed on power loss; a motorized ball valve drives open and drives closed, HOLDS POSITION WITHOUT POWER, and takes seconds rather than milliseconds** | Open. Four things owed before any subsystem designs around it, and **item 1 goes to the owner as a HAZARD question, not a lookup: most motorized ball valves stay where they are on power loss, which means A FILL CAN BE LEFT OPEN BY A POWER FAILURE unless the valve is spring-return.** G-22 asks what a severed conductor does; **no row in this tree asks what a dead panel does to an actuator.** Search terms below | 2026-09-03 |
+| F-087 | Owner, 2026-09-03. **RECORDED UNDER D-111 AS A MOTORIZED BALL VALVE AND REVERSED THE SAME DAY BY D-114** | The day tank fill valve. It was missing from the tree entirely | **IT IS A SOLENOID: ENERGISE TO OPEN, SPRING CLOSED ON POWER LOSS. Installed with UNIONS EITHER SIDE so it can be replaced without cutting pipe.** The one-message-long motorized ball valve alternative was withdrawn ON THE FAIL STATE: **a motorized valve holds position without power, so a power failure mid-fill leaves it open and the day tank overfills. On a valve that fills a tank, hold-last is the wrong failure.** And the speed is the same point, not a second one: **the float that stops the fill is the only thing stopping it, so several seconds of travel puts an unmeasured volume past the switching point every time** | **All four motorized-valve unknowns are withdrawn with the part: the two/three/five-wire relay fork, the travel-time number, and the auxiliary position contact. STILL OPEN AND WITH THE OWNER: voltage, pipe size, and whether it is normally closed.** Search terms below. **What survives is the QUESTION, and it is now G-39: what a valve does on power loss is a DESIGN property, not an incidental one. For a solenoid the answer is closed, and that is why it is the right part** | 2026-09-03 |
 | F-088 | BOSS, from D-110, under G-35 | The main enclosure's TOP FACE, after the box's rating closed | **The box is IP65 and the assembly is not. Five upward-facing 22 mm holes and four cord caps mean the assembly's rating is set by its WORST PENETRATION regardless of the box** | Open, and **deliberately re-filed rather than left inside closed F-025**, per G-35. What is still owed: **each 22 mm device's rating IN THE UPWARD-FACING ORIENTATION**, which is where a gasketed device is least able to keep water out, and a drip shield if the ratings do not match. D-047's treatment of the top face as needing gasketed devices stands unchanged | 2026-09-03 |
 | F-063 | BOSS, against the jug sizes | The frozen S-16 non-adjacency rule in channel-token.md | **channel-token.md declares, as a rule taken from S-16 rather than from legibility, that "pH up and pH down shall not receive ADJACENT tokens and shall not receive NEIGHBOURING colours", because their movements cancel and S-16 attributes to the COMMANDED channel, so a swap between them is invisible to the only check that looks at them. THE TWO pH CHANNELS ARE CH5 AND CH6. They are adjacent.** And the jug sizes make it worse: **both are 1000 mL while all six others are 3785 or 4000, so the two channels the rule wanted maximally separated are the two whose containers are identical, and the physical differentiator is weakest exactly where the confusion is most dangerous** | **NARROWED 2026-09-01 by F-064: the size axis already separates the pH pair from the six nutrients for free, so the confusion is CH5 versus CH6 alone, which is a much smaller job than the wording suggested. And DOSING found the axis that is available: the ordering rule constrains sequence, not SPACING.** NOT FIXED, and NOT by renumbering: forbidden item 2 in the declaration forbids renumbering, and G-17 and G-18 fix jugs and tubes to channels for life.** The owner's call. What remains available is the colour axis, which is unbound, and physical station separation, which is DOSING's. **DISSOLVED 2026-09-03 BY D-105, and dissolved rather than shrunk, which is the owner's word for it. THERE IS NO FIXED pH PAIR TO SEPARATE: any two channels could be the pair, so the adjacency problem is no longer a property of the token numbering at all.** **What the rule becomes is a CONSTRAINT ON THE ASSIGNMENT: pH-up and pH-down are not assigned to adjacent tokens or neighbouring colours. Same rule, applied at commissioning to a choice, instead of at design time to a fact nobody could change.** **And that is strictly better, because it was previously unsatisfiable without renumbering, which forbidden item 2 forbids and G-17 and G-18 make impossible.** The rule lives in channel-token.md and its restatement is CONTROL-SOFTWARE's, not BOSS's. **F-064's narrowing and F-071's withdrawal both go with it: the size axis argument is moot when the pair is not fixed** | 2026-09-01, dissolved 2026-09-03 |
 | F-058 | PUMP-BOXES, against the schematic | parts.md's own flat pin list, and three conclusions built on it | **The flat list `STEP DIR EN MS1 MS2 DIAG INDEX VDD GND VM 1A 1B 2A 2B` was a list of NAMES. It was read as an ORDER, and the order was read as ADJACENCY. It is TWO connectors: JP4, a 2x5 header, and JP1, a 6-way screw block.** T-013's disease committed at the DOCUMENT level rather than in a procedure step. **Three conclusions rest on it: F-031's "closest approach in the build, and it is a screw terminal, not a trace", which is contradicted because VDD is on the header and VS is on the block; PUMP-BOXES' own segment-5 "DIR's neighbours are STEP and EN, neither energised", which was WRONG IN THE UNSAFE DIRECTION because DIR is JP4 pin 3 and VDD is pin 1; and its landing rejection, whose T-009 and T-010 clamp argument has no clamp to apply to** | **CONFIRMED FROM THE PHOTOGRAPH: the top header row reads VDD DIR MS1 DIAG UART left to right, so VDD and DIR are PHYSICALLY ADJACENT on the board.** G-29 pairs DIR with its return in the cable and **cannot reach inside the connector.** F-031's requirement may still be worth having, since both conductors arrive in the same box, but its premise is withdrawn. **The board-layout spacing between JP4 and JP1 is a board-in-hand question, not a netlist one** | 2026-09-01 |
@@ -350,33 +350,35 @@ block at all. If the readback is the second 25 A NO pole, the question becomes
 whether that pole can be made reliable at logic-level current or whether the
 readback must be taken somewhere else entirely.
 
-## Search terms for F-087, the motorized ball valve. The owner does all lookups.
+## Search terms for F-087, the fill SOLENOID. The owner does all lookups.
 
-**BOSS names no part and no size.** Four separate questions, and they want different
-searches because they are answered on different pages of a datasheet:
+**REWRITTEN 2026-09-03 for D-114. The motorized ball valve search terms are gone
+with the part.** BOSS names no part, no voltage and no size.
 
-**1. The power-loss fail state, and this one is a hazard question first:**
-- motorized ball valve fail safe spring return power loss
-- motorized ball valve normally closed power off position
-- spring return actuated ball valve versus stay put on power failure
+**1. Confirming the part is normally closed, which the owner has already stated as
+the REQUIREMENT.** This search confirms a CANDIDATE meets it and does not decide
+it - a solenoid sold normally OPEN exists and would satisfy every other line:
+- solenoid valve normally closed energise to open spring return
+- normally closed versus normally open solenoid valve water
+- solenoid valve de-energised closed position confirmation
 
-**2. How it is driven, which sets the relay arrangement and gates the order:**
-- motorized ball valve 2 wire 3 wire 5 wire control difference
-- motorized ball valve maintained signal versus pulse control
-- CR01 CR02 CR05 motorized ball valve wiring control type
+**2. Voltage, and the constraint is the panel rather than the valve:**
+- solenoid valve 24 VDC water inlet
+- solenoid valve 120 VAC water inlet
+- solenoid valve coil inrush versus holding current
 
-**3. Whether it reports position:**
-- motorized ball valve auxiliary limit switch position feedback
-- motorized ball valve SPDT feedback contact open closed indication
+**3. Pipe size and connection, against D-109:**
+- solenoid valve 3/4 inch NPT water
+- solenoid valve minimum operating pressure differential
+- direct acting versus pilot operated solenoid valve low pressure
 
-**4. Travel time:**
-- motorized ball valve travel time seconds open to close
-- electric actuated ball valve operating time specification
+**WHAT IS WANTED, AS A REQUIREMENT AND NOT AS A PART:** a valve for the day tank
+fill line that is **normally closed and spring-returns closed with no power**,
+whose **coil voltage suits the rail the panel actually has**, whose **connection
+suits 3/4 in schedule 80**, and - the one that is easy to miss - **whose minimum
+operating pressure differential is met by the actual supply.** A pilot-operated
+solenoid needs a pressure difference to open at all, and a valve that will not
+open on a low-pressure tap is a valve that fails closed for the wrong reason.
 
-**What is wanted, stated as a requirement rather than as a part:** a valve for the
-day tank fill line whose **power-loss behaviour is known and stated**, whose
-**control type is known so the relay arrangement can be drawn**, whose **travel time
-is a number**, and **whether it offers a position contact at all** - because if it
-does, that is the only direct confirmation anywhere in the water path that a
-commanded thing actually moved, and no agent has ever had one to design with.
-
+**Not a search, a note for whoever fits it:** the unions either side are a
+property of the INSTALLATION and survive any later change of valve.

@@ -189,19 +189,30 @@ count, spacing, thread engagement, pressure drop, and whether C-10's catch-and-t
 method is affected by the bore - is yours to ask for, not to compute. **One
 dimension and a schedule is not a hydraulic model.**
 
-**4. THE FILL VALVE IS A MOTORIZED BALL VALVE, NOT A SOLENOID, D-111 and F-087.**
-The owner confirms it was missing.
+**4. THE FILL VALVE IS A SOLENOID. D-114 REVERSES D-111 THE SAME DAY.**
 
-**It drives open and drives closed, HOLDS POSITION WITHOUT POWER, and takes seconds
-rather than milliseconds.** A solenoid springs closed on power loss. This does not.
+**Energise to open, spring closed on power loss. Installed with unions either side
+so it can be replaced without cutting pipe.**
 
-**The item that touches you first is TRAVEL TIME: anything in your fill or transfer
-logic that assumes a fill starts or stops promptly needs that number, and the float
-bands are the first thing to check against it.** A valve that takes seconds to
-close changes what a float's switching point means in litres.
+**Everything the previous routing said about a motorized ball valve is WITHDRAWN.**
+There is no travel-time number to check your float bands against, no two/three/five
+wire relay fork, and **no auxiliary position contact - so the "only direct
+confirmation in the water path that a commanded thing moved" is gone. Do not design
+around it. It was never there.**
 
-**And the one nobody has considered: many of these carry auxiliary limit switches.
-If this one does, it is a POSITION signal the panel could read - the only direct
-confirmation anywhere in the water path that a commanded thing actually moved.**
-Say whether you would use it and for what, so the owner's lookup knows whether to
-treat it as a requirement or a bonus. **Name no part.**
+**The fail state is why, and it is the whole reason:** a motorized valve holds
+position without power, so a power failure mid-fill leaves it open and the day tank
+overfills. **On a valve that fills a tank, hold-last is the wrong failure.** And the
+speed is the same point: **the float that stops the fill is the only thing stopping
+it**, so seconds of travel put an unmeasured volume past the switching point every
+time.
+
+**That is now G-39, frozen beside G-22: when choosing an actuator, ask what it does
+with no power BEFORE asking anything else. Every other property is a preference.**
+
+**Still open and with the owner: voltage, pipe size, and whether it is normally
+closed.** Search terms are in findings.md under F-087. **One of them is yours to
+have an opinion on before he looks: MINIMUM OPERATING PRESSURE DIFFERENTIAL.** A
+pilot-operated solenoid needs a pressure difference to open at all. **Say what the
+supply actually offers at the fill point, or say that nothing establishes it - do
+not assume a house pressure.**

@@ -76,6 +76,7 @@ changed reports to BOSS and does not act.
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
 | G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
+| G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -2088,4 +2089,47 @@ once to keep it separate from F-071. D-105 is the second occasion that separatio
 paid.** Applying F-063's dissolution to everything filed near it would have lost
 D-085's free half a second time. **Proximity in a file is not a dependency, and
 this tree has now twice tried to treat it as one.**
+
+**D-114 THE FILL VALVE IS A SOLENOID. THIS REVERSES D-111, WHICH IS KEPT.** Owner,
+2026-09-03, within one exchange of proposing the opposite. **Energise to open,
+spring closed on power loss.**
+
+**The deciding property is the fail state and nothing else came close:**
+
+| | Solenoid | Motorized ball valve |
+|---|---|---|
+| Power loss mid-fill | **Springs CLOSED** | **HOLDS POSITION. Leaves the fill open and the day tank overfills** |
+| Shut speed | Instant | Several seconds of travel |
+
+**"On a valve that fills a tank, hold-last is the wrong failure."** And the speed
+half is not a separate point but the same one: **the float that stops the fill is
+the only thing stopping it**, so a valve that takes seconds to close puts an
+unmeasured volume past the float's switching point every time.
+
+**EVERYTHING D-111 SAID ABOUT THE MOTORIZED VALVE'S CONSEQUENCES IS WITHDRAWN.**
+The relay-arrangement fork on two, three and five wire types; the travel-time
+number; the auxiliary position contact that would have been the only direct
+confirmation in the water path. **All gone with the part.** D-111 stays on file
+because a reversal keeps both entries and because the reasoning in it is what
+produced G-39.
+
+**WHAT SURVIVES FROM D-111 IS THE QUESTION, and the owner made the point rather
+than BOSS: what a valve does on power loss is a DESIGN PROPERTY and not an
+incidental one. For a solenoid the answer is closed, and that is why it is the
+right part.** Frozen as G-39, above.
+
+**ONE PHYSICAL FACT ADDED: the valve is installed with UNIONS EITHER SIDE so it
+can be replaced without cutting pipe.** That is a maintenance property of the
+installation, not of the part, and it survives any later change of valve.
+
+**STILL OPEN AND WITH THE OWNER: voltage, pipe size, and whether it is normally
+closed.** Requirement and search terms in findings.md under F-087, rewritten.
+**BOSS names no part.**
+
+**A NOTE ON THE THIRD OF THOSE, offered as a reading and not as a correction:**
+"energise to open, spring closed" IS the definition of normally closed, so the
+owner has already stated the requirement. **What the lookup is for is confirming
+that a CANDIDATE PART meets it, which is a different act from deciding it** - and
+it is worth keeping separate, because a solenoid sold as normally OPEN exists and
+would satisfy every other line of the requirement.
 
