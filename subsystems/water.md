@@ -216,3 +216,59 @@ have an opinion on before he looks: MINIMUM OPERATING PRESSURE DIFFERENTIAL.** A
 pilot-operated solenoid needs a pressure difference to open at all. **Say what the
 supply actually offers at the fill point, or say that nothing establishes it - do
 not assume a house pressure.**
+
+## THE 1ST EDITION SET IS READ. TWO GUARDS BEFORE ANY PROPOSAL, D-116.
+
+audit/2026-09-03-1st-edition-floats-and-wall.md. 24 float proposals, 26 wall
+proposals, every one written as "observed in the 1st Edition set, unverified,
+confirm or replace". **G-40 is frozen: it is a citation, not a source. Where it
+disagrees with this tree, THE TREE WINS. You may not cite it for anything.**
+
+**GUARD 1, AND READ IT BEFORE YOU OPEN THE FILE. The old set closes dry-run
+protection with the day tank low-low float, which is a LEVEL element.**
+
+**That is exactly the choice you are holding S-05 open to avoid foreclosing.** Your
+own row says a level element can never subsume circulation verification, and D-060
+prices the flow-proving fork at one timing element.
+
+**S-05 STAYS OPEN. Do not adopt the old set's dry-run answer, and do not treat it
+as a starting proposal for S-05.** It is a starting proposal for FLOATS, which is a
+different question that happens to share a device. **The danger is not that the
+answer is wrong. It is that an open question would close because the old set
+already answered it, with nobody deciding to close it.**
+
+**GUARD 2, F-089. The old set's floats are rated to switch a 120 VAC coil and this
+build's control voltage is 24 V.** Under G-31 that is a fifth of the contact power
+at the same current. **It lands on S-01 and S-02 directly. G-24 says the minimum
+switching load question is asked of every contact, and this is the first time
+anyone has asked it of a float.** Joint with MAIN-PANEL.
+
+**AND ONE THING BLOCKS THE WHOLE FLOAT PASS UNTIL THE OWNER ANSWERS IT, F-090.**
+parts.md carries LS-1 through LS-8 on a named part, with its own note that nobody
+traced the chain. **The 1st Edition set has exactly that roster on exactly that
+part.** Either they converged independently or **the tree's roster is inherited
+from the set you would be checking it against, which is circular.** Do not confirm
+a float proposal against parts.md until that is settled.
+
+## THE STANDPIPE. D-117, AND IT IS THE MOST VALUABLE THING IN THE OLD SET.
+
+S-01 and S-02 both wait on you for "the physical location", and **nothing in this
+tree says what a float is ATTACHED to.** The old set's answer: **one rigid pipe per
+tank carrying every float and every cord, hung off the rim, nothing hanging off a
+float body.**
+
+**It contains no figure, so it survives every number in the old set being wrong.**
+G-34's shape arriving from a source where every dimension is suspect. **And it
+unblocks S-01, S-02 and CBL-04 together, because a cord route is a consequence of a
+mounting method.**
+
+**Your own file already states the principle and never applied it here:** "Position
+held by fixture, not by cord. A cord-hung pump is a pump whose position is a
+suggestion."
+
+Two frozen facts make a drifted FLOAT worse than a drifted pump: **nothing in this
+system measures a level, so a float that has moved is invisible**, and **D-114
+makes the fill-stop float the only thing stopping the fill.**
+
+**It is a proposal, not a decision. It is with the owner.** Do not size a pipe, do
+not choose a mounting, do not name a part.

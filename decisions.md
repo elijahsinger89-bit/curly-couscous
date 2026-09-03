@@ -77,6 +77,7 @@ changed reports to BOSS and does not act.
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
 | G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
 | G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood |
+| G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -2132,4 +2133,87 @@ owner has already stated the requirement. **What the lookup is for is confirming
 that a CANDIDATE PART meets it, which is a different act from deciding it** - and
 it is worth keeping separate, because a solenoid sold as normally OPEN exists and
 would satisfy every other line of the requirement.
+
+**D-115 THE 1ST EDITION DOCUMENT SET IS RECEIVED UNDER THE OWNER'S CAVEAT AND
+NOTHING IN IT IS ADOPTED.** Read 2026-09-03. Report in
+audit/2026-09-03-1st-edition-floats-and-wall.md, headed with the caveat verbatim.
+**The set itself is NOT in the working tree and is not committed** - it lives
+outside it, so no artifact of it can become accountable by accident.
+
+**The caveat is frozen as G-40** so it binds on subsystems that never read the
+message it arrived in.
+
+**24 float proposals and 26 wall proposals, every one written as "the old set
+appears to show X, observed in the 1st Edition set, unverified, confirm or
+replace."** That is the shape the owner asked for: he is a faster confirmer than
+originator, and this turns two blank questions into two questions with a starting
+proposal.
+
+**TEN CONTRADICTIONS WITH THE TREE, ALL MARKED TREE-WINS AND NONE OF THEM A
+FINDING ABOUT THE TREE:** board size against D-090's 8 by 8 ft; one enclosure
+against the frozen four; wall-mounted receptacle boxes against D-046; **a motorized
+ball valve against D-114 and G-39**, which is the same reversal arriving from two
+directions on the same day; six channels against eight; a chiller pump on a
+receptacle against D-108 and open F-086; the storage float pair as an add-on
+against G-03; and mixed duty on one relay against G-30.
+
+**AND SIX FIGURES THAT CONTRADICT THEMSELVES INSIDE THE OLD SET**, including one
+float with two different trip heights across five documents, and two different
+measurement datums used with the same numbers. **That is the strongest possible
+argument for the caveat and it came from the set itself.**
+
+**D-116 TWO ITEMS FROM THE OLD SET ARE GUARDED RATHER THAN PROPOSED, BECAUSE BOTH
+COULD CLOSE AN OPEN QUESTION BY DEFAULT.**
+
+**GUARD 1, AND IT IS THE MOST DANGEROUS THING IN THE SET. The old set closes
+dry-run protection with the day tank low-low float, which is a LEVEL element.**
+
+**That is precisely the choice S-05 is being held open to avoid foreclosing.**
+S-05's row says a level element can never subsume circulation verification, and
+D-060 prices the flow-proving fork at one timing element. **If the old set's answer
+is adopted because it is the only answer on the page, D-060's door closes with
+NOBODY HAVING DECIDED TO CLOSE IT** - which is T-023's mechanism arriving through a
+document instead of through a claim.
+
+**S-05 STAYS OPEN. No subsystem may cite the 1st Edition set for a dry-run element,
+and WATER is told so directly.** The owner may of course decide it; what is
+forbidden is it deciding itself.
+
+**GUARD 2. The old set's floats are rated to switch a 120 VAC coil, and this
+build's control voltage is 24 V.** F-089. **Under G-31 a minimum switching load is
+ONE POWER requirement and not three independent floors, so a fifth of the voltage
+at the same current is a fifth of the contact power.** It lands directly on S-01
+and S-02, the two rows this whole pass exists to feed. **G-24 already says the
+minimum switching load question is asked of EVERY contact; this is the first time
+it has been asked of a float.**
+
+**D-117 THE MOST VALUABLE THING THE OLD SET HAS IS A MECHANISM WITH NO NUMBER IN
+IT, AND THE TREE HAS NO POSITION ON IT AT ALL: HOW A FLOAT IS PHYSICALLY HELD IN A
+TANK.**
+
+S-01 and S-02 both wait on WATER for "the physical location", and **nothing
+anywhere in this tree says what a float is attached to.**
+
+**The old set's answer is a STANDPIPE: one rigid pipe per tank carrying every float
+and every cord, hung off the rim, with nothing hanging off a float body.**
+
+**Why it is worth more than the 50 proposals around it: it contains no figure, so
+it survives every number in the old set being wrong.** That is G-34's shape - a
+rule keyed to what a thing IS rather than to how big it is - arriving from a source
+where every dimension is suspect. **And it unblocks S-01, S-02 and CBL-04
+together**, because a cord route is a consequence of a mounting method.
+
+**And the tree already holds the principle without having applied it here.**
+water.md says of the submersibles: **"Position held by fixture, not by cord. A
+cord-hung pump is a pump whose position is a suggestion."** Nobody applied that
+sentence to the floats.
+
+**Two facts make a drifted float worse than a drifted pump, and both are already
+frozen:** nothing in this system measures a level, so **a float that has moved is
+invisible**; and D-114 establishes that **the fill-stop float is the only thing
+stopping the fill.**
+
+**IT IS STILL A PROPOSAL AND NOT A DECISION.** Observed in the 1st Edition set,
+unverified. **BOSS adopts nothing, sizes nothing and names no part.** Put to the
+owner as one question, with the tree's own sentence beside it.
 
