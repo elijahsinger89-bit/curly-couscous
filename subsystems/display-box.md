@@ -135,3 +135,30 @@ work rather than find anything, which is a fine outcome.
 Do not state a pin number, an I2C address, a resistor value or a part number
 from memory. The Pi 5 header and the EZO addressing come from the owner's
 datasheets, not from recall.
+
+## OPEN, routed 2026-09-03 by D-098. PI 5 PAD DEFAULTS, FOR THE THIRD-CASE SWEEP.
+
+Recorded in parts.md with its provenance. Read the provenance before you use the
+numbers: **they are forum statements by Raspberry Pi engineers, not a datasheet.**
+
+| Pins | Power-on state |
+|---|---|
+| GPIO0 to GPIO8 | pulled UP |
+| GPIO9 to GPIO27 | pulled DOWN |
+| Pad pull strength | about 50 k |
+| **GPIO2 and GPIO3** | **held strongly HIGH by 1.8 to 2 k. Not a pad default** |
+
+The rule that comes out of it, and it is the part that binds: **the HAT+
+specification says fit an external resistor, so an external pull is authoritative
+and the pad default is a fallback nobody designs against.** Every pin whose
+power-on level matters gets its own external pull.
+
+**GPIO2 and GPIO3 are excluded outright from any signal whose safe power-on state
+is low.** That is a hard exclusion. A 1.8 k hold is not something an external
+pull-down of any sane value argues with.
+
+Apply this to the third-case sweep, both columns per signal as the owner asked:
+what a SEVERED conductor does and what a SHORT TO ITS REALISTIC NEIGHBOUR does,
+**now with a third column for what the pin does in the window between Pi power-on
+and software taking the pin.** Do not state a pin number or a resistor value from
+memory.

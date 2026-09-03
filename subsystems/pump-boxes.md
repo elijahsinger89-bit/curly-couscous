@@ -128,3 +128,37 @@ VDD falls inside G-09's word "power", findings F-014.
 Do not state a motor part number, a current setting, a step count per millilitre
 or a wire gauge from memory. Do not assume a head calibration figure: nothing in
 this system measures delivered volume, so a wrong figure is invisible.
+
+## OPEN, routed 2026-09-03 by D-096. THE DIR LEVEL REVERSED.
+
+You said no datasheet could close the noise half and you named the three numbers
+that would close the level half. The owner returned them and **the level went the
+other way from what D-069 recorded.**
+
+| Quantity | Value |
+|---|---|
+| DIR internal pull-down | 132 k min, **166 k typical**, 200 k max |
+| STEP internal pull-down | **NONE.** Pin type is DI with no (pd) |
+| VINLO max | **0.30 x VCC_IO**, so 0.99 V at 3.3 V |
+| VINHI min | **0.70 x VCC_IO**, so 2.31 V at 3.3 V |
+
+**A FLOATING DIR FLOATS HIGH.** The 20 k plus green LED branch to VDD beats a
+166 k internal pull-down by an order of magnitude.
+
+Three things follow and all three are yours:
+
+1. **The external pull-down is now load-bearing for the LEVEL, not only for the
+   hold.** Size it against 166 k typical in parallel AND against the 20 k plus LED
+   branch pulling the other way, to a pin voltage below VINLO. **It is no longer a
+   leakage-scale question and every prior sizing discussion assumed it was.**
+2. **G-29's convergence on DIR is broken again.** Severed goes HIGH by the board.
+   Shorted to a return-paired neighbour goes LOW. Opposite once more, which is the
+   condition D-049 and G-22 called unsafe in both directions. Say what the pairing
+   should now be, or say that pairing can no longer deliver convergence here.
+3. **STEP has no chip contribution at all.** Your F-060 question is unchanged in
+   substance and now better founded than when you asked it.
+
+Return a requirement and a search term for anything you do not have. **Do not
+state a resistance value from memory and do not fit a pull-up on your own
+initiative** - D-062 is still the owner's gate and its question has flipped to
+"is DIR HIGH the safe rotation".

@@ -173,6 +173,28 @@ The real options there are a soldered pad, a header pin, or a socket. See F-054.
 anything on the board. EN and STEP have real board pulldowns. DIR does not, and its
 defined level comes from inside the chip.**
 
+### DIR, STEP and the thresholds. THIS CORRECTS AN EARLIER ENTRY.
+
+| Fact | Figure |
+|---|---|
+| DIR internal pull-down | **132 k min, 166 k TYPICAL, 200 k max.** Not the STANDBY pin's tighter 80 to 120 k row |
+| **STEP internal pull-down** | **NONE. Pin type is DI with no (pd). The pins marked (pd) are DIR, MS1, MS2 and STDBY only** |
+| VINLO max | **0.30 x VCC_IO**, so 0.99 V at 3.3 V |
+| VINHI min | **0.70 x VCC_IO**, so 2.31 V at 3.3 V |
+| Hysteresis | 0.12 x VCC_IO, about 0.40 V typical |
+| Input leakage | plus or minus 10 uA, **IN ADDITION to the pull-down** |
+
+The 0.44 and 0.56 figures in the datasheet's Fig 13.1 are **typical Schmitt trips, not
+guaranteed. Use 0.30 for a does-it-read-low ruling.**
+
+> **A FLOATING DIR FLOATS HIGH, NOT LOW. THIS REVERSES WHAT parts.md SAID BEFORE.**
+>
+> The internal pull-down sinks about 20 uA at 3.3 V. **The board's green LED branch
+> pulls UP to VDD through 20k and an LED, and a normal indicator LED with a 20k series
+> resistor WINS against 166 k by an order of magnitude.** The pin sits above VINHI.
+
+See findings F-059, corrected, and D-096.
+
 ### VS and VCC_IO sequencing: the datasheet is SILENT, and that is the result
 
 Checked TMC2209 rev 1.09, the PDF Adafruit ships, and 1.08. **THERE IS NO REQUIRED
@@ -330,6 +352,76 @@ it is one carrier each for pH and EC, and none for RTD, for a stated reason.
 
 **Plastic gives no bonding path, so every equipment ground lands on a ground bar
 rather than on the box.**
+
+## The Raspberry Pi 5 header at power-on
+
+**There is no official per-pin table, and the provenance of what exists matters.**
+
+The 40-pin header is RP1 bank 0, GPIO0 to GPIO27. **BCM2712 pad and device-tree
+defaults do NOT describe those pins, and RP1's own table lists the pull reset as
+"varies" with no per-pin column.**
+
+**At pad reset: output disable 1, input enable 0, drive 4 mA, Schmitt on. So the pin is
+NOT a software input at power-on and its function is NONE, neither input nor output
+enabled. THE PAD PULLS STILL ACT ON THE PIN VOLTAGE.**
+
+| Pins | Pad default |
+|---|---|
+| GPIO0 to GPIO8 | **PULL-UP** |
+| GPIO9 to GPIO27 | **PULL-DOWN** |
+| **GPIO2 and GPIO3** | **STRONGLY HIGH. On-board 1.8 to 2 k pull-ups to 3.3 V. The weak pad pull cannot fight them. No other I2C mux on the header has those resistors** |
+
+Pad resistance roughly 50 k typical: pull-up 37 to 86 k, pull-down 35 to 98 k.
+
+**PROVENANCE, and it is not a datasheet.** The per-pin map exists only in statements
+from Raspberry Pi engineers on the forum, March 2024 and January 2025, repeated for CM5
+and Pi 5. **It is the only Pi 5 specific source and it appears in no datasheet.** Recorded
+with its source rather than as a specification, per T-018's discipline in reverse: this
+is not a seed, it is a real observation from a non-authoritative source, and the
+difference is worth carrying.
+
+**The HAT+ spec says outright: if you need a defined level at power-on, FIT AN EXTERNAL
+RESISTOR. Do not trust the pad.** That makes DISPLAY-BOX's physical-pull requirement
+authoritative rather than prudent.
+
+**For the fail-direction sweep: GPIO0 to 8 weakly high, GPIO9 to 27 weakly low, GPIO2
+and 3 STRONGLY high, nothing floating, and any pin that must be safe the instant 3.3 V
+appears needs an external pull, because 50 k is weak and firmware can change it at step
+three.**
+
+## DIAG and INDEX, and why the ruling cannot rest on the datasheet
+
+**DIAG is pin 11, ACTIVE HIGH.** Its sources: StallGuard stall in StealthChop only;
+overtemperature shutdown, latched; short to GND, latched; short to VS, latched; and
+**charge-pump undervoltage uv_cp, which is NOT latched and disables the driver while
+set. Open load is informative only and does NOT reach DIAG.**
+
+**INDEX is pin 12 and is NOT a fault pin by default.** It pulses **once per electrical
+rotation at microstep 0.** It can be remapped to overtemperature prewarning or to the
+internal step generator by GCONF bits, and it reports nothing else.
+
+**BOTH ARE PUSH-PULL, NOT OPEN DRAIN.** The datasheet never uses either phrase, but the
+pin type is DO rather than OD and the DC table specifies VOUTHI at minus 2 mA, **which
+means the pad SOURCES.** CMOS push-pull into VCC_IO. **No pull-up required, no Hi-Z
+line.**
+
+### The two undervoltages must not be conflated
+
+**uv_cp is charge-pump undervoltage on a LIVING chip, and it IS a documented DIAG
+source.**
+
+**VUV_VS is the VS reset threshold, typically 4.2 V, and it takes the CORE into reset,
+because the 5 V regulator that feeds logic derives from VS. VCC_IO staying up does not
+prevent that.**
+
+> **For the state VS below VUV_VS with VCC_IO valid, the datasheet does NOT say whether
+> DIAG or INDEX is high, low or Hi-Z, does not say whether the pad remains a driven
+> output while the core is held in reset, and does not offer DIAG as a VS-present
+> detector.**
+>
+> **SO DIAG IS NOT A SPECIFIED DETECTOR FOR VM ABSENT.** A fault output undefined in the
+> state it would report is not a detector. **If the ruling depends on that, it cannot be
+> made from the PDF and only C-18 can settle it.**
 
 ## The main panel face, as decided
 

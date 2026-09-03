@@ -72,6 +72,7 @@ changed reports to BOSS and does not act.
 | G-25 | **A no-flow CONDITION may drop the pump in hardware. A circulation VERIFICATION FAILURE may not.** They are not the same event and must not be wired to the same decision. Hardware protects the pump with dry-run timing; software protects the batch and stops it loudly under G-16 | Frozen 2026-08-30, MAIN-PANEL's ruling, D-038 |
 | G-33 | **THE SEED, THE CAPACITY AND THE POURED VOLUME ARE THREE DIFFERENT QUANTITIES AND ARE NEVER ONE COLUMN.** A seed is what a file had to contain. A capacity is what a vessel holds. A poured volume is what the arithmetic runs on. **None of the three was the same number and all three were one column** | Frozen 2026-09-02, the standing shape rather than a local fix. See T-018 and D-086 |
 | G-34 | **WHERE A RULE CAN BE WRITTEN AGAINST A ROLE RATHER THAN AGAINST A DIMENSION, IT SHOULD BE.** A rule keyed to what a thing IS outlives a rule keyed to how big it is | Frozen 2026-09-02. Established by what survived the seed retraction: everything keyed to volume fell, everything keyed to role stood |
+| G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -1466,3 +1467,109 @@ granularity on the same grounds.
 **And it declined two decisions rather than inventing them:** whether an INDETERMINATE
 outcome stops the remainder of a batch, and whether a low-jug warning blocks a plan.
 Both are in section 11 as blockers rather than in the body as choices.
+
+## 2026-09-03
+
+**D-096 THE DIR CONVERGENCE IS REVERSED. A FLOATING DIR FLOATS HIGH.** This
+CORRECTS D-069's closing claim, F-053's resolution and F-059's inference. Both
+entries stay, per the standing rule on reversals.
+
+The owner's lookup returned the three numbers F-059 said would close it:
+
+| Quantity | Value |
+|---|---|
+| DIR internal pull-down | 132 k min, **166 k typical**, 200 k max |
+| STEP internal pull-down | **NONE.** The pin type is DI with no (pd) |
+| VINLO max | 0.30 x VCC_IO, so **0.99 V** at 3.3 V |
+| VINHI min | 0.70 x VCC_IO, so **2.31 V** at 3.3 V |
+
+**The board's green-LED branch, 20 k plus an LED to VDD, beats a 166 k internal
+pull-down by an order of magnitude, and the pin sits above VINHI.** So D-069's
+sentence "a severed DIR converges LOW" is WRONG. It converges HIGH.
+
+**What this does NOT change:** D-069's narrowing of F-018 stands. The schematic
+reading stands. F-059's refusal to state a level without the numbers stands, and
+was right - it named the exact three quantities and declined to guess the
+direction, which is why the correction is one line and not a rebuild.
+
+**What it DOES change, and it is not small:**
+
+1. **D-062's remaining question flips.** It was: is DIR LOW the safe rotation. It
+   is now: **IS DIR HIGH THE SAFE ROTATION.** Still a pump fact, still not a
+   datasheet question, still the gate before the S-10 cable is bought and before
+   any resistor is fitted. **But the answer that would have been reassuring is now
+   the answer that would be alarming, and vice versa.** Anyone who resolved D-062
+   in their head against the old direction has resolved it backwards.
+2. **D-043's external pull-down becomes load-bearing for the LEVEL**, not only for
+   noise immunity. F-072.
+3. **STEP has NO internal pull-down.** F-060 asked the noise question of STEP on
+   the assumption that a board pull-down closed the level question there. The
+   board pull-down on STEP is real, from the schematic; **what is now known is that
+   the chip contributes nothing to it.** F-060's question is unchanged in substance
+   and better founded.
+4. **G-29's convergence on DIR is broken again.** Severed goes HIGH, shorted to a
+   return-paired neighbour goes LOW. Opposite once more. F-072.
+
+**Routed to PUMP-BOXES**, with the four numbers above and nothing else: size the
+external pull-down against 166 k typical in parallel and against the 20 k plus LED
+branch, to a level below VINLO, and say what that does to G-29's pairing. **BOSS
+states no resistance value.**
+
+**D-097 DIAG IS NOT A SPECIFIED DETECTOR FOR VM ABSENT, AND ONLY C-18 CAN SETTLE
+IT.** The owner's DIAG lookup is recorded in parts.md. DIAG is pin 11, active
+high, push-pull, specified for the fault conditions the datasheet names, **and VM
+absent is not among them.** Separately: **uv_cp and VUV_VS are two different
+things and must not be conflated** - one is a charge-pump undervoltage flag, the
+other a VS supply threshold.
+
+This is D-070 arriving at a second pin. P-09 could not be closed from the
+datasheet; neither can this. **No agent may build a permissive-drop detection on
+DIAG on the strength of the word "diagnostic".** C-18 is now the only route, and
+C-18 already carries the ruling that running it IS the decision.
+
+**D-098 THE PI 5 PAD DEFAULTS ARE RECORDED, WITH THEIR PROVENANCE, AND THE
+EXTERNAL PULL IS AUTHORITATIVE.** In parts.md. GPIO0-8 come up pulled UP, GPIO9-27
+pulled DOWN, pad pull about 50 k. **GPIO2 and GPIO3 are held strongly high by
+1.8 to 2 k and are not a pad default at all.**
+
+Two things attach to this and both matter more than the numbers:
+
+- **The provenance is forum statements by Raspberry Pi engineers, not a
+  datasheet.** Recorded as such under G-15's spirit. It is the weakest provenance
+  of anything currently load-bearing in the tree.
+- **The HAT+ specification says fit an external resistor.** So the design rule is:
+  **every Pi pin whose power-on level matters gets an external pull, and the pad
+  default is a fallback nobody designs against.** That is the rule; the numbers
+  are only there to say which way an unfitted pin would drift while someone is
+  diagnosing.
+
+Routed to DISPLAY-BOX for its third-case sweep: **GPIO2 and GPIO3 cannot be used
+for anything whose safe power-on state is low**, and that is a hard exclusion, not
+a preference.
+
+**D-099 THE COLOUR MAP IS ACCEPTED.** colour-map-proposal.md, as proposed:
+
+| Token | Colour |
+|---|---|
+| CH1 | white |
+| CH2 | brown |
+| CH3 | grey |
+| CH4 | red |
+| CH5 | **blue** |
+| CH6 | **yellow** |
+| CH7 | black |
+| CH8 | violet |
+
+**The colour lives on the MARKER, not on the insulation.** That is the whole
+reason it survives: it does not compete with conductor colour, it does not require
+buying eight cable colours, and it does not break when a cable is replaced with
+whatever is on the shelf. **It is an identity axis added to the token, not a
+second token.** channel-token.md's forbidden list is unaffected: a colour is not a
+translation table and nothing is permitted to compute from it.
+
+**D-100 DOCUMENT 12, software-spec.md, IS ACCEPTED.** Accepted, not declared
+finished. Under agents.md rule 7 finished waits until another agent has built
+against it and found nothing, and the physical half of that begins at C-09. The
+acceptance covers what it contains and what it declined to contain: two decisions
+left in section 11 as blockers rather than invented in the body, and one of its
+own author's prior conclusions withdrawn inside it, F-070.
