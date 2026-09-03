@@ -280,3 +280,43 @@ Two things to return, and BOSS is not writing either:
    renumbering.
 
 Write in ONE pass at the end.
+
+## D-105, 2026-09-03. ROLE IS A PER-CHANNEL SETTING. THIS IS THE LARGEST CHANGE SINCE G-26.
+
+Owner's requirement. **Any channel may carry nutrient, pH-up or pH-down, assigned
+per channel and changeable.** The hardware always allowed it - eight identical
+pumps, identical tubing, drivers and wiring, nothing physical assigning a role.
+**What prevented it was software keying role to a channel number.**
+
+**The two mechanisms that need role both already exist in your document:**
+
+| Mechanism | Today | Under D-105 |
+|---|---|---|
+| The plan builder, which excludes pH from every injection group so pH runs alone and last | Reads a FIXED LIST | Reads the per-channel role setting |
+| The signed pH attribution, S-16 and D-083 | Needs the expected direction for a commanded channel | Reads the per-channel role setting |
+
+**Nothing is built against this yet.** A reach sweep is running to answer whether
+it touches more than the plan builder, the attribution check, the register schema
+and C-09. **Wait for it. Do not start on the assumption that those four are the
+whole list.**
+
+**THE COST, and it is named rather than absorbed.** A role that can change is a
+role someone can change wrongly. **A wrong role is worse than a wrong product: it
+makes the signed check expect the wrong direction, so the check CONFIRMS the error
+instead of catching it.** G-32 is amended to bind on role, and C-09 now verifies
+the role and not only the product.
+
+**Two things dissolve, and note that they DISSOLVE rather than shrink:**
+
+- **F-063.** There is no fixed pH pair to separate. **channel-token.md's S-16
+  non-adjacency rule is YOURS to restate: it stops being a constraint on the token
+  NUMBERING and becomes a constraint on the ASSIGNMENT - pH-up and pH-down are not
+  assigned to adjacent tokens or neighbouring colours.** That is strictly better,
+  because as written it was unsatisfiable without renumbering, which the
+  declaration's forbidden item 2 forbids.
+- **F-080 and the CH6 question.** No channel's role comes from elimination any
+  more, so CH6 needs no origin. Your section 3.2, which correctly told an
+  implementer not to promote the inference to a fact, is now moot in the right
+  direction.
+
+Write in ONE pass at the end, and not before the reach sweep reports.

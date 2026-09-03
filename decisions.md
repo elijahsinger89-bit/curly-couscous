@@ -75,7 +75,7 @@ changed reports to BOSS and does not act.
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
-| G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
+| G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
 | G-29 | **A SIGNAL'S NEAREST NEIGHBOUR MUST BE AT THE SAME POTENTIAL AS ITS PULL'S DESTINATION.** Pull down, pair with the return. Pull up, pair with the 5 V. **Then severed and shorted-to-neighbour produce the same level, and only one decision has to be right.** And it must be a PAIR: in a random-lay bundle you cannot guarantee which core ends up against which, **and a twisted pair guarantees adjacency by construction** | Frozen 2026-08-30, D-061. Polarity-agnostic, so it survives whichever way the missing link resolves. It is what dissolves F-033's "necessarily opposite" limit, **by construction rather than by circuit design**. **ANNOTATED 2026-09-03, D-103: THE RULE STANDS AND THE DISSOLUTION CLAIM DOES NOT HOLD FOR DIR.** D-096 reversed the convergence - severed goes HIGH by the board, shorted to a return-paired neighbour goes LOW - so F-033's limit is live again on that signal. BOSS annotated D-069, D-095 and F-053 with that reversal and MISSED this row and D-061. **G-29 is a construction rule and is still correct. What is withdrawn is that DIR satisfies it for free** |
@@ -775,7 +775,7 @@ So the S-05 fork now costs a device as well as a capability: flow-proving means 
 timing element is definite and circulation verification stays possible; level-based
 means no timing element and **circulation verification is foreclosed permanently.**
 
-**SUPERSEDED IN PART 2026-09-03 BY D-103. THAT LAST CLAUSE OVERSTATES, AND IT IS THE WORST INSTANCE IN THE FILE.** S-05's frozen row says a level element forecloses THE SHARED SOLUTION - that this element cannot subsume circulation verification. **D-060 escalated that to circulation verification being foreclosed PERMANENTLY, which is a claim about every route rather than about one element.** Three things on the table would change it:
+**CORRECTED 2026-09-03 BY D-103, at the owner's instruction, and it is the worst instance in the file. THE CLAUSE AS WRITTEN IS WITHDRAWN. WHAT D-060 SAYS IS: level-based means no timing element, and the SHARED SOLUTION is foreclosed - the element itself cannot subsume circulation verification. IT DOES NOT SAY CIRCULATION VERIFICATION IS FORECLOSED, AND IT NEVER HAD THE GROUND TO.** T-024, and the escalation happened in the summary rather than in the argument. S-05's frozen row says a level element forecloses THE SHARED SOLUTION - that this element cannot subsume circulation verification. **D-060 escalated that to circulation verification being foreclosed PERMANENTLY, which is a claim about every route rather than about one element.** Three things on the table would change it:
 
 - **F-003 is separately assigned** by D-016 to WATER with MAIN-PANEL at the other end, and S-05's own row says S-05 must not be answered before F-003 is.
 - **C-12's W-1 transient**, which C-12 itself calls the only F-003 option that costs nothing and adds nothing.
@@ -1857,4 +1857,79 @@ an ordinal.** An ordinal assigned by whoever finished first is not an identifier
 | PUMP-BOXES | Confirmed 6. The Vref instruction in pump-boxes.md was copied past the correction C-22 records |
 | The owner | **Confirmed 4.** "Auxiliary contact" for a 25 A power pole is in parts.md, which is AUTHORITATIVE under D-026. **F-051 says such a thing is not renamed silently, so BOSS has not touched it** |
 | Nobody yet | The 2 SUSPECTED and 3 CLEAN-BUT-FRAGILE are in the audit file. **CLEAN-BUT-FRAGILE means correctly sourced today but only one file carries the origin, so if it moved nothing would flag the copies. That is a watch item, not a defect** |
+
+**D-105 ROLE IS A PER-CHANNEL SETTING. ANY CHANNEL MAY CARRY NUTRIENT, pH-UP OR
+pH-DOWN.** Owner's requirement, 2026-09-03. **This is the largest change since
+G-26 and it dissolves rather than shrinks several open items.**
+
+**The hardware already allows it and always did.** All eight pumps are identical,
+the tubing, the drivers and the wiring are the same, and nothing physical assigns a
+role. **What prevented it was software keying role to a channel number.**
+
+**THE TWO MECHANISMS THAT NEED THE ROLE, AND BOTH ALREADY EXIST:**
+
+| Mechanism | What it does with role today | What it does instead |
+|---|---|---|
+| The plan builder | Excludes pH channels from every injection group so pH runs alone and last. **Reads a FIXED LIST** | Reads the per-channel role setting |
+| The signed pH attribution, S-16 and D-083 | Needs to know which direction to expect from a commanded channel, because pH-up and pH-down move the probe opposite ways | Reads the per-channel role setting |
+
+**Everything downstream follows from the ASSIGNMENT rather than from the NUMBER.**
+
+**THE COST, NAMED RATHER THAN ABSORBED, in the owner's words: a role that can
+change is a role someone can change wrongly, and a wrong role is WORSE than a wrong
+product - it makes the signed check expect the wrong direction, so the check
+CONFIRMS the error.** That is G-32 arriving through the role instead of through the
+label, and **G-32 is amended above to bind on role.**
+
+**So C-09 verifies the ROLE, not only the product.** Added to its script alongside
+D-084's duty-class question. C-09 was already the only check that catches a
+build-time labelling error, and it is now the only check that catches a
+configuration one.
+
+**F-063 DISSOLVES. It does not shrink.** There is no fixed pH pair to separate,
+because any two channels could be the pair. **Whatever separation matters becomes a
+property of the ASSIGNMENT at commissioning rather than of the token numbering.**
+That also disposes of F-080 and of the CH6 question underneath it: **CH6's role no
+longer needs an origin, because no channel's role comes from elimination any more.**
+
+**The owner's CH6 answer is recorded anyway, because it stands on its own and
+because a later reader will hit F-080 before this entry:** eight channels, two of
+them pH, the controller marks CH5 as pH-down by ROLE through the blocked-channels
+path, and there is no third pH role, **so CH6 is pH-up by elimination FROM A ROLE
+MARKING and not from the retracted seed.** The elimination is sound. **What BOSS
+cannot confirm from the tree is whether the config carries a role marking for CH6
+the way it does for CH5** - channel-register.md states the CH5 marking and calls
+CH6 an inference, and nothing in the tree shows the blocked list itself. **That is
+an owner lookup, not an agent question, and it is now optional rather than
+load-bearing.**
+
+**THE MARKER GATE EXTENDS.** F-080 gated the channel markers on C-09 binding
+tokens to products. **It now gates on C-09 binding both PRODUCT and ROLE.** Still
+free before C-09, still eight relabels after.
+
+**WHAT IT TOUCHES. The owner's expectation is the plan builder, the attribution
+check, the register schema and C-09, and asked whether it reaches further. BOSS IS
+NOT ANSWERING THAT FROM RECALL.** A reach sweep is running across the whole tree.
+**Until it reports, BOSS asserts nothing about what else is keyed to a channel
+number, and NOTHING IS BUILT against this decision.** The four the owner named are
+certain; the question is only whether there is a fifth.
+
+**Also running: the downstream trace**, graded per the owner's instruction on WHICH
+of three different facts each decision needs - **the pair being pH, the pair being
+ADJACENT, or the specific identity of CH6.** Those are three dependencies and they
+fail differently. The trace stays useful after this decision because it says which
+rows dissolve with F-063 and which were never about CH6 at all.
+
+**D-106 THE C-09 SCRIPT TAKES BOTH QUESTIONS.** D-084's duty class, at the owner's
+instruction, and D-105's role. **One line each on a script that already confirms
+which product is on which channel, and both close a residual for free.**
+
+**D-107 D-013'S PREMISE IS UNTESTABLE BY CONSTRUCTION, AND THAT GOES ON THE ROW
+RATHER THAN IN A SCOPE NOTE.** Owner's instruction. **The decision stands: fulvic
+stays unattributed and O-19 does not come back.** What is now stated where a reader
+will find it: **D-013 asserts fulvic moves neither EC nor pH meaningfully, no
+measurement is named for that anywhere, and C-04 is scoped "per EC-moving channel"
+- so the assumption removes the channel from the only measurement that could
+falsify it.** F-078. **A premise nobody measured, protected from measurement by
+itself.**
 

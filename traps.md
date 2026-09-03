@@ -3,6 +3,60 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-025 Knowing a pattern does not stop you producing it. The interval was four entries.
+
+**Put at the top at the owner's instruction, 2026-09-03, and it belongs there.**
+
+D-101 caught document 12 running two questions together in one sentence: the
+command half of a claim, which was structural, and the observe half, which was not.
+BOSS wrote the finding, froze G-36 out of it, and routed it.
+
+**Four entries later, in D-097, BOSS did the same thing.** "C-18 is now the only
+route" ran together what a driver DOES with VM absent, which is structural as far
+as documentation goes, and whether the Pi can KNOW the permissive dropped, which is
+current and which S-08 already answers. **It was caught by an audit, not by the
+agent that had just written the rule against it.**
+
+**Four instances across both builds now, all self-caught, none caught at the moment
+of writing.** The parallel build has three.
+
+**What this does NOT mean.** It is not an argument for more care, and "be careful"
+is not a mitigation. **The recognition test is the interval: the closer you are to
+having just articulated a pattern, the more confident you are that you are not
+committing it, and confidence is the thing that removes the check.** A rule you
+froze this morning does not inspect your afternoon.
+
+**What actually caught all four was a second reader with the rule in hand and no
+memory of having written it.** That is an argument for the audit cadence, not for
+introspection.
+
+## T-024 A claim about ONE ROUTE escalated into a claim about ALL ROUTES
+
+Hit on 2026-09-03, found by AUDIT grading decisions.md. **Distinct from T-023 and
+the owner named the distinction: the escalation happens in the SUMMARY rather than
+in the argument.**
+
+S-05's frozen row says a LEVEL element cannot subsume circulation verification.
+That is a claim about one element: this device senses supply, so it reads healthy
+through a fouled impeller and cannot witness flow.
+
+**D-060's summary line says circulation verification is foreclosed PERMANENTLY.**
+That is a claim about every route. Nothing in the argument above it supports the
+jump, and three other routes were on file the whole time: F-003 separately assigned
+under D-016, C-12's W-1 transient, and S-20, which exists on either fork.
+
+**Why the summary is where it happens.** The argument names its subject and stays
+with it. The summary compresses, and compression drops the qualifier before it
+drops the claim. **"This element cannot" becomes "it cannot" becomes "it is
+impossible", and each step reads as the same sentence to whoever wrote it.**
+
+**The recognition test.** When a line says something is foreclosed, ask what the
+SUBJECT of the sentence above it was. If the argument was about one device, one
+signal, one fork or one file, and the summary is about the capability, the
+escalation happened in between. **And under G-36 that is now a grading error as
+well as a wording one: a claim about one route is CURRENT by construction, because
+the other routes are what would change it.**
+
 ## T-001 Splitting one discipline across two agents and calling the result a boundary
 
 Hit on 2026-08-30, by BOSS, in the first agent proposal.

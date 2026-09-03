@@ -1,5 +1,26 @@
 # DOSING on F-004: the wet side of the settling time
 
+> **STOP. CORRECTION 2026-09-03, D-105, BEFORE YOU RUN ANYTHING IN THIS FILE.**
+>
+> **commissioning.md names this file as C-02's FULL PROCEDURE, so a person runs it.**
+>
+> **The gating sentence below is WRONG and is not to be executed. There is no
+> circulation-commanded signal and there cannot be one under G-26 and D-052: the Pi
+> commands ONE coil, the driver permissive, and nothing else. Do not look for that
+> signal, do not wait for it, and do not treat its absence as a fault.**
+>
+> **What the operator does instead is C-23, in commissioning.md: look at the pump,
+> confirm it is running, confirm it will still be running at the end of the window,
+> and start the window only then. If the pump starts or stops mid-window the run is
+> DISCARDED, not adjusted.**
+>
+> **The PHYSICS in this file is unaffected and stands: the settling clock counts
+> CIRCULATING time and not wall-clock time, and if the loop stops, settling stops.
+> That is the part DOSING established and it is why the operator condition exists at
+> all. Only the mechanism for knowing it was wrong.** F-079.
+>
+> Body rewrite routed to DOSING. This banner is the safety fix and it is BOSS's.
+
 Returned 2026-08-30. CONTROL-SOFTWARE answered what to do with the number, in
 subsystems/control-software-f004.md. This is what the number is made of. Nothing
 decided, nothing changed. DOSING reported stopped part-way.
@@ -34,6 +55,18 @@ CIRCULATING time, not wall-clock time. If the loop stops, settling stops. The
 timer must be gated on the circulation pump being commanded on, and per F-003
 nothing can confirm it is actually running, so commanded-on is the best available
 and its weakness is to be recorded rather than hidden.
+
+> **THAT SENTENCE IS WITHDRAWN, 2026-09-03, D-105. THERE IS NO COMMANDED-ON SIGNAL.**
+> It traces through control-software-f004.md to S-09 as first written, and S-09 as
+> first written came from the owner's original project description, which D-052
+> records verbatim as "That was loose." F-027, D-052 and G-26 killed it on
+> 2026-08-30 and it survived here because nothing re-derived it. F-079, and the
+> shape is G-37: a citation is not a source.
+>
+> **The constraint it was trying to express is real and survives: settling counts
+> circulating time. The operator enforces it under C-23. Software cannot, and per
+> G-36 that half is STRUCTURAL - it follows from G-26 - while whether the Pi can
+> OBSERVE circulation is CURRENT and turns on S-20.**
 
 ## Derivable, or measured? Measured.
 
