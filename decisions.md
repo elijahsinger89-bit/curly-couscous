@@ -73,6 +73,7 @@ changed reports to BOSS and does not act.
 | G-33 | **THE SEED, THE CAPACITY AND THE POURED VOLUME ARE THREE DIFFERENT QUANTITIES AND ARE NEVER ONE COLUMN.** A seed is what a file had to contain. A capacity is what a vessel holds. A poured volume is what the arithmetic runs on. **None of the three was the same number and all three were one column** | Frozen 2026-09-02, the standing shape rather than a local fix. See T-018 and D-086 |
 | G-34 | **WHERE A RULE CAN BE WRITTEN AGAINST A ROLE RATHER THAN AGAINST A DIMENSION, IT SHOULD BE.** A rule keyed to what a thing IS outlives a rule keyed to how big it is | Frozen 2026-09-02. Established by what survived the seed retraction: everything keyed to volume fell, everything keyed to role stood |
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
+| G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023 |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -1428,6 +1429,8 @@ one nobody else has. They get built when there is something to run them against.
 **D-095 Document 12 exists. software-spec.md, 1154 lines, twelve sections, written in
 one pass on the third attempt after two container restarts killed the first two.**
 
+**SUPERSEDED IN PART 2026-09-03 BY D-101.** The first of the three things this entry banked as STRUCTURALLY IMPOSSIBLE, positive confirmation that a settle window was valid, **is only CURRENTLY impossible.** D-060 says flow-proving keeps circulation verification possible. The entry is kept whole, per the rule on reversals. Read the rest of it knowing the grade of one of its three was wrong.
+
 **It is the first builder-facing document in the project and it is PARTIAL in a stated
 way**, which is the right shape: what is implementable today, what is blocked with the
 blocker named, and - the distinction that matters most - **what is STRUCTURALLY
@@ -1573,3 +1576,73 @@ against it and found nothing, and the physical half of that begins at C-09. The
 acceptance covers what it contains and what it declined to contain: two decisions
 left in section 11 as blockers rather than invented in the body, and one of its
 own author's prior conclusions withdrawn inside it, F-070.
+
+**D-101 AUDIT RUN 3 IS ACCEPTED, AND IT REVERSES PART OF D-095 AND PART OF WHAT
+BOSS WROTE HOURS EARLIER.** audit/2026-09-03-doc12-vs-frozen.md. Pairwise against
+the frozen rows document 12 claims to restate, plus the structural-versus-current
+sweep the owner asked for.
+
+| | Count |
+|---|---|
+| Pairs compared | 126 |
+| Clean RESTATEMENT | 111 |
+| DRIFT | 4 |
+| WIDENING | 3 |
+| OMISSION | 5 |
+| CONTRADICTION | 1 |
+| STALE | 1 |
+| MIS-TRACE | 1 |
+| Impossibility claims found | 24: 17 structural, 6 current, 1 mixed |
+
+**THE RULING, and it is the reason the second half of the run was worth asking
+for.** Document 12 calls positive confirmation of settle-window validity
+STRUCTURALLY impossible. **D-060 says the opposite in frozen text: flow-proving
+means a timing element is definite and circulation verification stays possible.**
+So the claim is CURRENT, not structural, and the decision that would close the
+door is S-05, which WATER holds open on purpose.
+
+Three separate errors stack, and BOSS made the third:
+
+1. The support document 12 cites, F-001 limit 1 and F-003, is about the pump AT
+   REST. A settle window is by design inside a RUNNING period, per D-063.
+2. **G-26 restricts what the Pi DRIVES and not what it READS**, and S-18's row is
+   the frozen statement of that boundary. Document 12 respects it at 4.3 and blurs
+   it at 6.4, where "neither commands nor observes" runs the two halves together.
+   **The command half is structural. The observe half is not, and G-26 is not the
+   rule that makes it so.** S-20 reports a second pole of K-DRY to the Pi and
+   circulation is a pole on that same relay under D-058.
+3. **BOSS BANKED IT IN D-095 AND THEN PROPAGATED IT INTO C-23 THE SAME DAY.** C-23
+   cited software-spec.md as its authority. **The claim was in two files, one
+   citing the other, and neither cited D-060 or S-20.** C-23's reason is corrected.
+   D-095's line is superseded here rather than deleted, per the rule on reversals.
+
+**The cost, which is what makes it expensive rather than untidy:** D-060 attaches a
+price to keeping the door open. Flow-proving costs a timing element. **Nobody pays
+for a capability they have been told is impossible**, so the false structural claim
+would have foreclosed S-05 by making the flow-proving fork look like waste - and
+then the claim becomes true retroactively.
+
+**The other five current-not-structural claims** are in the audit file's Part 2
+table with the sentence that decides each: loop movement and the slow failure, 2.10
+and 2.18, where "the mitigation is not a sensor" states a design preference as a
+property; the chiller tagging at 6.4 item 4 and 11.5, which S-18's row already
+names a Pi READ as one of three exits from; and 7.1's "never name a cause", right
+today, but grounded in "the Pi has no such input" rather than "the Pi may not have
+one", and only the second would be structural.
+
+**And AUDIT recorded two claims document 12 got RIGHT**, 11.16 and 11.12, so the
+pattern is visible as a standard rather than only as a defect. 11.12 is T-003
+observed exactly by a document that had every incentive to assert an absence.
+
+**ROUTED, and none of it is BOSS's to write:**
+
+| To | What |
+|---|---|
+| CONTROL-SOFTWARE | Its own document. 2.17, 11.6 and section 12 restate a structural claim the frozen tree does not support; 6.4 items 2, 3, 4 and 5, 4.4, 7.1 and 7.9 need their grade named under G-36. Plus the four DRIFT, three WIDENING and five OMISSION rows, of which 1.15 is the one that bites: **section 3.4 says how a channel enters OUT OF SERVICE and never how it leaves, and 5.2 admission checks a live token plus a non-void C-01 and C-17 but NOT C-09** |
+| WATER, and to the owner | **S-05 is carrying a cost it was not told about.** It was held open deliberately. It has since been described, in two files, as a fork one side of which is already impossible. It is not. D-060's price stands and the capability it buys is real |
+| CONTROL-SOFTWARE | N-20 and channel-token.md both say the colours are not bound. **D-099 bound them 2026-09-03.** Stale by hours, and the fix is the declaration's owner's, not BOSS's |
+| MAIN-PANEL and CONTROL-SOFTWARE | **F-055 is absent from document 12**, and the readback discipline, both permissive faults and N-14 all run on the contact F-055 is about |
+
+**Not routed and left as AUDIT filed it:** 1.11, where document 12 is AHEAD of
+channel-register.md on G-33. Reported by AUDIT because it runs the other way, which
+is the right instinct and is recorded here so it is not lost as a non-defect.

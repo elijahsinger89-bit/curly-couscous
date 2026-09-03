@@ -185,3 +185,69 @@ distinguishes circulating from not-circulating at rest, and F-001 limit 1 says
 the same from the other side. So any circulation fault it contains can only be
 raised from EC behaviour during a dose, or from nothing. That is a question for
 whoever can read the Pi.
+
+## OPEN, routed 2026-09-03 by D-101. AUDIT RUN 3 ON YOUR DOCUMENT.
+
+Read audit/2026-09-03-doc12-vs-frozen.md in full. 126 pairs compared, 111 clean
+restatements. **The document held up. What follows is the fifteen that did not,
+and one of them is expensive.**
+
+**1. THE STRUCTURAL CLAIM THAT IS ONLY CURRENT. 2.17, 11.6, section 12, and 6.4.**
+
+You call positive confirmation of settle-window validity structurally impossible.
+**D-060 says the opposite in frozen text: flow-proving means a timing element is
+definite and circulation verification stays possible.** Three things to check
+against your own text:
+
+- The support you cite, F-001 limit 1 and F-003, is about the pump AT REST. A
+  settle window sits inside a RUNNING period by design, under D-063.
+- **G-26 restricts what the Pi DRIVES and not what it READS.** S-18's row is the
+  frozen statement of that. You respect the boundary at 4.3 and blur it at 6.4,
+  where "neither commands nor observes" runs a structural half and a current half
+  together.
+- S-20 reports a second pole of K-DRY to the Pi, and circulation is a pole on that
+  same relay under D-058. Your own Claim B concedes the voiding mechanism and then
+  6.4 item 3 says flatly "not enforceable in software".
+
+**This one is expensive rather than untidy, and the reason is not editorial.**
+D-060 prices the flow-proving fork of S-05 at one timing element. **Nobody pays for
+a capability they have been told is impossible.** Decline to pay and S-05 closes
+level-based, and the claim becomes true retroactively. T-023.
+
+BOSS made this worse, not you alone: D-095 banked it and C-23 copied it citing your
+document. C-23 is corrected and D-095 is superseded in part. **The document is
+yours to correct and BOSS has not touched it.**
+
+**2. GRADE EVERY IMPOSSIBILITY CLAIM UNDER G-36, NEWLY FROZEN.** Structural means
+a frozen rule or physics and no addition could change it. Current means what has
+been bought, wired or decided so far, and a current claim NAMES WHAT WOULD CHANGE
+IT. AUDIT found 24 claims: 17 structural, 6 current, 1 mixed. The six are in its
+Part 2 table with the deciding sentence for each. **Two of yours already do it
+correctly, 11.16 and 11.12, and 11.16 is the model: the condition that would change
+it is named and the rule that survives the change is stated.**
+
+**3. THE ONE THAT BITES IN THE BUILD. Section 3.4 and 5.2.** F-075. **3.4 says how
+a channel enters OUT OF SERVICE and never how it leaves.** And 5.2's admission
+check is a live token plus a non-void C-01 and C-17, and **does not include C-09.**
+A channel whose driver was replaced is readmitted on a C-01 that may have been
+re-measured against the wrong channel, which is the one failure S-19 and D-022 both
+say passes every other check in the system.
+
+**4. N-20 AND channel-token.md ARE BOTH STALE BY HOURS.** Both say the colours are
+not bound. **D-099 bound them 2026-09-03.** The declaration is yours; BOSS does not
+edit it. Note that the colour lives on the MARKER and is an identity axis on the
+token, not a second token, so your forbidden list is unaffected: nothing computes
+from a colour.
+
+**5. THE REST**, in the audit file with section numbers: four DRIFT, three WIDENING,
+five OMISSION. The two worth naming here are **1.2 and 1.3, where G-16 and G-19 as
+you state them are WIDER than the frozen rules they cite** - widened in the safe
+direction, but an implementer can cite the frozen text against you, so either the
+rule moves or the document narrows. And **1.5, where 2.5.5's shipping rule traces
+to D-012 and is not in D-012**; its home is D-083's recital.
+
+**6. F-055 IS ABSENT FROM YOUR DOCUMENT** and your readback discipline, both
+permissive faults and N-14 all run on the contact F-055 is about.
+
+Write the correction in ONE pass at the end, per the invocation rule. State no
+value, no pin and no part number from memory.

@@ -114,3 +114,20 @@ C-11 and C-12.
 
 Do not add jug floats or dosing line flow meters. See decisions.md G-04 and
 G-05. Do not set pipe size, tank fitting size or pump counts from memory.
+
+## FOR YOUR INFORMATION, 2026-09-03, D-101. S-05 WAS CARRYING A COST NOBODY TOLD YOU ABOUT.
+
+You held S-05 open deliberately, on the ground that a FLOW-proving element can
+subsume dry-run protection while a LEVEL element can never subsume circulation
+verification. That reasoning stands and D-060 priced it: flow-proving costs a
+timing element, level-based costs the capability permanently.
+
+**What you were not told is that document 12 has since described that capability as
+STRUCTURALLY IMPOSSIBLE, in three places, and commissioning C-23 copied the claim.**
+AUDIT run 3 found it and D-101 reverses it. **The claim was wrong.** C-23 is
+corrected, D-095 is superseded in part, and the document is with CONTROL-SOFTWARE.
+
+Nothing is being asked of you and S-05 is not being reopened. **This is here so that
+if S-05 comes back to you, you decide it against D-060's real price and not against
+a capability someone had written off.** T-023 is why it is worth telling you at all:
+nobody pays for a door they have been told is bricked up.

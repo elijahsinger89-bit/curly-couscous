@@ -424,3 +424,32 @@ provisional until something is bought. Roles are decided earlier and change less
 **Where a rule can be written against a role rather than against a dimension, it should
 be.**
 
+## T-023. A claim of impossibility propagates. A claim of fact gets re-derived.
+
+BOSS accepted document 12, banked its structural claims in D-095, and hours later
+wrote one of them into commissioning C-23 citing document 12 as the authority. The
+claim was then in two files, one citing the other, and **neither cited D-060, which
+contradicts it, or S-20, which is the row that would deliver the capability.**
+
+**The mechanism, and it is not carelessness.** When an agent needs a FACT it goes
+and gets it, because it has to build on it and a wrong one shows up in the build.
+When an agent is told something is IMPOSSIBLE it stops, because there is nothing to
+build and therefore nothing to check the claim against. **The claim's own content
+removes the occasion to test it.** That is why it travels further and faster than
+anything true.
+
+**And it is self-fulfilling where the impossibility is only CURRENT.** D-060 prices
+the flow-proving fork of S-05 at one timing element. Nobody pays for a capability
+they have been told is impossible. Decline to pay and the fork closes, and the
+false claim becomes a true one, with no step in between that anyone would notice.
+
+**The recognition test.** When you write or copy the word "cannot", ask which grade
+it is under G-36 and what would change it. If you cannot name what would change it,
+you have not established that nothing would. **The absence of a route is not the
+absence of a possible route, which is T-003 arriving on capabilities instead of on
+files.**
+
+**What caught it was not review. It was the owner's extra instruction** to ask
+whether anything stated as structurally impossible is only currently impossible.
+Nobody had asked that question of any document before, and it found six.
+
