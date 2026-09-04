@@ -3346,3 +3346,31 @@ all - **D-046's precedent is that receptacles are panel mounted and cords are no
 fed through grips** - which would remove the named failure from that face at zero
 cost. DISPLAY-BOX's call, being made now.
 
+**D-161 P-07 ENTERS THE DISPLAY BOX AS A CABLE THROUGH A GRIP. NO RECEPTACLE GOES
+IN ANY FACE OF THAT BOX - AND THE CHEAP ANSWER WAS WRONG ON ITS OWN TERMS.**
+
+**The correction is the finding: A FACE RECEPTACLE DOES NOT REMOVE LINE FROM THAT
+FACE.** LINE has to reach the 5 V rail inside the box under P-09, **so a face
+receptacle is the same LINE in the same band with its conductors bare of jacket
+behind the face. D-049's and F-019's short cases are untouched.**
+
+**BOSS passed along "zero cost" from INTERCONNECT without testing it. DISPLAY-BOX
+tested it.** The remedy was never free; it was invisible.
+
+Three further reasons, all from inside the box: **P-07's cord cap already exists at
+End A, where D-046 actually applies, and a second cap at this end is a DISCONNECTING
+MEANS on the one supply P-07 froze as never switched and P-09 froze as unswitched -
+and it fails silently under G-26.** D-092's own words call a receptacle whose cord
+cap does not seal a non-sealing penetration, **so the receptacle form imports the
+main panel's unrated-as-assembled condition into a box that otherwise has only the
+display cutout.** And the only available face is the bottom, **where a cap would
+hang downward on friction and a grip clamps.**
+
+**Entry order is unchanged. The gap between entries 7 and 8 survives and spacing is
+still INTERCONNECT's, now waiting only on F-030 rather than on DISPLAY-BOX.**
+
+**F-114: WHERE THE AC-DC CONVERSION IS MOUNTED IS STATED NOWHERE** - not in
+parts.md, not in P-07 or P-09, not in RUN-009. **It is the one thing that would
+change this answer, it is DISPLAY-BOX's, and DISPLAY-BOX declined to guess it.**
+Graded CURRENT.
+
