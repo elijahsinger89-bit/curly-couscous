@@ -195,7 +195,7 @@ and never by position, because relays are not interchangeable once bought.
 order.md's envelope map gives six real names: K-PERM, K-FILL-D-Q, K-DRY-Q, K-FILL-S,
 K-FILL-D-P, K-DRY-P. **The driver permissive contactor has none.** parts.md,
 interface-table.md S-08 and the ladder all call it by its part family, and the ladder
-distinguishes two of them as **"22.32 #1" and "22.32 #2"**.
+distinguishes two of them as **"KM-DRV" and "KM-CHIL"**.
 
 **That is a part number plus an ordinal, which is precisely the two things G-28 and
 T-013 forbid a device identity from being.** S-08's terminal is on it. **So the

@@ -3099,7 +3099,7 @@ INTERCONNECT's and MAIN-PANEL's respectively.
 
 **D-151 THE DRIVER PERMISSIVE CONTACTOR HAS NO NAME, AND S-08's TERMINAL IS ON IT.
 F-105.** order.md gives six real envelope names; **this device has none, and the
-ladder distinguishes two of them as "22.32 #1" and "#2".**
+ladder distinguishes two of them as "KM-DRV" and "#2".**
 
 **That is a part number plus an ordinal, which are the two things G-28 and T-013
 forbid an identity from being.** The relays already have names - K-FILL-S,
@@ -3246,4 +3246,38 @@ class of the circuit it protects, which is one value simpler. Accepted.**
 and nobody has written it. 20 of D6's 43 empty cells are that one column, and
 RUN-010, RUN-018 and RUN-019 are ONE WORD from complete.** MAIN-PANEL is already
 tasked with it.
+
+**D-157 D2 EXISTS AND THE PANEL'S PERMITTED STATE IS SETTLED. electrical-schematic.md.**
+31 rungs, 25 live OPEN marks of 31 issued, keys never renumbered because
+INTERCONNECT and WATER already cite them.
+
+**THE ONE THAT CHANGES WHAT THE MACHINE DOES: K-DRY ENERGISED IS THE PERMITTED
+STATE.** D-154 answered it without naming it, and drawing the panel is what made
+that visible. **It closes the reset-block question, makes the de-energised-state
+choice free again, and WITHDRAWS main-panel-buy.md's NC reset block in favour of
+NO.** Three open marks closed by one answer that was already on file.
+
+**THE CONTACTORS ARE NAMED AND THE G-42 PASS IS DONE. KM-DRV** is the driver
+permissive contactor, **KM-CHIL** the chiller and loop-pump receptacle switching
+element. 16 references across 8 files. **KM- separates contactors from K- relays,
+and KM-DRV is deliberately not called "permissive" so it cannot collide with
+K-PERM.** Both old designations are recorded. F-105 closes.
+
+**F-107 IS ANSWERED: THE ROWS WERE MISSING, NOT THE CONDUCTORS WRONG.** RUN-007
+carries the D-042 dose-inhibit leg; RUN-008 carries S-20's complement. **Each is the
+other leg of a changeover pole whose first leg was already a row.**
+
+**So S-03 and S-20 are AMENDED to state that each is a TWO-CONDUCTOR PAIR FROM ONE
+CHANGEOVER POLE, rather than creating S-21 and S-22.** MAIN-PANEL's recommendation,
+taken: **under G-45 two new rows would be a written contract where one row is a
+mechanism.** G-27 now applies to both - same potential, same cable, and any state
+where both agree is a broken sense path.
+
+**THE DUTY VOCABULARY IS ARC / COIL / SENSE**, stated from D-072's three tiers
+rather than invented. **It unblocks 20 of D6's 43 empty cells and three rows that
+were one word from complete.** Passed to INTERCONNECT.
+
+**Also delivered and logged: the storage low lands in the K-FILL-D chain and not the
+permissive string. F-110 is drawn on its rung with a G-44 cost sheet and no remedy
+ruled, because the open mark above it is upstream of the remedy.**
 

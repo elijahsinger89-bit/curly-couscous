@@ -135,7 +135,7 @@ memory. Return the requirement and a search term.
 PERMISSIVE CONTACTOR HAS NO NAME.**
 
 order.md gives six real envelope names. **This device has none, and your own ladder
-distinguishes two of them as "22.32 #1" and "#2". That is A PART NUMBER PLUS AN
+distinguishes two of them as "KM-DRV" and "#2". That is A PART NUMBER PLUS AN
 ORDINAL - the two things G-28 and T-013 forbid an identity from being.**
 
 You named the relays: K-FILL-S, K-FILL-D, K-DRY, K-PERM. **The contactors were

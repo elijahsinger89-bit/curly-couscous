@@ -44,8 +44,8 @@ Tightest arrangement MAIN-PANEL could draw, roughly 13 to 15 poles of 16 used:
 | K-FILL-D, day tank | seal-in, transfer pump 120 V, **S-03 to the Pi**, PL-G | **0, FULL** |
 | K-CIRC | manifold pump 120 V, optional dry contact to the Pi | 2 to 3 |
 | K-DRY | interrupt K-CIRC, dry contact to the Pi | **RELAY DOES NOT EXIST** |
-| 22.32 #1, permissive | 24 V rail to both pump boxes, S-08 readback | **0, FULL** |
-| 22.32 #2, chiller | chiller, loop submersible per G-12 | 0, unless one pole carries both |
+| KM-DRV, permissive | 24 V rail to both pump boxes, S-08 readback | **0, FULL** |
+| KM-CHIL, chiller | chiller, loop submersible per G-12 | 0, unless one pole carries both |
 
 Two things make K-PERM full rather than roomy:
 
@@ -88,7 +88,7 @@ far broader than the fault.
 | 2.3 | K-FILL-S spare poles | The storage fill relay is closed | PL-G's other half if filling covers both fills |
 | 2.4 | K-DRY spare poles, IF the fifth relay is bought | The dry-run sense element currently reads made | **The ONLY contact in the whole panel that would say something about the WET SIDE rather than about the panel's own commands, and the closest thing to "healthy" that could ever exist here.** It does not exist yet: S-05 is open and WATER is holding it |
 | 2.5 | The leak console's unused Form C leg | The leak console reports no leak | **A genuinely distinct bit: PL-R lights for a leak, an E-stop or any lost interlock and cannot tell you which.** Cost: the common is shared with the string leg so this sits at 120 V class, and CBL-06 already requires every conductor in that jacket to be 600 V rated |
-| 2.6 | 22.32 #2 pole 2, only if one pole may carry both chiller loads | The chiller circuit is energised | **Nothing states whether G-12 means one pole per load or one pole feeding both.** Needs the loop submersible's nameplate and locked rotor, and parts.md is explicit that the DBE-200's LRA is not published and any inrush figure must be labelled an estimate |
+| 2.6 | KM-CHIL pole 2, only if one pole may carry both chiller loads | The chiller circuit is energised | **Nothing states whether G-12 means one pole per load or one pole feeding both.** Needs the loop submersible's nameplate and locked rotor, and parts.md is explicit that the DBE-200's LRA is not published and any inrush figure must be labelled an estimate |
 | 2.7 | **Not a contact: a lamp across the outgoing 24 V rail, downstream of the permissive contactor** | **Motor supply is actually PRESENT on the conductor leaving this panel for the pump boxes** | MAIN-PANEL's recommendation. See below |
 | 2.8 | Not a contact: a lamp across the NDR-240-24 output | Line power is present and the 24 V supply is up | Costs no pole, and **it is the only lamp still lit when everything else has dropped, which is exactly how you tell a dead panel from a tripped one** |
 

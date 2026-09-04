@@ -152,14 +152,14 @@ asks and this drawing inherits no answer. Every float is a `< ? >` box.
 15  < ?17  COIL POSITIVE: RAW 24 V, OR node PB >
     |            |
     |            +---( )---.......... ULN2003 SINK, BCM 18, display box
-    |             22.32 #1     S-07 and S-09.  SUP-1 across the coil,
+    |             KM-DRV     S-07 and S-09.  SUP-1 across the coil,
     |             coil         taken as given.  T-006 and T-007 apply:
     |                          the coil positive is HERE, the return is
     |                          4 ft away and the common must be traced
     |                          by hand
     |
 16  +--] [-----------+----.......... P-06 to PUMP BOX A
-    |  22.32 #1      |
+    |  KM-DRV      |
     |  pole 1        +----.......... P-06 to PUMP BOX B
     |  terminals 1,2      One pole for VM distribution, both feeds off one
     |                     terminal downstream of it.  D-029, given
@@ -413,7 +413,7 @@ purchase behind it and rule 5 says I stop. What I am recording is that the tree
 believes it has one spare contactor and one homeless load and has not put them in
 the same sentence.
 
-**Second, and this is the sharper half. If that load lands on 22.32 #2, three things
+**Second, and this is the sharper half. If that load lands on KM-CHIL, three things
 change at once.** Its pole 2 becomes free, which is **exactly the spare pole S-18
 needed** - and D-108 graded that exit as gone, upgrading D-064's claim from CURRENT
 to STRUCTURAL on the reasoning that "there is no chiller contactor, so there is no
