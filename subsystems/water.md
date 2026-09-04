@@ -569,3 +569,19 @@ reach it. **BOSS proposes no placement.**
 
 **Worth noting how it was nearly missed: D-147 arrived as good news that removed a
 constraint, and good news is not normally re-examined.**
+
+## TWO FREE CHANGES INTO THE FLOAT REQUIREMENT, D-156. MADE, NOT PROPOSED.
+
+**1. THE FLOAT CORD'S INSULATION IS RATED FOR THE HIGHEST VOLTAGE IN THE BUNDLE.**
+The standpipe puts 24 V float cords and 120 V pump cords up one pipe by
+construction. **A cord's insulation is a PURCHASING ATTRIBUTE, not a build step -
+free while your requirement is open, money after the floats are bought.** Put it in
+with F-089's contact power and F-112's AC-to-DC half.
+
+**2. FLOAT CORDS AND PUMP CORDS GET SEPARATE TIE GROUPS.** Into D-121's method.
+Costs nothing.
+
+**And the expensive failure is already paid for, so nothing else is added:** under
+D-154 every float is a series element, **so a float-to-float bridge on one pipe
+shorts out the elements between the bridge points and CLOSES THE CHAIN AROUND AN
+OPEN FLOAT.** D-130's overflow was bought for exactly that.

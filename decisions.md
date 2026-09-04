@@ -2322,6 +2322,8 @@ Owner, D-117 accepted.
 **One rigid pipe per tank carrying every float and every cord, hung off the rim,
 with nothing hanging off a float body.**
 
+**ONE ADDITION 2026-09-04, D-156, and it is free: FLOAT CORDS AND PUMP CORDS GET SEPARATE TIE GROUPS ON THE PIPE.** The standpipe guarantees worst-case adjacency by construction, F-113, and this is the only remedy that survives G-44 - shields, conduits and barriers cost money and block the tie a person must reach.
+
 **NO DIMENSION, NO MATERIAL, NO ATTACHMENT DETAIL, NO COUNT.** The owner's words
 and they are the whole scope of the adoption. **What is adopted is a rule about
 what holds what.**
@@ -3207,4 +3209,41 @@ direction. **That sentence is the standing correction and it is frozen as G-45.*
 **The build order was FOUND rather than derived**, distributed across the old set's
 purchase workbook, its numbered step pages, its commissioning checklist and its
 maintenance log baseline. G-40b working as intended.
+
+**D-156 TWO FREE CHANGES FROM D6, MADE RATHER THAN ASKED ABOUT. BOTH ARE FREE NOW
+AND COST MONEY LATER.** cable-and-terminal-schedule.md exists; INTERCONNECT's F-113
+answer produced both.
+
+**1. THE FLOAT CORD'S INSULATION IS RATED FOR THE HIGHEST VOLTAGE IN THE BUNDLE.**
+Into WATER's float requirement now. **D-121's standpipe puts 24 V float cords and
+120 V pump cords up one pipe by construction, and a cord's insulation is a
+PURCHASING ATTRIBUTE, not a build step** - free while the requirement is open, money
+after the floats are bought. F-113.
+
+**2. SEPARATE TIE GROUPS FOR FLOAT CORDS AND PUMP CORDS ON THE STANDPIPE.** Into
+D-121's method. Costs nothing, changes no part, and it is the only adjacency
+remedy that survives G-44: **shields, conduits and barriers cost money, block the
+tie a person must reach under D-131, and none of them touches the expensive
+failure.**
+
+**AND THE EXPENSIVE FAILURE IS ALREADY PAID FOR, which is why nothing else is
+added.** Under D-154 every float is a series element, **so a float-to-float bridge
+on one pipe shorts out the elements between the bridge points and closes the chain
+around an open float.** D-130's overflow, FL-11 and FL-12, was bought for exactly
+that failure and lands above the high-high.
+
+**LOGGED, NOT PURSUED:** a tie is a compression point and D-131 puts a person's
+hands on it with both pumps running; adjacency stops being a recorded fact, so a
+fault cannot be localised; and the pump cords get no positioning benefit from the
+pipe, since water.md holds the submersibles by cradle, so they are on it for
+tidiness. **Under G-44 the burden is on the addition and none of the three carries
+it today.**
+
+**D6 also dropped EGC from the voltage vocabulary - a bonding conductor takes the
+class of the circuit it protects, which is one value simpler. Accepted.**
+
+**THE ONE THING ON THE CRITICAL PATH: D-150 gave the DUTY vocabulary to MAIN-PANEL
+and nobody has written it. 20 of D6's 43 empty cells are that one column, and
+RUN-010, RUN-018 and RUN-019 are ONE WORD from complete.** MAIN-PANEL is already
+tasked with it.
 
