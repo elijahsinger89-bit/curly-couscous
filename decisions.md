@@ -83,6 +83,7 @@ changed reports to BOSS and does not act.
 | G-43 | **EVERY ID PREFIX IN THIS TREE IS GLOBAL. A DOCUMENT THAT NEEDS A LOCAL LIST USES A PREFIX NOBODY ELSE COULD MEAN, KEYED TO THAT DOCUMENT - NEVER A BARE LETTER** | Frozen 2026-09-04, D-145. **Three collisions, one cause.** F- meant fluid rows and findings; M- meant mechanical rows and a local mechanism list; C- meant commissioning rows and a local contradiction list. **All three were made by BOSS or AUDIT inventing a local enumeration inside a document. Not one was made by a subsystem**, because a subsystem writes about its own scope and reaches for the tree's IDs, while a reviewer writes about a document and reaches for A, B, C. **The reserved list is at the top of interface-table.md** |
 | G-44 | **SIMPLE IS BEST. THE BURDEN OF PROOF IS ON COMPLEXITY, NEVER ON SIMPLICITY.** A simpler build is easier to BUILD, easier to OPERATE and easier to REPAIR, and those are three separate wins that compound. **Anything added must say what failure it prevents and what it costs to build, operate and repair. If it cannot, it does not go in** | Frozen 2026-09-04, D-152, the owner's standing instruction: "do not over complicate this just get it done". **It outranks tidiness, completeness and elegance, and it is the tie-breaker whenever two answers both work** |
 | G-45 | **A WRITTEN CONTRACT IS A SUBSTITUTE FOR A MECHANISM. If two documents must agree, GENERATE THEM FROM ONE SOURCE rather than writing a rule that says they must agree** | Frozen 2026-09-04, D-155. **The 1st Edition disposed of the entire duplication question in one line: the schedules read the same wire list as the routing sheets, so they CANNOT disagree, and a schedule is never hand-transcribed.** This tree wrote the duplication contract twice and only two facts in it survive generation. **A contract needs a reader who obeys it; a mechanism does not** |
+| G-46 | **A CELL THAT CAN NEVER BE FILLED MUST NOT LOOK LIKE ONE THAT HAS NOT BEEN FILLED YET. Mark it N/A WITH ITS REASON and count it separately** | Frozen 2026-09-04, D-159. **A float has no faces, so the entry-face cell for a float-ended run has NO VALID VALUE rather than a missing one.** Two blank cells that mean opposite things is F-097's shape on a table instead of on an identifier: **one is work outstanding and the other is work that will never exist, and a completion count that mixes them is wrong in both directions.** INTERCONNECT reached this independently for the duty column with "n/a, no pole" |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -3296,4 +3297,30 @@ exactly the defect D-150 split the column to catch, confirmed on first use.** An
 **RUN-015 turned out to be a DECISION rather than a lookup: COIL or ARC depending on
 the permissive string's voltage class, which is the G-30 line itself.** That is
 MAIN-PANEL's and it sits on the voltage-class ambiguity already on file.
+
+**D-159 THE ENTRY FACES ARE STATED AND D-146 HELD. subsystems/entry-faces.md.**
+No D-146 finding was reported: **neither box needed a run to state its faces**,
+which is what the allocation predicted.
+
+**PUMP BOXES: bottom face of the box body, both boxes, every cable.** The lid faces
+the room, settled there because **a lid facing up puts the wet assembly - heads,
+barbs and every tubing joint - directly over its own sealing face.** Entry order is
+keyed to the board's own geometry, **so it survives RUN-003/004 splitting under
+D-149, and both boxes are identical rather than a mirrored pair.**
+
+**DISPLAY BOX: bottom face, every cable.** The front is the operator display and the
+face that opens, **and C-14's EZO jumper procedure opens it again.** The order
+carries two rules: **a susceptibility ramp so nothing crosses the box, and F-029
+enforced as an ENTRY rule** - the two runs it separates are not adjacent entries,
+with the two unsplittable G-27 pairs between them.
+
+**G-46 IS FROZEN OUT OF THE ONE THING THE PASS COULDN'T STATE: A FLOAT HAS NO
+FACES.** So RUN-012 and RUN-013's End A face cell has **no valid value rather than a
+missing one**, and a completion count that mixes the two is wrong in both
+directions.
+
+**Logged, not pursued: on the display box's bottom face every candidate neighbour
+for the LINE entry has a stated unsafe short case - D-049 for a sense loop, F-019
+for the coil drive - so one gap on that face carries a named failure. The remedy is
+spacing and spacing is INTERCONNECT's.**
 
