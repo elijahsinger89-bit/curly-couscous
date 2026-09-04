@@ -235,7 +235,7 @@ INTERCONNECT arbitrates.** No artifact in the tree owns a cord route - defect BD
 - **S-18**: reopened, and D-108 removed the chiller contactor entirely, so there is
   no contact to read and no conductor. **No run.**
 - **P-08**: internal to MAIN-PANEL. **No run.**
-- **FL-01 to F-10**: fluid. **No run** - with the exception recorded at BD-01.
+- **FL-01 to FL-10**: fluid. **No run** - with the exception recorded at BD-01.
 - **CBL-05**: a lid penetration for a head and the tubing through it. Not a cable.
 - **M-01, M-02, M-03**: placement. M-02 is mine to arbitrate and is not a cable.
 

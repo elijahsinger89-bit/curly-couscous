@@ -340,7 +340,7 @@ records what the Pi asked for. It is not evidence the compressor was running, an
 no code may present it as such. parts.md's rule stands: software never reports
 commanded state as measured state.
 
-**D-028 The pump tube belongs to DOSING.** Interface F-10 closed. It is wetted, it
+**D-028 The pump tube belongs to DOSING.** Interface FL-10 closed. It is wetted, it
 is a consumable, and it is in the path DOSING already owns end to end.
 PUMP-BOXES stops at the barb by D-006. **The head is a mechanical mount that
 happens to have a tube in it.** DOSING therefore also owns the change interval,
@@ -2960,8 +2960,11 @@ them on a drawing.**
 **D-145 THE ID NAMESPACE IS SETTLED AND THE FLUID ROWS ARE RENAMED. F-097 CLOSES.**
 The reserved list is at the top of interface-table.md and is frozen as G-43.
 
-**FLUID INTERFACE ROWS F-01 THROUGH F-09 BECOME FL-01 THROUGH FL-09. 72 references
-renamed across 14 files in one pass, per G-42.** F- now means one thing: a finding.
+**FLUID INTERFACE ROWS F-01 THROUGH F-10 BECOME FL-01 THROUGH FL-10.** 72 references in the first pass, **plus a second pass the same day for F-10, WHICH THE FIRST ONE MISSED.**
+
+**BOSS's regex matched a leading zero and F-10 has none. INTERCONNECT found it by reading the fluid crossings top to bottom: FL-01 to FL-06, then F-10, then FL-07 to FL-09** - **and two rows below it P-06's status cites F-010, the 24 V rail trim finding. So F-10 and F-010 sat in ONE TABLE meaning a fluid row and a finding: F-097's exact defect surviving inside the entry that closed it.**
+
+**Recorded at full size rather than folded in, because it is the second time this week a namespace fix has been the thing that carried the namespace defect** - **a rename applied by pattern is only as complete as the pattern, and G-42 says a rename is applied to the whole tree in one pass or not at all. A pass that misses a row has not been applied.** F- now means one thing: a finding.
 
 **The collision that forced it: F-09 was the day tank outlet, the frozen edge of
 this project's entire scope, and F-090 was the struck float roster. One keystroke
@@ -3027,4 +3030,81 @@ somewhere else on it. **A floor that drains well hides a leak from a floor senso
 changed shape when the drain did, **and the WaterBug's job - water where water
 should not be - is harder to do on a floor whose whole design is to have no standing
 water anywhere.**
+
+**D-148 INTERCONNECT'S SCHEDULES EXIST. 20 RUN- IDS ASSIGNED, AND THREE THINGS
+BOSS MUST SETTLE FELL OUT OF WRITING THEM.** subsystems/interconnect-schedules.md.
+
+**All 17 cable runs plus the 3 cord routes, kept in ONE schedule rather than
+separated, and the reasoning is accepted: D-046 removed their cable and left a
+physical route on the wall that only INTERCONNECT arbitrates, so if they are not in
+the schedule nothing owns them.** What is structurally different about them is
+stated rather than left to be misread as an error: **a cord has no CDR- children,
+because its conductors are inside a manufactured assembly and nothing lands them,
+so wire-table column 2 will never name RUN-018 to RUN-020.**
+
+**Still 0 buildable of 20, and 12 entry-face cells filled in TODAY** - because
+parts.md already carries MAIN-PANEL's face decision, every cord grip on the bottom
+face, **and under D-146 that is the enclosure owner's call already on file.** The
+deadlock-breaking allocation paid for itself the same day.
+
+**THE TRM- SHAPE IS ACCEPTED AS PROPOSED:** where, then what, then which - the
+enclosure or field device from a closed written-out set, **the device BY NAME per
+G-28**, and **the marking as printed on the part per F-051** - with a
+MARKING-SOURCE column saying PART, FILE or DESCRIBED, **because a marking quoted
+from a document is not a marking read off a part.**
+
+**And the column earns itself immediately: EVERY ROW IS FILE OR OPEN AND NOT ONE IS
+PART, because nobody has ever been asked to look at a terminal and report what is
+printed on it.** That is a whole class of build fact nothing in this tree has ever
+requested.
+
+**D-149 RUN- MEANS A JACKET, NOT A ROUTE. AND AN ID THAT SPLITS IS RETIRED, NEVER
+SUFFIXED.** INTERCONNECT found the ambiguity and correctly refused to invent the
+rule.
+
+**A conductor travels in a JACKET, so wire-table column 2 only works if RUN- names
+one.** Several of the 20 will therefore split when F-029 and F-030 settle.
+
+**When a RUN- splits, THE PARENT ID IS RETIRED AND NEW IDS ARE ISSUED. The parent
+number is never reused and never suffixed.** That follows channel-token.md's own
+forbidden list, which INTERCONNECT pointed at rather than applying: **no arithmetic
+on identifiers, no "the next one", sets written out explicitly.** A suffixed id is
+arithmetic on an identifier, and **RUN-007a is exactly the off-by-one generator that
+list exists to prevent.**
+
+**Retiring costs a renumbered schedule once. Suffixing costs a build sheet that
+reads RUN-007 while the cable says RUN-007b, forever.**
+
+**D-150 THE CLASS COLUMN CARRIES TWO ATTRIBUTES, NOT ONE. VOLTAGE AND DUTY ARE
+SEPARATE AND THE SCHEMA WAS WRONG.** INTERCONNECT found that four buckets need
+five, and the reason is the important part.
+
+**Its example: the driver motor supply is a POWER DUTY AT A CONTROL VOLTAGE. The
+bucket sorted by voltage, and G-30 sorts by DUTY.** Adding a fifth bucket would have
+hidden that - **a fifth bucket is a patch, and what the example shows is that one
+column was carrying two independent facts.**
+
+**So the wire table's column 8 and the cable schedule's equivalent become TWO
+columns: VOLTAGE CLASS, which drives insulation and segregation, and DUTY, which
+drives G-30's separation of power from sense.** A conductor can be low voltage and
+high duty, and until now nothing could say so.
+
+**BOSS states no voltage boundary and no duty threshold.** The two vocabularies are
+INTERCONNECT's and MAIN-PANEL's respectively.
+
+**D-151 THE DRIVER PERMISSIVE CONTACTOR HAS NO NAME, AND S-08's TERMINAL IS ON IT.
+F-105.** order.md gives six real envelope names; **this device has none, and the
+ladder distinguishes two of them as "22.32 #1" and "#2".**
+
+**That is a part number plus an ordinal, which are the two things G-28 and T-013
+forbid an identity from being.** The relays already have names - K-FILL-S,
+K-FILL-D, K-DRY, K-PERM - **and the contactors were never given any.**
+
+**The shape work said "device by name". Writing the id showed there is no name to
+write.**
+
+**ROUTED TO MAIN-PANEL, which owns them. BOSS does not name a device it does not
+own** - and names them it must, because **G-28 makes which relay goes in which
+socket a BUILD FACT labelled by name, and a build sheet cannot say "the second
+22.32".**
 

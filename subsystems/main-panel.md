@@ -128,3 +128,43 @@ would add a part for nothing.
 
 Do not state a terminal number, wire gauge, breaker size or part number from
 memory. Return the requirement and a search term.
+
+## THREE THINGS ROUTED FROM THE SCHEDULES, 2026-09-04. ONE IS A NAMING DUTY.
+
+**1. F-105, AND IT IS YOURS TO FIX BECAUSE YOU OWN THE DEVICES. THE DRIVER
+PERMISSIVE CONTACTOR HAS NO NAME.**
+
+order.md gives six real envelope names. **This device has none, and your own ladder
+distinguishes two of them as "22.32 #1" and "#2". That is A PART NUMBER PLUS AN
+ORDINAL - the two things G-28 and T-013 forbid an identity from being.**
+
+You named the relays: K-FILL-S, K-FILL-D, K-DRY, K-PERM. **The contactors were
+never named.** And **S-08's terminal is on one of them**, so the terminal schedule
+cannot write a row until they have names.
+
+**G-28 makes which relay goes in which socket a BUILD FACT labelled BY NAME. A
+build sheet cannot say "the second 22.32".** Name them. BOSS does not name a device
+it does not own.
+
+**2. F-107. TWO RUNS CARRY A CONDUCTOR WITH NO INTERFACE ROW** - RUN-007 and
+RUN-008, corresponding to the two unnumbered items on your own ladder. **A conductor
+with no interface row does not exist under the wire table's rules, and yet two are
+needed to build what you drew.**
+
+**Either the interface rows are missing or the conductors are wrong. BOSS does not
+guess which.** Say which, with both ends named, and BOSS creates the rows.
+
+**3. THE CLASS COLUMN SPLITS IN TWO, D-150, and your G-30 work is why.**
+INTERCONNECT found that the schema's four buckets sorted by VOLTAGE while G-30 sorts
+by DUTY - **the driver motor supply being a POWER DUTY AT A CONTROL VOLTAGE.**
+
+**So class becomes two columns: VOLTAGE CLASS, driving insulation and segregation,
+and DUTY, driving G-30's separation of power from sense.** A conductor can be low
+voltage and high duty and until now nothing could say so.
+
+**The DUTY vocabulary is yours to state.** BOSS sets no threshold. INTERCONNECT
+states the voltage vocabulary.
+
+**Still open with you from the ladder: the chiller receptacle's switching element,
+which state of K-DRY is the de-energised state, F-093's fail direction jointly with
+WATER, and F-094 having no reader.**

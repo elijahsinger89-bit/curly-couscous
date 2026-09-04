@@ -103,7 +103,7 @@ rule is sound and on file, but not at the number cited.
 | D-017 | The direction of error is chosen, not accidental | 2.2.6, verbatim in substance | RESTATEMENT | |
 | D-021, S-19 | CONTROL-SOFTWARE is the definitional end; everyone else consumes and matches; no translation at any point | 2.6.1, 3.x, faithful | RESTATEMENT | |
 | D-027, D-064, S-18 | The chiller is not held off; state is RECORDED against every sample; the mechanism was "the Pi commands the contactor" and G-26 removed it | 6.4 item 4, 11.5: specified and unimplementable, field left empty rather than inferred | RESTATEMENT | |
-| D-028, F-10, re-measure triggers | DOSING owns the tube and tells CONTROL-SOFTWARE C-01 is void after a change; the trigger is the tube change, not a date | 2.1.9, faithful | RESTATEMENT | |
+| D-028, FL-10, re-measure triggers | DOSING owns the tube and tells CONTROL-SOFTWARE C-01 is void after a change; the trigger is the tube change, not a date | 2.1.9, faithful | RESTATEMENT | |
 | D-029, S-08 | There is no auxiliary block on the 22.32 and none was bought; pole 2 of the contactor carries the readback; a 25 A power pole is the readback contact | 4.2: "the position of an AUXILIARY CONTACT on the permissive contactor" | DRIFT | 1.6 |
 | D-030, F-011 | Asymmetric readback discipline: DROP qualified over consecutive samples, WELD latches on a single sample and is never cleared by later samples | 2.5.6, 7.1, 7.2, faithful including the chosen direction of error | RESTATEMENT | |
 | D-030, F-011 guard | Software may not solve F-011 by lengthening the filter until the nuisance stops; the fix is at the contact | 2.5.7, near verbatim | RESTATEMENT | |

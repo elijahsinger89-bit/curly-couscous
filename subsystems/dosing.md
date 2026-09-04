@@ -138,14 +138,14 @@ proposed.** The installed BPT loop is short and external tubing joins at its end
 so the break point at the jug, and any keyed coupling if one is ever taken, sits on
 external tubing and never on the pump tube. Confirmed, not assumed.
 
-**New and unowned: interface F-10, the pump tube itself.** PharMed BPT B25, wetted,
+**New and unowned: interface FL-10, the pump tube itself.** PharMed BPT B25, wetted,
 a consumable at about 1000 h, inside PUMP-BOXES' head and part of DOSING's wet
 path. D-006 gave DOSING the wet path and stopped PUMP-BOXES at the barb, which
 leaves the tube between them. Answer jointly with PUMP-BOXES. Whoever owns it also
 owns the change interval, the change procedure, and telling CONTROL-SOFTWARE that
 C-01 is void for that channel.
 
-**F-10 is CLOSED: DOSING owns the pump tube.** D-028. It is wetted, it is a
+**FL-10 is CLOSED: DOSING owns the pump tube.** D-028. It is wetted, it is a
 consumable, and it is in the path DOSING already owns end to end. The head is a
 mechanical mount that happens to have a tube in it, and PUMP-BOXES stops at the
 barb per D-006. DOSING therefore also owns the change interval, the change

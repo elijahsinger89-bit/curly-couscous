@@ -221,7 +221,7 @@ are missing, not only to seams that are contested.
 
 ### The second method, from the third instance
 
-The third instance was the pump tube, interface F-10. PharMed BPT B25: wetted, a
+The third instance was the pump tube, interface FL-10. PharMed BPT B25: wetted, a
 consumable at about 1000 hours, living inside PUMP-BOXES' head and forming part of
 DOSING's wet path. D-006 gave DOSING the wet path and stopped PUMP-BOXES at the
 barb, and the tube fell between them.
