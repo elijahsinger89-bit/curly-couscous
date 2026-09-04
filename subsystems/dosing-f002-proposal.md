@@ -2,7 +2,7 @@
 
 Returned 2026-08-30. One proposal, two mechanisms, not a menu. Nothing bought,
 nothing changed. DOSING reported stopped part-way and did not declare itself
-finished. Task 1 is blocked from being built on F-06, which is OPEN.
+finished. Task 1 is blocked from being built on FL-06, which is OPEN.
 
 ## The division of labour
 

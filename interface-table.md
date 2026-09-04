@@ -4,6 +4,32 @@ Every crossing between subsystems, both ends named. BOSS owns this file. No
 subsystem edits it. A subsystem that finds a boundary defect reports it here
 through BOSS and does not fix it.
 
+## THE ID NAMESPACE. RESERVED, AND NOT REUSABLE. D-145, 2026-09-04.
+
+**Every prefix below is TREE-GLOBAL. No document may use one for a local list.**
+
+| Prefix | Means | Lives in |
+|---|---|---|
+| **FL-nn** | **FLUID** interface row. **RENAMED FROM F-nn 2026-09-04** | this file |
+| P-nn | POWER interface row | this file |
+| S-nn | SIGNAL interface row | this file |
+| CBL-nn | **A CABLE CROSSING, not a cable** | this file |
+| M-nn | MECHANICAL interface row | this file |
+| G-nn | Frozen rule | decisions.md |
+| D-nnn | Dated decision | decisions.md |
+| **F-nnn** | **FINDING**, and now the only meaning of F- | findings.md |
+| T-nnn | Trap | traps.md |
+| C-nn | Commissioning row | commissioning.md |
+| CH1 to CH8 | Channel token | channel-token.md |
+| LS-n | Float switch POSITION, not a part | the float requirement |
+| **RUN-nnn** | **One physical cable run. NEW** | the cable schedule |
+| **TRM-** | **One terminal. NEW, and its shape is INTERCONNECT's to propose** | the terminal schedule |
+| **CDR-nnn** | **One conductor. NEW** | the wire table |
+
+**A DOCUMENT THAT NEEDS A LOCAL LIST USES A PREFIX NOBODY ELSE COULD MEAN, keyed to
+that document. Not a bare letter.** All three collisions found were made by BOSS or
+AUDIT inventing a local list, never by a subsystem.
+
 Status meanings:
 - FROZEN: both ends may build against it. Changing it costs a BOSS decision
   and a dated entry in decisions.md.
@@ -20,18 +46,18 @@ until a subsystem returns them with a datasheet behind them.
 
 | ID | End A | End B | Status | Owner of the open item |
 |---|---|---|---|---|
-| F-01 | Building cold water supply | WATER: fill solenoid inlet | OPEN | WATER |
-| F-02 | WATER: fill solenoid outlet | WATER: storage tank inlet | internal to WATER | WATER |
-| F-03 | WATER: manifold pump discharge | DOSING: manifold inlet union | OPEN | WATER and DOSING jointly, BOSS freezes |
-| F-04 | DOSING: manifold outlet union | WATER: return drop to day tank | OPEN | WATER and DOSING jointly, BOSS freezes |
-| F-05 | DOSING: dose delivery tubing | PUMP-BOXES: head discharge end, 3/16 in barb | **SIZE CLOSED 2026-08-30 by parts.md**: 3/16 in straight connector mating 4.8 mm ID tube. The fixed-tube null head means external tubing joins at the ends of the short BPT piece, so this crossing is external tubing to barb and never involves the pump tube. Still open: DOSING's tubing selection against chemical compatibility and translucency, D-019 | DOSING |
-| F-06 | DOSING: jug suction tubing | PUMP-BOXES: head suction end, 3/16 in barb | As F-05. **This unblocks the F-002 proposal, which was blocked on F-06** | DOSING |
+| FL-01 | Building cold water supply | WATER: fill solenoid inlet | OPEN | WATER |
+| FL-02 | WATER: fill solenoid outlet | WATER: storage tank inlet | internal to WATER | WATER |
+| FL-03 | WATER: manifold pump discharge | DOSING: manifold inlet union | OPEN | WATER and DOSING jointly, BOSS freezes |
+| FL-04 | DOSING: manifold outlet union | WATER: return drop to day tank | OPEN | WATER and DOSING jointly, BOSS freezes |
+| FL-05 | DOSING: dose delivery tubing | PUMP-BOXES: head discharge end, 3/16 in barb | **SIZE CLOSED 2026-08-30 by parts.md**: 3/16 in straight connector mating 4.8 mm ID tube. The fixed-tube null head means external tubing joins at the ends of the short BPT piece, so this crossing is external tubing to barb and never involves the pump tube. Still open: DOSING's tubing selection against chemical compatibility and translucency, D-019 | DOSING |
+| FL-06 | DOSING: jug suction tubing | PUMP-BOXES: head suction end, 3/16 in barb | As FL-05. **This unblocks the F-002 proposal, which was blocked on FL-06** | DOSING |
 | F-10 | PUMP-BOXES: the head, a mechanical mount that happens to have a tube in it | DOSING: the pump tube, PharMed BPT B25, wetted, consumable at about 1000 h | **CLOSED 2026-08-30 by D-028. DOSING owns the pump tube**, including the change interval, the change procedure, and telling CONTROL-SOFTWARE that C-01 is void for that channel after a change. PUMP-BOXES stops at the barb per D-006 | closed |
-| F-07 | DOSING: injection ports | DOSING: manifold body | internal to DOSING | DOSING |
-| F-08 | WATER: chiller loop submersible and return | WATER: chiller ports | internal to WATER | WATER |
-| F-09 | WATER: day tank outlet | V3 inlet | FROZEN as the scope boundary. V3 is manual, nothing in this project actuates it, nothing downstream is designed here | closed |
+| FL-07 | DOSING: injection ports | DOSING: manifold body | internal to DOSING | DOSING |
+| FL-08 | WATER: chiller loop submersible and return | WATER: chiller ports | internal to WATER | WATER |
+| FL-09 | WATER: day tank outlet | V3 inlet | FROZEN as the scope boundary. V3 is manual, nothing in this project actuates it, nothing downstream is designed here | closed |
 
-F-05 and F-06 are the seam that had no owner in the first agent proposal. Both
+FL-05 and FL-06 are the seam that had no owner in the first agent proposal. Both
 ends are now named. DOSING owns the whole wet path from manifold to head to
 jug, including jug placement and how a jug is changed. PUMP-BOXES owns the head
 and stops at the barb.
@@ -101,3 +127,29 @@ the terminal it lands on. BOSS holds the row until both halves are in.
 | M-01 | WATER: day tank penetrations and hangers | WATER internal, but both submersible cords and the manifold return pass through it | internal to WATER | WATER |
 | M-02 | DOSING: manifold mounted on the dosing wall | PUMP-BOXES mounted on the same wall | OPEN. Both claim wall space and the tubing between them sets the spacing | DOSING and PUMP-BOXES jointly, INTERCONNECT arbitrates the wall layout |
 | M-03 | DISPLAY-BOX: enclosure on the wall | operator reach and sightline | OPEN | DISPLAY-BOX |
+
+## The gland boundary. ALLOCATED 2026-09-04 by D-146, to break a four-way deadlock.
+
+**CBL-01 through CBL-04 each say the enclosure owner owns what is inside its gland
+and INTERCONNECT owns the run. That left nobody able to move: all four enclosure
+owners waited on INTERCONNECT for gland positions and INTERCONNECT waited on all
+four.** INTERCONNECT declined to break it under rule 5 and was right to - **an
+allocation of decision rights is an interface decision, so it belongs here.**
+
+**THE ALLOCATION. It is a rule about WHO DECIDES, not a dimension:**
+
+| Decision | Owner | Why it can be made without the other |
+|---|---|---|
+| **WHICH FACE a cable enters, and the ORDER of entries on that face** | **The enclosure owner** | It follows from what is inside the box and from D-047's shed rule. **The main panel's faces are already partly fixed by the owner: five 22 mm holes on top, cord grips on the bottom** |
+| **WHERE on that face, and the spacing between glands** | **INTERCONNECT** | It follows from the wall layout and the approach direction of the run |
+
+**So neither waits.** An enclosure owner states faces and order without knowing a
+run. INTERCONNECT positions within a stated face.
+
+**IF AN ENCLOSURE OWNER CANNOT STATE A FACE WITHOUT KNOWING THE RUN, THAT IS A
+FINDING TO REPORT, NOT A REASON TO WAIT.** BOSS wants to know which box and why -
+**it would mean that box's contents are being decided by its cabling rather than the
+other way round.**
+
+**BOSS states no gland count, no spacing, no face dimension and no position.**
+

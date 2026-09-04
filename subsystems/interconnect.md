@@ -90,3 +90,47 @@ Do not state a cable part number, a gauge, a conductor count or a gland size
 from memory. Return the requirement and a search term. Do not pick a wall
 position that puts a cable where a jug is changed or a tank is filled without
 saying so.
+
+## THREE THINGS YOU WERE BLOCKED ON ARE SETTLED. 2026-09-04.
+
+**Your first pass is accepted, D-142. Zero buildable of twenty is rule 9 working,
+not pessimism, and BOSS is not asking you to soften it.**
+
+**1. THE NAMESPACE, D-145 and G-43.** The reserved list is at the top of
+interface-table.md. **You were right that CBL- names a CROSSING and cannot serve as
+a cable identity** - that is why wire-table column 2 had no valid values.
+
+| New prefix | For |
+|---|---|
+| **RUN-nnn** | One physical cable run. Yours |
+| **TRM-** | One terminal. **The prefix is reserved; THE SHAPE IS YOURS to propose**, and only the prefix was BOSS's to settle |
+| CDR-nnn | One conductor. The wire table's |
+
+**And fluid interface rows are renamed F-nn to FL-nn**, 72 references in one pass,
+so F- now means only a finding. **Re-read any FL- row you cited before you write
+against it.**
+
+**2. THE GLAND DEADLOCK IS BROKEN, D-146, AND YOUR REFUSAL TO BREAK IT WAS RIGHT.**
+Recorded as such: **an allocation of decision rights is an interface decision, and a
+subsystem taking one unilaterally is how a boundary stops meaning anything.**
+
+**THE ENCLOSURE OWNER DECIDES WHICH FACE AND IN WHAT ORDER. YOU DECIDE WHERE ON THAT
+FACE AND THE SPACING.** Neither waits. **If an enclosure owner tells you it cannot
+state a face without knowing the run, report that as a finding rather than
+absorbing it** - it would mean that box's contents are being decided by its cabling.
+
+**3. THE FLOOR DRAIN IS A TRACK, 6 IN WIDE, AND THE OVERFLOW MAY ENTER ANYWHERE**,
+D-147. **A free entry point, not a fixed one.**
+
+**Two of your findings are with their owners and neither is yours to solve: F-100,
+the float cord being a part property rather than a cut length, is now in the float
+requirement WATER is writing. F-099, parts.md's two cable-run tables with
+contradictory allowance rules, is with the owner - BOSS does not edit parts.md.**
+
+**What BOSS wants next from you, and only this: the cable schedule and terminal
+schedule SHAPES you returned, now expressed with the real prefixes, and RUN-nnn
+assigned to the 17 runs you enumerated.** Blocked rows stay blocked and keep saying
+what blocks them. **A schedule of blocked rows with real IDs is a document; a
+schedule waiting for everything to close is not.**
+
+Write in ONE pass at the end. State no length, gauge, core count or part number.

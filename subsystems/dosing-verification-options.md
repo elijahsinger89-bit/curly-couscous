@@ -131,10 +131,10 @@ bore.
 
 | Number | Who |
 |---|---|
-| Head discharge barb form and OD, F-05 and F-06 | PUMP-BOXES, currently blocking |
+| Head discharge barb form and OD, FL-05 and FL-06 | PUMP-BOXES, currently blocking |
 | Actual delivered volume per head, per unit time and per step | The owner measures. Must not come from a datasheet |
 | Head suction lift, and whether the head holds against back-siphon | PUMP-BOXES from the head |
-| Loop volume and turnover time through the manifold | WATER, from circulation flow at F-03 and the day tank |
+| Loop volume and turnover time through the manifold | WATER, from circulation flow at FL-03 and the day tank |
 | Probe resolution, noise and drift | DISPLAY-BOX from the EZO datasheets |
 | Probe step per single-channel dose, per channel | The owner measures, dosing one channel alone into the running loop |
 | Chemical compatibility per product | The owner, from the labels of the products he has |
@@ -145,4 +145,4 @@ bore.
 
 DOSING reported stopped part-way and did not declare itself finished. Nothing is
 decided, nothing is added, no file it owns was changed. Several options are
-blocked on F-05 and F-06, which are OPEN.
+blocked on FL-05 and FL-06, which are OPEN.

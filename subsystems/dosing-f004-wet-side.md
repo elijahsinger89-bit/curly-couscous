@@ -31,11 +31,11 @@ decided, nothing changed. DOSING reported stopped part-way.
 |---|---|---|
 | 1 | Head start-up, step command to first liquid motion, including the pump tube re-rounding after sitting occluded | PUMP-BOXES' domain, named because it is part of the interval |
 | 2 | Delivery line dead volume, head to injection port | Near zero if the line is liquid-full: the incoming dose displaces an equal volume out the port at once. **If the line contains air or the head lost prime, the whole dead volume must be pushed first, and that can exceed a small dose entirely.** Then the dose lands nowhere and the check fails correctly. Differs per channel with run length |
-| 3 | Manifold transport, injection port to outlet union F-04 | Internal volume downstream of THAT port over loop flow. Ports sit at different positions, so this differs per channel. Likely the smallest leg, and likely is not a number |
+| 3 | Manifold transport, injection port to outlet union FL-04 | Internal volume downstream of THAT port over loop flow. Ports sit at different positions, so this differs per channel. Likely the smallest leg, and likely is not a number |
 | 4 | Return drop back into the day tank | WATER's, an open drop. Fast, and it entrains air, which matters for reading the trace |
 | 5 | **Tank mixing** | The dominant leg and the one that resists calculation. A small slug enters a large volume with NO mixer: agitation is only the bottom suction per G-11 and the return drop's plunge. Sub-mechanisms: dead zones in corners and below the suction inlet; short-circuiting if the return lands near the suction; density-driven sinking of dense concentrate or acid entering at the surface; thermal stratification from the chiller loop, which suppresses convection and makes stratification persist |
 | 6 | Uptake at the submersible inlet | Concentration at the bottom inlet is not the tank average until mixing is done. Short-circuit gives an early unrepresentative high reading, a long path gives a late one. **First arrival is not the settled value** |
-| 7 | Transport from tank inlet through the pump body, F-03, and up the vertical probe section | Volume over flow |
+| 7 | Transport from tank inlet through the pump body, FL-03, and up the vertical probe section | Volume over flow |
 | 8 | Probe and circuit response | DISPLAY-BOX's number from the datasheets. Plus the temperature-compensation path: EC is temperature compensated, so if the PT-1000's own response lags, compensated EC keeps moving after true EC has settled. Flagged as a question for DISPLAY-BOX and CONTROL-SOFTWARE, not asserted |
 | 9 | Number of loop passes to homogeneity | The reading does not settle on one transit. It approaches a final value over repeated turnovers until the remaining change is below probe noise |
 
@@ -75,7 +75,7 @@ service.
 
 Legs 2, 3, 4 and 7 are arithmetic, volume over flow, if the volumes and the flow
 are known. They are not known: manifold diameter and port arrangement are open,
-tubing is open, circulation flow at F-03 is owed by WATER, and F-05 and F-06 are
+tubing is open, circulation flow at FL-03 is owed by WATER, and FL-05 and FL-06 are
 OPEN.
 
 Leg 5 is where a derivation stops being trustworthy, for reasons specific to this
@@ -110,10 +110,10 @@ derivation's whole value.
 | Number the derivation needs | Who |
 |---|---|
 | Day tank working volume, high and low ends of the fill band | WATER, it owns the tank and the floats that set the band |
-| Circulation flow actually through the manifold at F-03, measured against real restriction, not read off a pump curve | WATER. OPEN |
+| Circulation flow actually through the manifold at FL-03, measured against real restriction, not read off a pump curve | WATER. OPEN |
 | Loop turnover time | C-07 |
 | Manifold internal volume downstream of each injection port | DOSING, once diameter and ports settle |
-| Delivery line internal volume per channel | DOSING, blocked on F-05 and F-06 |
+| Delivery line internal volume per channel | DOSING, blocked on FL-05 and FL-06 |
 | Return drop path and volume | WATER |
 | Probe response time and EZO sampling or averaging | DISPLAY-BOX from the datasheets |
 | Probe noise and drift band IN THIS LOOP with the pump running | Must be measured in situ. Datasheet noise is not this loop's noise: pump electrical noise, entrained air and the cable run all contribute. C-08 |

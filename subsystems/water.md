@@ -13,7 +13,7 @@ and hangers. The JBJ Arctica DBE-200 chiller and the whole chiller loop
 plumbing. The manifold return drop back to the day tank. Physical placement of
 the leak detection sensors and of the dry run sense element.
 
-Ends at V3 and at the manifold unions F-03 and F-04.
+Ends at V3 and at the manifold unions FL-03 and FL-04.
 
 ## Out of scope
 
@@ -25,7 +25,7 @@ INTERCONNECT. The manifold itself and everything on it is DOSING.
 
 | ID | What is frozen |
 |---|---|
-| F-09 | Day tank outlet to V3 is the scope boundary. V3 is manual. Nothing downstream is designed here |
+| FL-09 | Day tank outlet to V3 is the scope boundary. V3 is manual. Nothing downstream is designed here |
 | G-03 | Fill control is a start float and a stop float with relay seal-in between them, both tanks |
 | G-01 | Floats are hardwired to relays and invisible to the Pi |
 | G-11 | Manifold pump takes suction at the day tank bottom so the tank mixes |
@@ -106,7 +106,7 @@ C-11 and C-12.
 
 | From | What |
 |---|---|
-| DOSING | Manifold inlet and outlet union type and orientation, F-03 and F-04 |
+| DOSING | Manifold inlet and outlet union type and orientation, FL-03 and FL-04 |
 | MAIN-PANEL | The contact duty and terminal each float chain lands on, S-01 and S-02 |
 | INTERCONNECT | How field cables leave the wet area |
 
@@ -508,7 +508,7 @@ continuously, and the owner rules that they will sufficiently mix nutrients.**
 
 **A naming problem to resolve before the generated set exists: the owner calls it
 the MANIFOLD PUMP and this tree calls the same device the MANIFOLD PUMP.**
-G-11 gives it suction at the tank bottom, F-03 takes its discharge to the manifold.
+G-11 gives it suction at the tank bottom, FL-03 takes its discharge to the manifold.
 Same pump, two names. **BOSS has not renamed it. Say which name your documents
 should carry.**
 
@@ -549,3 +549,23 @@ tank temperature is for the dose, not for control, D-108.
 C-02 still measures how long a reading takes to become valid, and C-07's turnover
 feeds it as a floor. What is withdrawn is any worry that the tank is inadequately
 mixed.
+
+## THE FLOOR DRAIN IS A TRACK. D-147, and one thing got harder. 2026-09-04.
+
+**6 in wide, and the overflow may enter it ANYWHERE.** D-139 closes. **That is a
+better answer than a position because it removes the constraint instead of
+satisfying it.** Price the overflow with a free entry point.
+
+**AND F-104, WHICH IS NOT GOOD NEWS AND ARRIVED INSIDE GOOD NEWS. A floor with a
+track drain is a floor built to MOVE WATER TO THE TRACK. A leak reaching that floor
+goes to the track, not to a sensor sitting somewhere else on it.**
+
+**The WaterBug's job is water where water should not be, and that is hard to do on a
+floor whose entire design is to have no standing water anywhere.**
+
+**It cuts both ways and say so in your answer:** the sensor is now EASY to keep out
+of the overflow's splash, per D-133, and HARDER to put anywhere a leak will actually
+reach it. **BOSS proposes no placement.**
+
+**Worth noting how it was nearly missed: D-147 arrived as good news that removed a
+constraint, and good news is not normally re-examined.**

@@ -16,8 +16,8 @@ heads and on to the jugs: dose delivery tubing, head suction tubing, the
 nutrient jugs, jug placement, and how a jug is changed without spilling or
 losing prime.
 
-Ends at the manifold unions F-03 and F-04, and at the pump head barbs F-05 and
-F-06.
+Ends at the manifold unions FL-03 and FL-04, and at the pump head barbs FL-05 and
+FL-06.
 
 ## Out of scope
 
@@ -101,10 +101,10 @@ DOSING did not declare itself finished and BOSS has not declared it finished.
 ## Both tasks answered 2026-08-30, neither finished
 
 1. F-002 proposal: subsystems/dosing-f002-proposal.md. Blocked from being built
-   on F-06, which is OPEN, and on DOSING's own open items: tubing selection, jug
+   on FL-06, which is OPEN, and on DOSING's own open items: tubing selection, jug
    placement, the siphon question.
 2. Wet side of F-004: subsystems/dosing-f004-wet-side.md. Blocked on WATER
-   returning circulation flow at F-03, DISPLAY-BOX returning probe response, and
+   returning circulation flow at FL-03, DISPLAY-BOX returning probe response, and
    DOSING's own manifold volumes.
 
 Four things DOSING found and did not fix, now BOSS-held: interface S-19 and
@@ -128,8 +128,8 @@ Revisit the coupling after C-09 exists and the jug procedure is in use.
 
 ## Unblocked 2026-08-30 by parts.md
 
-F-05 and F-06 are closed on size: 3/16 in straight barb mating PharMed BPT B25,
-4.8 mm ID by 8.0 mm OD, 1.6 mm wall. The F-002 proposal was blocked on F-06 and is
+FL-05 and FL-06 are closed on size: 3/16 in straight barb mating PharMed BPT B25,
+4.8 mm ID by 8.0 mm OD, 1.6 mm wall. The F-002 proposal was blocked on FL-06 and is
 no longer blocked on size. Tubing selection is still DOSING's: chemical
 compatibility per product, and translucency under D-019.
 
@@ -160,9 +160,9 @@ tube life. The re-measure trigger is a tube change, not a date.
 
 | From | What |
 |---|---|
-| PUMP-BOXES | Head barb form and size, F-05 and F-06. Lid penetration, CBL-05 |
+| PUMP-BOXES | Head barb form and size, FL-05 and FL-06. Lid penetration, CBL-05 |
 | DISPLAY-BOX | Probe cable termination and length limits, S-11 |
-| WATER | Union type at F-03 and F-04, and manifold pump flow through the manifold |
+| WATER | Union type at FL-03 and FL-04, and manifold pump flow through the manifold |
 
 ## Do not
 

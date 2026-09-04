@@ -43,7 +43,7 @@ two.** See section 2.5.
 | # | Column | What it is for, and which row or rule requires it | Who owns the value |
 |---|---|---|---|
 | 1 | **Cable ID** | The one identity of a jacket. **It is NOT a CBL- number** - see defect BD-02. Own namespace, no bare digit, per channel-token.md forbidden item 5 | BOSS assigns the prefix, INTERCONNECT assigns within it |
-| 2 | **End A: enclosure or field device** | Named exactly as the tree names it, never invented. Required because F-05, F-06, S-01, S-02 and S-04 are all rows that existed with an end nobody owned | The subsystem owning that end |
+| 2 | **End A: enclosure or field device** | Named exactly as the tree names it, never invented. Required because FL-05, FL-06, S-01, S-02 and S-04 are all rows that existed with an end nobody owned | The subsystem owning that end |
 | 3 | **End A: entry** | Which FACE, and which gland or grip. CBL-01 to CBL-04 are open on precisely this and nothing else in the tree carries it. **The drip-loop rule makes this a face decision, not a position decision** - constraint K-03 | The enclosure owner, through CBL-01 to CBL-04 |
 | 4 | **End B: enclosure or field device** | As column 2 | The subsystem owning that end |
 | 5 | **End B: entry** | As column 3 | As column 3 |
@@ -235,7 +235,7 @@ INTERCONNECT arbitrates.** No artifact in the tree owns a cord route - defect BD
 - **S-18**: reopened, and D-108 removed the chiller contactor entirely, so there is
   no contact to read and no conductor. **No run.**
 - **P-08**: internal to MAIN-PANEL. **No run.**
-- **F-01 to F-10**: fluid. **No run** - with the exception recorded at BD-01.
+- **FL-01 to F-10**: fluid. **No run** - with the exception recorded at BD-01.
 - **CBL-05**: a lid penetration for a head and the tubing through it. Not a cable.
 - **M-01, M-02, M-03**: placement. M-02 is mine to arbitrate and is not a cable.
 
@@ -567,7 +567,7 @@ Rule 2. I fixed none of these and edited no file but this one.
 
 **This is the most important item in this pass.**
 
-F-096 reads: "THE SOLENOID HAS FLUID ROWS AND NO POWER ROW. F-01 and F-02 carry the
+F-096 reads: "THE SOLENOID HAS FLUID ROWS AND NO POWER ROW. FL-01 and FL-02 carry the
 water into and out of it. NOTHING IN THE INTERFACE TABLE CARRIES THE ELECTRICITY."
 CDR-001's Interface row cell reads "OPEN - and this is defect 1 below. The solenoid's
 power feed has no P- row." D-140 then records F-096 as one of two defects "the

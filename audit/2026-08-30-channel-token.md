@@ -117,7 +117,7 @@ the one constrained?
 
 **C19.** The CBL rename left one reference behind: dosing.md's waiting-on row said
 "Lid penetration, C-05" with C-0n now meaning commissioning everywhere else.
-*FIXED.* And **F-06 the fluid crossing and F-006 the finding are one character
+*FIXED.* And **FL-06 the fluid crossing and F-006 the finding are one character
 apart and both concern the jug and tube path.**
 
 **C20.** Are "mapping" and "binding" the same word to all five parties? **Will a

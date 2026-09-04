@@ -87,10 +87,10 @@ now, so the moment to settle it is this one.
 
 | Prefix | Used for | Example |
 |---|---|---|
-| F-nn | **Fluid interface rows** | **F-09**, the day tank outlet, the scope boundary |
+| F-nn | **Fluid interface rows** | **FL-09**, the day tank outlet, the scope boundary |
 | F-nnn | **Findings** | **F-090**, the struck float roster |
 
-**They are distinguished by ZERO PADDING ALONE. F-09 and F-090 are one keystroke
+**They are distinguished by ZERO PADDING ALONE. FL-09 and F-090 are one keystroke
 apart and mean unrelated things**, one of them being the frozen edge of the whole
 project's scope.
 

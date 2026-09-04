@@ -48,7 +48,7 @@ chiller loop submersible together.
    second return jet exists and D-023 switches it off, **D-023 lengthens the very
    interval it is applied across.** It buys read cleanliness with settle time.
 
-WATER checked F-08, P-05, water.md and dosing-f004-wet-side.md: **no file states
+WATER checked FL-08, P-05, water.md and dosing-f004-wet-side.md: **no file states
 which tank the chiller loop submersible sits in.** It is WATER's open placement
 item. WATER is not asserting the consequence, it is reporting that G-12 plus D-023
 makes that placement load-bearing on settle time in a way it was not before.
@@ -130,7 +130,7 @@ settle window is a contaminant in the same way a fill is.
 
 | ID | Option | Proves | Plumbing | New failure modes | Panel |
 |---|---|---|---|---|---|
-| W-1 | **The probes already in the loop.** At rest the water standing in the vertical probe section sits in room air at 62 to 65 F while the tank is chilled and stratified. The standing column drifts toward room temperature. On pump start that column is displaced by tank water and the PT-1000 sees a step within the transport time. **No step means no flow.** Temperature is the witness, not EC or pH: temperature has a guaranteed physical driver here because the chiller creates the differential deliberately | Flow through the WHOLE loop, tank to pump to F-03 to probe section | None | False fail when tank and room converge or the rest was short. Diagnostic only, arrives seconds late and in software, protects nothing, and is not a substitute for S-05 | None |
+| W-1 | **The probes already in the loop.** At rest the water standing in the vertical probe section sits in room air at 62 to 65 F while the tank is chilled and stratified. The standing column drifts toward room temperature. On pump start that column is displaced by tank water and the PT-1000 sees a step within the transport time. **No step means no flow.** Temperature is the witness, not EC or pH: temperature has a guaranteed physical driver here because the chiller creates the differential deliberately | Flow through the WHOLE loop, tank to pump to FL-03 to probe section | None | False fail when tank and room converge or the rest was short. Diagnostic only, arrives seconds late and in software, protects nothing, and is not a substitute for S-05 | None |
 | W-2 | Current sensing on the pump cord | Motor energised and drawing. Catches a dead motor, a tripped overload, a failed or welded relay, a pulled cord, a lost circuit | None | **Reports healthy through the failure that matters most.** A submersible with a fouled or broken impeller, an air-locked volute or a blocked intake still draws current. Current is not flow, and F-004 names silent flow degradation as the dominant hidden input to the whole settling time | A device, a contact, an inrush blanking decision |
 | W-3 | A flow-proving element in the wet path | Flow is actually occurring, which is the thing | A body, two unions, a new leak path into the permissive chain via G-08, plus added restriction that reduces the very flow it measures | Stuck-made reports healthy forever, which is F-003 one layer up. **Closed by the free self-test below.** Fouling in nutrient solution | One dry contact, and the start-up bypass conflict with S-05 |
 | W-4 | Pressure at the discharge | Less than W-3 for less money. A dead-headed pump against a closed valve makes pressure with no flow | as W-3 | Rejected by WATER | as W-3 |
@@ -145,7 +145,7 @@ the resting interval proves the element, each state checks the other, and the
 rule, and it converts the at-rest interval from a blind spot into a test.
 
 W-3 placement is a real choice WATER did not make: at the pump discharge before
-F-03 proves the pump, simplest and cleanest; at the return drop after F-04 proves
+FL-03 proves the pump, simplest and cleanest; at the return drop after FL-04 proves
 the ENTIRE loop including the manifold, catching the other half of F-004's silent
 degradation, but sits in an open splashing aerating atmospheric path outside the
 pressure boundary and will foul with nutrient deposit. WATER needs the return drop
@@ -210,9 +210,9 @@ as a stall.
 
 ## The three numbers DOSING is blocked on
 
-### Circulation flow at F-03
+### Circulation flow at FL-03
 
-**Requirement:** a volumetric flow rate at F-03 under SERVICE conditions: the
+**Requirement:** a volumetric flow rate at FL-03 under SERVICE conditions: the
 manifold as built with its probe section and all injection ports, every valve in
 its normal running position, the return drop as built, the day tank at a stated
 level, in the service solution at service temperature, with the strainer in
@@ -221,7 +221,7 @@ whatever condition it is in.
 **Why a pump curve cannot supply it:** a curve is head against flow for the pump
 alone. The operating point is where that curve meets the SYSTEM curve, and the
 system curve is unknown in every term here: manifold diameter and ports are OPEN,
-F-05 and F-06 are OPEN, the probe section is not specified, valve positions are not
+FL-05 and FL-06 are OPEN, the probe section is not specified, valve positions are not
 recorded, and the strainer's condition changes over time. A curve reading is a
 number with nothing behind it, which commissioning.md's own preamble rejects.
 

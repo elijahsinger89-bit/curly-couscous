@@ -93,8 +93,8 @@ VDD falls inside G-09's word "power", findings F-014.
 
 ## Previously open, now closed by parts.md
 
-- Head barb form and size: 3/16 in straight connector mating 4.8 mm ID tube. F-05
-  and F-06 are closed on size.
+- Head barb form and size: 3/16 in straight connector mating 4.8 mm ID tube. FL-05
+  and FL-06 are closed on size.
 - Motor requirement: there is no separate motor. It is one unit.
 - Driver current: 1.0 A per driver, 71 percent of the part's rating.
 
@@ -108,7 +108,7 @@ VDD falls inside G-09's word "power", findings F-014.
   it is gone. And the "before any power" half is unexecutable, F-061.
 - Enclosure heat with four drivers in a closed plastic box, and whether the box
   needs venting given the room is 62 to 65 F and under 60 percent humidity.
-- Head barb form and size, returned to DOSING for F-05 and F-06.
+- Head barb form and size, returned to DOSING for FL-05 and FL-06.
 - Lid penetration and sealing for the heads, CBL-05.
 - Wall position relative to the manifold, M-02, jointly with DOSING.
 - How the two boxes divide the eight channels, and whether both boxes take one

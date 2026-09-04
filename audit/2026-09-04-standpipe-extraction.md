@@ -20,40 +20,40 @@ than through a summary:**
 **These are the sheets' RULES rather than their numbers. Each survives every
 figure in the old set being wrong, which is the test D-121 was adopted under.**
 
-**M-01. THE TRIP HEIGHT IS WHERE THE WEIGHT SITS, NOT WHERE THE FLOAT SITS.**
+**SP-01. THE TRIP HEIGHT IS WHERE THE WEIGHT SITS, NOT WHERE THE FLOAT SITS.**
 Stated in a box of its own on the day tank sheet. An external cable weight clamps
 to the float's cord; **the weight is the PIVOT and the float hangs on a tether
 below it, swinging from the weight.** So the level at which a float trips is set by
 where its weight is clamped, and the float body's own position is a consequence.
 **Observed in the 1st Edition set, unverified. Confirm or replace.**
 
-**M-02. THE TETHER LENGTH SETS THE DIFFERENTIAL.** A short tether is a narrow
+**SP-02. THE TETHER LENGTH SETS THE DIFFERENTIAL.** A short tether is a narrow
 swing angle and a small band between make and break; a longer one is a wider band.
 **So the switching band is a build dimension, not a property of the float.**
 Observed, unverified. Confirm or replace.
 
-**M-03. THE TRIP HEIGHT IS SET BY A TIE ON THE CORD, NEVER ON THE FLOAT BODY.**
+**SP-03. THE TRIP HEIGHT IS SET BY A TIE ON THE CORD, NEVER ON THE FLOAT BODY.**
 And the commissioning rule attached to it, in red on both sheets: **"Fill slowly
 and confirm each float trips at its mark. ADJUST THE CABLE TIE, NEVER ADJUST THE
 WIRING."** Observed, unverified. Confirm or replace.
 
-**M-04. MARK EVERY TRIP HEIGHT ON THE PIPE BEFORE ANYTHING GOES IN THE TANK.**
+**SP-04. MARK EVERY TRIP HEIGHT ON THE PIPE BEFORE ANYTHING GOES IN THE TANK.**
 With a paint marker, against a stated datum. **The pipe carries its own scale, so
 a float that has moved can be seen to have moved.** That is the answer to the
 thing that made a drifted float dangerous - **nothing in this system measures a
 level, so an unmarked float that slips is invisible; a marked one is not.**
 Observed, unverified. Confirm or replace.
 
-**M-05. FIT THE BRACKET FIRST, THEN SET FLOAT HEIGHTS AGAINST THE STANDPIPE.**
+**SP-05. FIT THE BRACKET FIRST, THEN SET FLOAT HEIGHTS AGAINST THE STANDPIPE.**
 An order-of-operations rule, not a dimension. Observed, unverified.
 
-**M-06. THE BRACKET CARRIES THE PIPE, THE FLOATS AND EVERY CORD. NOTHING HANGS
+**SP-06. THE BRACKET CARRIES THE PIPE, THE FLOATS AND EVERY CORD. NOTHING HANGS
 OFF A FLOAT BODY AND NOTHING RESTS ON THE TANK FLOOR.** This is the sentence D-121
 already adopted, found here in its original form. **The end cap stands clear of
 the floor in the day tank and above the cone apex in the cone-bottom storage
 tank.**
 
-**M-07. CORDS RUN UP THE PIPE, TIED AT INTERVALS, AND LEAVE THROUGH A CORD GRIP
+**SP-07. CORDS RUN UP THE PIPE, TIED AT INTERVALS, AND LEAVE THROUGH A CORD GRIP
 WITH A DRIP LOOP OUTSIDE THE BOX.** The drip loop is the part the current tree has
 no position on. **It is the same design-to-shed principle D-047 applies to the
 panel's top face, applied to a cord entry.** Observed, unverified. Confirm or
@@ -66,12 +66,12 @@ method.**
 **He read these off other pages and flagged the gaps himself. The standpipe sheets
 close both.**
 
-**C-01. LS-8 IS NOT UNACCOUNTED FOR. It is STORAGE HIGH-HIGH.** The storage sheet
+**SPX-01. LS-8 IS NOT UNACCOUNTED FOR. It is STORAGE HIGH-HIGH.** The storage sheet
 names it and gives it a role: if the fill overruns, LS-8 drops a permissive and
 the fill relay with it, described as a hardware backstop **in series with the day
 tank's own high-high float.**
 
-**C-02. THE STORAGE LOW PUMP-DOWN FLOAT IS LS-3, AND IT IS IN THE LS SERIES.** The
+**SPX-02. THE STORAGE LOW PUMP-DOWN FLOAT IS LS-3, AND IT IS IN THE LS SERIES.** The
 owner recorded it as "a separate STORAGE LOW pump-down float, not numbered in the
 LS series". The storage sheet numbers it LS-3 and describes it as the pre-existing
 transfer dry-run stop, distinguished from LS-6, LS-7 and LS-8 not by being outside

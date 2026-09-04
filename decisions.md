@@ -80,6 +80,7 @@ changed reports to BOSS and does not act.
 | G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
 | G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
 | G-42 | **ONE DEVICE, ONE NAME, EVERYWHERE. A RENAME IS APPLIED TO THE WHOLE TREE IN ONE PASS OR IT IS NOT APPLIED AT ALL, AND THE OLD NAME IS RECORDED SO AN OLD READER IS NOT LOST** | Frozen 2026-09-04, D-144. **A label on a wall has to match a row in a schedule, and a generated set cannot carry two names for one thing.** **And the distinction that makes a global rename safe: renaming a DEVICE is not editing a CLAIM.** A returned answer and an audit file are records of what an agent SAID, so their reasoning is annotated and never rewritten - **but the name of a pump is not part of anyone's reasoning, so it is renamed in place there too.** Contrast the display-box-sweep annotation, where the SUBJECT of a sentence moved and the sentence was left standing |
+| G-43 | **EVERY ID PREFIX IN THIS TREE IS GLOBAL. A DOCUMENT THAT NEEDS A LOCAL LIST USES A PREFIX NOBODY ELSE COULD MEAN, KEYED TO THAT DOCUMENT - NEVER A BARE LETTER** | Frozen 2026-09-04, D-145. **Three collisions, one cause.** F- meant fluid rows and findings; M- meant mechanical rows and a local mechanism list; C- meant commissioning rows and a local contradiction list. **All three were made by BOSS or AUDIT inventing a local enumeration inside a document. Not one was made by a subsystem**, because a subsystem writes about its own scope and reaches for the tree's IDs, while a reviewer writes about a document and reaches for A, B, C. **The reserved list is at the top of interface-table.md** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -2748,7 +2749,7 @@ DIRECTION.** Twelve cells, four certain, three from the interface table, five op
   table.** What is real is smaller: **F-098, P-02's status text is stale**, saying
   the coil voltage is undecided when D-136 decided it the same day.
 - **F-097: the F- prefix means two things - fluid rows and findings - separated by
-  zero padding alone. F-09 is the day tank outlet, the frozen scope boundary. F-090
+  zero padding alone. FL-09 is the day tank outlet, the frozen scope boundary. F-090
   is the struck float roster.** This is F-026's collision, **fixed in one place and
   left standing in another**, and no document had ever had to cite both kinds in one
   table until a wire table did.
@@ -2861,7 +2862,7 @@ continuously. The owner rules that they will sufficiently mix nutrients.**
 
 **A naming observation, recorded and not acted on: the owner calls it the MANIFOLD
 PUMP. The tree calls the same device the MANIFOLD PUMP** - G-11 gives it
-suction at the day tank bottom and F-03 takes its discharge to the manifold. **Same
+suction at the day tank bottom and FL-03 takes its discharge to the manifold. **Same
 pump, two names, and the generated set cannot carry both.** BOSS does not rename a
 device the owner just named. Raised.
 
@@ -2955,4 +2956,75 @@ decision rather than a default:
 
 **BOSS renames neither. They are flagged because a generated set will put one of
 them on a drawing.**
+
+**D-145 THE ID NAMESPACE IS SETTLED AND THE FLUID ROWS ARE RENAMED. F-097 CLOSES.**
+The reserved list is at the top of interface-table.md and is frozen as G-43.
+
+**FLUID INTERFACE ROWS F-01 THROUGH F-09 BECOME FL-01 THROUGH FL-09. 72 references
+renamed across 14 files in one pass, per G-42.** F- now means one thing: a finding.
+
+**The collision that forced it: F-09 was the day tank outlet, the frozen edge of
+this project's entire scope, and F-090 was the struck float roster. One keystroke
+apart, separated by zero padding alone.**
+
+**THE OTHER TWO COLLISIONS WERE BOSS'S AND AUDIT'S, MADE THIS WEEK, AND BOTH ARE
+FIXED IN PLACE:** the standpipe extraction used M-01 to M-07 for a local mechanism
+list while M-01 to M-03 are mechanical interface rows - **renamed to SP-nn.** And it
+used C-01 and C-02 for a local contradiction list while C-01 and C-02 are the two
+most-cited commissioning rows in the tree - **renamed to SPX-nn.**
+
+**THE PATTERN IS WORTH MORE THAN THE FIX, and it is now G-43: not one of the three
+was made by a subsystem.** A subsystem writes about its own scope and reaches for
+the tree's existing IDs. **A REVIEWER WRITES ABOUT A DOCUMENT AND REACHES FOR A, B,
+C** - and the tree's prefixes are all single letters.
+
+**THREE NEW PREFIXES ARE CREATED because production needs them and none existed:**
+**RUN-nnn** for one physical cable run, since **CBL- names a CROSSING and cannot
+serve as a cable identity** - INTERCONNECT found that, and it is why wire-table
+column 2 had no valid values; **TRM-** for one terminal, **with its shape left to
+INTERCONNECT** since only the prefix was BOSS's to reserve; and **CDR-nnn** for one
+conductor, already used in wire-table-row-zero.md.
+
+**D-146 THE GLAND BOUNDARY IS ALLOCATED AND THE FOUR-WAY DEADLOCK IS BROKEN.**
+Recorded in interface-table.md under CBL-.
+
+**All four enclosure owners waited on INTERCONNECT for gland positions and
+INTERCONNECT waited on all four.** INTERCONNECT declined to break it under rule 5.
+**That refusal was right and is recorded as such: an allocation of decision rights
+is an interface decision, and a subsystem taking one unilaterally is how a boundary
+stops meaning anything.**
+
+**THE ENCLOSURE OWNER DECIDES WHICH FACE AND IN WHAT ORDER. INTERCONNECT DECIDES
+WHERE ON THAT FACE AND THE SPACING.** Neither waits: a face follows from what is
+inside the box and from D-047's shed rule, and the main panel's faces are already
+partly fixed by the owner - five 22 mm holes on top, cord grips on the bottom.
+
+**And the escape clause is a question rather than a licence: if an enclosure owner
+cannot state a face without knowing the run, that is a FINDING to report, because it
+would mean that box's contents are being decided by its cabling rather than the
+other way round.**
+
+**D-147 THE FLOOR DRAIN IS A TRACK, 6 IN WIDE, AND THE OVERFLOW MAY ENTER IT
+ANYWHERE. D-139 CLOSES.** Owner, 2026-09-04.
+
+**That is a better answer than a position, because it removes the constraint rather
+than satisfying it.** D-130's overflow requirement, D-133's leak-sensor placement
+reasoning and D-134's above-the-high-high ordering all rested on a drain nobody had
+confirmed. **All three stand, and the entry point is now free.**
+
+**TWO CONSEQUENCES, AND THE SECOND IS NOT GOOD NEWS:**
+
+**1. D-133's placement constraint gets EASIER.** The leak sensor must not sit where
+normal overflow discharge can splash or pool on it. **With a track the discharge
+point is chosen, so the two can simply be put apart.** No compromise needed.
+
+**2. AND A TRACK DRAIN MAKES THE LEAK SENSOR HARDER TO PLACE WELL, WHICH NOBODY HAS
+CONSIDERED. F-104.** A floor with a track drain **is a floor built to move water to
+the track.** A leak reaching that floor goes to the track, not to a sensor sitting
+somewhere else on it. **A floor that drains well hides a leak from a floor sensor.**
+
+**BOSS proposes no placement.** The observation is that the leak detection question
+changed shape when the drain did, **and the WaterBug's job - water where water
+should not be - is harder to do on a floor whose whole design is to have no standing
+water anywhere.**
 
