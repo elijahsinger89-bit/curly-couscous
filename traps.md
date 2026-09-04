@@ -3,6 +3,35 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-029 A sound finding is not automatically a finding worth having
+
+Called 2026-09-04 by the owner, on F-104, in four words: an unnecessary rabbit
+hole.
+
+**F-104 was correct.** A floor with a track drain is built to move water to the
+track, so a leak goes to the track rather than to a sensor sitting elsewhere on it.
+Nothing in the reasoning was wrong.
+
+**It was still not worth having.** It would have cost a WATER pass, a placement
+proposal, a price, and every later document that had to carry the qualification -
+**to relocate a sensor that is fine where it is.**
+
+**The mechanism, and it is this project's own success working against it.** Every
+finding here has earned its keep, so the habit is to follow one wherever it goes.
+**But the tree now generates findings faster than it consumes them, and a finding's
+SOUNDNESS says nothing about its VALUE.** F-104 passed every test this project has
+for whether a finding is real, and none for whether it is worth pursuing, **because
+there was no such test.**
+
+**The test, and it is one question: WHAT WOULD CHANGE IF THIS WERE ACTED ON, AND IS
+THAT WORTH THE PASS IT COSTS?** If the answer is a device moved a few feet to catch
+a failure mode nothing else in the build treats as urgent, file it and stop.
+
+**It is the owner's earlier diagnosis arriving one level down.** He said the
+analysis loop is self-sustaining and runs indefinitely without a document existing.
+**T-029 is where that loop actually starts: not with a bad finding, with a good one
+that nobody asked whether to follow.**
+
 ## T-028 A document written to stand alone re-buys what the base set already has
 
 Found 2026-09-04 by the owner, in the 1st Edition set, and it is the one defect in
