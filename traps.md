@@ -3,6 +3,44 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-028 A document written to stand alone re-buys what the base set already has
+
+Found 2026-09-04 by the owner, in the 1st Edition set, and it is the one defect in
+that set that would have cost money rather than time.
+
+**The storage add-on sheet lists four float switches and four weights in its parts
+table. Its own text, on the same page, says one of those four is already on the
+panel and only three arrive with the add-on. Three new, four listed.**
+
+**Buy per the base sheet and then per the add-on sheet and you get nine floats for
+eight positions.**
+
+**The cause is structural and it is not carelessness.** An add-on document is
+written to be handed to someone who may not have the base set in front of them, so
+**it states its whole scope rather than its increment** - and that is the right
+instinct for the ASSEMBLY sections, which have to be followable alone. **The parts
+table inherits the same instinct and becomes wrong**, because a parts table is the
+one section whose meaning is a DELTA against what already exists.
+
+**The tell is that the sheet contradicts itself rather than the base sheet.** The
+text says three, the table says four, on one page. **Nobody reconciled the totals
+because the document was never read against the base set - which is exactly what
+"written to stand alone" means.**
+
+**Why this build has to care.** The generated set is not started yet and will have
+the same shape: **a main package and an add-on, or a first edition and a
+revision.** So the rule arrives before the documents do.
+
+**The recognition test.** For any document that supplements another, ask of each
+section: **is this section's meaning ABSOLUTE or is it a DELTA?** Assembly steps
+are absolute and should repeat. **Quantities, counts and totals are deltas and must
+never repeat.** If a table can be read as either, it will be read as absolute by
+whoever is holding a credit card.
+
+**And it is the T-018 family seen from a new side.** T-018 was a seed read as a
+measurement. **This is an increment read as a total.** Both are a number whose
+MEANING depends on a context that did not travel with it.
+
 ## T-027 Proximity in a file is not a dependency. Twice now.
 
 Hit twice, 2026-09-02 and 2026-09-03, and it is a pattern because it is twice.

@@ -387,3 +387,47 @@ Say whether a fail-DETECTED float is worth wanting here, given that **F-091's
 overflow question exists because a single float has no second line behind it.**
 They are not alternatives - one catches a broken sense path, the other catches
 water on the floor - **but nobody has had them on the table together.**
+
+## THE OVERFLOW IS A REQUIREMENT. PRICE IT. 2026-09-04, D-130.
+
+**Both tanks. It is not an idea any more and it is not optional.**
+
+**The owner's reason, and it is why this outranks the other float work:**
+
+| Failure | Why it is survivable |
+|---|---|
+| A float that stops working | It can be **ANNOUNCED**. A broken sense path is detected, something says so, and it is dealt with while the tank is where it was |
+| **A fill that does not stop** | **Nothing measures level here, so the only thing that knows the tank is full is the float meant to stop it.** If that float works and the fill continues anyway, or sticks and reports nothing wrong, **there is no second line at all and the first indication is water on the floor** |
+
+**What you return: the price, both tanks, INCLUDING THE LANDING POINT.** A bulkhead
+to a floor drain is a plumbing change made **before anything is cut**, and it
+interacts with the return drop's landing point, which is already a C-02 re-measure
+trigger.
+
+**Do not size it and do not name a part.** What is wanted is what it costs you in
+plumbing terms and what it constrains.
+
+**AND A GUARD THAT IS THE OWNER'S, NOT BOSS'S: F-094's SPDT fail-detect DOES NOT
+BECOME AN ARGUMENT FOR SKIPPING THE OVERFLOW.** They catch different failures. **A
+fail-detect tells you a sense path broke. It says nothing about a float that is
+working and reporting correctly while the water keeps rising.**
+
+**The AIR GAP is NOT closed by this** and stays a question. It protects the supply
+from backflow rather than the room from water.
+
+## THE METHOD IS CONFIRMED COMPLETE, D-131, AND ONE ADDITION CHANGES YOUR REQUIREMENT
+
+**THE DIFFERENTIAL IS SET BY TETHER LENGTH, SO IT IS A THING THIS BUILD CHOOSES
+RATHER THAN A THING THE PART PROVIDES.** The sheets state it with a number; **the
+number is not adopted and the sentence is.**
+
+**That inverts how the float requirement has to be written.** A switching band is
+normally something you look up and accept. **Here it is a build parameter: it must
+be DECIDED, then RECORDED, and no float datasheet can supply it.** So your
+requirement asks what band each position needs, not what band a part offers.
+
+**D-132 records a CANDIDATE PART FAMILY** - observed, unverified, possibly
+superseded, returned or never bought. **It is one entry on the candidate list with
+no priority for having been there first.** The requirement it answers to is already
+written: **F-089's 24 V contact power under G-31, D-127's eight positions, and now
+D-131's chosen differential.**

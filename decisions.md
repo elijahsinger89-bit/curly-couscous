@@ -2494,13 +2494,109 @@ fail-detected float is a different answer to the same worry.
 **D-129 THREE MORE SELF-CONTRADICTIONS, FROM THESE TWO SHEETS ALONE, AND THEY ARE
 THE EVIDENCE FOR D-120's REFUSAL OF THE HEIGHTS.**
 
-The day tank sheet **places its high-high float above the top of the pipe carrying
-it**, on its own elevation. The datum is stated **two ways in the same set - end
-cap face on these sheets, in red and twice; tank floor in the build book - with the
-same numbers under both.** And one sheet's clamp detail names a float count its own
-elevation and parts table contradict.
+**REVISED 2026-09-04 by the owner, against the sheets. Two stand, one was
+withdrawn and then RESTORED in a different and worse form.**
+
+**FIRST, AND IT IS WORSE THAN BOSS DESCRIBED. The day tank pipe is 30 in and its
+high-high mark is at 32 in, so the float sits TWO INCHES ABOVE THE TOP OF THE PIPE
+CARRYING IT - and the fill-stop mark sits EXACTLY AT THE CUT END, so the topmost
+usable mark is the pipe's own end face.** Both of the day tank's upper floats are
+at or past the end of their own standpipe. **That is the strongest single argument
+for D-120 refusing every height in the set.**
+
+**SECOND, THE DATUM.** Stated two ways: **end cap face on the standpipe sheets, in
+red and twice; TANK FLOOR in the build book - with the same numbers under both**,
+and the two differ by however far the end cap stands off the floor.
+
+**THIRD, WITHDRAWN AND THEN RESTORED BY THE OWNER, AND THE RESTORED VERSION IS A
+DIFFERENT SHAPE.** BOSS reported the clamp detail's "identical for all five floats"
+as contradicting a count of four. **It does not, and that one is struck: five is
+the BASE-SET total - four on the day tank plus LS-3 in storage - and the detail
+describes every float in the base build rather than the four on that pipe.**
+
+**What is real is in the STORAGE sheet's parts table. It lists FOUR float switches
+and FOUR weights, while its own text on the same page says LS-3's float and weight
+are already on the panel and only LS-6, LS-7 and LS-8 arrive with the add-on. THREE
+NEW, FOUR LISTED.**
+
+**Buy per the day tank sheet and then per the storage sheet and you get NINE FLOATS
+FOR EIGHT POSITIONS. The add-on sheet re-buys a float the base set already
+bought.**
+
+**It is not a number disagreeing with itself. It is a PARTS TABLE DOUBLE-COUNTING
+ACROSS A BASE SET AND AN ADD-ON**, and the owner names the cause: **an add-on sheet
+written to stand alone, with nobody reconciling the totals.** T-028.
+
+**Eight positions, four per tank, confirmed from the drawings. Five in the base
+set, three in the add-on.**
 
 **Findings about the old set, not about this tree.** D-120 refused those heights
 before this file was read; **this is the evidence, and it came from the two sheets
 most likely to be authoritative about heights.**
+
+**D-130 THE OVERFLOW BULKHEAD IS A REQUIREMENT, ON BOTH TANKS. F-091's FIRST HALF
+CLOSES AS A REQUIREMENT RATHER THAN AN IDEA.** Owner, 2026-09-04, answering which
+failure he is actually worried about.
+
+**The answer is BOTH, and the distinction he draws is the part to keep:**
+
+| Failure | Why it is survivable |
+|---|---|
+| A float that stops working | **It can be ANNOUNCED.** A broken sense path on an SPDT leg is DETECTED, something says so, and it is dealt with while the tank is where it was |
+| **A fill that does not stop** | **Different in kind. Nothing measures level in this system, so the only thing that knows the tank is full is the float that is supposed to stop it.** If that float works and the fill continues anyway, or sticks and reports nothing wrong, **there is no second line at all and the first indication is water on the floor** |
+
+**So the overflow is the one that HAS TO EXIST**, and F-094's SPDT leg is taken as
+well because it is free.
+
+**AND THE INSTRUCTION THAT MATTERS MOST IS THE ONE ABOUT HOW THEY RELATE: F-094
+DOES NOT BECOME AN ARGUMENT FOR SKIPPING THE OVERFLOW.** They catch different
+failures. **A fail-DETECT tells you a sense path broke. It says nothing about a
+float that is working and reporting correctly while the water keeps rising.** Any
+later reader who finds the SPDT leg cheaper than a bulkhead has misread both.
+
+**ROUTED: WATER PRICES THE OVERFLOW - both tanks, and the landing point, since a
+bulkhead to a floor drain is a plumbing change made before anything is cut.
+F-094 GOES TO MAIN-PANEL as a fail-detect on whichever floats have a spare leg.**
+
+**The air gap, F-091's second half, is NOT closed by this and stays a question.**
+It is a different class of requirement: **it protects the SUPPLY from backflow
+rather than the room from water**, and nothing in this answer touches it.
+
+**D-131 THE STANDPIPE METHOD IS CONFIRMED COMPLETE FROM THE SHEETS. NO FIGURE IS
+ADOPTED.** Owner, 2026-09-04, against audit/2026-09-04-standpipe-extraction.md.
+
+The method, as confirmed and in his order: **standpipe with a solvent-welded end
+cap at the bottom; every trip height marked on the pipe with a paint pen, MEASURED
+FROM THE END CAP FACE; a cable tie clamps each float's external weight on its mark
+and THE TIE IS THE TRIP HEIGHT; the float hangs below its weight on a tether and
+THE WEIGHT IS THE PIVOT; cords run up the pipe, tied at intervals, out through a
+grip with a DRIP LOOP OUTSIDE THE BOX; a U-bolt with a backing plate over the drum
+lip, nuts underneath, snug and not crushed; fill slowly, confirm each float trips
+at its mark, ADJUST THE TIE AND NEVER THE WIRING.**
+
+**ONE ADDITION THE OWNER MADE, AND IT IS THE SHARPEST THING IN THE PASS: THE
+DIFFERENTIAL IS SET BY TETHER LENGTH, SO IT IS A THING THIS BUILD CHOOSES RATHER
+THAN A THING THE PART PROVIDES.** The sheets state it with a number attached;
+**the number is not adopted and the sentence is.**
+
+**That inverts how a requirement for these floats has to be written.** A switching
+band is normally something you look up and accept. **Here it is a build parameter,
+so it must be DECIDED and then RECORDED, and a float datasheet cannot supply it.**
+G-34's shape: a rule keyed to what the thing IS.
+
+**And the owner's note on rule 3 is a correction of emphasis worth keeping: the
+sheets state "mark the pipe before anything goes in the tank" as an ASSEMBLY STEP,
+not as a principle.** It became a principle by being read against a tree that
+measures no levels. **The old set knew to do it. It did not know why it mattered.**
+
+**D-132 A CANDIDATE PART FAMILY IS RECORDED. IT IS NOT A SELECTION.** Observed in
+the 1st Edition set, unverified, and under G-40 every one may have been superseded,
+returned or never bought: **SJE Rhombus SignalMaster SPDT floats with a long cord;
+SJE Rhombus external cable weights; UV black nylon ties at a stated pull rating;
+316 stainless bracket hardware throughout.**
+
+**The float pass still restarts from requirements under D-118. This is ONE ENTRY ON
+THE CANDIDATE LIST and it carries no priority for having been there first.** The
+requirement it must answer to is already written: **F-089's 24 V contact power
+under G-31, the eight positions of D-127, and now D-131's chosen differential.**
 
