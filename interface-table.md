@@ -46,13 +46,15 @@ until a subsystem returns them with a datasheet behind them.
 
 | ID | End A | End B | Status | Owner of the open item |
 |---|---|---|---|---|
-| FL-01 | Building cold water supply | WATER: fill solenoid inlet | OPEN | WATER |
+| FL-01 | Building cold water supply | WATER: fill solenoid inlet | OPEN | WATER. **AND IT CARRIES THE AIR GAP, D-138: this crossing is where municipal supply meets a tank of nutrient solution, and the air gap is the backflow measure. NOT a separate row - it is a property of this crossing** |
 | FL-02 | WATER: fill solenoid outlet | WATER: storage tank inlet | internal to WATER | WATER |
 | FL-03 | WATER: manifold pump discharge | DOSING: manifold inlet union | OPEN | WATER and DOSING jointly, BOSS freezes |
 | FL-04 | DOSING: manifold outlet union | WATER: return drop to day tank | OPEN | WATER and DOSING jointly, BOSS freezes |
 | FL-05 | DOSING: dose delivery tubing | PUMP-BOXES: head discharge end, 3/16 in barb | **SIZE CLOSED 2026-08-30 by parts.md**: 3/16 in straight connector mating 4.8 mm ID tube. The fixed-tube null head means external tubing joins at the ends of the short BPT piece, so this crossing is external tubing to barb and never involves the pump tube. Still open: DOSING's tubing selection against chemical compatibility and translucency, D-019 | DOSING |
 | FL-06 | DOSING: jug suction tubing | PUMP-BOXES: head suction end, 3/16 in barb | As FL-05. **This unblocks the F-002 proposal, which was blocked on FL-06** | DOSING |
 | FL-10 | PUMP-BOXES: the head, a mechanical mount that happens to have a tube in it | DOSING: the pump tube, PharMed BPT B25, wetted, consumable at about 1000 h | **CLOSED 2026-08-30 by D-028. DOSING owns the pump tube**, including the change interval, the change procedure, and telling CONTROL-SOFTWARE that C-01 is void for that channel after a change. PUMP-BOXES stops at the barb per D-006 | closed |
+| FL-11 | WATER: day tank overflow bulkhead | WATER: the floor track drain | **NEW 2026-09-04, D-153. A requirement under D-130 that had no row after two irreversible holes were made requirements.** Entry point is FREE, D-147. Lands ABOVE the high-high mark unless WATER returns a reason, D-134 | WATER |
+| FL-12 | WATER: storage tank overflow bulkhead | WATER: the floor track drain | **NEW 2026-09-04, D-153.** As FL-11 | WATER |
 | FL-07 | DOSING: injection ports | DOSING: manifold body | internal to DOSING | DOSING |
 | FL-08 | WATER: chiller loop submersible and return | WATER: chiller ports | internal to WATER | WATER |
 | FL-09 | WATER: day tank outlet | V3 inlet | FROZEN as the scope boundary. V3 is manual, nothing in this project actuates it, nothing downstream is designed here | closed |

@@ -82,6 +82,7 @@ changed reports to BOSS and does not act.
 | G-42 | **ONE DEVICE, ONE NAME, EVERYWHERE. A RENAME IS APPLIED TO THE WHOLE TREE IN ONE PASS OR IT IS NOT APPLIED AT ALL, AND THE OLD NAME IS RECORDED SO AN OLD READER IS NOT LOST** | Frozen 2026-09-04, D-144. **A label on a wall has to match a row in a schedule, and a generated set cannot carry two names for one thing.** **And the distinction that makes a global rename safe: renaming a DEVICE is not editing a CLAIM.** A returned answer and an audit file are records of what an agent SAID, so their reasoning is annotated and never rewritten - **but the name of a pump is not part of anyone's reasoning, so it is renamed in place there too.** Contrast the display-box-sweep annotation, where the SUBJECT of a sentence moved and the sentence was left standing |
 | G-43 | **EVERY ID PREFIX IN THIS TREE IS GLOBAL. A DOCUMENT THAT NEEDS A LOCAL LIST USES A PREFIX NOBODY ELSE COULD MEAN, KEYED TO THAT DOCUMENT - NEVER A BARE LETTER** | Frozen 2026-09-04, D-145. **Three collisions, one cause.** F- meant fluid rows and findings; M- meant mechanical rows and a local mechanism list; C- meant commissioning rows and a local contradiction list. **All three were made by BOSS or AUDIT inventing a local enumeration inside a document. Not one was made by a subsystem**, because a subsystem writes about its own scope and reaches for the tree's IDs, while a reviewer writes about a document and reaches for A, B, C. **The reserved list is at the top of interface-table.md** |
 | G-44 | **SIMPLE IS BEST. THE BURDEN OF PROOF IS ON COMPLEXITY, NEVER ON SIMPLICITY.** A simpler build is easier to BUILD, easier to OPERATE and easier to REPAIR, and those are three separate wins that compound. **Anything added must say what failure it prevents and what it costs to build, operate and repair. If it cannot, it does not go in** | Frozen 2026-09-04, D-152, the owner's standing instruction: "do not over complicate this just get it done". **It outranks tidiness, completeness and elegance, and it is the tie-breaker whenever two answers both work** |
+| G-45 | **A WRITTEN CONTRACT IS A SUBSTITUTE FOR A MECHANISM. If two documents must agree, GENERATE THEM FROM ONE SOURCE rather than writing a rule that says they must agree** | Frozen 2026-09-04, D-155. **The 1st Edition disposed of the entire duplication question in one line: the schedules read the same wire list as the routing sheets, so they CANNOT disagree, and a schedule is never hand-transcribed.** This tree wrote the duplication contract twice and only two facts in it survive generation. **A contract needs a reader who obeys it; a mechanism does not** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -3136,4 +3137,74 @@ tree does not have.**
 frozen row, it does not lift a hazard, and it does not adopt a figure.** G-44 is a
 tie-breaker between answers that both work, not a reason to accept one that does
 not.
+
+**D-153 THE OVERFLOW ROWS EXIST. FL-11 AND FL-12.** WATER found that a requirement
+ending in two irreversible holes had no interface row on either tank. Created. **The
+air gap is a PROPERTY of FL-01 and not a row of its own** - it is where municipal
+supply meets nutrient solution, which is that crossing.
+
+**D-154 WATER'S FLOAT REQUIREMENT IS ACCEPTED, AND F-093 CLOSES BY TOPOLOGY RATHER
+THAN BY CHOICE.** subsystems/water-float-requirement.md. Returned as stopped
+part-way, correctly.
+
+**THE FAIL DIRECTION IS FORCED, NOT CHOSEN. Every one of the eight floats is a
+series element in a 24 V coil chain, so severed equals open equals coil drops.** The
+requirement is simply that each float be CLOSED in the state that permits the action
+to continue. **F-093 is answered and the answer is the OPPOSITE of the 1st Edition
+set** - derived from this build's topology, inherited from nothing, which is exactly
+what was asked.
+
+**Six floats close on LOW water, two close on HIGH** - the day tank low-low, which
+IS the S-05 dry-run element under G-11, and the storage pump-down.
+
+**F-103 CLOSES: THE THERMAL FAILURE DOES NOT OCCUR.** 3000 BTU/h is 879 W. The loop
+pump's 110 W is 12.5 percent, continuously; both pumps together are about 25
+percent. **The margin is comfortable and BOSS does not chase it further, per T-029.**
+**One inversion recorded and not pursued: the tank band sits at or above the room,
+so the room is a SINK and pump heat is very nearly the entire load - which makes the
+likely residual SHORT CYCLING rather than a warm tank.** WATER did not compute it
+because it needs C-11's working volume, and the 40 gal is nominal. Correct call.
+
+**OVERFLOW DETECTION IS NOT CHEAP AS A SIGNAL AND IS CHEAP AS A PROVISION.** The
+reader does not exist: G-01, G-02, five face holes spoken for, no spare relay
+envelope. **F-095's residual stands.** And WATER flagged rather than resolved a
+collision BOSS must rule on: **F-095 suggested a flow switch, and D-119 says there
+is no flow element anywhere and there is not going to be one.** That is the owner's
+sentence. **BOSS does not reinterpret it. Under G-44 nothing is added.**
+
+**D-155 THE DOCUMENT PLAN EXISTS. 11 DOCUMENTS AGAINST THE OLD SET'S 19. THREE ARE
+WRITABLE FROM THE TREE TODAY.** document-plan.md.
+
+**Writable today: the electrical schematic, from the ladder already drawn with its
+holes marked OPEN; the cable and terminal schedule, from INTERCONNECT's returned
+draft with real RUN- and TRM- ids; and the software specification.** Six partly
+exist, one exists with empty columns, one does not exist at all.
+
+**EIGHT DOCUMENTS DROPPED, and the largest drop is the whole storage auto-fill
+add-on package.** The storage fill is in scope from the start here, **so there is no
+base set for it to supplement - which is the cheapest possible satisfaction of G-41
+and T-028: the defect they were frozen against is a property of SUPPLEMENTS, and
+this set has none.** The receptacle documents go because D-046 panel-mounts the
+receptacles. The plotter sheet goes because it states no fact of its own.
+
+**AND THE VERDICT BOSS ASKED FOR, RECORDED IN FULL BECAUSE IT IS ABOUT BOSS:**
+
+**"The ratio of apparatus to deliverable is inverted. The 1st Edition carried
+everything it could not reconstruct from source in TWO markdown files, and against
+those two delivered nineteen documents. This tree carries twelve root files, nine
+audit files and twenty-three subsystem files, and against all of that has delivered
+ONE builder-facing document."**
+
+**And the specific form of it: DRAWING-METHODOLOGY.md disposes of the whole
+duplication question in one line - the schedules read the same wire list as the
+routing sheets, so they cannot disagree, and a schedule is never hand-transcribed.
+This tree has written the duplication contract TWICE, in two INTERCONNECT files.**
+
+**"A WRITTEN CONTRACT IS A SUBSTITUTE FOR A MECHANISM."** Only two facts in ours
+survive generation: the terminal marking's source, and the per-conductor fail
+direction. **That sentence is the standing correction and it is frozen as G-45.**
+
+**The build order was FOUND rather than derived**, distributed across the old set's
+purchase workbook, its numbered step pages, its commissioning checklist and its
+maintenance log baseline. G-40b working as intended.
 
