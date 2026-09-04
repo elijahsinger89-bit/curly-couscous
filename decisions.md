@@ -78,6 +78,7 @@ changed reports to BOSS and does not act.
 | G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
 | G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood |
 | G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
+| G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -2599,4 +2600,48 @@ SJE Rhombus external cable weights; UV black nylon ties at a stated pull rating;
 THE CANDIDATE LIST and it carries no priority for having been there first.** The
 requirement it must answer to is already written: **F-089's 24 V contact power
 under G-31, the eight positions of D-127, and now D-131's chosen differential.**
+
+**D-133 THE OVERFLOW DISCHARGES TO THE SAME FLOOR DRAIN THE LEAK SENSORS WATCH,
+AND THE TWO EVENTS ARE NOT THE SAME EVENT.** Owner, 2026-09-04. **It is neither a
+free second alarm nor a false one, and the reason is geometry.**
+
+**The WaterBug sensor sits ON THE FLOOR, not in the drain.** Its job is water where
+water should not be. **A pipe discharging into a drain is water going exactly where
+it should, so a WORKING overflow produces no floor water and no alarm at all.**
+
+**So the correct reading, and it is better than an overflow alarm would have been:
+THE LEAK SENSOR DOES NOT SEE THE OVERFLOW. IT SEES THE OVERFLOW FAILING** - a
+blocked drain, a discharge that misses, a line that comes apart.
+
+**AND THAT IS A PLACEMENT CONSTRAINT ON WATER'S PRICING, not a note.** The sensor
+**must not sit where normal overflow discharge can splash or pool on it.** If it
+does, **every overflow event reads as a leak and the alarm stops meaning
+anything** - which is G-16a's shape on an alarm instead of on a UI: a signal that
+fires when nothing is wrong trains the operator to ignore it.
+
+**D-134 THE HIGH-HIGH IS THE INSTRUMENTED PROTECTION AND THE OVERFLOW IS THE
+UNINSTRUMENTED ONE, SO THE OVERFLOW LANDS ABOVE THE HIGH-HIGH MARK.** Owner's
+reasoning, and it is an ordering decision rather than a dimension.
+
+**LS-2 and LS-8 drop the permissive, and that IS reported. The overflow reports to
+nobody.** They sit at different levels, so **which one is higher decides which one
+the machine finds out about:**
+
+| Overflow relative to high-high | What happens on a fill-stop failure |
+|---|---|
+| **ABOVE** | **The high-high trips first and the machine finds out.** The overflow is there for the case where the high-high also fails |
+| BELOW | **The overflow silently absorbs the failure and THE HIGH-HIGH NEVER TRIPS.** The protection works and nobody is told, every time, forever |
+
+**WATER prices it with the overflow landing ABOVE the high-high mark unless there
+is a reason not to.** BOSS states no height and no relationship in inches; **the
+ORDER is the decision and the dimension is WATER's to return.**
+
+**D-135 T-028 IS CARRIED INTO THIS BUILD'S OWN GENERATED SET BEFORE THAT SET
+EXISTS, AS G-41.** Owner's instruction. **An add-on parts table is a thing this
+project will eventually write**, and the rule is cheaper to hold now than to
+discover later in the same way the 1st Edition set discovered it.
+
+**The owner names the usable half: the recognition test, not the anecdote.** And
+the line that makes it stick is the last one - **if a table can be read either way,
+it will be read as absolute by whoever is holding a credit card.**
 

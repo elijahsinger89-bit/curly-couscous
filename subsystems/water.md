@@ -431,3 +431,42 @@ superseded, returned or never bought. **It is one entry on the candidate list wi
 no priority for having been there first.** The requirement it answers to is already
 written: **F-089's 24 V contact power under G-31, D-127's eight positions, and now
 D-131's chosen differential.**
+
+## THE OVERFLOW, THE DRAIN AND THE LEAK SENSOR. 2026-09-04, D-133 and D-134.
+
+**It discharges to the SAME floor drain the leak sensors watch, and the two events
+are not the same event.**
+
+**The WaterBug sits ON THE FLOOR, not in the drain.** A pipe discharging into a
+drain is water going exactly where it should, so **a WORKING overflow produces no
+floor water and no alarm.**
+
+**So the leak sensor does not see the overflow. IT SEES THE OVERFLOW FAILING** -
+blocked drain, discharge that misses, line that comes apart. **That is a better
+signal than an overflow alarm would have been.**
+
+**AND IT IS A CONSTRAINT ON YOUR PRICING, not a note: THE SENSOR MUST NOT SIT WHERE
+NORMAL OVERFLOW DISCHARGE CAN SPLASH OR POOL ON IT.** If it does, every overflow
+reads as a leak and **the alarm stops meaning anything** - G-16a's shape on an
+alarm instead of on a UI.
+
+**PRICE IT WITH THE OVERFLOW LANDING ABOVE THE HIGH-HIGH MARK, unless you have a
+reason not to.** The ordering is decided; the dimension is yours.
+
+| Overflow relative to high-high | On a fill-stop failure |
+|---|---|
+| **ABOVE** | **The high-high trips first and the machine finds out.** The overflow is the second line, for when the high-high fails too |
+| BELOW | **The overflow silently absorbs the failure and the high-high NEVER TRIPS.** The protection works and nobody is told, every time, forever |
+
+**LS-2 and LS-8 drop the permissive and that IS reported. The overflow reports to
+nobody.** That asymmetry is the whole argument.
+
+**AND THE OPEN ITEM BEHIND IT, F-095, which the owner did NOT ask to be fixed: THE
+OVERFLOW IS UNINSTRUMENTED. A SUCCESSFUL OVERFLOW IS INDISTINGUISHABLE FROM NOTHING
+HAPPENING.** Water gone, floor dry, machine fine, nobody knows - and a fill-stop
+float can have been failing for weeks with the only evidence down a drain.
+
+**If detection is cheap - a flow switch, a wet sensor IN THE LINE rather than on
+the floor - say so while you are pricing the bulkhead, because that is the one
+moment it costs almost nothing to add.** If it is not cheap, say that and the
+residual stands. **Do not design it and do not name a part.**
