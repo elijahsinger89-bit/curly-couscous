@@ -57,7 +57,7 @@ changed reports to BOSS and does not act.
 | G-08 | The leak detection console is wired into the permissive chain and drops power in hardware | As G-07 |
 | G-09 | **AMENDED 2026-08-30 by D-031: the permissive contactor removes MOTOR SUPPLY (VM) from every stepper driver at once.** It does NOT remove VDD, the driver's logic supply, which stays live. The original wording said "power" and was written when everyone believed a stepper driver had one supply. That belief is now known to be false, so the row says which supply. The Pi reads back a contact on the contactor | So a welded contact is detected rather than assumed, and so the two supplies are never confused again |
 | G-10 | Probes sit first in line in a vertical manifold section, ahead of every injection point | So a bubble cannot corrupt a reading and no injectate reaches a probe before mixing |
-| G-11 | The circulation submersible takes suction at the day tank bottom | So the tank mixes |
+| G-11 | The manifold pump takes suction at the day tank bottom | So the tank mixes |
 | G-12 | The chiller and its loop pump are switched together by one contactor on their own circuit | The chiller has no internal pump |
 | G-13 | E-stop and manual reset are in the permissive chain and are not software | As G-07 |
 | G-14 | UL listing is not gating. Hobby build, no electrical inspection | Owner's stated condition. It does not license unsafe work |
@@ -79,6 +79,7 @@ changed reports to BOSS and does not act.
 | G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood |
 | G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
 | G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
+| G-42 | **ONE DEVICE, ONE NAME, EVERYWHERE. A RENAME IS APPLIED TO THE WHOLE TREE IN ONE PASS OR IT IS NOT APPLIED AT ALL, AND THE OLD NAME IS RECORDED SO AN OLD READER IS NOT LOST** | Frozen 2026-09-04, D-144. **A label on a wall has to match a row in a schedule, and a generated set cannot carry two names for one thing.** **And the distinction that makes a global rename safe: renaming a DEVICE is not editing a CLAIM.** A returned answer and an audit file are records of what an agent SAID, so their reasoning is annotated and never rewritten - **but the name of a pump is not part of anyone's reasoning, so it is renamed in place there too.** Contrast the display-box-sweep annotation, where the SUBJECT of a sentence moved and the sentence was left standing |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -185,7 +186,7 @@ Matched identity at head, tube and jug, and keyed couplings, are to come back as
 their own proposal, separate from the nineteen. Routed to DOSING.
 
 **D-016 F-003 is assigned, not left in the gap.** Nothing verifies anything at
-rest. WATER holds it as primary because it owns the circulation submersible, the
+rest. WATER holds it as primary because it owns the manifold pump, the
 day tank and the placement of any sense element. MAIN-PANEL holds the other end
 because it owns the relay and the dry run interlock chain. Neither may assume
 the other has it. BOSS's note, not a design instruction: this sits next to the
@@ -281,7 +282,7 @@ What that does to each side of the trade:
 mostly is not happening.** The benefit shrank and the cost did not.
 
 One thing that pulls the other way and must be checked rather than assumed: the
-circulation submersible puts essentially all of its electrical input into the water
+manifold pump puts essentially all of its electrical input into the water
 it sits in, and it runs continuously through a settle window. **The moment the
 chiller is MOST likely to be called is during extended circulation, which is
 exactly when the settle windows are.** So "the chiller rarely runs" may not hold
@@ -670,7 +671,7 @@ tell commanded state from actual state.
 
 **What it does not drive:** the day tank fill coil, hardwired float seal-in; the
 storage fill coil, same construction, separate relay; **the transfer pump, which is
-a POLE on the day tank fill relay and not its own coil; the circulation pump, which
+a POLE on the day tank fill relay and not its own coil; the manifold pump, which
 is a POLE on the dry-run interlock relay; and the chiller, which is a CONTACTOR on
 its own circuit.**
 
@@ -680,7 +681,7 @@ matters.
 
 **Where the error came from, recorded because provenance matters:** the owner's
 original project description said the Pi commands relays for the transfer pump, the
-circulation pump and the chiller. **That was loose. It commands a permissive that
+manifold pump and the chiller. **That was loose. It commands a permissive that
 GATES those circuits; it does not command them.** MAIN-PANEL's table listing only
 K-CIRC was closer to the truth than S-09 and still not right.
 
@@ -737,7 +738,7 @@ pole on K-DRY.
 
 **It is now CONTACT DUTY, and it binds on TWO relays instead of one.** K-FILL-D
 carries the transfer pump and the S-03 and D-042 SELV pair. **K-DRY now carries the
-circulation pump AND the interlock contact to the Pi, which is new and was created
+manifold pump AND the interlock contact to the Pi, which is new and was created
 by G-26 moving circulation onto it.** Under G-28 those are different duties bought
 as different parts. **If either the mixed-voltage socket question or the mixed-duty
 contact question binds, it forces TWO slaves, not one.**
@@ -853,12 +854,12 @@ initiative for exactly that reason, twice now.
 
 ## 2026-09-01
 
-**D-063 The circulation pump is INTERMITTENT, not continuous.** It runs when the
+**D-063 The manifold pump is INTERMITTENT, not continuous.** It runs when the
 system needs the tank mixed or moving: during a batch, during dosing, and through a
 settle window. Between batches it is off. **The dry-run interlock is a PERMISSION
 for it to run, not a command that it should.**
 
-**CONTRADICTED 2026-09-04 AND THE CONTRADICTION IS THE OWNER'S OWN WORDS, NOT AN AGENT'S READING. D-137 states: "there are TWO submersibles in the day tank and BOTH RUN CONTINUOUSLY: the circulation pump and this one." MAIN-PANEL's ladder then established that NOTHING IN THE PANEL STARTS OR STOPS IT** - K-CIRC was deleted by D-058, circulation is a pole on K-DRY, K-DRY is a permission rather than a command, and G-26 bars the Pi. **So the topology and the owner agree with each other, and this entry is the outlier. NOT REVERSED HERE: BOSS does not decide whether the pump is intermittent, and the entry is left standing with the contradiction named. F-101, and it costs C-12's free F-003 witness, which needs a rest and a start.**
+**CONTRADICTED 2026-09-04 AND THE CONTRADICTION IS THE OWNER'S OWN WORDS, NOT AN AGENT'S READING. D-137 states: "there are TWO submersibles in the day tank and BOTH RUN CONTINUOUSLY: the manifold pump and this one." MAIN-PANEL's ladder then established that NOTHING IN THE PANEL STARTS OR STOPS IT** - K-CIRC was deleted by D-058, circulation is a pole on K-DRY, K-DRY is a permission rather than a command, and G-26 bars the Pi. **So the topology and the owner agree with each other, and this entry is the outlier. NOT REVERSED HERE: BOSS does not decide whether the pump is intermittent, and the entry is left standing with the contradiction named. F-101, and it costs C-12's free F-003 witness, which needs a rest and a start.**
 
 Three consequences, all favourable:
 
@@ -878,7 +879,7 @@ rather than spanning a transition**, which matters for the C-02 timing
 measurements. A window that spans a start or a stop measures two regimes.
 
 **What remains from F-045: the exercise run still has no command path.** The Pi
-cannot command the circulation pump under G-26. That is a real gap and it is
+cannot command the manifold pump under G-26. That is a real gap and it is
 separate from the question of whether the exercise is needed.
 
 **D-064 The chiller contactor coil's driver is an OPEN QUESTION, and it is the
@@ -927,7 +928,7 @@ a sense pole degrades regardless.**
 
 **Both relays that G-26 left carrying both duties are affected: K-FILL-D, which
 carries the transfer pump plus the S-03 and D-042 SELV pair, and K-DRY, which
-carries the circulation pump plus the interlock contact to the Pi.** BOSS is routing
+carries the manifold pump plus the interlock contact to the Pi.** BOSS is routing
 the conclusion to MAIN-PANEL with the fact in hand rather than drawing it, because
 it is a purchase and the split is MAIN-PANEL's to draw. **What it points to is two
 slaves.**
@@ -1014,7 +1015,7 @@ not the variable.**
 
 | Tier | Poles | Debris |
 |---|---|---|
-| 1, arcing loads | transfer pump, circulation pump, fill solenoid, the 120 V permissive bus | The source. Must be isolated |
+| 1, arcing loads | transfer pump, manifold pump, fill solenoid, the 120 V permissive bus | The source. Must be isolated |
 | 2, suppressed coil switching | seal-ins, latches, the 24 V coil bus, any slave-coil drive | Mild, and only if suppression is AT THE COIL |
 | 3, quiet | S-03, the D-042 inhibit, the K-DRY contact to the Pi, every lamp | What must be protected |
 
@@ -1063,7 +1064,7 @@ Six envelopes minimum, three quiet and three power: K-PERM quiet with the latch,
 coil bus and PL-R; K-FILL-S power with the seal-in and solenoid; K-FILL-D-Q quiet with
 the seal-in, the S-03 and D-042 changeover pair and PL-G; K-FILL-D-P power with the
 transfer pump; K-DRY-Q quiet with the seal-in and the G-27 complementary pair to the
-Pi; K-DRY-P power with the circulation pump. **Eight at maximum if both gates bind,
+Pi; K-DRY-P power with the manifold pump. **Eight at maximum if both gates bind,
 which resolves to a clean statement: four states, each in two envelopes, one quiet and
 one power.**
 
@@ -1821,7 +1822,7 @@ unflagged instances are control-software-f004.md, control-software-p09.md step 6
 
 **The bite, and it is why this is F-074's class and not a documentation defect:
 subsystems/dosing-f004-wet-side.md tells the reader the settling timer must be
-gated on the circulation pump being COMMANDED ON. That file is named in
+gated on the manifold pump being COMMANDED ON. That file is named in
 commissioning.md as C-02's full procedure.** The person running C-02 is told to
 gate on a signal that does not exist and cannot exist under G-26. **C-23 already
 says the operator is the only enforcement; the procedure C-23 governs says
@@ -2674,7 +2675,7 @@ contactor. **The chiller and this pump share ONE SWITCHED RECEPTACLE on a dedica
 circuit, so both stop when the permissive drops.**
 
 **TWO SUBMERSIBLES NOW SIT IN THE DAY TANK AND BOTH RUN CONTINUOUSLY** - the
-circulation pump and this one. **That is a new fact about the tank, not only about
+manifold pump and this one. **That is a new fact about the tank, not only about
 the panel**, and it lands on C-15's thermal thinking, on the standpipe's cord count,
 and on anything that assumed one cord in that tank.
 
@@ -2776,14 +2777,14 @@ while drawing.**
 **THE FINDING THAT MATTERS MOST IS F-101, AND IT LANDS ON A DECISION MADE
 YESTERDAY.**
 
-**NOTHING IN THIS PANEL STARTS OR STOPS THE CIRCULATION PUMP.** D-058 deleted K-CIRC
+**NOTHING IN THIS PANEL STARTS OR STOPS THE MANIFOLD PUMP.** D-058 deleted K-CIRC
 and made circulation a pole on K-DRY. D-063 says the pump is intermittent AND that
 K-DRY is a permission rather than a command. G-26 bars the Pi from commanding it.
 **No element exists between the permissive bus and the circulation receptacle.**
 
 **AND THE OWNER HAS ALREADY SAID SO WITHOUT EITHER OF US NOTICING. D-137, in his
 words: "there are TWO submersibles in the day tank and BOTH RUN CONTINUOUSLY: the
-circulation pump and this one."** parts.md, decisions.md and water.md all now carry
+manifold pump and this one."** parts.md, decisions.md and water.md all now carry
 that sentence. **D-063 says intermittent. The topology and the owner agree with each
 other and D-063 is the outlier.**
 
@@ -2859,7 +2860,7 @@ circulating water through the chiller. Those are the only two. Both run
 continuously. The owner rules that they will sufficiently mix nutrients.**
 
 **A naming observation, recorded and not acted on: the owner calls it the MANIFOLD
-PUMP. The tree calls the same device the CIRCULATION SUBMERSIBLE** - G-11 gives it
+PUMP. The tree calls the same device the MANIFOLD PUMP** - G-11 gives it
 suction at the day tank bottom and F-03 takes its discharge to the manifold. **Same
 pump, two names, and the generated set cannot carry both.** BOSS does not rename a
 device the owner just named. Raised.
@@ -2894,7 +2895,7 @@ rather than an observation, and an assumption that has never been checked is T-0
 shape.**
 
 **3. F-003 TRANSFORMS RATHER THAN DISSOLVING, AND THIS IS THE ONE TO WATCH.** F-003
-was "nothing verifies the circulation pump at rest" - **the submersible sitting dead
+was "nothing verifies the manifold pump at rest" - **the submersible sitting dead
 between batches being exactly the case where nobody knows it still works.** There is
 no at-rest case any more, **so that premise is gone.**
 
@@ -2918,4 +2919,40 @@ does NOT settle the settling-time question. **Sufficient mixing is not instant
 mixing, and C-02 still measures how long it takes** - what is withdrawn is any worry
 that the tank is inadequately mixed, not the need to know when a reading is valid.
 C-07's turnover time still feeds C-02 as a floor.
+
+**D-144 THE DEVICE IS THE MANIFOLD PUMP. RENAMED ACROSS THE WHOLE TREE IN ONE
+PASS.** Owner, 2026-09-04: "use manifold pump from here on out".
+
+**89 occurrences in 21 files.** The two phrases replaced were **"circulation
+submersible"** and **"circulation pump"**, case preserved. **The old names are
+recorded here and nowhere else is needed: anything a later reader finds under the
+old name is this pump.**
+
+**RENAMED IN RETURNED-ANSWER FILES AND AUDIT FILES TOO, and the reason is a
+distinction worth having: RENAMING A DEVICE IS NOT EDITING A CLAIM.** A returned
+answer is a record of what an agent said and its reasoning is annotated, never
+rewritten - **but the name of a pump is not part of anyone's reasoning.** Contrast
+subsystems/display-box-sweep.md, where the SUBJECT of two sentences moved under
+D-122 and the sentences were left standing with an annotation, because there the
+change was to what the sentence was ABOUT.
+
+**Frozen as G-42.**
+
+**WHAT WAS DELIBERATELY NOT RENAMED, and it needs the owner's eye because it is now
+the only inconsistency left:** the word **circulation** on its own still appears
+about 150 times as a FUNCTION rather than as the device - **circulation
+verification, circulation flow, circulation fault, the circulation loop, "circulation
+is a pole on K-DRY", and the deleted K-CIRC relay.**
+
+**Those are correct as they stand: the pump is the manifold pump and what it does is
+circulate.** But two of them are close enough to a device name to be worth a
+decision rather than a default:
+
+| Phrase | Why it is ambiguous now |
+|---|---|
+| **"the circulation relay"** | K-CIRC was DELETED by D-058 and circulation became a pole on K-DRY. The phrase names a relay that does not exist, and it survives in files that predate the deletion |
+| **"circulation commanded"** | Withdrawn as a signal by F-079 and D-105's line of work. It reads as a device state that can be commanded, and nothing commands it |
+
+**BOSS renames neither. They are flagged because a generated set will put one of
+them on a drawing.**
 

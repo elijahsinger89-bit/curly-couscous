@@ -376,7 +376,7 @@ in.** The sentence in 6.4 item 2 even ends with the source's own qualifier - "fr
 a stopped one AT REST" - and then the conclusion is drawn without it.
 
 **(b) Circulation is a POLE on K-DRY, so a read of K-DRY is a read of whether the
-circulation pump was energised.** D-058 deleted K-CIRC for this reason. If S-20
+manifold pump was energised.** D-058 deleted K-CIRC for this reason. If S-20
 freezes, the Pi reads the second pole of that relay. A window during which the
 relay stayed made is a window during which the pump was energised throughout;
 one during which it did not is a window that spanned a start or a stop. **That is
@@ -408,7 +408,7 @@ capability.**
   positive confirmation that a settle window was valid.
 - **It has already propagated.** Commissioning C-23 now reads: "**Software cannot
   catch this: under G-26 and D-052 the Pi neither commands nor observes the
-  circulation pump** ... software-spec.md section 6.4 states this as a procedural
+  manifold pump** ... software-spec.md section 6.4 states this as a procedural
   condition on the operator and NOT ENFORCEABLE IN SOFTWARE." C-23 cites document
   12 as its authority. **The claim is now in two files, one citing the other, and
   neither cites D-060 or S-20.**
@@ -731,12 +731,12 @@ impossible rather than pending".
 | 2.2 | 2.4.3, 4.1, 7.1.1 | "Software has no per-driver disable, permanently, and never will"; "there is no such request"; "the application cannot disable, de-energise, halt or make safe a driver" | **STRUCTURAL** | D-032: "software has no per-driver disable, permanently, and never will ... Its drop handler abstains rather than acts, permanently" |
 | 2.3 | 2.7.2 | "The safety of it is in the contact selection and software cannot improve on it" | **STRUCTURAL** | T-016: "Software cannot make a severed cable safe. Contact selection can" |
 | 2.4 | 4.1 | "Dropping the command does not by itself prove VM is removed" | **STRUCTURAL** | F-019: a shorted output device is not fail-safe, and S-07 is OPEN on where the coil positive is taken from - it is a statement about evidence, and no wiring makes a command into a measurement |
-| 2.5 | 4.3 | "The Pi cannot start it, cannot stop it, and cannot ask for it" - the circulation pump | **STRUCTURAL** | G-26 and D-052: the Pi drives one coil, the driver permissive, and nothing else; circulation is a pole on the dry-run interlock relay |
+| 2.5 | 4.3 | "The Pi cannot start it, cannot stop it, and cannot ask for it" - the manifold pump | **STRUCTURAL** | G-26 and D-052: the Pi drives one coil, the driver permissive, and nothing else; circulation is a pole on the dry-run interlock relay |
 | 2.6 | 4.3 | "Nothing commands intermittent circulation" | **CURRENT**, and correctly labelled | D-091: "there is no command path ... until one exists or the design changes" - document 12 calls it "a closed question with an open consequence", which is right |
 | 2.7 | 4.4, 2.1.1 | "Delivered volume, on any channel, ever. Nothing measures it" | **STRUCTURAL, by rule** | G-04: "No flow meters on the dosing lines", reinforced by D-014 taking O-19 off the table. Not physics; a frozen owner decision, and D-014 says "unless something changes" |
 | 2.8 | 4.4 | "Direction of rotation, or that a head turned at all. Nothing measures it ... no input sees it" | **CURRENT** | The 6121's printed pin list in parts.md includes INDEX, unwired; no frozen rule forbids landing it, and document 12's own 11.16 concedes "if a per-driver indication that requires actual commutation ever lands at the Pi" |
 | 2.9 | 4.4 | "Flow, anywhere. There is no flow signal" | **MIXED** | Structural for the dosing lines under G-04; **current for the circulation loop**, where S-05's flow-proving fork is open and no rule bans a flow element - the two are one sentence in document 12 |
-| 2.10 | 4.4, 6.4 item 2 | "Whether the circulation pump is turning"; "it cannot confirm the loop is moving" | **CURRENT** | D-060: "flow-proving means a timing element is definite and **circulation verification stays possible**" |
+| 2.10 | 4.4, 6.4 item 2 | "Whether the manifold pump is turning"; "it cannot confirm the loop is moving" | **CURRENT** | D-060: "flow-proving means a timing element is definite and **circulation verification stays possible**" |
 | 2.11 | 4.4 | "Tank level. Software cannot know the level and must never adapt to it" | **STRUCTURAL** | G-02: "The Pi gets **exactly one** level signal", and G-01 makes the floats invisible to the Pi |
 | 2.12 | 4.4, 7.1.6, 7.1.8, 7.10 | "Which element of the permissive chain opened ... It yields a mismatch, never a cause"; "Never name a cause" | **CURRENT** | S-18's row: G-26 "restricts what the Pi **drives** and not what it **reads**" - there is no rule against a leak, E-stop or interlock input, only no row proposing one |
 | 2.13 | 4.4, 6.4 item 4, 11.5 | "It cannot tag a sample with chiller state"; "D-027 is specified and unimplementable" | **CURRENT** | S-18's row names three ways out, the first being "the Pi READS a contact on the chiller contactor, which G-26 permits"; 11.5 correctly calls S-18 the blocker |

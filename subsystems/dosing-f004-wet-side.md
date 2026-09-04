@@ -52,7 +52,7 @@ Never sample before t_first. Never judge magnitude before t_settle.
 
 **One wet-side constraint handed to CONTROL-SOFTWARE:** the settling clock counts
 CIRCULATING time, not wall-clock time. If the loop stops, settling stops. The
-timer must be gated on the circulation pump being commanded on, and per F-003
+timer must be gated on the manifold pump being commanded on, and per F-003
 nothing can confirm it is actually running, so commanded-on is the best available
 and its weakness is to be recorded rather than hidden.
 

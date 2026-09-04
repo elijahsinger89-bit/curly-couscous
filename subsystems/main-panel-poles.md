@@ -18,8 +18,8 @@ its poles can then only say that same one thing.
 | 1 | Master permissive latch | It latches and seals in against the series string and only RESET re-closes it, G-07 and G-13. Nothing else has that state |
 | 2 | Storage fill seal-in | G-03: start float, stop float, seal-in. Drives the fill solenoid |
 | 3 | Day tank fill seal-in | G-03 again, separate tank, separate floats. Drives the transfer pump, **and its state IS S-03** |
-| 4 | Circulation pump | Commanded by the Pi, and the F-003 exercise run needs it commandable independently of both fills |
-| 5 | Dry-run interlock | Must drop the circulation pump fast and independently of the Pi, and **it cannot be folded into the permissive string, see below** |
+| 4 | Manifold pump | Commanded by the Pi, and the F-003 exercise run needs it commandable independently of both fills |
+| 5 | Dry-run interlock | Must drop the manifold pump fast and independently of the Pi, and **it cannot be folded into the permissive string, see below** |
 | 6 | Interposer for the permissive contactor coil | ONLY if the logic board cannot drive a 22.32 coil directly. OPEN |
 | 7 | Interposer for the chiller contactor coil | Same question |
 
@@ -42,7 +42,7 @@ Tightest arrangement MAIN-PANEL could draw, roughly 13 to 15 poles of 16 used:
 | K-PERM, master latch | seal-in, permissive bus 120 V class, permissive bus 24 V class, PL-R on the NC side | **0, FULL** |
 | K-FILL-S, storage | seal-in, fill solenoid, PL-G share if filling means either fill | 1 to 2 |
 | K-FILL-D, day tank | seal-in, transfer pump 120 V, **S-03 to the Pi**, PL-G | **0, FULL** |
-| K-CIRC | circulation pump 120 V, optional dry contact to the Pi | 2 to 3 |
+| K-CIRC | manifold pump 120 V, optional dry contact to the Pi | 2 to 3 |
 | K-DRY | interrupt K-CIRC, dry contact to the Pi | **RELAY DOES NOT EXIST** |
 | 22.32 #1, permissive | 24 V rail to both pump boxes, S-08 readback | **0, FULL** |
 | 22.32 #2, chiller | chiller, loop submersible per G-12 | 0, unless one pole carries both |
@@ -84,7 +84,7 @@ far broader than the fault.
 | # | Contact | What a lamp there means | Note |
 |---|---|---|---|
 | 2.1 | K-PERM spare pole | The master permissive relay is latched | **This is PL-R inverted and nothing more. Two lamps, one bit.** The candidate the owner suspected, and he is right about it |
-| 2.2 | K-CIRC spare poles | The panel is COMMANDING the circulation pump on | Commanded, not measured. parts.md's rule applies to a lamp as much as to software. Not health, an echo of an instruction |
+| 2.2 | K-CIRC spare poles | The panel is COMMANDING the manifold pump on | Commanded, not measured. parts.md's rule applies to a lamp as much as to software. Not health, an echo of an instruction |
 | 2.3 | K-FILL-S spare poles | The storage fill relay is closed | PL-G's other half if filling covers both fills |
 | 2.4 | K-DRY spare poles, IF the fifth relay is bought | The dry-run sense element currently reads made | **The ONLY contact in the whole panel that would say something about the WET SIDE rather than about the panel's own commands, and the closest thing to "healthy" that could ever exist here.** It does not exist yet: S-05 is open and WATER is holding it |
 | 2.5 | The leak console's unused Form C leg | The leak console reports no leak | **A genuinely distinct bit: PL-R lights for a leak, an E-stop or any lost interlock and cannot tell you which.** Cost: the common is shared with the string leg so this sits at 120 V class, and CBL-06 already requires every conductor in that jacket to be 600 V rated |

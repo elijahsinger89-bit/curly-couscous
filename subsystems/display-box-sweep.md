@@ -113,7 +113,7 @@ Findings F-019.
 
 **S-09, four relay coil drives.** All four fail off, and off is safe for each: a
 fill that fails to start is safe, a fill that fails to stop is not; transfer pump
-off is safe; **circulation pump off is electrically safe and DISPLAY-BOX refused to
+off is safe; **manifold pump off is electrically safe and DISPLAY-BOX refused to
 dress it up as free** - G-11's mixing stops, which corrupts any open settle window
 and lengthens the interval per F-004, a run in progress must be recorded as not
 completed under G-20, and injecting into a static manifold is DOSING's to rule on;

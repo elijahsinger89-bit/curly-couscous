@@ -80,7 +80,7 @@ Without it the direction of drift cannot be stated, only what drives it.
   hold-off is nearly free, and most of S-18 is moot. That single unknown decides
   how much D-023 costs.
 - **During a settle window the heat balance is the worst it ever gets, and this is
-  deliberate but was unstated.** The circulation submersible must keep running
+  deliberate but was unstated.** The manifold pump must keep running
   through the window, because settling counts circulating time. A submersible puts
   essentially all its electrical input into the water it sits in. So a heat source
   runs while the heat sink is switched off. The drift is one-directional and
@@ -116,7 +116,7 @@ only ever answers "what witnesses the exercise".
 
 ### Half one, the exercise. Costs nothing.
 
-The circulation pump is commanded on for a short exercise run on a defined
+The manifold pump is commanded on for a short exercise run on a defined
 trigger: a rest interval elapsing, and unconditionally at batch start before the
 first dose. It needs no hardware. CONTROL-SOFTWARE schedules it, MAIN-PANEL's
 relay switches it, WATER owns only that the pump and tank permit it, and they do.

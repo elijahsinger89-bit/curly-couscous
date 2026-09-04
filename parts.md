@@ -560,7 +560,7 @@ dosing and removes driver power. **If it dies, the water system keeps running an
 only dosing stops.**
 
 Note the topology this fixes: the transfer pump is a POLE on the day tank fill
-relay, the circulation pump is a POLE on the dry-run interlock relay, and the
+relay, the manifold pump is a POLE on the dry-run interlock relay, and the
 chiller is a CONTACTOR on its own circuit. None of the three is a Pi-driven coil.
 
 ## The permissive readback
@@ -680,7 +680,7 @@ against the wrong event.
 | Duty | Continuous, oil-free magnetic drive, submersible or inline |
 
 **SO THERE ARE TWO SUBMERSIBLES IN THE DAY TANK AND BOTH RUN CONTINUOUSLY:** the
-circulation pump and this one.
+manifold pump and this one.
 
 **G-12 WAS RIGHT THAT A LOOP PUMP EXISTS AND WRONG ABOUT WHAT SWITCHES IT.** Both
 the chiller and this pump share **ONE SWITCHED RECEPTACLE ON A DEDICATED CIRCUIT,

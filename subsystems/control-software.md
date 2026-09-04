@@ -65,7 +65,7 @@ on to do it.
 
 - Three process measurements exist: pH, EC and temperature. There are no others.
 - Doses are by volume.
-- The Pi commands relays for the fill solenoid, transfer pump, circulation pump
+- The Pi commands relays for the fill solenoid, transfer pump, manifold pump
   and chiller contactor. It reads no floats.
 
 ## Open, owned by CONTROL-SOFTWARE

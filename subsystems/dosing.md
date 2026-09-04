@@ -162,7 +162,7 @@ tube life. The re-measure trigger is a tube change, not a date.
 |---|---|
 | PUMP-BOXES | Head barb form and size, F-05 and F-06. Lid penetration, CBL-05 |
 | DISPLAY-BOX | Probe cable termination and length limits, S-11 |
-| WATER | Union type at F-03 and F-04, and circulation pump flow through the manifold |
+| WATER | Union type at F-03 and F-04, and manifold pump flow through the manifold |
 
 ## Do not
 
@@ -203,7 +203,7 @@ S-17 was never measured.
 ## GATED TO C-02, routed 2026-09-03 by D-104. YOUR FILE IS A COMMISSIONING PROCEDURE AND IT INSTRUCTS THE IMPOSSIBLE.
 
 **subsystems/dosing-f004-wet-side.md says the settling timer must be gated on the
-circulation pump being COMMANDED ON.** commissioning.md names that file as C-02's
+manifold pump being COMMANDED ON.** commissioning.md names that file as C-02's
 FULL PROCEDURE.
 
 **Under G-26 and D-052 the Pi commands one coil, the driver permissive, and nothing

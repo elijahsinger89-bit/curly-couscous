@@ -21,7 +21,7 @@ threshold.** Where an envelope splits, all tier 2 goes with tier 1.
 | K-DRY-Q | quiet | **GOLD, buy** | seal-in/latch; G-27 complementary pair to the Pi | 2 |
 | K-FILL-S | power | standard, from stock | seal-in; fill solenoid | 2 |
 | K-FILL-D-P | power | standard, from stock | transfer pump | 3 |
-| K-DRY-P | power | standard, from stock | circulation pump | 3 |
+| K-DRY-P | power | standard, from stock | manifold pump | 3 |
 
 **Six envelopes. Three gold bought, three standard drawn from the four in hand, one
 standard spare.** If K-PERM splits: **seven envelopes, four gold bought, four standard

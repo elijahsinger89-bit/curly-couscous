@@ -232,7 +232,7 @@ interlock or a master fault.**
 
 **A-22.** DRY-RUN. The old set appears to use the day tank LOW-LOW FLOAT - a LEVEL
 element - as the dry-run interlock, driving a dedicated relay whose poles switch
-the circulation pump and the chiller loop. Its stated reason for keeping that
+the manifold pump and the chiller loop. Its stated reason for keeping that
 relay out of the master latch: *"Dry-run protection must work whether or not
 anyone has pressed reset."* *Observed in the 1st Edition set, unverified. Confirm
 or replace.* **See flag 1, item C-06: this is the exact choice S-05 is being held
@@ -419,7 +419,7 @@ of stated diameter beside it, and a stated clear gap. *Observed in the 1st Editi
 set, unverified. Confirm or replace.* **The current tree treats the wall as an 8 x
 8 envelope and has no position on the floor in front of it.**
 
-**B-25.** The old set appears to state that the tank, the circulation pump and the
+**B-25.** The old set appears to state that the tank, the manifold pump and the
 probe glands *"sit on the floor below this board"*, so the wall carries no wet
 vessel weight. *Observed in the 1st Edition set, unverified. Confirm or replace.*
 
@@ -448,7 +448,7 @@ read as a challenge.
 | **C-07** | Six live dosing channels plus two spare, six injector ports on the manifold | **Eight channels, CH1 to CH8, eight heads, eight drivers.** S-19, D-021, D-105 | **The tree wins.** Every port spacing, every raceway tube count and the whole "12 tubes" figure in the old set is built on six |
 | **C-08** | The chiller ships with an external submersible pump and both are switched together by a relay pole feeding one receptacle | **D-108: the chiller is entirely self-contained, there is no chiller contactor. F-086 is OPEN: nothing on file states what switches the loop pump, and BOSS has NOT chosen between four possibilities** | **The tree wins, and F-086 stays open.** The old set contains something that looks like an answer to F-086. **It is not one.** water.md says explicitly: *"Do not design around any of the four."* Recording it here as an observation is the limit of what may be done with it |
 | **C-09** | The storage tank has ONE float in the base package; the start/stop pair is an add-on bolted on later | **G-03: storage AND day tank fill use a start float and a stop float with relay seal-in between them** | **G-03 wins.** The storage start/stop pair is a baseline requirement here, not an add-on. This is a difference in STATUS, not in arrangement - the old set's storage pair, once added, matches G-03's shape |
-| **C-10** | The transfer pump load and a pilot lamp share one relay; the circulation pump and the chiller share another | **G-30: DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL. A power pole and a sense pole never share a relay.** G-24 asks the minimum-switching-load question of lamp poles too | **G-30 wins.** Noted only because the float chains land on these relays; the relay allocation itself is MAIN-PANEL's and outside this pass |
+| **C-10** | The transfer pump load and a pilot lamp share one relay; the manifold pump and the chiller share another | **G-30: DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL. A power pole and a sense pole never share a relay.** G-24 asks the minimum-switching-load question of lamp poles too | **G-30 wins.** Noted only because the float chains land on these relays; the relay allocation itself is MAIN-PANEL's and outside this pass |
 
 ### The one nuance worth one sentence, and no more
 

@@ -220,7 +220,7 @@ INTERCONNECT arbitrates.** No artifact in the tree owns a cord route - defect BD
 | # | End A | End B | Carries | Interface row | Status |
 |---|---|---|---|---|---|
 | R-18 | MAIN-PANEL: relay-switched receptacle, panel mounted | WATER: transfer pump cord, plugged in from outside | 120 VAC | P-03 | **BLOCKED.** Mounting closed by D-046; circuit and rating still open. Route blocked on the wall layout |
-| R-19 | MAIN-PANEL: relay-switched receptacle, panel mounted | WATER: circulation submersible cord | 120 VAC | P-04 | **BLOCKED, as R-18.** **This cord runs on the day tank standpipe** under D-121 - see constraint K-02 |
+| R-19 | MAIN-PANEL: relay-switched receptacle, panel mounted | WATER: manifold pump cord | 120 VAC | P-04 | **BLOCKED, as R-18.** **This cord runs on the day tank standpipe** under D-121 - see constraint K-02 |
 | R-20 | MAIN-PANEL: switched receptacle on a dedicated circuit | WATER: chiller cord AND chiller loop pump cord, switched together | 120 VAC, two cord caps | P-05, as amended by D-137 | **BLOCKED on P-05 OPEN.** G-12 was right that a loop pump exists and wrong about what switches it: not a contactor, one switched receptacle. **Two cord caps at one receptacle is a MAIN-PANEL question that constrains where I route two cords to one point.** The loop pump is a submersible in the day tank, so **its cord is also on the standpipe** - constraint K-02 |
 
 ### 3.4 Rows that imply NO cable, checked and named rather than assumed

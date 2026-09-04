@@ -56,7 +56,7 @@ enclosures.
 
 ## Assigned 2026-08-30: findings.md F-003, second end
 
-Nothing verifies that the circulation submersible is alive at rest. MAIN-PANEL
+Nothing verifies that the manifold pump is alive at rest. MAIN-PANEL
 owns the relay that switches it and the dry run interlock chain, so it holds the
 electrical end of this. WATER is primary and owns the pump, the tank and any
 sense element placement. Neither may assume the other has it. See decisions.md

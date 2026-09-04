@@ -117,9 +117,9 @@ stop.
 | 3 | `subsystems/control-software-f004.md` line 45 | "The Pi commands the circulation relay, so it can require circulation commanded on" | **S-09** | Interface S-09 as first written, which D-052 records came from the owner's project description and "was loose" | **NON-ORIGIN.** F-070 covers this one instance |
 | 4 | `subsystems/control-software-f004.md` line 218 | "The software commands the circulation relay so it knows what it asked for" | nothing | same withdrawn premise | **NON-ORIGIN, AND UNFLAGGED.** Not covered by F-070 |
 | 5 | `subsystems/control-software-p09.md` step 6 | "Commanded circulation and chiller states alongside, per D-027" | **D-027** | D-027's mechanism, "the Pi commands the contactor, so it knows", withdrawn by G-26 and D-052 | **NON-ORIGIN, AND UNFLAGGED** |
-| 6 | `subsystems/dosing-f004-wet-side.md` line 34 | "The timer must be gated on the circulation pump being commanded on" | F-003, for the weakness only; the capability is uncited | same withdrawn premise | **NON-ORIGIN, AND UNFLAGGED.** This file is cited live by C-02 and by N-4 |
-| 7 | `subsystems/control-software.md` "Settled" bullet | "The Pi commands relays for the fill solenoid, transfer pump, circulation pump and chiller contactor" | nothing | the project description D-052 corrected | **NON-ORIGIN, AND UNFLAGGED** |
-| 8 | `subsystems/water-s18-f003.md` F-003 half one | "The circulation pump is commanded on for a short exercise run ... CONTROL-SOFTWARE schedules it, MAIN-PANEL's relay switches it" | nothing | same | **NON-ORIGIN.** Consequence flagged by F-045, F-057 and D-091; the file itself is unannotated |
+| 6 | `subsystems/dosing-f004-wet-side.md` line 34 | "The timer must be gated on the manifold pump being commanded on" | F-003, for the weakness only; the capability is uncited | same withdrawn premise | **NON-ORIGIN, AND UNFLAGGED.** This file is cited live by C-02 and by N-4 |
+| 7 | `subsystems/control-software.md` "Settled" bullet | "The Pi commands relays for the fill solenoid, transfer pump, manifold pump and chiller contactor" | nothing | the project description D-052 corrected | **NON-ORIGIN, AND UNFLAGGED** |
+| 8 | `subsystems/water-s18-f003.md` F-003 half one | "The manifold pump is commanded on for a short exercise run ... CONTROL-SOFTWARE schedules it, MAIN-PANEL's relay switches it" | nothing | same | **NON-ORIGIN.** Consequence flagged by F-045, F-057 and D-091; the file itself is unannotated |
 | 9 | `subsystems/main-panel-poles.md` state 4 and the F-003 ruling | K-CIRC is an independently commanded state, "commanded by the Pi", and the exercise needs it to stay its own relay | nothing | same, plus K-CIRC which D-058 deleted | **NON-ORIGIN.** Unannotated |
 | 10 | `subsystems/display-box-sweep.md` sweep row | "S-09, four relay coil drives" | S-09 | same | **NON-ORIGIN.** Unannotated |
 | 11 | `subsystems/display-box.md` scope | "relay coil drives" (plural) | nothing | same | **NON-ORIGIN.** S-09's own row says DISPLAY-BOX "must be told" and it has not been |
@@ -148,7 +148,7 @@ stop.
 | 34 | `subsystems/control-software-p09.md`, "what it cannot tell you" | The readback is "the position of an auxiliary contact" | S-08 | D-029 | **NON-ORIGIN** |
 | 35 | `parts.md` "The permissive readback" heading | "reads back a real auxiliary contact on that contactor" | the owner | **contradicted ten lines later in the same file: "There is no auxiliary contact block on the 22.32"** | **THE AUTHORITATIVE FILE STATES BOTH** |
 | 36 | `software-spec.md` 4.2 | "The position of an auxiliary contact" | D-029, S-08 | D-029 | **NON-ORIGIN.** Already reported by run 3 as 1.6 DRIFT |
-| 37 | Everything citing D-063 - C-23, C-02's blocked-on note, `software-spec.md` 6.4 item 3, F-045, F-046, F-057, D-091 | The circulation pump is intermittent and is OFF between batches | **D-063** | **D-063, which cites nothing.** D-091 then establishes that nothing commands it | **TERMINUS CITES NOTHING** |
+| 37 | Everything citing D-063 - C-23, C-02's blocked-on note, `software-spec.md` 6.4 item 3, F-045, F-046, F-057, D-091 | The manifold pump is intermittent and is OFF between batches | **D-063** | **D-063, which cites nothing.** D-091 then establishes that nothing commands it | **TERMINUS CITES NOTHING** |
 | 38 | `software-spec.md` 2.4.5, `subsystems/control-software.md` frozen slice, `subsystems/display-box.md` | "A watchdog is the only recovery path" | P-07, `parts.md` | The owner's fact that the Pi's receptacle is fused and not relay switched. **A real origin** | **CLEAN, but see chain 39** |
 | 39 | `subsystems/display-box-sweep.md` watchdog section | "If no external reset input is available on a Pi 5 ... P-07's 'watchdog is the only recovery path' becomes an open item rather than a plan" | its own search | the unchecked lookup, also named at C-20 and N-16 | **The condition on chain 38, carried in ONE file** |
 | 40 | `software-spec.md` 11.12 | No Pi application source in reach | `subsystems/control-software.md` search record | the search record, which is present and enumerates what was searched including the searches that returned nothing | **CLEAN.** T-003 observed |
@@ -167,7 +167,7 @@ stop.
 
 **Chains 3 to 11.** The claim's origin is interface row S-09 as first written,
 and D-052 records where S-09 got it: "the owner's original project description
-said the Pi commands relays for the transfer pump, the circulation pump and the
+said the Pi commands relays for the transfer pump, the manifold pump and the
 chiller. **That was loose.**" So the chain terminates in a description, which is
 not an origin, and F-027 and D-052 closed it on 2026-08-30.
 
@@ -178,8 +178,8 @@ not an origin, and F-027 and D-052 closed it on 2026-08-30.
 | `subsystems/control-software-f004.md` line 45 | "The Pi commands the circulation relay, S-09, so it can require circulation commanded on for the whole window" | **Yes.** F-070, and `software-spec.md` 1.3 and 6.4 withdraw it |
 | `subsystems/control-software-f004.md` line 218 | "The software commands the circulation relay so it knows what it asked for" | **NO** |
 | `subsystems/control-software-p09.md` step 6 | "Commanded circulation and chiller states alongside, per D-027" | **NO** |
-| `subsystems/dosing-f004-wet-side.md` line 34 | "The timer must be gated on the circulation pump being commanded on" | **NO** |
-| `subsystems/control-software.md` "Settled" | "The Pi commands relays for the fill solenoid, transfer pump, circulation pump and chiller contactor" | **NO** |
+| `subsystems/dosing-f004-wet-side.md` line 34 | "The timer must be gated on the manifold pump being commanded on" | **NO** |
+| `subsystems/control-software.md` "Settled" | "The Pi commands relays for the fill solenoid, transfer pump, manifold pump and chiller contactor" | **NO** |
 | `subsystems/water-s18-f003.md`, `subsystems/main-panel-poles.md`, `subsystems/display-box-sweep.md`, `subsystems/display-box.md` | the exercise run, K-CIRC, four coil drives, "relay coil drives" | **Consequence** flagged by F-045, F-057, D-091 and by S-09's own row; **the files are unannotated** |
 
 **Why this is the F-074 shape and not just staleness.** Two of these files are
@@ -381,7 +381,7 @@ CONFIRMED rather than fragile because the change has already happened.
 
 ---
 
-### SUSPECTED 1. "The circulation pump is off between batches" - the terminus cites nothing
+### SUSPECTED 1. "The manifold pump is off between batches" - the terminus cites nothing
 
 **Chain 37.**
 

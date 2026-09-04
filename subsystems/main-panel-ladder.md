@@ -96,7 +96,7 @@ asks and this drawing inherits no answer. Every float is a `< ? >` box.
     |         K-FILL-D-P   P-03.  Panel mounted, cord plugs in from
     |         power pole   outside, D-046                           < ?6 >
     |
-08  BUS-AP --< ?7 >-----[ R-CIRC  receptacle, circulation pump ]----------+
+08  BUS-AP --< ?7 >-----[ R-CIRC  receptacle, manifold pump ]----------+
     |         K-DRY-P     P-04.  WHICH WAY THIS POLE FACES IS NOT ON FILE
     |         power pole  and it is the load-bearing hole in this drawing
     |
@@ -240,13 +240,13 @@ asks and this drawing inherits no answer. Every float is a `< ? >` box.
     |    THIS IS THE SINGLE MOST LOAD-BEARING UNSTATED FACT IN THE PANEL.
     |    It decides rung 08's pole sense, rung 22's RESET block form,
     |    F-093's answer, whether rung 05's 120 V bus pole is needed, and
-    |    what the circulation pump does when the panel is dead.  See
+    |    what the manifold pump does when the panel is dead.  See
     |    finding 2.  NO TIMING ELEMENT: D-060's other half was spent by
     |    D-119 and the device is not bought
     |
 23  ***  THE RUNG THAT DOES NOT EXIST  ***
     |
-    |    NOTHING IN THIS PANEL STARTS OR STOPS THE CIRCULATION PUMP.
+    |    NOTHING IN THIS PANEL STARTS OR STOPS THE MANIFOLD PUMP.
     |    K-CIRC was deleted by D-058.  K-DRY is a PERMISSION and not a
     |    command, D-063's own words.  Under G-26 the Pi may not command it.
     |    So the pump runs whenever rung 08 permits.  See finding 3
@@ -453,28 +453,28 @@ will be decided twice, inconsistently.
 column.** D-058 says the pole "may not be needed, since the pumps' coils already sit
 on the permissive's 24 V bus". That holds for K-FILL-D-P, where energised means the
 transfer pump runs. **It is exactly backwards for K-DRY-P in the left column, where
-losing the bus releases the circulation pump instead of stopping it.** So ?4 is not
+losing the bus releases the manifold pump instead of stopping it.** So ?4 is not
 a free choice: in the left column the 120 V bus pole is required for an E-stop or a
 leak to stop circulation at all.
 
 **G-39's question has never been asked of this relay.** G-39 says to ask what an
 actuator does with no power before asking anything else, and it was frozen off a
-valve. The circulation pump's only interlock is a relay, and in the left column the
+valve. The manifold pump's only interlock is a relay, and in the left column the
 answer to "what does a dead panel do" is: it runs.
 
 I am not choosing. It costs money in one direction, it is a choice rather than a
 defect, and rule 5 says stop and ask.
 
-### FINDING 3. Nothing in this panel starts or stops the circulation pump, and the free circulation-verification witness D-119 banked on depends on it doing so
+### FINDING 3. Nothing in this panel starts or stops the manifold pump, and the free circulation-verification witness D-119 banked on depends on it doing so
 
 This is rung 23, drawn as an absence.
 
 What I read. **D-058 deleted K-CIRC**, making circulation a pole on K-DRY. **D-063
-says the circulation pump is INTERMITTENT**, "it runs when the system needs the tank
+says the manifold pump is INTERMITTENT**, "it runs when the system needs the tank
 mixed", "between batches it is off", and in the same entry, **"the dry-run interlock
 is a PERMISSION for it to run, not a command that it should"** and "the exercise run
-still has no command path. The Pi cannot command the circulation pump under G-26."
-**parts.md, under D-137, says the circulation pump and the loop pump "BOTH RUN
+still has no command path. The Pi cannot command the manifold pump under G-26."
+**parts.md, under D-137, says the manifold pump and the loop pump "BOTH RUN
 CONTINUOUSLY".** water.md line 498 repeats it: "Two submersibles now sit in the day
 tank and both run continuously."
 
@@ -498,7 +498,7 @@ because the element that would have made it possible was deleted for a different
 reason and nobody re-read C-12 against the deletion. **That is T-023's mechanism and
 D-060's exact shape recurring: declining to pay makes the claim true with no step
 anyone would notice.** The grade is CURRENT, not structural, and what would change
-it is a single element that can turn the circulation pump off.
+it is a single element that can turn the manifold pump off.
 
 Also affected, and each cited from its own source rather than from this one: D-063's
 own three "favourable consequences" all rest on the pump being off between batches,
@@ -575,7 +575,7 @@ positive is taken from. All three are choices, not lookups.
 Eight positions need: what the float must DO, its contact form under F-093, and the
 24 V contact power under F-089 and G-31. Until that returns, five rungs are boxes.
 
-**3. Two nameplates.** The transfer pump and the circulation pump. Neither exists in
+**3. Two nameplates.** The transfer pump and the manifold pump. Neither exists in
 the tree. Both are WATER's to return and both size a contact.
 
 **4. One LRA, or the recorded absence of one.** parts.md is explicit that the

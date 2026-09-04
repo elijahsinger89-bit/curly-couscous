@@ -124,7 +124,7 @@ is alongside so it can be checked against the source, not so it has to be.
 | 2.4.6 | **The panel runs without the Pi.** Fills, transfer, circulation and the chiller all operate on float and interlock logic. The Pi adds dosing and removes driver power. If it dies, the water system keeps running and only dosing stops | G-26, D-052 |
 | 2.4.7 | **Probes read upstream of every injection point.** A reading reflects the day tank, not the dose just injected | G-10 |
 | 2.4.8 | **Microstepping is set by pins and never over UART.** A UART-set factor reverts to the pin default on a rail dip, mid-batch, while every instrument reads healthy. The application does not set it and does not read it as authoritative: it uses the figure recorded at C-17 | D-075, D-080 |
-| 2.4.9 | **A no-flow CONDITION may drop the circulation pump in hardware. A circulation VERIFICATION FAILURE may not.** They are different events. Hardware protects the pump; software protects the batch and stops it loudly under G-16 | G-25, D-038 |
+| 2.4.9 | **A no-flow CONDITION may drop the manifold pump in hardware. A circulation VERIFICATION FAILURE may not.** They are different events. Hardware protects the pump; software protects the batch and stops it loudly under G-16 | G-25, D-038 |
 | 2.4.10 | **The watchdog is fed from the sequencer and state loop, never from an independent timer thread.** A timer that keeps ticking while the sequencer is wedged passes forever and hides exactly what it names | D-033, T-014 |
 
 ### 2.5 Constraints on verification
@@ -292,7 +292,7 @@ description said otherwise and was wrong (D-052, F-027):
 - **The storage tank fill.** Same construction, separate relay. Not the Pi's.
 - **The transfer pump.** A POLE on the day tank fill relay. Not a coil the Pi
   drives.
-- **The circulation pump.** A POLE on the dry-run interlock relay. **The Pi cannot
+- **The manifold pump.** A POLE on the dry-run interlock relay. **The Pi cannot
   start it, cannot stop it, and cannot ask for it** (D-052, D-091). It runs when
   the interlock is made and the relay is energised, and it is off between batches.
   **Nothing commands intermittent circulation** - that is a closed question with an
@@ -310,7 +310,7 @@ description said otherwise and was wrong (D-052, F-027):
   A severed direction conductor can run a head backwards while the books decrement
   forward, and no input sees it (S-10).
 - **Flow, anywhere.** There is no flow signal (D-007). The flow cell is a fitting.
-- **Whether the circulation pump is turning.** Between batches the loop is still
+- **Whether the manifold pump is turning.** Between batches the loop is still
   and EC sits flat whether the pump is healthy or dead (F-001 limit 1, F-003).
 - **Tank level.** The only level information in existence is the fill-in-progress
   contact (G-01, G-02). Software cannot know the level and must never adapt to it.

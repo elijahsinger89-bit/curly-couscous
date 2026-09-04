@@ -28,7 +28,7 @@ INTERCONNECT. The manifold itself and everything on it is DOSING.
 | F-09 | Day tank outlet to V3 is the scope boundary. V3 is manual. Nothing downstream is designed here |
 | G-03 | Fill control is a start float and a stop float with relay seal-in between them, both tanks |
 | G-01 | Floats are hardwired to relays and invisible to the Pi |
-| G-11 | Circulation submersible takes suction at the day tank bottom so the tank mixes |
+| G-11 | Manifold pump takes suction at the day tank bottom so the tank mixes |
 | G-12 | Chiller and its loop pump are switched together on one contactor |
 
 ## Settled
@@ -55,10 +55,10 @@ INTERCONNECT. The manifold itself and everything on it is DOSING.
 ## Assigned 2026-08-30: findings.md F-003, primary owner
 
 Nothing in this system verifies anything at rest. Between batches the loop is
-still and EC sits flat whether the circulation submersible is healthy or dead.
+still and EC sits flat whether the manifold pump is healthy or dead.
 The first anyone knows is at the start of the next batch.
 
-WATER holds this because it owns the circulation submersible, the day tank and
+WATER holds this because it owns the manifold pump, the day tank and
 the placement of any sense element. MAIN-PANEL holds the other end because it
 owns the relay and the dry run interlock chain. Neither may assume the other has
 it. See decisions.md D-016.
@@ -496,7 +496,7 @@ pressure differential**, spring closed on power loss, between unions. In parts.m
 a low-pressure tap is answered and closed.**
 
 **Two submersibles now sit in the day tank and both run continuously** - the
-circulation pump and the chiller loop pump, D-137. **That is a fact about your tank,
+manifold pump and the chiller loop pump, D-137. **That is a fact about your tank,
 not only about the panel: two cords, not one, on the standpipe's cord run, and a
 second continuous heat source in the water.**
 
@@ -507,7 +507,7 @@ circulating water through the chiller. Those are the only two. Both run
 continuously, and the owner rules that they will sufficiently mix nutrients.**
 
 **A naming problem to resolve before the generated set exists: the owner calls it
-the MANIFOLD PUMP and this tree calls the same device the CIRCULATION SUBMERSIBLE.**
+the MANIFOLD PUMP and this tree calls the same device the MANIFOLD PUMP.**
 G-11 gives it suction at the tank bottom, F-03 takes its discharge to the manifold.
 Same pump, two names. **BOSS has not renamed it. Say which name your documents
 should carry.**
