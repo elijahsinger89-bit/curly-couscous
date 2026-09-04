@@ -637,3 +637,59 @@ properties: a minimum switching load belongs to a contact.**
 
 The KPHM400-ST flow rate per revolution, its tube size and its barb size. Every
 part number, quantity and size not stated in this file. Ask the owner.
+
+## The fill solenoid. ORDERED AND FULLY SPECIFIED. Owner, 2026-09-04. D-136.
+
+**ASCO 8210G095AC120/60.**
+
+| Property | Value |
+|---|---|
+| Connection | 3/4 in NPT |
+| Body, seals | Brass body, NBR seals |
+| Action | **2-way NORMALLY CLOSED** |
+| Coil | **120 VAC 60 Hz**, Class F, 10.1 W |
+| **INRUSH** | **0.58 A** |
+| **HOLDING** | **0.21 A** |
+| Cv | 5 |
+| **Minimum operating pressure differential** | **0 psi.** Max 150 psi |
+| Operation | **DIRECT-LIFT hung diaphragm. NOT pilot-operated** |
+| Orientation | Any. Coil-up preferred for long life |
+| Power loss | **Spring returns CLOSED** |
+| Installation | Between unions |
+
+**THE 0 PSI IS THE PROPERTY THAT DECIDED IT.** A pilot-operated valve needs a
+pressure difference to open and **will not open on a low-pressure supply, which is
+a valve that fails closed for the wrong reason.** The owner's warning, recorded
+because it will mislead someone later: **distributors sometimes print "pilot
+operated" on this family. THE 0 PSI MINIMUM IS WHAT MATTERS**, not the wording on a
+listing.
+
+**AND THE NUMBER MAIN-PANEL NEEDS IS THE INRUSH, NOT THE HOLDING FIGURE. A RELAY
+CONTACT MAKES AND BREAKS 0.58 A.** Sizing a contact against 0.21 A is sizing it
+against the wrong event.
+
+## The chiller and its loop pump. F-086 CLOSES. Owner, 2026-09-04. D-137.
+
+| | |
+|---|---|
+| Chiller | **JBJ Arctica DBE-200**, 1/10 HP, 115 V, **6 A**, 3000 BTU/h, **NO internal pump** |
+| Loop pump | **Danner Supreme Aqua-Mag 12, item 02712** |
+| Rated | 1200 GPH, **about 840 to 940 GPH at 4 to 6 ft head** |
+| Electrical | 110 W, **1.5 A at 120 V** |
+| Connections | 3/4 in FPT inlet, 3/4 in MPT outlet |
+| Duty | Continuous, oil-free magnetic drive, submersible or inline |
+
+**SO THERE ARE TWO SUBMERSIBLES IN THE DAY TANK AND BOTH RUN CONTINUOUSLY:** the
+circulation pump and this one.
+
+**G-12 WAS RIGHT THAT A LOOP PUMP EXISTS AND WRONG ABOUT WHAT SWITCHES IT.** Both
+the chiller and this pump share **ONE SWITCHED RECEPTACLE ON A DEDICATED CIRCUIT,
+so both stop when the permissive drops.**
+
+**MAIN-PANEL NEEDS BOTH FIGURES AND THE THIRD ONE THAT IS NOT WRITTEN DOWN: 1.5 A
+of pump on top of the chiller's 6 A on the same circuit, AND THE COMPRESSOR INRUSH
+STACKS ON TOP OF THAT.**
+
+**DO NOT BUY THE VENTURI OR AIR-FRACTIONATING VERSION OF THIS PUMP. Air in a heat
+exchanger is the opposite of what a chiller loop wants.**
+

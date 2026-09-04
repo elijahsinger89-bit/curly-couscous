@@ -470,3 +470,32 @@ float can have been failing for weeks with the only evidence down a drain.
 the floor - say so while you are pricing the bulkhead, because that is the one
 moment it costs almost nothing to add.** If it is not cheap, say that and the
 residual stands. **Do not design it and do not name a part.**
+
+## THE AIR GAP IS A REQUIREMENT, AND ONE THING YOU MUST NOT ASSUME. 2026-09-04.
+
+**D-138: the air gap is a REQUIREMENT and F-091 closes entirely.** The fill line
+connects municipal supply to a tank of nutrient solution and an air gap is the
+standard answer to that. **Price it with the overflow. No figure adopted - the 6 in
+from the old set is observed, not taken.**
+
+**D-139, AND STOP BEFORE YOU PRICE ANYTHING: NOBODY HAS ESTABLISHED THAT THE FLOOR
+DRAIN EXISTS, OR WHERE IT IS RELATIVE TO THE WALL.**
+
+**Three decisions already rest on it.** D-130 made the overflow a requirement,
+D-133 reasoned about the leak sensor's placement relative to its discharge, and
+D-134 set its height against the high-high. **All three assume a drain is there.**
+
+**ASK THE OWNER RATHER THAN PRICING AGAINST ONE.** Return the question, not an
+assumption, and price the overflow in two versions if you must - but do not pick
+one and build the rest on it.
+
+**And the fill valve is now specified**, so the fill line's supply end is fixed:
+ASCO 8210G095AC120/60, 3/4 in NPT, **direct-lift with a 0 psi minimum operating
+pressure differential**, spring closed on power loss, between unions. In parts.md.
+**The 0 psi means your earlier worry about a pilot-operated valve failing to open on
+a low-pressure tap is answered and closed.**
+
+**Two submersibles now sit in the day tank and both run continuously** - the
+circulation pump and the chiller loop pump, D-137. **That is a fact about your tank,
+not only about the panel: two cords, not one, on the standpipe's cord run, and a
+second continuous heat source in the water.**

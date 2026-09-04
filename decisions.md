@@ -2645,3 +2645,104 @@ discover later in the same way the 1st Edition set discovered it.
 the line that makes it stick is the last one - **if a table can be read either way,
 it will be read as absolute by whoever is holding a credit card.**
 
+**D-136 THE FILL SOLENOID IS ORDERED AND FULLY SPECIFIED. ASCO 8210G095AC120/60.**
+Full table in parts.md. **Two properties matter beyond the model:**
+
+**THE 0 PSI MINIMUM OPERATING PRESSURE DIFFERENTIAL IS WHAT DECIDED IT**, and it is
+direct-lift rather than pilot-operated. A pilot-operated valve needs a pressure
+difference to open, so **on a low-pressure supply it fails closed for the wrong
+reason.** The owner's warning is recorded because it will mislead someone later:
+**distributors sometimes print "pilot operated" on this family. The 0 psi figure is
+what matters, not the wording on a listing.**
+
+**AND THE NUMBER THAT SIZES A CONTACT IS THE INRUSH, 0.58 A, NOT THE HOLDING 0.21
+A. A relay contact makes and breaks the inrush.** Sizing against the holding figure
+is sizing against the wrong event. **That distinction now has a column of its own in
+the wire table schema** - column 9 is "design current, AND WHICH EVENT" rather than
+"current", because the difference is the whole point.
+
+**D-137 F-086 CLOSES: THE CHILLER LOOP PUMP IS A SEPARATE SUBMERSIBLE AND IS BEING
+BOUGHT.** JBJ Arctica DBE-200 with no internal pump; Danner Supreme Aqua-Mag 12.
+Both in parts.md.
+
+**G-12 WAS RIGHT THAT A LOOP PUMP EXISTS AND WRONG ABOUT WHAT SWITCHES IT.** Not a
+contactor. **The chiller and this pump share ONE SWITCHED RECEPTACLE on a dedicated
+circuit, so both stop when the permissive drops.**
+
+**TWO SUBMERSIBLES NOW SIT IN THE DAY TANK AND BOTH RUN CONTINUOUSLY** - the
+circulation pump and this one. **That is a new fact about the tank, not only about
+the panel**, and it lands on C-15's thermal thinking, on the standpipe's cord count,
+and on anything that assumed one cord in that tank.
+
+**MAIN-PANEL gets three figures and the third is the one not written down: 1.5 A of
+pump on top of the chiller's 6 A on one circuit, AND THE COMPRESSOR INRUSH STACKS ON
+TOP OF THAT.**
+
+**And a purchasing constraint that is a design fact: DO NOT BUY THE VENTURI OR
+AIR-FRACTIONATING VERSION. Air in a heat exchanger is the opposite of what a chiller
+loop wants.**
+
+**D-138 THE AIR GAP IS A REQUIREMENT. F-091 CLOSES ENTIRELY.** The fill line
+connects municipal supply to a tank of nutrient solution, and **an air gap is the
+standard answer to that.** WATER prices it with the overflow. **No figure adopted -
+the 6 in from the old set is observed, not taken.**
+
+**D-139 TWO THINGS NOBODY HAS ESTABLISHED, AND WATER MUST NOT ASSUME EITHER: THE
+FLOOR DRAIN'S EXISTENCE AND ITS POSITION RELATIVE TO THE WALL.**
+
+**Everything about the overflow assumes a drain is there.** D-130 made the overflow
+a requirement, D-133 reasoned about the leak sensor's placement relative to it, and
+D-134 set its height against the high-high - **three decisions resting on a drain
+nobody has confirmed exists.** The owner's instruction: **ask him rather than
+pricing against one.**
+
+**Recorded as a decision rather than a finding because it is an instruction about
+how to proceed, not a defect** - and because it is the shape T-003 and G-40 both
+warn about, arriving on a physical feature instead of on a document.
+
+**D-140 PRODUCTION STARTS. THE OWNER'S DIRECTION IS ACCEPTED AS STATED AND THE
+DIAGNOSIS IS CORRECT.**
+
+His words, recorded verbatim because they are the standing correction to how this
+project has been running: **"The analysis is excellent and self-sustaining. Every
+pass produces findings, findings produce rules, rules produce sweeps, sweeps produce
+findings. That loop runs indefinitely without a document existing. The parallel
+build's cost was never the analysis. It was turning analysis into pages that stay
+consistent, and that is the part you have not started."**
+
+**One builder document exists and twelve are planned.** The blockers that justified
+waiting were his and most have closed: the wall, S-05, F-044, F-086, the enclosure,
+P-09 closing by measurement at C-18, and now the solenoid.
+
+**Three things started this pass, in his order:**
+
+1. **INTERCONNECT INVOKED FOR THE FIRST TIME.** It owns the cable schedule and the
+   terminal schedule, has never run, and now has a wall, five measured runs and a
+   cut rule.
+2. **MAIN-PANEL DRAWING THE LADDER**, under the instruction that governs the whole
+   change of mode: **what is still missing it MARKS OPEN on the drawing rather than
+   waiting for.** A schematic with three boxes marked OPEN is worth more than no
+   schematic, **because it shows what the machine is and makes the remaining
+   questions concrete.**
+3. **ONE WIRE TABLE ROW, filled in for a real conductor.** wire-table-row-zero.md.
+
+**NOT started, per his exclusion: the wet set, which waits on containers and the
+manifold; the procedures, which depend on everything; the audits, which need
+something to run against.**
+
+**THE ONE ROW ALREADY PAID FOR ITSELF AND THAT IS THE ARGUMENT FOR THE WHOLE
+DIRECTION.** Twelve cells, four certain, three from the interface table, five open -
+**and two of the five are DEFECTS the analysis could not see:**
+
+- **F-096: the solenoid has fluid rows and no POWER row.** Every other view of this
+  system describes the valve by what it does to water. **The wire table is the first
+  artifact that asks who energises it.**
+- **F-097: the F- prefix means two things - fluid rows and findings - separated by
+  zero padding alone. F-09 is the day tank outlet, the frozen scope boundary. F-090
+  is the struck float roster.** This is F-026's collision, **fixed in one place and
+  left standing in another**, and no document had ever had to cite both kinds in one
+  table until a wire table did.
+
+**Neither was findable by more analysis. Both fell out of trying to write one line
+that a person could build from.**
+
