@@ -46,6 +46,24 @@ no subsystem, and picks no parts.
     quotes it. Two files where one cites the other and neither cites the source
     is a second-source illusion, and it reads as corroboration. G-37.
 
+### Two standing instructions from the owner, 2026-09-04. They outrank habit.
+
+**SIMPLE IS BEST, G-44.** The burden of proof is on COMPLEXITY, never on
+simplicity. A simpler build is easier to build, easier to operate and easier to
+repair. **Anything you add must say what failure it prevents and what it costs on
+all three. If it cannot, it does not go in.** This is the tie-breaker whenever two
+answers both work.
+
+**LEAN ON THE 1ST EDITION SET, G-40b.** Where it did something and this build has
+no reason to differ, DO WHAT IT DID. **Deriving a fresh answer to a question it
+already answered is work nobody asked for.** Its figures are still unverified, its
+parts may still be superseded, and where it disagrees with a frozen row the tree
+still wins - **but on anything this tree has no position on, its answer is the
+starting point. It is a build that got built.**
+
+**And the instruction under both: GET IT DONE.** Return the thing that can be
+built. A returned answer that is correct and unbuildable is not finished.
+
 ### The one worth saying out loud to all of you
 
 **PUMP-BOXES was asked for the DIR level and refused to state one.** It named the

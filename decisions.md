@@ -81,6 +81,8 @@ changed reports to BOSS and does not act.
 | G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
 | G-42 | **ONE DEVICE, ONE NAME, EVERYWHERE. A RENAME IS APPLIED TO THE WHOLE TREE IN ONE PASS OR IT IS NOT APPLIED AT ALL, AND THE OLD NAME IS RECORDED SO AN OLD READER IS NOT LOST** | Frozen 2026-09-04, D-144. **A label on a wall has to match a row in a schedule, and a generated set cannot carry two names for one thing.** **And the distinction that makes a global rename safe: renaming a DEVICE is not editing a CLAIM.** A returned answer and an audit file are records of what an agent SAID, so their reasoning is annotated and never rewritten - **but the name of a pump is not part of anyone's reasoning, so it is renamed in place there too.** Contrast the display-box-sweep annotation, where the SUBJECT of a sentence moved and the sentence was left standing |
 | G-43 | **EVERY ID PREFIX IN THIS TREE IS GLOBAL. A DOCUMENT THAT NEEDS A LOCAL LIST USES A PREFIX NOBODY ELSE COULD MEAN, KEYED TO THAT DOCUMENT - NEVER A BARE LETTER** | Frozen 2026-09-04, D-145. **Three collisions, one cause.** F- meant fluid rows and findings; M- meant mechanical rows and a local mechanism list; C- meant commissioning rows and a local contradiction list. **All three were made by BOSS or AUDIT inventing a local enumeration inside a document. Not one was made by a subsystem**, because a subsystem writes about its own scope and reaches for the tree's IDs, while a reviewer writes about a document and reaches for A, B, C. **The reserved list is at the top of interface-table.md** |
+| G-44 | **SIMPLE IS BEST. THE BURDEN OF PROOF IS ON COMPLEXITY, NEVER ON SIMPLICITY.** A simpler build is easier to BUILD, easier to OPERATE and easier to REPAIR, and those are three separate wins that compound. **Anything added must say what failure it prevents and what it costs to build, operate and repair. If it cannot, it does not go in** | Frozen 2026-09-04, D-152, the owner's standing instruction: "do not over complicate this just get it done". **It outranks tidiness, completeness and elegance, and it is the tie-breaker whenever two answers both work** |
+| G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
 | G-31 | **A MINIMUM SWITCHING LOAD IS ONE POWER REQUIREMENT. The published V/mA pair is a REFERENCE COORDINATE, not an operating point, and not three independent floors.** A current figure that clears its reference coordinate is not a margin | Frozen 2026-09-01, D-068. 5 V times 5 mA is 25 mW against a published 300 mW, so the pair cannot be a legal operating point. Sharpens G-23 rather than replacing it |
@@ -3107,4 +3109,31 @@ write.**
 own** - and names them it must, because **G-28 makes which relay goes in which
 socket a BUILD FACT labelled by name, and a build sheet cannot say "the second
 22.32".**
+
+**D-152 SIMPLE IS BEST, AND LEAN ON THE 1ST EDITION. STANDING INSTRUCTION FROM THE
+OWNER, 2026-09-04.** Frozen as G-44 and G-40b.
+
+His words: **"simple is best, simple is smart, simple is easy to build operate and
+repair. do not over complicate this just get it done."**
+
+**TWO CHANGES OF POSTURE, and neither revokes a safety rule:**
+
+**1. THE BURDEN OF PROOF MOVES ONTO COMPLEXITY.** It has been sitting on
+simplicity: every added check, column, rule and sweep has been justified by being
+CORRECT, and correctness has been enough. **It is not enough any more. An addition
+must say what failure it prevents and what it costs to build, operate and repair.**
+T-029 is the same instruction applied to findings; **G-44 applies it to the build.**
+
+**2. THE 1ST EDITION SET BECOMES THE DEFAULT SHAPE RATHER THAN A CITATION TO
+CONSULT.** Where it did something and this build has no reason to differ, **do what
+it did.** G-40's safety half is untouched: **its figures are unverified, its parts
+may be superseded, its impossibility claims are ungraded, and where it disagrees
+with a frozen row the tree wins.** What changes is the default on everything the
+tree has NO position on. **It is a build that got built, and that is evidence this
+tree does not have.**
+
+**WHAT THIS DOES NOT LICENSE, stated so nobody has to ask: it does not reopen a
+frozen row, it does not lift a hazard, and it does not adopt a figure.** G-44 is a
+tie-breaker between answers that both work, not a reason to accept one that does
+not.
 
