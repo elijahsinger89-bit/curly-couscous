@@ -340,3 +340,50 @@ our pipe is 3/4 SCHEDULE 80 per D-109, so thread engagement and insertion depth
 differ from Sch 40** - a gland chosen against Sch 40 wall may bottom, may not
 engage enough thread, or may sit the sensing element in a different part of the
 bore.
+
+## THE STANDPIPE SHEETS, READ DIRECTLY. 2026-09-04, D-126 to D-129.
+
+audit/2026-09-04-standpipe-extraction.md. **G-40 governs: proposals to confirm or
+replace, nothing adopted beyond D-121's method.**
+
+**THREE RULES THAT CHANGE WHAT "FLOAT PLACEMENT" MEANS AS A REQUIREMENT:**
+
+1. **THE TRIP HEIGHT IS WHERE THE WEIGHT SITS, NOT WHERE THE FLOAT SITS.** An
+   external weight clamps to the cord and **the weight is the pivot**; the float
+   hangs on a tether below it and swings from the weight. **A trip level is set by
+   where a clamp is.**
+2. **THE TETHER LENGTH SETS THE DIFFERENTIAL.** The band between make and break is
+   a BUILD dimension, not a property of the part. **No float datasheet will tell
+   you the switching band this build gets** - which is worth knowing before you
+   write a requirement that asks for one.
+3. **THE PIPE IS MARKED WITH ITS TRIP HEIGHTS BEFORE ANYTHING GOES IN THE TANK.**
+   That answers the thing that made a drifted float dangerous: nothing here
+   measures a level, so **an unmarked float that slips is invisible and a marked
+   one is not.**
+
+**And one that is CBL-04's and arrives free: cords run UP the pipe and out through
+a cord grip with a DRIP LOOP OUTSIDE the box.** The tree had no position on cord
+entry at a tank.
+
+**YOUR ROSTER IS CORRECTED IN TWO PLACES, D-127**, by sheets the owner had not
+seen. **LS-8 is STORAGE HIGH-HIGH**, a hardware backstop in series with the day
+tank high-high. **The storage low pump-down float IS LS-3 and IS in the series** -
+what set it apart is that it is base-set hardware while LS-6, LS-7 and LS-8 came
+with the auto-fill add-on. **Eight positions, four per tank, no gaps and no
+spares.** Positions, not parts.
+
+**F-093, AND IT LANDS ON THE ROW THAT CLOSED YESTERDAY.** The old set draws every
+fill-control float NC and **both low-level stops NO.** S-05 is now level-based, so
+**your dry-run element is a float, and on an NO contact a severed conductor reads
+as "level is fine" - the unsafe direction.**
+
+**BOSS states no fail direction and inherits none.** Joint with MAIN-PANEL, against
+G-22 and D-049. **The old set's choice was made in a build whose dry-run element
+was not this one, so it is not evidence about yours.**
+
+**F-094: the floats are drawn SPDT, a changeover.** G-27's complementary pair was
+written for relay contacts and **nobody has considered a float as a source of one.**
+Say whether a fail-DETECTED float is worth wanting here, given that **F-091's
+overflow question exists because a single float has no second line behind it.**
+They are not alternatives - one catches a broken sense path, the other catches
+water on the floor - **but nobody has had them on the table together.**

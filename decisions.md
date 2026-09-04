@@ -2415,3 +2415,92 @@ rather than by answering it.
 **The owner will check his own hardware.** Under G-40 the drawing is a citation and
 not a source. **F-086 stays OPEN and no subsystem designs for either outcome.**
 
+## 2026-09-04
+
+**D-126 THE STANDPIPE SHEETS ARE READ DIRECTLY AND EXTRACTED. NOTHING BEYOND
+D-121's METHOD IS ADOPTED.** audit/2026-09-04-standpipe-extraction.md, from the
+two 1st Edition sheets read as pages rather than through a summary. **G-40
+governs and every item is a proposal to confirm or replace.**
+
+**SEVEN FIGURE-FREE RULES came back, which is the class D-121 was adopted under -
+each survives every figure in the old set being wrong.** Three are worth naming
+here because they change what a later reader thinks a float IS:
+
+**1. THE TRIP HEIGHT IS WHERE THE WEIGHT SITS, NOT WHERE THE FLOAT SITS.** An
+external weight clamps to the cord and **the weight is the PIVOT**; the float hangs
+on a tether below it and swings from the weight. **So a trip level is set by where
+a clamp is, and the float body's position is a consequence.** Nothing in this tree
+said that, and it changes what "float placement" even means as a requirement.
+
+**2. THE TETHER LENGTH SETS THE DIFFERENTIAL.** The band between make and break is
+a BUILD dimension, not a property of the part. **A float datasheet will not tell
+you the switching band this build gets.**
+
+**3. THE PIPE IS MARKED WITH ITS TRIP HEIGHTS BEFORE ANYTHING GOES IN THE TANK.**
+That is the answer to the thing that made a drifted float dangerous: **nothing in
+this system measures a level, so an unmarked float that slips is invisible - and a
+marked one is not.** The pipe carries its own scale.
+
+**And one more that arrives free and belongs to CBL-04: cords run UP the pipe and
+leave through a cord grip with a DRIP LOOP OUTSIDE the box.** The tree had no
+position on cord entry at a tank. **It is D-047's design-to-shed principle applied
+to a cord, and D-117 predicted exactly this - a cord route is a consequence of a
+mounting method.**
+
+**D-127 THE OWNER'S FLOAT TRANSCRIPTION IS CORRECTED IN TWO PLACES BY THE SHEETS
+HE HAD NOT SEEN.** He flagged both gaps himself.
+
+| He recorded | The standpipe sheets show |
+|---|---|
+| "LS-8 is unaccounted for on the pages I saw" | **LS-8 is STORAGE HIGH-HIGH**, described as a hardware backstop in series with the day tank's own high-high float |
+| "a separate STORAGE LOW pump-down float, not numbered in the LS series" | **It is LS-3, and it IS in the series.** What distinguishes it is that it is base-set hardware while LS-6, LS-7 and LS-8 arrive with the auto-fill add-on |
+
+**So the roster accounts for eight positions with no gaps and no spares: four on
+the day tank, four on storage.** Observed and unverified. **It is a ROSTER OF
+POSITIONS, not a parts list** - D-118 struck the part roster and restarted the pass
+from requirements. **What this is good for is confirming that the number of
+positions a design must answer for is eight.**
+
+**D-128 TWO ELECTRICAL OBSERVATIONS FROM THE SHEETS, BOTH RAISED AS QUESTIONS AND
+NEITHER ADOPTED.**
+
+**FIRST, AND IT LANDS ON A ROW THAT CLOSED YESTERDAY. The old set draws every
+fill-control float NC - high-high, fill stop, fill start - and draws BOTH low-level
+stops NO**: the day tank's dry-run stop and storage's transfer dry-run stop.
+
+**S-05 closed level-based on 2026-09-03, D-119, so this build's dry-run element is
+now a float.** G-22 asks what a severed conductor does. **On an NO dry-run contact
+a severed conductor reads as "level is fine", which is the unsafe direction. On an
+NC one it reads as a trip.**
+
+**BOSS STATES NO FAIL DIRECTION AND INHERITS NONE.** That is F-017's lesson and
+G-22's amendment, and this is exactly the situation that produced them. What is
+recorded is that **the old set's choice and this build's newly-closed S-05 land on
+the same contact, and that choice was made in a build whose dry-run element was not
+this one.** MAIN-PANEL and WATER jointly, against G-22 and D-049.
+
+**SECOND: THE FLOATS ARE DRAWN AS SPDT, A CHANGEOVER.** Observed, unverified, part
+may have been superseded.
+
+**If a float carries a changeover, it carries a second leg for free - and G-27 says
+a complementary pair is a fail-DETECT rather than a fail-safe, with D-053 calling
+it free wherever two legs of one changeover are already bought.** G-27 was written
+for relay contacts and **nobody has considered a float as a source of one.**
+
+**Raised, not proposed.** It matters because **F-091's overflow question exists
+precisely because a single float currently has no second line**, and a
+fail-detected float is a different answer to the same worry.
+
+**D-129 THREE MORE SELF-CONTRADICTIONS, FROM THESE TWO SHEETS ALONE, AND THEY ARE
+THE EVIDENCE FOR D-120's REFUSAL OF THE HEIGHTS.**
+
+The day tank sheet **places its high-high float above the top of the pipe carrying
+it**, on its own elevation. The datum is stated **two ways in the same set - end
+cap face on these sheets, in red and twice; tank floor in the build book - with the
+same numbers under both.** And one sheet's clamp detail names a float count its own
+elevation and parts table contradict.
+
+**Findings about the old set, not about this tree.** D-120 refused those heights
+before this file was read; **this is the evidence, and it came from the two sheets
+most likely to be authoritative about heights.**
+
