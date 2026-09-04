@@ -49,28 +49,33 @@ device in the build, so if any row fills in cleanly it should be this one.**
 | Function | Switched 120 VAC to the fill solenoid coil |
 | Class | **120 VAC.** Not SELV. **Segregation applies against every signal run sharing the wall** |
 | Design current, and which event | **0.58 A INRUSH, at make and break. NOT the 0.21 A holding figure.** parts.md, D-136 |
-| Interface row | **OPEN - and this is defect 1 below.** The solenoid's power feed has no P- row. F-01 and F-02 are its FLUID rows; its electrical crossing was never created |
+| Interface row | **P-02.** *(CORRECTED 2026-09-04. This cell first read OPEN, on the claim that the solenoid had no power row. It has one: P-02, MAIN-PANEL fill solenoid relay output to WATER fill solenoid coil, both ends named. INTERCONNECT found it. BOSS asserted an absence without looking - rule 8, T-003 - and then used the assertion as evidence. See F-096 withdrawn and F-098.)* |
 | Fail behaviour | **Severed conductor: the coil de-energises and the valve SPRING-RETURNS CLOSED.** D-114 and G-39. **This is the one cell that filled in with certainty**, because the fail state was chosen before the part was |
-| Status | **BLOCKED ON: no P- row for the solenoid feed; no terminal namespace; coil lead identification not looked up** |
+| Status | **BLOCKED ON: no terminal namespace; coil lead identification not looked up.** *(The first blocker listed here was withdrawn with F-096.)* |
 
 ## What filling in one row cost, and what it found
 
-**Twelve cells. Four filled with certainty, three filled from the interface table,
-five OPEN - and two of the five are defects rather than pending work.**
+**Twelve cells. Five filled with certainty, three from the interface table, four
+OPEN - and ONE of the four is a defect rather than pending work, after the first
+claimed defect was withdrawn.**
 
-### DEFECT 1. The solenoid has fluid rows and no power row.
+### DEFECT 1 WAS NOT A DEFECT. WITHDRAWN 2026-09-04, and left standing here.
 
-**F-01 and F-02 carry the water. Nothing carries the electricity.** The valve was a
-"solenoid" in the tree for weeks as a thing that opens, and **the conductor that
-opens it never got a crossing.**
+**This section claimed the solenoid had fluid rows and no power row. IT HAS P-02**,
+both ends named, sitting between P-01 and P-03. INTERCONNECT found it within the
+hour, reading the same table.
 
-It is invisible until you try to write the conductor down, because **every other
-view of the system describes the valve by what it does to water.** The wire table
-is the first artifact that asks who energises it.
+**BOSS asserted an absence without looking**, which is rule 8 and T-003, **and then
+used the assertion as the first exhibit in an argument about why production finds
+what analysis cannot.** The irony is the useful part: **the claim was that only a
+built artifact would reveal the gap, and what revealed the error was another agent
+reading the interface table.**
 
-**BOSS does not create the row from here** - it needs both ends named by the
-subsystems that own them, and MAIN-PANEL's ladder pass is running now and will hit
-the same gap from the other side. **Recorded and routed, not invented.**
+**What is real is smaller and is filed as F-098: P-02's status text is STALE.** It
+says the coil voltage is undecided; D-136 decided it the same day.
+
+**The section is not deleted.** A withdrawn exhibit that leaves no trace is how a
+tree learns to trust its own arguments too much.
 
 ### DEFECT 2. There is no terminal namespace, and the ID namespace is already ambiguous.
 

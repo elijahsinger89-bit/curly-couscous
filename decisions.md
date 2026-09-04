@@ -858,6 +858,8 @@ system needs the tank mixed or moving: during a batch, during dosing, and throug
 settle window. Between batches it is off. **The dry-run interlock is a PERMISSION
 for it to run, not a command that it should.**
 
+**CONTRADICTED 2026-09-04 AND THE CONTRADICTION IS THE OWNER'S OWN WORDS, NOT AN AGENT'S READING. D-137 states: "there are TWO submersibles in the day tank and BOTH RUN CONTINUOUSLY: the circulation pump and this one." MAIN-PANEL's ladder then established that NOTHING IN THE PANEL STARTS OR STOPS IT** - K-CIRC was deleted by D-058, circulation is a pole on K-DRY, K-DRY is a permission rather than a command, and G-26 bars the Pi. **So the topology and the owner agree with each other, and this entry is the outlier. NOT REVERSED HERE: BOSS does not decide whether the pump is intermittent, and the entry is left standing with the contradiction named. F-101, and it costs C-12's free F-003 witness, which needs a rest and a start.**
+
 Three consequences, all favourable:
 
 1. **F-003's exercise run does not dissolve. It is needed**, and needed precisely
@@ -2734,15 +2736,116 @@ something to run against.**
 DIRECTION.** Twelve cells, four certain, three from the interface table, five open -
 **and two of the five are DEFECTS the analysis could not see:**
 
-- **F-096: the solenoid has fluid rows and no POWER row.** Every other view of this
-  system describes the valve by what it does to water. **The wire table is the first
-  artifact that asks who energises it.**
+- **F-096 IS WITHDRAWN, SAME DAY, AND IT WAS THE HEADLINE EXHIBIT.** The claim that
+  the solenoid had no power row is FALSE: **P-02 exists**, both ends named, between
+  P-01 and P-03. **INTERCONNECT found it within the hour by reading the interface
+  table.** BOSS asserted an absence without looking - rule 8, T-003 - **and then
+  used the assertion as the first evidence in an argument about production finding
+  what analysis cannot. What actually found the error was an agent reading a
+  table.** What is real is smaller: **F-098, P-02's status text is stale**, saying
+  the coil voltage is undecided when D-136 decided it the same day.
 - **F-097: the F- prefix means two things - fluid rows and findings - separated by
   zero padding alone. F-09 is the day tank outlet, the frozen scope boundary. F-090
   is the struck float roster.** This is F-026's collision, **fixed in one place and
   left standing in another**, and no document had ever had to cite both kinds in one
   table until a wire table did.
 
-**Neither was findable by more analysis. Both fell out of trying to write one line
-that a person could build from.**
+**SO THE ARGUMENT STANDS ON F-097 ALONE, AND F-097 GOT BIGGER RATHER THAN SMALLER:
+INTERCONNECT found two FURTHER collisions in the same pass - M-0n and C-0n each also
+mean two things.** Three namespace collisions, none of which any analysis pass found
+in seven audits, **all three surfaced by two agents trying to write rows.**
+
+**The direction is unchanged and the honesty about the exhibit is the point.** A
+change of mode argued for with a fabricated absence would have been a bad start for
+a mode whose whole justification is that written artifacts catch what argument does
+not.
+
+**D-141 THE LADDER EXISTS. 31 RUNGS, 30 OPEN MARKS ACROSS 24 RUNGS.**
+subsystems/main-panel-ladder.md. Sections A through F: 120 VAC, the 24 VDC
+permissive string and driver permissive, the fill chains, dry-run, the sense
+circuits, and the face and ground bar.
+
+**Two rungs are drawn as ABSENCES and counted, which is the drawing working: a rung
+that should exist and does not is what a schematic is for.** Seven rungs carry no
+OPEN mark at all. **No float is drawn with a contact form anywhere - F-093 is open
+and MAIN-PANEL inherited no direction, which is F-017's lesson held under pressure
+while drawing.**
+
+**THE FINDING THAT MATTERS MOST IS F-101, AND IT LANDS ON A DECISION MADE
+YESTERDAY.**
+
+**NOTHING IN THIS PANEL STARTS OR STOPS THE CIRCULATION PUMP.** D-058 deleted K-CIRC
+and made circulation a pole on K-DRY. D-063 says the pump is intermittent AND that
+K-DRY is a permission rather than a command. G-26 bars the Pi from commanding it.
+**No element exists between the permissive bus and the circulation receptacle.**
+
+**AND THE OWNER HAS ALREADY SAID SO WITHOUT EITHER OF US NOTICING. D-137, in his
+words: "there are TWO submersibles in the day tank and BOTH RUN CONTINUOUSLY: the
+circulation pump and this one."** parts.md, decisions.md and water.md all now carry
+that sentence. **D-063 says intermittent. The topology and the owner agree with each
+other and D-063 is the outlier.**
+
+**THE COST, and it is the same shape this project spent two days learning to
+refuse:** D-119 closed S-05 level-based and explicitly kept three surviving F-003
+routes, **C-12's W-1 temperature-step witness being the free one.** C-12 requires
+the step **WHEN THE PUMP STARTS AFTER A REST**, and C-23 requires windows that do
+not span a start or a stop.
+
+**A PUMP THAT NEVER STOPS HAS NO REST AND NO START. The free route is gone and
+NOBODY DECLINED IT.**
+
+**That is T-023's mechanism and D-060's shape recurring ONE DAY after both were used
+to stop exactly this** - and this time it did not arrive as an overstatement in a
+summary. **It arrived as a physical consequence nobody traced.** F-003 and S-20
+still stand. **Graded CURRENT under G-36: what would change it is one element that
+can turn the pump off.**
+
+**Four more from the drawing, each with sources named in the file:** the chiller
+receptacle has no switching element on file while the panel owns a 25 A contactor
+D-108 orphaned - **and if the load lands there, S-18's Pi-read exit is CURRENT again
+under G-38**; which state of K-DRY is the de-energised state is unstated, with the
+two choices sitting in different files, **which also makes D-058's argument for
+dropping K-PERM's 120 V bus pole false in one of the two columns**; **F-094 has no
+READER** - G-27 needs both legs compared, G-01 and G-02 forbid the Pi, all five face
+holes are spoken for, and a hardware comparator costs a coil the four-state topology
+does not have; and **the permissive string's voltage class is stated two ways**,
+CBL-06 putting the leak console's legs in the 120 V chain against order.md's 24 Vdc
+K-PERM coil, **already propagated into two of MAIN-PANEL's own conclusions.**
+
+**G-30's one violation on the drawing is F-055, already on file, marked as
+reported-not-resolved rather than quietly fixed.**
+
+**D-142 INTERCONNECT HAS RUN FOR THE FIRST TIME. 20 ROWS: 17 CABLE RUNS AND 3 CORD
+ROUTES. ZERO BUILDABLE, TWENTY BLOCKED.**
+subsystems/interconnect-first-pass.md.
+
+**Zero-buildable is rule 9 working, not pessimism: CBL-01 through CBL-04 are all
+OPEN and every one of the 17 runs terminates at a gland those four rows govern.**
+Two runs are blocked on less than the rest - **the S-08 readback and the S-03
+fill-in-progress circuits are closed and recorded as given in parts.md**, and what
+remains for them is a gland face, DISPLAY-BOX's input side, and the terminal
+namespace.
+
+**THE CONSTRAINT NOBODY HAD WRITTEN DOWN IS F-100, AND IT IS A PURCHASING TRAP: A
+FLOAT'S CORD IS A PART PROPERTY, NOT A CUT LENGTH.** D-131 makes that cord the
+strain member, the trip-height datum and the signal path at once. **So it cannot be
+cut at the tank, must carry re-clamp slack, and its span runs from the trip mark up
+the pipe, over the rim, along a wall route, to the panel gland, plus drip loop and
+service - every term after the rim being a layout that does not exist.**
+
+**INTERCONNECT read the requirement the float pass was restarted against and cord
+length is not in it.** Self-fulfilling under G-36 as amended: **unstated, floats get
+bought against positions and contact duty alone, and the remedies left are a splice
+in the wet zone or moving a mounted panel.**
+
+**And a four-way deadlock stated rather than broken: all four enclosure owners wait
+on INTERCONNECT for gland positions and INTERCONNECT waits on all four.**
+INTERCONNECT declined to break it with a boundary allocation under rule 5. **BOSS
+agrees with the refusal - that allocation is an interface decision and belongs in
+the interface table, not in a subsystem's first pass.**
+
+**Also raised: CBL- cannot serve as a cable identity, so wire-table column 2 has no
+valid values; a three-way circular wait on the probe run; and the standpipe mandates
+a 120 VAC and SELV bundle IN THE WATER that no separation rule in this tree
+reaches.**
 
