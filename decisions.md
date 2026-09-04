@@ -3281,3 +3281,19 @@ were one word from complete.** Passed to INTERCONNECT.
 permissive string. F-110 is drawn on its rung with a G-44 cost sheet and no remedy
 ruled, because the open mark above it is upstream of the remedy.**
 
+**D-158 D6 IS AT 157 OF 180 CELLS AND 19 OF THE 23 GAPS ARE ONE UNASKED QUESTION.**
+The duty column closed all 20 of its cells: 13 carry ARC, COIL or SENSE from D2's
+poles, 7 carry "no pole", **which is an absence rather than a fourth value and
+follows D2's own rule that duty is a property of the pole.** Four rows are complete.
+
+**THE 19: AN ENTRY FACE AT PUMP-BOXES, DISPLAY-BOX OR A FIELD DEVICE.** Under D-146
+that is the enclosure owner's call, **and neither box had ever been asked.** Asked
+now.
+
+**Two things the duty column surfaced only by being filled, both logged:** three
+jackets carry ARC duty where a voltage-sorted column called them quiet - **which is
+exactly the defect D-150 split the column to catch, confirmed on first use.** And
+**RUN-015 turned out to be a DECISION rather than a lookup: COIL or ARC depending on
+the permissive string's voltage class, which is the G-30 line itself.** That is
+MAIN-PANEL's and it sits on the voltage-class ambiguity already on file.
+

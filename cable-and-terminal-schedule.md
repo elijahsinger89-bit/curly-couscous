@@ -1,6 +1,7 @@
 # D6. Cable and terminal schedule
 
-**Owner: INTERCONNECT. Issued 2026-09-04.**
+**Owner: INTERCONNECT. Issued 2026-09-04, revised the same day** against the duty
+vocabulary, the contactor names, the S-03 and S-20 amendments and D-156.
 
 **Who reads this and when.** The person routing, cutting and landing cable, before
 wiring starts. D5 gives them the conductor; this gives them the jacket it travels in
@@ -14,8 +15,8 @@ fact has one place:
 | Not here | There |
 |---|---|
 | Any conductor fact: endpoints, colour, fail direction, design current and its event | **D5**, one CDR- row |
+| Rung logic, device identity, and each pole's DUTY | **D2**, the electrical schematic |
 | What a crossing IS and its status | **interface-table.md**, one FL-, P-, S-, CBL- or M- row. This document cites the id and never restates the meaning |
-| Rung logic and device identity | **D2** |
 | Face geometry, penetration and rail positions | **D3** |
 | Any quantity, count, total or price | **D7, once** |
 | Per-channel product, role, jug and cable core | **D11**, the channel register |
@@ -39,8 +40,8 @@ sequence. No rule is keyed to it and a gap is never closed.
 
 **If a jacket splits, its id is RETIRED and new ids are issued.** D-149. Never a
 suffix: RUN-007a is arithmetic on an identifier and is the off-by-one generator
-channel-token.md's forbidden list exists to prevent. **Rows that are expected to
-split are marked in the Blocked on column.**
+channel-token.md's forbidden list exists to prevent. **Rows expected to split are
+marked in the Blocked on column.**
 
 **Stated once here rather than twenty times in the table:** where on a face a gland
 sits, and the spacing between glands, is INTERCONNECT's under D-146 and is OPEN in
@@ -60,18 +61,27 @@ Three values. It drives insulation and segregation and nothing else.
 | **24 V** | The panel's 24 V system, whatever the duty | Membership of that system |
 | **SIGNAL** | Below the 24 V system: the driver logic supply, the step and direction conductors, the probe conductors | Membership |
 
-**EGC is not a voltage class and has been removed from this vocabulary.** An
-equipment grounding conductor takes the voltage class of the circuit it protects, and
-"grounding" is a DUTY. **Simpler by one value, per G-44, and it stops a bonding
+**EGC is not a voltage class and is not in this vocabulary.** An equipment grounding
+conductor takes the voltage class of the circuit it protects, and "grounding" is a
+duty. Accepted 2026-09-04. **Simpler by one value, per G-44, and it stops a bonding
 conductor being sorted away from the circuit it belongs to.**
 
-### 1.2 Duty. MAIN-PANEL's vocabulary, per D-150
+### 1.2 Duty. MAIN-PANEL's vocabulary, and the cell is a roll-up
 
-**Every duty cell below is OPEN and there is one reason: the vocabulary does not
-exist yet.** D-150 gave voltage to INTERCONNECT and duty to MAIN-PANEL, because the
-driver motor supply is a power duty at a control voltage and one column was carrying
-two facts. **I do not invent MAIN-PANEL's half.** Duty drives G-30's separation of
-power from sense; voltage drives insulation. They are not the same sort.
+**ARC, COIL, SENSE.** Stated by MAIN-PANEL from D-072's three tiers rather than
+invented, and defined in D2 section 4, which is its single source. **This document
+cites it and does not restate the definitions.**
+
+**Duty is a property of the POLE, not of the conductor** - D2's own sentence. D5
+derives each conductor's duty from the pole it leaves; **the cell below is that
+roll-up over a jacket's conductors, generated rather than typed.** G-45.
+
+**A jacket that leaves no pole at either end has no duty, and "n/a, no pole" is an
+absence rather than a fourth value.** That follows from D2's rule directly and is
+not an extension of MAIN-PANEL's vocabulary: seven jackets are in that case, and
+each is marked. **Under G-44 a fourth value would have to say what failure it
+prevents, and none of the seven is a G-30 subject** - G-30 separates poles inside a
+relay, and these leave no relay.
 
 ### 1.3 Segregation groups
 
@@ -81,70 +91,91 @@ distance, and no separation distance exists anywhere in this tree yet.**
 | Group | Holds | What it prevents, and what it costs - G-44 |
 |---|---|---|
 | **SEG-A** | LINE runs and cords | Prevents a line conductor being the realistic neighbour of a sense conductor, which is the short D-049 handed to the wiring plan. Costs nothing to build, operate or repair: it is a routing rule, not a part |
-| **SEG-B** | 24 V runs | As SEG-A. **It does NOT separate power duty from sense duty inside itself** - that is what the duty column is for, and it is open |
+| **SEG-B** | 24 V runs | As SEG-A. **It does not separate ARC duty from SENSE duty inside itself** - the duty column does that, and RUN-001, RUN-002 and RUN-012 now show why one column could not |
 | **SEG-C** | SIGNAL runs to the drivers | F-030: eight step conductors in one jacket is the single most probable short in the build, and a step shorted to another step steps two heads together, which violates G-06 in hardware where software cannot prevent it. Costs nothing beyond the return conductors D5 already requires |
 | **SEG-D** | Probe runs, alone | INTERCONNECT's standing open item names probe cables separately. Costs nothing. **No rule exists yet for what SEG-D requires, and I state none** |
 
-**Two constraints no group satisfies, carried here because a person routing cable
+**Three constraints no group satisfies, carried here because a person routing cable
 must see them:**
 
-- **RUN-005 and RUN-006 are the same class as each other**, so no scheme that sorts
-  by class separates them. A short between them makes the readback follow the
+- **RUN-005 and RUN-006 are the same voltage class as each other**, so no scheme that
+  sorts by class separates them. A short between them makes the readback follow the
   command, which is precisely and only the failure G-09 exists to detect, and it
   removes weld detection too. **F-029. They must be separate jackets or provably
-  non-adjacent.**
+  non-adjacent.** The duty column now confirms rather than resolves this: COIL and
+  SENSE, which D-072 permits in one envelope on conditions, and which says nothing
+  about two jackets on a wall.
+- **RUN-007 and RUN-008 each carry a G-27 complementary pair from one changeover
+  pole.** G-27's construction rule is both legs at the same potential **on the same
+  cable**, so **neither pair may be split across jackets.** That is a jacket
+  constraint and it lives here.
 - **RUN-012, RUN-013, RUN-019 and part of RUN-020 are tied to one pipe by D-121 and
-  cannot be separated by any group.** Section 4.
+  cannot be separated by any group.** Section 4, and D-156 is what was done about it.
 
 ---
 
 ## 2. THE CABLE SCHEDULE
 
-Device names are post-D-144: the **manifold pump** is the device formerly called the
-circulation submersible or circulation pump.
+Device names are current: the **manifold pump** is the device formerly called the
+circulation submersible or circulation pump, D-144. **KM-DRV** is the driver
+permissive contactor and **KM-CHIL** is the chiller and loop-pump receptacle
+switching element, both named 2026-09-04, F-105 closed.
 
 | RUN | End A | A face | End B | B face | Rows | Voltage | Duty | Provision | Seg | Blocked on |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **RUN-001** | MAIN-PANEL: permissive contactor load side | BOTTOM | PUMP-BOX-A: driver motor supply | OPEN | P-06 | 24 V | OPEN | Cut | SEG-B | P-06; CBL-02; D-150 |
-| **RUN-002** | MAIN-PANEL: permissive contactor load side | BOTTOM | PUMP-BOX-B: driver motor supply | OPEN | P-06 | 24 V | OPEN | Cut | SEG-B | P-06; CBL-02; D-150. **Both feeds leave one terminal downstream, parts.md - T-010 applies there, not here** |
-| **RUN-003** | DISPLAY-BOX: logic board step and direction outputs | OPEN | PUMP-BOX-A: driver STEP and DIR terminals | OPEN | S-10; P-09 | SIGNAL | OPEN | Cut | SEG-C | S-10; CBL-02; CBL-03; D-150. **Expect a split: F-030's per-signal returns** |
-| **RUN-004** | DISPLAY-BOX: logic board step and direction outputs | OPEN | PUMP-BOX-B: driver STEP and DIR terminals | OPEN | S-10; P-09 | SIGNAL | OPEN | Cut | SEG-C | As RUN-003, plus PUMP-BOXES' open division of the eight channels between boxes |
-| **RUN-005** | DISPLAY-BOX: logic board permissive coil drive | OPEN | MAIN-PANEL: driver permissive contactor coil | BOTTOM | S-07; **S-09 unmerged** | 24 V | OPEN | Cut | SEG-B | S-07; CBL-03; D-150. **One conductor, two interface rows - S-09's own status says merge into S-07 or close, and D5 admits one row per conductor** |
-| **RUN-006** | MAIN-PANEL: second pole of the driver permissive contactor | BOTTOM | DISPLAY-BOX: optocoupler input | OPEN | S-08 | 24 V | OPEN | Cut | SEG-B | CBL-03; DISPLAY-BOX's input side; D-150; **F-029 against RUN-005** |
-| **RUN-007** | MAIN-PANEL: K-FILL-D-Q, the normally closed contact | BOTTOM | DISPLAY-BOX: isolated Pi input | OPEN | S-03; **F-107** | 24 V | OPEN | Cut | SEG-B | CBL-03; DISPLAY-BOX's input side; D-150; **F-107 - it carries a conductor with no interface row** |
-| **RUN-008** | MAIN-PANEL: K-DRY-Q, second pole | BOTTOM | DISPLAY-BOX: isolated Pi input | OPEN | S-20; **F-107** | 24 V | OPEN | Cut | SEG-B | S-20; CBL-03; D-150; F-107 |
-| **RUN-009** | MAIN-PANEL: fused, NOT relay switched receptacle | BOTTOM | DISPLAY-BOX: Pi power | OPEN | P-07 | LINE, **contested** | OPEN | OPEN | SEG-A | CBL-03; D-150. **P-07 reads CLOSED in the interface table while display-box.md still carries its form as open. The principle is closed; the conductor is not, and provision and voltage both follow the answer** |
-| **RUN-010** | Building branch circuit | n/a | MAIN-PANEL: line input | BOTTOM | P-01 | LINE | OPEN | Cut | SEG-A | P-01; D-150. **May be two jackets: D-137's dedicated chiller circuit is unaccounted for in P-01, and no disconnecting means is named** |
-| **RUN-011** | MAIN-PANEL: K-FILL-S, solenoid pole | BOTTOM | FIELD: fill solenoid coil | OPEN | **P-02** | LINE | OPEN | Cut | SEG-A | P-02; CBL-04; D-150. **P-02's text is stale, F-098: it says the coil voltage is undecided and D-136 specified the valve** |
-| **RUN-012** | FIELD: day tank floats, on the day tank standpipe | OPEN | MAIN-PANEL: coil chains, per D-154 | BOTTOM | S-02 | **24 V**, D-154 | OPEN | **Supplied** | SEG-B | S-02; CBL-04; D-150; **F-100** cord length; **F-113** section 4 |
-| **RUN-013** | FIELD: storage tank floats, on the storage standpipe | OPEN | MAIN-PANEL: coil chains, per D-154 | BOTTOM | S-01 | **24 V**, D-154 | OPEN | **Supplied** | SEG-B | As RUN-012, on S-01 |
-| **RUN-014** | FIELD: leak detection sensor | OPEN | MAIN-PANEL: leak console | **UNPLACEABLE** | S-04 | OPEN | OPEN | Supplied | OPEN | S-04; D-150; **the console's position is stated in no file**; **F-104** - a floor built to move water to a track drain hides a leak from a floor sensor, so the sensor's position and therefore this jacket's are both open |
-| **RUN-015** | MAIN-PANEL: leak console, 24 V in and Form C out | **UNPLACEABLE** | MAIN-PANEL: permissive string | BOTTOM | **CBL-06** | **LINE-rated**, CBL-06 | OPEN | Cut | SEG-A | CBL-06; D-150; the console's position. **CBL-06 requires every conductor in this jacket at the higher rating including the 24 V pair. The float requirement's finding 5 records the string's class stated two ways** |
-| **RUN-016** | DOSING: probes in the manifold probe section | n/a, a wet fitting | DISPLAY-BOX: the EZO circuits and their carriers | OPEN | S-11 | SIGNAL | OPEN | **Supplied** | SEG-D | S-11; CBL-03; D-150. **The EZO length limit is a lookup nobody has run** - section 5 |
-| **RUN-017** | MAIN-PANEL: ground bar | BOTTOM | **A SET, not one end** | OPEN | **CBL-07** | Takes the class it protects | OPEN | Cut | Rides its circuit | CBL-07; D-150. **PROVISIONAL ID.** CBL-07 is one crossing over four enclosures, and an EGC is either a conductor inside each other jacket or a separate bonding run to each plastic box. Those are different id counts. **This row will retire under D-149 when CBL-07 returns** |
-| **RUN-018** | MAIN-PANEL: relay-switched receptacle, panel mounted | **FACE**, D-046 | FIELD: transfer pump cord cap | n/a | P-03 | LINE | OPEN | **Cord** | SEG-A | P-03's circuit and rating; D-150 |
-| **RUN-019** | MAIN-PANEL: relay-switched receptacle, panel mounted | **FACE**, D-046 | FIELD: manifold pump cord cap | n/a | P-04 | LINE | OPEN | **Cord** | SEG-A | P-04's circuit and rating; D-150. **On the day tank standpipe** - section 4 |
-| **RUN-020** | MAIN-PANEL: **the row's End A names a device D-108 says does not exist** | **FACE**, D-046 | FIELD: chiller cord cap and chiller loop pump cord cap | n/a | P-05, as amended by D-137 | LINE | OPEN | **Cord**, two | SEG-A | P-05; D-150. **End A is unwritable as the row writes it, and no file names the device that switches this receptacle.** The loop pump's cord is on the day tank standpipe - section 4 |
+| **RUN-001** | MAIN-PANEL: KM-DRV load side | BOTTOM | PUMP-BOX-A: driver motor supply | OPEN | P-06 | 24 V | **ARC** | Cut | SEG-B | P-06; CBL-02. **D-150's own case: 24 V voltage and ARC duty. A DC break with no zero crossing into eight drivers with bulk capacitors** |
+| **RUN-002** | MAIN-PANEL: KM-DRV load side | BOTTOM | PUMP-BOX-B: driver motor supply | OPEN | P-06 | 24 V | **ARC** | Cut | SEG-B | P-06; CBL-02. **Both feeds leave one terminal downstream, parts.md - T-010 applies there, not here** |
+| **RUN-003** | DISPLAY-BOX: logic board step and direction outputs | OPEN | PUMP-BOX-A: driver STEP and DIR terminals | OPEN | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | S-10; CBL-02; CBL-03. **Expect a split: F-030's per-signal returns** |
+| **RUN-004** | DISPLAY-BOX: logic board step and direction outputs | OPEN | PUMP-BOX-B: driver STEP and DIR terminals | OPEN | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | As RUN-003, plus PUMP-BOXES' open division of the eight channels between boxes |
+| **RUN-005** | DISPLAY-BOX: logic board permissive coil drive | OPEN | MAIN-PANEL: KM-DRV coil | BOTTOM | S-07; **S-09 unmerged** | 24 V | **COIL** | Cut | SEG-B | S-07; CBL-03. **One conductor, two interface rows - S-09's own status says merge into S-07 or close, and D5 admits one row per conductor.** Duty is D-072 tier 2, a slave-coil drive |
+| **RUN-006** | MAIN-PANEL: KM-DRV pole 2 | BOTTOM | DISPLAY-BOX: optocoupler input | OPEN | S-08 | 24 V | **SENSE** | Cut | SEG-B | CBL-03; DISPLAY-BOX's input side; **F-029 against RUN-005**. Also open: whether KM-DRV's poles share one contact volume, which would put S-08 against G-30 with nowhere to move |
+| **RUN-007** | MAIN-PANEL: K-FILL-D-Q changeover pole | BOTTOM | DISPLAY-BOX: two isolated Pi inputs | OPEN | **S-03, both legs** | 24 V | **SENSE** | Cut | SEG-B | CBL-03; DISPLAY-BOX's input side. **Carries a G-27 pair and may not be split** |
+| **RUN-008** | MAIN-PANEL: K-DRY-Q changeover pole | BOTTOM | DISPLAY-BOX: two isolated Pi inputs | OPEN | **S-20, both legs** | 24 V | **SENSE** | Cut | SEG-B | S-20; CBL-03. **Carries a G-27 pair and may not be split** |
+| **RUN-009** | MAIN-PANEL: fused, NOT relay switched receptacle | BOTTOM | DISPLAY-BOX: Pi power | OPEN | P-07 | LINE, **contested** | **n/a, no pole** | OPEN | SEG-A | CBL-03. **P-07 reads CLOSED in the interface table while display-box.md still carries its form as open. The principle is closed; the conductor is not, and provision and voltage both follow the answer** |
+| **RUN-010** | Building branch circuit | n/a | MAIN-PANEL: line input | BOTTOM | P-01 | LINE | **n/a, no pole** | Cut | SEG-A | P-01. **May be two jackets: D-137's dedicated chiller circuit is unaccounted for in P-01. If a disconnecting means is chosen it becomes this jacket's pole and the duty cell fills** |
+| **RUN-011** | MAIN-PANEL: K-FILL-S solenoid pole | BOTTOM | FIELD: fill solenoid coil | OPEN | **P-02** | LINE | **ARC** | Cut | SEG-A | P-02; CBL-04. **P-02's text is stale, F-098: it says the coil voltage is undecided and D-136 specified the valve.** D-072 puts the solenoid on the arcing side whatever its coil voltage |
+| **RUN-012** | FIELD: day tank floats, on the day tank standpipe | OPEN | MAIN-PANEL: K-FILL-D and K-DRY coil chains | BOTTOM | S-02 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | S-02; CBL-04; **F-100** cord length. **D2: every float conductor is COIL duty, being a series element in a coil chain.** Section 4 |
+| **RUN-013** | FIELD: storage tank floats, on the storage standpipe | OPEN | MAIN-PANEL: K-FILL-S and permissive coil chains | BOTTOM | S-01 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | As RUN-012, on S-01 |
+| **RUN-014** | FIELD: leak detection sensor | OPEN | MAIN-PANEL: leak console | **UNPLACEABLE** | S-04 | OPEN | **n/a, no pole** | Supplied | OPEN | S-04; **the console's position is stated in no file**; **F-104** - a floor built to move water to a track drain hides a leak from a floor sensor, so the sensor's position and therefore this jacket's are both open |
+| **RUN-015** | MAIN-PANEL: leak console, 24 V in and Form C out | **UNPLACEABLE** | MAIN-PANEL: permissive string | BOTTOM | **CBL-06** | **LINE-rated**, CBL-06 | **COIL or ARC, contested** | Cut | SEG-A | CBL-06; the console's position. **The permissive string's voltage class decides this cell and it is the G-30 line itself: as a 24 V coil string these legs are COIL; as a 120 V bus they are ARC under D-072 tier 1, and ARC may not share a relay with SENSE** |
+| **RUN-016** | DOSING: probes in the manifold probe section | n/a, a wet fitting | DISPLAY-BOX: the EZO circuits and their carriers | OPEN | S-11 | SIGNAL | **n/a, no pole** | **Supplied** | SEG-D | S-11; CBL-03. **The EZO length limit is a lookup nobody has run** - section 5 |
+| **RUN-017** | MAIN-PANEL: ground bar | BOTTOM | **A SET, not one end** | OPEN | **CBL-07** | Takes the class it protects | **n/a, no pole** | Cut | Rides its circuit | CBL-07. **PROVISIONAL ID.** CBL-07 is one crossing over four enclosures, and an EGC is either a conductor inside each other jacket or a separate bonding run to each plastic box. Those are different id counts. **This row retires under D-149 when CBL-07 returns** |
+| **RUN-018** | MAIN-PANEL: K-FILL-D-P pole, to a panel-mounted receptacle | **FACE**, D-046 | FIELD: transfer pump cord cap | n/a | P-03 | LINE | **ARC** | **Cord** | SEG-A | P-03's circuit and rating |
+| **RUN-019** | MAIN-PANEL: K-DRY-P pole, to a panel-mounted receptacle | **FACE**, D-046 | FIELD: manifold pump cord cap | n/a | P-04 | LINE | **ARC** | **Cord** | SEG-A | P-04's circuit and rating. **On the day tank standpipe** - section 4 |
+| **RUN-020** | MAIN-PANEL: **KM-CHIL**, to a panel-mounted receptacle | **FACE**, D-046 | FIELD: chiller cord cap and chiller loop pump cord cap | n/a | P-05, as amended by D-137 | LINE | **ARC** | **Cord**, two | SEG-A | P-05, whose End A still names a chiller contactor D-108 removed. **KM-CHIL names the FUNCTION and no device performs it yet.** The loop pump's cord is on the day tank standpipe - section 4 |
 
 ### 2.1 What is filled, honestly
 
-**Twenty jackets. 137 of the 180 content cells filled. ZERO rows complete.**
+**Twenty jackets. 157 of the 180 content cells filled. Four rows complete: RUN-010,
+RUN-018, RUN-019 and RUN-020.**
 
-**Twenty of the forty-three gaps are one column: duty.** Three rows - RUN-010,
-RUN-018 and RUN-019 - are **one word from complete, and that word is MAIN-PANEL's
-under D-150.** Under document-plan.md 4.1 nothing can be wired until D6 is complete
-for the jacket in question, so **a vocabulary nobody has written is currently on the
-build's critical path.** Stated, not solved.
+**A complete row is not a buildable row.** All four are still blocked, on P-01 and on
+P-03, P-04 and P-05. That is the document working as intended: the schedule is
+finished for those jackets and the crossings behind them are not.
+
+**Nineteen of the twenty-three remaining gaps are one thing: an entry face at
+PUMP-BOXES, DISPLAY-BOX or a field device.** CBL-02, CBL-03 and CBL-04. **The other
+four are RUN-009's provision, RUN-014's voltage and segregation, and RUN-017's End
+B.** So the document is now gated almost entirely on three interface rows, and under
+D-146 two of them cost their owner nothing: a face follows from what is inside the
+box.
+
+**What the duty column did the moment it was filled.** Three jackets carry ARC duty
+into places a voltage-sorted column would have called quiet: **RUN-001 and RUN-002 at
+24 V, and RUN-011 whose coil voltage does not matter.** And one cell turned out to be
+a decision rather than a lookup: **RUN-015 is COIL or ARC depending on the permissive
+string's voltage class, and that is the G-30 line itself rather than a label.**
 
 ### 2.2 Three rows that are not one physical thing, flagged so nobody builds them
 
-- **RUN-017** is one id standing in for a set of unknown size. Section 2, and it
-  retires under D-149.
+- **RUN-017** is one id standing in for a set of unknown size. It retires under D-149.
 - **RUN-003 and RUN-004** are expected to split when F-030's per-signal returns
   settle. **Do not order or label against these two ids.**
-- **RUN-018, RUN-019 and RUN-020 have no CDR- children**, because a cord's
-  conductors are inside a manufactured assembly and nothing lands them. **D5 will
-  never name these three ids. That is correct and is not an error to fix.**
+- **RUN-018, RUN-019 and RUN-020 have no CDR- children and no TRM- landing point.** A
+  cord's conductors are inside a manufactured assembly and nothing lands them; the
+  receptacle's own terminals are panel-internal conductors and are D5's rows, not
+  these. **D5 will never name these three ids, and that is correct rather than an
+  error to fix.**
 
 ---
 
@@ -191,24 +222,28 @@ tick the box. It costs one word per row to build, nothing to operate, and nothin
 repair. **It goes in.**
 
 **Not one row below is marked PART. F-106: nobody in this project has ever been asked
-to look at a terminal and report what is printed on it.**
+to look at a terminal and report what is printed on it.** Naming KM-DRV closed the
+device half of that problem and left the marking half untouched.
 
 ### 3.3 The schedule
 
 | TRM | Device, by name | Which | Source | Runs landed | Row | Blocked on |
 |---|---|---|---|---|---|---|
-| `TRM-MAIN-PANEL.{unnamed}.{motor supply pole}` | **UNNAMED**, F-105 | `{motor supply pole}` | DESCRIBED | RUN-001, RUN-002 | P-06 | **F-105 and D-151: the device has no name, only a part number and an ordinal.** MAIN-PANEL owns naming it. **T-010 applies here: two jackets leave one terminal** |
-| `TRM-MAIN-PANEL.{unnamed}.{readback pole}` | **UNNAMED**, F-105 | `{readback pole}` | DESCRIBED | RUN-006 | S-08 | F-105. Also the open question of whether that contactor's poles share one contact volume, which would put S-08 against G-30 with nowhere to move |
-| `TRM-MAIN-PANEL.K-FILL-S.{solenoid pole}` | **K-FILL-S**, order.md | `{solenoid pole}` | DESCRIBED | RUN-011 | P-02 | P-02; no marking has been read. **The pole is sized on the make-and-break event, not the holding figure** |
-| `TRM-MAIN-PANEL.K-FILL-D-Q.{S-03 changeover}` | **K-FILL-D-Q**, order.md | `{S-03 changeover pair}` | DESCRIBED | RUN-007 | S-03 | No marking read; **F-107 - one conductor landing here has no interface row** |
-| `TRM-MAIN-PANEL.K-DRY-Q.{Pi pair}` | **K-DRY-Q**, order.md | `{complementary pair}` | DESCRIBED | RUN-008 | S-20 | S-20; **the relay is called K-DRY in the interface table and K-DRY-Q in order.md, so the id is unstable until one name wins** |
-| `TRM-MAIN-PANEL.{ground bar}.{...}` | **{ground bar}**, not yet a bought part | OPEN | OPEN | RUN-017 | CBL-07 | CBL-07; the bar is not bought; RUN-017 is provisional |
+| `TRM-MAIN-PANEL.KM-DRV.{pole 1, motor supply}` | **KM-DRV** | `{pole 1}` | DESCRIBED | RUN-001, RUN-002 | P-06 | **The marking has not been read, F-106.** The device is named and the row is otherwise writable. **T-010 applies here: two jackets leave one terminal** |
+| `TRM-MAIN-PANEL.KM-DRV.{pole 2, readback}` | **KM-DRV** | `{pole 2}` | DESCRIBED | RUN-006 | S-08 | The marking has not been read. Also open: whether KM-DRV's poles share one contact volume, which would put S-08 against G-30 with nowhere to move |
+| `TRM-MAIN-PANEL.KM-DRV.{coil}` | **KM-DRV** | `{coil}` | DESCRIBED | RUN-005 | S-07 | S-07, which must state where the coil positive is taken from; the marking has not been read |
+| `TRM-MAIN-PANEL.K-FILL-S.{solenoid pole}` | **K-FILL-S**, order.md | `{solenoid pole}` | DESCRIBED | RUN-011 | P-02 | P-02; the marking has not been read. **The pole is sized on the make-and-break event, not the holding figure** |
+| `TRM-MAIN-PANEL.K-FILL-D-Q.{S-03 changeover pole}` | **K-FILL-D-Q**, order.md | `{changeover pole}` | DESCRIBED | RUN-007 | S-03 | The marking has not been read. **Both legs of one pole land here and G-27 requires both on RUN-007** |
+| `TRM-MAIN-PANEL.K-DRY-Q.{S-20 changeover pole}` | **K-DRY-Q**, order.md | `{changeover pole}` | DESCRIBED | RUN-008 | S-20 | S-20; the marking has not been read. **The relay is called K-DRY in the interface table and K-DRY-Q in order.md, so the id is unstable until one name wins** |
+| `TRM-MAIN-PANEL.{ground bar}.{...}` | **{ground bar}**, not a bought part | OPEN | OPEN | RUN-017 | CBL-07 | CBL-07; the bar is not bought; RUN-017 is provisional |
 | `TRM-FIELD.{fill solenoid}.{coil lead}` | The fill solenoid specified by D-136 | OPEN | **OPEN** | RUN-011 | P-02 | **Coil lead identification has never been looked up.** Per F-051 it is named by what is printed on the part, and nobody has looked |
 | `TRM-PUMP-BOX-A.{driver}.{...}` | OPEN | OPEN | OPEN | RUN-001, RUN-003 | P-06, S-10, P-09 | S-10; P-06. **The pin list is known and the MARKINGS are not** - parts.md records that the flat pin list is a list of names that was read as an order, and the board is two connectors |
 | `TRM-PUMP-BOX-B.{driver}.{...}` | OPEN | OPEN | OPEN | RUN-002, RUN-004 | P-06, S-10, P-09 | As PUMP-BOX-A |
 | `TRM-DISPLAY-BOX.{logic board}.{...}` | OPEN. The board is hand built and does not exist | OPEN | OPEN | RUN-003 to RUN-009, RUN-016 | S-07, S-08, S-03, S-20, S-10, S-11, P-07 | S-12 is not frozen and the board does not exist |
 
-**Ten landing points. None buildable. Two blocked on a device that has no name.**
+**Eleven landing points. Six now name their device**, which they could not before
+KM-DRV and KM-CHIL were named. **None is buildable, and every one of the six is
+blocked on the same thing: nobody has looked at the part.** F-106.
 
 ### 3.4 The check this table holds that no other document can
 
@@ -220,92 +255,52 @@ this table is organised by its destination.
 
 ---
 
-## 4. F-113. WHAT THE STANDPIPE ADJACENCY COSTS
+## 4. THE STANDPIPE ADJACENCY. F-113, ANSWERED AND ACTED ON
 
-**Asked of INTERCONNECT. The method is not reopened: D-121 answers a float that has
-moved, and nothing in this system measures a level, so an unmarked float that slips
-is invisible. That is the worse failure and the method stays.**
+**The method is not reopened: D-121 answers a float that has moved, and nothing in
+this system measures a level, so an unmarked float that slips is invisible. That is
+the worse failure and the method stays.**
 
 **What D-049 gave up.** G-22 asks two questions of every sense path. D-049 amended
-it: the severed case is chosen safe on frequency, and **the short case is answered by
-ADJACENCY - the wiring plan - and not by circuit design.** That escape assumes a
+it: the severed case is chosen safe on frequency, and the short case is answered by
+**adjacency - the wiring plan** - and not by circuit design. That escape assumes a
 route with choices in it. **D-121 fixes the adjacency at worst case by construction,
 so on RUN-012, RUN-013, RUN-019 and part of RUN-020 there is no wiring plan left to
 answer with.** Grade: **STRUCTURAL** while D-121 stands. Nothing added to the wiring
 plan changes it, because the wiring plan is what was removed.
 
-### The cost, in four parts
+**The expensive failure is float-to-float and not the cross-class one.** Under D-154
+every float is a series element in a coil chain, so a bridge between pairs on one
+pipe **shorts out the elements between the bridge points and closes the chain around
+an open float.** Severed is safe; this is not. **And it is already paid for**:
+D-130's overflow, FL-11 and FL-12, was made a requirement for exactly that failure
+and lands above the high-high per D-134, so the instrumented protection trips first.
 
-**COST 1, and it is the expensive one, and it is NOT the 120 V one.** WATER's float
-requirement states it: a short between two float pairs on one standpipe can bridge a
-high-high to a fill float and produce "level is fine" on a chain that is not fine.
-Under D-154 every float is a series element in a coil chain, so **a bridge does not
-report a wrong level - it shorts out the elements between the bridge points and
-closes the chain around an open float.** Severed is safe; this is not.
+### What was done, D-156, and what was not
 
-**And it is already paid for.** D-130 made the overflow bulkhead a requirement on
-both tanks precisely because a fill that does not stop has no second line, and FL-11
-and FL-12 now carry it. **The mitigation exists, was bought for a different reason,
-and lands above the high-high per D-134 so the instrumented protection trips first.**
-Under G-44 nothing is added, because the thing that would be added is already there.
+| | Status |
+|---|---|
+| **The float cord's insulation is rated for the highest voltage in the bundle** | **TAKEN.** In WATER's float requirement. Free while the requirement is open, money after a float is bought. It is a purchasing attribute, not a build step |
+| **Float cords and pump cords get separate tie groups on the standpipe** | **TAKEN.** Into D-121's method. Costs nothing to build, nothing to operate, and it makes a cord identifiable by its group, which is a repair saving |
+| **Shields, conduits, barriers or dividers on the pipe** | **REJECTED under G-44, and named so nobody proposes them later.** Each costs money and build time, each obstructs the tie a person must reach under D-131, and **none touches the expensive failure, which is float-to-float and inside one class** |
+| **Removing the pump cords from the pipe** | **LOGGED, NOT PURSUED.** D-121's sentence is the owner's. The observation stands and is not an action: the pipe was adopted so a float that has moved is visible, and a pump gets no positioning benefit from it, since water.md holds the submersibles by cradle with both cords carrying no positioning duty |
 
-**COST 2. The cross-class short is less probable and more severe, and its whole cost
-is a purchasing attribute.** A 120 VAC conductor faulting to a 24 V float conductor
-does not flip a level; it injects line potential into a coil chain that runs to the
-panel and to three optocoupled inputs. **CBL-06 already sets this tree's precedent:
-where a 120 V leg shares a jacket, every conductor takes the higher rating.** These
-share a tie bundle rather than a jacket and no row covers that case. **The cost is
-that the float cord's insulation rating is set by the highest voltage in the bundle
-rather than by its own use** - which is free to state now, while WATER's float
-requirement is open and no float is bought, and costs money after. **Same window and
-same shape as F-100.**
-
-**COST 3. A tie is a compression point, and D-131 puts a person's hands on it.** The
-commissioning step is fill slowly, confirm each float trips at its mark, adjust the
-tie and never the wiring - with both pumps running continuously under D-143, in
-water, on cords tied to the same pipe. **G-22 asks what a severed conductor does and
-G-39 asks what a dead panel does. Nothing in this tree asks what a wet hand does**,
-and this is the one place in the build where that question has an address.
-
-**COST 4. It removes a diagnostic, not just a margin.** Off the pipe, a conductor's
-neighbour is a choice and therefore a recorded fact. On the pipe every float
-conductor's realistic neighbour is every other cord on that tank, **so a fault cannot
-be localised by knowing what lies next to what.** That is a repair cost, paid every
-time, forever.
-
-### What is worth doing, each with what it prevents and what it costs - G-44
-
-| | What it prevents | Build | Operate | Repair |
-|---|---|---|---|---|
-| **M1. Float cords and pump cords are never under the same tie.** Separate tie groups on the pipe | The compression contact between two classes at the one point insulation is stressed for the life of the build. Does not touch cost 1 | **Nothing. It is a tie position, not a part** | Nothing | **Negative cost: a cord is identifiable by which group it is in** |
-| **M2. The float cord's insulation rating is set by the highest voltage in the bundle.** Into WATER's float requirement, which is open | Cost 2 entirely | **Nothing now. Money if stated after a float is bought** | Nothing | Nothing |
-| **M3. A question, not a change: do the pump cords need the pipe at all?** | Cost 2 and most of cost 4, at zero cost | - | - | - |
-
-**M3 is routed to the owner and I am not making it.** D-121 says one pipe carries
-every float **and every cord**, and that sentence is the owner's. **What is worth his
-eye: the pipe was adopted so a float that has moved is visible, and a pump gets no
-positioning benefit from it** - water.md holds the submersibles by cradle, with both
-cords strain-relieved so they carry no positioning duty. **So the pump cords are on
-the pipe for tidiness, and under G-44 the burden of proof is on the addition.**
-Removing them removes cost 2 and most of cost 4 and buys nothing back that the
-mounting method was adopted for.
-
-**REJECTED under G-44, and named so nobody proposes them later:** a shield, a
-separate conduit, a barrier or a divider on the pipe. Each costs money and build
-time, each obstructs the tie a person must reach under D-131, **and none of them
-touches cost 1, which is float-to-float and inside one class.** An addition that
-misses the expensive failure and charges for the cheap one does not go in.
+**Two residuals recorded rather than solved**, both logged in D-156: a tie is a
+compression point and D-131 puts a person's hands on it with both pumps running
+under D-143; and adjacency stops being a recorded fact, so a fault on the pipe
+cannot be localised by knowing what lies next to what. **That is a repair cost paid
+every time, forever.**
 
 ---
 
 ## 5. REQUIREMENTS AND SEARCH TERMS
 
-No value is stated. Each is a lookup the owner runs under G-15.
+No value is stated. Each is a lookup the owner runs under G-15. **The float cord's
+insulation rating has left this list: it is in WATER's float requirement, D-156.**
 
 | For | Requirement | Search term |
 |---|---|---|
 | RUN-011, RUN-015, RUN-018 to RUN-020 | A flexible LINE-class cable for a wall route in a room where water moves tank to tank, with an equipment grounding conductor | `flexible power cable 600 V oil resistant wet location`; `tray cable TC-ER exposed run wall` |
-| RUN-012, RUN-013 | **The float cord's insulation rated for the highest voltage in the standpipe bundle, not for its own 24 V use.** Section 4, M2 | `float switch cord insulation voltage rating 600 V`; `submersible level switch cable water resistant rating` |
 | RUN-015 | Confirmation that every conductor in one jacket may share the higher rating CBL-06 requires | `600 V insulated conductor mixed circuit same raceway control cable` |
 | RUN-016 | The maximum probe cable length the EZO circuits tolerate. **Not from any file in this tree** | `Atlas Scientific EZO pH EC probe cable length limit extension` |
 | Every gland entry | A cord grip per entry, sized to the cable chosen, sealed at least to the enclosure's rating and suitable for the face it lands on under F-088 | `liquid tight cord grip strain relief NPT cable range chart` |
@@ -317,9 +312,10 @@ No value is stated. Each is a lookup the owner runs under G-15.
 ## 6. WHY THERE IS NO DUPLICATION CONTRACT IN THIS DOCUMENT
 
 **G-45. D5 and D6 are generated from one source, so they cannot disagree, and a
-schedule is never hand-transcribed.** The rule that said they must agree has been
-deleted rather than restated: **a contract needs a reader who obeys it; a mechanism
-does not.**
+schedule is never hand-transcribed.** The rule that said they must agree was deleted
+rather than restated: **a contract needs a reader who obeys it; a mechanism does
+not.** The duty column is the newest instance - it is a roll-up over D5's
+conductors, whose duty comes from D2's poles, so no one types it twice.
 
 **Two facts do not survive generation and are therefore stated here and nowhere
 else:**
@@ -342,20 +338,19 @@ else:**
 **Stopped part way. INTERCONNECT does not declare this finished** - rule 7, and that
 waits until another agent builds against it and finds nothing.
 
-**Deliverable as it stands:** every jacket and every landing point in the build has a
-real id, an owner, and a named blocker. A person can route, group and plan against
-it. **Nobody may cut, order or land against it yet**, and the reasons are in the
-Blocked on column of every row.
+**Deliverable as it stands:** every jacket and every landing point has a real id, an
+owner, a duty, a voltage class, a segregation group and a named blocker. Four rows
+are complete. A person can route, group and plan against it. **Nobody may cut, order
+or land against it yet**, and the reasons are in the Blocked on column of every row.
 
-**Four things would move the most, in order:**
+**Three things would move the most, in order:**
 
-1. **MAIN-PANEL's duty vocabulary, D-150.** One column, twenty cells, and three rows
-   go from one-word-short to complete.
-2. **PUMP-BOXES and DISPLAY-BOX stating faces and order under D-146.** Sixteen cells,
-   and it costs them nothing: a face follows from what is inside the box.
-3. **Naming the driver permissive contactor, F-105 and D-151.** Two landing points
-   cannot exist until it has a name.
-4. **The S-07 and S-09 merge.** RUN-005 carries one conductor with two interface rows
+1. **PUMP-BOXES and DISPLAY-BOX stating faces and order under D-146**, and WATER
+   stating the field entries under CBL-04. **That is nineteen of the twenty-three
+   remaining gaps**, and under D-146 it costs its owners nothing.
+2. **One sentence on the permissive string's voltage class.** It decides RUN-015's
+   duty, and ARC against SENSE is the G-30 line rather than a label.
+3. **The S-07 and S-09 merge.** RUN-005 carries one conductor with two interface rows
    and D5 admits one.
 
 **Not returned, so no absence is read as an answer:** no wall layout, because M-02 is
