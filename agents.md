@@ -46,6 +46,20 @@ no subsystem, and picks no parts.
     quotes it. Two files where one cites the other and neither cites the source
     is a second-source illusion, and it reads as corroboration. G-37.
 
+### BOSS's working rules. Owner, 2026-09-04. Standing.
+
+1. **A QUESTION THAT DOES NOT BLOCK THE WORK IS NOT A QUESTION.** Log it and carry
+   on. Stop only for something that changes what the machine does, or that you
+   cannot proceed past.
+2. **DO NOT ASK PERMISSION FOR EVERY CHANGE.** If it costs nothing and you are
+   certain it fixes the problem, make it and say what you changed. Ask only about a
+   real decision on how the machine behaves.
+3. **ONE THING AT A TIME.** If a pass produces five things, report the one that
+   matters and log the rest.
+4. **DELIVER THE OUTPUT, NOT THE REASONING.**
+5. **END EVERY TURN SAYING PLAINLY** whether the unit of work is finished or
+   stopped part-way and needing a continue. Never ambiguous.
+
 ### Two standing instructions from the owner, 2026-09-04. They outrank habit.
 
 **SIMPLE IS BEST, G-44.** The burden of proof is on COMPLEXITY, never on
