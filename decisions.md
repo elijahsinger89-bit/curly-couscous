@@ -1412,6 +1412,8 @@ circulation.** The pump is a pole on the dry-run interlock relay and the Pi does
 command it: it runs when the interlock is made and the relay is energised, and it is
 off between batches.
 
+**SUPERSEDED IN PART 2026-09-04 BY D-143.** This entry was right that NOTHING COMMANDS the pump and wrong about what that meant. **It concluded the pump is "off between batches" and that the F-003 exercise run cannot happen as designed. The first is withdrawn - both day tank pumps run CONTINUOUSLY. The second stands and is worse: the exercise run cannot happen because there is nothing to exercise, and C-12 is void.** **The absence of a command path was recorded correctly and its consequence was read backwards.**
+
 **So there is no command path, and the F-003 exercise run cannot happen as designed
 until one exists or the design changes.** That is a CLOSED QUESTION WITH AN OPEN
 CONSEQUENCE, which is a different thing from an open question, and the file says so.
@@ -2848,4 +2850,72 @@ the interface table, not in a subsystem's first pass.**
 valid values; a three-way circular wait on the probe run; and the standpipe mandates
 a 120 VAC and SELV bundle IN THE WATER that no separation rule in this tree
 reaches.**
+
+**D-143 BOTH PUMPS RUN CONTINUOUSLY. THIS REVERSES D-063, WHICH IS KEPT.** Owner,
+2026-09-04, answering F-101.
+
+**The two pumps in the day tank are the MANIFOLD PUMP for dosing and the pump
+circulating water through the chiller. Those are the only two. Both run
+continuously. The owner rules that they will sufficiently mix nutrients.**
+
+**A naming observation, recorded and not acted on: the owner calls it the MANIFOLD
+PUMP. The tree calls the same device the CIRCULATION SUBMERSIBLE** - G-11 gives it
+suction at the day tank bottom and F-03 takes its discharge to the manifold. **Same
+pump, two names, and the generated set cannot carry both.** BOSS does not rename a
+device the owner just named. Raised.
+
+**D-063 is REVERSED, not amended.** Both entries stay on file. **What it got right
+and keeps: the dry-run interlock is a PERMISSION for the pump to run, not a command
+that it should. What it got wrong: "intermittent", and everything downstream of
+"between batches it is off".**
+
+**THE TOPOLOGY WAS RIGHT ALL ALONG AND THE PROSE WAS WRONG.** D-058 deleted K-CIRC
+and made circulation a pole on K-DRY; no element was ever drawn that could stop the
+pump. **MAIN-PANEL's ladder found the mismatch by drawing what exists rather than by
+reading what was written**, which is the whole argument for D-140's change of mode,
+now made twice in one afternoon by two different agents.
+
+**FOUR CONSEQUENCES, AND TWO OF THEM ARE GOOD.**
+
+**1. C-12 IS VOID. The free F-003 witness is spent and this is the cost F-101
+named.** C-12 measures the PT-1000 step **when the pump starts after a rest**, with
+the standing probe-section column at room temperature against a chilled tank. **A
+pump that never stops has no rest and no start, so there is no transient to
+measure.** The row is struck with its reason on it rather than deleted.
+
+**2. C-23 LARGELY DISSOLVES, AND THAT IS A REAL SIMPLIFICATION.** C-23 is the hazard
+row requiring a measurement window to sit inside a running period and not span a
+start or a stop, **with the operator as the only enforcement because software can
+neither command nor observe the pump.** **If the pump never starts and never stops,
+every window sits inside a running period by construction.** The hazard was created
+by intermittency and intermittency is withdrawn. **The row is not deleted: it is
+reduced to what still binds, because "the pump is running" is now an assumption
+rather than an observation, and an assumption that has never been checked is T-012's
+shape.**
+
+**3. F-003 TRANSFORMS RATHER THAN DISSOLVING, AND THIS IS THE ONE TO WATCH.** F-003
+was "nothing verifies the circulation pump at rest" - **the submersible sitting dead
+between batches being exactly the case where nobody knows it still works.** There is
+no at-rest case any more, **so that premise is gone.**
+
+**But the pump can still fail while running, and nothing detects that either.** So
+the question is not withdrawn, it is restated: **from "nobody knows it still works
+after resting" to "NOBODY KNOWS IT IS STILL MOVING WATER".** F-102. **The second is
+harder than the first, because a failed rest-and-restart at least has an event
+attached to it and a running failure has none.** F-003's other two routes stand:
+it is separately assigned under D-016, and S-20 exists.
+
+**4. A THERMAL LOAD NOBODY HAS COUNTED.** Two submersibles running continuously in a
+chilled tank **put their entire electrical input into the water as heat, forever.**
+The loop pump is 110 W by D-137 and the manifold pump's figure is not on file.
+**That is a continuous load the chiller carries in addition to the room, and no
+agent has ever added it up.** F-103. **BOSS states no wattage, no BTU figure and no
+margin.**
+
+**AND ONE THING THE OWNER RULED THAT IS NOT A CONSEQUENCE BUT A DECISION: THE TWO
+PUMPS WILL SUFFICIENTLY MIX NUTRIENTS.** That settles the mixing question and it
+does NOT settle the settling-time question. **Sufficient mixing is not instant
+mixing, and C-02 still measures how long it takes** - what is withdrawn is any worry
+that the tank is inadequately mixed, not the need to know when a reading is valid.
+C-07's turnover time still feeds C-02 as a floor.
 

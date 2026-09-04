@@ -499,3 +499,53 @@ a low-pressure tap is answered and closed.**
 circulation pump and the chiller loop pump, D-137. **That is a fact about your tank,
 not only about the panel: two cords, not one, on the standpipe's cord run, and a
 second continuous heat source in the water.**
+
+## BOTH PUMPS RUN CONTINUOUSLY. D-143 REVERSES D-063. 2026-09-04.
+
+**The two pumps in the day tank are the MANIFOLD PUMP for dosing and the pump
+circulating water through the chiller. Those are the only two. Both run
+continuously, and the owner rules that they will sufficiently mix nutrients.**
+
+**A naming problem to resolve before the generated set exists: the owner calls it
+the MANIFOLD PUMP and this tree calls the same device the CIRCULATION SUBMERSIBLE.**
+G-11 gives it suction at the tank bottom, F-03 takes its discharge to the manifold.
+Same pump, two names. **BOSS has not renamed it. Say which name your documents
+should carry.**
+
+**FOUR THINGS FOLLOW AND TWO ARE GOOD:**
+
+**1. C-12 IS VOID.** It measured the temperature step when the pump starts after a
+rest. **No rest, no start, no transient.** Struck with its reason on the row rather
+than deleted, so nobody later reads the free F-003 route as declined rather than
+spent.
+
+**2. C-23 MOSTLY DISSOLVES and that is a real simplification.** Every measurement
+window now sits inside a running period by construction. **What still binds is the
+residual: "the pump is running" is an ASSUMPTION now, not an observation - nothing
+commands it, nothing reports it, and a pump that has failed looks exactly like a
+pump that is running.** Confirm both by eye before and after a window.
+
+**3. F-102, AND IT IS YOURS. F-003 restates rather than dissolving.** It was
+"nothing verifies the pump at rest". There is no at-rest case, so that premise is
+gone - **but the pump can fail while running and nothing detects that either. The
+question is now: NOBODY KNOWS IT IS STILL MOVING WATER, and that is HARDER than the
+original**, because a failed restart has an event attached and a running failure has
+none.
+
+**4. F-103, AND NOBODY HAS ADDED IT UP. Two submersibles running continuously in a
+CHILLED tank put their entire electrical input into the water as heat, forever.**
+The loop pump is 110 W; the manifold pump's figure is not on file. **That is a
+continuous load the chiller carries on top of the room, and it was invisible while
+the pump was believed intermittent - an intermittent load is a duty-cycle question
+and a continuous one is a floor.**
+
+**Do the arithmetic. BOSS states no wattage, no BTU figure and no margin.** The
+reason it matters rather than being tidy: **if the load exceeds the margin the tank
+does not reach temperature, and NOTHING IN THIS SYSTEM WOULD SAY SO** - the Pi's
+tank temperature is for the dose, not for control, D-108.
+
+**AND WHAT IS SETTLED: MIXING.** The owner rules the two pumps mix sufficiently.
+**That does not settle SETTLING TIME. Sufficient mixing is not instant mixing**, so
+C-02 still measures how long a reading takes to become valid, and C-07's turnover
+feeds it as a floor. What is withdrawn is any worry that the tank is inadequately
+mixed.
