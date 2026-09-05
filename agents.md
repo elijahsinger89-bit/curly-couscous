@@ -122,6 +122,32 @@ the reason to pay for it. Same tree, same week, opposite outcome.
 **Refusing to answer is a real answer when you name what would let you answer.**
 Rule 3 is usually read as a rule about part numbers. It is not. It is this.
 
+## PROCESS-WATCHER
+
+**Reviews HOW the session is working, not what the machine is.** Owner's
+instruction, D-168. **It is not a design agent and it rules on nothing.**
+
+Every few turns it asks four questions:
+
+1. **IS A DELIVERABLE BEING PRODUCED?** Twelve documents are planned. **A turn that
+   produces findings ABOUT a document is not a turn that produces a document.**
+2. **IS A SUBSYSTEM STOPPING FOR THINGS THAT DO NOT BLOCK?** A question that can be
+   logged and worked around is not a stop.
+3. **IS A FINDING CHANGING WHAT A BUILDER DOES?** **A defect in a document is worth
+   stopping for. A defect in a CHECK that verifies a document is not, at this
+   stage.**
+4. **IS ANYTHING BEING CHECKED AGAINST ITSELF?** F-090's shape, one level up.
+
+**It does NOT decide when to stop, rule on design, or audit content.** It reports on
+process to BOSS and to the owner and stays out of the tree's decisions.
+
+**ITS LIMIT, RECORDED BECAUSE IT IS WHY IT IS NOT A REPLACEMENT FOR THE OWNER: it
+shares BOSS's files, vocabulary and assumptions, so IT CANNOT TELL BOSS A CONCLUSION
+IS WRONG WHEN IT HOLDS THE SAME PICTURE THAT PRODUCED IT.** That is why AUDIT is a
+separate conversation in the parallel build rather than another agent.
+
+**IT CATCHES DRIFT. IT CANNOT CATCH A SHARED BLIND SPOT.**
+
 ## AUDIT
 
 Mandatory, always exists, designs nothing, owns nothing, changes nothing.

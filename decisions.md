@@ -2327,7 +2327,7 @@ with nothing hanging off a float body.**
 
 **ONE ADDITION 2026-09-04, D-156, and it is free: FLOAT CORDS AND PUMP CORDS GET SEPARATE TIE GROUPS ON THE PIPE.** The standpipe guarantees worst-case adjacency by construction, F-113, and this is the only remedy that survives G-44 - shields, conduits and barriers cost money and block the tie a person must reach.
 
-**AND THE MATERIAL IS NOT OPEN IN BOTH DIRECTIONS, 2026-09-05, D-166. A METAL STANDPIPE WOULD BE AN UNBONDED CONDUCTIVE PART IN A TANK WITH 120 V CORDS TIED TO IT.** INTERCONNECT raised it while D-121 still adopts no material, **which is the only window in which it is free.** **The 1st Edition used non-metallic pipe, and under G-40b that is the default where this build has no reason to differ. So the hazard does not arise and nothing is added to prevent it - which is G-48's answer: the cheapest remedy is the one that removes the failure instead of managing it.** **If the owner wants metal, it becomes a bonded part landing on the local bar under D-165 and that is a different build.** Raised to him as the one decision here that changes what the machine is.
+**AND THE MATERIAL IS NOT OPEN IN BOTH DIRECTIONS, 2026-09-05, D-166. A METAL STANDPIPE WOULD BE AN UNBONDED CONDUCTIVE PART IN A TANK WITH 120 V CORDS TIED TO IT.** INTERCONNECT raised it while D-121 still adopts no material, **which is the only window in which it is free.** **The 1st Edition used non-metallic pipe, and under G-40b that is the default where this build has no reason to differ. So the hazard does not arise and nothing is added to prevent it - which is G-48's answer: the cheapest remedy is the one that removes the failure instead of managing it.** **CONFIRMED BY THE OWNER 2026-09-05: PVC, same as everything else in the wet path.** **His note on why it is G-48's first real test: the alternative was a bonding conductor, a landing on the local bar, a step, a check that it is still bonded, and a failure mode where it is not. The material choice costs nothing and none of that exists.**
 
 **NO DIMENSION, NO MATERIAL, NO ATTACHMENT DETAIL, NO COUNT.** The owner's words
 and they are the whole scope of the adoption. **What is adopted is a rule about
@@ -3486,4 +3486,38 @@ document.
 
 **Logged, not pursued: whether the USB-C brick has integral pins or a mains cord,
 and what supports it. MAIN-PANEL's face.**
+
+**D-168 A PROCESS WATCHER EXISTS. IT REVIEWS HOW THE SESSION WORKS, NOT WHAT THE
+MACHINE IS.** Owner's instruction, 2026-09-05. **Not a design agent. It rules on
+nothing.**
+
+**What it checks:** whether a DELIVERABLE is being produced, since a turn that
+produces findings ABOUT a document is not a turn that produces a document; whether a
+subsystem is stopping for things that do not block; whether a finding CHANGES WHAT A
+BUILDER DOES - **a defect in a document is worth stopping for, a defect in a check
+that verifies a document is not, at this stage**; and whether anything is being
+checked against itself, which is **F-090's shape one level up.**
+
+**What it does NOT do: decide when to stop, rule on design, or audit content.**
+
+**AND ITS LIMIT IS RECORDED WITH IT, BECAUSE THE LIMIT IS WHY IT IS NOT A
+REPLACEMENT FOR THE OWNER: it shares BOSS's files, vocabulary and assumptions. IT
+CANNOT TELL BOSS A CONCLUSION IS WRONG WHEN IT HOLDS THE SAME PICTURE THAT PRODUCED
+IT.** That is why AUDIT is a separate conversation in the parallel build rather than
+another agent.
+
+**IT CATCHES DRIFT. IT CANNOT CATCH A SHARED BLIND SPOT.**
+
+**D-169 THE NEXT DELIVERABLE IS D5, THE WIRING SCHEDULE, AND ITS INPUTS BOTH
+EXIST.** document-plan.md: D5 depends on D2 for what a conductor is FOR and D6 for
+the jacket it travels IN. **Both are written.**
+
+**D5 is the per-conductor list on CDR- ids, prototyped in
+wire-table-row-zero.md.** And it is the gate for the one document that does not
+exist at all: **D4, the wiring instructions, is a VIEW of D5 and never a
+transcription of it** - which is G-45 built into the plan rather than written as a
+contract.
+
+**So D5 unblocks D4, and D4 is the document a person actually holds while
+wiring.**
 
