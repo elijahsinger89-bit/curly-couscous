@@ -3699,3 +3699,47 @@ after a revision code.**
 distrust rather than fixing it. If the part says one thing and the datasheet says
 another, THE PART WINS AND THE DISCREPANCY IS THE FINDING.**
 
+**D-178 THE PUMP BOX CHANNEL DIVISION: CH1 TO CH4 IN BOX A, CH5 TO CH8 IN BOX B.
+STRAIGHT SPLIT, IN ORDER, NO INTERLEAVING.** Owner, 2026-09-05. **18 D4 rows
+unblock.**
+
+**The reason is the reason for every other identity rule here: a builder holding a
+box should be able to tell which channels are in it WITHOUT CONSULTING A TABLE.** Box
+A is the low four, box B is the high four. **An interleaved split costs a lookup
+every time and buys nothing.** And it keeps the two boxes as ONE BUILD rather than a
+mirrored pair, which is already why the entry order is keyed to board geometry.
+
+**BOSS SEES ONE REASON TO WATCH IT AND NOT ONE TO CHANGE IT.** If the pH roles land
+on CH5 and CH6 they are both in box B, **so an acid and a base would share one
+sealed enclosure and one lid.** Under D-105 role is assignable, so nothing fixes
+that today.
+
+**The cheaper place to fix it is the ROLE ASSIGNMENT at C-09, not the box
+division** - one is a sentence typed at commissioning, the other is which head is
+screwed to which plate. **So the division stands and the constraint is recorded
+where it can be honoured for free: pH-up and pH-down should not be assigned to two
+channels in the same box.** That sits beside the existing rule against assigning
+them to adjacent tokens or neighbouring colours.
+
+**D-179 THE HIGH-HIGH FLOATS STOP THE WHOLE PLANT AND NEED A HUMAN RESET. D-154 IS
+CONFIRMED.** Owner, 2026-09-05. **8 D4 rows unblock.**
+
+**The owner's reasoning, kept because it is the argument and not the ruling: a
+high-high trip means a fill-stop float has ALREADY FAILED. That is not a condition to
+work around - it is a condition where the machine has proven it cannot stop its own
+fill, and the next thing it would do unattended is overflow. Stopping only the fill
+assumes the thing that stops the fill still works, and the trip is evidence it does
+not.**
+
+**AND THE HUMAN RESET IS THE POINT RATHER THAN THE COST. If a high-high self-cleared
+when the level dropped, the machine would cycle between high-high and normal
+indefinitely and nobody would ever know a float had failed. THE LATCH IS WHAT MAKES
+THE FAILURE VISIBLE.**
+
+**That also settles why the overflow exists SEPARATELY, and it is the cleanest
+statement of it on file: the high-high is the INSTRUMENTED protection and it is
+reported; the overflow is UNINSTRUMENTED and silent. Both catch a fill-stop float
+failure, one loudly and one not - and the high-high being in the permissive string
+is what makes the loud one loud.** F-095's residual is unchanged and correctly
+sized.
+
