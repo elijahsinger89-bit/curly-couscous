@@ -3598,3 +3598,25 @@ two terminal columns, F-106, because nobody has looked at a part. A conductor
 labelled at both ends is identifiable WITHOUT the terminal marking**, so the label
 column carries the build while F-106 is still open.
 
+**D-173 THE LABEL COLUMN IS IN AND THE GLAND RULING CHANGED NOTHING - WHICH IS THE
+RESULT.** wiring-schedule.md: **896 cells, 656 filled**, up from 832 and 592. Row
+count unchanged at 64, empties and n/a untouched at 198 and 42.
+
+**The label cell holds what gets MARKED: the CDR- id, plus the channel token in
+addition on the sixteen per-channel conductors, NEVER MERGED WITH IT.** Two
+identities on one label, kept apart - **which is channel-token.md's forbidden item 5
+observed without being told, two names for one thing.**
+
+**AND THE GLAND RULING CHANGED NOTHING BECAUSE THE ENUMERATION WAS ALREADY
+LANDING-TO-LANDING.** Every row already named a device in one enclosure and a device
+in another, and none had been split at a boundary. **The ruling did not fix D5; it
+prevented a schema change to a document that was already right.** That is the
+cheapest form of a decision and it only looks like nothing because it was made
+before 200 rows existed rather than after.
+
+**INTERCONNECT also declined to add a spanning-conductor column, correctly: a
+spanning conductor is the one whose two ends are in different boxes, derivable from
+the landing columns by whoever generates D4, and a stored column would be a second
+copy of a fact already on the row.** G-45 applied by an agent to its own document
+without being asked.
+
