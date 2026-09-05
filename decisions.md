@@ -86,6 +86,7 @@ changed reports to BOSS and does not act.
 | G-46 | **A CELL THAT CAN NEVER BE FILLED MUST NOT LOOK LIKE ONE THAT HAS NOT BEEN FILLED YET. Mark it N/A WITH ITS REASON and count it separately** | Frozen 2026-09-04, D-159. **A float has no faces, so the entry-face cell for a float-ended run has NO VALID VALUE rather than a missing one.** Two blank cells that mean opposite things is F-097's shape on a table instead of on an identifier: **one is work outstanding and the other is work that will never exist, and a completion count that mixes them is wrong in both directions.** INTERCONNECT reached this independently for the duty column with "n/a, no pole". **CONFIRMED ON FIRST APPLICATION 2026-09-04: twelve cells previously counted as FILLED were never fillable. Under the old two-state count D6 would have reported 169 of 180 and been wrong by twelve IN THE FLATTERING DIRECTION** |
 | G-47 | **A COST NOBODY HAS PRICED IS NOT A ZERO COST.** An unpriced remedy is not cheap, it is UNPRICED, and the two are indistinguishable until someone who owns the thing looks | Frozen 2026-09-04, D-162. **BOSS relayed "zero cost" for a face receptacle from the agent that did not own the box. DISPLAY-BOX owned it and found the remedy removed nothing: LINE still had to reach the rail, so the same conductors sat in the same band bare of jacket behind the face. The remedy was never free, it was INVISIBLE.** **And the conversation that caught it OWNED the thing being changed - which is the argument for asking the owner rather than reasoning about the owner's box** |
 | G-48 | **SAY WHAT A PROPOSAL COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT BUYS. If it removes a failure mode nothing else covers, take it. If it is THOROUGH, do not** | Frozen 2026-09-04, D-164, sharpening G-44 with the owner's own test. **Every part placed is a part that can fail, a part that needs a buy line, a part that needs a step, and a part a future reader has to understand.** **Not permission to under-build: a protection that is needed is needed, and the overflow bulkhead, the high-high floats and the permissive chain all stay.** What is barred is **a mechanism added because it is interesting, a check added because a check is available, and a component added to close a gap that was never going to bite** |
+| G-49 | **WRITE BUILD INSTRUCTIONS THE WAY LEGO WRITES THEM. ONE ACTION PER STEP. EVERY PART NAMED BY THE IDENTIFIER PRINTED ON IT. EVERY STEP CARRIES AN ACCEPTANCE CONDITION OBSERVABLE AT THAT MOMENT. NO STEP ASSUMES SOMETHING THE BUILDER WAS NOT TOLD TO DO** | Frozen 2026-09-05, D-180. **Not a style preference - it is the format that survives being followed by someone who did not design the thing.** Six clauses, each from a real defect in the parallel build: **a step with two verbs can be half done and look finished; a step that names a terminal by LIST INDEX told a builder to verify a short and tick the box; a step with no acceptance condition can be done wrong and passed; a correction stated AFTER the step it modifies cut five cables 200 mm short, and a cut cable cannot be un-cut; silent renumbering breaks a person who marks their place on a printed page; and where a builder would reasonably do it differently, SAY WHY NOT - a builder who knows why will not undo it, and a builder who does not will improve it** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -3742,4 +3743,50 @@ reported; the overflow is UNINSTRUMENTED and silent. Both catch a fill-stop floa
 failure, one loudly and one not - and the high-high being in the permissive string
 is what makes the loud one loud.** F-095's residual is unchanged and correctly
 sized.
+
+**D-180 THE PROCEDURE FORMAT IS FROZEN AS G-49 AND APPLIES TO D4 NOW AND TO EVERY
+PROCEDURE AFTER IT.** Owner, 2026-09-05, sent before D4 grows.
+
+**THE SIX CLAUSES, each from a defect that actually happened:**
+
+| Clause | The defect it prevents |
+|---|---|
+| **One action per step. Strip is a step, land is a step** | **A step with two verbs can be HALF DONE AND LOOK FINISHED.** The parallel build had one that said "work the conductor pages that follow" and then continued with nine steps assuming the builder had not gone |
+| **Every part named by the identifier PRINTED ON IT** | A step named a terminal by LIST INDEX and **told a builder to verify a short and tick the box** |
+| **Every step has an acceptance condition, OBSERVABLE AT THAT MOMENT** | **A step with none can be done wrong and passed.** A continuity check three sections away is not an acceptance condition for a joint made now |
+| **The builder knows tools and NOTHING about this machine** | If it is not on the page it does not happen |
+| **A correction goes BEFORE the step it modifies, folded INTO it** | **"Cut to the recorded length", then the next step said add 100 mm at each end. Five cables 200 mm short, and a cut cable cannot be un-cut** |
+| **Number steps, never renumber silently** | A person marks their place on a printed page |
+
+**AND THE CLAUSE THAT SEPARATES A PROCEDURE FROM A CHECKLIST: WHERE A STEP EXISTS TO
+PREVENT SOMETHING AND A BUILDER WOULD REASONABLY DO IT DIFFERENTLY, SAY WHAT IT
+PREVENTS.** Not on every step - most steps are just work. **The owner's example is
+the ULN2003's COM: leave it open, and the reason is that every datasheet says to tie
+it to the load supply, and doing so here means the relay never pulls in and no pump
+ever turns.** Without the reason **a knowledgeable builder confidently does the wrong
+thing.**
+
+**WHAT IT COSTS TO APPLY TO D4: ONE GENERATION PASS, NOT A REWRITE.** D4 is a VIEW
+of D5 under G-45, so **the format is a property of the generator and not of 111
+hand-written rows.** That is the first time that structural choice has been paid
+back, and it is the whole argument for it.
+
+**TWO THINGS IN THE CURRENT D4 CONFLICT WITH G-49, BOTH FROM ONE CAUSE - CROSS-
+REFERENCING INSTEAD OF REPEATING:**
+
+1. **Every page says "standing joint steps: section 0" rather than printing them.**
+   G-49 says if it is not on the page it does not happen, and **G-41 already says
+   assembly steps are ABSOLUTE and should repeat.** The steps print in full at the
+   top of every page.
+2. **Standing step 3 sends the builder to D5 to tick a conductor off, mid-joint.**
+   That is a step that leaves the page. **The tick belongs on the page the builder is
+   holding, and D5 is the record, not the worksheet.**
+
+**Neither conflicts with the DATA. D4 is a view, so nothing INTERCONNECT generated is
+wrong - only the shape it was rendered in.**
+
+**AND ONE ROW IS NOW STALE RATHER THAN WRONG: "eight step and direction conductors,
+BLOCKED, which channels are in this box is not decided" - D-178 decided it.** CH1 to
+CH4 in box A, CH5 to CH8 in box B. **Eight named rows per box, not one grouped
+row.**
 

@@ -60,6 +60,28 @@ no subsystem, and picks no parts.
 5. **END EVERY TURN SAYING PLAINLY** whether the unit of work is finished or
    stopped part-way and needing a continue. Never ambiguous.
 
+### HOW TO WRITE A PROCEDURE. G-49. Applies to every procedure, not only D4.
+
+**Write build instructions the way LEGO writes them.** The builder knows how to use
+tools and **NOTHING about this machine.** If it is not on the page it does not
+happen.
+
+1. **ONE ACTION PER STEP.** Strip is a step. Land is a step. **A step with two verbs
+   can be half done and look finished.**
+2. **NAME EVERY PART BY THE IDENTIFIER PRINTED ON IT.** Never by position in a list,
+   never by description.
+3. **EVERY STEP CARRIES AN ACCEPTANCE CONDITION - how the builder knows it is right,
+   OBSERVABLE AT THAT MOMENT.** A check three sections away is not an acceptance
+   condition for a joint made now.
+4. **A CORRECTION, ALLOWANCE OR PRECONDITION GOES BEFORE THE STEP IT MODIFIES, FOLDED
+   INTO IT.** Never after. **A cut cable cannot be un-cut.**
+5. **NUMBER STEPS AND NEVER RENUMBER SILENTLY.** If one is inserted, say so on the
+   page.
+6. **WHERE A STEP EXISTS TO PREVENT SOMETHING AND A BUILDER WOULD REASONABLY DO IT
+   DIFFERENTLY, SAY WHAT IT PREVENTS.** Not on every step - most steps are just work.
+   **A builder who knows why will not undo it. A builder who does not will improve
+   it.**
+
 ### KEEP IT SIMPLE. Owner's design instruction, standing. G-44, G-47, G-48.
 
 **Simple is smart. Simple is easy to build, easy to diagnose, and easy to repair at
