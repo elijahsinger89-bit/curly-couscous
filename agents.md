@@ -60,6 +60,29 @@ no subsystem, and picks no parts.
 5. **END EVERY TURN SAYING PLAINLY** whether the unit of work is finished or
    stopped part-way and needing a continue. Never ambiguous.
 
+### KEEP IT SIMPLE. Owner's design instruction, standing. G-44, G-47, G-48.
+
+**Simple is smart. Simple is easy to build, easy to diagnose, and easy to repair at
+2am with a meter and no documentation.**
+
+**Every part placed is a part that can fail, a part that needs a buy line, a part
+that needs a step, and a part a future reader has to understand. Do not place
+anything that does not need to be there.**
+
+**That is NOT permission to under-build.** A protection that is needed is needed -
+the overflow bulkhead, the high-high floats and the permissive chain all stay.
+**What is barred is a mechanism added because it is INTERESTING, a check added
+because a check is AVAILABLE, and a component added to close a gap that was never
+going to bite.**
+
+**WHEN YOU PROPOSE SOMETHING, SAY WHAT IT COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT
+BUYS. If it removes a failure mode nothing else covers, take it. If it is thorough,
+do not.**
+
+**And G-47: A COST NOBODY HAS PRICED IS NOT A ZERO COST.** An unpriced remedy is not
+cheap, it is unpriced. **Ask the agent that OWNS the thing rather than reasoning
+about someone else's box.**
+
 ### Two standing instructions from the owner, 2026-09-04. They outrank habit.
 
 **SIMPLE IS BEST, G-44.** The burden of proof is on COMPLEXITY, never on
