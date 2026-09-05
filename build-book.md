@@ -7,10 +7,18 @@ order the work is done.**
 |---|---|
 | Document | **D1**, per document-plan.md section 1.2 |
 | Owner | BOSS, assembled from the returns of WATER, DOSING, PUMP-BOXES, DISPLAY-BOX, MAIN-PANEL and INTERCONNECT |
-| Issue | 1, 2026-09-05 |
+| Issue | **2, 2026-09-05** |
 | Read by | The builder, from the first fixing to the last lid |
 | Read when | Throughout. It is the book you are holding while you work |
 | Written to | G-49 for every step and G-50 for every section |
+
+**ISSUE 2 EXISTS BECAUSE OF audit/2026-09-05-d1-builder-read.md**, an end-to-end
+builder read of Issue 1 that found forty-eight things, none of them findable by the
+sequence check. **Every change it caused is marked on the page**: a REVISION line at
+the head of every section whose steps moved, a retirement line where a section or a
+step number is retired, and section 34.6, which reports what the blocked-note sweep
+changed. **No step number has been silently reused and no retired number will ever be
+reused.**
 
 ---
 
@@ -35,23 +43,32 @@ kind of fact lives in another document and this book points at it.
 | What you need | Where it is | What this book does |
 |---|---|---|
 | Any conductor, terminal or landing | **D4** wiring-instructions.md, **D5** wiring-schedule.md | Points at the page. Never restates a joint |
-| Any part, quantity, count or price | **D7** | Points. G-41: quantities are deltas and must never repeat |
+| Any part, quantity, count, material or price | **D7** | Points. G-41: quantities are deltas and must never repeat |
 | Any measurement or acceptance test for service | **D8** and commissioning.md | Points |
-| Any rung, coil, contact or device function | **D2** electrical-schematic.md | Points |
-| Any cable route, jacket or gland position | **D6** cable-and-terminal-schedule.md | Points |
+| Any rung, coil, contact, device identity or device function | **D2** electrical-schematic.md | Points |
+| Any cable route, jacket, entry order or entry position | **D6** cable-and-terminal-schedule.md, and subsystems/entry-faces.md for the faces it cites | Points |
 | Where a device sits on a plate, a rail or a face | **D3** | Points |
+| What a float must do at a position, and which position is in which tank | **The float requirement**, subsystems/water-float-requirement.md | Points |
 | Why anything is the way it is | The tree: decisions.md, findings.md, traps.md, the subsystem files | Points |
 
-**There is no parts table in this book.** Not on any section, not at the end. D7 is
+**There is no parts table in this book.** Not in any section, not at the end. D7 is
 the only document in this set where a quantity appears, and a second place a quantity
 can live is the one defect in the 1st Edition set that cost money.
+
+**The builder read of Issue 1 found seventeen places where this book had restated a
+fact from that table.** They are gone. **If you find another, it is a defect and not a
+convenience.**
 
 ### 1.2 How to read a step
 
 **Every step is numbered and the numbers are section-scoped.** 7-03 is section 7,
-step 3. **Numbers are never silently changed. If a step is ever inserted it takes a
-letter, 7-03a, and a REVISION line appears at the head of that section saying so.**
-There are no revision lines yet.
+step 3. **Numbers are never silently changed. A step inserted after an existing one
+takes a letter**, 7-03a, **and a REVISION line appears at the head of that section
+saying so.** Issue 2 has REVISION lines in fourteen sections.
+
+**A step number that is RETIRED is never reused and stays visible saying why.** That
+is D-149's discipline applied to step numbers: a suffix on a live number is arithmetic
+on an identifier, and a reused number is worse.
 
 **Every step ends with ACCEPT: how you know it is right, checked at that moment.** If
 you cannot see the accept condition, the step is not done.
@@ -60,15 +77,24 @@ you cannot see the accept condition, the step is not done.
 a builder would reasonably do it differently. A builder who knows why will not undo
 it, and a builder who does not will improve it.
 
-**A step marked BLOCKED has no accept condition yet.** It says what is missing and
-who owns it. **Do not substitute, do not pick a likely value, do not skip ahead.**
-Leave that item and go to the next step. A blocked step stays in its place so you
-know you are stepping over it, rather than reaching the end and discovering something
-in the middle was left out. This is D4's convention and this book uses the same one.
-
 **Every allowance, correction and precondition is folded into the step it modifies.**
 Nothing in this book corrects a step after it. T-020: a builder running in order cuts
 at step 7 and reads step 8 too late, and a cut cable cannot be un-cut.
+
+**A step marked BLOCKED has no accept condition at all.** It says what is missing and
+who owns it. **Do not substitute, do not pick a likely value, do not skip ahead.**
+Leave that item and go to the next step. A blocked step stays in its place so you know
+you are stepping over it, rather than reaching the end and discovering something in
+the middle was left out.
+
+**A BLOCKED STEP NEVER CARRIES A LIVE ACCEPT CONDITION.** Issue 1 had seven steps that
+asked you to deburr and clean holes that no step had been able to cut, each with a
+live accept that passed by doing nothing. **If a step's work cannot have happened,
+the step is blocked**, and this book now uses one phrase for it: "nothing to do until
+X is done."
+
+**A step that says NOT HERE is not blocked.** It does its own work and names work that
+belongs somewhere else, so you do not go looking for it on this page.
 
 ### 1.3 How to read a section
 
@@ -84,6 +110,16 @@ document for its own pre- and postconditions, per G-43, and means nothing outsid
 it. Something earlier was skipped or is blocked, and the section that produces the
 missing condition is named beside it.
 
+**A DEPENDENCY STATED IN A BLOCKED NOTE IS A PRECONDITION AND IS WRITTEN AS ONE.**
+F-116. Issue 1 stated one section's dependency on another inside the prose of a
+blocked note, and the sequence check could not see it because the check reads
+preconditions. **Every blocked note in this book has been swept for that and section
+34.6 reports what the sweep changed.**
+
+**A SECTION HEADED "NOT YOURS TO WORK" IS ADDRESSED TO SOMEBODY ELSE.** Section 6 is
+the only one. Read it so you know what it must produce, then wait for it. **Do not
+work its steps.**
+
 ### 1.4 Names
 
 **Every device is named as D2's roster names it, and G-42 binds: one device, one
@@ -91,12 +127,24 @@ name, everywhere.** This book states no device's function, no contact and no run
 It states which device, where it goes, and when.
 
 Float POSITIONS are LS-1 to LS-8 and they are positions, not parts, per D-127 and
-D-145. Channels are CH1 to CH8 per channel-token.md.
+D-145. Channels are CH1 to CH8 per channel-token.md. **Which position is in which
+tank, and which channel is in which box, are facts this book points at and never
+states.**
+
+**A CORD GRIP AND A GLAND ARE ONE PART AND THIS BOOK CALLS IT A CORD GRIP,
+EVERYWHERE.** That is the name on the thing a builder fits, and it is the name
+parts.md, D4 and D6's own requirement line use.
+**REPORTED TO BOSS RATHER THAN FIXED, per rule 2 and G-42: the tree carries both
+names for one part.** interface-table.md's gland boundary, D-146's gland allocation
+and D6's gland positions all mean this part. **A rename is applied to the whole tree
+in one pass or it is not applied at all**, so this book renames it inside itself only,
+and records the other name here so an older reader is not lost. **A builder told to
+pull a cable through a gland has fitted none.**
 
 ### 1.5 Where this book differs from the sheet list in document-plan.md, and why
 
-The plan lists D1's sheets in the 1st Edition's sheet order. Six differences, each
-stated so nobody reads a missing sheet as an oversight.
+The plan lists D1's sheets in the 1st Edition's sheet order. **Seven differences**,
+each stated so nobody reads a missing sheet as an oversight.
 
 | Plan's sheet | What this book does | Why |
 |---|---|---|
@@ -105,15 +153,15 @@ stated so nobody reads a missing sheet as an oversight.
 | "Chiller loop routing" | **Kept**, section 27 | It is pipe, not cable. No other document owns a pipe run |
 | "Legend" | Section 1 carries the conventions instead | A legend belongs on a drawing sheet. This book is prose and numbered steps |
 | "Overview" | Section 2, written as a precondition list rather than as a picture | G-50. An overview a builder cannot check against is decoration |
-| "The dosing wall", old sheet 13 | Absorbed into sections 6, 10, 12 and 29 | **There is one wall in this build, not a separate dosing wall.** parts.md's "The wall" section puts the four enclosures, the manifold, the tubing raceway and the jug stations on one wall |
+| "The dosing wall", old sheet 13 | Absorbed into sections 6, 10, 12 and 32a | **There is one wall in this build, not a separate dosing wall.** parts.md's "The wall" section puts the four enclosures, the manifold, the tubing raceway and the jug stations on one wall |
 | "Float standpipe assembly" and "Storage standpipe", old sheets 14 and 19 | Absorbed into sections 17 to 23, one set of steps covering both tanks with every difference named at the step | D-121's method is one method. Two sheets for one method is where a difference gets stated once and missed once |
 
 **Three sections are in this book and in no sheet list**, because they are build work
 nothing else in the set schedules and two of them are the open gates: **section 3**,
 labelling every device as it is unpacked; **section 4**, reading every terminal;
-**section 5**, measuring the wall.
+**section 5**, confirming the wall and measuring the floor.
 
-### 1.6 The two things that block every dimension in this book
+### 1.6 The two things that block most of this book
 
 **Said here once and then said again in every section where a builder would need
 them.** They are not collected at the end, because a builder who reaches the end and
@@ -121,14 +169,25 @@ discovers something in the middle was skipped has found out at the worst possibl
 moment.
 
 **F-106. Nobody in this project has looked at a terminal and written down what is
-printed on it.** Section 4 is the work that closes it. Until it is closed, every
-joint in D4 is blocked, so section 31 cannot be worked.
+printed on it.** Section 4 is the work that closes it. Until it is closed, every joint
+in D4 is blocked, so section 31 cannot be worked. **It is one evening with the parts
+and a pen. It is not a decision, a purchase or a design.**
 
-**M-02. The wall is not measured and there is no wall layout.** Section 5 produces
-the measurement and section 6 is the layout that is blocked on it. **Until it exists,
-every dimension in this book is blocked**: every mounting position, every gland
-position, every tank position, every cable length, and the float cord length that
-gates the float purchase under F-100.
+**M-02, AND IT IS TWO QUESTIONS OF WHICH ONE IS ALREADY ANSWERED.** D-185. **The
+ENVELOPE is answered**: D-090 gives the wall's size, five measured cable runs and a
+cut rule, all recorded in parts.md. **What is open is the ARRANGEMENT** - where the
+enclosures, the manifold, the raceway, the jug stations, the tanks and the chiller
+sit inside it.
+
+**Every step in this book that names M-02 is blocked on the ARRANGEMENT and not one
+is blocked on the size.** So nothing here is waiting on a tape measure. What is
+waiting is section 6, and section 6 is an arbitration.
+
+**CABLE LENGTH IS NOT BLOCKED ON M-02.** It is D-090's answered half, and what gates
+it is **F-099**, which 31-01 names: parts.md carries the same five figures in two
+tables under contradictory allowance rules, and a person reads one of those tables
+immediately before cutting. **Issue 1 said cable length was blocked on M-02 in three
+places. It was wrong in all three and they are corrected.**
 
 **Everything else in this book is complete.** The order is complete and the method is
 complete. What is missing is where things go and what is printed on them.
@@ -136,6 +195,10 @@ complete. What is missing is where things go and what is printed on them.
 ---
 
 ## 2. WHAT MUST BE TRUE BEFORE STEP 1
+
+**REVISION, Issue 2: 2-03a and 2-05a inserted. 2-01's document list extended and the step
+marked BLOCKED. 2-07 and 2-08 changed from BLOCKED to NOT HERE, because finding a
+supply point is not blocked by the row that describes it.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-01, section 1.
@@ -146,20 +209,35 @@ complete. What is missing is where things go and what is printed on them.
 - **BB-04.** The four fixed features of the room are located: the wall, the floor
   drain track, the cold water supply point, and the building branch circuit.
 
-**2-01. Put the document set on the bench: D2, D3, D4, D5, D6, D7 and this book.**
-ACCEPT: seven documents, each with its own name at the top of its first page.
-WHY: D4's pages and D5's rows are used in section 31 and are useless without D6, and
-D3 is the only place a position is stated. **A build worked from this book alone will
-reach section 7 and stop.**
+**2-01. Put the whole document set on the bench.**
+BLOCKED. Missing: **D3 does not exist.** Owner: each enclosure owner for its own
+sheet, with INTERCONNECT placing cord grips within a stated face under D-146.
+**WHAT THE SET IS, so that when D3 lands you can pack it in one go:** D2, D3, D4, D5,
+D6, D7 and this book; **terminal-survey.md**, which section 4 fills and sections 31
+and 32 read; **parts.md**, which sections 5, 7 and 25 send you to;
+**subsystems/entry-faces.md**, which sections 6, 8, 9 and 10 send you to;
+**subsystems/water-float-requirement.md**, which sections 6, 19 and 22 send you to;
+and **channel-token.md**, which sections 12 and 14 send you to.
+WHY THE LIST IS LONGER THAN THE ELEVEN DOCUMENTS: this book points rather than
+restating, **so every place it points is a document you have to be holding.** A
+builder who packed to Issue 1's shorter list reached section 4 with nothing to open.
 
 **2-02. Confirm D7 has been worked and the buy is done.**
 ACCEPT: D7 exists and every line on it is marked bought, ordered or open.
 WHY: **D7 comes before this book, not after it.** If you are reading this step with
 parts missing, the buy was not finished, and the sections below will stop at the part
 rather than at a decision.
+**AND ONE THING D7 CANNOT HAVE FINISHED, WHICH IS THIS BOOK'S OWN DEFECT AND IS
+REPORTED RATHER THAN HIDDEN:** the float purchase cannot be closed until section 6
+produces the cord span terms, under F-100. **So a D7 that is genuinely finished is not
+possible today**, and this step's accept passes with the float line, and eight other
+lines this book names as unbought, still open. Owner: BOSS. **Do not read this step's
+accept as a statement that everything has arrived.**
 
-**2-03. Lay out the parts D7 lists for the mechanical build and check each one
-against its line.**
+**2-03. Lay out the parts D7 lists for the mechanical build.**
+ACCEPT: every part is out of its packaging and visible on the bench or the floor.
+
+**2-03a. Check each part against its line on D7.**
 ACCEPT: every line is either matched to a part in front of you or marked absent on
 D7, and no line is unaccounted for.
 
@@ -169,9 +247,11 @@ WHY: **a recorded absence is worth more than a guess.** It tells sections 3, 4 a
 which rows stay blocked, and it stops a substitution being made at the bench where
 nobody will see it again.
 
-**2-05. Find the wall this build mounts on and confirm it is clear.**
-ACCEPT: the wall named in parts.md's "The wall" section is empty and reachable along
-its whole width.
+**2-05. Find the wall this build mounts on.**
+ACCEPT: you are standing at the wall parts.md's "The wall" section names.
+
+**2-05a. Confirm that wall is clear.**
+ACCEPT: it is empty and reachable along its whole width.
 
 **2-06. Find the floor drain track.**
 ACCEPT: you can see the track and walk its length.
@@ -180,14 +260,15 @@ one. **You need to know where it runs before section 6 places a tank.**
 
 **2-07. Find the cold water supply point that FL-01 connects to.**
 ACCEPT: you can put a hand on the supply stub.
-BLOCKED for anything beyond finding it. Missing: FL-01 is an OPEN interface row.
-Owner: WATER returns the connection, BOSS freezes the row.
+NOT HERE: nothing is connected to it in this section. **FL-01 is an OPEN interface
+row** and WATER returns the connection, with BOSS freezing the row. Section 25 is
+where the line is run.
 
 **2-08. Find the building branch circuit that P-01 connects to.**
 ACCEPT: you can put a hand on the outlet or the disconnect.
-BLOCKED for anything beyond finding it. Missing: P-01 is an OPEN interface row, and
-D-137's dedicated chiller circuit is unaccounted for in it. Owner: MAIN-PANEL and
-BOSS.
+NOT HERE: nothing is connected to it in this section. **P-01 is an OPEN interface
+row**, and D-137's dedicated chiller circuit is unaccounted for in it. Owner:
+MAIN-PANEL and BOSS.
 
 ---
 
@@ -207,12 +288,22 @@ ACCEPT: you are looking at a list of names.
 
 **3-02. Write its roster name on each device as you unpack it.**
 ACCEPT: the name on the device reads exactly as D2 spells it, character for
-character.
+character, **and the mark does not smear when you rub it with a thumb once it is
+dry.**
+**REQUIREMENT AND SEARCH TERM, because no file read for this book states a marker and
+D7 has no line for one:** a marker whose mark stays legible on the device it is
+written on for the life of the machine, inside a warm enclosure. Search:
+`permanent marker plastic metal smear resistant`; `industrial equipment marking pen`.
+**The line belongs in D7 and the lookup is the owner's under G-15.**
+**THE STEP IS NOT BLOCKED AND THAT IS A DELIBERATE CALL, per G-44 and BOSS's rule 1:**
+the accept condition above tests the requirement directly at the bench, so a marker
+that fails it is caught by the step rather than by a lookup. **If it smears, stop.
+That is a purchase.**
 WHY: **G-28. Which device goes in which position is a build fact, and the two relay
 contact types look alike.** A swapped pair passes every check in this build and
 destroys the property one of them was bought for. **Label at unpack, not at
-installation** - once four identical envelopes are on a bench, the information that
-told them apart is in the packaging you have thrown away.
+installation** - once identical envelopes are on a bench, the information that told
+them apart is in the packaging you have thrown away.
 
 **3-03. Write the roster name on the socket a plug-in device goes into, as well as on
 the device.**
@@ -223,8 +314,8 @@ fits.
 
 **3-04. Set aside any device whose roster name you cannot find in D2.**
 ACCEPT: it is on the bench, unlabelled, and written down.
-BLOCKED beyond setting it aside. Missing: a device with no name in D2 has no identity
-in this build. Owner: BOSS, and G-42 governs the naming.
+NOT HERE: naming it. **A device with no name in D2 has no identity in this build.**
+Owner: BOSS, and G-42 governs the naming.
 
 ---
 
@@ -238,9 +329,9 @@ in this build. Owner: BOSS, and G-42 governs the naming.
 - **BB-06.** terminal-survey.md is filled in for every device on the shelf, and every
   device not on the shelf is recorded as NOT ON SHELF.
 
-**THIS SECTION CLOSES F-106 AND IT IS THE ONLY THING BLOCKING ALL 125 JOINTS IN D4.**
-No decision, no lookup, no money: the parts in front of you and something to write
-with. It is one evening and everything downstream reads it.
+**THIS SECTION CLOSES F-106, AND EVERY JOINT IN D4 IS BLOCKED ON IT.** No decision, no
+lookup, no money: the parts in front of you and something to write with. It is one
+evening and everything downstream reads it.
 
 **4-01. Open terminal-survey.md.**
 ACCEPT: you are looking at the form and the device list.
@@ -254,33 +345,51 @@ book does not restate the form, the datum rule or the legend convention: they ar
 terminal-survey.md's and a terminal fact copied into a second document is a terminal
 fact that can drift.
 
-**4-03. Put the completed survey with the document set.**
-ACCEPT: it is on the bench with D2 to D7.
+**4-03. Put the completed survey back with the document set.**
+ACCEPT: it is with the document set and not left where the parts are.
 WHY: **it is read once and cited forever.** That is the whole point of doing it once,
 and it is why a photograph is not a substitute.
 
 ---
 
-## 5. MEASURE THE WALL AND THE FLOOR
+## 5. CONFIRM THE WALL ENVELOPE AND MEASURE THE FLOOR
+
+**REVISION, Issue 2: 5-01 changed from a fresh measurement to a CONFIRMATION against
+D-090, and 5-01a and 5-02a inserted. D-185 records that the envelope is already answered, and a
+second place to write it down is a second place it can drift.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-04, section 2.
 
 **TRUE AFTER IT ENDS:**
-- **BB-07.** The wall, its fixing points, and the positions of the supply stub, the
-  branch circuit and the drain track relative to it are measured, recorded, and
-  handed to whoever holds M-02.
+- **BB-07.** The wall envelope is confirmed against D-090, and the wall's fixing
+  points and the positions of the supply stub, the branch circuit and the drain track
+  relative to it are measured, recorded, and handed to whoever holds M-02.
 
-**5-01. Measure the wall and write the figures down.**
-ACCEPT: a written record exists, dated, with the units on it.
-WHY: **M-02 is OPEN and this measurement is its missing input.** parts.md states the
-layout envelope; nothing in this tree states what is actually on that wall. **This
-book states no dimension of its own and never will** - it records that the
-measurement is taken and hands it on.
+**5-01. Confirm the wall in front of you agrees with the envelope D-090 records in
+parts.md.**
+ACCEPT: you have compared the wall against parts.md's figure and can say whether they
+agree.
+WHY IT IS A CONFIRMATION AND NOT A MEASUREMENT: **the envelope is already on file and
+this book states no dimension of its own.** Measuring it again produces a second
+figure that can disagree with the first, which is the whole reason the tree generates
+rather than transcribes. **What is genuinely unknown is 5-02 to 5-05, and that is
+where the tape comes out.**
 
-**5-02. Find and record every fixing point the wall offers.**
-ACCEPT: each stud, rail, block course or fixing you found is on the record with its
-position relative to one corner you name as the datum.
+**5-01a. Send any disagreement to BOSS, in writing and dated.**
+ACCEPT: either nothing was sent because they agree, or a dated note has left your
+hands.
+WHY: a wall that is not the wall on file changes the arrangement, not the book. **It
+is BOSS's to reconcile and parts.md is authoritative under D-026, so it is not
+corrected at the bench.**
+
+**5-02. Find every fixing point the wall offers.**
+ACCEPT: you have been over the whole wall and can point at each stud, rail, block
+course or fixing you found.
+
+**5-02a. Record each fixing point against one corner you name as the datum.**
+ACCEPT: every point found at 5-02 is on the record with its position relative to that
+one named corner.
 WHY: **name the datum and the direction you measured in.** A set of positions with no
 datum is the defect the terminal survey exists to prevent, one level up, and the 1st
 Edition's height contradictions were exactly this.
@@ -298,49 +407,69 @@ rise anywhere. **The track's position is a constraint on where a tank may stand,
 that constraint has to be in the layout before a tank is placed and not after.**
 
 **5-06. Hand the record to whoever holds M-02.**
-ACCEPT: the record has left your hands and section 6's precondition is somebody
-else's work.
+ACCEPT: the record has left your hands.
+NOT HERE: what is done with it. **Section 6 is that person's work and is not yours.**
 
 ---
 
 ## 6. THE LAYOUT
+
+### NOT YOURS TO WORK.
+
+**This section is addressed to INTERCONNECT, DOSING and PUMP-BOXES, not to the
+builder.** Read it so you know what it must produce and then wait for it. **Its seven
+steps are the only steps in this book you must not do.** Issue 1 did not mark the
+change of audience and a builder reading in order met seven instructions he was not
+the reader of.
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-02, section 2.
 - BB-07, section 5.
 
 **TRUE AFTER IT ENDS:**
-- **BB-08.** A mounting position exists for the main panel, pump box A, pump box B,
-  the display box, the manifold and every jug station; a floor position exists for
-  each tank; and a standing position exists for a jug change.
-- **BB-09.** Each enclosure's entry positions and the spacing between them are
+- **BB-08.** A position exists for every item this build places: the main panel, pump
+  box A, pump box B, the display box, the manifold and every jug station on the wall;
+  each tank, the transfer pump and **the chiller** on the floor; a standing position
+  for a jug change; and **every position on each tank's rim and upper wall** - the
+  standpipe's hang point, the overflow bulkhead, the cord exit, the return drop's
+  landing, the transfer discharge and the submersible cords.
+- **BB-09.** Each enclosure's cord grip positions and the spacing between them are
   stated.
 
 ### THIS WHOLE SECTION IS BLOCKED. HERE IS WHAT IS MISSING AND WHO OWNS IT.
 
-**BLOCKED. Missing: M-02 is an OPEN interface row and there is no wall layout.**
+**BLOCKED. Missing: M-02's ARRANGEMENT half is OPEN and there is no wall layout.**
 Owner: DOSING and PUMP-BOXES claim the wall space jointly, **INTERCONNECT
-arbitrates**, BOSS freezes the row.
+arbitrates**, BOSS freezes the row. **The ENVELOPE half is answered by D-090 and
+nothing here waits on it**, per D-185.
 
 **BLOCKED. Missing: CBL-01, CBL-02, CBL-03 and CBL-04 are all OPEN.** The FACE half
 of each is answered - parts.md for the main panel, subsystems/entry-faces.md for the
 pump boxes and the display box, D-126 and D-156 for the field devices - **and the
-position-and-spacing half is INTERCONNECT's and needs the wall layout.** Owner:
+position-and-spacing half is INTERCONNECT's and needs the arrangement.** Owner:
 INTERCONNECT, then BOSS freezes.
 
 **BLOCKED. Missing: D3 does not exist.** Owner: each enclosure owner for its own
-sheet, with INTERCONNECT placing glands within a stated face under D-146.
+sheet, with INTERCONNECT placing cord grips within a stated face under D-146.
 
-**Nothing below this line may be started until BB-08 and BB-09 exist.** Sections 7,
-8, 9, 10, 12 and 16 each require one of them.
+**Nothing below this line may be started until BB-08 and BB-09 exist.** Eleven
+sections require one of them and each names it in its own precondition list.
 
 ### What the layout must resolve, so that whoever writes it knows what is waiting
 
 Stated as constraints, not as positions. **No position, no spacing and no dimension
 is proposed here.**
 
-**6-01. Give every wall-mounted item a position.**
+**6-01. Give every item this build places a position: the wall-mounted items, the
+floor-standing items including the transfer pump and the chiller, the standing
+position for a jug change, and every item on each tank's rim and upper wall.**
 BLOCKED. Missing: as above.
+WHY THE LIST IS LONGER THAN THE WALL: Issue 1's layout produced wall positions and
+floor positions for the tanks only. **The chiller then had no position and no step
+anywhere placed it**, while section 27's postcondition asserted the loop was plumbed.
+**And the tank rim is the tightest piece of real estate in the build**: six things
+land on it and each was placed by a different section, so 20-04 has to check a hole
+against positions that do not physically exist yet.
 
 **6-02. Give each tank a floor position that leaves a continuous fall from its
 overflow bulkhead to the drain track, with no trap, no low point and no rise
@@ -355,7 +484,7 @@ fixed.
 **6-03. Give each tank a floor position that leaves the far side of its rim
 reachable.**
 BLOCKED. Missing: as above.
-WHY: sections 18, 21, 22 and 23 all put a person's hands on the standpipe over the
+WHY: sections 18, 20, 22, 23 and 27 all put a person's hands on the standpipe over the
 rim, and D-131 puts them there again at every level adjustment for the life of the
 machine.
 
@@ -370,30 +499,46 @@ decision that was already made.**
 **6-05. Give the display box a position that satisfies operator reach and sightline.**
 BLOCKED. Missing: M-03 is an OPEN interface row. Owner: DISPLAY-BOX.
 
-**6-06. State each enclosure's entry positions within the face its owner has already
-stated, and the spacing between them.**
+**6-06. State each enclosure's cord grip positions within the face its owner has
+already stated, and the spacing between them.**
 BLOCKED. Missing: as above.
-**ONE SPACING ON ONE FACE IS NOT FREE AND MUST NOT BE SPACED EVENLY.** The display
-box's bottom face carries a gap between its entry 7 and its entry 8 that
-subsystems/entry-faces.md section 3.3 flags as **the one gap on that face carrying a
-named failure.** It is called out here because a builder handed a face with no
-spacings marked will space them evenly, and even spacing is the one answer that is
-wrong. The reasoning is in entry-faces.md and D6 and is not repeated.
+**ONE SPACING ON ONE FACE IS NOT FREE AND MUST NOT BE SPACED EVENLY.**
+subsystems/entry-faces.md section 3.3 names the one gap on the display box's bottom
+face that carries a named failure, and D6 carries it too. **Read it there.** It is
+called out here because a builder handed a face with no spacings marked will space
+them evenly, and even spacing is the one answer that is wrong. **Which entries and
+which gap is entry-faces.md's fact and is not repeated here.**
 
 **6-07. Produce the float cord span terms.**
-BLOCKED. Missing: the wall layout. Owner: INTERCONNECT.
+BLOCKED. Missing: the arrangement. Owner: INTERCONNECT.
 WHY THIS ONE GATES A PURCHASE AND NOT A STEP: **F-100.** D-131 makes the float cord
 the strain member, the trip-height datum and the signal path at once, so it cannot be
 cut at the tank and cannot be joined there. **A float whose supplied cord does not
 reach is disqualified, and the only remedies D-131 leaves are a splice in the wet
 zone or moving a mounted panel, both of which it forbids.** So the cord length has to
 exist before the float search, which means this section gates section 22 through D7.
-The terms of the sum are set out in subsystems/water-float-requirement.md section
-1.4 and are not repeated here.
+The terms of the sum are in subsystems/water-float-requirement.md section 1.4 and are
+not repeated here.
+**AND ONE THING THAT COULD BE ANSWERED TODAY WITHOUT THE ARRANGEMENT, PUT TO
+INTERCONNECT AND WATER RATHER THAN DECIDED HERE:** the requirement 6-07 feeds is a
+**disqualification** test, not a cut length. **A worst-case BOUND on the span follows
+from D-090's envelope and the cut rule with no arrangement at all, and a conservative
+bound disqualifies the same floats a measured span would.** If the bound is accepted,
+**the longest-lead purchase in this book stops waiting on the arrangement** and
+sections 22 and 31 stop waiting with it. **Cost, per G-48: nothing in parts and
+nothing in steps. What it buys is the float search starting now instead of after the
+arbitration. What it risks is buying more cord than the arrangement turns out to
+need, which is a cord that is too long.** Owner: INTERCONNECT and WATER between them,
+BOSS to rule.
 
 ---
 
 ## 7. PREPARE THE MAIN PANEL ENCLOSURE
+
+**REVISION, Issue 2: 7-01a and 7-06a inserted, splitting the mark from the cut to
+match the pattern 7-02/7-03 and 7-04/7-05 already used. 7-07 and 7-08 changed from live accept
+conditions to BLOCKED, because nothing can be deburred or cleaned until a hole has
+been cut.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
@@ -408,50 +553,58 @@ AND THAT IS THE WHOLE REASON THE SECTION SITS HERE.** Section 13 populates the p
 **A hole cut over a populated plate puts swarf under a relay socket and on a gold
 contact, and neither is recoverable by cleaning.**
 
-**7-01. Take the backplate out of the enclosure and set it aside.**
+**7-01. Take the backplate out of the enclosure.**
 ACCEPT: the enclosure is empty and you can see through it.
 
-**7-02. Mark the five top-face device holes at the positions D3 states.**
-BLOCKED. Missing: D3 does not exist. Owner: MAIN-PANEL, and the face itself is
-already decided in parts.md: the door-mounted devices are all on the TOP FACE,
-nothing else penetrates that face, and every cord grip is on the bottom. **The hole
-size and the count are parts.md's and D3's and are not repeated here.**
+**7-01a. Set the backplate aside where it will not be walked on or cut over.**
+ACCEPT: it is off the floor, flat, and nowhere near the next four steps.
 
-**7-03. Step drill each of the five top-face holes.**
+**7-02. Mark the top-face device holes at the positions D3 states.**
+BLOCKED. Missing: D3 does not exist. Owner: MAIN-PANEL. **The face itself is already
+decided in parts.md: the door-mounted devices are all on the TOP FACE, nothing else
+penetrates that face, and every cord grip is on the bottom. The hole size, the count
+and the positions are parts.md's and D3's.**
+
+**7-03. Step drill each top-face hole.**
 BLOCKED. Missing: as 7-02.
 WHY IT IS STEP DRILLED AND NOT TWIST DRILLED: parts.md records the method with the
 face. A twist drill grabs sheet and tears a hole that a gasketed device cannot seal
-against, and D-047 treats every one of these five as needing a gasketed device.
+against, and D-047 treats every one of these as needing a gasketed device.
 
-**7-04. Mark the bottom-face cable entries at the positions and spacings D6 states.**
-BLOCKED. Missing: CBL-01 is OPEN and its position half needs the wall layout, M-02.
-Owner: INTERCONNECT places them within the face; MAIN-PANEL owns the face, which is
-already stated: **every cord grip is on the BOTTOM face.**
+**7-04. Mark the bottom-face cord grip positions D6 states.**
+BLOCKED. Missing: CBL-01 is OPEN and its position half needs the arrangement. Owner:
+INTERCONNECT places them within the face; MAIN-PANEL owns the face, which is already
+stated: **every cord grip is on the BOTTOM face.**
 
-**7-05. Cut each bottom-face entry.**
+**7-05. Cut each bottom-face cord grip hole.**
 BLOCKED. Missing: as 7-04.
 
-**7-06. Mark and cut the receptacle openings in the face D3 states.**
+**7-06. Mark the receptacle openings in the face D3 states.**
 BLOCKED. Missing: D3 does not exist and no file read for this book states which face
 carries them. Owner: MAIN-PANEL. **What is decided is D-046: the receptacles are
 panel mounted in the enclosure face and cords plug into them from outside, so no
-receptacle cord is fed through a grip.**
+receptacle cord is fed through a cord grip.**
+
+**7-06a. Cut each receptacle opening.**
+BLOCKED. Missing: as 7-06.
 
 **7-07. Deburr every hole you have cut.**
-ACCEPT: run a finger round each edge and feel nothing that catches.
-WHY: a burr on a device hole cuts the gasket of the device that seals it, and the cut
-is on the underside where nobody will look again.
+BLOCKED. Missing: nothing to deburr until 7-03, 7-05 and 7-06a are done.
+WHY IT IS ITS OWN STEP AND NOT PART OF THE CUT: a burr on a device hole cuts the
+gasket of the device that seals it, and the cut is on the underside where nobody will
+look again.
 
-**7-08. Turn the enclosure over and shake every particle of swarf out of it.**
-ACCEPT: hold it to the light, run a hand over the inside, and find nothing.
+**7-08. Shake every particle of swarf out of the enclosure, turning it over to do
+it.**
+BLOCKED. Missing: nothing to clean until 7-07 is done.
 WHY: **this is the last moment the box is empty.** Swarf that stays in now ends up on
 a contact face or across a terminal, and a short between two clamps built by a metal
 chip passes every visual check.
 
-**7-09. Fit a cord grip to each bottom-face entry, sized to the cable D6 selects for
+**7-09. Fit a cord grip to each bottom-face hole, sized to the cable D6 selects for
 that entry.**
 BLOCKED. Missing: the cable selections in D6 section 5 are requirements and search
-terms, not parts, and the entry positions are 7-04's blocker. Owner: the owner runs
+terms, not parts, and the hole positions are 7-04's blocker. Owner: the owner runs
 the lookups under G-15; INTERCONNECT selects.
 
 **7-10. Fit the top-face devices' gaskets and blanks so that no top-face hole is left
@@ -461,12 +614,16 @@ enclosure's own rating and **explicitly does not close the question of each top-
 device's rating in an upward-facing orientation.** Owner: MAIN-PANEL.
 WHY THE TOP FACE IS TREATED DIFFERENTLY FROM EVERY OTHER FACE: D-092 and D-110. **The
 assembly's rating is set by its worst penetration regardless of what the box is
-rated**, and five upward-facing holes are the worst penetration. The design sheds
-rather than seals, so anything that lands on that face has to run off it.
+rated**, and upward-facing holes are the worst penetration. The design sheds rather
+than seals, so anything that lands on that face has to run off it.
 
 ---
 
 ## 8. PREPARE THE TWO PUMP BOXES
+
+**REVISION, Issue 2: 8-01a, 8-01b and 8-01c inserted. Issue 1 required a lid to be marked in
+an acceptance condition and never told anybody to mark one, and two later steps
+depended on the mark. 8-06 and 8-07 changed from live accept conditions to BLOCKED.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
@@ -474,26 +631,40 @@ rather than seals, so anything that lands on that face has to run off it.
 
 **TRUE AFTER IT ENDS:**
 - **BB-11.** Both pump box bodies have every penetration they will ever have, cut,
-  deburred and fitted; both lids have their head penetrations; both are clean.
+  deburred and fitted; both lids have their head penetrations and each lid is marked
+  with its box; both are clean.
 
 **Do both boxes together, one operation at a time across the pair.** They are one
-build and not a mirrored pair: **left and right are the same on both boxes**, per
-subsystems/entry-faces.md section 2.3. A mirrored pair is two builds of one thing.
+build and not a mirrored pair, per subsystems/entry-faces.md section 2.3. **A mirrored
+pair is two builds of one thing.**
 
-**8-01. Take the lid off each box and set both lids aside.**
-ACCEPT: two open box bodies and two lids, each lid marked with the box it came off.
+**8-01. Take one box's lid off.**
+ACCEPT: one open box body, one lid in your hands, and the other box still closed.
+WHY ONE BOX AT A TIME: the next step writes that box's name on that lid. **Two lids
+off two boxes at once is two lids that look alike and one guess.**
 
-**8-02. Mark the bottom-face entries on each box body, at the positions and spacings
-D6 states.**
-BLOCKED. Missing: CBL-02 is OPEN and its position half needs the wall layout, M-02.
-Owner: INTERCONNECT places them within the face.
-**THE FACE AND THE ORDER ARE ALREADY DECIDED AND ARE NOT OPEN:** bottom face, both
-boxes, every cable, and reading the bottom face left to right as you stand at the box
-facing the lid, the motor supply entry is at the left end and the step-and-direction
-entry is at the right end. That is subsystems/entry-faces.md section 2.3 and this
-book does not restate its reasoning.
+**8-01a. Write that box's name on the lid you are holding, as D2 spells it.**
+ACCEPT: the lid reads the same name as the box it came off.
+WHY: sections 14 and 32 both take a lid off a bench and put it on a box. **The heads,
+the motors and the head penetrations are per box, and a lid on the wrong box is a
+sealed enclosure with the wrong holes in it.**
 
-**8-03. Cut each bottom-face entry.**
+**8-01b. Set that lid on the bench.**
+ACCEPT: the lid is flat on the bench, marked side up.
+
+**8-01c. Repeat 8-01, 8-01a and 8-01b for the other box.**
+ACCEPT: two open box bodies and two lids on the bench, each lid marked with its box.
+
+**8-02. Mark the bottom-face cord grip positions on each box body, as D6 states.**
+BLOCKED. Missing: CBL-02 is OPEN and its position half needs the arrangement. Owner:
+INTERCONNECT places them within the face.
+**THE FACE AND THE ORDER ARE ALREADY DECIDED AND ARE NOT OPEN, AND THEY ARE STATED IN
+subsystems/entry-faces.md SECTION 2.3, NOT HERE.** Read the order off that document
+and off D6. **This book does not carry which entry is where**, because that fact is
+what 14-06's whole no-crossing argument rests on and a second copy of it is a second
+copy that can drift.
+
+**8-03. Cut each bottom-face cord grip hole.**
 BLOCKED. Missing: as 8-02.
 
 **8-04. Mark the head penetrations on each lid.**
@@ -504,12 +675,12 @@ penetration, DOSING owns the tubing through it.
 BLOCKED. Missing: as 8-04.
 
 **8-06. Deburr every hole in both bodies and both lids.**
-ACCEPT: run a finger round each edge and feel nothing that catches.
+BLOCKED. Missing: nothing to deburr until 8-03 and 8-05 are done.
 
 **8-07. Clean every particle out of both bodies and off both lids.**
-ACCEPT: hold each to the light and find nothing.
+BLOCKED. Missing: nothing to clean until 8-06 is done.
 
-**8-08. Fit a cord grip to each bottom-face entry, sized to the cable D6 selects.**
+**8-08. Fit a cord grip to each bottom-face hole, sized to the cable D6 selects.**
 BLOCKED. Missing: as 7-09.
 
 **NOTHING ENTERS A PUMP BOX LID EXCEPT A HEAD, AND NOTHING IS FITTED TO THE TOP OR
@@ -524,6 +695,9 @@ that is a decision, not a step.**
 
 ## 9. PREPARE THE DISPLAY BOX
 
+**REVISION, Issue 2: 9-01a and 9-07a inserted, splitting two-action steps. 9-05 and
+9-06 changed from live accept conditions to BLOCKED.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
 - BB-09, section 6.
@@ -532,44 +706,52 @@ that is a decision, not a step.**
 - **BB-12.** The display box body has every penetration it will ever have, cut,
   deburred and fitted, including the USB-C bulkhead; the box is clean.
 
-**9-01. Open the box and take out the back plate.**
-ACCEPT: the box is empty and the display cutout's gasket is undisturbed.
+**9-01. Open the box.**
+ACCEPT: the cover is off and the display cutout's gasket is undisturbed.
 WHY: **the gasketed display cutout is the youngest part in this assembly** under
 D-092's own argument, and every operation below throws particles.
 
-**9-02. Mark the bottom-face entries at the positions and spacings D6 states.**
-BLOCKED. Missing: CBL-03 is OPEN and its position half needs the wall layout, M-02.
-Owner: INTERCONNECT places them within the face.
-**THE FACE AND THE ORDER ARE DECIDED:** bottom face, every cable, and the order
-reading left to right as you stand at the box facing the display is in
-subsystems/entry-faces.md section 3.3. **Two of those entries must not become
-adjacent and one gap between two of them is deliberate and is not even.** The rule
-and the failure it prevents are in that file and in D6 and are not restated here.
+**9-01a. Take out the back plate.**
+ACCEPT: the box is empty.
 
-**9-03. Cut each bottom-face entry.**
+**9-02. Mark the bottom-face cord grip positions D6 states.**
+BLOCKED. Missing: CBL-03 is OPEN and its position half needs the arrangement. Owner:
+INTERCONNECT places them within the face.
+**THE FACE AND THE ORDER ARE DECIDED AND ARE STATED IN subsystems/entry-faces.md
+SECTION 3.3, NOT HERE.** Read the order off that document and off D6. **Two of those
+entries must not become adjacent, and one gap between two of them is deliberate and is
+not even.** The rule, the entries it applies to and the failure it prevents are in
+that file and in D6.
+
+**9-03. Cut each bottom-face cord grip hole.**
 BLOCKED. Missing: as 9-02.
 
 **9-04. Cut the opening for the panel-mount USB-C bulkhead at the position D6 gives
-it, at the right-hand end of the bottom face.**
+it.**
 BLOCKED. Missing: as 9-02, and the bulkhead itself is a requirement and a search term
 in D6 section 5, not a part. Owner: the owner runs the lookup under G-15.
-WHY IT IS A BULKHEAD AND NOT A GRIP: D-162. **A USB-C connector will not pass a grip
-bore, and cutting and re-terminating a USB-C cable is not a thing anyone should do.**
-If you are holding a grip and a USB-C cable, you are about to solve this the
-expensive way.
+WHY IT IS A BULKHEAD AND NOT A CORD GRIP: D-162. **A USB-C connector will not pass a
+grip bore, and cutting and re-terminating a USB-C cable is not a thing anyone should
+do.** If you are holding a cord grip and a USB-C cable, you are about to solve this
+the expensive way.
 
 **9-05. Deburr every hole.**
-ACCEPT: run a finger round each edge and feel nothing that catches.
+BLOCKED. Missing: nothing to deburr until 9-03 and 9-04 are done.
 
 **9-06. Clean every particle out of the box and off the back plate.**
-ACCEPT: hold both to the light and find nothing.
+BLOCKED. Missing: nothing to clean until 9-05 is done.
 
-**9-07. Fit a cord grip to each bottom-face entry and the bulkhead to its opening.**
-BLOCKED. Missing: as 9-02 and 9-04.
+**9-07. Fit a cord grip to each bottom-face hole.**
+BLOCKED. Missing: as 9-02.
+
+**9-07a. Fit the bulkhead to its opening.**
+BLOCKED. Missing: as 9-04.
 
 ---
 
 ## 10. MOUNT THE FOUR ENCLOSURES
+
+**REVISION, Issue 2: 10-01a inserted, splitting the set-out from the mark.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-08, section 6.
@@ -586,8 +768,11 @@ Sections 13, 14 and 15 populate them afterwards.
 WHY BOTH: **a populated plate is heavy and is lifted at height**, and a tank standing
 in its final position is between you and the wall for every remaining wall operation.
 
-**10-01. Transfer each mounting position from the layout onto the wall and mark it.**
+**10-01. Set out each mounting position on the wall from the layout.**
 BLOCKED. Missing: BB-08, section 6. Owner: as section 6.
+
+**10-01a. Mark each position on the wall.**
+BLOCKED. Missing: as 10-01.
 
 **10-02. Fix the main panel to the wall.**
 BLOCKED. Missing: the mounting position, and the fixings, which are a D7 line.
@@ -625,17 +810,21 @@ own gasket, and the gasket is the part that gets blamed.
 
 ## 11. ASSEMBLE THE MANIFOLD
 
+**REVISION, Issue 2: 11-06a inserted, to record when the last joint was made. 11-04's
+partial acceptance condition is withdrawn and the step is fully BLOCKED, because a
+builder should not have to adjudicate which of his own joints an accept applies to.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-03, section 2.
 
 **TRUE AFTER IT ENDS:**
 - **BB-14.** The manifold is assembled between its two unions, its probe section
-  vertical and ahead of every injection port, its solvent joints cured, and it is off
-  the wall.
+  vertical and ahead of every injection port, the time of its last joint written down,
+  its joints cured, and it is off the wall.
 
-**THIS IS BENCH WORK AND IT ENDS AT A CURE.** Section 12 does not start until the
-cure is finished, and it says so as its own precondition. **Do not carry on working
-this assembly while a joint is curing.**
+**THIS IS BENCH WORK AND IT ENDS AT A CURE.** Section 12 does not start until the cure
+is finished, and it says so as its own precondition. **Do not carry on working this
+assembly while a joint is curing.**
 
 **11-01. Lay the manifold out dry, end to end, before any cement is opened.**
 ACCEPT: the probe section is vertical when the assembly is held in its mounting
@@ -643,6 +832,15 @@ orientation, and every injection port is downstream of every probe position.
 WHY: **G-10.** Probes sit first in line in a vertical section, ahead of every
 injection point, **so a bubble cannot corrupt a reading and no injectate reaches a
 probe before mixing.** A dry lay-up is the last moment this is free to correct.
+**REQUIREMENT AND SEARCH TERM FOR THE CEMENT, because no file read for this book
+states one and D7 has no line for it, and this is the first step that mentions it:**
+a solvent cement and primer for the pipe material D-121 and D-109 settle, rated for
+the products this loop carries, with a stated cure time at the room's temperature.
+Search: `PVC solvent cement cure time chart temperature`; `solvent cement chemical
+resistance fertiliser solution`. **The line belongs in D7 and the lookup is the
+owner's under G-15.** **Every cure step in this book reads a time off that label, so
+without it nothing in sections 11, 17, 24, 25, 26, 27 or 28 can be cured or
+confirmed.**
 
 **11-02. Mark each joint's alignment across the joint line while the assembly is
 still dry.**
@@ -654,12 +852,13 @@ puts an injection port or a probe boss facing a wall, and it cannot be taken apa
 ACCEPT: every piece is loose and every alignment mark is still readable.
 
 **11-04. Make each solvent-welded joint in turn, to the alignment marks.**
-BLOCKED for the port arrangement. Missing: **DOSING's injection port arrangement is
-an open item** - how a port is made in PVC, and whether ports need a check to stop
-backflow into a dose line when its head is idle. Owner: DOSING returns the
-requirement.
-ACCEPT for the joints that are not blocked: the marks line up and the joint is home
-to its stop.
+BLOCKED. Missing: **DOSING's injection port arrangement is an open item** - how a port
+is made in PVC, and whether ports need a check to stop backflow into a dose line when
+its head is idle - and the cement is 11-01's blocker. Owner: DOSING returns the
+requirement; the owner runs the cement lookup under G-15.
+WHY THE WHOLE STEP IS BLOCKED AND NOT PART OF IT: **which joints are the port joints
+is DOSING's answer, so a builder cannot tell which of his own joints a partial accept
+would apply to.** Issue 1 asked him to and that is a judgement, not a check.
 
 **11-05. Fit the union at each end of the manifold body.**
 BLOCKED. Missing: **FL-03 and FL-04 are OPEN interface rows** and the union type is
@@ -671,12 +870,20 @@ somebody else's pipe.
 
 **11-06. Fit the probe wet fittings to the probe section.**
 BLOCKED. Missing: **DOSING's probe wet fitting requirement is an open item**, one per
-EZO probe body, and S-11 is an OPEN interface row. Owner: DOSING returns the
-requirement and the search term; the owner runs the lookup under G-15.
+probe body, and S-11 is an OPEN interface row. Owner: DOSING returns the requirement
+and the search term; the owner runs the lookup under G-15.
+
+**11-06a. Write down the time the last joint in this assembly was made.**
+BLOCKED. Missing: nothing to record until 11-04 is done.
+WHY A TIME IS WRITTEN DOWN AND NOT REMEMBERED: **31-02 confirms every wet joint in the
+build has cured, and it cannot confirm elapsed time against a memory.** Issue 1 asked
+it to. Section 18 is the book's own example of how this is done: write the number,
+its units and what it was taken between.
 
 **11-07. Leave the assembly undisturbed until the cement's own instruction says the
 cure is complete.**
-ACCEPT: the time the cement's label states has elapsed and nothing has been moved.
+BLOCKED. Missing: nothing to leave until 11-04 is done, and the cement is 11-01's
+blocker.
 WHY THIS SECTION ENDS HERE: **a cure is a wait, and a wait in the middle of a section
 is where a builder is sent away and the next steps quietly assume he did not go.**
 Section 12 restates the cure as a precondition so that coming back to the book puts
@@ -697,9 +904,9 @@ you in the right place.
   permanent channel token.
 
 **12-01. Fix the manifold to the wall at its layout position.**
-BLOCKED. Missing: BB-08, section 6. The manifold's position is half of M-02 and DOSING
-and PUMP-BOXES claim the same wall space, with the tubing between them setting the
-spacing. Owner: as section 6.
+BLOCKED. Missing: BB-08, section 6. The manifold's position is half of M-02's
+arrangement and DOSING and PUMP-BOXES claim the same wall space, with the tubing
+between them setting the spacing. Owner: as section 6.
 
 **12-02. Confirm the probe section is vertical as mounted.**
 BLOCKED. Missing: nothing to check until 12-01 is done.
@@ -717,7 +924,8 @@ possible without a tool. Owner: DOSING.
 BLOCKED. Missing: the token's carrier is a requirement and a search term in D6 section
 5 and is not a part yet, and **which product and which role a channel carries is bound
 at C-09 and is not knowable before commissioning.** Owner: CONTROL-SOFTWARE declares
-the token per S-19 and D-021; DOSING carries it on the station.
+the token per S-19 and D-021 and channel-token.md holds its canonical form; DOSING
+carries it on the station.
 WHY THE STATION IS TOKENED AND NOT THE JUG ALONE: G-17 makes a jug dedicated to its
 channel for life, and G-18 puts the change break point at the jug. **A station with no
 token is a station where the right jug can be put in the wrong place**, and S-19's own
@@ -726,6 +934,10 @@ row says a crossed pair confirms itself and passes every check in this build.
 ---
 
 ## 13. THE MAIN PANEL BACKPLATE
+
+**REVISION, Issue 2: 13-02a and 13-10a inserted, splitting the mark of the rails from
+the mark of the ducts and the lift from the fix. 13-05 changed
+from a live accept condition to BLOCKED.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
@@ -746,10 +958,12 @@ looks like the wasteful option. It is not.
 **13-01. Put the bare backplate on the bench.**
 ACCEPT: it is off the wall, empty, and you can reach both ends of it.
 
-**13-02. Mark the rail runs and the duct runs on the bare plate at the positions D3
-states.**
+**13-02. Mark the rail runs on the bare plate at the positions D3 states.**
 BLOCKED. Missing: D3 does not exist. **The plate layout - which device on which rail,
 in what order - has not been returned by any subsystem.** Owner: MAIN-PANEL.
+
+**13-02a. Mark the duct runs on the bare plate at the positions D3 states.**
+BLOCKED. Missing: as 13-02.
 
 **13-03. Cut each rail to length on the bare plate.**
 BLOCKED. Missing: as 13-02.
@@ -758,7 +972,7 @@ BLOCKED. Missing: as 13-02.
 BLOCKED. Missing: as 13-02.
 
 **13-05. Clean every particle off the plate before anything is fixed to it.**
-ACCEPT: hold the plate to the light and find nothing.
+BLOCKED. Missing: nothing to clean until 13-03 and 13-04 are done.
 
 **13-06. Fix each rail to the plate.**
 BLOCKED. Missing: as 13-02.
@@ -766,15 +980,15 @@ BLOCKED. Missing: as 13-02.
 **13-07. Fix each duct to the plate.**
 BLOCKED. Missing: as 13-02.
 
-**13-08. Fix the copper ground bar to the plate.**
+**13-08. Fix the ground bar to the plate.**
 BLOCKED. Missing: the bar is a requirement and a search term in D6 section 5 and has
 not been bought. Owner: MAIN-PANEL provides the bar; the owner runs the lookup under
 G-15.
 WHY IT GOES ON EARLY AND EMPTY: **CBL-07, closed by D-165. The bar is the SINGLE
 BONDING POINT in this panel and nothing bonds anywhere else.** It is written down
 because a builder who finds a convenient screw will use it. Fitting the bar now means
-that when section 31 lands a green conductor there is somewhere for it to go, and
-D4's page 1 lands the whole bar last and all together.
+that when section 31 lands a green conductor there is somewhere for it to go, and D4's
+page 1 lands the whole bar last and all together.
 
 **13-09. Fit each device to its rail, by the name written on it in section 3.**
 BLOCKED. Missing: as 13-02.
@@ -783,18 +997,28 @@ different contact duties, and a step that names a device by its place in a list
 follows the index and not the meaning as soon as the list changes. **D2's roster is
 the only source of which device this is.**
 
-**13-10. Lift the populated plate into the mounted enclosure and fix it.**
+**13-10. Lift the populated plate into the mounted enclosure.**
 BLOCKED. Missing: nothing to lift until 13-06 to 13-09 are done.
 
-**13-11. Confirm nothing on the plate fouls a face device or a cable entry.**
+**13-10a. Fix the plate in the enclosure.**
 BLOCKED. Missing: as 13-10.
+WHY IT IS ITS OWN STEP: **half done is a plate resting in an enclosure and not fixed,
+and it looks finished.** It stays looking finished until something is landed on it.
+
+**13-11. Confirm nothing on the plate fouls a face device or a cord grip.**
+BLOCKED. Missing: as 13-10a.
 WHY IT IS CHECKED NOW: this is the last moment before conductors are in the way. A
-device that fouls a gland is moved with one screwdriver today and with a stripped
+device that fouls a cord grip is moved with one screwdriver today and with a stripped
 panel in section 31.
 
 ---
 
-## 14. THE PUMP BOXES: LIDS, MOTORS, HEADS AND DRIVERS
+## 14. THE PUMP BOXES: LIDS, MOTORS, HEADS, DRIVERS AND BARS
+
+**REVISION, Issue 2: 14-08a and 14-08b inserted. Issue 1 fitted the main panel's
+ground bar and never fitted the three local bars, while 31-08 landed conductors on
+them and 32-01 checked them. That is this book's own defect shape 2, inside the book,
+on the one class of conductor the book says has nowhere else to go.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
@@ -802,15 +1026,16 @@ panel in section 31.
 - BB-13, section 10.
 
 **TRUE AFTER IT ENDS:**
-- **BB-18.** Each pump box carries its motors and heads on its lid and its drivers on
-  its box body, every driver in a box set the same way round, with the lids not yet
-  fitted.
+- **BB-18.** Each pump box carries its motors and heads on its lid, its drivers and
+  its local ground bar on its box body, every driver in a box set the same way round,
+  with the lids not yet fitted.
 
-**Do both boxes together, one operation at a time across the pair.** Box A carries
-CH1 to CH4 and box B carries CH5 to CH8, per D-178.
+**Do both boxes together, one operation at a time across the pair.** **Which channels
+are in which box is D-178's fact and channel-token.md's, and this book does not carry
+it.**
 
 **14-01. Put each lid on the bench with its outside face up.**
-ACCEPT: two lids, each still marked with the box it came off in 8-01.
+ACCEPT: two lids, each still marked with its box from 8-01a.
 
 **14-02. Fit each motor body to the inside of its lid.**
 BLOCKED. Missing: D3 does not exist and no file read for this book states the motor
@@ -829,29 +1054,29 @@ from the operator's standing position, and not obscured by the tubing it identif
 **14-05. Fit each driver to the BOX BODY, not to the lid.**
 BLOCKED. Missing: D3 does not exist and the driver positions in the box are not
 stated. Owner: PUMP-BOXES.
-WHY THE BODY AND NOT THE LID: **the lid is a heavy serviceable assembly carrying four
+WHY THE BODY AND NOT THE LID: **the lid is a heavy serviceable assembly carrying the
 motor bodies and it is removed as a unit.** Anything landed on it moves with it and
 drags wiring, which is already on file as the reason the pull-down landing mounts to
 the body.
 
-**14-06. Set every driver in a box the same way round, so that every power block
-faces one end of the box and every logic header faces the other.**
+**14-06. Set every driver in a box the same way round, so that every power block faces
+one end of the box and every logic header faces the other.**
 BLOCKED. Missing: as 14-05.
 WHY, AND IT IS THE REASON THE ENTRY ORDER IN SECTION 8 IS WHAT IT IS: the motor supply
-enters at the power-block end and the step and direction enter at the logic end, so
-**nothing crosses the box.** An arcing break into drivers with bulk capacitors and
-the logic pins of drivers whose severed direction input is the worst outcome in the
-whole fail-safe sweep are the two most different things in this box, and separation
-inside the box is the only adjacency remedy PUMP-BOXES has that costs nothing. **One
-driver turned round undoes it silently.**
+enters at one end and the step and direction enter at the other, **so nothing crosses
+the box.** subsystems/entry-faces.md section 2.3 states which end is which and why, and
+that is where to read it. **An arcing break into drivers with bulk capacitors, and the
+logic pins of drivers whose severed direction input is the worst outcome in the whole
+fail-safe sweep, are the two most different things in this box**, and separation inside
+the box is the only adjacency remedy PUMP-BOXES has that costs nothing. **One driver
+turned round undoes it silently.**
 
 **14-07. Fit each driver's heatsink.**
 BLOCKED. Missing: the heatsink is a D7 line and no file read for this book states it
 as bought. Owner: PUMP-BOXES states the requirement; the owner runs the lookup under
 G-15.
 WHY IT IS NOT OPTIONAL AND WHY IT CANNOT BE ADDED LATER: **the motor bodies and the
-drivers sit in one sealed plastic box and nothing has measured the temperature
-rise.**
+drivers sit in one sealed plastic box and nothing has measured the temperature rise.**
 C-15 is the measurement and its own precondition is boxes populated and closed with
 heatsinks fitted, **so a box built without them cannot even be measured.** G-06, one
 pump at a time, is a thermal constraint and stays mandatory until C-15 exists.
@@ -865,23 +1090,47 @@ component has to be at the driver end, inside this box. Landing it is a conducto
 fact and belongs to D4. **Fitting the thing it lands on is this section's, because a
 conductor cannot be landed on a part a later step installs.**
 
+**14-08a. Fit the local ground bar to pump box A's body.**
+BLOCKED. Missing: the bars are a requirement and a search term in D6 section 5 and
+have not been bought. Owner: MAIN-PANEL provides the bars; the owner runs the lookup
+under G-15.
+WHY EVERY REMOTE BOX GETS ITS OWN BAR: **CBL-07, closed by D-165. The boxes are
+plastic and offer no bonding path at all**, so a green conductor arriving in this box
+has nowhere to go unless a bar is here. A green conductor in each cross-box cable
+joins this bar home to the main one. **Nothing bonds anywhere else and a builder who
+finds a convenient screw will use it.**
+
+**14-08b. Fit the local ground bar to pump box B's body.**
+BLOCKED. Missing: as 14-08a.
+
 **14-09. Leave both lids off.**
 ACCEPT: both boxes are open and both lids are on the bench, each marked with its box.
 WHY: section 31 lands conductors inside these boxes and section 32 closes them. **A
 lid fitted now is a lid taken off again, and every removal is a chance to trap a
 conductor in a sealing face.**
+**AND THE THING THAT DECIDES THE ORDER OF THE WHOLE END OF THIS BOOK: the tubing
+cannot be run until the lids are on, and the lids cannot go on until the wiring is
+done.** The heads sit on the lid and a tube run to a lid on a bench is a tube that has
+to travel with the lid to the wall. **That is why the dose and suction tubing is
+section 32a and comes after section 32**, and it is why Issue 1's section 29 is
+retired.
 
 ---
 
 ## 15. THE DISPLAY BOX BACK PLATE
+
+**REVISION, Issue 2: 15-05a inserted, fitting the local ground bar, for the reason
+given at 14-08a. 15-06a inserted, splitting the setting from the recording. 15-07a
+inserted, splitting the lift from the fix.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3.
 - BB-13, section 10.
 
 **TRUE AFTER IT ENDS:**
-- **BB-19.** The display box back plate is populated and installed, the three EZO
-  circuits have been set and recorded per C-14, and the cover is not fitted.
+- **BB-19.** The display box back plate is populated and installed with its local
+  ground bar fitted, the EZO circuits have been set and recorded per C-14, and the
+  cover is not fitted.
 
 **15-01. Put the bare back plate on the bench.**
 ACCEPT: it is out of the box and empty.
@@ -889,32 +1138,46 @@ ACCEPT: it is out of the box and empty.
 **15-02. Fit the Pi to the back plate at the position D3 states.**
 BLOCKED. Missing: D3 does not exist. Owner: DISPLAY-BOX.
 
-**15-03. Fit each EZO carrier board to the back plate.**
+**15-03. Fit each carrier board to the back plate.**
 BLOCKED. Missing: as 15-02.
 
-**15-04. Fit the pH circuit and the EC circuit each to a carrier, and the RTD circuit
-to the back plate on no carrier.**
-BLOCKED. Missing: as 15-02.
-**S-11 is an OPEN interface row.** DOSING owns the wet fitting and the probe
-placement, DISPLAY-BOX owns the carriers and the I2C side, INTERCONNECT owns the cable
-run.
+**15-04. Fit each EZO circuit as D3 places it.**
+BLOCKED. Missing: as 15-02. **Which circuit sits on a carrier and which does not is
+DISPLAY-BOX's and D3's, and is not stated here.** **S-11 is an OPEN interface row**:
+DOSING owns the wet fitting and the probe placement, DISPLAY-BOX owns the carriers and
+the I2C side, INTERCONNECT owns the cable run.
 
 **15-05. Fit the logic board to the back plate.**
 BLOCKED. Missing: **the logic board does not exist yet.** Owner: DISPLAY-BOX. D4
 records it as the blocker behind a group of its steps.
 
-**15-06. Set each of the three EZO circuits from UART to I2C, and record which pin and
-which procedure was used for each one, per C-14.**
+**15-05a. Fit the local ground bar to the back plate.**
+BLOCKED. Missing: the bars are a requirement and a search term in D6 section 5 and
+have not been bought. Owner: MAIN-PANEL provides the bars.
+WHY: as 14-08a. **The box is polycarbonate and offers no bonding path.**
+
+**15-06. Set each EZO circuit from UART to I2C, per C-14.**
 BLOCKED. Missing: C-14 is the procedure and it is D8's to stage. **This book states
 only when it happens.** Owner: the owner, with the circuits in hand.
 **WHEN IT HAPPENS IS THE POINT AND IT IS THIS BOOK'S FACT: BEFORE THE DISPLAY BOX IS
 CLOSED.** C-14's own note says so, and until it is done the Pi cannot read any probe.
-It is three different procedures, not one repeated three times, and **without a
-per-circuit record nobody can repeat it after a board swap.** The procedure and the
-record are C-14's and are not restated here.
+**It is a different procedure per circuit type, not one procedure repeated**, and the
+detail is C-14's.
 
-**15-07. Lift the populated back plate into the mounted box and fix it.**
-BLOCKED. Missing: nothing to lift until 15-02 to 15-05 are done.
+**15-06a. Record which pin and which procedure was used, for each circuit
+individually, per C-14.**
+BLOCKED. Missing: nothing to record until 15-06 is done.
+WHY IT IS ITS OWN STEP: **the record is the half nobody can repeat without.** C-14's
+own reason is that after a board swap the next person applies one circuit's procedure
+to a different circuit. **A step that sets and records in one action can be half done
+and look finished, and the half that gets dropped is always the writing.**
+
+**15-07. Lift the populated back plate into the mounted box.**
+BLOCKED. Missing: nothing to lift until 15-02 to 15-05a are done.
+
+**15-07a. Fix the back plate in the box.**
+BLOCKED. Missing: as 15-07.
+WHY IT IS ITS OWN STEP: as 13-10a.
 
 **15-08. Leave the cover off.**
 ACCEPT: the box is open and the cover is set aside with its gasket undisturbed.
@@ -941,12 +1204,14 @@ stand for the life of the machine.
 
 **16-01. Stand the storage tank on its support at its layout position.**
 BLOCKED. Missing: BB-08, section 6, and the support is a D7 line.
-**REQUIREMENT AND SEARCH TERM, because no file read for this book states one:** the
-storage tank is cone bottom and open top, so **it cannot stand on its own bottom** and
-needs a support that carries it full, leaves its outlet reachable, and stands on the
-floor the drain track runs across. Search: `cone bottom tank stand`; `conical tank
-stand load rating`. **The line belongs in D7 and the lookup is the owner's under
-G-15.**
+**REQUIREMENT AND SEARCH TERM, because no file read for this book states one:** a
+support that carries the storage tank full, suits the tank's form as parts.md
+describes it, leaves its outlet reachable, and stands on the floor the drain track
+runs across. Search: `tank stand load rating`; `conical tank stand`. **The line
+belongs in D7 and the lookup is the owner's under G-15.**
+WHY IT IS ASKED FOR AT ALL RATHER THAN ASSUMED: **read the tank's form in parts.md
+before you look for a flat place to stand it.** A tank that cannot stand on its own
+bottom and is stood on one is a tank standing on its outlet.
 
 **16-02. Stand the day tank at its layout position.**
 BLOCKED. Missing: BB-08, section 6.
@@ -975,13 +1240,25 @@ lifting out.**
 
 ## 17. BUILD ONE STANDPIPE PER TANK
 
+**REVISION, Issue 2: 17-01 IS NO LONGER BLOCKED, and 17-04a is inserted to record when
+the end cap joint was made.**
+
+**THE BLOCK ON 17-01 WAS A CYCLE AND IT IS THE ONE THE SEQUENCE CHECK COULD NOT SEE.**
+F-116. Issue 1 blocked the pipe's length on trip heights that section 19 produces,
+section 19 waits on section 18, and section 18 waits on this section. **The dependency
+lived inside a blocked note instead of in a precondition, so the check read past it.**
+**It is broken by the fact that dissolves it: every mark on this pipe is measured from
+the end cap face, so the pipe's overall length does not set any height and a pipe
+longer than it needs to be is not wrong.** The rule below is the instruction, not a
+placeholder.
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-03, section 2.
 - BB-20, section 16.
 
 **TRUE AFTER IT ENDS:**
 - **BB-21.** One standpipe exists per tank, each with a solvent-welded end cap at its
-  bottom, cured.
+  bottom, the time of its joint written down, and cured.
 
 **THIS IS D-121'S METHOD AND SECTIONS 17 TO 23 ARE THE WHOLE OF IT.** One rigid pipe
 per tank carrying every float and every cord, hung off the rim, **with nothing hanging
@@ -992,23 +1269,25 @@ own cord and it will look fine:** nothing in this system measures a level. **A f
 that has moved is invisible**, and under D-114 the fill-stop float is the only thing
 stopping the fill. A cord-hung float is a float whose position is a suggestion.
 
-**THE PIPE IS PVC.** D-121 as confirmed by the owner on 2026-09-05: the same material
-as everything else in the wet path.
-WHY IT IS WRITTEN DOWN RATHER THAN LEFT TO THE BUILDER: **a metal standpipe would be
-an unbonded conductive part in a tank with line-voltage cords tied to it.** The material
-choice removes that failure instead of managing it. The alternative was a bonding
-conductor, a landing on the local bar, a step, a check that it is still bonded, and a
-failure mode where it is not. **If you are holding a metal pipe because it is stiffer,
-that is what you are buying.**
+**THE PIPE'S MATERIAL IS SETTLED BY D-121 AND CONFIRMED BY THE OWNER, AND D7 CARRIES
+THE LINE. DO NOT SUBSTITUTE ANOTHER MATERIAL AT THE BENCH.**
+WHY, because the substitution a builder would reasonably make is to something
+stiffer: **a conductive standpipe is an unbonded conductive part standing in a tank
+with line-voltage cords tied to it.** The alternative to the material choice was a
+bonding conductor, a landing on a bar, a step, a check that it is still bonded, and a
+failure mode where it is not. **The material removes the failure instead of managing
+it, and that is the whole of what it buys.**
 
-**17-01. Cut one pipe per tank.**
-BLOCKED for the length. Missing: **this book states no dimension.** The length is set
-by the tank in front of you and by the trip heights, which do not exist until section
-19.
-**THE RULE THAT SURVIVES EVERY NUMBER BEING WRONG, so the cut can be made when the
-heights arrive:** the pipe stands at the bottom of the tank and its top clears the rim
-by enough to take the U-bolt and to turn the cords over the rim without a sharp bend.
-**Cut long and cut again if you must. A pipe cut short is a pipe bought twice.**
+**17-01. Cut one pipe per tank, long enough to stand at the bottom of its tank and
+clear the rim by enough to take the U-bolt and turn the cords over the rim without a
+sharp bend.**
+ACCEPT: the pipe stands on the tank floor with its top clear of the rim, and you can
+lay a cord over the rim from the top of it without the cord bending sharply.
+WHY THE LENGTH IS NOT A DIMENSION AND WHY IT IS NOT WAITING ON THE TRIP HEIGHTS:
+**every mark on this pipe is measured from the end cap face in section 21, so the top
+of the pipe sets nothing.** A pipe that is longer than it needs to be carries its
+marks in exactly the same places. **Cut long. A pipe cut short is a pipe bought
+twice.**
 
 **17-02. Deburr the cut end of each pipe.**
 ACCEPT: run a finger round the bore and the outside and feel nothing that catches.
@@ -1021,12 +1300,16 @@ WHY THE CAP IS AT THE BOTTOM AND WHY IT IS FLAT: **every trip height in this bui
 measured from the end cap face**, D-131. The cap is the datum for the whole tank.
 
 **17-04. Solvent-weld the end cap to each pipe.**
-ACCEPT: the cap is home to its stop and the joint has an unbroken bead all round.
+BLOCKED. Missing: the cement, which is 11-01's blocker. Owner: the owner runs the
+lookup under G-15.
+
+**17-04a. Write down the time each end cap joint was made.**
+BLOCKED. Missing: nothing to record until 17-04 is done.
+WHY: as 11-06a. 31-02 confirms this cure and cannot confirm it against a memory.
 
 **17-05. Leave both pipes undisturbed until the cement's own instruction says the cure
 is complete.**
-ACCEPT: the time the cement's label states has elapsed and neither pipe has been
-moved.
+BLOCKED. Missing: as 17-04.
 WHY THIS SECTION ENDS HERE: as section 11. **A wait in the middle of a section is
 where a builder is sent away and the next steps assume he did not go.** Section 18
 restates the cure as its own precondition.
@@ -1035,12 +1318,17 @@ restates the cure as its own precondition.
 
 ## 18. HANG EACH PIPE ONCE AND TAKE ITS DATUM
 
+**REVISION, Issue 2: 18-01, 18-02 and 18-03 are RE-ORDERED. The three actions are
+unchanged and the order was wrong: Issue 1 clamped the U-bolt to the rim before the
+pipe was stood in the tank, so either the pipe had nowhere to go or the clamp was
+tightened on nothing. 18-02a, 18-05a and 18-05b are inserted.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-20, section 16.
 - BB-21, section 17, **including its cure.**
 
 **TRUE AFTER IT ENDS:**
-- **BB-22.** Each pipe's U-bolt is fitted and its hang position on the rim is set;
+- **BB-22.** Each pipe's U-bolt is fitted and its hang position is marked on the pipe;
   the offset between the pipe's end cap face and the tank floor is measured once per
   tank and recorded; and each pipe is back out of its tank.
 
@@ -1054,38 +1342,45 @@ bulkhead is a hole in a **tank wall.** An air gap is measured from the **tank's 
 rim.** Those are three different datums on two different objects, and the offsets
 between them are whatever they happen to be.
 
-**18-01. Fit a U-bolt with a backing plate over the tank's drum lip, to each pipe.**
+**18-01. Fit a U-bolt and its backing plate loosely round each pipe, nuts finger-tight
+only.**
 BLOCKED. Missing: the U-bolt and the backing plate are D7 lines and no file read for
 this book states them as bought. Owner: WATER states the requirement; the owner runs
 the lookup under G-15.
-**REQUIREMENT AND SEARCH TERM:** a U-bolt and a backing plate that clamp over the
-tank's lip without crushing it, in a material that will stand in a fertiliser solution
-atmosphere. Search: `U-bolt with backing plate pipe clamp`; `tank rim pipe mounting
-bracket`.
+**REQUIREMENT AND SEARCH TERM:** a U-bolt and a backing plate that clamp the pipe over
+the tank's lip without crushing the lip, in a material that will stand in a fertiliser
+solution atmosphere. Search: `U-bolt with backing plate pipe clamp`; `tank rim pipe
+mounting bracket`.
+WHY FINGER-TIGHT AND NOT TIGHT: the pipe has to be stood in the tank and slid to
+height before anything is clamped. **A U-bolt tightened on the bench is a U-bolt that
+has to be undone.**
 
-**18-02. Tighten the U-bolt nuts underneath the lip, snug and not crushed.**
+**18-02. Stand each pipe in its tank.**
+BLOCKED. Missing: as 18-01.
+
+**18-02a. Hang each pipe's U-bolt over its tank's lip.**
+BLOCKED. Missing: as 18-01.
+ACCEPT when unblocked: the pipe stands at the bottom of the tank, hangs from the rim,
+and nothing else in the tank carries any part of its weight.
+
+**18-03. Tighten each U-bolt's nuts underneath the lip, snug and not crushed.**
 BLOCKED. Missing: as 18-01.
 WHY IT IS WRITTEN AS ONE STEP WITH THE ALLOWANCE IN IT: D-131 states the whole of it
 in one breath - **a U-bolt with a backing plate over the drum lip, nuts underneath,
 snug and not crushed.** A crushed lip on a bought tank is not recoverable, and a
 builder tightening to feel will keep going until something stops moving.
 
-**18-03. Stand each pipe in its tank and hang it on its U-bolt.**
-BLOCKED. Missing: as 18-01.
-ACCEPT when unblocked: the pipe stands at the bottom of the tank, hangs from the rim,
-and nothing else in the tank carries any part of its weight.
-
 **18-04. Measure the offset between the end cap face and the tank floor, once, for
 this tank.**
-BLOCKED. Missing: nothing to measure until 18-03 is done.
+BLOCKED. Missing: nothing to measure until 18-02a is done.
 WHY THIS ONE MEASUREMENT IS ITS OWN STEP: **it is the only thing that ties the
 standpipe's datum to the tank's datum**, and every height in section 19 is written
 against one or the other. **It is measured once per tank and recorded before any
 height in this build is written down.** WATER's return names it as the cheapest item
 in that entire pass.
-WHY IT MAY NOT BE ZERO: the storage tank is cone bottom. A pipe standing in it may sit
-on a boss, on the cone, or clear of the floor entirely, **and the same tether length
-gives a very different volume band at different heights in that vessel.**
+WHY IT MAY NOT BE ZERO: **read the storage tank's form in parts.md.** A pipe standing
+in it may sit on a boss, on a slope, or clear of the floor entirely, and the same
+tether length gives a very different volume band at different heights in that vessel.
 
 **18-05. Record the offset against the tank it belongs to.**
 BLOCKED. Missing: as 18-04.
@@ -1095,25 +1390,37 @@ WHY THE TWO FACES ARE NAMED IN THE RECORD: a figure with no datum is the defect 
 section exists to prevent. Writing the number without writing what it was measured
 between reproduces it exactly.
 
-**18-06. Lift each pipe back out of its tank and put it on the bench.**
+**18-05a. Mark the U-bolt's position on each pipe.**
+BLOCKED. Missing: as 18-02a.
+WHY: **section 23 hangs these pipes again and the hang has to land in the same place.**
+The offset recorded at 18-05 is only true for this hang. A pipe re-hung a little
+higher or lower makes every mark in section 21 wrong by that amount, invisibly.
+
+**18-05b. Slacken each U-bolt's nuts.**
 BLOCKED. Missing: as 18-03.
-WHY THE PIPE COMES BACK OUT: section 20 cuts a hole in each tank wall and section 21
-marks the pipes. **Cutting a tank wall with a standpipe in the tank puts swarf down
-the tank and onto a pipe that will carry floats**, and marking a pipe is bench work
-that is done badly leaning over a rim. **The cost is one lift per tank and it is
-paid here on purpose.**
+
+**18-06. Lift each pipe out of its tank onto the bench.**
+BLOCKED. Missing: as 18-05b.
+WHY THE PIPE COMES BACK OUT: section 20 cuts holes in each tank and section 21 marks
+the pipes. **Cutting a tank with a standpipe in it puts swarf down the tank and onto a
+pipe that will carry floats**, and marking a pipe is bench work that is done badly
+leaning over a rim. **The cost is one lift per tank and it is paid here on purpose.**
 
 ---
 
 ## 19. SET THE LEVELS
+
+**REVISION, Issue 2: 19-01 split into 19-01, 19-01a and 19-01b, and 19-05 split into
+19-05 and 19-05a. One decision per step,
+with its own reason.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-22, section 18.
 
 **TRUE AFTER IT ENDS:**
 - **BB-23.** Every height in each tank's freeboard stack is decided and recorded: the
-  fill band, the four trip heights, the high-high mark, the overflow invert, the rim,
-  and the air gap.
+  working volume, the fill band, every trip height, the high-high mark, the overflow
+  invert, the rim, and the air gap.
 
 ### THIS SECTION IS A DECISION AND NOT A STEP, AND IT IS BLOCKED.
 
@@ -1128,14 +1435,12 @@ used as a working volume.**
 **BLOCKED. Missing: the differential each position needs.** Owner: WATER. **D-131:
 the differential is set by tether length, so it is a thing this build chooses rather
 than a thing the part provides, and no float datasheet can supply it.** The
-requirement per position is in subsystems/water-float-requirement.md section 1.0(e)
-and is not restated here.
+requirement per position is in subsystems/water-float-requirement.md section 1.0(e).
 
 **BLOCKED. Missing: the surface disturbance amplitude at each position.** Owner: the
 owner, as an observation taken while filling slowly. It is caused by things WATER
-places - the return drop's landing point, the transfer discharge, and two
-continuously running submersibles in the day tank - **and nothing has measured it and
-no datasheet contains it.**
+places - the return drop's landing point, the transfer discharge, and the submersibles
+in the day tank - **and nothing has measured it and no datasheet contains it.**
 
 **BLOCKED. Missing: whether the freeboard stack closes at all.** Owner: WATER, and it
 cannot be added up until the differentials are chosen. **Everything from the top of
@@ -1153,28 +1458,39 @@ manifold's diameter**, which is a different duty.
 **Taken from subsystems/water-float-requirement.md section 2.2, which is where the
 ordering was worked out. The order stands whatever the numbers turn out to be.**
 
-**19-01. Decide the working volume and the fill band, both ends, with the reason for
-each.**
+**19-01. Decide the working volume, with the reason.**
 BLOCKED. Missing: C-11, as above.
 WHY THIS IS FIRST AND WHY IT IS NOT CIRCULAR: C-11's own blocked-on column says
-"floats chosen and set", which reads as though the band waits on the floats. **It does
-not. The band is a decision about the water and the float marks follow it.**
+"floats chosen and set", which reads as though the volume waits on the floats. **It
+does not. The band is a decision about the water and the float marks follow it.**
 
-**19-02. Decide the four trip heights for this tank, with the differential of each,
+**19-01a. Decide the fill band's low end, with the reason.**
+BLOCKED. Missing: as 19-01.
+
+**19-01b. Decide the fill band's high end, with the reason.**
+BLOCKED. Missing: as 19-01.
+WHY EACH END IS ITS OWN STEP WITH ITS OWN REASON: **the two ends are set by different
+things.** WATER's return records that the low end is a measurement-quality limit as
+well as a pump limit. **A step that decides both at once records one reason and loses
+the other.**
+
+**19-02. Decide each trip height this tank carries, with the differential of each,
 measured from the end cap face.**
-BLOCKED. Missing: as above.
+BLOCKED. Missing: as 19-01. **Which positions this tank carries is the float
+requirement's fact and D2's roster's, not this book's.**
 **ONE POSITION IS A CONFLICT AND NOT A REQUIREMENT, and it must be recognised before a
-mark is chosen and not after:** the day tank low-low needs the largest differential of
-the eight, **because low level is when the two submersibles are nearest the surface
-and vortexing is worst, and it is the position with the least depth available to spend
-on a tether.** It may force the low-low trip higher than the pump's bare submergence
-limit. That is resolved by geometry and not by a part.
+mark is chosen and not after:** the float requirement records that the day tank
+low-low needs the largest differential of any position, **because low level is when
+the submersibles are nearest the surface and vortexing is worst, and it is the
+position with the least depth available to spend on a tether.** It may force that trip
+higher than the pump's bare submergence limit. That is resolved by geometry and not by
+a part.
 
-**19-03. Decide the high-high mark, which is the topmost of item 19-02's marks.**
-BLOCKED. Missing: as above.
+**19-03. Decide the high-high mark, which is the topmost of 19-02's marks.**
+BLOCKED. Missing: as 19-01.
 
 **19-04. Decide the overflow's landing height, above the high-high mark.**
-BLOCKED. Missing: as above.
+BLOCKED. Missing: as 19-01.
 WHY ABOVE AND NOT BELOW, AND THIS IS THE ONE THAT WILL BE ARGUED WITH WHILE SOMEBODY
 IS HOLDING A HOLE SAW: **the high-high is the instrumented protection and the overflow
 is the uninstrumented one.** D-134. Above, the high-high trips first and the machine
@@ -1185,8 +1501,14 @@ does not close, **the tempting fix is to drop the overflow below the high-high a
 recover the height, and that is exactly the trade D-134 forbids.** The thing that
 gives is the working volume.
 
-**19-05. Decide the tank rim and the fill air gap above it.**
-BLOCKED. Missing: as above, and one question the owner has not been asked.
+**19-05. Decide where this tank's flood rim is.**
+BLOCKED. Missing: as 19-01.
+WHY IT IS A DECISION AND NOT A MEASUREMENT: **on a tank with an overflow the flood
+level is set by the overflow and not by the moulded edge.** 25-05 measures the air gap
+from it, so which one it is has to be decided here and written down.
+
+**19-05a. Decide the fill air gap above that rim.**
+BLOCKED. Missing: as 19-01, and one question the owner has not been asked.
 **THE QUESTION, and it doubles or halves this half of the work:** D-138's stated reason
 for the air gap is backflow protection of the municipal supply, **and only the storage
 tank is connected to municipal supply.** On that reason the air gap attaches to the
@@ -1197,7 +1519,7 @@ WATER declined to merge them.** Owner: the owner.
 
 **19-06. Record every decided height against the tank it belongs to, and against the
 datum it was measured from.**
-BLOCKED. Missing: as above.
+BLOCKED. Missing: as 19-01.
 ACCEPT when unblocked: every height on the record names its tank, its datum face, and
 its units.
 WHY THE DATUM IS RECORDED WITH EVERY SINGLE HEIGHT AND NOT ONCE AT THE TOP OF THE
@@ -1207,20 +1529,27 @@ them precisely so that this record can be unambiguous.
 
 ---
 
-## 20. CUT THE OVERFLOW BULKHEADS
+## 20. CUT THE OVERFLOW BULKHEADS AND THE CORD EXITS
+
+**REVISION, Issue 2: 20-05a, 20-07a and 20-07b inserted, and the section retitled.
+Issue 1 threaded float cords out through a tank's cord grip in section 22 and no step
+anywhere cut the opening or fitted the grip. It is cut here, with the tank empty and
+the standpipe out, which is the same argument that puts the bulkhead here. 20-07 split
+from 20-07a. Owners added to 20-03 and 20-05.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-20, section 16.
+- BB-22, section 18.
 - BB-23, section 19.
 
 **TRUE AFTER IT ENDS:**
-- **BB-24.** Each tank carries one overflow bulkhead at its decided invert, sealed,
-  and each tank is clean of swarf.
+- **BB-24.** Each tank carries its overflow bulkhead at its decided invert, sealed,
+  and its cord exit with a cord grip fitted; and each tank is clean of swarf.
 
-**THIS IS THE MOST IRREVERSIBLE OPERATION IN THE BUILD.** Two holes in two bought
-tanks. **A bulkhead sited before the heights are settled is a scrapped tank**, which
-is why BB-23 is this section's precondition and why section 19 is a section rather
-than a note.
+**THIS IS THE MOST IRREVERSIBLE OPERATION IN THE BUILD.** Holes in bought tanks. **A
+bulkhead sited before the heights are settled is a scrapped tank**, which is why BB-23
+is this section's precondition and why section 19 is a section rather than a note.
 
 **20-01. Confirm the standpipe is out of this tank before anything is cut.**
 ACCEPT: the tank is empty of everything.
@@ -1230,29 +1559,46 @@ WHY: section 18 took it out for this reason. **Swarf in a tank is swarf on a flo
 BLOCKED. Missing: **whether either tank has a flat moulded boss near the top is a
 question for the owner with the tanks in front of him.** Owner: the owner.
 WHY IT IS A STEP AND NOT AN ASSUMPTION: **a gasket needs a flat land, and the upper
-wall of a cylindrical tank is a curve.** A bulkhead gasket seating on a curve is a
-leak that appears later. It changes the fitting class and it may change the landing
-height, **which is why it is asked before the hole and not after.**
+wall of a tank is a curve.** A bulkhead gasket seating on a curve is a leak that
+appears later. It changes the fitting class and it may change the landing height,
+**which is why it is asked before the hole and not after.**
 
 **20-03. Mark the hole centre at the decided invert height, on the flat land.**
-BLOCKED. Missing: BB-23 and 20-02.
+BLOCKED. Missing: BB-23 and 20-02. Owner: WATER for the height, the owner for the
+land.
 
-**20-04. Confirm the marked position is clear of the standpipe's hang point, the
-return drop's landing, the transfer discharge, the submersible cords and every
-penetration and hanger M-01 carries.**
-BLOCKED. Missing: BB-08, section 6, and M-01's contents.
-WHY THIS CHECK IS HERE AND NOT LATER: **the same upper wall and rim carry all of
-those**, and M-01 grows by one item with this bulkhead. **The overflow must not sit
-under the return drop's splash and must not sit where the standpipe or its cord run
-is.** A hole in the wrong place on a bought tank is the whole tank.
+**20-04. Confirm the marked position is clear of every position the layout and M-01
+assign on this tank's rim and upper wall: the standpipe's hang point, the cord exit,
+the return drop's landing, the transfer discharge, the submersible cords, and every
+penetration and hanger.**
+BLOCKED. Missing: BB-08, section 6, and M-01's contents. Owner: INTERCONNECT
+arbitrates the layout, WATER owns M-01.
+WHY THE CHECK IS AGAINST THE LAYOUT AND NOT AGAINST THE OBJECTS, and this is the fix
+for a real defect in Issue 1: **the return drop is landed in section 28, the transfer
+discharge in section 26 and the submersible cords in section 27, so three of these
+things do not exist when this check is made.** Issue 1 asked a builder to check
+clearance against objects that were not there, standing in front of the most
+irreversible cut in the build. **They exist as POSITIONS in the layout, which is why
+6-01 now has to produce them**, and sections 26, 27 and 28 each confirm the installed
+object landed where the layout put it.
 
-**20-05. Cut the hole.**
-BLOCKED. Missing: BB-23, 20-02, 20-03 and 20-04.
+**20-05. Cut the bulkhead hole.**
+BLOCKED. Missing: BB-23, 20-02, 20-03 and 20-04. Owner: as 20-03 and 20-04.
+
+**20-05a. Cut this tank's cord exit.**
+BLOCKED. Missing: **no file read for this book says what the cord exit is cut in.**
+D-131's method names a cord grip at the tank and F-100's span names the tank's
+cord-exit grip, and neither says whether it mounts in the tank wall, in the rim, or in
+a bracket beside it. Owner: WATER, as part of M-01's penetrations and hangers.
+WHY IT IS CUT HERE AND NOT WHEN THE CORDS ARRIVE: **it is a penetration on a tank, and
+every argument that puts the bulkhead in this section puts this here too** - the tank
+is empty, the standpipe is out, and swarf has somewhere to go that is not the water.
+**Issue 1 threaded cords through a grip that no step had ever fitted.**
 
 **20-06. Clean every particle of swarf out of the tank.**
-BLOCKED. Missing: nothing to clean until 20-05 is done.
+BLOCKED. Missing: nothing to clean until 20-05 and 20-05a are done.
 
-**20-07. Fit the bulkhead and seal it.**
+**20-07. Fit the bulkhead to its hole.**
 BLOCKED. Missing: the bulkhead is a requirement and a search term, not a part.
 **REQUIREMENT AND SEARCH TERM, per WATER's return:** a bulkhead fitting for the tank
 wall it lands in, sized to swallow the full inflow with the fill-stop failed, seating
@@ -1266,8 +1612,17 @@ It fouls silently and it is the last line, with nothing behind it. **A screen ma
 visible failure into an invisible one**, which is the same trade WATER already refused
 on the return drop.
 
-**20-08. Confirm the bulkhead does not leak, dry, by hand.**
+**20-07a. Seal the bulkhead.**
 BLOCKED. Missing: as 20-07.
+WHY IT IS ITS OWN STEP: **this is the most irreversible object in the build and a
+bulkhead fitted and not sealed looks exactly like one that is.** 20-05 and 20-06 above
+are split for the same reason and this one was not.
+
+**20-07b. Fit the cord grip to this tank's cord exit.**
+BLOCKED. Missing: as 20-05a, and the grip is a D7 line as at 7-09.
+
+**20-08. Confirm the bulkhead does not leak, dry, by hand.**
+BLOCKED. Missing: nothing to check until 20-07a is done.
 ACCEPT when unblocked: the fitting is home, the gasket is seated all round with no
 witness of a lip or a curve under it, and nothing moves when you pull on it.
 WHY IT IS CHECKED DRY AND NOW: a wet test belongs to D8. **What is checked here is
@@ -1278,18 +1633,26 @@ full and only correctable before the run is plumbed to it.**
 
 ## 21. MARK THE STANDPIPES
 
+**REVISION, Issue 2: the steps no longer name which tank each position is in. Which
+position is in which tank is the float requirement's fact and D2's roster's. An owner
+is added to 21-10.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-22, section 18.
 - BB-23, section 19.
 
 **TRUE AFTER IT ENDS:**
 - **BB-25.** Each pipe carries a permanent mark at every one of its trip heights,
-  measured from its end cap face.
+  measured from its end cap face, with the position's name beside it.
 
 **THE PIPE IS MARKED BEFORE ANYTHING GOES IN THE TANK.** D-131 states it as an
 assembly step. **It is more than that here, and the reason is worth carrying: nothing
 in this system measures a level, so an unmarked float that slips is invisible and a
 marked one is not.** The 1st Edition knew to do it. It did not know why it mattered.
+
+**BEFORE 21-02, READ WHICH POSITIONS BELONG TO WHICH PIPE off the float requirement
+and D2's roster.** Each step below marks one position on the pipe for the tank that
+position is in. **This book does not carry the assignment.**
 
 **21-01. Put each pipe on the bench with its end cap face against a stop.**
 ACCEPT: the cap face is square to the stop and the pipe cannot slide.
@@ -1297,32 +1660,33 @@ WHY THE STOP: every mark on this pipe is measured from that face and from nothin
 else. Measuring from a tape held against a free end reproduces the datum error section
 18 exists to prevent.
 
-**21-02. Mark the day tank pipe at LS-1's trip height.**
-BLOCKED. Missing: BB-23, section 19.
+**21-02. Mark LS-1's trip height on its pipe.**
+BLOCKED. Missing: BB-23, section 19. Owner: WATER for the height.
 
-**21-03. Mark the day tank pipe at LS-5's trip height.**
+**21-03. Mark LS-2's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-04. Mark the day tank pipe at LS-4's trip height.**
+**21-04. Mark LS-3's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-05. Mark the day tank pipe at LS-2's trip height.**
+**21-05. Mark LS-4's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-06. Mark the storage pipe at LS-6's trip height.**
+**21-06. Mark LS-5's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-07. Mark the storage pipe at LS-7's trip height.**
+**21-07. Mark LS-6's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-08. Mark the storage pipe at LS-3's trip height.**
+**21-08. Mark LS-7's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
-**21-09. Mark the storage pipe at LS-8's trip height.**
+**21-09. Mark LS-8's trip height on its pipe.**
 BLOCKED. Missing: as 21-02.
 
 **21-10. Write the position name beside each mark.**
-BLOCKED. Missing: nothing to write beside until 21-02 to 21-09 are done.
+BLOCKED. Missing: nothing to write beside until 21-02 to 21-09 are done. Owner: as
+21-02.
 ACCEPT when unblocked: every mark on both pipes carries its LS- name, and no two marks
 on one pipe carry the same name.
 WHY THE NAME AND NOT THE ORDER: **T-013.** A mark identified as "the second one up"
@@ -1333,9 +1697,9 @@ alike on a pipe.**
 **21-11. Make every mark permanent with a paint pen.**
 BLOCKED. Missing: the paint pen is a D7 line and no file read for this book states it
 as bought. Owner: the owner runs the lookup under G-15.
-**REQUIREMENT AND SEARCH TERM:** a marker that survives permanent immersion in a
-fertiliser solution on PVC. Search: `paint marker permanent immersion PVC chemical
-resistant`.
+**REQUIREMENT AND SEARCH TERM:** a marker whose mark survives permanent immersion in a
+fertiliser solution on the pipe's material. Search: `paint marker permanent immersion
+chemical resistant`.
 WHY PERMANENT AND WHY IT IS ITS OWN STEP: **the mark is the only record of where a
 float is supposed to be.** A pencil line under water for a season is a mark that
 disappears exactly when somebody comes to check whether a float has slipped.
@@ -1344,13 +1708,20 @@ disappears exactly when somebody comes to check whether a float has slipped.
 
 ## 22. FIT THE FLOATS AND THEIR CORDS
 
+**REVISION, Issue 2: 22-15 and 22-16 are RETIRED and their work has moved to section
+23, because Issue 1 threaded the cords out through the tank's cord grip and formed the
+drip loop while the pipe was still on the bench, and section 23 then lowered the pipe
+into the tank and pulled the cord back through. The numbers 22-15 and 22-16 are not
+reused. The steps no longer name which tank each position is in.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6. **The float cannot be bought until section 6 produces the span
+  terms, so section 6 is a precondition of this one and not only of D7.**
 - BB-25, section 21.
 
 **TRUE AFTER IT ENDS:**
-- **BB-26.** Every float is clamped at its mark, every float cord is run up its pipe
-  in the float tie group, and every float cord leaves through its tank's cord grip
-  with the drip loop outside.
+- **BB-26.** Every float is clamped at its mark and every float cord is laid and tied
+  on its pipe in the float tie group.
 
 ### THE WHOLE OF THIS SECTION IS BLOCKED ON THE FLOAT, AND HERE IS WHY
 
@@ -1362,40 +1733,56 @@ runs the lookup under G-15; BOSS freezes the rows.
 **AND THE FLOAT CANNOT BE BOUGHT UNTIL SECTION 6 EXISTS.** F-100. **The cord is the
 strain member, the trip-height datum and the signal path at once**, so it cannot be
 cut at the tank and cannot be joined there, **and a float whose supplied cord does not
-reach the panel gland is disqualified.** The span's terms are in
-subsystems/water-float-requirement.md section 1.4. **This is the one place in the book
-where a layout gates a purchase, and it is why section 6 is early.**
+reach the panel is disqualified.** The span's terms are in
+subsystems/water-float-requirement.md section 1.4.
+**THIS IS THE ONE PLACE WHERE THIS BOOK CONTRADICTS ITS OWN STEP 2-02, AND IT IS
+REPORTED RATHER THAN HIDDEN:** 2-02 requires a finished D7 before step 1, and the
+float line on D7 cannot close until section 6 has run. 2-02 now says so. **A bound on
+the span, put to INTERCONNECT and WATER at 6-07, is what would remove it.**
 
 **ONE REQUIREMENT ON THE PART THAT IS FREE NOW AND MONEY LATER, D-156:** the float
 cord's insulation is rated for the highest voltage in the bundle, **because the
-standpipe puts the float cords and the pump cords up one pipe by construction and
-they are not in the same voltage class.** D6 carries the class of each.
-It is a purchasing attribute and not a build step, and it is free only while the
-requirement is open.
+standpipe puts the float cords and the pump cords up one pipe by construction and they
+are not in the same voltage class.** D6 carries the class of each. It is a purchasing
+attribute and not a build step, and it is free only while the requirement is open.
 
-**22-01. Clamp LS-1's external weight on its mark on the day tank pipe with a cable
-tie.**
-BLOCKED. Missing: the float part, as above.
+**AND THE CABLE TIES ARE A LINE NOBODY HAS WRITTEN. REQUIREMENT AND SEARCH TERM,
+because 22-01 to 22-08 clamp with one and 22-11, 22-13 and 27-06 tie with one:** a tie
+that holds a clamped weight in position under permanent immersion in a fertiliser
+solution, and that a person can cut and replace at a level adjustment for the life of
+the machine. Search: `cable tie chemical resistant permanent immersion`; `UV and
+chemical resistant cable tie material selection`. **The line belongs in D7 and the
+lookup is the owner's under G-15.** **It is the same duty as 21-11's marker and it was
+missing for the same reason: a consumable that a step names is a consumable that has
+to be bought.**
+
+**BEFORE 22-01, READ WHICH POSITIONS BELONG TO WHICH PIPE off the float requirement
+and D2's roster**, as at section 21.
+
+**22-01. Clamp LS-1's external weight on its mark with a cable tie.**
+BLOCKED. Missing: the float part, as above, and the ties.
 **THE TIE IS THE TRIP HEIGHT AND THE WEIGHT IS THE PIVOT.** D-131. The float hangs
 below its weight on a tether and swings from the weight, **so a trip level is set by
-where a clamp is and by nothing else.**
+where a clamp is and by nothing else.** **The weight is part of the float assembly and
+the float requirement describes it; if the float that arrives has no external weight,
+stop, because the whole method rests on it.**
 
-**22-02. Clamp LS-5's external weight on its mark.**
+**22-02. Clamp LS-2's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
-**22-03. Clamp LS-4's external weight on its mark.**
+**22-03. Clamp LS-3's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
-**22-04. Clamp LS-2's external weight on its mark.**
+**22-04. Clamp LS-4's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
-**22-05. Clamp LS-6's external weight on its mark on the storage pipe.**
+**22-05. Clamp LS-5's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
-**22-06. Clamp LS-7's external weight on its mark.**
+**22-06. Clamp LS-6's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
-**22-07. Clamp LS-3's external weight on its mark.**
+**22-07. Clamp LS-7's external weight on its mark.**
 BLOCKED. Missing: as 22-01.
 
 **22-08. Clamp LS-8's external weight on its mark.**
@@ -1404,28 +1791,28 @@ BLOCKED. Missing: as 22-01.
 **22-09. Confirm every float on each pipe is fitted the same way up.**
 BLOCKED. Missing: as 22-01.
 **READ THIS BEFORE YOU FIT ANY OF THEM, BECAUSE IT CANNOT BE CHECKED AFTERWARDS BY
-LOOKING.** **The float requirement records that most positions in this build are
-closed on low water and that some are the inverse of the rest.** Which are which is
-that document's fact and is not repeated here. **The inverted ones sit on the same
-standpipes, in the same tanks as the others, and if the parts are identical they are
-indistinguishable by eye once installed.** A float installed the wrong way up silently
-inverts the fail direction, and it does so at the positions where an inverted fail
-direction is most dangerous.
+LOOKING.** **The float requirement records that most positions in this build are closed
+on low water and that some are the inverse of the rest.** Which are which is that
+document's fact. **The inverted ones sit on the same standpipes, in the same tanks as
+the others, and if the parts are identical they are indistinguishable by eye once
+installed.** A float installed the wrong way up silently inverts the fail direction,
+and it does so at the positions where an inverted fail direction is most dangerous.
 **WHAT THE REQUIREMENT DOES ABOUT IT, so that this step is a confirmation and not a
 judgement:** WATER's requirement asks for a changeover contact **so that both senses
-are available at the panel from one physical installation.** Eight floats installed
-identically, two of them wired to the other leg. **The fail direction becomes a wiring
-choice at a terminal a person can see, instead of an orientation choice in a tank a
-person cannot.** If the float that arrives is not a changeover, this step becomes a
-judgement made in a tank and it should be reported rather than made.
+are available at the panel from one physical installation.** Every float installed
+identically, and the ones that need the other sense wired to the other leg. **The fail
+direction becomes a wiring choice at a terminal a person can see, instead of an
+orientation choice in a tank a person cannot.** If the float that arrives is not a
+changeover, this step becomes a judgement made in a tank and it should be reported
+rather than made.
 
-**22-10. Lay the four float cords along the day tank pipe.**
+**22-10. Lay this pipe's float cords along the pipe.**
 BLOCKED. Missing: as 22-01.
 
-**22-11. Tie the four day tank float cords to the pipe at intervals, as one group.**
+**22-11. Tie this pipe's float cords to the pipe at intervals, as one group.**
 BLOCKED. Missing: as 22-01.
 **FLOAT CORDS AND PUMP CORDS GET SEPARATE TIE GROUPS.** D-121 as extended by D-156.
-The pump cords join this pipe in section 27 and they go in their own group.
+The pump cords join the day tank's pipe in section 27 and they go in their own group.
 WHY IT IS THE ONLY ADJACENCY REMEDY TAKEN, AND WHY NOTHING ELSE IS ADDED: it costs
 nothing, changes no part, and is one instruction. **Shields, conduits and barriers
 cost a part per pipe, a buy line and an assembly step, they obstruct the tie a person
@@ -1433,10 +1820,10 @@ has to reach at every level adjustment, and none of them touches the expensive f
 - which is float to float, inside one class.** That failure is already paid for by the
 overflow.
 
-**22-12. Lay the four storage float cords along the storage pipe.**
+**22-12. Lay the other pipe's float cords along that pipe.**
 BLOCKED. Missing: as 22-01.
 
-**22-13. Tie the four storage float cords to the pipe at intervals, as one group.**
+**22-13. Tie the other pipe's float cords to that pipe at intervals, as one group.**
 BLOCKED. Missing: as 22-01.
 
 **22-14. Leave slack in each cord at its weight clamp, enough for that position's full
@@ -1451,16 +1838,11 @@ has to be re-run from the panel, and the only remedies left are the two D-131 fo
 **This allowance has no analogue in any other cable in this build and nobody but WATER
 can give it.**
 
-**22-15. Take each tank's float cords out through that tank's cord grip.**
-BLOCKED. Missing: as 22-01, and the grip is a D7 line.
+**22-15. RETIRED at Issue 2. Its work is now 23-03c and 23-03e.** The number is not
+reused.
 
-**22-16. Form the drip loop in the cords outside the grip.**
-BLOCKED. Missing: as 22-15.
-ACCEPT when unblocked: the lowest point of the cord run is outside the grip and not
-inside it.
-WHY: D-126 and D-047. **Water runs to the lowest point. If that point is inside the
-grip, it runs into the entry.** A loop formed on the inside is not a drip loop, it is
-a funnel.
+**22-16. RETIRED at Issue 2. Its work is now 23-03d and 23-03f.** The number is not
+reused.
 
 **22-17. Confirm no float body carries the weight of anything.**
 BLOCKED. Missing: as 22-01.
@@ -1472,32 +1854,75 @@ standpipe was adopted to remove, and it is easy to do while tidying.
 
 ## 23. HANG THE STANDPIPES FOR THE LAST TIME
 
+**REVISION, Issue 2: 23-02a, 23-02b, 23-03a to 23-03f inserted. The hang is now split
+from the lowering and the nuts are re-tightened at the mark 18-05a made; and the cords
+are threaded out through the tank's grip and the drip loop formed HERE, after the pipe
+is in the tank, because Issue 1 did both on the bench and then pulled the cord back
+through when the pipe was lowered. Owners added to 23-04 and 23-05.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-24, section 20.
 - BB-26, section 22.
 
 **TRUE AFTER IT ENDS:**
-- **BB-27.** Both standpipes are hung in their tanks, floats at their marks, cords out
-  through the grips.
+- **BB-27.** Both standpipes are hung in their tanks at the position section 18 set,
+  floats at their marks, and every float cord is out through its tank's cord grip with
+  the drip loop outside it.
 
 **23-01. Confirm each tank is clean and dry before the pipe goes back in.**
 ACCEPT: nothing in either tank.
-WHY: section 20 cut a hole in each of them. This is the check that section 20's
+WHY: section 20 cut holes in each of them. This is the check that section 20's
 cleaning actually happened, made at the last moment it is free.
 
-**23-02. Lower the day tank pipe into its tank and hang it on its U-bolt.**
+**23-02. Lower the day tank's pipe into its tank.**
 BLOCKED. Missing: BB-26, section 22.
 
-**23-03. Lower the storage pipe into its tank and hang it on its U-bolt.**
+**23-02a. Hang its U-bolt over the lip at the mark made in 18-05a.**
 BLOCKED. Missing: as 23-02.
+ACCEPT when unblocked: the U-bolt sits on its mark.
+WHY THE MARK AND NOT BY EYE: **the offset recorded at 18-05 is only true for that
+hang, and every trip mark on this pipe was measured against it.** A pipe re-hung a
+little higher or lower makes every mark wrong by that amount, invisibly, and nothing
+in this system measures a level to tell you.
+
+**23-02b. Tighten its U-bolt's nuts, snug and not crushed.**
+BLOCKED. Missing: as 23-02.
+WHY THE ALLOWANCE IS IN THIS STEP: as 18-03. A crushed lip on a bought tank is not
+recoverable.
+
+**23-03. Lower the storage tank's pipe into its tank.**
+BLOCKED. Missing: as 23-02.
+
+**23-03a. Hang its U-bolt over the lip at the mark made in 18-05a.**
+BLOCKED. Missing: as 23-02.
+
+**23-03b. Tighten its U-bolt's nuts, snug and not crushed.**
+BLOCKED. Missing: as 23-02.
+
+**23-03c. Take the day tank's float cords out through that tank's cord grip.**
+BLOCKED. Missing: as 23-02, and BB-24's cord grip.
+
+**23-03d. Form the drip loop in those cords outside the grip.**
+BLOCKED. Missing: as 23-03c.
+ACCEPT when unblocked: the lowest point of the cord run is outside the grip and not
+inside it.
+WHY: D-126 and D-047. **Water runs to the lowest point. If that point is inside the
+grip, it runs into the entry.** A loop formed on the inside is not a drip loop, it is
+a funnel.
+
+**23-03e. Take the storage tank's float cords out through that tank's cord grip.**
+BLOCKED. Missing: as 23-03c.
+
+**23-03f. Form the drip loop in those cords outside the grip.**
+BLOCKED. Missing: as 23-03e.
 
 **23-04. Confirm each pipe hangs where section 18 set it and nothing else in the tank
 carries its weight.**
-BLOCKED. Missing: as 23-02.
+BLOCKED. Missing: as 23-02. Owner: WATER, whose method this is.
 
 **23-05. Confirm every float hangs clear of the tank wall, the bulkhead and the pipe
 through its full swing.**
-BLOCKED. Missing: as 23-02.
+BLOCKED. Missing: as 23-02. Owner: WATER.
 WHY IT IS CHECKED WITH THE TANK EMPTY: a float that fouls something swings short, and
 a float that swings short trips at a height that is not its mark. **With the tank
 empty you can see the whole swing. With water in it you cannot see any of it**, and
@@ -1507,19 +1932,25 @@ nothing in this system measures a level to tell you.
 
 ## 24. THE OVERFLOW RUNS TO THE TRACK
 
+**REVISION, Issue 2: 24-07a inserted, to record when the last joint was made. 24-01's
+acceptance condition is changed from a thought experiment to something a level can
+check. 24-03's blocker is corrected: it is not blocked on F-104, which the owner has
+closed.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-20, section 16.
 - BB-24, section 20.
 
 **TRUE AFTER IT ENDS:**
 - **BB-28.** Each overflow falls continuously from its bulkhead to the drain track and
-  discharges through an air gap above it, and a provision for a tell-tale is left in
-  each run.
+  discharges through an air gap above it, the time of its last joint is written down,
+  and a provision for a tell-tale is left in each run.
 
 **24-01. Set out each run dry from its bulkhead to the track, with continuous fall.**
 BLOCKED. Missing: BB-08, section 6, for where the tank stands relative to the track.
-ACCEPT when unblocked: water poured in at the bulkhead end would run the whole way
-without standing anywhere.
+ACCEPT when unblocked: **taken along the set-out with a level, every point is lower
+than the point before it, and there is no point where it is not.**
 **NO TRAP, NO LOW POINT, NO RISE ANYWHERE.** Gravity is the only thing moving water in
 this line. **The entry point into the track is free under D-147**, which removes the
 constraint rather than satisfying it, so the route has the whole track to aim at.
@@ -1533,16 +1964,17 @@ has to have been in the layout. If it was not, this step is where that is discov
 and it is discovered against everything already fixed.
 
 **24-03. Choose the run's entry into the track away from where the leak sensor sits.**
-BLOCKED. Missing: as 24-01, and the sensor's position is the owner's under F-104,
-which he has closed.
+BLOCKED. Missing: BB-08, section 6.
+NOT BLOCKED ON F-104: **the owner has closed it and the sensor's placement stands**,
+so where the sensor is is known. What is not known is where this run can reach.
 WHY: D-133. **If normal overflow discharge can splash or pool on the sensor, every
 overflow reads as a leak and the alarm stops meaning anything.** The entry point is
 free, so this is satisfied by choosing rather than by paying for anything.
 
 **24-04. Build the run in from the bulkhead to the track.**
-BLOCKED. Missing: BB-08 and the pipe size, which is 19-05's blocked capacity
-requirement. **The overflow's size must not be inherited from the manifold's
-diameter** - it is a different question with a different driver.
+BLOCKED. Missing: BB-08, the pipe size, which is 19-05's blocked capacity requirement,
+and the cement, which is 11-01's blocker. **The overflow's size must not be inherited
+from the manifold's diameter** - it is a different question with a different driver.
 
 **24-05. Leave a provision in the run for a tell-tale device.**
 BLOCKED. Missing: **there is no decision.** WATER recommended the provision and named
@@ -1582,18 +2014,26 @@ WHY IT IS ITS OWN STEP: a gravity line that sags has a low point, **and a low po
 the one thing 24-01 forbids.** A run set out correctly and then hung on too few
 supports fails 24-01 without anybody repeating 24-01.
 
+**24-07a. Write down the time the last joint in each overflow run was made.**
+BLOCKED. Missing: nothing to record until 24-04 is done.
+WHY: as 11-06a.
+
 ---
 
 ## 25. THE STORAGE FILL LINE AND ITS AIR GAP
 
+**REVISION, Issue 2: 25-03a and 25-06a inserted. 25-02's quoted valve specification is
+removed; it is parts.md's and D7's.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-20, section 16.
 - BB-23, section 19.
 
 **TRUE AFTER IT ENDS:**
 - **BB-29.** The fill line runs from the building supply through FV-1 to a fixed
   outlet that discharges into the storage tank through an air gap above its flood
-  rim.
+  rim, and the time of its last joint is written down.
 
 **25-01. Run the line from the supply stub toward the storage tank.**
 BLOCKED. Missing: **FL-01 is an OPEN interface row.** Owner: WATER, and the crossing
@@ -1602,18 +2042,21 @@ carries the air gap as a property of itself under D-138 and D-153.
 **25-02. Install FV-1 in the line between unions.**
 BLOCKED. Missing: FL-01, as 25-01.
 ACCEPT when unblocked: FV-1 is between two unions and can be taken out of the line
-without cutting pipe.
-**FV-1 IS ORIENTATION-TOLERANT AND FLOW-DIRECTIONAL.** parts.md records the valve as
-mountable in any orientation with coil-up preferred for long life. **Fit it the way
-round its own body arrow says.** A directional valve fitted backwards is a valve that
-never opens, and it looks correctly installed.
-WHY UNIONS AND NOT SOLVENT WELD: parts.md records it as the installation method for
-this valve. **A coil is a serviceable item on a line that is otherwise permanent.**
+without cutting pipe, **and it is fitted the way round its own body marking says.**
+WHY UNIONS AND NOT SOLVENT WELD: parts.md records the installation method with the
+valve, and D7 carries its line. **A coil is a serviceable item on a line that is
+otherwise permanent.**
+WHY THE BODY MARKING AND NOT THE DRAWING: **a directional valve fitted backwards never
+opens and looks correctly installed.** The marking is on the part in front of you and
+it is the only thing that is.
 
-**25-03. Bring the line over the storage tank rim and turn its outlet downward into
-open air.**
-BLOCKED. Missing: BB-23's air gap height, and 19-05's open question about whether the
-air gap is required on both tanks or only on the storage fill. Owner: the owner.
+**25-03. Bring the line over the storage tank rim.**
+BLOCKED. Missing: as 25-01.
+
+**25-03a. Turn its outlet downward into open air.**
+BLOCKED. Missing: as 25-01, and BB-23's air gap height, and 19-05's open question
+about whether the air gap is required on both tanks or only on the storage fill.
+Owner: the owner.
 
 **25-04. Fix the outlet to a bracket.**
 BLOCKED. Missing: the bracket is a D7 line and its position depends on BB-08.
@@ -1625,20 +2068,24 @@ definition.** There is nothing at the end of the pipe holding it, and a fill lin
 has swung out of position discharges onto a floor or onto the rim.
 
 **25-05. Confirm the outlet is clear of the flood rim by the decided air gap.**
-BLOCKED. Missing: BB-23.
+BLOCKED. Missing: BB-23, and 25-04.
 **THE GAP IS MEASURED FROM THE FLOOD-LEVEL RIM, AND ON A TANK WITH AN OVERFLOW THE
 FLOOD LEVEL IS SET BY THE OVERFLOW AND NOT BY THE RIM.** So this dimension is
 referenced to the overflow, which is referenced to the high-high, which is referenced
 to a float mark on a standpipe. **D-130 and D-138 are one dimension chain, not two
 requirements**, and that is why section 19 decides all of it in one pass.
 
-**25-06. Note the splash the gap discharge will make, and confirm it does not land on
-the storage standpipe or its cords.**
-BLOCKED. Missing: as 25-03.
+**25-06. Confirm the gap discharge's splash does not land on the storage standpipe or
+its cords.**
+BLOCKED. Missing: as 25-03a.
 WHY IT IS WORTH A STEP: **a gap discharge into an open tank splashes and entrains
-air.** It lands in storage, not in the day tank, so it is one transfer away from the
-probes, **but it disturbs the storage surface that LS-6, LS-7 and LS-8 read**, and
-that disturbance is an input to the differential each of them needs.
+air.** It lands in storage, so it is one transfer away from the probes, **but it
+disturbs the storage surface that the storage floats read**, and that disturbance is
+an input to the differential each of them needs.
+
+**25-06a. Write down the time the last joint in the fill line was made.**
+BLOCKED. Missing: nothing to record until 25-01 to 25-03a are done.
+WHY: as 11-06a.
 
 **25-07. Report FL-02's wording to BOSS rather than correcting it.**
 ACCEPT: the report is written and sent.
@@ -1652,18 +2099,23 @@ builder reading FL-02 and looking for an inlet fitting stops looking.
 
 ## 26. THE TRANSFER LINE
 
+**REVISION, Issue 2: 26-04a inserted, to record when the last joint was made. Owners
+added to 26-05 and 26-06.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-20, section 16.
 
 **TRUE AFTER IT ENDS:**
 - **BB-30.** The transfer line runs from the storage tank to the day tank with its
-  discharge fixed.
+  discharge fixed at the position the layout gives it, and the time of its last joint
+  is written down.
 
 **26-01. Place the transfer pump at its layout position.**
 BLOCKED. Missing: BB-08, section 6.
-**IT IS A CORDED PUMP AND ITS CORD PLUGS INTO A PANEL-MOUNTED RECEPTACLE FROM
-OUTSIDE**, per D-046. **Nothing about its cord is fed through a grip and nothing about
-it is cut.** The cord cap and the receptacle are D6's RUN-018 and are not this book's.
+**ITS CORD PLUGS INTO A PANEL-MOUNTED RECEPTACLE FROM OUTSIDE**, per D-046. **Nothing
+about its cord is fed through a cord grip and nothing about it is cut.** The cord cap
+and the receptacle are D6's and are not this book's.
 
 **26-02. Run the suction from the storage tank to the pump.**
 BLOCKED. Missing: BB-08, and WATER's transfer plumbing is an open item.
@@ -1671,47 +2123,64 @@ BLOCKED. Missing: BB-08, and WATER's transfer plumbing is an open item.
 **26-03. Run the discharge from the pump to the day tank.**
 BLOCKED. Missing: as 26-02.
 
-**26-04. Fix the discharge end over the day tank.**
+**26-04. Fix the discharge end over the day tank at the position the layout gives it.**
 BLOCKED. Missing: as 26-02.
 WHY IT IS FIXED AND NOT LEFT HANGING: **the transfer discharge disturbs the surface
 the day tank floats read**, and that disturbance is an input to every day tank
 differential in section 19. **A discharge that moves changes a number that was
 measured once.**
 
-**26-05. Confirm the discharge does not land on the day tank standpipe, its floats or
-its cords.**
-BLOCKED. Missing: as 26-04.
+**26-04a. Write down the time the last joint in the transfer line was made.**
+BLOCKED. Missing: nothing to record until 26-02 to 26-04 are done.
+
+**26-05. Confirm the discharge landed where the layout put it, and not on the day tank
+standpipe, its floats or its cords.**
+BLOCKED. Missing: as 26-04. Owner: INTERCONNECT arbitrates the layout, WATER owns
+M-01.
+WHY IT IS PHRASED AS A CONFIRMATION AGAINST THE LAYOUT: **20-04 cut a hole in this
+tank against this discharge's layout POSITION, months before the discharge existed.**
+This is the step that closes that loop. **If it did not land where the layout put it,
+the bulkhead was sited against something that is no longer true.**
 
 **26-06. Confirm the discharge is not under the overflow bulkhead's splash path and
-does not sit where the return drop lands.**
-BLOCKED. Missing: as 26-04.
-WHY THESE ARE CHECKED TOGETHER: the same rim carries the standpipe's U-bolt, the
-standpipe and its cord bundle, the return drop's landing, two submersible cords, the
-overflow bulkhead and M-01's penetrations and hangers. **This is the tightest piece of
-real estate in the build and every item on it was placed by a different section.**
+does not sit where the return drop's layout position is.**
+BLOCKED. Missing: as 26-04. Owner: as 26-05.
+WHY THESE ARE CHECKED TOGETHER: the same rim carries the standpipe's hang point, the
+cord exit, the return drop's landing, the submersible cords, the overflow bulkhead and
+M-01's penetrations and hangers. **This is the tightest piece of real estate in the
+build and every item on it was placed by a different section, which is why 6-01 has to
+produce all of them.**
 
 ---
 
-## 27. THE DAY TANK SUBMERSIBLES AND THE CHILLER LOOP
+## 27. THE CHILLER, THE DAY TANK SUBMERSIBLES AND THE CHILLER LOOP
+
+**REVISION, Issue 2: 27-06a inserted, placing the chiller. Issue 1 blocked 27-07 on
+"where the chiller stands", BB-08 did not produce a chiller position, and no step in
+the book ever set the chiller down. Owners added to 27-03. 27-09a inserted, to record
+when the last joint was made.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-20, section 16.
+- BB-26, section 22. **The float tie group has to exist before the pump group can be
+  separate from it.**
 - BB-27, section 23.
 
 **TRUE AFTER IT ENDS:**
-- **BB-31.** Both submersibles are held by cradle in the day tank, their cords are
-  tied on the standpipe in their own group, and the chiller loop is plumbed and its
-  joints are cured.
+- **BB-31.** The chiller stands at its layout position, both submersibles are held by
+  cradle in the day tank, their cords are tied on the standpipe in their own group, and
+  the chiller loop is plumbed with the time of its last joint written down and cured.
 
-**TWO SUBMERSIBLES SIT IN THE DAY TANK AND BOTH RUN CONTINUOUSLY**, per D-137 and
-D-143: the manifold pump and the chiller loop pump.
+**WHICH PUMPS SIT IN THE DAY TANK AND HOW THEY RUN IS D-137's AND D-143's, AND D2
+NAMES THEM.** This section places them.
 
 **27-01. Set the manifold pump in a cradle at the day tank bottom.**
 BLOCKED. Missing: the cradle is a D7 line and no file read for this book states it as
 bought.
 **REQUIREMENT AND SEARCH TERM:** a fixture that holds a submersible pump at a fixed
 position and depth in the day tank, taking no load through the cord. Search:
-`submersible pump mounting bracket tank`; `pump cradle stand aquarium sump`.
+`submersible pump mounting bracket tank`; `pump cradle stand sump`.
 WHY A CRADLE AND NOT THE CORD: water.md's own rule. **Position held by fixture, not by
 cord. A cord-hung pump is a pump whose position is a suggestion**, and G-11 puts this
 pump's suction at the day tank bottom so the tank mixes.
@@ -1720,12 +2189,12 @@ pump's suction at the day tank bottom so the tank mixes.
 BLOCKED. Missing: as 27-01.
 
 **27-03. Confirm neither pump is set where a float swings.**
-BLOCKED. Missing: as 27-01.
+BLOCKED. Missing: as 27-01. Owner: WATER.
 
 **27-04. Confirm neither pump's intake is where the low-low trip will leave it drawing
 air.**
-BLOCKED. Missing: as 27-01, and BB-23.
-WHY: C-11 names the vortex explicitly and it is worst at low level, when both
+BLOCKED. Missing: as 27-01, and BB-23. Owner: WATER.
+WHY: C-11 names the vortex explicitly and it is worst at low level, when the
 submersibles are nearest the surface. **Air past a probe makes the spike that looks
 like an early arrival**, which corrupts the measurement the whole dosing model rests
 on. The conflict this creates for the low-low trip is named in 19-02 and is resolved
@@ -1736,19 +2205,23 @@ BLOCKED. Missing: as 27-01.
 
 **27-06. Tie both pump cords to the pipe at intervals, as a group separate from the
 float cords.**
-BLOCKED. Missing: as 27-05, and BB-26 must already have put the float cords in their
-own group.
+BLOCKED. Missing: as 27-05, and the ties, which are section 22's line.
 WHY THE GROUPS ARE SEPARATE AND WHY THIS SECTION IS WHERE THE PUMP GROUP IS MADE:
 D-121 as extended by D-156. **These cords and the float cords are not in the same
-voltage class**, and D6 carries the class of each.
-The pump cords cannot be tied before the pumps are in the tank, so section 22 tied the
-float group and left this one, **and this step must not be done by adding the pump
-cords to the float bundle because that is exactly the adjacency the two groups exist
-to keep apart.**
+voltage class**, and D6 carries the class of each. The pump cords cannot be tied before
+the pumps are in the tank, so section 22 tied the float group and left this one, **and
+this step must not be done by adding the pump cords to the float bundle, because that
+is exactly the adjacency the two groups exist to keep apart.**
+
+**27-06a. Set the chiller at its layout position.**
+BLOCKED. Missing: BB-08, section 6.
+WHY IT IS A STEP AT ALL: **Issue 1 never placed it.** Every other object this build
+sets down has a step that sets it down, and the chiller had a blocked pipe run
+pointing at a position that nothing produced and nobody owned.
 
 **27-07. Run the chiller loop pump's discharge to the chiller's inlet port.**
-BLOCKED. Missing: BB-08 for where the chiller stands, and FL-08 is internal to WATER
-and its plumbing is an open item.
+BLOCKED. Missing: 27-06a, and FL-08 is internal to WATER and its plumbing is an open
+item. Owner: WATER.
 
 **27-08. Run the chiller's outlet port back to the day tank.**
 BLOCKED. Missing: as 27-07.
@@ -1756,9 +2229,12 @@ BLOCKED. Missing: as 27-07.
 **27-09. Fix the loop's return end over the day tank.**
 BLOCKED. Missing: as 27-07.
 
+**27-09a. Write down the time the last joint in the chiller loop was made.**
+BLOCKED. Missing: nothing to record until 27-07 to 27-09 are done.
+
 **27-10. Leave the loop undisturbed until the cement's own instruction says any
 solvent joint in it is cured.**
-BLOCKED. Missing: as 27-07.
+BLOCKED. Missing: as 27-07, and the cement, which is 11-01's blocker.
 WHY THIS SECTION ENDS AT A CURE: as sections 11 and 17.
 
 **ONE THING TO KNOW WHILE YOU ARE PLACING THESE TWO PUMPS, because it changes nothing
@@ -1772,13 +2248,17 @@ never reaches temperature.
 
 ## 28. THE LOOP: MANIFOLD SUCTION AND RETURN DROP
 
+**REVISION, Issue 2: 28-06a inserted, to record when the last joint was made. Owner
+added to 28-07, and the confirmation against the layout is folded into 28-07 rather
+than into 28-06.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-15, section 12.
 - BB-31, section 27.
 
 **TRUE AFTER IT ENDS:**
 - **BB-32.** The circulation loop is closed: day tank, manifold pump, manifold, return
-  drop, day tank.
+  drop, day tank, with the time of its last joint written down.
 
 **28-01. Run the manifold pump's discharge to the manifold's inlet union.**
 BLOCKED. Missing: **FL-03 is an OPEN interface row.** Owner: WATER and DOSING jointly,
@@ -1804,138 +2284,59 @@ clear, **and that hole fouls shut silently.** Trading a visible failure for an
 invisible one is the wrong trade. **If you are about to submerge this for the sake of
 splash, that is what you are trading.**
 
-**28-06. Fix the return drop's landing point.**
-BLOCKED. Missing: as 28-03.
-WHY THE LANDING POINT IS FIXED AND RECORDED RATHER THAN LEFT WHERE IT FALLS:
-commissioning.md's re-measure triggers list the return drop's landing point by name,
-and it records that **the return-versus-suction geometry changes short-circuiting more
-than anything else, and that it can be changed by someone tidying a cord.** A landing
-point that moves voids a measurement nobody will know to re-take.
+**28-06. Fix the return drop's landing point at the position the layout gives it.**
+BLOCKED. Missing: as 28-03, and BB-08.
+WHY THE LANDING POINT IS FIXED, RECORDED AND CHECKED AGAINST THE LAYOUT RATHER THAN
+LEFT WHERE IT FALLS: commissioning.md's re-measure triggers list the return drop's
+landing point by name, and record that **the return-versus-suction geometry changes
+short-circuiting more than anything else, and that it can be changed by someone tidying
+a cord.** A landing point that moves voids a measurement nobody will know to re-take.
+**And 20-04 cut a hole in this tank against this landing's layout position before this
+line existed**, so this is the step that closes that loop.
 
-**28-07. Confirm the drop does not land on the standpipe, a float, a cord or the
-overflow bulkhead.**
-BLOCKED. Missing: as 28-06.
+**28-06a. Write down the time the last joint in the loop was made.**
+BLOCKED. Missing: nothing to record until 28-01 to 28-05 are done.
 
-**28-08. Confirm the drop's splash does not land where the day tank floats read.**
-BLOCKED. Missing: as 28-06.
+**28-07. Confirm the drop landed where the layout put it, clear of the standpipe,
+every float, every cord and the overflow bulkhead, with its splash away from where the
+day tank floats read.**
+BLOCKED. Missing: as 28-06. Owner: WATER.
 WHY: as 26-04. It is an input to every day tank differential in section 19.
 
 ---
 
-## 29. THE DOSE AND SUCTION TUBING
+## 29. RETIRED AT ISSUE 2.
 
-**MUST BE TRUE BEFORE THIS SECTION STARTS:**
-- BB-15, section 12.
-- BB-16, section 12.
-- BB-18, section 14.
+**Section 29 was the dose and suction tubing. It has MOVED to section 32a, after the
+lids are fitted. The number 29 is not reused and its step numbers 29-01 to 29-19 are
+not reused.**
 
-**TRUE AFTER IT ENDS:**
-- **BB-33.** Every channel has an unbroken suction line from its jug to its head and
-  an unbroken delivery line from its head to its injection port, dry and unprimed.
-
-**THE WET PATH FROM MANIFOLD TO HEAD TO JUG IS ONE PATH AND ONE OWNER'S**, D-006.
-PUMP-BOXES stops at the barb.
-
-**29-01. Run the suction line for CH1 from its jug station to its head's suction barb,
-through the lid penetration.**
-BLOCKED. Missing: **CBL-05 is an OPEN interface row** and DOSING's tubing selection is
-an open item - chemical compatibility per product, and translucency under D-019.
-Owner: PUMP-BOXES owns the penetration, DOSING owns the tubing through it.
-**THE TUBE IS TRANSLUCENT.** D-019 took translucent tubing and the jug end in the
-operator's sightline **instead of** the keyed coupling, and both were named by DOSING
-as the conditions without which the coupling trades a detectable failure for an
-undetectable one. **An opaque tube spends a decision that was already made.**
-WHY IT MATTERS ON THE SUCTION SIDE SPECIFICALLY: **on a suction line a bad seal does
-not drip, it draws air. The head turns, the books decrement, and nothing is
-delivered.** Nothing in this system measures what a head actually delivered.
-
-**29-02. Run the suction line for CH2 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-03. Run the suction line for CH3 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-04. Run the suction line for CH4 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-05. Run the suction line for CH5 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-06. Run the suction line for CH6 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-07. Run the suction line for CH7 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-
-**29-08. Run the suction line for CH8 from its jug station to its head's suction barb, through the lid penetration.**
-BLOCKED. Missing: as 29-01.
-**CH1 to CH4 are in box A and CH5 to CH8 are in box B, per D-178. One step per
-channel, eight ticks, because a step covering several channels can be half done and
-look finished.**
-
-**29-09. Run the delivery line for CH1 from its head's discharge barb, through the lid
-penetration, to its injection port.**
-BLOCKED. Missing: as 29-01, and DOSING's injection port arrangement is an open item.
-
-**29-10. Run the delivery line for CH2 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-11. Run the delivery line for CH3 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-12. Run the delivery line for CH4 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-13. Run the delivery line for CH5 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-14. Run the delivery line for CH6 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-15. Run the delivery line for CH7 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-
-**29-16. Run the delivery line for CH8 from its head's discharge barb, through the lid penetration, to its injection port.**
-BLOCKED. Missing: as 29-09.
-**Eight steps, one per channel, as 29-01 to 29-08.**
-
-**29-17. Confirm every tube joins external tubing at the ends of the head's own short
-tube piece, and that no external tube is joined onto the pump tube itself.**
-BLOCKED. Missing: as 29-01.
-WHY: **the pump tube is a consumable that gets changed**, and DOSING owns the change.
-A joint made onto the pump tube is a joint that has to be remade at every change, in
-place, over an open manifold.
-
-**29-18. Confirm the jug end of every line is visible from the operator's standing
-position.**
-BLOCKED. Missing: BB-08, section 6, and 29-01.
-WHY IT IS CHECKED AFTER THE TUBES ARE RUN AND NOT ONLY WHEN THE STATIONS WERE PLACED:
-a station in the sightline with a tube routed behind something is a sightline that was
-paid for and not delivered.
-
-**29-19. Leave every line dry and unprimed.**
-BLOCKED. Missing: as 29-01.
-WHY: priming is commissioning's, and **a primed line is a line with product in it
-standing against a head that has not been proved to hold.** Whether a head holds
-against back-siphon with the jug above the inlet is C-06 and it is not answered.
-
-**ONE THING NOT DECIDED HERE AND NOT TO BE DECIDED AT THE BENCH: how high a jug
-stands.** DOSING's jug placement item is open - height relative to the head, so a head
-is not asked to lift more than it can and so a jug change is possible without a tool -
-and **whether a dose line can siphon when the head is idle depends on it.** Owner:
-DOSING, and C-06 measures it in both energised and de-energised states.
+**WHY IT MOVED, and it is this book's own defect shape 2 one class over from
+conductors:** the heads sit on the pump box lids. Issue 1 ran sixteen tubes from
+wall-fixed jug stations to heads on lids that were lying on a bench, and section 32
+then lifted those lids onto the boxes carrying the motors, the heads and every tube
+with them. **The lids cannot go on before the wiring, because the drivers are inside
+the boxes; so the tubing cannot go on before the wiring either.** 34.4's check for
+this defect shape looked only at conductors and section 31's preconditions, which is
+why it passed.
 
 ---
 
 ## 30. THE LEAK CONSOLE AND ITS SENSOR
 
+**REVISION, Issue 2: 30-01a inserted, fitting the console's own cord grip, which
+Issue 1 named and never fitted. 30-02's blocker is corrected: it is not blocked on
+F-104, which the owner has closed.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
 - BB-13, section 10.
 - BB-28, section 24.
 
 **TRUE AFTER IT ENDS:**
-- **BB-34.** WB200 is mounted at the position the owner set and its sensor is placed
-  on the floor clear of every overflow discharge point.
+- **BB-34.** WB200 is mounted at the position the owner set, with its own cord grip
+  fitted, and its sensor is placed on the floor clear of every overflow discharge
+  point.
 
 **WB200 IS REMOTE AND IS IN NO ENCLOSURE.** D-163. It sits outside the main panel, fed
 through its own cord grip, with its sensor on the floor.
@@ -1944,9 +2345,15 @@ through its own cord grip, with its sensor on the floor.
 BLOCKED. Missing: **the console's position on the wall is the owner's and is not
 fixed.** Owner: the owner. CBL-06 is an OPEN interface row.
 
+**30-01a. Fit the console's own cord grip.**
+BLOCKED. Missing: as 30-01, and the grip is a D7 line as at 7-09.
+WHY IT IS ITS OWN STEP: **D-163 says the console is fed through its own cord grip and
+no step in Issue 1 fitted one.** Section 31 pulls a jacket through it.
+
 **30-02. Place the sensor on the floor.**
-BLOCKED. Missing: the placement is the owner's under F-104, which he has closed, and
-S-04 is an OPEN interface row.
+BLOCKED. Missing: **S-04 is an OPEN interface row.** Owner: WATER places it, BOSS
+freezes the row.
+NOT BLOCKED ON F-104: **the owner has closed it and the sensor stays where it is.**
 **WHAT MAKES THE PLACEMENT HARD, so that a builder does not put it somewhere
 convenient:** the floor drain is a track, and **a floor with a track drain is a floor
 built to move water to the track.** A leak reaching that floor goes to the track, not
@@ -1970,24 +2377,30 @@ BLOCKED. Missing: **RUN-014's voltage and segregation cells in D6 are empty and 
 wait on one lookup, the WB200's sensing-circuit class.** Owner: the owner runs the
 lookup under G-15.
 WHY IT IS CALLED OUT: D6 records that D-163, CBL-06 and parts.md's WB200 entry all
-describe the console's supply and its output contact, **and that none of them
-describes the sensor lead.**
+describe the console's supply and its output contact, **and that none of them describes
+the sensor lead.**
 
 ---
 
 ## 31. WIRING
 
+**REVISION, Issue 2: 31-03 is SPLIT. Issue 1 cut every cable in the build under one
+step number with one tick, which is the exact shape that cut five cables 200 mm short
+in the parallel build, arriving in a document written to prevent it. 31-03a, 31-03b and
+31-03c are inserted and 31-04 becomes the completion check. 31-02 changed from a live
+accept condition to BLOCKED, because Issue 1 asked a builder to confirm elapsed cure
+times against records no step had ever written.**
+
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-05, section 3. Every device carries its name.
 - BB-06, section 4. Every terminal has been read.
-- BB-09, section 6. Every entry position is stated.
-- BB-17, section 13. The main panel plate is populated and installed.
-- BB-18, section 14. The pump boxes are populated.
-- BB-19, section 15. The display box plate is populated.
-- BB-26, section 22. Every float cord is out through its grip.
-- BB-27, section 23. Both standpipes are hung.
+- BB-09, section 6. Every cord grip position is stated.
+- BB-17, section 13. The main panel plate is populated and installed with its bar.
+- BB-18, section 14. Both pump boxes are populated with their bars.
+- BB-19, section 15. The display box plate is populated with its bar.
+- BB-27, section 23. Every float cord is out through its tank's cord grip.
 - BB-29, section 25. FV-1 is installed.
-- BB-34, section 30. WB200 is mounted.
+- BB-34, section 30. WB200 is mounted with its cord grip.
 
 **TRUE AFTER IT ENDS:**
 - **BB-35.** Every conductor in D5 is cut, routed, labelled at both ends, landed and
@@ -2000,11 +2413,12 @@ are D5's rows, D4's pages and D6's runs. **What is here is when the wiring happe
 what has to be true before it starts, and the one ordering rule that is not on any of
 those three documents.**
 
-**THE ORDERING RULE, and it is why this section is the second-to-last piece of work:
-NO CONDUCTOR IS LANDED ON A PART A LATER SECTION INSTALLS.** Every precondition above
-is a part that a conductor lands on. **A build that wires before it mounts produces
-joints that have to be broken to finish the mounting, and a broken and remade joint is
-not the joint that was checked.**
+**THE ORDERING RULE, and it is why this section is near the end of the work: NO
+CONDUCTOR IS LANDED ON A PART A LATER SECTION INSTALLS.** Every precondition above is
+a part that a conductor lands on, and the four ground bars are in that list because
+Issue 1 landed on three that nothing had fitted. **A build that wires before it mounts
+produces joints that have to be broken to finish the mounting, and a broken and remade
+joint is not the joint that was checked.**
 
 **31-01. Confirm F-099 is closed before any cable is cut.**
 BLOCKED. Missing: **F-099 is open against parts.md's two cable-run tables, which carry
@@ -2014,41 +2428,73 @@ WHY IT IS THE FIRST STEP IN THIS SECTION: **T-020, and it is worse for where it 
 It is an ambiguous quantity in the authoritative file, on a table a person reads
 immediately before cutting cable.** A cut cable cannot be un-cut. **Do not cut from
 either table until it closes.**
+**AND THIS, NOT M-02, IS WHAT GATES CABLE LENGTH.** D-090 answered the envelope and
+the cut rule. **If you have been told the cut is waiting on the wall, it is not.**
 
-**31-02. Confirm every joint in the wet path has cured.**
-ACCEPT: every solvent joint made in sections 11, 17, 24, 25, 26, 27 and 28 has had the
-time its cement's label states.
-WHY IT IS CHECKED HERE: it is one of D8's prerequisites and this is the last moment
-before the machine stops being a plumbing job. **Finding an uncured joint after the
+**31-02. Confirm every wet joint in the build has cured.**
+BLOCKED. Missing: nothing to confirm until the joint-time records written at 11-06a,
+17-04a, 24-07a, 25-06a, 26-04a, 27-09a and 28-06a exist.
+ACCEPT when unblocked: for every joint-time record written in those steps, the time
+the cement's label states has elapsed since the time written.
+WHY THE RECORDS EXIST AT ALL: **Issue 1 asked this step to confirm elapsed time
+against nothing.** A cure that only somebody's memory can date is a cure nobody can
+confirm, and this is one of D8's prerequisites. **Finding an uncured joint after the
 panel is live is finding it in the worst order.**
 
-**31-03. Take D6 and cut each jacket.**
+**31-03. Cut ONE jacket, working that jacket's own cut step in D6, and cut no other
+until it is marked and routed.**
 BLOCKED. Missing: 31-01, and **no row in D6 is buildable: CBL-01 through CBL-04 are
-all OPEN and every jacket lands at a gland or a bulkhead they govern.** Owner:
+all OPEN and every jacket lands at a cord grip or a bulkhead they govern.** Owner:
 INTERCONNECT for position and spacing, BOSS to freeze the rows.
 **THE ALLOWANCE IS IN D6'S CUT STEP AND IS NOT STATED ANYWHERE ELSE.** Do not add
 anything to it and do not take anything off it.
+**THIS STEP IS WORKED ONCE PER JACKET AND TICKED ONCE PER JACKET.** Write the jacket's
+RUN- id beside the tick each time. **How many jackets there are is D6's fact and is not
+stated here**, and a list of them on this page would be a second inventory of D6's rows
+that goes stale the moment a jacket splits.
+WHY ONE JACKET AT A TIME AND WHY IT IS NOT "CUT EACH JACKET": **that phrasing is every
+cable in the build under one number with one tick, and it is the shape that cut five
+cables short in the parallel build.** One cut is one step. **A cut cable cannot be
+un-cut, and the tick is the only thing that tells you which one you are on.**
 
-**31-04. Route each jacket on the wall per D6.**
-BLOCKED. Missing: as 31-03. **No page in this set says which way a cable runs on the
-wall, because the wall layout does not exist.** That is an open cell in D6 and it
-stays open while M-02 is open.
-
-**31-05. Pull every jacket through its glands before any conductor is landed.**
+**31-03a. Write that jacket's RUN- id on it, at both ends.**
 BLOCKED. Missing: as 31-03.
-WHY EVERY JACKET IS PULLED BEFORE ANY END IS LANDED: **a conductor spans the gland and
-is one row, D-171.** Landing one end of a spanning conductor before its jacket is
-pulled means pulling a landed conductor, and a jacket pulled past a populated gland
+WHY BEFORE IT IS ROUTED: **once a jacket is on the wall with others, the only thing
+that identifies it is what is written on it.** An unmarked jacket in a bundle is a
+jacket you have to trace.
+
+**31-03b. Route that jacket on the wall per its own D6 row.**
+BLOCKED. Missing: as 31-03. **No page in this set says which way a cable runs on the
+wall, because the arrangement does not exist.** That is an open cell in D6 and it stays
+open while M-02's arrangement half is open.
+
+**31-03c. Repeat 31-03, 31-03a and 31-03b for the next jacket in D6, and start no
+jacket until the one before it is routed.**
+BLOCKED. Missing: as 31-03.
+
+**31-04. Confirm every jacket D6 lists as cut is cut, marked at both ends and routed.**
+BLOCKED. Missing: nothing to confirm until 31-03c is done.
+ACCEPT when unblocked: every row in D6's cable schedule that calls for a cut has a tick
+beside 31-03 with its RUN- id written against it.
+
+**31-05. Pull every jacket through its cord grips before any conductor is landed.**
+BLOCKED. Missing: as 31-03.
+WHY EVERY JACKET IS PULLED BEFORE ANY END IS LANDED: **a conductor spans the cord grip
+and is one row, D-171.** Landing one end of a spanning conductor before its jacket is
+pulled means pulling a landed conductor, and a jacket pulled past a populated grip
 plate disturbs the ones already there.
 
-**31-06. Take the D4 page for the box in front of you and work it in order.**
-BLOCKED. Missing: **every joint in D4 is blocked on F-106, and section 4 is what
-closes it.** If section 4 was worked, this is not blocked by F-106 and the remaining
-blockers are the ones D4 names on each page.
+**31-06. Take the D4 page for the box in front of you, and no other page.**
+BLOCKED. Missing: **every joint in D4 is blocked on F-106, and section 4 is what closes
+it.** If section 4 was worked, this is not blocked by F-106 and the remaining blockers
+are the ones D4 names on each page.
 **THE PAGES MAY BE WORKED IN ANY ORDER AND THIS BOOK IMPOSES NONE.** Each page is
-complete for the end you are holding, and a conductor that spans a gland appears on
+complete for the end you are holding, and a conductor that spans a cord grip appears on
 both pages with its far end named, **so you never hold two documents to land one
 wire.** Each page carries its own step order and this book does not repeat it.
+
+**31-06a. Work that page from its first step to its last, in order.**
+BLOCKED. Missing: as 31-06.
 
 **31-07. Tick each conductor on D5 as D4's page tells you to.**
 BLOCKED. Missing: as 31-06.
@@ -2057,16 +2503,20 @@ hand. D5 is the record of what the build is, not the worksheet for what you have
 done.**
 
 **31-08. Land the ground bars last, per D4.**
-BLOCKED. Missing: as 31-06, and **the ground bars are not bought.** Owner: MAIN-PANEL.
-**THE BARS ARE THE ONLY BONDING POINTS IN THIS BUILD AND NOTHING BONDS ANYWHERE
-ELSE.** D-165. **A builder who finds a convenient screw will use it**, which is why it
-is written down. Each remote enclosure has its own local bar and a green conductor
-inside the cross-box cable joins it home. **There is no separate bonding cable** -
-RUN-017 was retired for exactly that reason.
+BLOCKED. Missing: as 31-06.
+**THE FOUR BARS ARE THE ONLY BONDING POINTS IN THIS BUILD AND NOTHING BONDS ANYWHERE
+ELSE.** D-165. The main panel's bar is fitted at 13-08, the pump boxes' at 14-08a and
+14-08b, and the display box's at 15-05a. **A green conductor in each cross-box cable
+joins a local bar home to the main one, and there is no separate bonding cable** -
+RUN-017 was retired for exactly that reason. **A builder who finds a convenient screw
+will use it, which is why this is written down.**
 
 ---
 
 ## 32. CLOSING UP
+
+**REVISION, Issue 2: 32-03 and 32-04's acceptance conditions no longer mention tubing.
+There is no tubing on a lid at this point, because the tubing moved to section 32a.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-35, section 31.
@@ -2074,31 +2524,35 @@ RUN-017 was retired for exactly that reason.
 **TRUE AFTER IT ENDS:**
 - **BB-36.** All four enclosures are closed, and no bond exists outside a bar.
 
-**32-01. Confirm nothing in any enclosure is bonded to anything but its bar.**
-ACCEPT: you have looked at every green conductor in every box and every one of them
-ends at a bar.
+**32-01. Confirm nothing in any enclosure is bonded to anything but that enclosure's
+bar.**
+BLOCKED. Missing: nothing to check until BB-35 exists.
 WHY IT IS CHECKED BEFORE THE LIDS GO ON: it is the last moment any of them is visible,
 and **a bond made to a convenient screw during wiring looks exactly like a bond made
 to a bar until you look at where it ends.**
 
 **32-02. Confirm no conductor lies where a lid or a cover will trap it.**
-ACCEPT: you have run a hand round every sealing face and found nothing crossing it.
+BLOCKED. Missing: as 32-01.
 
-**32-03. Fit pump box A's lid.**
-ACCEPT: the lid seats all round and no tubing or conductor is pinched at the sealing
-face.
+**32-03. Fit pump box A's lid, the one marked with its box at 8-01a.**
+BLOCKED. Missing: as 32-01.
+ACCEPT when unblocked: the lid seats all round and no conductor is pinched at the
+sealing face.
 
-**32-04. Fit pump box B's lid.**
-ACCEPT: as 32-03.
+**32-04. Fit pump box B's lid, the one marked with its box at 8-01a.**
+BLOCKED. Missing: as 32-01.
+ACCEPT when unblocked: as 32-03.
 
 **32-05. Fit the display box cover.**
-ACCEPT: the cover seats all round and the display cutout's gasket is undamaged and
-seated.
+BLOCKED. Missing: as 32-01.
+ACCEPT when unblocked: the cover seats all round and the display cutout's gasket is
+undamaged and seated.
 WHY IT IS CHECKED RATHER THAN ASSUMED: the gasketed cutout is the youngest part in the
 assembly and it has been off and on since section 9.
 
 **32-06. Close the main panel.**
-ACCEPT: the door closes on its own seal without being forced.
+BLOCKED. Missing: as 32-01.
+ACCEPT when unblocked: the door closes on its own seal without being forced.
 
 **32-07. Confirm every top-face device on the main panel is fitted and no top-face
 hole is open.**
@@ -2110,13 +2564,133 @@ face has to run off it and not into it.
 
 ---
 
+## 32a. THE DOSE AND SUCTION TUBING
+
+**This section was section 29 at Issue 1 and it has MOVED to here.** The old number is
+retired and the old step numbers are retired with it. **It is here because the heads
+are on the pump box lids, the lids go on at section 32, and the lids cannot go on
+until the wiring is done.**
+
+**MUST BE TRUE BEFORE THIS SECTION STARTS:**
+- BB-08, section 6.
+- BB-11, section 8. The lids' head penetrations exist.
+- BB-15, section 12. The manifold is mounted.
+- BB-16, section 12. The jug stations are fixed.
+- BB-18, section 14. The heads are on the lids.
+- BB-36, section 32. **The lids are on the boxes.**
+
+**TRUE AFTER IT ENDS:**
+- **BB-33.** Every channel has an unbroken suction line from its jug to its head and
+  an unbroken delivery line from its head to its injection port, dry and unprimed.
+
+**THE WET PATH FROM MANIFOLD TO HEAD TO JUG IS ONE PATH AND ONE OWNER'S**, D-006.
+PUMP-BOXES stops at the barb.
+
+**WHICH CHANNEL IS IN WHICH BOX IS D-178's FACT AND channel-token.md's.** Read it
+there. **Work one channel at a time and tick one box per channel**: the whole reason
+these are sixteen steps and not two is that a step covering several channels can be
+half done and look finished.
+
+**32a-01. Run CH1's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: **CBL-05 is an OPEN interface row** and DOSING's tubing selection is
+an open item - chemical compatibility per product, and translucency under D-019.
+Owner: PUMP-BOXES owns the penetration, DOSING owns the tubing through it.
+**THE TUBE IS TRANSLUCENT.** D-019 took translucent tubing and the jug end in the
+operator's sightline **instead of** the keyed coupling, and both were named by DOSING
+as the conditions without which the coupling trades a detectable failure for an
+undetectable one. **An opaque tube spends a decision that was already made.**
+WHY IT MATTERS ON THE SUCTION SIDE SPECIFICALLY: **on a suction line a bad seal does
+not drip, it draws air. The head turns, the books decrement, and nothing is
+delivered.** Nothing in this system measures what a head actually delivered.
+
+**32a-02. Run CH2's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-03. Run CH3's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-04. Run CH4's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-05. Run CH5's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-06. Run CH6's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-07. Run CH7's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-08. Run CH8's suction line from its jug station to its head's suction barb.**
+BLOCKED. Missing: as 32a-01.
+
+**32a-09. Run CH1's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-01, and DOSING's injection port arrangement is an open item.
+
+**32a-10. Run CH2's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-11. Run CH3's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-12. Run CH4's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-13. Run CH5's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-14. Run CH6's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-15. Run CH7's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-16. Run CH8's delivery line from its head's discharge barb to its injection
+port.**
+BLOCKED. Missing: as 32a-09.
+
+**32a-17. Confirm every tube joins external tubing at the ends of the head's own short
+tube piece, and that no external tube is joined onto the pump tube itself.**
+BLOCKED. Missing: as 32a-01.
+WHY: **the pump tube is a consumable that gets changed**, and DOSING owns the change.
+A joint made onto the pump tube is a joint that has to be remade at every change, in
+place, over an open manifold.
+
+**32a-18. Confirm the jug end of every line is visible from the operator's standing
+position.**
+BLOCKED. Missing: BB-08, section 6, and 32a-01.
+WHY IT IS CHECKED AFTER THE TUBES ARE RUN AND NOT ONLY WHEN THE STATIONS WERE PLACED:
+a station in the sightline with a tube routed behind something is a sightline that was
+paid for and not delivered.
+
+**32a-19. Leave every line dry and unprimed.**
+BLOCKED. Missing: as 32a-01.
+WHY: priming is commissioning's, and **a primed line is a line with product in it
+standing against a head that has not been proved to hold.** Whether a head holds
+against back-siphon with the jug above the inlet is C-06 and it is not answered.
+
+**ONE THING NOT DECIDED HERE AND NOT TO BE DECIDED AT THE BENCH: how high a jug
+stands.** DOSING's jug placement item is open - height relative to the head, so a head
+is not asked to lift more than it can and so a jug change is possible without a tool -
+and **whether a dose line can siphon when the head is idle depends on it.** Owner:
+DOSING, and C-06 measures it in both energised and de-energised states.
+
+---
+
 ## 33. WHAT COMES NEXT, AND WHAT HAD TO COME FIRST
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-28, section 24. The overflows run to the track.
 - BB-30, section 26. The transfer line is in.
 - BB-32, section 28. The circulation loop is closed.
-- BB-33, section 29. Every dose and suction line is run.
+- BB-33, section 32a. Every dose and suction line is run.
 - BB-36, section 32. Every enclosure is closed.
 
 **TRUE AFTER IT ENDS:**
@@ -2129,6 +2703,20 @@ face has to run off it and not into it.
 section 2 with parts missing, D7 was not finished. **The cart audit says what to
 change in each cart before checkout, which is a thing that only helps before money is
 spent.**
+
+**AND D7 CANNOT BE FULLY FINISHED BEFORE THIS BOOK STARTS, WHICH IS A REAL DEFECT AND
+IS REPORTED HERE RATHER THAN LEFT FOR A BUILDER TO DISCOVER AT SECTION 22.** The float
+purchase is gated by the cord span, the cord span is gated by section 6, and section 6
+is inside this book. **Nine other lines are in the same position** - the wall fixings
+at 10-02, the marker at 3-02, the ground bars at 13-08 and 14-08a, the heatsinks at
+14-07, the tank support at 16-01, the U-bolts at 18-01, the cable ties at section 22,
+the paint pen at 21-11, the solvent cement at 11-01, the tank cord grips at 20-07b,
+the fill outlet bracket at 25-04 and the pump cradles at 27-01. **Each says at its own
+step that no file read for this book states it as bought, and each returns a
+requirement and a search term rather than a part.** Owner: BOSS to fold them into D7;
+the owner runs every lookup under G-15.
+**6-07 names the one thing that would break the float half of this loop tonight: a
+BOUND on the cord span from D-090's envelope, which needs no arrangement at all.**
 
 **D2, D3, D5, D6 and D4 were in your hands throughout and none of them comes after
 this book.** D2 and D3 are what the panel is and where things sit in it. D6 must be
@@ -2153,13 +2741,13 @@ wall says it is, is the channel software means. **A measurement taken against a
 mislabelled channel is not a wrong number, it is a right number filed against the
 wrong thing, and every later check confirms it.**
 
-**2. THE FLOAT TESTS COME BEFORE WATER IS IN THE TANKS.** C-24 lifts each float's
-conductor at the panel terminal in turn and confirms the chain does what it is
-supposed to. Its own row says to do it before water is in the tanks, **because the
-test is about conductors and coils and a wet tank adds nothing to it and makes the
-lifting worse.** WATER's return adds a second one of the same shape, on the plant
-rather than on the meter, and returns it as a required row that BOSS has not yet put
-in commissioning.md. **Owner: BOSS.**
+**2. THE FLOAT FAIL-DIRECTION TESTS COME BEFORE WATER IS IN THE TANKS.** C-24 is that
+test and its own row says to run it before water is in the tanks, **because the test is
+about conductors and coils and a wet tank adds nothing to it and makes the lifting
+worse.** WATER's return adds a second one of the same shape, on the plant rather than
+on the meter, and returns it as a required row that BOSS has not yet put in
+commissioning.md. **Owner: BOSS.** The tests themselves are commissioning.md's and are
+not described here.
 
 **3. THE FIRST FILL IS SLOW AND IT IS WHERE THE MARKS ARE PROVED.** D-131: fill
 slowly, confirm each float trips at its mark, **and adjust the tie and never the
@@ -2178,9 +2766,10 @@ machine.**
 D4 is blocked and section 31 cannot be worked.** It is one evening with the parts and
 a pen. It is not a decision, a purchase or a design.
 
-**M-02.** Section 5 produces the measurement and section 6 is the layout. Until it
-exists, **every dimension in this book is blocked** and so is D3, the balance of D6,
-and the float purchase that section 22 waits on.
+**M-02's ARRANGEMENT half.** Section 6 is the layout and it is an arbitration, not a
+measurement. **Its ENVELOPE half is already answered by D-090 and nothing in this book
+waits on it**, per D-185. **Cable length is not blocked on M-02**: it is gated by
+F-099, which 31-01 names.
 
 **Everything else in this book is complete. What is missing is where things go and
 what is printed on them.**
@@ -2191,13 +2780,14 @@ what is printed on them.**
 
 **Run as G-50 and D-183 require, after the book was written and against the book as
 written.** It does not replace an end-to-end read as a builder. **It gives that read
-something to check against.**
+something to check against, and at Issue 1 that read found forty-eight things this
+check could not see. Section 34.5 is why, and it is not fixed by a better checker.**
 
 ### 34.1 Every precondition, matched
 
-**Thirty-three sections. Thirty-seven postconditions, BB-01 to BB-37. Every
-precondition below is matched by a postcondition of an EARLIER section, or by
-something true before the build starts.**
+**Thirty-two build sections plus one retirement notice. Thirty-seven postconditions,
+BB-01 to BB-37. Every precondition below is matched by a postcondition of a section
+EARLIER IN THE WORKING ORDER, or by something true before the build starts.**
 
 | Section | Requires | Produced by |
 |---|---|---|
@@ -2220,31 +2810,33 @@ something true before the build starts.**
 | 17 | BB-03, BB-20 | 2, 16 |
 | 18 | BB-20, BB-21 | 16, 17 |
 | 19 | BB-22 | 18 |
-| 20 | BB-20, BB-23 | 16, 19 |
+| 20 | BB-08, BB-20, BB-22, BB-23 | 6, 16, 18, 19 |
 | 21 | BB-22, BB-23 | 18, 19 |
-| 22 | BB-25 | 21 |
+| 22 | BB-08, BB-25 | 6, 21 |
 | 23 | BB-24, BB-26 | 20, 22 |
-| 24 | BB-20, BB-24 | 16, 20 |
-| 25 | BB-20, BB-23 | 16, 19 |
-| 26 | BB-20 | 16 |
-| 27 | BB-20, BB-27 | 16, 23 |
+| 24 | BB-08, BB-20, BB-24 | 6, 16, 20 |
+| 25 | BB-08, BB-20, BB-23 | 6, 16, 19 |
+| 26 | BB-08, BB-20 | 6, 16 |
+| 27 | BB-08, BB-20, BB-26, BB-27 | 6, 16, 22, 23 |
 | 28 | BB-15, BB-31 | 12, 27 |
-| 29 | BB-15, BB-16, BB-18 | 12, 12, 14 |
-| 30 | BB-13, BB-28 | 10, 24 |
-| 31 | BB-05, BB-06, BB-09, BB-17, BB-18, BB-19, BB-26, BB-27, BB-29, BB-34 | 3, 4, 6, 13, 14, 15, 22, 23, 25, 30 |
+| 29 | retired, no work, no conditions | |
+| 30 | BB-08, BB-13, BB-28 | 6, 10, 24 |
+| 31 | BB-05, BB-06, BB-09, BB-17, BB-18, BB-19, BB-27, BB-29, BB-34 | 3, 4, 6, 13, 14, 15, 23, 25, 30 |
 | 32 | BB-35 | 31 |
-| 33 | BB-28, BB-30, BB-32, BB-33, BB-36 | 24, 26, 28, 29, 32 |
+| 32a | BB-08, BB-11, BB-15, BB-16, BB-18, BB-36 | 6, 8, 12, 12, 14, 32 |
+| 33 | BB-28, BB-30, BB-32, BB-33, BB-36 | 24, 26, 28, 32a, 32 |
 
-**RESULT: no precondition is unmatched. Every producing section number is lower than
-the section that requires it.**
+**RESULT: no precondition is unmatched. Every producing section comes earlier in the
+working order than the section that requires it, section 32a included: it is printed
+after section 32 and it requires section 32's output.**
 
 ### 34.2 Cycles
 
 **RESULT: none.** Every precondition in 34.1 is produced by a strictly earlier
 section, so the dependency graph is acyclic by inspection of the table.
 
-**Two candidate cycles existed while the book was being written and both were broken
-deliberately. They are recorded because a reader will otherwise re-derive them.**
+**Three candidate cycles existed and all three are broken deliberately. They are
+recorded because a reader will otherwise re-derive them.**
 
 **Candidate 1. The wall layout needs the tank positions and the tank positions need
 the wall layout.** Broken by making section 6 produce BOTH: it is one arbitration
@@ -2255,6 +2847,17 @@ places a tank or a wall item.**
 marks are blocked on the fill band.** Broken by WATER's reading, adopted in 19-01:
 **the band is a decision about the water and the float marks follow it.** Section 19
 decides the band before section 21 marks anything.
+
+**Candidate 3, FOUND BY THE BUILDER READ AND NOT BY THIS CHECK. F-116.** Issue 1's
+17-01 blocked the standpipe's length on trip heights that section 19 produces; section
+19 waits on 18; section 18 waits on 17. **A hard stop, and this check passed it,
+because the dependency lived inside a blocked note instead of in a precondition and
+this check reads preconditions.**
+**Broken structurally rather than by a better checker: every mark on a standpipe is
+measured from its end cap face, so the pipe's overall length sets no height and a pipe
+longer than it needs to be is not wrong.** 17-01 is no longer blocked and the cut-long
+rule is its instruction. **Section 34.6 is the sweep that rule forced across the whole
+book.**
 
 ### 34.3 Postconditions nothing later requires
 
@@ -2271,37 +2874,79 @@ gone.** Four sections end at a wait and each names its wait as the last step: 11
 the manifold cure, 17 at the standpipe cure, 27 at the chiller loop cure, and 19 at a
 decision that is somebody else's. **Sections 12, 18, 28 and 20 restate the wait as
 their own precondition**, so returning to the book puts you in the right place.
-**Section 5 ends by handing the measurement to somebody else and section 6 is that
-person's work.**
+**Section 5 ends by handing the record away and section 6 is marked NOT YOURS TO
+WORK**, which Issue 1 handled honestly and did not mark.
 
 **2. A step that lands a conductor on a part a later step installs.** Section 31's
-preconditions name every part a conductor lands on: the populated main panel plate,
-both populated pump boxes, the populated display box plate, the float cords out
-through their grips, the standpipes hung, FV-1 installed, and WB200 mounted. **Nothing
-is wired before it is mounted.** The single case inside a section is 14-08, which
-fits the pull-down landing to the box body **because a conductor cannot be landed on a
-part a later step installs**, and leaves the landing itself to D4.
+preconditions name every part a conductor lands on, **including all four ground bars,
+which Issue 1 landed on and never fitted three of.** 14-08 fits the pull-down landing
+in the box for exactly this reason and leaves the landing itself to D4.
+**AND THE CLASS-OVER INSTANCE, WHICH THIS CHECK MISSED AT ISSUE 1 BECAUSE IT LOOKED
+ONLY AT CONDUCTORS:** Issue 1's section 29 ran sixteen tubes to heads on lids that
+section 32 then installed. **It is retired and the work is section 32a, after the lids
+are on.** The check now reads: no work of any kind is landed on a part a later section
+installs.
 
 **3. A book that ends by sending the builder to the next book without mentioning the
-one that had to come first.** Section 33 names D7 as the book before this one, names
-D2, D3, D5, D6 and D4 as in hand throughout, and then names D8 as next. **It says why
-in terms.**
+one that had to come first.** Section 33 names D7 as the book before this one, **and
+now also names the way in which D7 cannot be finished before this book starts**, with
+the fourteen lines that are in that position and the one thing at 6-07 that would break
+it. Then it names D8 as next, and says why.
 
-**4. Two sections each depending on the other's output.** 34.2. None, and the two
+**4. Two sections each depending on the other's output.** 34.2. None, and the three
 candidates are recorded with how each was broken.
 
 **5. A duct cut over a populated plate.** Sections 7, 8 and 9 cut every penetration
 with the enclosure empty and its plate out. **Section 13 cuts rail and duct on a bare
 plate and says why a builder would reasonably do it the other way.** Sections 18 and
-20 apply the same rule to a tank: the standpipe comes out before the bulkhead is cut,
-**because swarf in a tank is swarf on a float.**
+20 apply the same rule to a tank: the standpipe comes out before anything is cut,
+**because swarf in a tank is swarf on a float**, and section 20 now cuts the cord exit
+in the same visit for the same reason.
 
-### 34.5 What this check does not do
+### 34.5 What this check does not do, and the evidence for it
 
 **It does not find a step that is wrong.** Every precondition here is a statement the
 writer made about his own section, and a section that names the wrong precondition
-passes this check. **The end-to-end read as a builder is still owed, and it is the
-thing this check exists to serve.**
+passes this check.
+
+**AND THAT IS NOT A THEORETICAL LIMIT ANY MORE.** The builder read of Issue 1 found
+forty-eight things and this check had passed every one of them: sixteen two-action
+steps, seven things a step assumed and no step produced, seventeen facts belonging to
+other documents, seven acceptance conditions that could not be satisfied, and a closed
+loop between three sections. **None of it is visible to a check that reads
+preconditions, because none of it is a precondition.**
+
+**The end-to-end read as a builder is not an audit of this book. It is part of writing
+it.**
+
+### 34.6 The blocked-note sweep, and what it changed
+
+**F-116's fix applied to the whole book, not only to the three sections that showed
+it: ANY BLOCKED NOTE THAT NAMES ANOTHER SECTION IS A DEPENDENCY, AND A DEPENDENCY IS
+WRITTEN AS A PRECONDITION.**
+
+**Every blocked note in the book was read for a reference to another section or to one
+of its postconditions. Seven sections gained a precondition they were already relying
+on in prose, and one section lost a block entirely.**
+
+| Section | The note that named it | What changed |
+|---|---|---|
+| **17** | 17-01: "the trip heights, which do not exist until section 19" | **The block is removed.** It was a cycle. The pipe's length sets no height and 17-01 is now an instruction |
+| **20** | 20-01 needs the standpipe out; 20-04 names BB-08 | **BB-08 and BB-22 added** to its preconditions |
+| **22** | its header: "the float cannot be bought until section 6 exists" | **BB-08 added.** Issue 1 had section 6 gating this section only through D7, which 2-02 requires before step 1 |
+| **24** | 24-01 names BB-08 | **BB-08 added** |
+| **25** | 25-04 names BB-08 | **BB-08 added** |
+| **26** | 26-01 names BB-08 | **BB-08 added** |
+| **27** | 27-06 names BB-26; 27-07 named "BB-08 for where the chiller stands" | **BB-08 and BB-26 added**, and **BB-08 itself was extended to produce a chiller position**, which it did not before |
+| **30** | 30-01 needs a wall position | **BB-08 added** |
+| **32a** | its tubing passes a lid penetration and reaches a head on a lid | **BB-08, BB-11 and BB-36 added**, and the section moved after section 32 |
+
+**And two blockers were found to be false rather than unstated.** 24-03 and 30-02 both
+blocked on F-104, **which the owner has closed.** Each now says what it is really
+waiting for and says explicitly that F-104 is not it.
+
+**What the sweep did NOT change: nothing in the book depended on a LATER section
+except the one case in section 32a, and that case is why section 29 is retired.**
 
 ---
 
@@ -2309,18 +2954,48 @@ thing this check exists to serve.**
 
 **Stopped part way, and this book is finished only when somebody has tried to build
 from it.** Rule 7: BOSS declares it finished after another agent builds against it and
-finds nothing.
+finds nothing. **Issue 1 was read end to end by a builder and that read is the reason
+Issue 2 exists.**
 
-**Thirty-three build sections, one check section and this one. 237 numbered steps.**
-**185 of the 237 are blocked and 52 are ready to work today.** The order is complete,
-the method is complete, and **the sequence check above passes with no unmatched
-precondition, no cycle, and no unconsumed postcondition except the book's own
-output.**
+**Thirty-two build sections, one retirement notice, one check section and this one.
+284 numbered steps, plus two retired step numbers that are not reused.**
+
+### Two counts, because they are not the same number and Issue 1 published only one
+
+| | |
+|---|---|
+| **Steps carrying no blocker of their own** | **47** |
+| **Steps that can actually be worked today** | **27** |
+
+**Issue 1 published the first of those as though it were the second, and it was wrong
+in the flattering direction.** Section 1.3 says a section whose preconditions are not
+all true is not started, **so a step with no blocker inside a section nobody can open
+is not work, it is a step waiting behind a closed door.**
+
+**The 27 are in six sections and no others: section 2 (9 steps), section 3 (4),
+section 4 (3), section 5 (8) and section 11 (3), with section 1 carrying no steps.**
+Every other section needs BB-08, BB-09, BB-13 or BB-20, and each of those traces back
+to section 6.
+
+**The twenty other steps that carry no blocker sit in sections 7, 8, 9, 13, 14, 15,
+17, 20, 21, 23 and 25**, and every one of those sections is waiting on section 6 or on
+something section 6 produces.
+
+### What is not complete, and it is two things and not three
+
+**F-106.** Nobody has read a terminal. **Section 4 is the work and it needs nothing
+but the parts and a pen.** It is three of the twenty-seven steps above.
+
+**M-02's ARRANGEMENT half.** Section 6 is an arbitration and not a measurement.
+**Its ENVELOPE half is answered by D-090 and no step in this book waits on it**, per
+D-185 - which is the honest negative: measuring the wall again tonight would unblock
+nothing. **What would help tonight is at 6-07: a BOUND on the float cord span taken
+from the envelope, which starts the longest-lead purchase in the book without waiting
+for the arbitration.**
+
+**Cable length is not on this list.** It is D-090's answered half, gated by F-099,
+and 31-01 is where a builder meets it.
 
 **Counts of this document's own sections and steps appear because this section is
 about the document.** No count of anything the build contains appears anywhere in this
 book, per G-41 and D-183: D7 is the only document in this set where a quantity lives.
-
-**What is not complete is every dimension and every marking, and both have one cause
-each: M-02 and F-106.** Neither is a design problem. One is an evening with a tape
-measure and one is an evening with a pen.

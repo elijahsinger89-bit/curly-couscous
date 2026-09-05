@@ -4004,3 +4004,40 @@ span could be BOUNDED from the envelope, which starts the float search that gate
 sections, and 5-01 could become a CONFIRMATION against D-090 rather than a fresh
 measurement.**
 
+**D-187 D1 ISSUE 2. ALL 48 READ FINDINGS FIXED, FIVE MORE FOUND ON THE SAME SCAN,
+AND THE 17/18/19 CYCLE BROKE STRUCTURALLY RATHER THAN BEING RESEQUENCED.**
+
+**THAT IS THE ONE WORTH KEEPING: SECTION 17 LOST A BLOCK ENTIRELY.** The loop existed
+because the pipe's length appeared to set a float height. **It does not - every mark
+is measured FROM THE END CAP FACE, per D-131, so the pipe's length sets no height at
+all.** The cycle was an artefact of a datum nobody had applied. **A cycle removed by
+finding the constraint false is worth more than a cycle removed by reordering,
+because reordering leaves the false dependency in place for the next editor.**
+
+**THE BLOCKED-NOTE SWEEP CHANGED NINE SECTIONS**, F-116's fix applied everywhere
+rather than at the three sections that showed it. Eight gained preconditions they
+were already relying on in prose. **And two blockers turned out to be FALSE - both
+blocked on F-104, which the owner closed as not worth pursuing.** A closed finding
+still blocking two steps is G-38's shape on a blocker: **a block is only true against
+the tree it was written on.**
+
+**ZERO TWO-ACTION STEPS REMAIN.** 31-03 is now one cut, one tick, one RUN- id per
+jacket, worked one jacket at a time, **with no jacket list on the page because that
+would be a second inventory of D6's rows.** Five more were found beyond the sixteen
+named. **Every insertion took a letter, every affected section carries a REVISION
+line, and nothing was silently renumbered** - G-49's rule honoured while applying
+G-49.
+
+**WORKABLE TODAY IS 27, NOT 52, AND IT WAS TESTED RATHER THAN TAKEN.** 284 real
+steps, 237 blocked. **47 carry no blocker of their own and only 27 sit in a section a
+builder can OPEN** - the other 20 sit behind one section's unmet preconditions.
+
+**THAT DISTINCTION IS G-46 AGAIN AND IT IS THE THIRD TIME: a step with no blocker
+inside an unopenable section is not a workable step, and counting the two together
+overstates readiness in the flattering direction.** Section 35 now publishes both
+numbers and says why they differ.
+
+**"Gland" is gone and the book says CORD GRIP everywhere.** The tree's second name is
+recorded rather than renamed, and reported to BOSS instead of being fixed in place,
+**which is G-42 observed by an agent on a file it does not own.**
+
