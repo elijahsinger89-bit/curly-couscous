@@ -3556,3 +3556,45 @@ never open. Its Cable cell named a CROSSING rather than a JACKET, and P-02 alway
 existed.** The row that was written to test the schema was itself wrong in two
 cells, and the document built from it found both.
 
+**D-171 A CDR ROW IS ONE CONDUCTOR, LANDING TO LANDING, AND IT SPANS THE GLAND.
+THERE IS NO SUFFIX CONVENTION AND THERE WILL NOT BE ONE.**
+
+The parallel build splits a conductor at a gland because the gland is a package
+boundary and the two sides are landed by different books. **The problem is real. The
+split is a data change made to solve a PRESENTATION problem, and this build does not
+need it, because D4 IS GENERATED.**
+
+**D4 produces a page per enclosure, and a conductor that spans a gland APPEARS ON
+BOTH PAGES with its far end named.** A builder holding the pump-box page sees one
+instruction for the joint in front of them and the far landing as context. **One
+joint, one instruction, and the identity was never split.**
+
+**Why not the suffix, in one line: a suffix is arithmetic on an identifier.**
+channel-token.md's forbidden list bars exactly that, D-149 already retired rather
+than suffixed a RUN-, and **CDR-007 against CDR-007a is the same off-by-one
+generator that list exists to prevent - at 200 rows, with two rows that are one
+keystroke apart and mean two ends of one wire.**
+
+**And it is G-45 in the place G-45 is for: if two views must agree, generate them
+from one row rather than storing the row twice.**
+
+**One field carries the relationship instead of the identifier: FAR ENCLOSURE.**
+Every CDR row already names both landings, so a spanning conductor is recognisable
+by its two ends being in different boxes. **Nothing is added. The fact was already
+in the row.**
+
+**D-172 THE BOTH-END LABEL IS A COLUMN, TAKEN AS PROPOSED. Every conductor gets its
+number written on BOTH ends before it is landed, and it is a thing a builder TICKS
+rather than a thing they remember.**
+
+**It passes G-48 on the owner's own evidence: the parallel build found a step that
+named a terminal by LIST INDEX rather than by name, and it told a builder to verify
+a short and tick the box.** A label column is the cheapest defence against that
+class - **one column, no parts, one step that already happens, and it removes a
+failure mode nothing else in this build covers.**
+
+**And it is the answer to a gap D5 already has: 128 of its 198 empty cells are the
+two terminal columns, F-106, because nobody has looked at a part. A conductor
+labelled at both ends is identifiable WITHOUT the terminal marking**, so the label
+column carries the build while F-106 is still open.
+
