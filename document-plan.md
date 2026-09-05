@@ -209,7 +209,7 @@ the 1st Edition set, unverified.
 
 ### D4. Wiring instructions
 
-**Purpose.** One page per conductor: from, to, which clamp, the route, and the same
+**Purpose.** **CORRECTED 2026-09-05 BY D-171: ONE PAGE PER ENCLOSURE, not per conductor.** A conductor that spans a gland appears on both pages with its far end named, so a builder gets one instruction per JOINT and never holds two documents to land one wire. This line predated D-171 and is struck. ~~One page per conductor~~: from, to, which clamp, the route, and the same
 connection steps every time.
 
 **Owner.** MAIN-PANEL for panel conductors, each box owner for conductors inside

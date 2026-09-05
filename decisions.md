@@ -3620,3 +3620,38 @@ the landing columns by whoever generates D4, and a stored column would be a seco
 copy of a fact already on the row.** G-45 applied by an agent to its own document
 without being asked.
 
+**D-174 D4 EXISTS. EIGHT PAGES, 111 ROWS FOR 64 CONDUCTORS, AND EVERY ROW CARRIES
+THE SAME ONE BLOCKER.** wiring-instructions.md. The last document that did not exist
+at all.
+
+**Pages: main panel, display box, pump box A, pump box B, day tank standpipe,
+storage standpipe, fill solenoid, leak console.** Panel first because every jacket
+but two has an end in it and the ground bar is the single point; **the two pump
+boxes back to back because they are one build, not a mirrored pair.**
+
+**111 rows for 64 conductors, and the difference IS the gland ruling working:** the
+spanning ones are landed twice and instructed twice, once on each page, **still one
+conductor with one id.** Nothing on any page is a fact of its own.
+
+**ALL 111 ROWS CARRY A BLOCKED CELL AND 111 OF THEM CARRY THE SAME ONE: F-106.
+NOBODY HAS LOOKED AT A PART AND WRITTEN DOWN WHAT IS PRINTED ON ITS TERMINALS.**
+
+**That is the cheapest thing in the whole document set and it now gates every wiring
+instruction in the build.** It needs no decision, no lookup and no agent - it needs
+somebody with the parts in front of them and something to write with. **F-051 exists
+only because the owner once looked at a board.**
+
+**And the label column is what carries the build until it closes**, which is why D4
+orders every joint as **step 1 label both ends, step 2 land it.** D-172 was taken
+one turn before the document that needed it.
+
+**Four smaller blockers behind it:** eighteen rows wait on the pump box channel
+division, eight on whether the high-high floats sit in the permissive string, four
+on the leak console's de-energised contact state, F-115.
+
+**Two things reported rather than written onto a page, both correct calls:**
+document-plan.md's D4 purpose line said "one page per conductor" and predated D-171
+- **struck, and it is BOSS's file.** And **D5 has no ROUTE column, so no page implies
+a route while M-02 is open** - the document does not guess a wall layout it does not
+have.
+
