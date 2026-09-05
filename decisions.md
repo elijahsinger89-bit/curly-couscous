@@ -3768,8 +3768,20 @@ thing.**
 
 **WHAT IT COSTS TO APPLY TO D4: ONE GENERATION PASS, NOT A REWRITE.** D4 is a VIEW
 of D5 under G-45, so **the format is a property of the generator and not of 111
-hand-written rows.** That is the first time that structural choice has been paid
-back, and it is the whole argument for it.
+hand-written rows.**
+
+**THIS IS THE FIRST TIME G-45 PAID FOR ITSELF, AND IT IS A FACT ABOUT THE
+ARCHITECTURE RATHER THAN ABOUT THIS CHANGE.** A format instruction arriving after a
+111-row document exists would have cost **111 hand edits in a build that stores its
+instructions**, and the parallel build's own evidence says some would have been
+missed - **it duplicated three ribbon steps across two sections during exactly this
+kind of reorder, and the ribbon connected before the plate went in, which was the
+constraint the reorder existed to protect.**
+
+**Here it costs one pass because nothing was ever written twice.** That is the
+return on the rule, and it is worth recording because the rule's cost - refusing to
+state a fact in a second place, repeatedly, when stating it would have been easier -
+was paid over many turns before today.
 
 **TWO THINGS IN THE CURRENT D4 CONFLICT WITH G-49, BOTH FROM ONE CAUSE - CROSS-
 REFERENCING INSTEAD OF REPEATING:**
@@ -3789,4 +3801,19 @@ wrong - only the shape it was rendered in.**
 BLOCKED, which channels are in this box is not decided" - D-178 decided it.** CH1 to
 CH4 in box A, CH5 to CH8 in box B. **Eight named rows per box, not one grouped
 row.**
+
+**AND ONE CLAUSE ADDED TO G-49 BY BOSS AND CONFIRMED BY THE OWNER AS THE HALF HE
+MISSED: A BLOCKED JOINT IS STILL A NUMBERED STEP, IN ITS PLACE AND IN ORDER, with
+its acceptance condition replaced by what is missing and who owns it.**
+
+**Collapsing blocked joints into a list at the end means a builder reaches the end
+and discovers something in the middle was skipped - the worst possible moment to
+find out.** In place and in order means **they meet it when they would have done
+it.**
+
+**A verification is required after any reformat that moves steps, and it is a
+comparison rather than a read: every joint appears EXACTLY ONCE PER PAGE, and the
+total joint count matches D5's conductor count with spanning conductors counted
+twice.** The parallel build hit the alternative twice. **Both halves of a duplicated
+or dropped step look correct in isolation.**
 
