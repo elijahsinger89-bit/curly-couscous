@@ -3907,3 +3907,44 @@ it ends.**
 to check against**, and the owner's instruction stands: **plan for that read rather
 than discovering you need it.** It is scheduled as part of D1, not as a later audit.
 
+**D-184 D1 EXISTS. build-book.md, 33 BUILD SECTIONS, 237 NUMBERED STEPS, AND 52 OF
+THEM ARE WORKABLE TODAY.** Six of eleven documents now exist.
+
+**THE THING THAT MATTERS MOST IS THAT THE TWO GATES BECAME SECTIONS RATHER THAN
+BLOCKERS.** The order runs: read the book, parts and room, **label every device,
+read every terminal - which IS F-106 - measure the wall - which IS M-02's missing
+input** - then the layout and everything after it.
+
+**So the two things the owner was going to do this week are steps 3 and 4 of the
+build rather than prerequisites to it.** A builder does not wait for them; they are
+the first work.
+
+**THE SEQUENCE CHECK PASSES AND IT WAS RUN, NOT ASSERTED.** Every one of the 33
+sections' preconditions is matched by a postcondition of a **strictly earlier**
+section or by something true before the build starts. **No unmatched precondition and
+no cycle.**
+
+**TWO CANDIDATE CYCLES EXISTED AND BOTH ARE RECORDED WITH HOW THEY WERE BROKEN**,
+which is worth more than the absence of cycles: **wall layout versus tank position -
+one arbitration produces both** - and **C-11's fill band versus the float marks - the
+band is a decision about the water and the marks follow it.** G-50 earning its
+freeze on the first document it governed.
+
+**One postcondition is consumed by nothing later and it is the correct one: the last
+section's output, consumed by D8.** That is the test working rather than failing.
+
+**And all five of the owner's named sequence defects are checked ONE AT A TIME**, by
+shape, rather than being assumed away by the general check.
+
+**185 of 237 steps are blocked, on two causes, stated IN PLACE in every section where
+a builder needs them and never collected at the end.** M-02 blocks every position,
+spacing and dimension plus the float purchase through F-100; F-106 blocks every joint
+in D4.
+
+**INTEGRATOR differs from document-plan's sheet list in seven named places, each
+with its reason** - enclosure interiors and probe routing go to D3 and D6 rather than
+into the book; legend and overview become G-50 front matter; the dosing wall and both
+standpipe sheets are absorbed; **and three sections exist that no sheet list has.**
+The differences are stated in the document rather than resolved silently, **which is
+the right handling of a plan that was written before the document.**
+
