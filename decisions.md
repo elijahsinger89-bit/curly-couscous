@@ -3419,3 +3419,40 @@ the row carries and what its shape has to answer.
 **G-48 is frozen from the owner's design instruction: say what a proposal costs in
 parts and steps alongside what it buys.**
 
+**D-165 CBL-07 CLOSES. THE GROUND BAR IS THE SINGLE POINT AND THE BARS ARE DAISIED
+HOME.** Owner, 2026-09-04, from the parallel build, which reached the same
+conclusion independently.
+
+**A copper ground bar in the main panel, one part. Each remote enclosure has its own
+LOCAL BAR, and a GREEN CONDUCTOR INSIDE THE CROSS-BOX CABLE joins the local bar to
+the main one.** So it is **one green conductor per CABLE rather than one per
+DEVICE**, and that is why the cross-box cords are three-conductor rather than two.
+
+**THAT ANSWERS RUN-017's PROVISIONAL ID: the EGC is a conductor INSIDE each run, not
+a separate bonding cable. RUN-017 retires under D-149** - the parent id goes and the
+conductors appear inside the runs they protect. **Nothing is renumbered around it
+and no suffix is issued.**
+
+**TWO PROPERTIES WORTH MORE THAN THE TOPOLOGY:**
+
+**The bar is the SINGLE POINT and nothing bonds anywhere else.** The owner's reason
+for writing it down is the whole value of writing it down: **a builder who finds a
+convenient screw will use it.**
+
+**And a bar is a terminal that is ALWAYS IN THE 120 V CHAIN even in a box holding
+only 24 V, because the ground is common.** So whatever insulates a conductor landing
+there is rated for the highest voltage **anywhere on the bar**. That is the float
+cord rule for the third time - **D-156 on the standpipe, D-163 on the leak console,
+and now here.** Three arrivals from three directions at the same rule is the rule
+being real rather than local.
+
+**A PURCHASING WARNING FROM THE PARALLEL BUILD, RECORDED BECAUSE IT COST MONEY
+THERE: seven DIN-rail grounding terminal blocks were bought before the ground bar
+decision and are being returned. A grounding terminal block bonds to the rail, the
+rail bonds to the plate, AND THE PLATE IS PLASTIC. THEY BOND TO NOTHING.**
+
+**Nothing in this tree assumes them.** Searched parts.md, order.md,
+electrical-schematic.md, both schedules and interface-table.md: **every one already
+says ground bar.** Recorded so it stays that way when the second order pass runs,
+which order.md lists as not started.
+
