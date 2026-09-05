@@ -3907,8 +3907,9 @@ it ends.**
 to check against**, and the owner's instruction stands: **plan for that read rather
 than discovering you need it.** It is scheduled as part of D1, not as a later audit.
 
-**D-184 D1 EXISTS. build-book.md, 33 BUILD SECTIONS, 237 NUMBERED STEPS, AND 52 OF
-THEM ARE WORKABLE TODAY.** Six of eleven documents now exist.
+**D-184 D1 EXISTS. build-book.md, 33 BUILD SECTIONS, 237 NUMBERED STEPS.**
+
+**THE "52 WORKABLE TODAY" FIGURE IS WITHDRAWN, 2026-09-05. IT IS ABOUT HALF THAT UNDER THE BOOK'S OWN RULE.** The builder read found **seven steps carrying LIVE acceptance conditions for cuts that are themselves blocked, and those seven were counted in the 52.** **BOSS reported the number to the owner as the headline of the pass. It was the document's own count, taken and relayed without testing it - G-47's shape on a count instead of on a cost.** Six of eleven documents now exist.
 
 **THE THING THAT MATTERS MOST IS THAT THE TWO GATES BECAME SECTIONS RATHER THAN
 BLOCKERS.** The order runs: read the book, parts and room, **label every device,
@@ -3963,4 +3964,43 @@ on the ARRANGEMENT is not.** Being checked against every blocked step in D1, bec
 **Recorded as a decision rather than a note because it is the shape G-46 is about at
 document scale: two blockers wearing one name, and the closed one invisible behind
 the open one.**
+
+**D-186 THE BUILDER READ OF D1 FOUND FORTY-EIGHT THINGS AND NONE WAS FINDABLE BY THE
+SEQUENCE CHECK.** audit/2026-09-05-d1-builder-read.md.
+
+**16 two-action steps, 7 untold assumptions, 8 sequence problems a person hits, 17
+restatements of facts other documents own, and several unsatisfiable acceptance
+conditions.** The parallel build's read found twenty-two across five books. **This
+one found more in one.**
+
+**THE ONE THAT MATTERS MOST IS A LIMIT ON G-50 ITSELF: SECTIONS 17, 18 AND 19 ARE A
+CLOSED LOOP AND THE SEQUENCE CHECK COULD NOT SEE IT, BECAUSE THE DEPENDENCY LIVES
+INSIDE A BLOCKED NOTE RATHER THAN IN A PRECONDITION.** F-116.
+
+**A dependency stated in prose is not a precondition, and G-50 only reads
+preconditions.** So the check passed a cycle. **That is not an argument against G-50
+- four of the five defect shapes were still caught by construction - it is the
+boundary of it, and the boundary is where a writer says a thing in the wrong field.**
+
+**THE WORST INDIVIDUAL DEFECT: step 31-03, "take D6 and cut each jacket" - EVERY
+CABLE CUT IN THE BUILD UNDER ONE STEP NUMBER.** That is the shape that cut five
+cables 200 mm short in the parallel build, arriving in a document written to prevent
+it.
+
+**AND THE UNTOLD ASSUMPTIONS ARE THE ones that would stop a builder dead:** lids are
+never marked yet three steps depend on the mark; **three of four ground bars are
+never installed yet a later step lands on them and another checks them**; the tanks'
+cord grips are never cut or fitted; the chiller is never placed; **and "gland" and
+"cord grip" are two names for one part**, which is the declaration's own forbidden
+item arriving in a build book.
+
+**THE M-02 SPLIT RETURNED A HONEST NEGATIVE: all 35 steps naming it are blocked on
+the POSITIONS. ZERO unblock on the envelope.** The wrong half appears only in prose,
+in three places that say cable length is blocked on M-02 when it is D-090's answered
+half gated by F-099.
+
+**Two adjacent items are worth working tonight and neither is one of the 35: 6-07's
+span could be BOUNDED from the envelope, which starts the float search that gates two
+sections, and 5-01 could become a CONFIRMATION against D-090 rather than a fresh
+measurement.**
 
