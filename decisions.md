@@ -76,7 +76,7 @@ changed reports to BOSS and does not act.
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
 | G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
-| G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood |
+| G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood. **EXTENDED 2026-09-05, D-170: THE QUESTION IS ASKED OF EVERY POWERED DEVICE IN A SAFETY CHAIN, NOT ONLY OF ACTUATORS.** A powered SENSE device fails the same way an actuator does - **its contact goes somewhere when its own supply dies, and if that contact sits in a permissive chain, where it goes IS the safe state or is not.** Found by writing D5: the leak console is powered, its Form C legs sit in the permissive chain, and what the contact does when its own 24 V fails is on file nowhere |
 | G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
 | G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
 | G-42 | **ONE DEVICE, ONE NAME, EVERYWHERE. A RENAME IS APPLIED TO THE WHOLE TREE IN ONE PASS OR IT IS NOT APPLIED AT ALL, AND THE OLD NAME IS RECORDED SO AN OLD READER IS NOT LOST** | Frozen 2026-09-04, D-144. **A label on a wall has to match a row in a schedule, and a generated set cannot carry two names for one thing.** **And the distinction that makes a global rename safe: renaming a DEVICE is not editing a CLAIM.** A returned answer and an audit file are records of what an agent SAID, so their reasoning is annotated and never rewritten - **but the name of a pump is not part of anyone's reasoning, so it is renamed in place there too.** Contrast the display-box-sweep annotation, where the SUBJECT of a sentence moved and the sentence was left standing |
@@ -3520,4 +3520,39 @@ contract.
 
 **So D5 unblocks D4, and D4 is the document a person actually holds while
 wiring.**
+
+**D-170 D5 EXISTS. 64 CDR- ROWS, ONE PER CONDUCTOR, EACH CITING ITS INTERFACE ROW
+AND CARRYING ITS OWN FAIL DIRECTION.** wiring-schedule.md. **592 filled, 42 no valid
+value, 198 empty** across 832 cells.
+
+**THE EMPTIES ARE NOT SPREAD, WHICH IS THE USEFUL PART: 128 OF 198 ARE THE TWO
+TERMINAL COLUMNS ON EVERY ROW, AND THAT IS ONE REQUEST NOBODY HAS MADE** - F-106,
+go and look at the parts and write down what is printed on them. 48 more are design
+current, 16 are per-channel cable cells waiting on the box division, and 6 are
+everything else. **So a document that looks a quarter empty is three requests, not
+two hundred problems.**
+
+**AND THE ONE THAT CHANGES WHAT THE MACHINE DOES: WHAT THE LEAK CONSOLE'S FORM C
+CONTACT DOES WHEN ITS OWN 24 V SUPPLY FAILS IS ON FILE NOWHERE, AND ITS LEGS SIT IN
+THE PERMISSIVE CHAIN.** F-115.
+
+**G-39 was frozen for ACTUATORS and nobody asked it of a POWERED SENSE DEVICE.** The
+console is not a passive float: it takes 24 V and returns a dry contact. **If that
+contact holds closed when the console dies, a dead leak detector reads as no leak
+and the permissive stays made.** CDR-063 and CDR-064 are the only two conductors in
+the whole schedule whose fail cell INTERCONNECT could not fill, **and it stated no
+direction, which is F-017's lesson held.**
+
+**G-39 IS EXTENDED RATHER THAN DUPLICATED: the no-power question is asked of every
+POWERED DEVICE IN A SAFETY CHAIN, not only of actuators.**
+
+**Logged, not pursued: CDR-031, the shared common for the permissive coil drive, may
+be a second F-107** - T-007 says a remote sinking driver needs one or both ends
+landed correctly or the circuit does nothing, and S-07 names the drive and the coil
+but not the common. Reported, not invented.
+
+**And INTERCONNECT corrected BOSS's prototype: two of CDR-001's five open cells were
+never open. Its Cable cell named a CROSSING rather than a JACKET, and P-02 always
+existed.** The row that was written to test the schema was itself wrong in two
+cells, and the document built from it found both.
 
