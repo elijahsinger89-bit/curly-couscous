@@ -84,6 +84,8 @@ changed reports to BOSS and does not act.
 | G-44 | **SIMPLE IS BEST. THE BURDEN OF PROOF IS ON COMPLEXITY, NEVER ON SIMPLICITY.** A simpler build is easier to BUILD, easier to OPERATE and easier to REPAIR, and those are three separate wins that compound. **Anything added must say what failure it prevents and what it costs to build, operate and repair. If it cannot, it does not go in** | Frozen 2026-09-04, D-152, the owner's standing instruction: "do not over complicate this just get it done". **It outranks tidiness, completeness and elegance, and it is the tie-breaker whenever two answers both work** |
 | G-45 | **A WRITTEN CONTRACT IS A SUBSTITUTE FOR A MECHANISM. If two documents must agree, GENERATE THEM FROM ONE SOURCE rather than writing a rule that says they must agree** | Frozen 2026-09-04, D-155. **The 1st Edition disposed of the entire duplication question in one line: the schedules read the same wire list as the routing sheets, so they CANNOT disagree, and a schedule is never hand-transcribed.** This tree wrote the duplication contract twice and only two facts in it survive generation. **A contract needs a reader who obeys it; a mechanism does not** |
 | G-46 | **A CELL THAT CAN NEVER BE FILLED MUST NOT LOOK LIKE ONE THAT HAS NOT BEEN FILLED YET. Mark it N/A WITH ITS REASON and count it separately** | Frozen 2026-09-04, D-159. **A float has no faces, so the entry-face cell for a float-ended run has NO VALID VALUE rather than a missing one.** Two blank cells that mean opposite things is F-097's shape on a table instead of on an identifier: **one is work outstanding and the other is work that will never exist, and a completion count that mixes them is wrong in both directions.** INTERCONNECT reached this independently for the duty column with "n/a, no pole". **CONFIRMED ON FIRST APPLICATION 2026-09-04: twelve cells previously counted as FILLED were never fillable. Under the old two-state count D6 would have reported 169 of 180 and been wrong by twelve IN THE FLATTERING DIRECTION** |
+| G-47 | **A COST NOBODY HAS PRICED IS NOT A ZERO COST.** An unpriced remedy is not cheap, it is UNPRICED, and the two are indistinguishable until someone who owns the thing looks | Frozen 2026-09-04, D-162. **BOSS relayed "zero cost" for a face receptacle from the agent that did not own the box. DISPLAY-BOX owned it and found the remedy removed nothing: LINE still had to reach the rail, so the same conductors sat in the same band bare of jacket behind the face. The remedy was never free, it was INVISIBLE.** **And the conversation that caught it OWNED the thing being changed - which is the argument for asking the owner rather than reasoning about the owner's box** |
+| G-48 | **SAY WHAT A PROPOSAL COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT BUYS. If it removes a failure mode nothing else covers, take it. If it is THOROUGH, do not** | Frozen 2026-09-04, D-164, sharpening G-44 with the owner's own test. **Every part placed is a part that can fail, a part that needs a buy line, a part that needs a step, and a part a future reader has to understand.** **Not permission to under-build: a protection that is needed is needed, and the overflow bulkhead, the high-high floats and the permissive chain all stay.** What is barred is **a mechanism added because it is interesting, a check added because a check is available, and a component added to close a gap that was never going to bite** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -3373,4 +3375,47 @@ still INTERCONNECT's, now waiting only on F-030 rather than on DISPLAY-BOX.**
 parts.md, not in P-07 or P-09, not in RUN-009. **It is the one thing that would
 change this answer, it is DISPLAY-BOX's, and DISPLAY-BOX declined to guess it.**
 Graded CURRENT.
+
+**D-162 F-114 CLOSES AND IT CONFIRMS D-161 RATHER THAN OVERTURNING IT. THE AC-DC
+CONVERSION IS OUTSIDE BOTH ENCLOSURES.** Owner, 2026-09-04.
+
+**A 27 W USB-C brick on an UNSWITCHED RECEPTACLE ON THE MAIN PANEL FACE. The
+conversion happens in the brick, hanging outside the main panel, in neither box.
+WHAT CROSSES TO THE DISPLAY BOX IS 5 V DC OVER A USB-C CABLE, NOT LINE.**
+
+**AND THE CROSSING IS A BULKHEAD, NOT A GRIP: a USB-C connector will not pass a
+grip bore, and cutting and re-terminating a USB-C cable is not a thing anyone
+should do.** Panel-mount USB-C bulkhead. **That is a machine fact and it changes
+the entry hardware at the display box face.**
+
+**DISPLAY-BOX's ruling stands and is STRENGTHENED: with the conversion outside, LINE
+never has to reach the display box at all, so a face receptacle there would import
+line voltage into a box that has no reason to hold any.**
+
+**P-09 CHECKED, AS THE OWNER ASKED. Its substance is unaffected and only DISPLAY-BOX's
+REASON was wrong.** P-09 crosses the 5 V rail from the display box to the drivers'
+VDD; **that rail exists in the box under either topology, so P-09 was not written
+against a machine that is not this one.** What was wrong is the sentence "LINE has
+to reach the 5 V rail inside the box under P-09" - **it does not, and never did.**
+The conclusion it supported is right for a better reason.
+
+**G-47 IS FROZEN OUT OF IT: A COST NOBODY HAS PRICED IS NOT A ZERO COST.**
+
+**D-163 THE LEAK CONSOLE IS REMOTE AND IN NO ENCLOSURE.** Winland WaterBug WB200,
+outside the main panel, **fed 24 V through its own cord grip, sensor on the floor.**
+Its contact legs sit in the 120 V permissive chain, **so every conductor in its
+cable is insulated for 600 V - the same rule D-156 applied to the float cords,
+arriving from the other direction: the cable is rated for the highest voltage in the
+bundle even though the console runs on 24 V.**
+
+**Its position on the wall is the owner's and is not fixed.**
+
+**D-164 CBL-07 IS EQUIPMENT GROUNDING, ACROSS ALL FOUR ENCLOSURES.** Answering the
+owner's question about BOSS's own numbering. **The display box is polycarbonate and
+the pump boxes are plastic, so there is NO BONDING PATH THROUGH ANY OF THEM, and
+every equipment ground lands on a ground bar rather than on a box.** That is what
+the row carries and what its shape has to answer.
+
+**G-48 is frozen from the owner's design instruction: say what a proposal costs in
+parts and steps alongside what it buys.**
 
