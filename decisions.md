@@ -3655,3 +3655,47 @@ document-plan.md's D4 purpose line said "one page per conductor" and predated D-
 a route while M-02 is open** - the document does not guess a wall layout it does not
 have.
 
+**D-175 F-115 CLOSES AND THE UNSAFE CASE DOES NOT EXIST. THE LEAK CONSOLE'S CONTACT
+IS C-NC, OPEN ON POWER LOSS OR LEAK.** Owner, 2026-09-05.
+
+**A dead console and a wet floor produce the SAME result: the contact opens and the
+permissive drops.** So the failure G-39's extension was written to catch - **a dead
+leak detector reading as no leak** - is structurally absent on this device.
+
+**CDR-063 and CDR-064's fail cells are fillable and the four D4 rows waiting on it
+are unblocked.** G-39 was extended to powered sense devices one turn before the
+question was asked, and the answer came back safe. **The rule stands on the next
+powered device, not on this one.**
+
+**D-176 THE THREE BEHIND F-106, SORTED INTO DECISIONS AND LOOKUPS, BECAUSE THEY ARE
+NOT THE SAME KIND OF THING.**
+
+| | Kind | Who | What it needs |
+|---|---|---|---|
+| **The leak console's de-energised state** | **LOOKUP, and CLOSED** | Answered above | Nothing |
+| **The pump box channel division** | **DECISION** | **The owner's**, and it is one sentence: which four channels are in box A and which four in box B | **It is not derivable and no agent may pick it.** G-06 serialises the heads and D-127 gives eight positions, but nothing anywhere says which four share a box. **18 D4 rows wait on it** |
+| **The high-high floats in the permissive string** | **DECISION**, and it changes what the machine does | **MAIN-PANEL's ruling, the owner's call** | Whether a high-high trip stops THE WHOLE PLANT and needs a human reset, or stops only the fill. **8 D4 rows wait on it, and D-154 already drew them in the permissive string, so the question is whether that is right rather than what to do** |
+
+**Neither decision needs F-106, M-02, or a part in hand. Both are one sentence
+each.**
+
+**D-177 THE TERMINAL SURVEY SHEET EXISTS. terminal-survey.md.** The form, the
+device list grouped so a partial pass still unblocks something, **and the convention
+for a terminal with no legend, which generalises F-051 rather than reinventing it:**
+a terminal is identified by **POSITION FIRST and by legend second**, because
+position always exists and a legend may not, may be a symbol, or may be wrong.
+
+**A SYMBOL is recorded in plain words and marked NOT QUOTABLE**, and the build sheet
+names that terminal by position and function - **which is exactly what F-051 forced
+for the 6121's circled plus and minus.**
+
+**Two fields that are not obvious and both earn their place: the DATUM, because
+"left to right" is meaningless without a stated physical reference and the 1st
+Edition's height contradictions were a datum problem one level up; and ANYTHING ELSE
+PRINTED NEARBY, which is the field that stops a future reader naming a terminal
+after a revision code.**
+
+**And one instruction that matters more than the format: record a legend you
+distrust rather than fixing it. If the part says one thing and the datasheet says
+another, THE PART WINS AND THE DISCREPANCY IS THE FINDING.**
+
