@@ -3817,3 +3817,46 @@ total joint count matches D5's conductor count with spanning conductors counted
 twice.** The parallel build hit the alternative twice. **Both halves of a duplicated
 or dropped step look correct in isolation.**
 
+**D-181 D4 IS REGENERATED UNDER G-49 AND BOTH COUNTS PASS. 8 pages, 173 numbered
+steps, 125 joints.** wiring-instructions.md.
+
+**Count one: every joint appears exactly once on its page.** 64 distinct conductors,
+**61 on exactly two pages, 3 on one** - CDR-042, CDR-043 and CDR-044, **whose far
+end is the building branch circuit, which is not an enclosure and has no page.** None
+appears three or more times and none of CDR-001 to CDR-064 is missing.
+
+**Count two: 125 joints against 111, and the rise is +14 for the reason predicted.**
+The two grouped "eight step and direction conductors, blocked" rows became eight
+named rows each: **2 became 16, so 111 minus 2 plus 16 is 125.** Every other page's
+count is identical to the previous issue and only pages 3 and 4 moved. **Nothing else
+changed the count.**
+
+**The check was run mechanically against the file rather than from memory**, which
+is the only way it is worth anything - both halves of a duplicated or dropped step
+look correct in isolation.
+
+**ALL 125 JOINTS ARE BLOCKED AND EVERY ONE IS BLOCKED ON THE SAME THING: NO TERMINAL
+HAS HAD ITS PRINTED IDENTIFIER READ AND WRITTEN DOWN.** D-178, D-179 and F-115's
+closure removed the other three blockers entirely. **F-106 is now the only one left
+in the entire document.**
+
+**D-182 THE UNLOCK MAP EXISTS. unlock-map.md.** The honest answer to what the two
+open gates buy, and **the two gates buy different KINDS of thing:**
+
+| Gate | What it buys |
+|---|---|
+| **F-106**, an evening with the parts and a pen | **All 125 D4 joints and 128 D5 cells. IT RELEASES NO NEW DOCUMENT.** It makes two finished documents USABLE rather than producing a third |
+| **M-02**, measuring the wall | **D3 outright - it is gated on nothing else - plus D6's last cells, D1's dimensioned half, and RUN- lengths under D-090's cut rule** |
+
+**Three documents are gated on NEITHER: D7 can start now, D11 exists as a live
+record awaiting C-09, and D8 can be WRITTEN now** - only its first stage, which
+checks landed conductors against the schedule, waits on F-106.
+
+**D9 is not gated by anything and is empty by definition: its content cannot exist
+before commissioning runs.** The form is writable today.
+
+**AND THE ANSWER THE MAP IS FOR: D1, THE BUILD BOOK, IS THE LARGEST UNWRITTEN
+DOCUMENT AND IT IS BLOCKED ON NOTHING.** It can be started tonight without the survey
+and without the wall, **and it will still be incomplete in exactly the places M-02
+fills.**
+
