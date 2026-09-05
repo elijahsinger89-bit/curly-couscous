@@ -2327,6 +2327,8 @@ with nothing hanging off a float body.**
 
 **ONE ADDITION 2026-09-04, D-156, and it is free: FLOAT CORDS AND PUMP CORDS GET SEPARATE TIE GROUPS ON THE PIPE.** The standpipe guarantees worst-case adjacency by construction, F-113, and this is the only remedy that survives G-44 - shields, conduits and barriers cost money and block the tie a person must reach.
 
+**AND THE MATERIAL IS NOT OPEN IN BOTH DIRECTIONS, 2026-09-05, D-166. A METAL STANDPIPE WOULD BE AN UNBONDED CONDUCTIVE PART IN A TANK WITH 120 V CORDS TIED TO IT.** INTERCONNECT raised it while D-121 still adopts no material, **which is the only window in which it is free.** **The 1st Edition used non-metallic pipe, and under G-40b that is the default where this build has no reason to differ. So the hazard does not arise and nothing is added to prevent it - which is G-48's answer: the cheapest remedy is the one that removes the failure instead of managing it.** **If the owner wants metal, it becomes a bonded part landing on the local bar under D-165 and that is a different build.** Raised to him as the one decision here that changes what the machine is.
+
 **NO DIMENSION, NO MATERIAL, NO ATTACHMENT DETAIL, NO COUNT.** The owner's words
 and they are the whole scope of the adoption. **What is adopted is a rule about
 what holds what.**
@@ -3455,4 +3457,33 @@ rail bonds to the plate, AND THE PLATE IS PLASTIC. THEY BOND TO NOTHING.**
 electrical-schematic.md, both schedules and interface-table.md: **every one already
 says ground bar.** Recorded so it stays that way when the second order pass runs,
 which order.md lists as not started.
+
+**D-167 D6 IS EFFECTIVELY DONE. 153 FILLED, 16 NO VALID VALUE, 2 EMPTY over 19
+active jackets and 171 cells.** The two empties share one cause: **the WaterBug's
+sensing-circuit class, which is a lookup on a bought device.** Search terms: Winland
+WaterBug WB200 sensor circuit voltage and current, and WB200 sensing loop class.
+
+**CBL-07 CLOSED A CAUSE WITHOUT FILLING A SINGLE CELL, because D-165 REMOVED
+RUN-017 from the schedule.** Better than filling it.
+
+**And INTERCONNECT recorded that D-165 corrected its own shape argument: it had
+reasoned that plastic boxes have nothing to bond, so only LINE jackets need a
+grounding conductor. THE LOCAL-BAR DAISY PUTS ONE IN ALL EIGHT CROSS-BOX JACKETS.**
+An agent correcting its own returned reasoning in the document that carried it.
+
+**THE ALLOWANCE IS RELEASED. The named failure left the display box face with the
+LINE entry, so the width returns to the pool F-030's split has a prior claim on -
+no parts, and one instruction removed from a routing step.** Removal beat
+mitigation and it beat it for free, which is the outcome G-48 exists to prefer.
+
+**INTERCONNECT also recorded the G-47 exhibit against its own document**, that the
+previous revision claimed a zero-cost face remedy for a box it does not own.
+
+**THE WHOLE SCHEDULE IS NOW DOWNSTREAM OF ONE MECHANICAL ARBITRATION, M-02.**
+CBL-01 to CBL-04 have their face half answered under D-146 and wait only on position
+and spacing, **which is the wall layout.** One open row now gates a finished
+document.
+
+**Logged, not pursued: whether the USB-C brick has integral pins or a mains cord,
+and what supports it. MAIN-PANEL's face.**
 
