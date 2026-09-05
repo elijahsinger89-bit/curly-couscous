@@ -87,6 +87,7 @@ changed reports to BOSS and does not act.
 | G-47 | **A COST NOBODY HAS PRICED IS NOT A ZERO COST.** An unpriced remedy is not cheap, it is UNPRICED, and the two are indistinguishable until someone who owns the thing looks | Frozen 2026-09-04, D-162. **BOSS relayed "zero cost" for a face receptacle from the agent that did not own the box. DISPLAY-BOX owned it and found the remedy removed nothing: LINE still had to reach the rail, so the same conductors sat in the same band bare of jacket behind the face. The remedy was never free, it was INVISIBLE.** **And the conversation that caught it OWNED the thing being changed - which is the argument for asking the owner rather than reasoning about the owner's box** |
 | G-48 | **SAY WHAT A PROPOSAL COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT BUYS. If it removes a failure mode nothing else covers, take it. If it is THOROUGH, do not** | Frozen 2026-09-04, D-164, sharpening G-44 with the owner's own test. **Every part placed is a part that can fail, a part that needs a buy line, a part that needs a step, and a part a future reader has to understand.** **Not permission to under-build: a protection that is needed is needed, and the overflow bulkhead, the high-high floats and the permissive chain all stay.** What is barred is **a mechanism added because it is interesting, a check added because a check is available, and a component added to close a gap that was never going to bite** |
 | G-49 | **WRITE BUILD INSTRUCTIONS THE WAY LEGO WRITES THEM. ONE ACTION PER STEP. EVERY PART NAMED BY THE IDENTIFIER PRINTED ON IT. EVERY STEP CARRIES AN ACCEPTANCE CONDITION OBSERVABLE AT THAT MOMENT. NO STEP ASSUMES SOMETHING THE BUILDER WAS NOT TOLD TO DO** | Frozen 2026-09-05, D-180. **Not a style preference - it is the format that survives being followed by someone who did not design the thing.** Six clauses, each from a real defect in the parallel build: **a step with two verbs can be half done and look finished; a step that names a terminal by LIST INDEX told a builder to verify a short and tick the box; a step with no acceptance condition can be done wrong and passed; a correction stated AFTER the step it modifies cut five cables 200 mm short, and a cut cable cannot be un-cut; silent renumbering breaks a person who marks their place on a printed page; and where a builder would reasonably do it differently, SAY WHY NOT - a builder who knows why will not undo it, and a builder who does not will improve it** |
+| G-50 | **EVERY SECTION OF A SEQUENCED DOCUMENT STATES WHAT MUST BE TRUE BEFORE IT STARTS AND WHAT IS TRUE AFTER IT ENDS. THEN A SECTION THAT REQUIRES X MUST COME AFTER THE SECTION THAT PRODUCES X, AND THAT IS A CHECK A MACHINE CAN RUN** | Frozen 2026-09-05, D-183. **Sequence defects are invisible to every per-page check because each page is internally consistent and the defect is in the ORDER.** The parallel build hit five and none was findable by any audit: **a section that sends a builder away then continues assuming he has not gone; a step that lands a conductor on a part a later step installs; a book that ends by sending the builder to the next book without mentioning the one that must come first; two sections each depending on the other's output; and a duct cut over a populated plate.** **Preconditions and postconditions turn an end-to-end read into a comparison. They do not replace the read - they give it something to check against** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -3859,4 +3860,50 @@ before commissioning runs.** The form is writable today.
 DOCUMENT AND IT IS BLOCKED ON NOTHING.** It can be started tonight without the survey
 and without the wall, **and it will still be incomplete in exactly the places M-02
 fills.**
+
+**D-183 D1 CANNOT BE A VIEW, AND ITS DRIFT SURFACE CAN STILL BE CUT TO ALMOST
+NOTHING. HERE IS THE HONEST ANSWER.**
+
+**D4 is a view of D5 because every fact on its pages is a cell in a table. A build
+book is not that.** Its content is **SEQUENCE and MECHANICAL ASSEMBLY**, and no table
+in this tree generates either.
+
+**So D1 is hand-written. What can be removed is not the writing - it is the
+OPPORTUNITY TO DISAGREE.**
+
+**D1 CARRIES NO FACT THAT ANOTHER DOCUMENT OWNS.** Not one:
+
+| Content | Where it lives | What D1 does |
+|---|---|---|
+| Any conductor, terminal, or landing | **D4 and D5** | **Points at the page. Never restates a joint** |
+| Any part, quantity or count | **D7** | Points. **G-41: quantities are deltas and must never repeat** |
+| Any measurement or acceptance test | **D8 and commissioning.md** | Points |
+| Any rung, coil or contact | **D2** | Points |
+| Any cable route or gland position | **D6** | Points |
+
+**What is left is genuinely D1's own and is owned nowhere else: the ORDER things
+happen in, and how a thing is physically assembled.** That is a real document and
+it is prose.
+
+**AND THE REMAINING DRIFT SURFACE IS EXACTLY THE THING THE OWNER SAYS WILL BE WRONG:
+THE SEQUENCE.** His five, and not one was findable by any check, because **each page
+was internally consistent and the defect was in the order.**
+
+**SO SEQUENCE STOPS BEING PROSE AND BECOMES A PAIR OF STATEMENTS PER SECTION,
+frozen as G-50: what must be TRUE BEFORE this section starts, and what is TRUE AFTER
+it ends.**
+
+**Then the five defects become mechanically detectable:**
+
+- **A section that requires X placed before the section that produces X** is a
+  precondition with no matching postcondition above it.
+- **Two sections each depending on the other's output** is a cycle.
+- **A step landing a conductor on a part a later section installs** is a
+  precondition naming a postcondition that comes after.
+- **A duct cut over a populated plate** is a precondition the writer never stated,
+  and being forced to write one per section is what surfaces it.
+
+**IT DOES NOT REPLACE THE END-TO-END READ AS A BUILDER. It gives that read something
+to check against**, and the owner's instruction stands: **plan for that read rather
+than discovering you need it.** It is scheduled as part of D1, not as a later audit.
 
