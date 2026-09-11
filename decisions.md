@@ -88,7 +88,7 @@ changed reports to BOSS and does not act.
 | G-48 | **SAY WHAT A PROPOSAL COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT BUYS. If it removes a failure mode nothing else covers, take it. If it is THOROUGH, do not** | Frozen 2026-09-04, D-164, sharpening G-44 with the owner's own test. **Every part placed is a part that can fail, a part that needs a buy line, a part that needs a step, and a part a future reader has to understand.** **Not permission to under-build: a protection that is needed is needed, and the overflow bulkhead, the high-high floats and the permissive chain all stay.** What is barred is **a mechanism added because it is interesting, a check added because a check is available, and a component added to close a gap that was never going to bite** |
 | G-49 | **WRITE BUILD INSTRUCTIONS THE WAY LEGO WRITES THEM. ONE ACTION PER STEP. EVERY PART NAMED BY THE IDENTIFIER PRINTED ON IT. EVERY STEP CARRIES AN ACCEPTANCE CONDITION OBSERVABLE AT THAT MOMENT. NO STEP ASSUMES SOMETHING THE BUILDER WAS NOT TOLD TO DO** | Frozen 2026-09-05, D-180. **Not a style preference - it is the format that survives being followed by someone who did not design the thing.** Six clauses, each from a real defect in the parallel build: **a step with two verbs can be half done and look finished; a step that names a terminal by LIST INDEX told a builder to verify a short and tick the box; a step with no acceptance condition can be done wrong and passed; a correction stated AFTER the step it modifies cut five cables 200 mm short, and a cut cable cannot be un-cut; silent renumbering breaks a person who marks their place on a printed page; and where a builder would reasonably do it differently, SAY WHY NOT - a builder who knows why will not undo it, and a builder who does not will improve it** |
 | G-50 | **EVERY SECTION OF A SEQUENCED DOCUMENT STATES WHAT MUST BE TRUE BEFORE IT STARTS AND WHAT IS TRUE AFTER IT ENDS. THEN A SECTION THAT REQUIRES X MUST COME AFTER THE SECTION THAT PRODUCES X, AND THAT IS A CHECK A MACHINE CAN RUN** | Frozen 2026-09-05, D-183. **Sequence defects are invisible to every per-page check because each page is internally consistent and the defect is in the ORDER.** The parallel build hit five and none was findable by any audit: **a section that sends a builder away then continues assuming he has not gone; a step that lands a conductor on a part a later step installs; a book that ends by sending the builder to the next book without mentioning the one that must come first; two sections each depending on the other's output; and a duct cut over a populated plate.** **Preconditions and postconditions turn an end-to-end read into a comparison. They do not replace the read - they give it something to check against**. **AND THE VALUE IS IN BEING FORCED TO WRITE ONE, NOT IN THE CHECK THAT READS IT.** Four of the five defect shapes become mechanically detectable, **but the fifth - a duct cut over a populated plate - surfaces only because a writer required to state a precondition has to confront what the section assumes. The rule works before it is ever run** |
-| G-51 | **PREFER THE SMALLEST ENCLOSURE THAT ACTUALLY FITS, AND MOUNT EVERYTHING VERTICAL - PORTRAIT, NOT LANDSCAPE, ON EVERY BOX. SPEND DOUBLE-STACKED BLOCKS AND TIGHTER RAIL PACKING TO GET THERE. NEVER SPEND A PROTECTION, A MARGIN OR A CLEARANCE** | Frozen 2026-09-11, D-188, the owner's KISS applied to enclosures. **If a box only fits by crowding a 120 V rail against a 24 V one, or by losing the separation that keeps a sense conductor away from a mains pair, THE BOX IS TOO SMALL and that is the answer to report.** **And a double-deck block is a real trade, not a free win: two terminals in one footprint makes the TIER PAIRING a build fact - hot with hot, neutral with neutral, so a slip between tiers shorts LIKE TO LIKE. That hazard exists only because the part exists.** The parallel build bought them and decided against them. **Take them if the box needs it and say so on the face. Do not take them for tidiness** |
+| G-51 | **PREFER THE SMALLEST ENCLOSURE THAT ACTUALLY FITS, AND MOUNT EVERYTHING VERTICAL - PORTRAIT, NOT LANDSCAPE, ON EVERY BOX. SPEND DOUBLE-STACKED BLOCKS AND TIGHTER RAIL PACKING TO GET THERE. NEVER SPEND A PROTECTION, A MARGIN OR A CLEARANCE** | Frozen 2026-09-11, D-188, the owner's KISS applied to enclosures. **If a box only fits by crowding a 120 V rail against a 24 V one, or by losing the separation that keeps a sense conductor away from a mains pair, THE BOX IS TOO SMALL and that is the answer to report.** **And a double-deck block is a real trade, not a free win: two terminals in one footprint makes the TIER PAIRING a build fact - hot with hot, neutral with neutral, so a slip between tiers shorts LIKE TO LIKE. That hazard exists only because the part exists.** The parallel build bought them and decided against them. **Take them if the box needs it and say so on the face. Do not take them for tidiness**. **AMENDED 2026-09-11 by D-190: THE STATED HAZARD IS INVERTED ON A SERIES INTERLOCK CHAIN. Like-to-like assumes every terminal in a bank sits at the same potential. In a series chain each one sits at a DIFFERENT POINT of the chain, so a tier slip does not short like to like - IT BYPASSES THE PROTECTION and makes a float permanently MADE.** So on an interlock bank a double-deck is not a smaller box for a new failure mode, **it is a smaller box for the inverse of the topology's whole purpose** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -4076,4 +4076,49 @@ and the F-017 matches are the fail-direction principle being cited, not a block.
 **So the two INTEGRATOR found were the only two, and they are fixed.** Recorded as a
 negative with its search named, per rule 8 - **an empty result is only worth having
 if the search is stated.**
+
+**D-190 THE 16 BY 12 STUDY IS BACK AND IT CORRECTS G-51's OWN HAZARD STATEMENT. TAKE
+NO DOUBLE-DECKS ANYWHERE.** subsystems/main-panel-plate-area.md.
+
+**THE CORRECTION IS THE FINDING AND IT IS THE OWNER'S OWN ARGUMENT TURNED OVER.**
+G-51 says a tier slip shorts LIKE TO LIKE - hot with hot, neutral with neutral -
+which is a real but bounded hazard. **That reasoning assumes every terminal in a bank
+sits at the SAME POTENTIAL.**
+
+**The only bank in this panel big enough to justify double-decking is the 16 float
+conductors, and a series interlock chain is exactly the case where the assumption
+fails: every terminal sits at a DIFFERENT POINT of the chain.** So a tier slip does
+not short like to like - **it BYPASSES the elements between the tiers and makes a
+float permanently MADE. That is the precise inverse of D-154's fail-safe topology,
+where severed equals open equals coil drops.**
+
+**And where tiers WOULD be safe - common-potential banks - a bridge comb is the
+simpler part.** So the answer is none, anywhere, **and it is a safety answer rather
+than a space answer.** G-51 is amended in place.
+
+**THE VERDICT ON 16 BY 12: NOT ANSWERABLE AS STATED, AND THE REASON IS USEFUL RATHER
+THAN PEDANTIC. IT IS TWO NUMBERS AND AN ENCLOSURE HAS THREE** - the main panel is the
+only box in parts.md with **no depth and no material on file.**
+
+**But the failure mode is WIDTH, NOT AREA, and that is decidable without the third
+number: height 16.6 to 16 is 4 percent; WIDTH 20.7 TO 12 IS 42 PERCENT.** Width
+carries the rails, both wireways and all eleven glands. **BOSS states no size.** One
+lookup - grip bore and spacing against eleven grips plus one separation gap on a 12
+in face - **turns this from a study into a decision.**
+
+**ELEVEN LOOKUPS ARE OWED because parts.md carries NO footprint, width, height or
+depth for ANY panel component.** Searched parts.md, order.md, electrical-schematic.md
+and both schedules. **What needs no lookup and is stated now: 16 to 24 rail
+positions, 56 to 57 clamps as a floor, and 11 bottom-face glands in a constrained
+order.**
+
+**D-191 THE 12-WAY GROUND BAR DOES NOT FIT AND IT IS INDEPENDENT OF BOX SIZE. F-117.**
+**Twelve landings enumerated, twelve ways, ZERO SPARE** - before three named
+additions nobody has counted: the WB200's EGC, the enclosure's own bonding if it is
+metal, and any spare at all.
+
+**It should not wait for the enclosure decision.** D-165 made the bar the single
+point and nothing bonds anywhere else, **so a bar with no spare way is a bar that
+cannot take the next thing that has to bond** - and the next thing is already named
+three times over.
 
