@@ -88,6 +88,7 @@ changed reports to BOSS and does not act.
 | G-48 | **SAY WHAT A PROPOSAL COSTS IN PARTS AND STEPS ALONGSIDE WHAT IT BUYS. If it removes a failure mode nothing else covers, take it. If it is THOROUGH, do not** | Frozen 2026-09-04, D-164, sharpening G-44 with the owner's own test. **Every part placed is a part that can fail, a part that needs a buy line, a part that needs a step, and a part a future reader has to understand.** **Not permission to under-build: a protection that is needed is needed, and the overflow bulkhead, the high-high floats and the permissive chain all stay.** What is barred is **a mechanism added because it is interesting, a check added because a check is available, and a component added to close a gap that was never going to bite** |
 | G-49 | **WRITE BUILD INSTRUCTIONS THE WAY LEGO WRITES THEM. ONE ACTION PER STEP. EVERY PART NAMED BY THE IDENTIFIER PRINTED ON IT. EVERY STEP CARRIES AN ACCEPTANCE CONDITION OBSERVABLE AT THAT MOMENT. NO STEP ASSUMES SOMETHING THE BUILDER WAS NOT TOLD TO DO** | Frozen 2026-09-05, D-180. **Not a style preference - it is the format that survives being followed by someone who did not design the thing.** Six clauses, each from a real defect in the parallel build: **a step with two verbs can be half done and look finished; a step that names a terminal by LIST INDEX told a builder to verify a short and tick the box; a step with no acceptance condition can be done wrong and passed; a correction stated AFTER the step it modifies cut five cables 200 mm short, and a cut cable cannot be un-cut; silent renumbering breaks a person who marks their place on a printed page; and where a builder would reasonably do it differently, SAY WHY NOT - a builder who knows why will not undo it, and a builder who does not will improve it** |
 | G-50 | **EVERY SECTION OF A SEQUENCED DOCUMENT STATES WHAT MUST BE TRUE BEFORE IT STARTS AND WHAT IS TRUE AFTER IT ENDS. THEN A SECTION THAT REQUIRES X MUST COME AFTER THE SECTION THAT PRODUCES X, AND THAT IS A CHECK A MACHINE CAN RUN** | Frozen 2026-09-05, D-183. **Sequence defects are invisible to every per-page check because each page is internally consistent and the defect is in the ORDER.** The parallel build hit five and none was findable by any audit: **a section that sends a builder away then continues assuming he has not gone; a step that lands a conductor on a part a later step installs; a book that ends by sending the builder to the next book without mentioning the one that must come first; two sections each depending on the other's output; and a duct cut over a populated plate.** **Preconditions and postconditions turn an end-to-end read into a comparison. They do not replace the read - they give it something to check against**. **AND THE VALUE IS IN BEING FORCED TO WRITE ONE, NOT IN THE CHECK THAT READS IT.** Four of the five defect shapes become mechanically detectable, **but the fifth - a duct cut over a populated plate - surfaces only because a writer required to state a precondition has to confront what the section assumes. The rule works before it is ever run** |
+| G-51 | **PREFER THE SMALLEST ENCLOSURE THAT ACTUALLY FITS, AND MOUNT EVERYTHING VERTICAL - PORTRAIT, NOT LANDSCAPE, ON EVERY BOX. SPEND DOUBLE-STACKED BLOCKS AND TIGHTER RAIL PACKING TO GET THERE. NEVER SPEND A PROTECTION, A MARGIN OR A CLEARANCE** | Frozen 2026-09-11, D-188, the owner's KISS applied to enclosures. **If a box only fits by crowding a 120 V rail against a 24 V one, or by losing the separation that keeps a sense conductor away from a mains pair, THE BOX IS TOO SMALL and that is the answer to report.** **And a double-deck block is a real trade, not a free win: two terminals in one footprint makes the TIER PAIRING a build fact - hot with hot, neutral with neutral, so a slip between tiers shorts LIKE TO LIKE. That hazard exists only because the part exists.** The parallel build bought them and decided against them. **Take them if the box needs it and say so on the face. Do not take them for tidiness** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -4040,4 +4041,39 @@ numbers and says why they differ.
 **"Gland" is gone and the book says CORD GRIP everywhere.** The tree's second name is
 recorded rather than renamed, and reported to BOSS instead of being fixed in place,
 **which is G-42 observed by an agent on a file it does not own.**
+
+**D-188 THE ENCLOSURE INSTRUCTION, FROZEN AS G-51, AND THE 16 BY 12 IS A TARGET
+RATHER THAN A REQUIREMENT.** Owner, 2026-09-11.
+
+**Portrait on every box. Smallest that actually fits.** The owner will spend
+double-stacked terminal blocks and tighter rail packing. **He will not spend a
+protection, a margin or a clearance** - and says explicitly that he wants to hear the
+box is too small rather than receive a clever layout.
+
+**WHAT IS ASKED FOR BEFORE ANY DESIGN: WHAT 16 BY 12 ACTUALLY COSTS.** Plate area
+needed against plate area available, what has to double-stack, what does not fit at
+all. **If the honest answer is 18 by 14, that is the answer.**
+
+**And the double-deck trade is stated rather than assumed away: a smaller box for a
+NEW FAILURE MODE.** Tier pairing becomes a build fact, and a slip between tiers
+shorts like to like. **The hazard exists only because the part exists**, which is
+G-48's test arriving on a component: **say what it costs in parts and steps alongside
+what it buys.**
+
+**D-189 THE FALSE-BLOCKER SWEEP RETURNS A CLEAN NEGATIVE, AND THE SEARCH IS NAMED.**
+The owner asked for a sweep rather than waiting to trip on another.
+
+**34 findings are closed, withdrawn, dissolved or void. Every deliverable was
+searched for each of them in a blocking context: build-book.md, wiring-instructions.md,
+wiring-schedule.md, cable-and-terminal-schedule.md, electrical-schematic.md,
+commissioning.md and interface-table.md.**
+
+**Six lines matched and NOT ONE IS A FALSE BLOCKER.** The F-104 pairs are
+INTEGRATOR's own corrections saying the block was removed; F-025's line says its
+top-face half is live, which it is, as F-088; F-116's line describes what Issue 1 did;
+and the F-017 matches are the fail-direction principle being cited, not a block.
+
+**So the two INTEGRATOR found were the only two, and they are fixed.** Recorded as a
+negative with its search named, per rule 8 - **an empty result is only worth having
+if the search is stated.**
 

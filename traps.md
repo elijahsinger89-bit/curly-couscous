@@ -153,8 +153,25 @@ as documentation goes, and whether the Pi can KNOW the permissive dropped, which
 current and which S-08 already answers. **It was caught by an audit, not by the
 agent that had just written the rule against it.**
 
-**Four instances across both builds now, all self-caught, none caught at the moment
-of writing.** The parallel build has three.
+**FIVE INSTANCES ACROSS BOTH BUILDS, 2026-09-05, and the fifth is the sharpest
+because it is not a rule being violated - it is a DEFECT BEING REPRODUCED.**
+
+**The parallel build had a step that said "cut each cable to the recorded length"
+with the allowance in the NEXT step. Five cables, 200 mm short each, and a cut cable
+cannot be un-cut.** That defect is why G-49 exists.
+
+**D1 was written to G-49 from its first line. Its step 31-03 read "take D6 and cut
+each jacket" - EVERY CABLE IN THE BUILD UNDER ONE STEP NUMBER.**
+
+**The same shape, in a document written to prevent that shape, by a writer holding
+the rule.** Merged into this entry at the owner's instruction rather than filed as a
+second trap: **it is one pattern with five instances, not five patterns.**
+
+**And the fifth changes what the entry claims.** The first four were a rule being
+forgotten. **This one is the ORIGINAL DEFECT reappearing inside its own remedy** -
+which means holding the rule in mind is not a partial defence, it is no defence at
+all. **What caught it was a reader who was not the writer, reading in order, as a
+builder.**
 
 **What this does NOT mean.** It is not an argument for more care, and "be careful"
 is not a mitigation. **The recognition test is the interval: the closer you are to
