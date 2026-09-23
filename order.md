@@ -119,3 +119,30 @@ range or at whatever C-16 records, not at 24 V.** S-08's 45 to 55 mA window carr
 headroom and survives it. **S-03 as stated sits on the floor at 24 V and does not.**
 Five circuits are affected: S-03, the D-042 inhibit, the K-DRY pair, PL-R and PL-G.
 See F-056.
+
+## THREE LINES IN THIS FILE ARE STALE. CORRECTED 2026-09-23 BY D-211.
+
+Found by writing D7, which is the document that spends the money.
+
+**ITEM 5'S FOURTH ORDINARY SUPPRESSOR was written 2026-09-01 against "a 24 Vdc
+contactor coil". THAT COIL NO LONGER EXISTS.** D-201 made KM-CHIL a motor-rated
+contactor with a **100 to 250 V electronic coil**, chosen because it opens cleanly on
+a sagging rail where a magnet coil chatters and can weld. **A suppressor specified
+against a 24 Vdc coil is specified against a part this build does not have.**
+
+**ITEM 6'S TIMING ELEMENT IS CONDITIONED ON S-05 LANDING FLOW-PROVING. D-119 CLOSED
+S-05 LEVEL-BASED, SO THE COUNT IS ZERO.** D-060's price is not paid because the fork
+it priced was not taken.
+
+**But F-040's dry-run BYPASS timer may be a separate demand and is NOT closed by
+this.** D7 declined to decide it and that was right - **two timers that arrive in one
+sentence are not one timer.**
+
+**ITEM 3'S FOUR SOCKETS ARE DERIVED from this file's own arithmetic rather than
+recorded anywhere.** Flagged for a count rather than trusted. **A derived quantity in
+a buy list is T-018's shape on a purchase.**
+
+**And one line this file never had: THREE LOCAL GROUND BARS for the remote
+enclosures.** F-121. D6 needs four, two are bought, and D-192 puts both of those in
+the main panel.
+

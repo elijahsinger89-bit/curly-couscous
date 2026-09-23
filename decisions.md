@@ -4681,3 +4681,56 @@ plate's front plane clears the band entirely.**
 **And the panel-internal conductor list is now the ONLY thing left that can move the
 demand figure.** Unblocked, unwritten, MAIN-PANEL's.
 
+**D-211 D7 EXISTS. 102 LINES: 38 CARRY A PART, 50 ARE FINISHED REQUIREMENT WORK, 14
+CAN NEVER CARRY ONE.** purchase-package.md. **It states the completion figure both
+ways and says why a mixed count is wrong in both directions.**
+
+**IT CHECKED BOSS'S OWN LIST AGAINST parts.md RATHER THAN TRUSTING IT, AND THE LIST
+WAS WRONG TWICE.**
+
+**THE FUSE HOLDER ON THE SHELF HAS NO INDICATOR AND DOES NOT MEET THE R-PI
+REQUIREMENT, so it is a BUY LINE and not an owned one.** BOSS had listed it as
+owned. **The requirement that makes it a buy is the one this build raised against the
+parallel one - a blown fuse presenting as a dead Pi with no cause.**
+
+**AND THE CHILLER LOOP PUMP IS BOTH OWNED AND NOT: D-137 says it "is being bought"
+while the 2026-08-30 owned table says two submersibles are held.** Not picked
+between. **A contradiction inside the tree rather than in the list.**
+
+**F-121: THREE LOCAL GROUND BARS FOR THE REMOTE ENCLOSURES ARE A REQUIREMENT NOBODY
+HAD COSTED.** D6 needs four bars; two are bought **and D-192 puts BOTH of those in
+the main panel.** So the daisy-home topology D-165 settled **needs three more parts
+that no document had a line for** - and it was found by writing the purchase
+document, not by reading the design.
+
+**THREE STALE LINES IN order.md, ALL BOSS'S FILE AND ALL CORRECTED:**
+
+**Item 5's fourth ordinary suppressor was written 2026-09-01 against "a 24 Vdc
+contactor coil". D-201 made KM-CHIL a motor-rated contactor with a 100 to 250 V coil,
+so that element's coil is no longer the coil order.md assumed.**
+
+**Item 6's timing element is conditioned on S-05 landing FLOW-PROVING. D-119 closed
+S-05 LEVEL-BASED, so the count is zero** - but **F-040's dry-run BYPASS timer may be
+a separate demand and D7 correctly declined to decide it.**
+
+**And item 3's four sockets are DERIVED from its own arithmetic rather than recorded.
+Flagged for a count rather than trusted.**
+
+**G-41'S HANDLING IS THE PART TO KEEP, BECAUSE THIS IS THE DOCUMENT IT WAS FROZEN
+FOR:** held quantities are never added to buy quantities; **no buy line carries a
+RANGE** - order.md's "3 or 4" is written as 3 with an explicit ADD and the decision it
+waits on named; **and order.md's four suppressors are split into two IDs with a line
+saying three plus one is order.md's four, SO NOBODY ADDS THEM TWICE.**
+
+**D-212 D7's LOCAL IDS ARE RENAMED TO D7-A-nn AND THE AGENT WAS RIGHT NOT TO DO IT
+ITSELF.** It used A-, B-, C- and D- inside named sections. **"D-13" inside D7 collides
+with the decision namespace, which is G-43's exact defect - a document needing a local
+list and reaching for a bare letter.**
+
+**The agent flagged it and declined to rename unilaterally**, which is correct: **a
+namespace is BOSS's and G-43 is a BOSS rule.** One pass, D7-A-nn through D7-D-nn.
+
+**Four of the five things it found beyond its brief are cart-audit items and stay
+there. The fifth is F-120, already open: two boxes under one name, and every rail and
+gland position downstream reads one of the two.**
+
