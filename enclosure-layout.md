@@ -375,15 +375,30 @@ not.
 
 ---
 
-## SHEET 3.6. THE TOP FACE: FIVE 22 mm DEVICES
+## SHEET 3.6. THE DOOR: FIVE 22 mm DEVICES
 
-**Face: 419 x 201 mm. Five 22 mm step-drilled holes and nothing else.** Owner-given.
+**MOVED FROM THE TOP FACE TO THE DOOR 2026-09-23 BY THE OWNER, D-232, ON F-122. The
+top face now carries NOTHING and has no penetration of any kind.**
 
-### 3.6.1 Order on the face, and the reasons
+**The reason, and it is the owner's: an E-stop that requires an overhead reach is not an
+E-stop.** At the 1829 mm sightline both offered placements put the top face at or above
+eye level, **and D3 itself placed the E-stop "so a struck palm lands on nothing else",
+which is a statement that this device is struck with a palm. A palm strike is a
+chest-height action.**
 
-**MAIN-PANEL's ruling. It costs nothing before the holes are drilled and a drilling
-step cannot exist without it.** Stated left to right as the operator faces the panel,
-which is a datum statement and not a description.
+**And the second reason, which is not ergonomic: the top face is the upward-facing
+penetration that sets the assembly's rating regardless of what is gasketed on it. Five
+gasketed devices on a horizontal face is a rating bought and then spent on the one
+surface that collects standing water.**
+
+**D-047's reasoning was about sealing. THE CONSEQUENCE WAS OPERABILITY, AND THE
+CONSEQUENCE WAS NEVER WEIGHED AGAINST IT.**
+
+### 3.6.1 What this move does NOT change
+
+**The device order and every reason for it, unaltered.** It is stated left to right as
+the operator faces the panel, which is a datum statement and not a description, **and
+that sentence is as true of a door as of a roof.**
 
 | Position | Device | Why here |
 |---|---|---|
@@ -393,10 +408,13 @@ which is a datum statement and not a description.
 | 4 | **PL-G**, filling | |
 | 5 | **RESET** | **At the opposite end from E-STOP**, so a person clearing a trip cannot strike the E-stop while reaching for it |
 
-### 3.6.2 Depth behind the face
+**And nothing in D4, D5 or D6 changes. The five devices' conductors land where they
+landed. Only the face they pass through moves.** Zero rows, zero joints, zero runs.
 
-Schneider XB5A with ZBE screw blocks, measured from the front face of the panel with
-the gasket compressed:
+### 3.6.2 Depth behind the face. UNCHANGED AS A FIGURE, INVERTED AS A PROBLEM
+
+Schneider XB5A with ZBE screw blocks, measured from the front face with the gasket
+compressed:
 
 | Rows of blocks | Depth |
 |---|---|
@@ -404,33 +422,76 @@ the gasket compressed:
 | 2 | 55 mm |
 | 3 | **68 mm** |
 
-**A DOUBLE BLOCK IS TWO ROWS. Side-by-side blocks add no depth - only stacked rows
-do.**
+**A DOUBLE BLOCK IS TWO ROWS. Side-by-side blocks add no depth - only stacked rows do.**
 
-**RESET needs at least two NO blocks** - one to latch K-PERM, one to re-arm K-DRY,
-which is a MAKE and not a break because D-154 settled that K-DRY energised is the
-permitted state - **and a third if it proves the lamps.** Three blocks SIDE BY SIDE is
-one row at 43 mm. **Plan 68 mm only if three ROWS turn out to be necessary.**
+**RESET needs at least two NO blocks** - one to latch K-PERM, one to re-arm K-DRY, which
+is a MAKE and not a break because D-154 settled that K-DRY energised is the permitted
+state - **and a third if it proves the lamps.** Three blocks SIDE BY SIDE is one row at
+43 mm. **Plan 68 mm only if three ROWS turn out to be necessary.**
 
-### 3.6.3 The collision that does not have to happen
+### 3.6.3 THE COLLISION HAS INVERTED, AND THIS IS THE ONE REAL COST OF THE MOVE
 
-**These devices hang DOWN from the roof, not back from a door.** main-panel-buy.md
-required the top rail to move down to clear the deepest stack.
+**On the top face the bodies hung DOWN from the roof into the door-side volume, which
+was empty**, and the old 3.6.3 bought that clearance by choosing where along the depth
+axis to drill: *"the clearance is bought by where the hole goes, not by moving a rail."*
 
-**It does not have to. The box is 201 mm deep and the holes' position along that depth
-axis is free.** Drill them **forward of the plate's front plane** and the bodies hang
-in the door-side volume, clear of B4's rail entirely. **The clearance is bought by
-where the hole goes, not by moving a rail**, and B4's 70 mm band keeps its position.
+**ON THE DOOR THE BODIES HANG BACKWARD, TOWARD THE PLATE.** The door-side volume stops
+being empty because the devices are now in it, **and what they point at is B1 to B4 -
+the supply, the contactors, the relays and the terminals.**
 
-### 3.6.4 Hole spacing. EMPTY, with its blocker.
+**The clearance can no longer be bought by choosing a hole position, because every hole
+on the door points the same way.**
 
-**419 mm of face width across five holes.** Evenly spaced with a half-pitch margin at
-each end gives 83.8 mm between centres; end-to-end gives 104.75 mm.
+| | |
+|---|---|
+| Box depth, overall | **201 mm** |
+| Deepest device body | **68 mm** at three rows, 43 mm at one |
+| **Clear depth, closed door's inner face to the plate's front surface** | **EMPTY. Not on file.** Owner is measuring it with the mounting holes, 2026-09-23 |
+| **Then the question** | Whether the deepest device body clears the tallest device on the plate **in the band it lands over**, which is B1's supply and contactors at the bottom and B4's terminals at the top |
 
-**The C-C FLOOR is not stated here and must not be assumed.** Lookup 10 returned
-depth only. **G-52 governs it: the floor is the bezel and the rear collar at
-across-corners while a collar nut is being turned, not the 22 mm bore.** Named in
-section 4.2.
+**AND ONE THING THE MOVE BUYS BACK: the door opens, so the bodies swing with it.**
+Nothing behind them has to be reachable past them. **A device on a door is easier to
+service than one hanging from a roof, not harder.**
+
+### 3.6.4 Hole spacing. EMPTY, with its blocker, and its face has changed
+
+**508 x 419 mm of door, against 419 x 201 of top face.** The five holes now sit on the
+LONG axis of a larger face, **so the spacing constraint is looser than it was and the
+BLOCKER IS THE SAME ONE.**
+
+**The C-C FLOOR is not stated and must not be assumed.** Lookup 10 returned depth only.
+**G-52 governs it: the floor is the bezel and the rear collar at across-corners while a
+collar nut is being turned, not the 22 mm bore.**
+
+**AND THE USABLE DOOR AREA IS NOT 508 x 419.** A gasketed door has a sealing perimeter
+and usually a stiffening rib inset from it, **and no figure for either is on file.** It
+is the same measurement as the door-to-plate depth and is taken in the same minute.
+
+### 3.6.5 G-52 ARRIVES ON THE HINGE, AND IT IS NEW
+
+**A device body near the HINGE sweeps a smaller arc than one near the LATCH. Spacing
+that assumes the door is stationary has ignored the swing.**
+
+**This did not exist on the top face and it is not a spacing rule - it is a CLEARANCE
+rule against whatever the door sweeps past**: the enclosure's own frame, and anything
+mounted on the wall beside the panel.
+
+**WHICH SIDE IS HINGED IS NOT ON FILE.** It decides which end of the row - E-STOP's or
+RESET's - is the one with the small arc, **and therefore which end's body is the one
+that could foul the frame.** Owner's, in the same measurement batch.
+
+### 3.6.6 The top face, now
+
+**SOLID. No penetration, no device, no gasket, no blank.**
+
+**D-047 is SUPERSEDED rather than reversed, D-232: the top face stops carrying devices,
+so there is nothing on it to gasket.** The decision was right about sealing and is now
+moot rather than wrong.
+
+**AND F-025's TOP-FACE HALF CLOSES.** It was live: *"the requirement for each 22 mm
+device's rating IN THAT ORIENTATION is still live."* **A device on a vertical door has
+no upward orientation to be rated in.** One open item goes away and it was not counted
+as a benefit until the move was costed.
 
 ---
 

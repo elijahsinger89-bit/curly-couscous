@@ -215,9 +215,16 @@ SOURCE: C-24. One lift.
 BEFORE: tanks empty and dry, the chain complete, and the float's conductor landed.
 **Write the position's name beside the tick.** How many float positions there are is
 D2's roster's fact and the float requirement's, and is not stated here.
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW.** C-24 says to confirm the chain does what
-D-154 says it does, and **the eight fail directions are D-154's and are not printed in
-the C- row.** Owner: **BOSS**, `decisions.md` D-154.
+ACCEPT: **LIFT IT, THE PERMISSIVE DROPS, TICK.** With the conductor lifted the chain
+OPENS and the permissive drops, observable at the panel: **the master permissive relay
+releases and STAYS released until the conductor is landed again.**
+**IF THE PERMISSIVE HOLDS, STOP AND DO NOT PROCEED.** A lifted conductor that leaves
+the permissive MADE means that position is not in the series path it is supposed to be
+in.
+**ORIGIN: ELIJAH, 2026-09-23.** **SUPPLIED, not derived from a part figure.** The eight fail directions
+in D-154 are what the chain is supposed to do; **this step tests one thing about each -
+that the position is actually in the series path - because that is the only thing
+observable at that moment, and it has never been verified.**
 RECORD: D9 group **MR-G1**, one row per float position.
 COST AND WHAT IT BUYS: **no part and no instrument added.** It buys the only test of the
 float fail directions that exists, because C-19 records what the Pi reports and G-01
@@ -227,7 +234,8 @@ makes all eight floats invisible to the Pi. **F-109.**
 it is ticked.**
 SOURCE: C-24.
 BEFORE: as D8-09.
-ACCEPT: as D8-09. **NO ACCEPTANCE CRITERION IN THE ROW.** Owner: BOSS, D-154.
+ACCEPT: as D8-09. **Lift it, the permissive drops, tick. Same criterion for every
+position, because every float is in series.** **ORIGIN: ELIJAH, 2026-09-23.**
 RECORD: D9 group **MR-G1**.
 
 **D8-11. Confirm every float position in D2's roster carries a tick.**
@@ -337,9 +345,12 @@ does not schedule would put the view ahead of its source. G-54.
 - The watchdog fitted, **and confirmation that an external reset input exists at all.**
   C-20's blocked-on. **BLOCKED TODAY: no file read for this checklist confirms it.**
   Owner: DISPLAY-BOX.
-  **PRODUCER: UNPRODUCED. Searched build-book.md for "watchdog": no occurrence. NO BUILD
-  SECTION FITS IT.** A commissioning stage requires a part the build never installs.
-  Listed in 12.4 as the sharpest of the four.
+  **PRODUCER: UNPRODUCED, AND THE REASON IS SHARPER THAN "NOBODY INSTALLED IT".
+  THE WATCHDOG IS SPECIFIED AT ONE END ONLY.** D-033 and software-spec 2.4.10 say how it
+  is FED - from the sequencer and state loop, never from an independent timer thread.
+  **NOTHING ANYWHERE SAYS WHAT IT DRIVES.** P-07 says nothing in the panel can power
+  cycle the Pi, so a watchdog is the only recovery path, **and the path itself has no
+  owner, no part and no mechanism.** Routed 2026-09-23, D-231. Section 12.11.
 - **S-12 is an OPEN interface row.** Rule 9: nothing is built against it. **Every step in
   this stage needs the Pi reading a pin, so this stage cannot run while S-12 is open.**
   **PRODUCER: OPEN ROW.** Closed by DISPLAY-BOX and CONTROL-SOFTWARE agreeing the pin
@@ -355,10 +366,21 @@ the Pi reports.**
 SOURCE: C-19. No instruments needed.
 BEFORE: **at the gland, not at a terminal.** Write the conductor's CDR- id beside the
 tick. How many sense conductors there are is D5's fact.
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW.** C-19 says to record what the Pi reports
-and names no expected report. **The expectation per signal is G-22's - what a SEVERED
-conductor does and what a SHORT TO ITS REALISTIC NEIGHBOUR does - and it is not in the
-C- row.** Owner: **BOSS.**
+ACCEPT: **THE PI REPORTS THE SIGNAL IN ITS SAFE DIRECTION WITHIN ONE READ INTERVAL,
+AND THE REPORT PERSISTS WHILE THE CONDUCTOR IS DISCONNECTED.**
+
+**THE CRITERION IS A DIRECTION, NOT A VALUE, and the person decides it standing there:
+disconnect it, and THE MACHINE BECOMES MORE CAUTIOUS RATHER THAN LESS. If it becomes
+less cautious, that conductor fails.** G-22: a severed conductor must produce the report
+that INHIBITS action, not the one that permits it. **Fill sense severed reads as
+FILLING and dosing is inhibited. Readback severed reads as NOT PULLED IN.**
+
+**The tick is on the direction. The CDR- id and the actual report go in the record.**
+
+**AND IF A CONDUCTOR'S SAFE DIRECTION IS NOT STATED, IT IS NOT GUESSED AT THE BENCH.**
+It is a gap and it goes to the owner. **Three are known today and are listed in section
+12.8.**
+**ORIGIN: ELIJAH, 2026-09-23.** **SUPPLIED, and its content is derived from G-22 rather than chosen.**
 RECORD: D9 group **MR-G3**, one row per sense conductor.
 COST AND WHAT IT BUYS: **no instrument and no part.** It is the only thing that converts
 G-22 from an intention into a fact.
@@ -367,7 +389,8 @@ G-22 from an intention into a fact.
 it is ticked.**
 SOURCE: C-19.
 BEFORE: as D8-18.
-ACCEPT: as D8-18. **NO ACCEPTANCE CRITERION IN THE ROW.** Owner: BOSS.
+ACCEPT: as D8-18. **Disconnect it and the machine becomes more cautious, not less.**
+**ORIGIN: ELIJAH, 2026-09-23.**
 RECORD: D9 group **MR-G3**.
 
 **D8-20. Confirm every sense conductor D5 lists carries a tick.**
@@ -444,7 +467,23 @@ SOURCE: C-13.
 BEFORE: drivers wired, rail set and recorded at D8-16, **and VDD present per whatever
 P-09 decides. C-13's own row says this presumes VDD exists while P-09 has not said where
 it comes from, and says not to read that as settled.**
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW.** C-13 names no limit. Its own stated
+ACCEPT: **THE MEASURED TOTAL FOR EIGHT DRIVERS AT STANDSTILL IS AT OR BELOW 2.4 A.**
+0.3 A per driver, STANDSTILL_FRACTION at 0.30 against the 1.0 A rated winding current -
+**the figure the package assumes.** `parts.md`: "Standstill current has never been
+measured and is currently assumed at 30 percent."
+
+**THIS IS A CHECK ON AN ASSUMPTION, NOT A DESIGN LIMIT.** Measure, compare, tick at or
+below. **Above 2.4 A: STOP and report the figure rather than continuing.**
+
+**AND THE CONSEQUENCE HAS NOWHERE TO LAND TODAY, WHICH THE OWNER SHOULD SEE BEFORE HE
+RUNS IT.** The instruction was to cite MAIN-PANEL's loading model rather than the
+owner. **SEARCHED: there is no loading model and no assembled 24 V budget anywhere in
+this tree.** What exists is `parts.md` lines 241 to 248 - 1.0 A per driver, 8.0 A worst
+case with all eight connected, and a 10 A supply - **which is a worst case nobody will
+ever see, because G-06 runs one head at a time. The figure this step measures is the
+term that would turn that into a real number, and nothing assembles it.** Section 12.8.
+**ORIGIN: ELIJAH, 2026-09-23.** **DERIVED FROM A PART FIGURE: the 1.0 A rated winding current
+and the package's own 30 percent assumption.**
 consumer is the rail's real load, **and no document read for this checklist holds a rail
 load budget for the figure to be judged against.** Owner: **BOSS to say where that
 budget lives; MAIN-PANEL owns the rail.**
@@ -458,7 +497,22 @@ running and three idle at standstill current, and record the EN state of the thr
 ones.**
 SOURCE: C-15.
 BEFORE: boxes populated and closed, heatsinks fitted, lids on.
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW.** C-15 names no limit and no pass mark.
+ACCEPT: **INTERNAL AIR STABILISES AT OR BELOW 60 C**, one motor running and three idle,
+**in a room at 18 C. A 42 C rise.**
+
+**The number comes from the components rather than from a preference: the TMC2209's
+operating range, the electrolytics beside it, and the PharMed tubing, WHICH SOFTENS
+WITH HEAT AND CHANGES DELIVERED VOLUME.**
+
+**Stabilises below 60: tick, and the figure is what PUMP-BOXES judges G-06 against.
+Does not stabilise, or exceeds 60: SEQUENTIAL DOSING STAYS MANDATORY, AND THAT IS THE
+RESULT RATHER THAN A FAILURE.**
+
+**PUMP-BOXES OWNS THE REAL RATING and supersedes 60 C if it has a tighter one from a
+part datasheet. This is a pass mark supplied so the step is runnable. It is not a
+specification.**
+**ORIGIN: ELIJAH, 2026-09-23.** **DERIVED FROM PART FIGURES, and the softening tubing is the
+term that is easy to forget because it is not electrical.**
 Owner: **BOSS, with PUMP-BOXES stating the rating the rise is judged against.**
 RECORD: D9 row **MR-08**.
 COST AND WHAT IT BUYS: **no part.** It is the only measurement that could ever relax
@@ -470,10 +524,20 @@ re-application transient.**
 SOURCE: C-18.
 BEFORE: **read C-18's blocked-on cell first.** P-09 cannot be closed from documentation,
 D-070: the datasheet neither allows, forbids nor characterises the state.
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW, AND THE ROW SAYS WHY.** Running it IS
-itself the decision to accept an uncharacterised state on purpose, once, under
-observation. The alternative is to remove the state, which reopens D-031. Owner: **the
-owner takes the decision; BOSS records it.**
+ACCEPT: **NO PASS MARK. OBSERVE AND RECORD. THE ONLY FAILURE IS A PART THAT DOES NOT
+WORK AFTERWARDS.**
+
+**Running it IS the decision to accept an uncharacterised state on purpose, once, under
+observation. THE OWNER HAS TAKEN THAT DECISION, 2026-09-23, and it is recorded as
+taken.** The alternative was to remove the state, which reopens D-031.
+
+**What the step produces is an OBSERVATION RECORD rather than a pass or a fail:** what
+the drivers do, what DIAG does if anything, whether anything gets warm, **and what the
+re-application transient does that is visible.**
+
+**If a driver is dead afterwards, that is the answer and D-031 REOPENS.**
+**ORIGIN: ELIJAH, 2026-09-23.** **A DECISION RECORDED, not a criterion. It is in this list so the
+set is complete and so nobody later reads the blank as an oversight.**
 RECORD: D9 row **MR-09**, which is an observation record and not a figure.
 WHY IT EXISTS: **no other row exercises the one state the system enters on every fault
 and every shutdown**, and leaves by a human pressing a button at a moment software does
@@ -523,6 +587,12 @@ which is not the same as cheap.
 - Both ends of the fill band are set, each with its reason.
 - The circulation flow at FL-03 is measured under service conditions.
 - The loop turnover time exists as a FLOOR for C-02.
+- **THE LOOP IS LEFT RUNNING, the day tank is at the HIGH end of the band, and the
+  chiller is in NORMAL SERVICE.** **ADDED 2026-09-23, D-231, AT SOURCE UNDER G-54.**
+  Stages 8, 9 and 10 each require this and **stage 7's postconditions were four measured
+  figures, none of which said the machine was left in a state.** One missing line, met
+  three times. **A stage that MEASURES something is not thereby a stage that LEAVES
+  something, and only the postcondition can say which.**
 
 **D8-30. Run C-11: measure the day tank working volume.**
 SOURCE: C-11.
@@ -592,10 +662,8 @@ safe. Derived from the rows rather than assumed.
 - Stage 6 closed and stage 7 closed.
 - Loop running. Tokens applied at both ends of every per-channel core, per
   `channel-token.md`.
-  **PRODUCER: tokens applied is PRODUCED, BB-35, which labels every conductor at both
-  ends. LOOP RUNNING IS UNPRODUCED: stage 7 runs the loop to measure and its
-  postconditions are four figures, none of which is "the loop is left running".**
-  Listed in 12.4.
+  **PRODUCER: PRODUCED. Tokens applied, BB-35, which labels every conductor at both
+  ends. Loop running, STAGE 7's fourth postcondition, added 2026-09-23 at source.**
 - **G-06 serialises the heads, which is what makes this check possible at all.**
   **PRODUCER: RULE.** A standing constraint, not a state. Nothing produces it and
   nothing ends it.
@@ -700,13 +768,13 @@ it.**
 **MUST BE TRUE BEFORE THIS STAGE STARTS:**
 - **GATE 8 passed.**
 - Probes live, loop circulating, **no dose in flight** for C-08.
-  **PRODUCER: probes live is PRODUCED, stage 5. Loop circulating is UNPRODUCED, as
-  stage 8's. NO DOSE IN FLIGHT is OPERATOR** - a condition the person running the step
-  holds, produced by no section and ended by the next dose.
+  **PRODUCER: PRODUCED. Probes live, stage 5. Loop circulating, stage 7. NO DOSE IN
+  FLIGHT is OPERATOR** - a condition the person running the step holds, produced by no
+  section and ended by the next dose.
 - Day tank filled at the **HIGH end of the band** set at D8-32, circulation running,
   **chiller in NORMAL SERVICE**, per D-027.
-  **PRODUCER: PRODUCED, D8-32, stage 7** for the band's high end. **Circulation running
-  and the chiller in service are UNPRODUCED, as above.**
+  **PRODUCER: PRODUCED, stage 7** - the band's high end at D8-32, and circulation and
+  the chiller in normal service in stage 7's fourth postcondition.
 - **SEE SECTION 12, CHECK RESULT 3: C-08's own window length is stated against the
   settling interval, which is C-02's output. That is a cycle and it is not broken here.**
 
@@ -788,9 +856,8 @@ discarded.**
 - **GATE 8 passed and GATE 9 passed.**
 - **C-17 recorded**, stage 6. C-01's blocked-on says C-17 is recorded first.
 - Heads mounted, tubing fitted, loop circulating.
-  **PRODUCER: heads mounted is PRODUCED, BB-18. Tubing fitted is PRODUCED, BB-33,
-  section 32a. Loop circulating is UNPRODUCED, as above** - the same missing
-  postcondition, met for the third time.
+  **PRODUCER: PRODUCED throughout. Heads mounted, BB-18. Tubing fitted, BB-33, section
+  32a. Loop circulating, stage 7.**
 - **F-075 SETTLED. D-102 attached that deadline to C-01 and it is the first step of this
   stage.**
 
@@ -818,7 +885,26 @@ SOURCE: C-01. **Write the channel token beside the tick.**
 BEFORE: D8-48 ticked. The manifold running, so the back pressure is the real one.
 **G-04: nothing in this system measures delivered volume, so a wrong figure here is
 invisible.**
-ACCEPT: **NO ACCEPTANCE CRITERION IN THE ROW.** C-01 names no tolerance. It names a
+ACCEPT: **TWO CONDITIONS, BOTH DECIDABLE AT THE BENCH.**
+
+**1. The measured volume per revolution is BELOW the manufacturer's no-back-pressure
+figure.** C-01 already names the direction: back pressure can only reduce delivery, **so
+a figure at or above the catalogue figure means the measurement is wrong**, not that the
+pump is good.
+
+**2. The eight channels agree with each other within 5 PERCENT.** Eight identical heads
+on eight identical drivers into one manifold should agree within a few percent. **A
+channel 15 percent off its siblings has a tube seated wrong, a head not clamped, or a
+driver at a different current.**
+
+**The second condition is the one C-01 does not have and it is worth more than the
+first**, because the first only catches a bad measurement and the second catches a bad
+build.
+**ORIGIN: ELIJAH, 2026-09-23.** **CONDITION 1 IS DERIVED from C-01's own stated direction.
+CONDITION 2's 5 PERCENT IS CHOSEN, WITH NO EXTERNAL BASIS, and the owner says so:
+tighten it after the first full set if the real spread is tighter.**
+
+**The row's original note stands:** C-01 names a
 DIRECTION only: the manufacturer's per-revolution figure is specified at NO back
 pressure, so the real figure is lower, in a known direction, by an amount nobody has
 measured. **A measured figure at or above the no-back-pressure figure is the one thing
@@ -829,7 +915,8 @@ RECORD: D9 group **MR-G6**, one row per channel, two value cells.
 ticked.**
 SOURCE: C-01.
 BEFORE: as D8-49.
-ACCEPT: as D8-49. **NO ACCEPTANCE CRITERION IN THE ROW.** Owner: BOSS.
+ACCEPT: as D8-49. **Below the catalogue figure, and within 5 percent of its
+siblings.** **ORIGIN: ELIJAH, 2026-09-23.**
 RECORD: D9 group **MR-G6**.
 
 **D8-51. Confirm every channel in D11 carries a C-01 tick.**
@@ -1023,6 +1110,110 @@ that produces it.**
 **Two are real absences in D1: a part nobody installs, and a valve state nobody sets.**
 Both routed.
 
+### 12.8 THREE SAFE DIRECTIONS THAT ARE NOT STATED, AND ONE BUDGET THAT DOES NOT EXIST
+
+**Produced by writing D8-18's acceptance criterion, 2026-09-23, D-231. The owner's
+instruction: if any conductor's safe direction is not stated, that is a gap and it comes
+to him rather than being guessed at the bench.** Searched the interface table, G-22,
+G-27, G-29 and D-049.
+
+| Conductor | Safe direction | State |
+|---|---|---|
+| **S-03 NC leg**, fill in progress | Severed reads as FILLING, dosing inhibited | **STATED.** D-042 |
+| **S-03 NO leg**, dose inhibit | Complement of the above on the same pole | **STATED by construction.** G-27: any state where both agree is a broken sense path |
+| **S-08**, the 22.32 readback | Severed leaves the Pi input high, reads contact open, reads a drop | **STATED, and named as a CHOSEN property rather than an inheritance** |
+| **S-20 and its complement leg**, K-DRY | | **NOT STATED. GAP 1.** The row says its fail direction "is established rather than inherited, per F-017's lesson" **and does not print what it is.** G-37's shape: a claim that cites its own establishment without stating its content |
+| **S-04**, the leak console's Form C legs | **C-NC: OPENS on power loss OR on leak.** A dead console and a wet floor do the same thing, so the unsafe case does not exist | **STATED.** F-115, closed by the owner and recorded in D5 section 6 |
+| **S-11**, the probe conductors | | **NOT STATED, AND G-22'S FRAME DOES NOT FIT. GAP 2.** A severed I2C conductor is not a two-state loop failing in a direction - **it makes a probe unreadable, and whether unreadable INHIBITS dosing is a software question. Searched `software-spec.md`: no row says what an unreadable probe does** |
+
+**D8-18 disconnects at the GLAND, and S-11's probe cable is the most likely conductor a
+person reaches for there.** So gap 2 is not academic: **it is the first conductor the
+step will meet.**
+
+**AND A THIRD ENTRY WAS WRITTEN HERE AND WITHDRAWN BEFORE IT WAS SENT.** S-04 was listed
+as a gap on the strength of **G-39's own annotation, which still reads "what the contact
+does when its own 24 V fails is on file nowhere."** It is not: **F-115 closed it and the
+owner answered it - C-NC, opens on power loss or leak.** G-39's annotation is STALE and
+is the thing to fix.
+
+**G-38's shape on a rule instead of on a grade: the annotation was true against the tree
+it was written on, and it reads today as a live absence.** A rule that carries its
+founding example keeps that example after the example is closed, **and the rule is the
+last place anybody looks for a stale fact.** G-39's annotation is corrected; **the rule
+itself is unchanged and was never wrong.** D-231.
+
+### 12.9 AND THE CONSEQUENCE OF D8-25 HAS NOWHERE TO LAND
+
+**The owner's criterion for D8-25 is a check on an assumption: 2.4 A total at
+standstill, and "if the measured figure exceeds it, every branch loading figure keyed to
+it moves." His instruction was to cite MAIN-PANEL's loading model.**
+
+**SEARCHED `parts.md`, `subsystems/main-panel*.md` and `decisions.md` for a rail load
+budget, a loading model or an assembled 24 V total. THERE IS NONE.**
+
+**What exists is `parts.md` lines 241 to 248:** 1.0 A per driver, **8.0 A worst case
+with all eight connected**, and a 10 A supply. **That worst case will never occur,
+because G-06 runs one head at a time.** The real figure is one running plus seven at
+standstill, **and the standstill term is exactly what D8-25 measures.**
+
+**So the step measures the one term that would turn a worst case nobody will see into a
+number somebody could use, and nothing assembles it.** MAIN-PANEL's, and it is the
+fourth ordering defect from D-222 arriving with a number attached.
+
+### 12.11 THE WATCHDOG IS SPECIFIED AT ONE END ONLY. ROUTED 2026-09-23, D-231
+
+**The owner asked plainly whether the watchdog is a part, a software mechanism, or
+something assumed and never specified. SEARCHED THE WHOLE TREE. The answer is the third,
+and it is more specific than that.**
+
+| What the tree says | Where |
+|---|---|
+| **How it is FED** | **D-033 and `software-spec.md` 2.4.10: from the sequencer and state loop, NEVER from an independent timer thread.** A timer that keeps ticking while the sequencer is wedged passes forever and hides exactly what it names |
+| **Why it exists** | **P-07: nothing in the panel can power cycle the Pi.** It reboots by software or by killing the panel, **so a watchdog is the only recovery path from a hang** |
+| **That it must not resume anything** | **G-16 has no crash exemption.** A watchdog reset may not resume a batch |
+| **Whose it is** | **P-07: "The watchdog is CONTROL-SOFTWARE's and DISPLAY-BOX's"** |
+| **WHAT IT DRIVES** | **NOTHING. NO FILE.** Not a part, not a pin, not a Pi facility, not a mechanism |
+
+**SO IT IS NOT "A PART THE BUILD NEVER INSTALLS", WHICH IS HOW I REPORTED IT LAST TURN.
+IT IS A MECHANISM SPECIFIED AT ITS INPUT AND NOT AT ITS OUTPUT.** D1 installs nothing
+because there may genuinely be nothing to install - **or because nobody chose. Those are
+different answers and the tree cannot tell them apart.**
+
+**THE WORD "FITTED" IN THIS STAGE'S PRECONDITION IS WHERE IT SHOWS.** "Fitted" reads as
+a part. **Everything on file describes software. Nobody noticed because each end was
+written by the agent that owned its own end, and neither wrote the join.**
+
+**ROUTED TO DISPLAY-BOX AND CONTROL-SOFTWARE JOINTLY, with the question stated so it
+cannot be answered halfway:**
+
+1. **What does the watchdog ACT ON when the feed stops?** A facility the Pi already has,
+   a part on the display box plate, or nothing yet chosen.
+2. **If it is a part, it is a D7 line, a D1 step and a D3 position, and none of the three
+   exists.**
+3. **C-20's other half - "confirmation that an external reset input exists at all" - is
+   the same question asked from the other side**, and it has been sitting in a blocked-on
+   cell as though somebody were going to look it up.
+
+**IF NOBODY CHOSE, THAT IS A DECISION AND IT GOES TO THE OWNER**, per his instruction.
+**It is not a lookup: which recovery path this machine has is a design choice, and the
+only reason it looks like a lookup is that the question was never asked out loud.**
+
+### 12.12 VALVE SERVICE POSITIONS. ROUTED TO WATER, 2026-09-23, D-231
+
+**Stage 7 requires "valves in service positions". NO BUILD SECTION SETS A VALVE
+POSITION AND NO LIST OF SERVICE POSITIONS EXISTS ANYWHERE IN THIS TREE.**
+
+**Same shape as the watchdog and it is the owner's word for it: a plumbing document
+nobody has asked for.** The valves exist - D1 sections 24 to 28 fit them - **and what
+each one's position IS during normal service is on file nowhere.**
+
+**WATER's, and what is wanted is one line per valve: its name, its position in normal
+service, and what changes it.** The last term is the one that makes it worth having:
+**a valve whose service position nobody wrote down is a valve the next person leaves
+where they found it.**
+
+**It is not blocked on the wall, on the survey or on anything the owner is measuring.**
+
 ### 12.5 What this check cannot see
 
 **F-116's lesson, restated because it applies to this document too: this check reads
@@ -1140,7 +1331,7 @@ somebody works a stage from it and finds nothing.
 accounted for: **23 are run by a step, C-05 is NOT SCHEDULED and C-12 is VOID**, and both
 appear in D9 marked N/A with their reason rather than omitted, per G-46.
 
-**TWENTY OF THE 56 STEPS CARRY NO ACCEPTANCE CRITERION. TWO OF THE TWENTY - D8-46 running C-08 and D8-47 running C-02 - ARE STRUCTURALLY CRITERION-FREE AND ARE MARKED AS THAT RATHER THAN AS MISSING, D-225: they DEFINE the figures every other step is judged against, so there is nothing to judge them by. EIGHTEEN ARE GENUINELY OWED**, each saying so on its own ACCEPT
+**NINE OF THE 56 STEPS STILL CARRY NO ACCEPTANCE CRITERION, 2026-09-23, D-231.** It was twenty. **Two - D8-46 running C-08 and D8-47 running C-02 - ARE STRUCTURALLY CRITERION-FREE AND ARE MARKED AS THAT RATHER THAN AS MISSING, D-225:** they DEFINE the figures every other step is judged against, so there is nothing to judge them by. **Nine were BOSS's and the owner supplied SIX CRITERIA COVERING ALL NINE on 2026-09-23, each marked ORIGIN: ELIJAH with the derived ones distinguished from the chosen ones, per G-53.** **The nine that remain are PUMP-BOXES', WATER's and the owner's lookups**, each saying so on its own ACCEPT
 line with its owner named. **Eighteen of those are rows that owe a criterion. Two are
 structurally criterion-free** - C-08 and C-02 define the figures everything else is
 compared against, and there is nothing behind them to compare to.

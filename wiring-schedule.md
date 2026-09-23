@@ -470,6 +470,51 @@ ones that end at a device rather than at a plug, which is why they were easy to 
 gap.** A page per conductor over a cable nobody terminates would be a page describing
 nothing.
 
+### 5.1 THE FIVE DOOR CONDUCTORS. A REQUIREMENT WAITING FOR ROWS THAT DO NOT EXIST YET
+
+**D-232 moved the E-STOP, the three pilots and the RESET from the top face to the DOOR.
+Their conductors are PANEL-INTERNAL, and the panel-internal conductor list is unblocked,
+unwritten and MAIN-PANEL's** - D3 section 6. **So there is no row here to amend, and
+this is the requirement written where the rows will be.**
+
+**FIVE CONDUCTOR GROUPS THAT NEVER FLEXED NOW FLEX ON EVERY DOOR OPENING.** A device
+hanging from a roof is stationary. A device on a door travels through an arc every time
+somebody looks inside, **and over the life of this machine that is the highest cycle
+count of any motion in the build.**
+
+**IT ADDS NO CONDUCTORS. It adds a length allowance and a strain path to five that
+already exist.**
+
+| | |
+|---|---|
+| **Length allowance** | **The loop is sized so the door opens FULLY without the cable reaching its own straight length.** A loop sized to a half-open door is the one that gets pulled out, because the person who finds the limit is pushing |
+| **Where the loop lives** | **The HINGE side.** The arc is smallest nearest the hinge axis, so the same door swing costs the least cable and the least bending there |
+
+### 5.2 THE STRAIN PATH. A CLAMP AT EACH END OF THE LOOP, BOTH ON THE HINGE SIDE
+
+**Three candidates were on the table: a cable clamp at the hinge side, a spiral wrap, or
+a grip through the door. THE ANSWER IS A CLAMP AT EACH END, AND THE REASON IS THAT THE
+OTHER TWO DO NOT ANCHOR.**
+
+| Candidate | Verdict |
+|---|---|
+| **A grip through the door** | **NO. A grip is for crossing an enclosure wall.** These conductors never leave the enclosure - they run from the plate to the door inside one sealed volume. **A grip here would put a sixth penetration in a door whose whole point was removing penetrations** |
+| **A spiral wrap** | **NOT SUFFICIENT ALONE. It BUNDLES; it does not ANCHOR.** Five conductors wrapped together still transmit every door movement to whichever end is least well held, **which is a screw terminal.** It may go on as well, and it is not the strain path |
+| **A clamp at EACH END of the loop, both on the hinge side** | **YES.** One on the plate side, one on the door side. **The flexing section is then a short defined arc between two fixed points near the hinge axis, and NO MOTION REACHES A TERMINAL SCREW** |
+
+**THE THING WORTH SAYING IS THAT IT IS TWO CLAMPS AND NOT ONE.** A single clamp fixes
+one end and leaves the other end free to take the whole travel. **One clamp looks like
+strain relief and is a hinge with a screw terminal at one end of it.**
+
+**G-52 APPLIES TO THE DOOR ITSELF, NOT ONLY TO THE CLAMPS:** a device body near the
+hinge sweeps a smaller arc than one near the latch, **so spacing that assumes the door
+is stationary has ignored the swing.** Which side is hinged is not on file and the owner
+is measuring it. D3 sheet 3.6.5.
+
+**NOT A PART NUMBER AND NOT A SIZE. The requirement is two anchor points per loop on the
+hinge side; the clamp, its fixing and its position are MAIN-PANEL's with the
+panel-internal list.**
+
 ---
 
 ## 6. WHAT WRITING THIS FOUND

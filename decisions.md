@@ -5246,3 +5246,170 @@ next reader would have found anyway.**
 THIS BUILT FROM, AND WHO ELSE HAS A ROW IN THIS DOCUMENT?** F-123's answer was
 "MAIN-PANEL's, and two other agents have sheets here" - **and that answer was available
 the day the claim was written.**
+
+---
+
+# D-231. THE SIX CRITERIA, THE MISSING POSTCONDITION, AND WHAT WRITING THEM FOUND. 2026-09-23
+
+**The owner supplied six acceptance criteria covering all nine BOSS-owned steps. Each is
+marked ORIGIN: ELIJAH, 2026-09-23 in D8, with the DERIVED ones distinguished from the
+CHOSEN ones per G-53.** D8's criterion-free count goes from twenty to nine.
+
+| Step | Criterion | Origin class |
+|---|---|---|
+| D8-09, D8-10 | **Lift it, the permissive drops, tick. If the permissive holds, STOP** | **SUPPLIED.** Not from a part figure |
+| D8-18, D8-19 | **The machine becomes MORE cautious, not less. A direction, not a value** | **DERIVED from G-22** |
+| D8-25 | **2.4 A total at standstill** | **DERIVED:** 1.0 A rated winding, 30 percent assumed |
+| D8-26 | **Stabilises at or below 60 C, room at 18 C** | **DERIVED** from the TMC2209, the electrolytics and the PharMed tubing, **which softens with heat and changes delivered volume** |
+| D8-27 | **No pass mark. The only failure is a part that does not work afterwards** | **A DECISION RECORDED**, and the owner has taken it |
+| D8-49, D8-50 | **Below the catalogue figure, AND eight channels within 5 percent** | **Condition 1 DERIVED. Condition 2's 5 percent CHOSEN, no external basis, tighten after the first set** |
+
+**The owner's marking instruction is G-53 applied to a criterion, and it earns its keep
+immediately: two of the six are sourced from part figures and two are chosen, and a
+reader a year from now cannot tell which from the criterion alone.**
+
+## 1. STAGE 7'S MISSING POSTCONDITION. ONE LINE, FOUR GAPS
+
+**Added at source under G-54: "THE LOOP IS LEFT RUNNING, the day tank is at the HIGH end
+of the band, and the chiller is in NORMAL SERVICE."**
+
+**Genuine gaps fall from seven to three.** Stages 8, 9 and 10 each required it and stage
+7's postconditions were four measured figures.
+
+**The general shape: A STAGE THAT MEASURES SOMETHING IS NOT THEREBY A STAGE THAT LEAVES
+SOMETHING, AND ONLY THE POSTCONDITION CAN SAY WHICH.** Four requirements had been met by
+an assumption that measuring the loop leaves it running.
+
+## 2. THE OWNER'S RECOGNITION TEST, FROZEN AS G-59b
+
+> **G-59b. A PRECONDITION THAT CITES A STEP NUMBER RATHER THAN A STATE IS COMPENSATING
+> FOR A POSTCONDITION THAT DOES NOT SAY ENOUGH.**
+
+**From D8 stage 2, which had to cite "D1 step 31-02" where every other precondition
+cites a state.** It is a recognition test rather than a prohibition: **the step citation
+is a symptom and the postcondition is the defect.** Numbered as a rider on G-59 rather
+than as a new rule, because the register is not what is short.
+
+## 3. THREE THINGS WRITING THE CRITERIA FOUND
+
+### 3.1 S-20's fail direction is asserted and not printed. GAP
+
+**The row says its fail direction "is established rather than inherited, per F-017's
+lesson" AND DOES NOT SAY WHAT IT IS.** G-37's shape: a claim citing its own
+establishment without stating its content. **D8-18 cannot be run on that conductor
+without it.** To the owner.
+
+### 3.2 S-11's probe conductors are outside G-22's frame entirely. GAP
+
+**A severed I2C conductor is not a two-state loop failing in a direction. It makes a
+probe UNREADABLE, and whether unreadable INHIBITS dosing is a software question.**
+Searched `software-spec.md`: **no row says what an unreadable probe does.**
+
+**And it is the first conductor D8-18 will meet**, because the step disconnects AT THE
+GLAND and the probe cable is what is at the gland.
+
+### 3.3 A THIRD GAP WAS WRITTEN AND WITHDRAWN BEFORE IT WAS SENT
+
+**S-04, the leak console, was listed as unstated on the strength of G-39's own
+annotation: "what the contact does when its own 24 V fails is on file nowhere."**
+
+**IT IS ON FILE. F-115 closed it and the owner answered it - C-NC, opens on power loss
+or leak.** G-39's annotation is stale and has been corrected.
+
+**G-38's shape arriving on a RULE rather than on a grade.** The annotation was true
+against the tree it was written on. **A rule that carries its founding example keeps
+that example after the example closes, and the rule is the last place anybody looks for
+a stale fact.** The rule itself was never wrong.
+
+## 4. AND D8-25's CONSEQUENCE HAS NOWHERE TO LAND
+
+**The owner's instruction was to cite MAIN-PANEL's loading model rather than himself.
+SEARCHED `parts.md`, `subsystems/main-panel*.md` and `decisions.md`: THERE IS NO LOADING
+MODEL AND NO ASSEMBLED 24 V BUDGET.**
+
+What exists is parts.md lines 241 to 248: **1.0 A per driver, 8.0 A worst case with all
+eight connected, 10 A supply. That worst case will never occur, because G-06 runs one
+head at a time.** The real figure is one running plus seven at standstill, **and the
+standstill term is exactly what D8-25 measures.**
+
+**So the step measures the one term that would turn a worst case nobody will see into a
+number somebody could use, and nothing assembles it.** MAIN-PANEL's. It is D-222's
+fourth ordering defect arriving with a number attached.
+
+## 5. TWO ROUTES SENT
+
+**THE WATCHDOG, to DISPLAY-BOX and CONTROL-SOFTWARE jointly. And my report of it last
+turn was wrong in a way worth correcting: I said "a part the build never installs". IT
+IS A MECHANISM SPECIFIED AT ITS INPUT AND NOT AT ITS OUTPUT.** D-033 and software-spec
+2.4.10 say how it is FED. **Nothing anywhere says what it DRIVES.** D1 installs nothing
+because there may be nothing to install, **or because nobody chose, and the tree cannot
+tell those apart.** If nobody chose, it is a decision and it is the owner's.
+
+**VALVE SERVICE POSITIONS, to WATER.** The valves exist and their normal-service
+positions are on file nowhere. One line per valve: name, service position, and what
+changes it. **The last term is what makes it worth having - a valve whose service
+position nobody wrote down is a valve the next person leaves where they found it.**
+
+---
+
+# D-232. THE FIVE 22 mm DEVICES MOVE TO THE DOOR. THE TOP FACE IS SOLID. 2026-09-23
+
+**The owner ruled on F-122 and the ruling is DO IT.**
+
+**His reasoning, kept because it is the argument and not the ruling: an E-stop that
+requires an overhead reach is not an E-stop. And the top face was always the wrong place
+for a second reason - it is the upward-facing penetration that sets the assembly's
+rating regardless of what is gasketed on it. Five gasketed devices on a horizontal face
+is a rating bought and then spent on the one surface that collects standing water.
+D-047's reasoning was about sealing; the consequence was operability, and the
+consequence was never weighed against it.**
+
+## What changed, and it is all of it
+
+| | |
+|---|---|
+| **D3 sheet 3.6** | **Rewritten as THE DOOR.** The device order and every reason for it are unchanged. The collision analysis is inverted. The hinge rule is new |
+| **D-047** | **SUPERSEDED, not reversed.** The top face carries no devices, so there is nothing on it to gasket. **Right about sealing and now moot rather than wrong** |
+| **D1 7-02, 7-03** | Face changed. **Two method notes added that the top face never needed: mark the door SUPPORTED, and drill it OFF THE BOX** - swarf from a door drilled in place falls onto the plate |
+| **D1 7-10** | **DELETED. The step number is not reused.** It fitted gaskets and blanks to top-face holes and there are none. **Deleted rather than left standing, at the owner's instruction: a step that blanks nothing is not kept as a formality** |
+| **D1 32-07** | Rewritten, **and a second clause added: confirm the TOP FACE has no penetration at all.** A box drilled to an older sheet has five holes in its roof and they will not be found later |
+| **D5 sections 5.1 and 5.2** | The flexing loop and its strain path |
+| **D4, D6, D5's CDR- rows** | **NOTHING. Zero joints, zero runs, zero rows.** The conductors land where they landed |
+
+## What it closed
+
+**F-025's TOP-FACE HALF. It was live - "the requirement for each 22 mm device's rating
+in an upward-facing orientation".** A device on a vertical door has no upward
+orientation to be rated in. **One open item gone, and it was not counted as a benefit
+until the move was costed.**
+
+## THE STRAIN PATH, PICKED, AND THE REASON IS THAT TWO OF THE THREE DO NOT ANCHOR
+
+**A CLAMP AT EACH END OF THE LOOP, BOTH ON THE HINGE SIDE.**
+
+| Candidate | Verdict |
+|---|---|
+| **A grip through the door** | **NO.** A grip crosses an enclosure wall and these conductors never leave the enclosure. **It would put a sixth penetration in a door whose whole point was removing penetrations** |
+| **A spiral wrap** | **NOT SUFFICIENT ALONE. It BUNDLES; it does not ANCHOR.** Five wrapped conductors still transmit every door movement to whichever end is least well held, **which is a screw terminal** |
+| **A clamp at EACH END, hinge side** | **YES.** The flexing section becomes a short defined arc between two fixed points near the hinge axis, **and no motion reaches a terminal screw** |
+
+**AND THE THING WORTH SAYING IS THAT IT IS TWO CLAMPS AND NOT ONE. A single clamp fixes
+one end and leaves the other to take the whole travel - it looks like strain relief and
+is a hinge with a screw terminal at one end of it.**
+
+**The hinge side because the arc is smallest nearest the hinge axis: the same door swing
+costs the least cable and the least bending there.**
+
+**No part number, no size. The requirement is two anchor points per loop on the hinge
+side; the clamp, its fixing and its position are MAIN-PANEL's with the panel-internal
+conductor list, which is unblocked and unwritten.**
+
+## G-52 ON THE HINGE, AND IT IS THE SECOND TIME ONE OF THESE RULES HAS CAUGHT SOMETHING WRITTEN AFTER IT
+
+**A device body near the HINGE sweeps a smaller arc than one near the LATCH. Spacing
+that assumes the door is stationary has ignored the swing.**
+
+**WHICH SIDE IS HINGED IS NOT ON FILE**, and it decides which end of the row - E-STOP's
+or RESET's - has the small arc and therefore which body could foul the frame. **Owner's,
+in the same measurement batch as the door-to-plate depth, the usable door area inside
+the sealing perimeter, and the mounting holes.**

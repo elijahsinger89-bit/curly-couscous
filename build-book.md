@@ -559,17 +559,25 @@ ACCEPT: the enclosure is empty and you can see through it.
 **7-01a. Set the backplate aside where it will not be walked on or cut over.**
 ACCEPT: it is off the floor, flat, and nowhere near the next four steps.
 
-**7-02. Mark the top-face device holes at the positions D3 states.**
-BLOCKED. Missing: D3 does not exist. Owner: MAIN-PANEL. **The face itself is already
-decided in parts.md: the door-mounted devices are all on the TOP FACE, nothing else
-penetrates that face, and every cord grip is on the bottom. The hole size, the count
-and the positions are parts.md's and D3's.**
+**7-02. Mark the DOOR device holes at the positions D3 states.**
+**REVISION, 2026-09-23, D-232: THIS STEP WAS "mark the top-face device holes". THE FIVE
+22 mm DEVICES MOVED TO THE DOOR.** The top face now has no penetration of any kind.
+BLOCKED. Missing: D3 sheet 3.6 is rewritten but its hole spacing is still empty on the
+C-C floor, **and the usable door area inside the sealing perimeter is not on file.**
+Owner: MAIN-PANEL for the order, the owner for the two measurements.
+**WHAT IS DECIDED: five 22 mm holes on the door and nothing else on it; nothing at all on
+the top face; every cord grip on the bottom. The order on the face is D3 sheet 3.6's and
+is unchanged by the move.**
+**AND MARK THEM WITH THE DOOR OFF ITS HINGES OR FULLY SUPPORTED.** A door marked while
+hanging is marked against its own sag.
 
-**7-03. Step drill each top-face hole.**
+**7-03. Step drill each DOOR hole.**
 BLOCKED. Missing: as 7-02.
-WHY IT IS STEP DRILLED AND NOT TWIST DRILLED: parts.md records the method with the
-face. A twist drill grabs sheet and tears a hole that a gasketed device cannot seal
-against, and D-047 treats every one of these as needing a gasketed device.
+WHY IT IS STEP DRILLED AND NOT TWIST DRILLED: **a twist drill grabs sheet and tears a
+hole that a gasketed device cannot seal against.** The devices are still gasketed - what
+D-232 removed is the UPWARD-FACING orientation, not the seal.
+**AND DRILL THE DOOR OFF THE BOX.** Swarf from a door hole drilled in place falls onto
+the plate below it, and 7-08 cannot shake out a box whose door is being worked on.
 
 **7-04. Mark the bottom-face cord grip positions D6 states.**
 BLOCKED. Missing: CBL-01 is OPEN and its position half needs the arrangement. Owner:
@@ -607,15 +615,20 @@ BLOCKED. Missing: the cable selections in D6 section 5 are requirements and sear
 terms, not parts, and the hole positions are 7-04's blocker. Owner: the owner runs
 the lookups under G-15; INTERCONNECT selects.
 
-**7-10. Fit the top-face devices' gaskets and blanks so that no top-face hole is left
-open.**
-BLOCKED. Missing: as 7-02, and F-025's top-face half is live - D-110 closes the
-enclosure's own rating and **explicitly does not close the question of each top-face
-device's rating in an upward-facing orientation.** Owner: MAIN-PANEL.
-WHY THE TOP FACE IS TREATED DIFFERENTLY FROM EVERY OTHER FACE: D-092 and D-110. **The
-assembly's rating is set by its worst penetration regardless of what the box is
-rated**, and upward-facing holes are the worst penetration. The design sheds rather
-than seals, so anything that lands on that face has to run off it.
+**7-10. DELETED 2026-09-23, D-232. THE STEP NUMBER IS NOT REUSED.**
+
+**It read "fit the top-face devices' gaskets and blanks so that no top-face hole is left
+open". THERE ARE NO TOP-FACE HOLES. A step that blanks nothing is not kept as a
+formality**, and the owner's instruction was to delete it rather than leave it standing.
+
+**WHAT LEAVES WITH IT, so nobody goes looking for it:** F-025's top-face half, which was
+LIVE - *"the requirement for each 22 mm device's rating in an upward-facing orientation"*
+- **CLOSES, because there is no upward-facing device to rate.**
+
+**WHAT DOES NOT LEAVE WITH IT: D-092 and D-110's rule that the assembly's rating is set
+by its worst penetration regardless of what the box is rated.** That rule is why the move
+happened. **The worst penetration is now a bottom-face grip with a drip loop outside it,
+which is the best case this enclosure can have.**
 
 ---
 
@@ -2571,13 +2584,12 @@ assembly and it has been off and on since section 9.
 BLOCKED. Missing: as 32-01.
 ACCEPT when unblocked: the door closes on its own seal without being forced.
 
-**32-07. Confirm every top-face device on the main panel is fitted and no top-face
-hole is open.**
-BLOCKED. Missing: 7-10's blocker. Owner: MAIN-PANEL.
-WHY IT IS CHECKED AGAIN HERE: **the assembly's rating is set by its worst
-penetration**, and an unfitted device hole in an upward-facing face is a hole in the
-roof of the panel. The design sheds rather than seals, so anything that lands on that
-face has to run off it and not into it.
+**32-07. Confirm every DOOR device is fitted and no door hole is open, and confirm the
+TOP FACE has no penetration at all.**
+**REVISION, 2026-09-23, D-232: was "every top-face device ... no top-face hole".** The
+second clause is new and is a check that the move actually happened: **a box that was
+drilled to an older sheet has five holes in its roof and they will not be found later.**
+BLOCKED. Missing: 7-02's blockers. Owner: MAIN-PANEL.
 
 ---
 
