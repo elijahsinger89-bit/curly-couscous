@@ -821,3 +821,88 @@ behind the panel.**
 with TayMac covers, mounted to the wall BESIDE the panel and fed by cord grips. SO
 THIS LOOKUP CONSTRAINS NOTHING INSIDE THE ENCLOSURE.**
 
+## The five panel devices. OWNER, 2026-09-23. D-200, D-201, D-202.
+
+### 1. Disconnect. NO PART. ZERO RAIL MILLIMETRES.
+
+**A lockable 2-pole building breaker upstream opens both incoming legs together and
+can be locked OFF.** OSHA and NFPA 79 care that the source is isolated and locked,
+**not that a second isolator sits on the plate.**
+
+**A DIN isolator earns its place ONLY IF a LOCAL VISIBLE open point is needed without
+walking to the building panel, or if the two entering circuits are not on the same
+2-pole breaker.** Neither holds. **If that changes: ABB SD202/25, 2P 25 A load-break,
+35 mm, padlock adapter 2CDD282001R0001.**
+
+### 2. BUS-A overcurrent. Altech 1C15UL. 1P, C curve, 15 A, UL 489, 10 kA at 120 V, 17.5 mm.
+
+### 3. BUS-B overcurrent. Altech 1D15UL. Same family, D curve, UL 489, 10 kA, 17.5 mm.
+
+> **UL 489, NOT UL 1077, IS A REQUIREMENT ON THE LINE AND NOT A PREFERENCE.** A
+> supplementary protector is not legal branch protection under the NEC. **The common
+> IEC parts - ABB S201-C15, Schneider M9F11115, Eaton FAZ-C15/1 without the NA suffix
+> - are all UL 1077, many fully rated only two-pole at 240 or 415 V with the
+> single-pole 120 V interrupt weaker or unlisted.**
+
+**THE D CURVE DOES NOT SOLVE THE UNKNOWN LRA. It moves the magnetic wall from 5-10x
+to 10-20x, which on 15 A is 150 to 300 A.**
+
+| Fault current | What happens |
+|---|---|
+| 7.5 A continuous, 0.5x In | **The thermal element never moves** |
+| Under 150 A | **Will not instantaneous trip** |
+| 150 to 240 A | **May or may not. Nuisance trip on a sticky start is possible** |
+| Over 240 A | Clears under 100 ms - **a stall rather than a start** |
+
+A small 120 V hermetic LRA is typically **4 to 8 times compressor FLA for 50 to 200
+ms**. A C curve starts tripping at 75 A, so D is right **and it is not unlimited
+headroom.**
+
+**SO THE COMPRESSOR NAMEPLATE READING DECIDES WHETHER THIS BREAKER IS CORRECT. If the
+measured LRA is over 120 to 150 A, the answer is a larger breaker sized to the wire,
+or a motor-rated protector.**
+
+### 4. R-PI fuse holder. Phoenix Contact PT 4-HESILED 250 (5x20), or spring-cage ST 4-HESILED 250, order 3036563. 6.2 mm rail.
+
+**THE INDICATOR HAS NO MINIMUM LOAD CURRENT, BECAUSE THE LAMP SITS ACROSS THE FUSE
+AND NOT IN SERIES WITH THE LOAD.** Fuse good, LED shorted out, dark. **Fuse open, full
+120 V across the LED and its resistor, lamp lights.**
+
+**So the Pi brick's 0.23 A is irrelevant, and when the fuse blows the load current is
+ZERO and the lamp still sees 120 V.** The datasheet's 0.4 to 0.95 mA is **LEAKAGE
+through the indicator while the fuse is open, not a lighting threshold.**
+
+**USE THE 250 V VERSION. A 24 V LED version dies on 120 V.**
+
+### 5. KM-CHIL. ABB AF09-30-10-13, 45 mm rail. Alternative Schneider LC1D09G7, same width.
+
+**THE FINDER 22.32 IS THE WRONG PART AND THE NUMBERS SHOW WHY: its 25 A is AC-1
+RESISTIVE, its AC-3 motor rating is typically 8 A or less, and it is not built for
+compressor make and break.** The load is **8.7 A** - 7.2 A compressor FLA at 1/3 HP
+115 V, plus 1.5 A pump.
+
+| | AC-3 | AC-1 | Listing |
+|---|---|---|---|
+| AF09-30-10-13 | 9 A | 25 A | UL 3/4 HP at 120 V, **coil 100 to 250 V AC or DC** |
+| LC1D09G7 | 9 A | 25 A | 1/3 HP at 115 V, 120 V coil |
+
+**COIL DROP-OUT DECIDES IT AND IT FAVOURS THE ABB. A standard AC magnet coil chatters
+and can WELD on a brown-out** - TeSys D pulls in at 0.85 to 1.1x Un and drops out at
+0.3 to 0.6x Un. **The ABB electronic coil operates across 100 to 250 V, stays sealed
+to about 100 V, then opens cleanly.**
+
+**Take the ABB: it REMOVES the failure mode rather than tolerating it.**
+
+**KM-CHIL STAYS BLOCKED on the open rung that decides its coil's bus.**
+
+### On the shelf, and candidates rather than the specification
+
+**Control Gear CGMB1C15 (1P 15 A C) and CGMB1D15 (1P 15 A D), both delivered, plus a
+CGMB1D06.** So BUS-A and BUS-B may need no purchase - **but whether they are UL 489
+or UL 1077 is UNKNOWN, and by the requirement above that decides whether they are
+usable.**
+
+**Also on the shelf: Conta-Clip 2190.2 DIN fuse holder, 5 x 20 mm, with a 2046.2 end
+plate and five 3 A glass fuses. NO INDICATOR.** It is the part the parallel build
+specified before anyone asked for one.
+
