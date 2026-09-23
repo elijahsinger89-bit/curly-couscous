@@ -517,6 +517,27 @@ panel-internal list.**
 
 ---
 
+## 5.3 THE CUT LENGTH IS A BENCH MEASUREMENT. D-237
+
+**Owner's method, 2026-09-23. Wire is bought in rolls and cut at the bench when the boxes
+are hung: wall run plus the 3 ft allowance, MEASURED ON THE DAY.**
+
+> **THE SCHEDULE CARRIES THE RULE AND NOT THE LENGTH.**
+
+**So no RUN- cell in this document or in D6 is waiting on a number from anybody, and the
+unlock map's "RUN- lengths become computable once M-02 closes" was solving a problem that
+does not exist.**
+
+**And it is the better answer rather than a concession: D3 sheet 3.8's coordinates are
+PROPOSED and good to plus or minus 50 mm. A cut length computed from them would be a
+figure with a tolerance nobody would carry to the bench**, and T-020 already says the
+allowance is folded into the cut step and never stated after it.
+
+**What the schedule still owes and this does not excuse: the ALLOWANCE itself, 3 ft under
+D-090, which is a rule and is on file.**
+
+---
+
 ## 6. WHAT WRITING THIS FOUND
 
 **F-115, RAISED HERE AND NOW CLOSED. What the leak console's contact does when its own

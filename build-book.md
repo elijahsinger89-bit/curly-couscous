@@ -783,9 +783,25 @@ in its final position is between you and the wall for every remaining wall opera
 
 **10-01. Set out each mounting position on the wall from the layout.**
 BLOCKED. Missing: BB-08, section 6. Owner: as section 6.
+**D3 sheet 3.8 now carries proposed coordinates, ORIGIN ELIJAH, good to plus or minus
+50 mm. THEY ARE A SET-OUT AND NOT A DRILL DIMENSION.**
 
 **10-01a. Mark each position on the wall.**
 BLOCKED. Missing: as 10-01.
+
+**10-01b. Hold each box in its marked position, level it, and MARK THROUGH ITS OWN
+MOUNTING HOLES.**
+**NEW 2026-09-23, D-237, AND IT CLOSES F-124.** The owner's method, and it is how anybody
+hangs an enclosure.
+ACCEPT: every mark is made through a hole in the box itself, with the box level, **and no
+mark was transferred from a dimension.**
+**WHY NO HOLE PATTERN IS ON FILE AND NONE IS NEEDED: a pattern is a second representation
+of the part, and a pattern that disagrees with the box in your hands loses.** F-124 asked
+for twelve numbers across four boxes. **This step needs none of them.**
+**WHAT IT DOES NEED, and it is the one thing a pattern would have told you early: whether
+the holes go through the BACK WALL or through EXTERNAL FEET.** A through-the-back hole
+breaks the seal and wants a sealing washer; a foot does not. **Look at the box before you
+drill and record which it is, because D9 will want it after the first leak.**
 
 **10-02. Fix the main panel to the wall.**
 BLOCKED. Missing: the mounting position, and the fixings, which are a D7 line.

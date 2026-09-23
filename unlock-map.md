@@ -98,8 +98,11 @@ commissioning order.** channel-register.md is already the file.
 - **D6's last position and spacing cells fill**, which is the whole remaining
   balance of the cable schedule.
 - **D1 can carry its dimensioned half.**
-- **RUN- lengths become computable** under D-090's cut rule, wall run plus 3 ft -
-  and until then no page implies a route, which is why D5 has no route column.
+- ~~**RUN- lengths become computable** under D-090's cut rule~~ **WITHDRAWN 2026-09-23,
+  D-237. THE CUT LENGTH IS A BENCH MEASUREMENT AND THE SCHEDULE CARRIES THE RULE RATHER
+  THAN THE LENGTH.** Wire is bought in rolls and cut when the boxes are hung. **This gate
+  never had this consequence and the map claimed it for five weeks.** No page implies a
+  route, which is why D5 has no route column, and that part stands.
 
 ## The one thing neither gate touches
 

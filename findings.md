@@ -593,3 +593,106 @@ of that row's reasoning already lives.** The column is now uniform.
 **And the guard in the extractor is kept rather than removed with the cell: `num()` takes
 what follows an equals sign, because the next expression cell somebody writes will be
 found by the proof instead of read wrongly.**
+
+---
+
+## F-128. FOUR OF FIVE PARTS DO NOT PUBLISH EITHER FIGURE IN THE FRAME THE MODEL NEEDS. 2026-09-23
+
+**The owner's lookup came back and largely refused to answer. THAT IS THE FINDING RATHER
+THAN A FAILURE.**
+
+**What catalogues print is OVERALL INCLUDING THE CLIP, or OVERALL IN THE RAIL PLANE
+spanning above and below the rail. Neither is depth from the rail face. Neither is height
+above the rail top.**
+
+| Part | Rail-face depth | Height above rail | What IS published |
+|---|---|---|---|
+| **Finder 94.74SMA + 55.34 + 094.71** | **EMPTY** | **EMPTY** | Assembled envelope **NOT PUBLISHED AT ALL.** Socket 70.5 overall in the rail plane including the DIN foot, 27 body depth; relay can 39.5 x 20.6 x 27.5. **DO NOT ADD 27 AND 39.5 - that sum is a guess and the source says so** |
+| **Altech 1C15UL and 1D15UL** | **EMPTY** | **EMPTY** | 68.4 overall including the clip behind the rail; 105.3 overall in the rail plane. **A 14.5 rail-pocket dimension is on the same view and 68.4 minus 14.5 gives 53.9 - ALTECH DOES NOT NAME THAT PLANE THE RAIL FACE, so it is not a published figure.** Kele's 4.1 x 2.7 x 0.7 in is the same envelope with the axes mislabelled |
+| **Phoenix PT 4-HESILA 250** | **57.3** | **EMPTY** | **THE ONLY RAIL-FACE FIGURE ON THE LIST.** 64.8 is that plus a 7.5 rail. The 56 is wire entry to wire entry IN THE RAIL PLANE |
+| **ABB AF09-30-10-13** | **EMPTY** | **EMPTY** | 77 overall including the clip, a 71 rear plane also shown, 86 overall in the rail plane. **DO NOT SUBTRACT 35 FROM EITHER: the drawing marks the rail and gives no dimension from its top** |
+
+**ONE FIGURE IN TEN EXISTS IN THE FRAME THE MODEL NEEDS.**
+
+**THE SHAPE, AND IT IS THE MIRROR OF F-127:**
+
+> **A FIGURE PUBLISHED IN A FRAME OTHER THAN THE ONE YOU NEED IS NOT THE FIGURE.** The
+> conversion between frames looks like arithmetic and is an ASSUMPTION ABOUT WHERE THE
+> DATUM SITS. **Subtracting a rail height from an overall depth is a guess wearing a
+> subtraction sign.**
+
+**And it is not one careless catalogue. IT IS HOW THIS WHOLE CLASS OF PART IS
+DIMENSIONED.** Overall-including-clip and overall-in-plane are the convention;
+rail-face depth is the exception. **The McMaster terminal-block caution that got the
+terminal band wrong once was not a one-off - it was the first instance of the rule.**
+
+**RESOLUTION: MEASURED, NOT LOOKED UP.** Five devices, two figures each, owner's caliper,
+in the same batch as the door-to-plate depth. **The section view is therefore still
+blocked and is now blocked on a MEASUREMENT rather than on a lookup, which is a better
+kind of blocked because the parts are on the shelf.**
+
+**Every published figure is recorded in `model/main-panel.json` WITH ITS FRAME NAMED and
+NOTHING IS CONVERTED.**
+
+---
+
+## F-129. THE PROPOSED MAIN PANEL POSITION IS LANDSCAPE, AND THE INTERIOR DOES NOT FIT IN IT. 2026-09-23
+
+**Found by the wall sheet checking its own numbers before it was written.**
+
+**Proposed extent: X 1880 to 2388, Y 1620 to 2039. That is 508 WIDE by 419 TALL.
+LANDSCAPE.** Sheet 3.1 states the box as **419 wide by 508 tall, PORTRAIT, per G-51
+frozen.**
+
+**It is not a preference and not a tolerance question:**
+
+| | |
+|---|---|
+| The band stack | **396 mm** |
+| Plate height PORTRAIT | **468 mm.** Fits, 72 mm slack |
+| Plate height LANDSCAPE | **379 mm.** **DOES NOT FIT, BY 17 mm** |
+
+**So it is not 89 mm out of position. It is a box the interior of this document cannot be
+built in.**
+
+**AND IT IS D-199's ERROR ARRIVING FROM THE OTHER SIDE.** D3 section 5 already reports
+D-199 working the plate as 468 wide by 379 high and deriving an impossible 407 mm usable
+at a 379 mm width. **The same swap, made independently, five weeks apart, by the other
+party.**
+
+**T-018's shape on an ORIENTATION instead of on a figure: 468 and 379 are both real
+numbers for this plate, and only one assignment of them is the box.** A swapped pair
+looks exactly like the right pair, **and neither number is wrong on its own.**
+
+**Minimal correction proposed in sheet 3.8.4 and NOT adopted**, because it moves the
+panel further than the sheet's own plus or minus 50 mm.
+
+---
+
+## F-130. BAND B1's STATED "USED" FIGURE DOES NOT EQUAL THE SUM OF ITS OWN ROWS. 2026-09-23
+
+**FOUND BY THE PLATE ELEVATION, while laying the devices out end to end. A drawing that
+places rows in a line is the first thing that ever adds them.**
+
+D3 sheet 3.3, band B1, beside the NDR:
+
+| | |
+|---|---|
+| The rows: 17.5 + 17.5 + 6.2 + 45 + 99.2 | **185.4** |
+| D3's stated Used | **195.6 to 201.8** |
+| **Unexplained** | **10.2 mm** |
+
+**B2, B3 and B4 all reconcile exactly - 197.5, 188.0 and 107.4 - so it is one band and
+not a systematic error.**
+
+**Ten point two is not the end plates**, which D3's demand table carries separately at
+2 mm across three banks, **and no other figure on the sheet is 10.2.** **Reported
+UNEXPLAINED rather than explained away: I do not know which of the two numbers is right
+and inventing a reconciliation would be the worse move.**
+
+**THE DIRECTION IS THE SAFE ONE - the stated figure over-reports demand by 10.2 - so
+nothing built to it is short of rail.** The verdict is untouched either way: B1 has
+256 mm beside the NDR against either figure.
+
+**MAIN-PANEL's to resolve.** The check now runs on every band every time the sheet is
+drawn.

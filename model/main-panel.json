@@ -485,5 +485,246 @@
     "depth_off_rail": 56,
     "overall_height_with_din_clip": 70,
     "_": "D3 sheet 3.2.2 and parts.md section 7. The 70 mm is OVERALL INCLUDING THE DIN CLIP and is NOT height above the rail - the distinction that made the terminal band's figure wrong once already."
+  },
+  "published_figures": {
+    "_": "PUBLISHED FIGURES WITH THEIR FRAME NAMED. Owner's lookup 2026-09-23, F-128. NOT CONVERTED, NOT SUBTRACTED, NOT INFERRED. Four of five parts do not publish either figure in the frame a section view needs. The frame is part of the figure, and a conversion between frames is an assumption about where the datum sits, not arithmetic.",
+    "frames": {
+      "rail_face_depth": "from the face of the DIN rail outward. WHAT A SECTION VIEW NEEDS.",
+      "overall_incl_clip": "front of the device to the back of the DIN clip. Spans the rail.",
+      "overall_in_rail_plane": "top extremity to bottom extremity in the plane of the rail. NOT height above the rail top.",
+      "above_rail": "from the rail TOP upward. WHAT THE BAND HEIGHTS NEED."
+    },
+    "parts": [
+      {
+        "part": "Finder 94.74SMA socket + 55.34 + 094.71 clip",
+        "covers": 6,
+        "along_rail": 30,
+        "assembled_envelope": null,
+        "socket_overall_in_rail_plane_incl_din_foot": 70.5,
+        "socket_body_depth": 27,
+        "relay_can_alone": [
+          39.5,
+          20.6,
+          27.5
+        ],
+        "rail_face_depth": null,
+        "above_rail": null,
+        "warning": "DO NOT ADD 27 AND 39.5. That sum is a guess and the source says so."
+      },
+      {
+        "part": "Altech 1C15UL and 1D15UL, one outline covers both",
+        "covers": 2,
+        "along_rail": 17.5,
+        "overall_incl_clip": 68.4,
+        "overall_in_rail_plane": 105.3,
+        "rail_face_depth": null,
+        "above_rail": null,
+        "warning": "A 14.5 mm rail-pocket dimension appears on the same view and 68.4 minus 14.5 gives 53.9, BUT ALTECH DOES NOT NAME THAT PLANE THE RAIL FACE. Not a published figure and not to be used. A 45 mm handle-side vertical exists and is NOT labelled above the rail. Kele's 4.1 x 2.7 x 0.7 in is the same envelope with the axes mislabelled."
+      },
+      {
+        "part": "Phoenix PT 4-HESILA 250 (5x20), single level, article 3211907",
+        "covers": 1,
+        "along_rail": 6.2,
+        "rail_face_depth": 57.3,
+        "overall_incl_rail": 64.8,
+        "overall_in_rail_plane": 56,
+        "above_rail": null,
+        "note": "THE ONLY PART ON THE LIST WITH A MANUFACTURER FIGURE EXPLICITLY FROM THE RAIL FACE. 64.8 is 57.3 plus a 7.5 mm rail. The 56 mm is wire entry to wire entry IN THE RAIL PLANE and is NOT height above rail.",
+        "warning": "CONFIRM THE PART NUMBER AGAINST THE D7 LINE. PT 4-L/HESILED 250, article 3002612, is a DIFFERENT AND TALLER THREE-LEVEL BLOCK at 118.5 mm in the rail plane."
+      },
+      {
+        "part": "ABB AF09-30-10-13",
+        "covers": 1,
+        "along_rail": 45,
+        "overall_incl_clip": 77,
+        "rear_plane_also_shown": 71,
+        "overall_in_rail_plane": 86,
+        "body": 80,
+        "coil_terminal_projection": 6,
+        "rail_face_depth": null,
+        "above_rail": null,
+        "warning": "DO NOT SUBTRACT 35 FROM EITHER. The drawing marks the rail and gives no dimension from its top. Neither 77 nor 71 is labelled from the rail face."
+      }
+    ],
+    "score": "ONE FIGURE IN TEN EXISTS IN THE FRAME THE MODEL NEEDS: the Phoenix rail-face depth.",
+    "resolution": "MEASURED, NOT LOOKED UP. Five devices, two figures each, owner's caliper batch."
+  },
+  "wall": {
+    "_": "PROPOSED POSITIONS. ORIGIN ELIJAH, 2026-09-23, DERIVED NOT MEASURED, good to roughly plus or minus 50 mm. Adjusted with a tape when the boxes go up, so a later correction SUPERSEDES rather than contradicts.",
+    "datum": "bottom-left corner of the wall as the operator faces it. X right along the floor, Y up.",
+    "wall": {
+      "width": 2438,
+      "height": 2438
+    },
+    "not_on_this_wall": "the 100 gal cone-bottom storage tank, which sits on the other side of a door",
+    "items": [
+      {
+        "item": "Main panel",
+        "x": [
+          1880,
+          2388
+        ],
+        "y": [
+          1620,
+          2039
+        ],
+        "outline": [
+          508,
+          419
+        ],
+        "note": "hinged LEFT, latch right, E-stop at the latch end. Top at 2039, centre at 1830"
+      },
+      {
+        "item": "Display box",
+        "x": [
+          1500,
+          1800
+        ],
+        "y": [
+          1680,
+          1980
+        ],
+        "outline": [
+          300,
+          300
+        ],
+        "note": "centre at 1830, the 6 ft sightline"
+      },
+      {
+        "item": "Pump box A",
+        "x": [
+          100,
+          506
+        ],
+        "y": [
+          1500,
+          1703
+        ],
+        "outline": [
+          406,
+          203
+        ]
+      },
+      {
+        "item": "Pump box B",
+        "x": [
+          600,
+          1006
+        ],
+        "y": [
+          1500,
+          1703
+        ],
+        "outline": [
+          406,
+          203
+        ]
+      },
+      {
+        "item": "Injection manifold run",
+        "x": [
+          100,
+          1300
+        ],
+        "y": [
+          1400,
+          1400
+        ],
+        "note": "horizontal, ports on TOP"
+      },
+      {
+        "item": "Probe section",
+        "x": [
+          1300,
+          1450
+        ],
+        "y": [
+          1400,
+          1500
+        ],
+        "note": "45 degree offset at the right end, three tees off the UPPER side"
+      },
+      {
+        "item": "Tubing raceway",
+        "x": [
+          100,
+          1300
+        ],
+        "y": [
+          1450,
+          1450
+        ],
+        "note": "slotted duct with lid, directly under the pump boxes"
+      },
+      {
+        "item": "Jug shelf",
+        "x": [
+          100,
+          1400
+        ],
+        "y": [
+          900,
+          900
+        ],
+        "depth": 300,
+        "stations": 8,
+        "note": "every jug liquid level below Y 1400. A 5 gal jug is about 380 tall, so a full jug tops out near 1280 with 120 of headroom"
+      },
+      {
+        "item": "Day tank",
+        "x": [
+          1500,
+          2100
+        ],
+        "y": [
+          0,
+          760
+        ],
+        "note": "on the floor. OFFSET FROM THE JUG SHELF so a jug leak falls on the floor rather than into the tank. Circulation pump and chiller loop pump both inside it"
+      },
+      {
+        "item": "Floor drain",
+        "x": null,
+        "y": null,
+        "note": "NOT A WALL FEATURE. In the floor in front of the day tank. Both overflows discharge to it and the leak sensor sits near it, NOT where normal overflow discharge lands"
+      }
+    ],
+    "constraints": [
+      {
+        "constraint": "Manifold above every jug level",
+        "grade": "HARD",
+        "why": "anti-siphon"
+      },
+      {
+        "constraint": "Day tank not under the jug shelf",
+        "grade": "HARD",
+        "why": "leak path"
+      },
+      {
+        "constraint": "Pump boxes above the manifold",
+        "grade": "FREE",
+        "why": "either side is safe"
+      },
+      {
+        "constraint": "Panel and display at the 1830 sightline",
+        "grade": "SOFT",
+        "why": "operator reach"
+      },
+      {
+        "constraint": "Panel and display to the right",
+        "grade": "SOFT",
+        "why": "preference"
+      },
+      {
+        "constraint": "Pump boxes left, near the manifold",
+        "grade": "SOFT",
+        "why": "tube length"
+      },
+      {
+        "constraint": "Raceway under the pump boxes",
+        "grade": "SOFT",
+        "why": "tube routing"
+      }
+    ]
   }
 }

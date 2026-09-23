@@ -50,7 +50,30 @@ you measured to.**
 questions: **holes are what a person drills, outline is what collides with the next
 thing.**
 
-### 2a. THE MOUNTING HOLE PATTERNS THEMSELVES. ADDED 2026-09-23, F-124
+### 2a. WITHDRAWN 2026-09-23, D-237. THE MOUNTING HOLE PATTERNS ARE NOT WANTED
+
+**F-124 CLOSES. It asked for twelve numbers across four boxes and the answer is that a
+hole pattern is not a drill specification.**
+
+**The owner's method, now D1 step 10-01b: hold the box in position, level it, MARK
+THROUGH ITS OWN MOUNTING HOLES, drill, fix.** No pattern on file, nothing to disagree
+with the part in your hands.
+
+**ONE THING SURVIVES FROM THE WITHDRAWN SECTION AND IT IS NOT A DIMENSION: whether each
+box's holes go through the BACK WALL or through EXTERNAL FEET**, because a
+through-the-back hole breaks the seal and a foot does not. **That is looked at, not
+measured, and it is folded into 10-01b.**
+
+**WHAT REPLACES IT IN THE BATCH: five devices, two figures each, MEASURED WITH A
+CALIPER. F-128.** Depth off the rail and height above the rail for the Finder
+94.74SMA-plus-55.34 assembly, the Altech 1C15UL/1D15UL outline, the Phoenix
+4-HESILA 250 and the ABB AF09-30-10-13. **Four of five publish neither figure in the
+frame a section view needs, so the shelf answers faster than the catalogue.**
+
+**Plus the door-to-plate clear depth and the usable door area inside the sealing
+perimeter.**
+
+### 2b. THE WITHDRAWN TEXT, KEPT SO THE REASONING IS NOT LOST
 
 **THE FOUR OUTLINES AND PLATES ARE NOW ON FILE. NO HOLE PATTERN IS, FOR ANY BOX,
 INCLUDING THE MAIN PANEL.** Searched parts.md, enclosure-layout.md, build-book.md and

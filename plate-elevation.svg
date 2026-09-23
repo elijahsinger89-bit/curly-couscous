@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="887" height="1131" viewBox="0 0 887 1131" font-family="ui-monospace,Menlo,Consolas,monospace">
+<style>:root{--ink:#111;--pale:#888;--empty:#b23;--bg:#fff}@media (prefers-color-scheme: dark){:root{--ink:#e8e8e8;--pale:#888;--empty:#f66;--bg:#151515}}text{fill:var(--ink)}.s{font-size:11px}.t{font-size:15px;font-weight:700}.e{fill:var(--empty);font-size:11px;font-weight:700}.d{stroke:var(--pale);stroke-width:1;fill:none;stroke-dasharray:5 4}.l{stroke:var(--ink);stroke-width:1.2;fill:none}.f{fill:none;stroke:var(--ink);stroke-width:1}</style>
+<rect width="887" height="1131" fill="var(--bg)"/>
+<text x="150" y="42" class="t">MAIN PANEL - PLATE ELEVATION, PORTRAIT</text>
+<text x="150" y="62" class="s">GENERATED from model/main-panel.json. Not drawn. Round trip against enclosure-layout.md passed before this sheet was written.</text>
+<text x="150" y="78" class="s">Scale 1.4 px per mm. Box 419 x 508 x 201. Plate 379 x 468.</text>
+<text x="150" y="94" class="e">RECTANGLES ARE RAIL WIDTH x BAND ENVELOPE. A device's own height above the rail is EMPTY for every part but two, so it is not drawn.</text>
+<rect x="150" y="150" width="586.6" height="711.2" class="f"/>
+<text x="154" y="142" class="s">BOX 419 x 508</text>
+<rect x="178.0" y="178.0" width="530.6" height="655.2" class="l"/>
+<text x="178.0" y="851.2" class="e">BOTTOM MARGIN EMPTY - the 72 mm of slack is not allocated between margins and horizontal ducts, so every band Y floats with it</text>
+<rect x="213.0" y="574.2" width="460.6" height="259.0" class="d"/>
+<text x="82.0" y="707.7" class="s">B1 Supply and LINE</text>
+<text x="82.0" y="721.7" class="s">185 mm</text>
+<rect x="213.0" y="574.2" width="102.2" height="259.0" class="l"/>
+<text x="264.1" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 264.1 703.7)">NDR-240-24</text>
+<text x="264.1" y="828.2" class="s" text-anchor="middle">73</text>
+<rect x="315.2" y="574.2" width="24.5" height="259.0" class="l"/>
+<text x="327.4" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 327.4 703.7)">BUS-A overcurrent</text>
+<text x="327.4" y="828.2" class="s" text-anchor="middle">17.5</text>
+<rect x="339.7" y="574.2" width="24.5" height="259.0" class="l"/>
+<text x="351.9" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 351.9 703.7)">BUS-B overcurrent</text>
+<text x="351.9" y="828.2" class="s" text-anchor="middle">17.5</text>
+<rect x="364.2" y="574.2" width="8.7" height="259.0" class="l"/>
+<text x="368.5" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 368.5 703.7)">R-PI fuse holder</text>
+<text x="368.5" y="828.2" class="s" text-anchor="middle">6.2</text>
+<rect x="372.9" y="574.2" width="63.0" height="259.0" class="l"/>
+<text x="404.4" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 404.4 703.7)">KM-CHIL</text>
+<text x="404.4" y="828.2" class="s" text-anchor="middle">45</text>
+<rect x="435.9" y="574.2" width="138.9" height="259.0" class="l"/>
+<text x="505.3" y="703.7" class="s" text-anchor="middle" transform="rotate(-90 505.3 703.7)">LINE terminal bank, 16 to 17</text>
+<text x="505.3" y="828.2" class="s" text-anchor="middle">99.2</text>
+<text x="583.2" y="707.7" class="s">185.4 laid out, of 256</text>
+<text x="583.2" y="721.7" class="e">D3 SAYS 195.6 to 201.8 USED. THE ROWS SUM TO 185.4. F-130</text>
+<rect x="213.0" y="474.8" width="460.6" height="99.4" class="d"/>
+<text x="82.0" y="528.5" class="s">B2 Relay</text>
+<text x="82.0" y="542.5" class="s">71 mm</text>
+<rect x="213.0" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="234.0" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 234.0 524.5)">K-FILL-S</text>
+<text x="234.0" y="569.2" class="s" text-anchor="middle">30</text>
+<rect x="255.0" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="276.0" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 276.0 524.5)">K-FILL-D-P</text>
+<text x="276.0" y="569.2" class="s" text-anchor="middle">30</text>
+<rect x="297.0" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="318.0" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 318.0 524.5)">K-DRY-P</text>
+<text x="318.0" y="569.2" class="s" text-anchor="middle">30</text>
+<rect x="339.0" y="474.8" width="24.5" height="99.4" class="l"/>
+<text x="351.2" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 351.2 524.5)">KM-DRV</text>
+<text x="351.2" y="569.2" class="s" text-anchor="middle">17.5</text>
+<rect x="363.5" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="384.5" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 384.5 524.5)">K-PERM</text>
+<text x="384.5" y="569.2" class="s" text-anchor="middle">30</text>
+<rect x="405.5" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="426.5" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 426.5 524.5)">K-FILL-D-Q</text>
+<text x="426.5" y="569.2" class="s" text-anchor="middle">30</text>
+<rect x="447.5" y="474.8" width="42.0" height="99.4" class="l"/>
+<text x="468.5" y="524.5" class="s" text-anchor="middle" transform="rotate(-90 468.5 524.5)">K-DRY-Q</text>
+<text x="468.5" y="569.2" class="s" text-anchor="middle">30</text>
+<text x="497.9" y="528.5" class="s">197.5 laid out, of 329</text>
+<rect x="213.0" y="376.8" width="460.6" height="98.0" class="d"/>
+<text x="82.0" y="429.8" class="s">B3 24 V terminal</text>
+<text x="82.0" y="443.8" class="s">70 mm</text>
+<rect x="213.0" y="376.8" width="34.7" height="98.0" class="l"/>
+<text x="230.4" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 230.4 425.8)">Motor supply out</text>
+<text x="230.4" y="469.8" class="s" text-anchor="middle">24.8</text>
+<rect x="247.7" y="376.8" width="17.4" height="98.0" class="l"/>
+<text x="256.4" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 256.4 425.8)">Permissive coil drive</text>
+<text x="256.4" y="469.8" class="s" text-anchor="middle">12.4</text>
+<rect x="265.1" y="376.8" width="69.4" height="98.0" class="l"/>
+<text x="299.8" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 299.8 425.8)">Day tank floats</text>
+<text x="299.8" y="469.8" class="s" text-anchor="middle">49.6</text>
+<rect x="334.5" y="376.8" width="69.4" height="98.0" class="l"/>
+<text x="369.2" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 369.2 425.8)">Storage floats</text>
+<text x="369.2" y="469.8" class="s" text-anchor="middle">49.6</text>
+<rect x="404.0" y="376.8" width="17.4" height="98.0" class="l"/>
+<text x="412.6" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 412.6 425.8)">E-STOP</text>
+<text x="412.6" y="469.8" class="s" text-anchor="middle">12.4</text>
+<rect x="421.3" y="376.8" width="52.1" height="98.0" class="l"/>
+<text x="447.4" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 447.4 425.8)">RESET, three blocks</text>
+<text x="447.4" y="469.8" class="s" text-anchor="middle">37.2</text>
+<rect x="473.4" y="376.8" width="2.8" height="98.0" class="l"/>
+<text x="474.8" y="425.8" class="s" text-anchor="middle" transform="rotate(-90 474.8 425.8)">End plates</text>
+<text x="474.8" y="469.8" class="s" text-anchor="middle">2</text>
+<text x="484.6" y="429.8" class="s">188 laid out, of 329</text>
+<rect x="213.0" y="278.8" width="460.6" height="98.0" class="d"/>
+<text x="82.0" y="331.8" class="s">B4 Quiet</text>
+<text x="82.0" y="345.8" class="s">70 mm</text>
+<rect x="213.0" y="278.8" width="17.4" height="98.0" class="l"/>
+<text x="221.7" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 221.7 327.8)">S-08 readback</text>
+<text x="221.7" y="371.8" class="s" text-anchor="middle">12.4</text>
+<rect x="230.4" y="278.8" width="17.4" height="98.0" class="l"/>
+<text x="239.0" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 239.0 327.8)">S-03 and the D-042 inhibit, </text>
+<text x="239.0" y="371.8" class="s" text-anchor="middle">12.4</text>
+<rect x="247.7" y="278.8" width="17.4" height="98.0" class="l"/>
+<text x="256.4" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 256.4 327.8)">S-20 and its complement, one</text>
+<text x="256.4" y="371.8" class="s" text-anchor="middle">12.4</text>
+<rect x="265.1" y="278.8" width="52.1" height="98.0" class="l"/>
+<text x="291.1" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 291.1 327.8)">PL-R, PL-G, PL-Y</text>
+<text x="291.1" y="371.8" class="s" text-anchor="middle">37.2</text>
+<rect x="317.2" y="278.8" width="43.4" height="98.0" class="l"/>
+<text x="338.9" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 338.9 327.8)">The five sense-circuit burde</text>
+<text x="338.9" y="371.8" class="s" text-anchor="middle">31</text>
+<rect x="360.6" y="278.8" width="2.8" height="98.0" class="l"/>
+<text x="362.0" y="327.8" class="s" text-anchor="middle" transform="rotate(-90 362.0 327.8)">End plates</text>
+<text x="362.0" y="371.8" class="s" text-anchor="middle">2</text>
+<text x="371.8" y="331.8" class="s">107.4 laid out, of 329</text>
+<rect x="178.0" y="178.0" width="35.0" height="655.2" class="d"/>
+<rect x="673.6" y="178.0" width="35.0" height="655.2" class="d"/>
+<text x="180.8" y="170.0" class="e">DUCT WIDTH EMPTY - drawn at the smallest catalogue size, 25 mm. 40, 60, 80, 100 and 150 also clear the rail budget at 60 and below.</text>
+<rect x="221.4" y="247.0" width="204.5" height="17.8" class="l"/>
+<rect x="437.1" y="247.0" width="204.5" height="17.8" class="l"/>
+<text x="221.4" y="261.8" class="s">TWO GROUND BARS, 146.05 each, side by side below B1. Holes at least 127 apart. Y POSITION EMPTY.</text>
+<text x="150" y="895.1999999999999" class="t">EMPTY ON THIS SHEET, WITH ITS OWNER</text>
+<text x="150" y="915.1999999999999" class="s">EMPTY  Duct width, and therefore every band's usable rail  -  MAIN-PANEL, after the conductor list and a gauge</text>
+<text x="150" y="931.1999999999999" class="s">EMPTY  The 72 mm of slack, split between margins and horizontal ducts  -  MAIN-PANEL</text>
+<text x="150" y="947.1999999999999" class="s">EMPTY  Device height above the rail, 4 of 5 parts  -  OWNER, measured with a caliper. F-128</text>
+<text x="150" y="963.1999999999999" class="s">EMPTY  Device depth off the rail, 4 of 5 parts - no section can be drawn  -  OWNER, measured with a caliper. F-128</text>
+<text x="150" y="979.1999999999999" class="s">EMPTY  The five sense-circuit burdens' carrier  -  MAIN-PANEL. No part yet, so nothing to measure</text>
+</svg>

@@ -600,28 +600,134 @@ by tidiness.
 
 ---
 
-## SHEET 3.8. THE WALL POSITION. EMPTY.
+## SHEET 3.8. THE WALL POSITION
 
-**This sheet states where the enclosure sits on the wall: the mounting-hole
-coordinates a person drills, the outline extent that collides, and the approach
-direction of every run.**
+**FILLED 2026-09-23, D-237, FROM OWNER-PROPOSED COORDINATES. M-02 IS CLOSED AS A
+BLOCKER AND NOT AS A MEASUREMENT.**
 
-**IT IS EMPTY AND IT IS BLOCKED ON M-02.**
+> **EVERY COORDINATE ON THIS SHEET IS PROPOSED. ORIGIN ELIJAH, 2026-09-23, DERIVED AND
+> NOT MEASURED. Good to roughly plus or minus 50 mm, adjusted with a tape when the boxes
+> go up.** A later correction SUPERSEDES rather than contradicts, which is why the origin
+> and the tolerance are printed with the numbers rather than in a note somewhere else.
+
+### 3.8.1 The datum
+
+**Bottom-left corner of the wall as the operator faces it. X runs right along the floor.
+Y runs up. Millimetres. The wall is 2438 x 2438, 8 by 8 ft.**
+
+**THE 100 GALLON CONE-BOTTOM STORAGE TANK IS NOT ON THIS WALL.** It sits on the other
+side of a door. Everything else in the build is on the 8 by 8.
+
+### 3.8.2 The positions
+
+| Item | X | Y | Outline | Note |
+|---|---|---|---|---|
+| **Main panel** | **1880 to 2388** | **1620 to 2039** | 508 x 419 | **CONTRADICTED. SEE 3.8.4 BEFORE USING THIS ROW.** Hinged LEFT, latch right, E-stop at the latch end |
+| **Display box** | 1500 to 1800 | 1680 to 1980 | 300 x 300 | Centre at 1830, the 6 ft sightline |
+| **Pump box A** | 100 to 506 | 1500 to 1703 | 406 x 203 | |
+| **Pump box B** | 600 to 1006 | 1500 to 1703 | 406 x 203 | |
+| **Injection manifold run** | 100 to 1300 | **1400** | horizontal | **Ports on TOP** |
+| **Probe section** | 1300 to 1450 | 1400 to 1500 | 45 degree offset | At the right end, **three tees off the UPPER side** |
+| **Tubing raceway** | 100 to 1300 | **1450** | slotted duct with lid | Directly under the pump boxes |
+| **Jug shelf** | 100 to 1400 | **900** | depth 300 | **Eight stations** |
+| **Day tank** | 1500 to 2100 | 0 to 760 | on the floor | Circulation pump and chiller loop pump both inside it |
+| **Floor drain** | **n/a** | **n/a** | | **NOT A WALL FEATURE.** In the floor in front of the day tank |
+
+### 3.8.3 The constraints, graded, so a later move is checkable
+
+| Constraint | Grade | Why |
+|---|---|---|
+| **Manifold above every jug level** | **HARD** | **Anti-siphon.** G-58 |
+| **Day tank not under the jug shelf** | **HARD** | **Leak path.** The 1st Edition's drip-tray constraint satisfied BY POSITION instead of by a tray - **a constraint met by geometry costs no part and cannot be left off** |
+| Pump boxes above the manifold | **FREE** | Either side is safe. The siphon path runs container to manifold and the pump head is not on it |
+| Panel and display at the 1830 sightline | SOFT | Operator reach |
+| Panel and display to the right | SOFT | Preference |
+| Pump boxes left, near the manifold | SOFT | Tube length |
+| Raceway under the pump boxes | SOFT | Tube routing |
+
+**BOTH HARD CONSTRAINTS ARE SATISFIED BY THESE NUMBERS AND THE ARITHMETIC IS PRINTED SO
+IT IS CHECKABLE RATHER THAN ASSERTED:**
 
 | | |
 |---|---|
-| Blocker | **M-02**, OPEN. DOSING's manifold and PUMP-BOXES both claim wall space and the tubing between them sets the spacing. DOSING and PUMP-BOXES jointly, INTERCONNECT arbitrates |
-| Why nothing can be stated | **Every value on this sheet is a coordinate from one datum**, and the datum is on a wall whose occupancy is not settled. A coordinate written against a moving layout is worse than a blank one |
-| What would fill it | **wall-survey.md**, the form already written: one named physical datum with both axes stated, then per item the named feature, its X and Y, and the item's extent from that feature |
-| What it blocks in turn | Every RUN- cut length, which is the wall run plus 3 ft under D-090. **A relationship cannot be cut from** |
+| Jug shelf at **Y 900**, a 5 gal jug about **380** tall | **Full jug tops out near 1280** |
+| Manifold at **Y 1400** | **120 mm of headroom under it.** HARD constraint SATISFIED |
+| Jug shelf spans **X 100 to 1400**. Day tank spans **X 1500 to 2100** | **No overlap. 100 mm apart.** HARD constraint SATISFIED |
 
-**This sheet being empty does not block sheets 3.1 to 3.7.** D-208: an enclosure
-layout sheet has two independent halves and the interior needs no survey at all. **A
-document half of which is blocked is not a blocked document.**
+### 3.8.4 THE MAIN PANEL ROW CONTRADICTS G-51 AND SHEET 3.1, AND THE INTERIOR DOES NOT FIT IN IT
 
-**Also empty and not MAIN-PANEL's: the pump box and display box interior sheets.**
-D3 covers all four enclosures and each box's owner writes its own. Not blocked -
-unwritten, by PUMP-BOXES and DISPLAY-BOX.
+**F-129. The proposed extent is 508 WIDE by 419 TALL. That is LANDSCAPE.**
+
+**Sheet 3.1 states the box as 419 wide by 508 tall, PORTRAIT, per G-51 frozen.** This is
+not a preference and it is not a tolerance question:
+
+| | |
+|---|---|
+| The band stack, sheets 3.2.3 and 3.3 | **396 mm** |
+| Plate height **portrait** | **468 mm.** Fits, with 72 mm of slack for horizontal ducts and edge margins |
+| Plate height **landscape** | **379 mm.** **DOES NOT FIT, BY 17 mm** |
+
+**So the landscape row is not 89 mm out of position. It is a box the interior of this
+document cannot be built in.**
+
+**AND IT IS D-199's ERROR ARRIVING FROM THE OTHER SIDE.** Section 5 already reports
+D-199 working the plate as 468 wide by 379 high and deriving an impossible 407 mm usable
+at a 379 mm width. **The same swap, made independently, five weeks apart, by the other
+party.** T-018's shape on an orientation instead of on a figure: **468 and 379 are both
+real numbers for this plate and only one assignment of them is the box.**
+
+**THE MINIMAL CORRECTION, PROPOSED AND NOT ADOPTED, because it moves the panel further
+than the sheet's own plus or minus 50 mm and that is the owner's to accept:**
+
+| | Proposed | Portrait |
+|---|---|---|
+| X | 1880 to 2388 | **1969 to 2388**, keeping the right edge |
+| Y | 1620 to 2039 | **1576 to 2084**, keeping the centre at 1830 |
+
+**Everything else on the sheet is unaffected: the display box's 80 mm gap grows, nothing
+else is near it, and the sightline is preserved exactly because the centre is what the
+sightline binds.**
+
+### 3.8.5 One soft-constraint collision the numbers show and the sheet cannot resolve
+
+**The 1st Edition's wall notes require 4 in - 102 mm - clear below each head to change
+tubing.** The heads sit on the pump box LIDS, which face the room, D1 10-03.
+
+| | |
+|---|---|
+| Pump box bottom | **Y 1500** |
+| Raceway centreline | **Y 1450** |
+| Clear between them | **50 mm**, and less once the duct's own height is counted |
+
+**A head mounted low on its lid would have 50 mm below it where the imported constraint
+wants 102.** **WHERE THE HEADS SIT ON THE LID IS PUMP-BOXES' AND IS NOT ON FILE**, so
+this is reported rather than resolved. **It is a SOFT constraint against a SOFT
+constraint - raceway position against head clearance - and either can move.**
+
+**Under G-53 the 102 mm is an IMPORT from the previous arrangement and is a T-018
+candidate.** What survives the import is that a tube change needs room under the head.
+**The figure does not survive; the requirement does.**
+
+### 3.8.6 What this sheet does NOT produce, and it is the owner's method rather than a gap
+
+**RUN- CUT LENGTHS DO NOT COME FROM THIS SHEET.** D-237, the owner's method: **wire is
+bought in rolls and cut at the bench when the boxes are hung, wall run plus the 3 ft
+allowance measured on the day.**
+
+> **THE CUT LENGTH IS A BENCH MEASUREMENT. THE SCHEDULE CARRIES THE RULE AND NOT THE
+> LENGTH.**
+
+**So no RUN- cell is waiting on a number from anybody, and the unlock map's "RUN- lengths
+become computable" was solving a problem that does not exist.** A length computed from a
+proposed coordinate good to plus or minus 50 mm would have been worse than the tape.
+
+**MOUNTING HOLE PATTERNS ARE NOT A DRILL SPECIFICATION AND ARE NOT SUPPLIED. F-124
+CLOSES.** The owner's method: **hold the box in position, mark through its own mounting
+holes, drill, fix.** That needs no pattern on file, it is how anybody hangs an enclosure,
+and it is proof against a pattern that disagrees with the part in your hands.
+
+**D1 section 10 is amended to say MARK OFF THE PART rather than set out from a
+dimension.**
 
 ---
 
