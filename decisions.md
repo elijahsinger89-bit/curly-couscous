@@ -93,6 +93,7 @@ changed reports to BOSS and does not act.
 | G-53 | **EVERY FACT, TRAP OR FINDING THAT CROSSES BETWEEN THE TWO BUILDS CARRIES ITS ORIGIN AND ITS DIRECTION, PERMANENTLY** | Frozen 2026-09-23, D-205. **Two builds agreeing is worth nothing when one told the other.** **Without the direction recorded, every imported trap becomes independent corroboration six months later, and the whole value of running two builds evaporates into an ECHO.** It binds on convergence as hard as on import: **a conclusion both builds reached is only independent if neither was told** |
 | G-54 | **A FACT ENTERS AT THE SOURCE, NEVER AT THE VIEW. A VIEW THAT IS AHEAD OF ITS SOURCE IS NO LONGER A VIEW** | Frozen 2026-09-23, D-209. **BOSS sent a settled decision to the document that DISPLAYS conductor facts instead of to the one that HOLDS them.** D4 now states the box division as settled in four places while D5 marks the same rows OPEN. **G-45 made them one source so they could not disagree; feeding the view directly defeats that at the only point where it can be defeated - the hand that types.** **The mechanism is only as good as the discipline about where facts are injected** |
 | G-55 | **A SINGLE-SOURCE ARCHITECTURE PROTECTS AGAINST DRIFT AND NOT AGAINST A WRITER WHO EDITS THE WRONG FILE** | Frozen 2026-09-23, D-213, the owner's general form of G-54. **The architecture was sound and the process went around it.** **Every mechanism in this tree that makes two documents agree has the same exposure: it constrains what the documents do to each other and not what a hand does to a document.** G-45 is the mechanism, G-54 is the discipline, **and this is the statement of why the mechanism alone was never going to be enough** |
+| G-56 | **G-50 CHECKS WITHIN A DOCUMENT. A CYCLE THAT SPANS TWO DOCUMENTS IS INVISIBLE TO BOTH OF THEIR CHECKS, AND EACH WILL PASS** | Frozen 2026-09-23, D-222. **D1's sequence check passed. D8's passed. And C-11 needs the transfer chain live, D1 section 19 is blocked on C-11, and the chain that makes it live runs through section 31 - a loop whose two halves sit in different files.** **Each document's check saw only its own half and each half was internally consistent**, which is the same shape as the duplicated step and the second-source illusion, **arriving on a dependency graph instead of on a claim.** **So a precondition naming a row in ANOTHER document is checked against that document, or it is not checked at all** |
 | G-53b | **A NUMBER CORRECT IN ITS OWN FRAME, IMPORTED WITHOUT ITS FRAME, IS WRONG AND LOOKS RIGHT** | Frozen 2026-09-23, D-213, the owner's naming of G-53's cousin. **407 mm of usable rail was correct on the parallel build's layout and impossible on a plate stood the other way up.** **The five cross-box run lengths are the same shape caught in time: measured, and measured on a different wall.** So an imported figure carries its FRAME - the orientation, the datum, the assumption it was measured under - **or it does not cross at all** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
@@ -4882,4 +4883,61 @@ consistent.** Crossing 7 in the G-53 ledger - **but a CONVERGENCE this time, and
 genuinely one: neither build told the other, and the two were found by different
 methods.** The parallel build found its by reading; this one found its by a schedule
 requiring three where its source enumerated two.
+
+**D-222 D8 AND D9 EXIST. TEN OF ELEVEN DOCUMENTS NOW DO - AND D8's CHECK FOUND A
+CYCLE THAT D1's COULD NOT SEE.** commissioning-checklist.md, 11 stages and 56 steps;
+maintenance-record.md, marked empty by definition throughout.
+
+**THE CYCLE, AND IT IS REAL: C-11 needs the transfer chain live. D1 section 19 is
+blocked on C-11. Section 19's output feeds the sections whose output gates section 31,
+AND SECTION 31 IS WHAT MAKES THE CHAIN LIVE.**
+
+**D1's sequence check passed. D8's passed. Both were right about their own half.**
+D1 section 34.2 breaks a DIFFERENT term of C-11 and **this one survived it.**
+
+**FROZEN AS G-56: a cycle that spans two documents is invisible to both of their
+checks.** Each half was internally consistent - **the same shape as the duplicated
+step and the second-source illusion, arriving on a dependency graph.**
+
+**A SECOND CYCLE, IN BOSS'S OWN FILE: C-08 must run "at least as long as the settling
+interval", which is C-02's OUTPUT, and the ordering note puts C-08 FIRST.** A
+measurement whose duration is defined by the measurement it precedes.
+
+**AND A THIRD ORDERING DEFECT: C-16's "before anything else is connected to the rail"
+is UNMATCHED BY ANY STATE THE BUILD PRODUCES.** D1 lands every conductor before
+anything is energised. **commissioning.md records the tension with C-22 only, so the
+half of it that bites was never written down.**
+
+**ALL THREE ARE IN commissioning.md AND ALL THREE ARE BOSS'S.** Routed to the owner as
+ordering decisions rather than fixed, **because each one changes what happens in what
+order on a real day and none is a wording slip.**
+
+**INTEGRATOR DIFFERED FROM BOSS'S BRIEF ON C-09 AND SAID SO ON THE PAGE, WHICH IS THE
+RIGHT HANDLING.** BOSS said C-09 is first. **C-09's own blocked-on needs the loop
+running, so it is first AMONG THE ROWS THAT TOUCH A CHANNEL, not the first step** -
+and stages 1 to 7 contain no row that touches channel identity. **D-022 is not
+contradicted; it is read more precisely than BOSS read it.**
+
+**20 OF 56 STEPS HAVE NO ACCEPTANCE CRITERION, AND BOSS OWNS 9.** Eighteen are rows
+that OWE one; **two are structurally criterion-free - C-08 and C-02 DEFINE the figures
+everything else is judged against, so there is nothing to judge them by.** Marked n/a
+with reason under G-46 rather than left blank.
+
+**NOT ONE STAGE IS RUNNABLE TODAY. Stage 1 is closest and needs only the parts and the
+plate.**
+
+**D-223 SIX DEFECTS IN commissioning.md, FOUR FIXED AND TWO ROUTED.** Found by writing
+the view, which is the third time a document has found a defect in its own source.
+
+**Fixed, because each is unambiguous and costs nothing:** C-24 said "with a meter and
+a hand" and "No instrument needed" in one row; C-23's applies-to cell named C-12,
+which is VOID; C-23's bold headline stated the withdrawn rule while its body reduced
+it, **which is T-022's shape inside a single cell**; and C-06, C-13 and C-15 treat the
+EN policy as open **when G-21 and D-032 froze it permanently.**
+
+**Routed, not fixed: C-11 bundles two measurements with different preconditions and
+its surge term is what closes the cycle above.** And **nothing schedules recording the
+as-set VREF although C-22 requires it set per driver** - INTEGRATOR deliberately gave
+D9 no row for it, **because adding one would have put the view ahead of its source.**
+G-54 observed unprompted, by an agent, against its own convenience.
 
