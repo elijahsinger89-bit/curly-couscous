@@ -4396,7 +4396,9 @@ than tolerating it**, which is G-48's test and the owner's own stated requiremen
 
 **CONSEQUENCE FOR THE TREE: the second 22.32 was KM-CHIL in D-157 and in the ladder.
 It is no longer that part.** Rail demand rises accordingly and is already in D-199's
-figure. **What becomes of the freed 22.32 is not decided here.**
+figure.
+
+**AND BOSS STATED THIS BADLY. "The freed 22.32 now has no job" was wrong about WHICH ONE is freed.** **KM-DRV, the DRIVER PERMISSIVE CONTACTOR, is a 22.32 and is unaffected. It is the KM-CHIL unit that is freed - one 22.32, not the pair, and the permissive one keeps its job.**
 
 **KM-CHIL STAYS BLOCKED on the open rung that decides its coil's bus**, which decides
 whether the Pi can stop the water system.
@@ -4414,4 +4416,50 @@ plain DIN fuse holder before anyone asked for one. **This build identified why i
 needs one: nothing can power-cycle the Pi, so a blown fuse presents as a DEAD PI WITH
 NO CAUSE.** Recorded as a real difference between the builds rather than as a
 preference - **it is the first thing this build has that the shipped one does not.**
+
+**D-203 THIS BUILD HAS THE SAME PERMISSIVE ELEMENT AND IT IS KM-DRV. THE 22.32 SPLIT
+IS IDENTICAL TO THE PARALLEL BUILD'S.** Reported rather than decided, as asked, and
+checked against the tree rather than from memory.
+
+**The parallel build's K-101 gates VM on all eight stepper drivers: the Pi commands
+one coil, the coil pulls in the contactor, and the contactor puts motor power on the
+drivers.**
+
+**THIS BUILD HAS EXACTLY THAT, in two frozen rows:**
+
+**S-09** - DISPLAY-BOX, ONE logic board output on BCM 18, a ULN2003 SINKING the coil
+return with a suppressor across the coil, to **MAIN-PANEL: the driver permissive
+contactor coil, AND NOTHING ELSE.** D-052 emptied that row of the four coils it
+originally named, and G-26 is why: **the Pi drives one coil.**
+
+**P-06** - MAIN-PANEL permissive contactor load side to PUMP-BOXES stepper driver VM
+distribution. **"This is the conductor the permissive removes."**
+
+**So the split is the same: one 22.32 with a 24 V coil for the permissive, one with a
+120 V coil for the chiller.** KM-DRV is K-101's equivalent under a different name.
+
+**THEREFORE: THE PERMISSIVE 22.32 IS CORRECT AND UNAFFECTED. THE FREED UNIT IS THE
+KM-CHIL ONE - ONE SPARE, NOT A PAIR.** D-201's correction is recorded above.
+
+**One difference worth noting because it is a difference and not a discrepancy: this
+build's permissive removes MOTOR SUPPLY ONLY.** D-031 keeps VDD live through a
+permissive drop, so the drivers' logic stays powered while VM goes. **That is a
+property of P-09 and it is not a departure from K-101's job.**
+
+**D-204 THE FUSE INDICATOR FINDING IS ROUTED TO THE PARALLEL BUILD AND RECORDED AS
+ORIGINATING HERE.**
+
+**The parallel build's Pi feed is fused with a plain DIN holder and NO INDICATOR. A
+blown fuse there presents as A DEAD PI WITH NO CAUSE, and nothing in that panel can
+power-cycle the Pi to distinguish a fuse from a software hang or a dead supply.**
+
+**Why it matters rather than merely existing: the three causes are indistinguishable
+at the moment a person is looking at a dark screen, and they have three different
+responses.** An indicator across the fuse collapses that to one glance.
+
+**This is the FIRST FINDING TO TRAVEL FROM THIS BUILD TO THE PARALLEL ONE.** Three
+traps have come the other way. **Recorded as originating here, at the owner's
+instruction, because a finding whose direction of travel is unrecorded becomes
+convergent evidence later** - and two builds agreeing is worth nothing when one told
+the other.
 
