@@ -3,6 +3,36 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-031 A headline right about direction and wrong about magnitude is still wrong
+
+Logged 2026-09-23 at the owner's instruction, after the fourth or fifth time a
+headline in this project was corrected by its own author **before anyone acted on
+it.**
+
+**BOSS said the terminal survey unblocked every wiring instruction in the build. It
+unblocks 61 of 127.** The direction was right - it is still the largest single
+unblock available - **and the magnitude was wrong by half.**
+
+**The owner was deciding how to spend an evening on the strength of it.**
+
+**WHY THE DIRECTION BEING RIGHT MAKES IT WORSE RATHER THAN BETTER.** A headline that
+is wrong about direction gets argued with. **A headline that is right about direction
+invites no scrutiny at all, so its magnitude is never tested** - and magnitude is what
+a person budgets against. **"This unblocks everything" and "this unblocks half" lead
+to two different evenings.**
+
+**AND THE CORRECTION ARRIVING BEFORE THE ACTION IS THE WHOLE VALUE.** The same
+correction a day later is a post-mortem. **There is no credit for finding it
+eventually.**
+
+**The recognition test: when you report that something unblocks, clears or completes
+a body of work, SAY HOW MUCH OF IT, and count rather than characterise.** "Most",
+"nearly all" and "every" are the words to distrust in your own output - **they are
+what a number becomes when nobody counted.**
+
+**Related and distinct from T-029.** T-029 is about a finding not worth pursuing.
+This is about a finding worth pursuing, reported at the wrong size.
+
 ## T-030 A part considered during shopping enters the record as a part owned
 
 Hit 2026-09-23, by the owner, and caught by MAIN-PANEL drawing against both entries.

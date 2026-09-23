@@ -4847,3 +4847,39 @@ work with.**
 because terminal-survey.md is BOSS's file.** Correct call. **The sheet claimed to
 unblock a document it had never been checked against.**
 
+**D-220 THE PAGE-INDEPENDENCE RESULT, RECORDED AS A POSITIVE WITH ITS METHOD.** The
+owner's instruction, and the reason is that **a check returning nothing is usually
+worthless and this one returned a fact.**
+
+**NO PAGE OF D4 DEPENDS ON ANOTHER PAGE'S POSTCONDITION. THE EIGHT ARE INDEPENDENT
+AND MAY BE WORKED IN ANY ORDER.**
+
+**THE METHOD, because the claim is only worth what the method is:** every page was
+given a G-50 precondition and postcondition; **the F-116 sweep moved five hidden
+dependencies out of blocked notes and into preconditions first**, so the check ran
+against the real dependency set rather than the stated one; **then no precondition on
+any page matched a postcondition of another page.**
+
+**D1 had already told a builder the pages could be worked in any order. THAT WAS AN
+ASSERTION. This is a derivation, and the difference is that an assertion cannot
+survive an edit nobody re-checks.**
+
+**A rule frozen to catch cycles has certified their absence** - and certifying an
+absence is the harder direction, **because a cycle announces itself and an
+independence has to be proved over every pair.**
+
+**D-221 TWO SMALL INSTANCES WORTH THE LINE THEY COST.**
+
+**INTERCONNECT REPORTED THE MISSING SOLENOID RATHER THAN ADDING IT, AND THAT IS G-54
+AT ITS SMALLEST: the agent that found the defect was not the owner of the file, and
+fixing it would have been editing the wrong file from the wrong hand.** The rule was
+frozen against a fact entering a generated view; it applies unchanged to a fact
+entering someone else's source.
+
+**AND CDR-065 IS THE PARALLEL BUILD'S FLOATING OPTO OUTPUT EXACTLY: a conductor the
+model never had, where every check passed because everything PRESENT was
+consistent.** Crossing 7 in the G-53 ledger - **but a CONVERGENCE this time, and
+genuinely one: neither build told the other, and the two were found by different
+methods.** The parallel build found its by reading; this one found its by a schedule
+requiring three where its source enumerated two.
+
