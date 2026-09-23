@@ -1,8 +1,9 @@
 # D5. Wiring schedule
 
 **Every conductor in the build, one row each, keyed CDR-. Issued 2026-09-05, revised
-the same day** against D-171, one conductor spans the gland, and D-172, the both-end
-label is a column.
+2026-09-23** against the builder read of D4, D5 and D6, which found three settled
+facts entered at the view instead of at this document and one conductor missing
+entirely. **Section 6 says what that was.**
 
 **Owner.** BOSS holds the list; each conductor's row is filled by the subsystem that
 owns the crossing it realises. **This issue is INTERCONNECT's and covers the
@@ -10,7 +11,7 @@ conductors inside the jackets of D6.** Section 7 states what it does not cover a
 who owns it.
 
 **Who reads this and when.** The person with strippers in hand, before and during
-wiring. **D4 is a generated VIEW of this list, one page per conductor - never a
+wiring. **D4 is a generated VIEW of this list, ONE PAGE PER ENCLOSURE - never a
 transcription**, so no rule is written here saying the two must agree. G-45: they are
 one source.
 
@@ -143,16 +144,20 @@ the ground bar at D-165, a bar being always in the 120 V chain even in a box tha
 holds only 24 V because the ground is common. **So every grounding conductor below,
 and every 24 V conductor landing on a bar, takes that rating whatever it carries.**
 
-**3. A supplied assembly has no conductors in this list.** RUN-009's USB-C cable,
-RUN-014's and RUN-016's supplied leads and the three cord routes are manufactured
-assemblies whose conductors nothing lands. **Section 5 names them so their absence
-reads as a property rather than as an omission.**
+**3. A conductor exists here when something LANDS it, not when its cable is bought.**
+RUN-009's USB-C cable, RUN-014's and RUN-016's supplied leads and the three cord routes
+end in mated connectors or caps, so nothing lands their conductors and they have no
+rows. **"Supplied" is not the test and never was: RUN-012 and RUN-013 are supplied
+float cords and sixteen of their conductors land on coil chains in the panel.**
+Corrected 2026-09-23; the earlier wording said supplied assemblies have no conductors
+and this document's own float rows contradicted it. **Section 5 names the six so their
+absence reads as a property rather than as an omission.**
 
 ---
 
 ## 2. THE SCHEDULE
 
-**Sixty-four conductors. CDR-001 through CDR-064.**
+**Sixty-five conductors. CDR-001 through CDR-065.**
 
 Column 4 and column 6 are OPEN on every row for one reason and it is F-106: **nobody
 in this project has ever been asked to look at a terminal and report what is printed
@@ -196,30 +201,49 @@ live at that landing and is D6's check, not this document's.**
 | **CDR-012** | DISPLAY-BOX.`{5 V return}` | PUMP-BOX-B.`{driver GND}` | Logic supply return and level reference | **OPEN** | P-09 | As CDR-009 | BLOCKED: CBL-02, CBL-03 | CDR-012  [ ] |
 | **CDR-013** | PUMP-BOX-B.`{local ground bar}` | DISPLAY-BOX.`{local ground bar}` | Equipment grounding | **n/a** | CBL-07 | As CDR-004 | BLOCKED: CBL-02, CBL-03 | CDR-013  [ ] |
 
-### The per-channel conductors. Cable: **OPEN on all sixteen** | Voltage: **SIGNAL** | Duty: **n/a, no pole**
+### The per-channel conductors. Voltage: **SIGNAL** | Duty: **n/a, no pole**
 
 **These sixteen exist because the eight channels exist, S-19 and D-021, and the pin
-list exists.** **Their JACKET does not**, because PUMP-BOXES has not returned which
-tokens sit in which box - so column 2 is OPEN on every one and is the only place in
-this document where it is.
+list exists.**
+
+**THE BOX DIVISION IS SETTLED AND IT ENTERS HERE. D-178: CH1 to CH4 in pump box A,
+CH5 to CH8 in pump box B. Straight split, in order, nothing interleaved.** So column 2
+is filled: CH1 to CH4 travel in RUN-003 and CH5 to CH8 travel in RUN-004, and the
+group is split into two tables below because the cable differs between them.
+
+**CORRECTED 2026-09-23 under G-54.** D-178 was sent to D4's generator instead of to
+this document, so for eighteen days D4 stated the division on two page titles and
+sixteen steps while these rows read OPEN. **A view ahead of its source is not a view.**
+F-119. **The fact is entered here and D4 is regenerated from it.**
 
 **The token is the conductor's identity at both ends and there is no per-cable
-restart when they split across RUN-003 and RUN-004.** channel-token.md, and its
-forbidden list bars a renumbering to match a connector's pin order or a core's
-position in a bundle. **The token appears IN ADDITION to the CDR- id and the two are
-never merged.**
+restart across RUN-003 and RUN-004.** channel-token.md, and its forbidden list bars a
+renumbering to match a connector's pin order or a core's position in a bundle. **The
+token appears IN ADDITION to the CDR- id and the two are never merged.**
+
+**One thing the division carries with it, recorded because it is free to honour and
+expensive later:** if the pH roles are ever assigned to CH5 and CH6 they land in one
+sealed box, so an acid and a base would share one enclosure and one lid. **The place
+to prevent that is the role assignment at C-09, not this split.**
+
+#### CH1 to CH4. Cable: **RUN-003**, to pump box A
 
 | CDR | From | To | Function | Current, and which event | Row | Severed conductor | Status | Marked both ends |
 |---|---|---|---|---|---|---|---|---|
-| **CDR-014** | DISPLAY-BOX.`{logic board, CH1 STEP}` | `{the driver assigned CH1}` . `{STEP}` | Step pulses, **CH1** | **OPEN** - DISPLAY-BOX owes the drive form and PUMP-BOXES the input threshold | S-10 | **Not "no steps": an undriven CMOS input on a driver enabled by default, in a box where four choppers drive eight motor phase conductors. Coupled noise can clock it and the books never record it.** F-018, F-060 | BLOCKED: S-10, and the box division | CDR-014 + CH1  [ ] |
-| **CDR-015** | DISPLAY-BOX.`{logic board, CH1 DIR}` | `{the driver assigned CH1}` . `{DIR}` | Direction, **CH1** | **OPEN** | S-10 | **THE WORST OUTCOME IN THE FAIL-SAFE SWEEP. Direction undefined on a driver enabled by default: a head runs backwards, drawing from the manifold toward the jug, while the books decrement as though it dosed forward.** D-096: severed goes HIGH by the board. The fix is a pull-down AT THE DRIVER END, PUMP-BOXES', D-043 | BLOCKED: S-10, D-043, and the box division | CDR-015 + CH1  [ ] |
-| **CDR-016 / CDR-017** | as above, **CH2** STEP / DIR | " | " | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED | CDR-016 / CDR-017 + CH2  [ ] |
-| **CDR-018 / CDR-019** | **CH3** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-018 / CDR-019 + CH3  [ ] |
-| **CDR-020 / CDR-021** | **CH4** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-020 / CDR-021 + CH4  [ ] |
-| **CDR-022 / CDR-023** | **CH5** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-022 / CDR-023 + CH5  [ ] |
-| **CDR-024 / CDR-025** | **CH6** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-024 / CDR-025 + CH6  [ ] |
-| **CDR-026 / CDR-027** | **CH7** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-026 / CDR-027 + CH7  [ ] |
-| **CDR-028 / CDR-029** | **CH8** STEP / DIR | " | " | **OPEN** | S-10 | " | BLOCKED | CDR-028 / CDR-029 + CH8  [ ] |
+| **CDR-014** | DISPLAY-BOX.`{logic board, CH1 STEP}` | PUMP-BOX-A, `{the driver assigned CH1}` . `{STEP}` | Step pulses, **CH1** | **OPEN** - DISPLAY-BOX owes the drive form and PUMP-BOXES the input threshold | S-10 | **Not "no steps": an undriven CMOS input on a driver enabled by default, in a box where four choppers drive eight motor phase conductors. Coupled noise can clock it and the books never record it.** F-018, F-060 | BLOCKED: S-10 | CDR-014 + CH1  [ ] |
+| **CDR-015** | DISPLAY-BOX.`{logic board, CH1 DIR}` | PUMP-BOX-A, `{the driver assigned CH1}` . `{DIR}` | Direction, **CH1** | **OPEN** | S-10 | **THE WORST OUTCOME IN THE FAIL-SAFE SWEEP. Direction undefined on a driver enabled by default: a head runs backwards, drawing from the manifold toward the jug, while the books decrement as though it dosed forward.** D-096: severed goes HIGH by the board. The fix is a pull-down AT THE DRIVER END, PUMP-BOXES', D-043 | BLOCKED: S-10, D-043 | CDR-015 + CH1  [ ] |
+| **CDR-016 / CDR-017** | DISPLAY-BOX.`{logic board, CH2 STEP / DIR}` | PUMP-BOX-A, `{the driver assigned CH2}` | Step and direction, **CH2** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-016 / CDR-017 + CH2  [ ] |
+| **CDR-018 / CDR-019** | DISPLAY-BOX.`{logic board, CH3 STEP / DIR}` | PUMP-BOX-A, `{the driver assigned CH3}` | Step and direction, **CH3** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-018 / CDR-019 + CH3  [ ] |
+| **CDR-020 / CDR-021** | DISPLAY-BOX.`{logic board, CH4 STEP / DIR}` | PUMP-BOX-A, `{the driver assigned CH4}` | Step and direction, **CH4** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-020 / CDR-021 + CH4  [ ] |
+
+#### CH5 to CH8. Cable: **RUN-004**, to pump box B
+
+| CDR | From | To | Function | Current, and which event | Row | Severed conductor | Status | Marked both ends |
+|---|---|---|---|---|---|---|---|---|
+| **CDR-022 / CDR-023** | DISPLAY-BOX.`{logic board, CH5 STEP / DIR}` | PUMP-BOX-B, `{the driver assigned CH5}` | Step and direction, **CH5** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-022 / CDR-023 + CH5  [ ] |
+| **CDR-024 / CDR-025** | DISPLAY-BOX.`{logic board, CH6 STEP / DIR}` | PUMP-BOX-B, `{the driver assigned CH6}` | Step and direction, **CH6** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-024 / CDR-025 + CH6  [ ] |
+| **CDR-026 / CDR-027** | DISPLAY-BOX.`{logic board, CH7 STEP / DIR}` | PUMP-BOX-B, `{the driver assigned CH7}` | Step and direction, **CH7** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-026 / CDR-027 + CH7  [ ] |
+| **CDR-028 / CDR-029** | DISPLAY-BOX.`{logic board, CH8 STEP / DIR}` | PUMP-BOX-B, `{the driver assigned CH8}` | Step and direction, **CH8** | **OPEN** | S-10 | As CDR-014 / CDR-015 | BLOCKED: S-10 | CDR-028 / CDR-029 + CH8  [ ] |
 
 **SIXTEEN MORE CONDUCTORS ARE REQUIRED AND ARE NOT ENUMERATED HERE, DELIBERATELY.**
 F-030 requires every STEP and DIR to be paired with its own return, so that the
@@ -322,12 +346,21 @@ never the wiring.**
 **No grounding conductor: there is no local bar at a float and nothing conductive to
 bond.** The standpipe is PVC, confirmed 2026-09-05.
 
+**THE HIGH-HIGH LANDING ENTERED HERE 2026-09-23, UNDER G-54, AND IT IS THE SECOND
+INSTANCE OF F-119's SHAPE.** D-154 put LS-2 and LS-8 in the 24 V permissive string and
+D2's own closed table records ?13 and ?14 closed on it; D-179 confirmed it and added
+the latch. **Those decisions reached D4 and never reached these rows**, so D4 asserted
+a destination this document held OPEN. **The destination is filled here and D4 renders
+it.** **Why the latch is the point rather than the cost: a high-high trip means a
+fill-stop float has already failed, and a trip that cleared itself when the level
+dropped would let the machine cycle forever with nobody learning that.**
+
 | CDR | From | To | Function | Current, and which event | Row | Severed conductor | Status | Marked both ends |
 |---|---|---|---|---|---|---|---|---|
 | **CDR-047 / CDR-048** | LS-1 `{day tank fill start}` , both switch terminals | MAIN-PANEL.K-FILL-D `{coil chain}` , rung 20 | Series element, day tank fill start | **OPEN** - MAIN-PANEL owes the coil burden, and **F-112: the break is DC and inductive, not AC**, which is a different contact problem at the same power | S-02 | Coil de-energises, the day tank fill stops | BLOCKED: S-02, CBL-01, CBL-04, D-118 | CDR-047 / CDR-048  [ ] |
 | **CDR-049 / CDR-050** | LS-5 `{day tank fill stop}` , both terminals | MAIN-PANEL.K-FILL-D `{coil chain}` , rung 20 | Series element, day tank fill stop | **OPEN** | S-02 | Coil de-energises, the fill stops. **Under D-130 this is the float that is the only thing knowing the tank is full, and the overflow is its second line** | BLOCKED: as above | CDR-049 / CDR-050  [ ] |
 | **CDR-051 / CDR-052** | LS-4 `{day tank low-low}` , both terminals | MAIN-PANEL.K-DRY `{coil chain}` , rung 22 | Series element, **the S-05 dry-run element under G-11 and D-119** | **OPEN** | S-02 | K-DRY de-energises and the manifold pump stops. **G-39's question answered for this relay by D2 rung 22** | BLOCKED: as above | CDR-051 / CDR-052  [ ] |
-| **CDR-053 / CDR-054** | LS-2 `{day tank high-high}` , both terminals | **OPEN** | Series element, overfill backstop | **OPEN** | S-02 | The chain it sits in de-energises | BLOCKED: **whether the high-high floats sit in the permissive string, and their landing, is open** - D2's ?13 and ?14, MAIN-PANEL and WATER jointly | CDR-053 / CDR-054  [ ] |
+| **CDR-053 / CDR-054** | LS-2 `{day tank high-high}` , both terminals | MAIN-PANEL.`{the permissive string}` | Series element, overfill backstop. **It stops the whole plant and latches until a person resets it** | **OPEN** | S-02 | The permissive string opens and everything downstream of it drops | BLOCKED: S-02, CBL-01, CBL-04, D-118 | CDR-053 / CDR-054  [ ] |
 
 ### RUN-013, the storage floats. Cable: RUN-013 | Voltage and duty **as RUN-012**
 
@@ -336,14 +369,24 @@ bond.** The standpipe is PVC, confirmed 2026-09-05.
 | **CDR-055 / CDR-056** | LS-6 `{storage fill start}` , both terminals | MAIN-PANEL.K-FILL-S `{coil chain}` , rung 19 | Series element, storage fill start | **OPEN** | S-01 | Coil de-energises, the storage fill stops | BLOCKED: S-01, CBL-01, CBL-04, D-118 | CDR-055 / CDR-056  [ ] |
 | **CDR-057 / CDR-058** | LS-7 `{storage fill stop}` , both terminals | MAIN-PANEL.K-FILL-S `{coil chain}` , rung 19 | Series element, storage fill stop | **OPEN** | S-01 | As CDR-049 | BLOCKED: as above | CDR-057 / CDR-058  [ ] |
 | **CDR-059 / CDR-060** | LS-3 `{storage low, pump-down}` , both terminals | MAIN-PANEL.K-FILL-D `{coil chain}` , rung 20 | **Series element in the DAY TANK fill chain, not the permissive string.** MAIN-PANEL's ruling closing ?15: a dry storage tank then stops the transfer only, rather than dropping the drivers and both fills | **OPEN** | S-01 | The day tank fill stops. **The transfer pump is protected from running dry** | BLOCKED: as above | CDR-059 / CDR-060  [ ] |
-| **CDR-061 / CDR-062** | LS-8 `{storage high-high}` , both terminals | **OPEN** | Series element, overfill backstop | **OPEN** | S-01 | The chain it sits in de-energises | BLOCKED: **?13 and ?14, as CDR-053** | CDR-061 / CDR-062  [ ] |
+| **CDR-061 / CDR-062** | LS-8 `{storage high-high}` , both terminals | MAIN-PANEL.`{the permissive string}` | Series element, overfill backstop. **As CDR-053: it stops the whole plant and latches** | **OPEN** | S-01 | As CDR-053 | BLOCKED: S-01, CBL-01, CBL-04, D-118 | CDR-061 / CDR-062  [ ] |
 
 ### RUN-015, the leak console. Cable: RUN-015 | Voltage: **LINE-rated on every conductor**, CBL-06 | Duty: **COIL or ARC, contested**
 
 | CDR | From | To | Function | Current, and which event | Row | Severed conductor | Status | Marked both ends |
 |---|---|---|---|---|---|---|---|---|
-| **CDR-063** | MAIN-PANEL.`{24 V rail, +V}` | WB200 `{supply}` | Console supply, positive. **Insulated for 600 V although it carries 24 V, because its jacket holds contact legs in the 120 V chain** | **OPEN** - the console's draw is not stated in any file I read | CBL-06 | **OPEN, and it is section 6's finding: what this console's Form C contact does when its own supply fails is on file nowhere, and its legs are in the permissive chain** | BLOCKED: CBL-06, CBL-01, the console's position, and its de-energised contact state | CDR-063  [ ] |
-| **CDR-064** | WB200 `{supply return}` | MAIN-PANEL.`{24 V rail, -V}` | Console supply, return | **OPEN** | CBL-06 | **OPEN**, as CDR-063 | BLOCKED: as CDR-063 | CDR-064  [ ] |
+| **CDR-063** | MAIN-PANEL.`{24 V rail, +V}` | WB200 `{supply}` | Console supply, positive. **Insulated for 600 V although it carries 24 V, because its jacket holds contact legs in the 120 V chain** | **OPEN** - the console's draw is not stated in any file I read | CBL-06 | **The console is unpowered, its C-NC output OPENS, and the permissive drops.** F-115, closed by the owner. **Identical to what it does for a leak, so a dead leak detector cannot read as no leak** | BLOCKED: CBL-06, CBL-01, the console's position | CDR-063  [ ] |
+| **CDR-064** | WB200 `{supply return}` | MAIN-PANEL.`{24 V rail, -V}` | Console supply, return | **OPEN** | CBL-06 | As CDR-063 | BLOCKED: as CDR-063 | CDR-064  [ ] |
+
+| **CDR-065** | WB200 `{grounding point}` | MAIN-PANEL.`{ground bar}` | Equipment grounding for the console | **n/a**, as CDR-004 | CBL-07 | As CDR-004 | BLOCKED: CBL-06, CBL-01, the console's position, and the bar is not bought | CDR-065  [ ] |
+
+**CDR-065 WAS MISSING AND IS ADDED 2026-09-23.** D6 section 2.4 lists RUN-015 among the
+jackets that carry a grounding conductor - "RUN-010, RUN-011, RUN-015, the LINE field
+jackets" - and this group enumerated two conductors where it should have had three.
+**RUN-010 has CDR-044 and RUN-011 has CDR-046; RUN-015 had nothing.** It is a dropped
+conductor rather than a dropped step: D4 could not render a page for it because no row
+existed to render. **Found by a builder read of three documents against each other, and
+not by any check inside one of them.**
 
 **The console's CONTACT LEGS are not enumerated and their absence is stated:**
 **MAIN-PANEL states the legs**, per CBL-06's own owner column, and a Form C has three
@@ -354,21 +397,24 @@ and it is not INTERCONNECT's to decide.**
 
 ## 3. WHAT IS FILLED, HONESTLY
 
-**Sixty-four conductors, fourteen columns, 896 cells: 656 FILLED, 42 with NO VALID
-VALUE, 198 still EMPTY.**
+**Sixty-five conductors, fourteen columns, 910 cells: 688 FILLED, 44 with NO VALID
+VALUE, 178 still EMPTY.**
 
-**D-172's label column added 64 cells and filled all 64**, because what a conductor is
-marked with is knowable the moment it has an id. **D-171 changed no cell and no row**:
-the enumeration was already landing-to-landing.
+**What the 2026-09-23 corrections moved.** CDR-065 added one row of fourteen cells.
+Entering the box division filled sixteen Cable cells, entering the high-high landing
+filled four To cells, and F-115's closure filled two fail cells. **Twenty-two cells
+moved from empty to filled and not one of them was a new answer - every one was an
+answer that existed and had been entered at the view instead of at the source.**
 
-**The empty cells are not spread evenly and three columns hold nearly all of them:**
+**EVERY REMAINING EMPTY CELL IS NOW IN EXACTLY TWO COLUMNS.** There is no longer a
+miscellaneous bucket:
 
 | Column | Empty | Why, in one line |
 |---|---|---|
-| **4 and 6, the terminals** | **128** - two on every row | **F-106. Nobody has been asked to look at a part.** It is one request, not sixty-four. **Column 13 carries the build in the meantime**: a conductor labelled at both ends is identifiable without its terminal marking |
-| **9, design current and its event** | **48** | Each belongs to the subsystem owning the load. **Six are filled and every one of them came from parts.md having recorded a real figure with its event** |
-| **2, the cable** | **16** | Only the per-channel conductors, waiting on PUMP-BOXES' box division |
-| Everything else | **6** | LS-2's and LS-8's landings, ?13 and ?14; and RUN-015's two fail cells, section 6 |
+| **4 and 6, the terminals** | **130** - two on every row | **F-106**, and it is no longer a request with no home: **D1 section 4 closes it and terminal-survey.md is the form.** One evening with the parts and something to write with. **Column 13 carries the build in the meantime**: a conductor labelled at both ends is identifiable without its terminal marking |
+| **9, design current and its event** | **48** | Each belongs to the subsystem owning the load. **Six are filled and every one came from parts.md having recorded a real figure with its event**, and eleven are n/a because a grounding conductor has no design current |
+
+**That is the whole list. 130 plus 48 is 178.**
 
 **Not one conductor is buildable**, and the reason is D6's and unchanged: CBL-01
 through CBL-04 are OPEN, and every jacket lands at a gland or bulkhead they govern.
@@ -385,16 +431,21 @@ was amended.
 **What the column shows when you read it down rather than across, and it is worth the
 pass:**
 
-- **Sixty of sixty-four fail SAFE on a severed conductor**, and almost none of them
-  fails safe by luck. The float chains fail safe because D-154 forced it from topology;
-  the solenoid because D-114 chose the fail state before the part; the sense loops
-  because D-042 inverted a contact and G-22 chose the severed case on frequency.
-- **Two fail UNSAFE and both are known: CDR-015's family.** A severed DIR leaves
-  direction undefined on a driver enabled by default, and a severed STEP is an
-  undriven CMOS input that noise can clock. **Their remedy is a pull-down at the
-  DRIVER end, PUMP-BOXES' under D-043, because a pull at the display end does nothing
-  once the conductor is cut.**
-- **Two are OPEN, CDR-063 and CDR-064**, section 6.
+- **Not one fail cell is OPEN any more.** CDR-063 and CDR-064 were the last two and
+  F-115 closed them: the console's output is C-NC, so losing its supply opens the
+  contact exactly as a leak does. **A dead leak detector cannot read as no leak.**
+- **Most fail SAFE, and almost none by luck.** The float chains because D-154 forced it
+  from topology; the solenoid because D-114 chose the fail state before the part; the
+  sense loops because D-042 inverted a contact and G-22 chose the severed case on
+  frequency.
+- **The sixteen per-channel conductors fail UNSAFE and it is the known one.** A severed
+  DIR leaves direction undefined on a driver enabled by default; a severed STEP is an
+  undriven input that noise can clock. **Their remedy is a pull-down at the DRIVER end,
+  PUMP-BOXES' under D-043 and NOT YET FITTED, because a pull at the display end does
+  nothing once the conductor is cut.**
+- **The eleven grounding conductors fail SILENTLY, which is neither.** A severed one
+  leaves a local bar unbonded and nothing reports it. **That is the argument for the
+  single point rather than against it.**
 - **And the severed case is only half of G-22.** The SHORT case is answered by
   adjacency - the wiring plan - and that is D6's segregation groups and entry order,
   not this document. **On the standpipe there is no wiring plan left to answer with,
@@ -404,8 +455,10 @@ pass:**
 
 ## 5. WHAT HAS NO CONDUCTORS HERE, AND WHY THAT IS A PROPERTY
 
-**Six of D6's nineteen jackets contribute no CDR- row, and every one is a manufactured
-assembly whose conductors nothing lands.**
+**Six of D6's nineteen jackets contribute no CDR- row, and every one ends in a mated
+connector or a cap that lands nothing.** D6 section 2.2 listed four of the six and is
+corrected to six in the same pass; **the two it left out, RUN-014 and RUN-016, are the
+ones that end at a device rather than at a plug, which is why they were easy to miss.**
 
 | Jacket | Why |
 |---|---|
@@ -421,24 +474,27 @@ nothing.
 
 ## 6. WHAT WRITING THIS FOUND
 
-**F-115 shape, and it is the sharper of the two. WHAT THE LEAK CONSOLE'S CONTACT DOES
-WHEN ITS OWN SUPPLY FAILS IS ON FILE NOWHERE, AND ITS LEGS ARE IN THE PERMISSIVE
-CHAIN.**
+**F-115, RAISED HERE AND NOW CLOSED. What the leak console's contact does when its own
+supply fails was on file nowhere, and its legs sit in the permissive chain.** G-39 asks
+what a dead panel does and was frozen for actuators; **nobody had asked it of a powered
+SENSE device**, and the console is the only one in the build. **The owner answered:
+C-NC, open on power loss or leak.** So a dead console and a wet floor do the same
+thing, the unsafe case does not exist, and CDR-063 and CDR-064's fail cells are filled.
+**The question was worth asking and the answer was the good one.**
 
-CDR-063 and CDR-064 are the console's 24 V supply. **Severing either one leaves a
-powered device unpowered while its dry contact still sits in a hardwired safety
-string.** G-39 asks what a DEAD PANEL does, and it was frozen for actuators. **Nobody
-has asked it of a powered sense device**, and the console is the only one in the
-build.
+**AND THE THING THIS PASS FOUND, WHICH IS WORSE THAN ANYTHING IN THE FIRST ISSUE:
+THREE SETTLED FACTS HAD BEEN ENTERED AT D4 AND NOT HERE.** The channel-to-box division,
+D-178. The high-high float landing, D-154 and D-179. The console's fail direction,
+F-115. **In each case a decision existed, D4 rendered it, and these rows still read
+OPEN** - so for eighteen days the view was ahead of its source and a builder holding a
+page had no way to know which of its statements this document could back.
 
-What I read to establish the absence: **CBL-06, D-163, D2's device roster and rung 11,
-parts.md's leak console section, and order.md.** All four describe the 24 V supply and
-the Form C output. **None states the contact's de-energised state.** If it fails to
-the "no leak" state, a dead console is a permission; if it fails to the "leak" state,
-a dead console is a stop. **One is fail-safe and one is not, and which it is decides
-whether this conductor's fail cell can be filled at all.** Routed to MAIN-PANEL, which
-states the legs, and to the owner, whose lookup it is. **I state neither direction and
-inherit none**, per F-017.
+**It is one failure with three instances and it is not a failure of the architecture.**
+G-45 made D4 a generated view precisely so the two could not disagree, **and the
+mechanism was defeated at the only point where it can be: the hand that types.** G-54
+and G-55 are frozen out of it. **The lesson worth keeping is narrower than "be
+careful": when a decision lands, the question is not "which document shows this" but
+"which document HOLDS it", and they are rarely the same one.**
 
 **F-107's shape, a possible second instance, reported and not invented. CDR-031, the
 shared common for the permissive coil drive.** T-007 is explicit: a remote
@@ -498,15 +554,16 @@ rather than remembered.
 
 **Four things would move the most, in order:**
 
-1. **One request nobody has made: look at the parts and write down what is printed on
-   the terminals.** F-106. It is 128 of the 198 empty cells and it is not a decision,
-   a purchase or a design - it is somebody with the parts in hand and a pen.
-2. **PUMP-BOXES' box division**, which fills the only sixteen empty Cable cells.
-3. **The leak console's de-energised contact state**, section 6.
-4. **F-030's per-signal returns**, after which sixteen more conductors are issued and
+1. **Work D1 section 4 and fill terminal-survey.md.** F-106. It is **130 of the 178
+   empty cells**, it is the only blocker on all 125 of D4's joints, and it is not a
+   decision, a purchase or a design - it is one evening with the parts and a pen.
+2. **F-030's per-signal returns**, after which sixteen more conductors are issued and
    RUN-003 and RUN-004 retire under D-149.
+3. **The design current on the loads that owe one**, which is the other 48.
+4. **The open interface rows behind whole groups**: P-01, P-02, P-06, S-07, S-10,
+   S-20, S-01, S-02, CBL-06, and CBL-01 to CBL-04 behind every jacket.
 
 **Not returned, so no absence is read as an answer:** no length, gauge, core count,
 colour or part number, none of which is a column here; **no conductor internal to any
-enclosure**, section 7; and **no fail direction stated for CDR-063 or CDR-064**, which
-is unanswered rather than safe.
+enclosure**, section 7; and **no assembly step of any kind** - nothing here mounts,
+fits or feeds a cable through anything, and D1 is where that lives.

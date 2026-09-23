@@ -10,6 +10,13 @@ and the landing point at each end. Per document-plan.md section 4.1, **D6 must b
 complete for any jacket a conductor travels in, because a conductor cannot be cut,
 routed or landed without both.**
 
+**REVISION 2026-09-23, against the builder read.** Five cells corrected and ten
+landing points added: the channel division and the high-high landing now enter at D5
+and are cited here rather than asserted; RUN-013's End B named a landing D5 held open
+and omitted the one D5 had filled; the no-children list was four and is six; and D5's
+missing RUN-015 grounding conductor is now CDR-065. **Nothing was fixed in D4 directly
+- a conductor fact enters at D5 and D4 is regenerated, G-54.**
+
 **What is NOT here, and where it is instead.** Per document-plan.md section 3.2, one
 fact has one place:
 
@@ -162,8 +169,8 @@ current: the **manifold pump**, D-144; **KM-DRV** the driver permissive contacto
 |---|---|---|---|---|---|---|---|---|---|---|
 | **RUN-001** | MAIN-PANEL: KM-DRV load side | BOTTOM | PUMP-BOX-A: driver motor supply | **BOTTOM, entry 1 of 2, power-block end** | P-06 | 24 V | **ARC** | Cut | SEG-B | P-06; CBL-01; CBL-02. **D-150's own case: 24 V voltage, ARC duty. A DC break with no zero crossing into eight drivers with bulk capacitors** |
 | **RUN-002** | MAIN-PANEL: KM-DRV load side | BOTTOM | PUMP-BOX-B: driver motor supply | **BOTTOM, entry 1 of 2, power-block end** | P-06 | 24 V | **ARC** | Cut | SEG-B | P-06; CBL-01; CBL-02. **Both feeds leave one terminal downstream, parts.md - T-010 applies there, not here.** Same hand as box A: the two boxes are one build, not a mirrored pair |
-| **RUN-003** | DISPLAY-BOX: logic board step and direction outputs | **BOTTOM, entry 2 of 8** | PUMP-BOX-A: driver STEP and DIR terminals | **BOTTOM, entry 2 of 2, logic-header end** | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | S-10; CBL-02; CBL-03. **Expect a split on F-030's per-signal returns. The entry rule is keyed to the board's geometry, not to this id, so it survives** |
-| **RUN-004** | DISPLAY-BOX: logic board step and direction outputs | **BOTTOM, entry 3 of 8** | PUMP-BOX-B: driver STEP and DIR terminals | **BOTTOM, entry 2 of 2, logic-header end** | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | S-10; CBL-02; CBL-03, plus PUMP-BOXES' open division of the eight channels |
+| **RUN-003** | DISPLAY-BOX: logic board step and direction outputs | **BOTTOM, entry 2 of 8** | PUMP-BOX-A: driver STEP and DIR terminals | **BOTTOM, entry 2 of 2, logic-header end** | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | S-10; CBL-02; CBL-03. **Carries CH1 to CH4, D-178.** Expect a split on F-030's per-signal returns; the entry rule is keyed to the board's geometry, not to this id, so it survives |
+| **RUN-004** | DISPLAY-BOX: logic board step and direction outputs | **BOTTOM, entry 3 of 8** | PUMP-BOX-B: driver STEP and DIR terminals | **BOTTOM, entry 2 of 2, logic-header end** | S-10; P-09 | SIGNAL | **n/a, no pole** | Cut | SEG-C | S-10; CBL-02; CBL-03. **Carries CH5 to CH8, D-178.** The division is settled and is now entered in D5, where a conductor's cable belongs; **it had been stated only in D4 for eighteen days, F-119** |
 | **RUN-005** | DISPLAY-BOX: logic board permissive coil drive | **BOTTOM, entry 4 of 8** | MAIN-PANEL: KM-DRV coil | BOTTOM | S-07; **S-09 unmerged** | 24 V | **COIL** | Cut | SEG-B | S-07; CBL-01; CBL-03. **One conductor, two interface rows - S-09's own status says merge into S-07 or close, and D5 admits one row per conductor.** Duty is D-072 tier 2, a slave-coil drive |
 | **RUN-006** | MAIN-PANEL: KM-DRV pole 2 | BOTTOM | DISPLAY-BOX: optocoupler input | **BOTTOM, entry 7 of 8** | S-08 | 24 V | **SENSE** | Cut | SEG-B | CBL-01; CBL-03; DISPLAY-BOX's input side. **Not adjacent to RUN-005 at either end, F-029.** Also open: whether KM-DRV's poles share one contact volume, which would put S-08 against G-30 with nowhere to move |
 | **RUN-007** | MAIN-PANEL: K-FILL-D-Q changeover pole | BOTTOM | DISPLAY-BOX: two isolated Pi inputs | **BOTTOM, entry 5 of 8** | **S-03, both legs** | 24 V | **SENSE** | Cut | SEG-B | CBL-01; CBL-03; DISPLAY-BOX's input side. **Carries a G-27 pair, may not be split, may not leave the F-029 gap it holds** |
@@ -171,8 +178,8 @@ current: the **manifold pump**, D-144; **KM-DRV** the driver permissive contacto
 | **RUN-009** | **The 27 W USB-C brick**, on an unswitched receptacle on the main panel FACE, in neither enclosure | **n/a, a brick is not an enclosure.** The cable plugs into it | DISPLAY-BOX: Pi power | **BOTTOM, entry 8 of 8 - a panel-mount USB-C BULKHEAD, not a grip**, D-162 | P-07, **CLOSED** | **SIGNAL**, 5 V DC. **Not LINE** | **n/a, no pole** | **Supplied, and not cuttable** | SEG-C | **CBL-03 only.** P-07 is closed and every other cell is answered. **See 2.3 and 2.5** |
 | **RUN-010** | Building branch circuit | **n/a, not an enclosure** | MAIN-PANEL: line input | BOTTOM | P-01 | LINE | **n/a, no pole** | Cut | SEG-A | P-01; CBL-01. **May be two jackets: D-137's dedicated chiller circuit is unaccounted for in P-01. If a disconnecting means is chosen it becomes this jacket's pole and the duty cell fills** |
 | **RUN-011** | MAIN-PANEL: K-FILL-S solenoid pole | BOTTOM | FIELD: fill solenoid coil | **n/a, a coil housing has no faces** | **P-02** | LINE | **ARC** | Cut | SEG-A | P-02, whose text is stale per F-098; CBL-01; CBL-04. **D-072 puts the solenoid on the arcing side whatever its coil voltage** |
-| **RUN-012** | FIELD: day tank floats, on the day tank standpipe | **n/a, a float has no faces.** Entry rule is D-126 | MAIN-PANEL: K-FILL-D and K-DRY coil chains | BOTTOM | S-02 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | S-02; CBL-01; CBL-04; **F-100** cord length. **D2: every float conductor is COIL duty, being a series element in a coil chain.** Section 4 |
-| **RUN-013** | FIELD: storage tank floats, on the storage standpipe | **n/a, as RUN-012** | MAIN-PANEL: K-FILL-S and permissive coil chains | BOTTOM | S-01 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | S-01; CBL-01; CBL-04; F-100 |
+| **RUN-012** | FIELD: day tank floats, on the day tank standpipe | **n/a, a float has no faces.** Entry rule is D-126 | MAIN-PANEL: K-FILL-D and K-DRY coil chains, and the permissive string for LS-2 | BOTTOM | S-02 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | S-02; CBL-01; CBL-04; **F-100** cord length. **D2: every float conductor is COIL duty, being a series element in a coil chain.** Section 4 |
+| **RUN-013** | FIELD: storage tank floats, on the storage standpipe | **n/a, as RUN-012** | MAIN-PANEL: K-FILL-S for LS-6 and LS-7, **K-FILL-D for LS-3**, and the permissive string for LS-8 | BOTTOM | S-01 | **24 V**, D-154 | **COIL** | **Supplied** | SEG-B | S-01; CBL-01; CBL-04; F-100 |
 | **RUN-014** | FIELD: leak detection sensor, on the floor | **n/a, a floor sensor has no faces** | The leak console, **remote and in no enclosure**, D-163 | **Its own housing entry, the manufacturer's** - not allocated under D-146 | S-04 | **OPEN** | **n/a, no pole** | Supplied | **OPEN** | S-04; CBL-04. **Voltage and segregation both wait on one lookup: the WaterBug's sensing-circuit class, which is stated in no file I read** - D-163, CBL-06 and parts.md's WaterBug entry all describe the 24 V supply and the Form C output and none describes the sensor lead. Section 5. **F-104 still governs where the sensor may sit** |
 | **RUN-015** | The leak console, remote, 24 V in and Form C out | **Its own cord grip**, D-163 | MAIN-PANEL: permissive string | BOTTOM | **CBL-06** | **LINE-rated**, CBL-06 | **COIL or ARC, contested** | Cut | SEG-A | CBL-06; CBL-01. **The console's POSITION is the owner's and not fixed, so this jacket's route and length terms stay open while everything else about it closes.** The duty contest is unresolved: D-163 restates CBL-06's "legs in the 120 V chain" and does not adjudicate it against order.md's 24 Vdc coil, so under G-37 that is one claim in two places rather than two sources |
 | **RUN-016** | DOSING: probes in the manifold probe section | **n/a, a wet fitting has no faces** | DISPLAY-BOX: the EZO circuits and their carriers | **BOTTOM, entry 1 of 8, alone at one end** | S-11 | SIGNAL | **n/a, no pole** | **Supplied** | SEG-D | S-11; CBL-03. **The EZO length limit is a lookup nobody has run** - section 5 |
@@ -202,10 +209,14 @@ build whose own interface row is CLOSED**, and it is still blocked by CBL-03 alo
 - **RUN-003 and RUN-004** are expected to split on F-030's per-signal returns. **Do
   not order or label against these two ids.** Their entry rule survives the split
   because entry-faces.md keyed it to the driver board's geometry rather than to an id.
-- **RUN-009, RUN-018, RUN-019 and RUN-020 have no CDR- children and no TRM- landing
-  point.** Each is a manufactured assembly - a USB-C cable, three cord caps - whose
-  conductors nothing lands. **D5 will never name these four ids, and that is correct
-  rather than an error to fix.**
+- **SIX jackets have no CDR- children: RUN-009, RUN-014, RUN-016, RUN-018, RUN-019 and
+  RUN-020.** Each ends in a mated connector or a cap that lands nothing - a USB-C
+  cable, two supplied sensor and probe leads, three cord caps. **D5 will never name
+  these six ids, and that is correct rather than an error to fix.**
+  **Corrected 2026-09-23 from four: RUN-014 and RUN-016 were left off because they end
+  at a device rather than at a plug, and D5 had them on its list all along.** **And the
+  test is not "supplied": RUN-012 and RUN-013 are supplied float cords and sixteen of
+  their conductors land on coil chains.**
 - **RUN-017 is retired**, section 2.4.
 
 ### 2.3 THE DISPLAY BOX FACE: THE NAMED FAILURE IS GONE AND THE ALLOWANCE IS RELEASED
@@ -260,7 +271,7 @@ one of this document's three remaining causes and it is gone rather than filled.
 | Jackets | Carry a grounding conductor? |
 |---|---|
 | **RUN-001 to RUN-008**, the cross-box cables | **Yes, one each.** This is what daisies the three local bars home |
-| **RUN-010, RUN-011, RUN-015**, the LINE field jackets | **Yes.** A LINE circuit's equipment ground goes home in its own jacket |
+| **RUN-010, RUN-011, RUN-015**, the LINE field jackets | **Yes.** A LINE circuit's equipment ground goes home in its own jacket. **RUN-015's was missing from D5 until 2026-09-23 and is now CDR-065** - this table was right and the schedule had two conductors where it needed three |
 | **RUN-009, RUN-018, RUN-019, RUN-020** | Whatever the manufactured assembly carries. **Not selectable and not landed by anyone here** |
 | **RUN-012, RUN-013, RUN-014, RUN-016**, supplied field leads | Whatever the supplied part carries |
 
@@ -373,8 +384,35 @@ to look at a terminal and report what is printed on it.**
 | `TRM-PUMP-BOX-B.{driver}.{...}` | OPEN | OPEN | OPEN | RUN-002, RUN-004 | P-06, S-10, P-09 | As PUMP-BOX-A |
 | `TRM-DISPLAY-BOX.{logic board}.{...}` | OPEN. The board is hand built and does not exist | OPEN | OPEN | RUN-003 to RUN-008, RUN-016 | S-07, S-08, S-03, S-20, S-10, S-11 | S-12 is not frozen and the board does not exist. **RUN-009 no longer lands here: it terminates at a bulkhead connector** |
 
-**Fifteen landing points. Six name their device. None is buildable, and every one of
-the six is blocked on the same thing: nobody has looked at the part.** F-106.
+| `TRM-MAIN-PANEL.{line input}.{...}` | **{line input}**, the device is not chosen - no disconnecting means is named anywhere | OPEN | OPEN | RUN-010 | P-01 | P-01; the device does not exist. **terminal-survey.md group 3 surveys the fuse holder** |
+| `TRM-MAIN-PANEL.{neutral}.{...}` | **NDR-240-24** and the 120 V return side | OPEN | OPEN | RUN-010, RUN-011 | P-01, P-02 | Marking not read. **terminal-survey.md group 1** |
+| `TRM-MAIN-PANEL.{24 V rail, +V}.{...}` | **NDR-240-24** | OPEN | OPEN | RUN-013, RUN-015 | P-08, CBL-06 | Marking not read. **terminal-survey.md group 1 surveys its output terminals** |
+| `TRM-MAIN-PANEL.{24 V rail, -V}.{...}` | **NDR-240-24** | OPEN | OPEN | RUN-001, RUN-002, RUN-005, RUN-006, RUN-015 | P-06, S-07, S-08, CBL-06 | Marking not read. **Five conductors land here today - CDR-003, CDR-006, CDR-034, CDR-031 and CDR-064 - and RUN-007's and RUN-008's returns may join them once that arrangement settles.** A rail is many terminals, so it is the one landing where D4's stop rule cannot apply and its steps say so |
+| `TRM-MAIN-PANEL.K-FILL-S.{coil chain}` | **K-FILL-S**, order.md | `{coil chain}` | DESCRIBED | RUN-013 | S-01 | Marking not read. **The socket is what a conductor lands on, not the relay** |
+| `TRM-MAIN-PANEL.K-FILL-D.{coil chain}` | **K-FILL-D**, order.md | `{coil chain}` | DESCRIBED | RUN-012, RUN-013 | S-02, S-01 | As K-FILL-S. **LS-3 lands here from the OTHER tank's jacket** |
+| `TRM-MAIN-PANEL.K-DRY.{coil chain}` | **K-DRY**, order.md - **and the name is unstable, see below** | `{coil chain}` | DESCRIBED | RUN-012 | S-02 | As K-FILL-S |
+| `TRM-MAIN-PANEL.{the permissive string}.{...}` | **A series path across sockets, not one device** | OPEN | OPEN | RUN-012, RUN-013, RUN-015 | S-01, S-02, CBL-06 | **Which physical terminals the two high-high floats and the console's legs land on is MAIN-PANEL's and is not stated.** The landing is settled, D-154 and D-179; the terminals are not |
+| `TRM-DISPLAY-BOX.{5 V rail}.{...}` | **The logic board**, which does not exist | OPEN | OPEN | RUN-003, RUN-004 | P-09 | S-12 is not frozen and the board does not exist |
+| `TRM-DISPLAY-BOX.{5 V return}.{...}` | **The logic board**, which does not exist | OPEN | OPEN | RUN-003, RUN-004 | P-09 | As above |
+
+**Twenty-five landing points. None is buildable, and nearly all are blocked on the same
+thing: nobody has looked at the part.** F-106, and **D1 section 4 is what closes it**,
+with terminal-survey.md as the form.
+
+**TEN OF THESE ROWS WERE ADDED 2026-09-23 AND THE GAP THEY CLOSE IS WORTH NAMING.**
+The builder read found that most of D4's blocked steps name a missing marking for a
+landing point this table did not carry - the two rails, the three coil chains, the
+neutral, the line input, the permissive string and the display box's 5 V pair. **So the
+afternoon with a pen that both schedules nominate as the unblocker had nowhere to write
+half of what it would find.** The rows exist now and each names the terminal-survey.md
+group that surveys it.
+
+**AND ONE NAME IS STILL UNSTABLE AND IS NOT BEING FIXED HERE.** The dry-run relay is
+**K-DRY** in the interface table and in D2's coil chains, and **K-DRY-Q** in order.md
+and on D2's sense rungs. D4 uses both on one page. **If they are one device G-42 is
+broken in the document a builder holds; if they are two, nothing says which is which.**
+**Renaming a device is BOSS's under G-42 and is not done by a subsystem**, so it is
+reported and the rows above carry both names as the tree does.
 
 **ONE PART THAT MUST NOT APPEAR ON ANY OF THESE ROWS, recorded here because a
 terminal schedule is where someone would reach for it: a DIN-rail grounding terminal

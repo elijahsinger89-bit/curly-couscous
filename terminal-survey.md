@@ -69,6 +69,7 @@ finding about the part, not an error to correct at the bench.**
 | **Fuse holder** | 1 | Line and load marking, if any |
 | **Inrush current limiters** | 2 | Polarity or orientation marking, if any |
 | **Winland WaterBug WB200** | 1 | **Supply terminals, Form C terminals, and the sensing-circuit terminals.** Its C-NC output is answered; this is the legend, not the behaviour |
+| **THE FILL SOLENOID - ASCO 8210G095AC120/60** | **1** | **ADDED 2026-09-23. IT WAS MISSING AND ITS ABSENCE WAS SILENT.** Its coil leads or terminals, and anything printed on the coil housing. **Found by INTERCONNECT running the G-50 check: the survey evening both schedules nominate as THE unblocker would have left page 7's three joints blocked with nothing saying why.** If the coil is flying leads rather than terminals, **record THAT - a lead is identified by colour or by nothing, and "nothing" is an answer the build sheet can work with** |
 | **The four enclosures** | 4 | **Nothing to survey unless a face carries printed text.** Recorded here so nobody wonders whether they were missed |
 
 ## What NOT to do
@@ -78,6 +79,8 @@ worth more than a guess, and it tells the schedule which rows stay blocked.
 
 **Do not merge two devices' surveys because they look identical.** Record one, then
 CONFIRM the others against it, and say you confirmed rather than assuming.
+
+**AND THE SURVEY DOES NOT CLEAR EVERYTHING. It clears 61 of D4's 127 joints, not all of them.** The rest wait on the panel-internal conductor list, the terminals this survey cannot reach, and the rows still OPEN. **Stated here because BOSS described this evening as unblocking every wiring instruction in the build, and that was wrong - it unblocks about half, which is still the largest single unblock available.**
 
 **Do not photograph it instead.** A photograph is a source someone has to re-read
 every time. **This sheet is read once and cited forever** - that is the whole point

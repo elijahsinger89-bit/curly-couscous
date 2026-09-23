@@ -4794,3 +4794,56 @@ asked before purchase costs nothing.**
 quantity in a buy list **reads as recorded**, and the reader holding a credit card
 cannot tell which it is. Labelled in order.md rather than re-derived.
 
+**D-217 K-DRY IS THE DEVICE. "K-DRY-Q" IS NOT A SECOND NAME AND IS NOT A DEVICE AT
+ALL.** G-42 ruling, which INTERCONNECT correctly refused to take on its own.
+
+**The -Q suffix means a changeover POLE of that relay. A pole is not a device: it is a
+part of one.** And the TRM- shape INTERCONNECT itself proposed already has the right
+place for it - **where, then WHAT, then WHICH. The device by name goes in the second
+field and the pole belongs in the third.**
+
+**So K-DRY-Q is struck as a device name, and the pole moves into the terminal's own
+field.** Consistent with G-28's rule that a device is labelled BY NAME, and with the
+declaration's bar on arithmetic against an identifier: **a suffix that names a part of
+a thing is a second identity for the same thing.**
+
+**NOT DONE BY FIND-AND-REPLACE, and that is why it is routed rather than executed.**
+Replacing the string would collide two legs into one address. **It is a structural
+edit to rows - the pole has to land in the field that holds poles - and that is
+INTERCONNECT's.**
+
+**D-218 THE FIX PASS WORKED AND G-54 WORKED WITH IT: D4 CHANGED BY REGENERATION ONLY.
+"Nothing was typed onto a page."**
+
+**D5 took three settled facts at the SOURCE** - the channel division, the high-high
+landing, and F-115's closure - **and twenty-two cells moved from empty to filled with
+NOT ONE being a new answer.** Every remaining empty is now in exactly two columns.
+
+**AND A CONDUCTOR WAS MISSING, NOT MISFORMATTED. CDR-065 is added: D6 always required
+a grounding conductor in RUN-015 and D5 enumerated two where it needed three.** D4
+went from 125 joints to 127 because of it. **A missing conductor found by reading and
+fixed at the source is the whole shape working.**
+
+**THE G-50 CHECK RETURNED A STRUCTURAL RESULT NOBODY ASKED FOR AND IT IS WORTH MORE
+THAN THE DEFECTS IT FOUND: NO PAGE DEPENDS ON ANOTHER PAGE'S POSTCONDITION. THE EIGHT
+PAGES ARE INDEPENDENT AND MAY BE WORKED IN ANY ORDER.**
+
+**That CONFIRMS a D1 step rather than assuming it.** D1 already told a builder the
+pages could be worked in any order; **the check proves it from the preconditions
+instead of asserting it.** G-50 was frozen to catch cycles and it has now also
+certified an absence of them.
+
+**D-219 THE SURVEY EVENING DOES NOT CLEAR EVERYTHING AND BOSS SAID IT WOULD. IT
+CLEARS 61 OF 127.**
+
+**And the survey sheet was MISSING A DEVICE. terminal-survey.md did not list the fill
+solenoid**, so the evening both schedules nominate as the unblocker **would have left
+page 7's three joints blocked with nothing saying why.** Added, with the instruction
+that **if the coil is flying leads rather than terminals, record THAT** - a lead is
+identified by colour or by nothing, **and "nothing" is an answer a build sheet can
+work with.**
+
+**Found by INTERCONNECT running the G-50 check, reported and deliberately not fixed
+because terminal-survey.md is BOSS's file.** Correct call. **The sheet claimed to
+unblock a document it had never been checked against.**
+
