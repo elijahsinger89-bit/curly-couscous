@@ -693,3 +693,131 @@ STACKS ON TOP OF THAT.**
 **DO NOT BUY THE VENTURI OR AIR-FRACTIONATING VERSION OF THIS PUMP. Air in a heat
 exchanger is the opposite of what a chiller loop wants.**
 
+## Panel component dimensions. OWNER'S LOOKUPS, 2026-09-23. D-194.
+
+**Eleven lookups run. These are measured or manufacturer figures from the owner, not
+derived by any agent.**
+
+### 1. Cord grips. NO MANUFACTURER PUBLISHES A MINIMUM CENTRE-TO-CENTRE. GEOMETRY DECIDES IT.
+
+| Thread | Clearance hole | Wrench flats |
+|---|---|---|
+| 3/8 NPT | 0.670 to 0.680 in | 0.75 in |
+| 1/2 NPT | 0.875 in | 0.95 to 0.98 in |
+
+**USE 1.10 IN C-C FOR 3/8 AND 1.30 IN C-C FOR 1/2. Mixed pair: 1.15 to 1.20 in.**
+
+**The geometric floor is the flat width itself, but TWO ADJACENT DOME NUTS HAVE TO
+TAKE A WRENCH.** Across-corners is about 1.15x flats **and that is what collides
+first when a nut rotates** - the collision is dynamic, not static.
+
+### 2. Enclosure. 16 BY 12 IS NOT A STANDARD POLYCARBONATE FOOTPRINT.
+
+**Stahlin, Allied Moulded, Integra and Hoffman ALL SKIP IT.** They go 14 x 12 x 6,
+then 16 x 14 x 7 or 8. **And the panel is always smaller than the box by roughly
+1.25 in each way.**
+
+| Box | Panel |
+|---|---|
+| 14 x 12 | 12.75 x 10.88 |
+| 16 x 14 | 14.75 x 12.88 |
+| Hoffman QLINE I 400 x 300 | 14.17 x 10.24 |
+
+**THE BOX THE OWNER ACTUALLY HOLDS IS A QILISU, measured from its own drawing:
+overall 425 x 340 x 183 mm, MOUNTING PLATE 359 x 271 mm, plate mounting holes
+300 x 199 mm, plate thickness 4.5 mm.**
+
+**A 16 x 14 step-down gives 375 x 327. A true 16 x 12 gives about 360 x 260 at best,
+and that is metric QLINE I rather than a 16 x 12.**
+
+### 3. Wire duct.
+
+Inch widths: 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 4, 6 in. Metric DIN 43659: 25, 40, 60,
+80, 100, 150 mm.
+
+**FILL IS 50 PERCENT OF INTERIOR CROSS-SECTION, from NFPA 79 section 13.5.2, NOT
+NEC.** Panduit and T&B size their tables to it.
+
+**Knock nominal W x H down to about 90 percent for wall thickness, then fill 50
+percent of that.** Catalog shortcut: N = (W x H) / (1.75 x D squared).
+
+**Shop practice designs to 30 to 40 percent so the cover still snaps on. The LIMIT is
+50.**
+
+### 4. 94.74SMA socket with 55.34 relay.
+
+Rail occupancy **30 mm**. Height above rail, socket plus relay plus 094.71 metal
+clip, **70.5 mm - use 71 mm for cover clearance.**
+
+### 5. Finder 22.32, one module.
+
+Rail occupancy **17.5 mm**. Height above rail **88.8 mm**. Depth off rail **60.8 mm**.
+**9 mm air gap to the next 22.32 if ambient over 40 C with contacts over 20 A.**
+
+### 6. NDR-240-24.
+
+**63 x 125.2 x 113.5 mm, W x H x D.** Clearance **40 mm above, 20 mm below, 5 mm each
+side, 15 mm from another heat source.**
+
+**VERTICAL MOUNTING ONLY, AC IN AT THE BOTTOM, DC OUT AT THE TOP. ANY OTHER
+ORIENTATION VOIDS THE COOLING FIGURES.**
+
+**Vertical budget at full load: 125.2 + 40 + 20 = 185 mm.**
+
+### 7. Terminal block.
+
+**6.2 mm per way** confirmed. **McMaster lists 70 mm overall height INCLUDING THE DIN
+CLIP, WHICH IS NOT HEIGHT ABOVE THE RAIL** - equivalent parts at the same pitch give
+**44 mm above the rail and 56 mm off the rail face.**
+
+**Use 6.2 mm per way, 70 mm vertical envelope, 56 mm depth. End plates add 1 to 2 mm
+outside the pitch.**
+
+### 8. Ground bar. THE PART BOUGHT IS NOT A STANDOFF BAR.
+
+**McMaster 2450K14: a tin-plated copper block, 5.75 x 0.50 x 0.50 in, twelve 1/4-28
+tapped holes, 14 to 6 AWG, NO INSULATORS AND NO MOUNTING HARDWARE.**
+
+**It sits on the panel or bolts through its own ends. There is no published
+mounting-hole C-C.** If drilled through the half-inch section, **holes must be at
+least 5.0 in apart to miss the taps.**
+
+**A true insulated 12-way bar is a 12.5 x 2.5 in envelope at 9 in C-C, and that is
+not what is on the shelf.**
+
+### 9. 94.74SMA module and clip together: YES.
+
+**The SMA ships with the 094.71 metal clip and the coil-side slot takes the 99.01
+module. Both fit, neither is sacrificed, and the module sits INSIDE the socket
+envelope so it adds no height.**
+
+**Do NOT use a 99.02 - that is the box-clamp family. The plastic 094.91.3 clip is
+INSTEAD OF the metal one, not in addition.**
+
+### 10. 22 mm device stack depth.
+
+Schneider XB5A with ZBE screw blocks, **measured from the front face of the panel
+with the gasket compressed:**
+
+| Rows | Depth |
+|---|---|
+| 1 | 43 mm |
+| 2 | 55 mm |
+| 3 | 68 mm |
+
+**A DOUBLE BLOCK IS TWO ROWS. Side-by-side blocks add no depth - only stacked rows
+do. Plan 68 mm if three rows are possible.**
+
+### 11. Panel-mount receptacle. A STANDARD 15 A DUPLEX DOES NOT PANEL-MOUNT.
+
+**It screws to a DEVICE BOX by the yoke, strap holes 3.281 in apart, and the body
+sits in the box rather than in the panel.** A weatherproof in-use cover mounts to
+that box, not through a sheet face.
+
+**What does panel-mount is a SINGLE snap-in 5-15R: cutout 26 x 22 mm, 25 to 33 mm
+behind the panel.**
+
+**AND THE BUILD USES DEVICE BOXES, NOT PANEL CUTOUTS: Bell 5320-0 weatherproof boxes
+with TayMac covers, mounted to the wall BESIDE the panel and fed by cord grips. SO
+THIS LOOKUP CONSTRAINS NOTHING INSIDE THE ENCLOSURE.**
+

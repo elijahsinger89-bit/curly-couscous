@@ -4167,3 +4167,49 @@ overcurrent devices, the R-PI fuse holder and KM-CHIL.** Four rail positions who
 footprint **cannot be looked up because nobody has said what they are**, and they
 were open before this study.
 
+**D-194 ALL ELEVEN LOOKUPS ARE IN parts.md, AND THREE OF THEM CAME BACK AS SOMETHING
+OTHER THAN A NUMBER.** Owner, 2026-09-23. **Each of the three changes the question
+rather than answering it, which is worth more than the eight that returned
+dimensions.**
+
+**1. 16 BY 12 IS NOT A STANDARD POLYCARBONATE FOOTPRINT.** Stahlin, Allied Moulded,
+Integra and Hoffman **all skip it** - 14 x 12 x 6, then 16 x 14. **So the target may
+be unbuyable independent of whether the components fit it**, and the study's "not
+answerable as stated" turns out to have been understated rather than pedantic.
+
+**And the box the owner ALREADY HOLDS has a 359 by 271 mm plate**, measured from its
+own drawing. **A true 16 by 12 gives about 360 by 260 at best.**
+
+**2. THE GROUND BAR BOUGHT IS NOT A STANDOFF BAR.** A tin-plated copper block with
+twelve tapped holes, **no insulators and no mounting hardware**, which sits on the
+panel or bolts through its own ends. **There is no published mounting-hole C-C, and
+drilling the half-inch section requires holes at least 5.0 in apart to miss the
+taps.** A true insulated 12-way bar is a 12.5 by 2.5 in envelope. **F-118: the part
+on the shelf and the part the schedule assumed are not the same part.**
+
+**3. LOOKUP 11 CONSTRAINS NOTHING INSIDE THE ENCLOSURE.** A standard 15 A duplex
+does not panel-mount at all - **it screws to a DEVICE BOX by the yoke** - and the
+build uses weatherproof device boxes mounted **on the wall BESIDE the panel**, fed by
+cord grips. **A lookup that removes an item from the plate budget entirely.**
+
+**AND THE FIRST LOOKUP, THE ONE THAT WAS NAMED AS CONVERTING THE STUDY INTO A
+DECISION, RETURNED A METHOD RATHER THAN A FIGURE: no manufacturer publishes a minimum
+centre-to-centre, so geometry decides.** 1.10 in C-C for 3/8, 1.30 for 1/2, 1.15 to
+1.20 mixed.
+
+**The reason is the part worth keeping: the floor is NOT the flat width. Across-
+corners is about 1.15x flats and THAT IS WHAT COLLIDES FIRST WHEN A NUT ROTATES.**
+The constraint is **dynamic rather than static** - a spacing that fits two nuts
+sitting still does not fit two nuts being tightened.
+
+**TWO CONSTRAINTS ARE HARD AND NOT TRADEABLE:** the NDR-240-24 is **VERTICAL
+MOUNTING ONLY, AC in at the bottom and DC out at the top, and any other orientation
+VOIDS THE COOLING FIGURES** - 185 mm of vertical budget at full load. **And the
+terminal block figure carried a trap the owner caught: McMaster's 70 mm is OVERALL
+HEIGHT INCLUDING THE DIN CLIP, which is not height above the rail.** 44 mm above
+rail, 56 mm depth, 6.2 mm per way.
+
+**The arithmetic and the verdict are with MAIN-PANEL. BOSS states no size.** G-51
+stands: **no protection, no margin and no clearance is spent to make a box fit**, and
+D-190 already removed double-decks as a lever.
+
