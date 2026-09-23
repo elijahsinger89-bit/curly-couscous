@@ -90,6 +90,7 @@ changed reports to BOSS and does not act.
 | G-50 | **EVERY SECTION OF A SEQUENCED DOCUMENT STATES WHAT MUST BE TRUE BEFORE IT STARTS AND WHAT IS TRUE AFTER IT ENDS. THEN A SECTION THAT REQUIRES X MUST COME AFTER THE SECTION THAT PRODUCES X, AND THAT IS A CHECK A MACHINE CAN RUN** | Frozen 2026-09-05, D-183. **Sequence defects are invisible to every per-page check because each page is internally consistent and the defect is in the ORDER.** The parallel build hit five and none was findable by any audit: **a section that sends a builder away then continues assuming he has not gone; a step that lands a conductor on a part a later step installs; a book that ends by sending the builder to the next book without mentioning the one that must come first; two sections each depending on the other's output; and a duct cut over a populated plate.** **Preconditions and postconditions turn an end-to-end read into a comparison. They do not replace the read - they give it something to check against**. **AND THE VALUE IS IN BEING FORCED TO WRITE ONE, NOT IN THE CHECK THAT READS IT.** Four of the five defect shapes become mechanically detectable, **but the fifth - a duct cut over a populated plate - surfaces only because a writer required to state a precondition has to confront what the section assumes. The rule works before it is ever run** |
 | G-51 | **PREFER THE SMALLEST ENCLOSURE THAT ACTUALLY FITS, AND MOUNT EVERYTHING VERTICAL - PORTRAIT, NOT LANDSCAPE, ON EVERY BOX. SPEND DOUBLE-STACKED BLOCKS AND TIGHTER RAIL PACKING TO GET THERE. NEVER SPEND A PROTECTION, A MARGIN OR A CLEARANCE** | Frozen 2026-09-11, D-188, the owner's KISS applied to enclosures. **If a box only fits by crowding a 120 V rail against a 24 V one, or by losing the separation that keeps a sense conductor away from a mains pair, THE BOX IS TOO SMALL and that is the answer to report.** **And a double-deck block is a real trade, not a free win: two terminals in one footprint makes the TIER PAIRING a build fact - hot with hot, neutral with neutral, so a slip between tiers shorts LIKE TO LIKE. That hazard exists only because the part exists.** The parallel build bought them and decided against them. **Take them if the box needs it and say so on the face. Do not take them for tidiness**. **AMENDED 2026-09-11 by D-190: THE STATED HAZARD IS INVERTED ON A SERIES INTERLOCK CHAIN. Like-to-like assumes every terminal in a bank sits at the same potential. In a series chain each one sits at a DIFFERENT POINT of the chain, so a tier slip does not short like to like - IT BYPASSES THE PROTECTION and makes a float permanently MADE.** So on an interlock bank a double-deck is not a smaller box for a new failure mode, **it is a smaller box for the inverse of the topology's whole purpose** |
 | G-52 | **ANY FASTENER SPACING THAT ASSUMES THE PART IS STATIONARY HAS IGNORED THE TOOL.** Space for a fitting is not space to FIT it | Frozen 2026-09-23, D-195, the owner's generalisation of lookup 1. **No manufacturer publishes a minimum centre-to-centre for a cord grip, so geometry decides - and the floor is NOT the flat width.** **Across-corners is about 1.15x flats and that is what collides first WHEN A NUT ROTATES.** A spacing that fits two nuts sitting still does not fit two being tightened. **It generalises past cord grips to every threaded fitting, every terminal screw reached with a driver, and every nut on a crowded plate** |
+| G-53 | **EVERY FACT, TRAP OR FINDING THAT CROSSES BETWEEN THE TWO BUILDS CARRIES ITS ORIGIN AND ITS DIRECTION, PERMANENTLY** | Frozen 2026-09-23, D-205. **Two builds agreeing is worth nothing when one told the other.** **Without the direction recorded, every imported trap becomes independent corroboration six months later, and the whole value of running two builds evaporates into an ECHO.** It binds on convergence as hard as on import: **a conclusion both builds reached is only independent if neither was told** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -4462,4 +4463,34 @@ traps have come the other way. **Recorded as originating here, at the owner's
 instruction, because a finding whose direction of travel is unrecorded becomes
 convergent evidence later** - and two builds agreeing is worth nothing when one told
 the other.
+
+**D-205 CROSS-BUILD PROVENANCE IS FROZEN AS G-53, AND THE LEDGER IS OPENED WITH FIVE
+CROSSINGS - INCLUDING ONE THIS BUILD HAD ALREADY MISFILED AS INDEPENDENT.**
+
+| # | What crossed | Direction |
+|---|---|---|
+| 1 | T-018's shape, the seed read as a measurement | **IN**, from the parallel build |
+| 2 | The add-on parts table double-count, T-028 | **IN** |
+| 3 | The cut-to-length allowance in the following step, which is why G-49 exists | **IN** |
+| 4 | **The Pi feed's blown-fuse indicator** | **OUT**, D-204. The first to travel this way |
+| 5 | **P-09's silence** | **IN, AND THIS BUILD NEARLY FILED IT AS CONVERGENCE** |
+
+**NUMBER 5 IS THE ONE THE RULE IS FOR.** Both builds reached the same topology - a
+permissive that removes MOTOR supply while VCC_IO stays live - and both found the
+TMC2209 datasheet **silent on VS absent with VCC_IO live: not permitted, not
+forbidden, not characterised.** Both closed it the same way, **by measurement at
+commissioning rather than from documentation.**
+
+**That reads as powerful independent corroboration and IT IS NOT. The parallel build
+reached it first and told this one the datasheet was silent.** The topology may well
+have converged independently; **the SILENCE did not, and the two are easy to blur
+because they arrived in one sentence.**
+
+**So the ledger records what it actually is: the topology is a convergence, the
+silence is an import, and D-070 and D-093 rest on the second.** Nothing about the
+decision changes - **C-18 is still the only route - but its evidentiary weight was
+overstated and is now correctly sized.**
+
+**And that is the whole argument for the rule: the misfiling happened in the same
+exchange that produced the rule, by the agent that wrote it.**
 
