@@ -4325,8 +4325,16 @@ DERIVATION:**
 |---|---|---|---|
 | Plate width | 374.65 mm | **468 mm** | +93 |
 | Plate height | 327.15 mm | **379 mm** | +52 |
-| Rail available | 758 mm at 16 x 14 | **814 mm**, two rails at 407 usable | +56 over the larger candidate |
-| Rail demand | 568 with a 70 mm placeholder | **584.2** with the five devices at their real 86.2 | **clears by 230 mm** |
+| Rail available | 758 mm at 16 x 14 | ~~814 mm, two rails at 407 usable~~ **1243 mm, FOUR bands, portrait** | see correction |
+| Rail demand | 568 with a 70 mm placeholder | ~~584.2~~ **649.3** | **clears at 52 percent** |
+
+**BOTH OF THOSE FIGURES WERE WRONG AND BOTH ERRORS ARE BOSS'S. THE VERDICT IS UNCHANGED AND THE ARITHMETIC IS NOT.**
+
+**THE 814 WAS A LANDSCAPE FIGURE. 407 mm of usable rail is impossible at a 379 mm plate width** - BOSS took a number from the parallel build's layout and applied it to a plate stood the other way up. **G-51 is frozen PORTRAIT.** Drawn portrait it is **1243 mm across four bands**, against landscape's 741 and two bands. **The rule costs nothing here and the sheet clears either way.**
+
+**AND THE 584.2 TREATED A PLACEHOLDER AS THOUGH IT WERE INSIDE THE 568.** The study listed the four unchosen devices as NOT IN THE TOTAL, so subtracting 70 subtracted something that was never added. **The supportable operation is 568.4, minus 17.5 for KM-CHIL ceasing to be a 22.32, plus 86.2, plus the terminal count moving from 57 to 58, plus three banks of end plates. 649.3.**
+
+**The terminal count is 58 ways, superseding 56 to 57: 16 LINE, 30 at 24 V, 12 SENSE.**
 
 **The five devices cost 16.2 mm MORE than the placeholder assumed, and the
 disconnect returned 35 mm of that by needing no part at all.**
@@ -4630,4 +4638,46 @@ uses both ways on one page.**
 **The reader also said plainly, in a section of its own, that the documents are
 strong where they were feared weak.** Recorded because **a read that reports only
 defects is a read nobody can calibrate.**
+
+**D-210 D3's INTERIOR EXISTS - SEVEN SHEETS - AND IT RAISES ONE QUESTION THAT MUST BE
+SETTLED BEFORE A HOLE IS DRILLED. F-120: THE TREE HOLDS TWO BOXES UNDER ONE NAME.**
+enclosure-layout.md.
+
+| Source | Name | Overall | Plate |
+|---|---|---|---|
+| parts.md, lookup 2 | **QILISU** | 425 x 340 x 183 | **359 x 271** |
+| D-199 | **QILIPSU** | 508 x 419 x 201 | **468 x 379** |
+
+**Both are recorded as "the box on the shelf". The names differ by one letter and the
+plates differ by 109 mm in width.** The owner stated each at a different time, both
+as the box he holds.
+
+**AND IT IS NOT COSMETIC: ON parts.md's FIGURES THE DEMAND DOES NOT CLEAR.** The
+whole study closed on the larger plate. **BOSS cannot resolve it and will not guess -
+it is one question and it gates every hole in the enclosure.**
+
+**THE INTERIOR SHEETS, on the larger plate: 649.3 mm of rail used against 1243
+available, 52 percent, across four bands in 468 mm of plate height** - supply 185,
+relay 71, 24 V terminals 70, sense terminals 70, summing 396 with 72 of slack.
+
+**FIVE THINGS ARE N/A WITH THEIR REASON RATHER THAN EMPTY, AND THE FIRST IS THE
+CLEANEST USE OF G-46 YET: THE DISCONNECT'S POSITION IS NOT A VACANCY, BECAUSE THERE
+IS NO PART.** Also the enclosure's own bonding and its ground-bar way, the bar
+insulators, KM-DRV's air gap - which needs over 40 C and over 20 A against a 62 to 65
+F room - and suppression rail millimetres, since the module sits inside the socket
+envelope. **Eight more are empty with their blockers named.**
+
+**THREE FINDINGS FROM THE DRAWING WORTH KEEPING:**
+
+**THE TWO-ROW GRIP SPLIT FALLS OUT AS 8 AND 7 BECAUSE THE CLASSES COUNT 7 LINE AND 8
+NON-LINE. THE ROWS ARE THE SEGREGATION RATHER THAN A NUMBER HALVED** - which is why
+two rows is REQUIRED and not preferred, and **one row fails only once the segregation
+gap is included.**
+
+**The top-face devices' 43 to 68 mm intrusion needs no rail to move**, because the
+holes' position along 201 mm of depth is free and **drilling them forward of the
+plate's front plane clears the band entirely.**
+
+**And the panel-internal conductor list is now the ONLY thing left that can move the
+demand figure.** Unblocked, unwritten, MAIN-PANEL's.
 
