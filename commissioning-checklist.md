@@ -62,8 +62,11 @@ though they were not commissioning, and then nobody ticks them at all.**
 **MUST BE TRUE BEFORE THIS STAGE STARTS:**
 - D1 section 13 has mounted both main panel ground bars and fitted the inter-bar jumper,
   and nothing else has landed on either bar. C-25's own blocked-on cell.
+  **PRODUCER: PRODUCED, BB-17.** Its wording says "the ground bar" singular where D-192
+  put two bonded bars. Listed in 12.4.
 - D1 section 15 has the display box plate populated and the three EZO circuits in hand,
   **with the box still open.** C-14's own blocked-on cell.
+  **PRODUCER: PRODUCED, BB-19.**
 
 **TRUE AFTER THIS STAGE ENDS:**
 - The inter-bar jumper's continuity is proved and recorded.
@@ -128,7 +131,12 @@ on it. **A conductor that has not been landed cannot be checked as landed.**
   landed and ticked.
 - **D1 step 31-02.** Every wet joint's cure has been confirmed against the joint-time
   records, not against anybody's memory.
+  **PRODUCER: PRODUCED, D1 step 31-02 - and NOT by BB-35, which covers conductors only.**
+  BB-35 is extended to carry it. Listed in 12.4.
 - Nothing in the build is energised.
+  **PRODUCER: INVARIANT.** True from the first step and produced by nothing. **Ended by
+  stage 4, which energises the supply.** It is not a missing arc and must not be
+  reported as one.
 
 **TRUE AFTER THIS STAGE ENDS:**
 - Every CDR- row D5 lists as landing in an enclosure is ticked as landed and labelled.
@@ -185,10 +193,17 @@ nobody tested is a claim nobody has.**
 - **The tanks are empty and dry.** C-24 says to run it before water is in the tanks: the
   test is about conductors and coils, and a wet tank adds nothing to it and makes the
   lifting worse.
+  **PRODUCER: PRODUCED, BB-20, then INVARIANT. Ended by stage 7**, which fills the day
+  tank.
 - **The pull-down resistors are fitted at the DRIVER end.** C-21's blocked-on. **BLOCKED
   TODAY: D5 records them as an owed fix and not as a fitted part, PUMP-BOXES' under
   D-043.**
+  **PRODUCER: PRODUCED, BB-35.** D1 14-08 fits the pull-down LANDING; the pull-downs
+  themselves are landed in section 31. **The producer existed and the precondition did
+  not name it, which is the whole reason this one read as a gap.**
 - **V_IL is known from the datasheet.** C-21's blocked-on. **BLOCKED TODAY.**
+  **PRODUCER: LOOKUP.** A fact from outside the build. No section can produce it and none
+  should be asked to. Owner's, under G-15.
 
 **TRUE AFTER THIS STAGE ENDS:**
 - Every float position's fail direction is proved.
@@ -266,6 +281,9 @@ while a person has a screwdriver on a pot beside four motors. **F-061.**
 - **C-16's own precondition: the supply powered, before anything else is connected to
   the rail. THIS PRECONDITION IS UNMATCHED BY ANY STATE THE BUILD PRODUCES.** See
   section 12, check result 1. It is not resolved here.
+  **PRODUCER: UNPRODUCED, and F-125 says the requirement is wrong rather than
+  unachievable** - a rail with nothing on it is not the rail the devices see. Routed to
+  the owner.
 
 **TRUE AFTER THIS STAGE ENDS:**
 - The NDR-240-24 trim position as actually left is measured at the rail and recorded.
@@ -315,11 +333,18 @@ does not schedule would put the view ahead of its source. G-54.
 **MUST BE TRUE BEFORE THIS STAGE STARTS:**
 - Stage 4 closed.
 - Sense circuits built and the Pi reading them. C-19's blocked-on.
+  **PRODUCER: PRODUCED, BB-19 and BB-35.**
 - The watchdog fitted, **and confirmation that an external reset input exists at all.**
   C-20's blocked-on. **BLOCKED TODAY: no file read for this checklist confirms it.**
   Owner: DISPLAY-BOX.
+  **PRODUCER: UNPRODUCED. Searched build-book.md for "watchdog": no occurrence. NO BUILD
+  SECTION FITS IT.** A commissioning stage requires a part the build never installs.
+  Listed in 12.4 as the sharpest of the four.
 - **S-12 is an OPEN interface row.** Rule 9: nothing is built against it. **Every step in
   this stage needs the Pi reading a pin, so this stage cannot run while S-12 is open.**
+  **PRODUCER: OPEN ROW.** Closed by DISPLAY-BOX and CONTROL-SOFTWARE agreeing the pin
+  map, not by any build step. **It belongs in the interface table's graph, not this
+  one.**
 
 **TRUE AFTER THIS STAGE ENDS:**
 - Every sense conductor's fail behaviour is recorded as the Pi reports it.
@@ -370,12 +395,18 @@ has watched fire is the silent reboot-hang-reboot case waiting to happen.**
 - Stage 4 closed. The rail is set and recorded.
 - Drivers wired. Boxes populated and closed, heatsinks fitted. C-13's and C-15's
   blocked-on cells.
+  **PRODUCER: PRODUCED, BB-18, BB-35 and BB-36.** Heatsinks are D1 step 14-07 and **are
+  not named in BB-18**, which is extended to carry them. Listed in 12.4.
 - Jug placement made, and an EN policy at least provisionally chosen. C-06's blocked-on.
   **SEE SECTION 13, DEFECT 4: G-21 froze EN unwired with the drivers defaulting enabled,
   permanently, and three rows still read as though the policy were open.**
+  **PRODUCER: jug placement is PRODUCED, BB-16. The EN policy is a DECISION ALREADY
+  MADE**, G-21 and D-032, permanently. **Not a state and not open.**
 - **P-09's remaining open half** - what a 6121 does with STEP asserted and VM absent -
   **is what C-18 observes.** Rule 9 bars building against an open row. **C-18 builds
   nothing; it is the observation the row says will settle it.**
+  **PRODUCER: OPEN ROW, and deliberately so.** This is the one precondition in the
+  document that is satisfied by the step rather than before it.
 
 **TRUE AFTER THIS STAGE ENDS:**
 - MS1 and MS2 are recorded per driver, as set by pins.
@@ -476,7 +507,14 @@ which is not the same as cheap.
 **MUST BE TRUE BEFORE THIS STAGE STARTS:**
 - **GATE 3 passed: C-24 is done and the tanks were dry when it was done.**
 - Tank as built, floats chosen and set, transfer chain live. C-11's blocked-on.
+  **PRODUCER: tank as built is PRODUCED, BB-20, BB-24 and BB-27. Floats set is PRODUCED,
+  BB-25 and BB-26. TRANSFER CHAIN LIVE is PRODUCED BY STAGE 4 plus BB-30 and BB-35** -
+  a chain is live only once the supply is energised, **so its producer was never a D1
+  section at all, which is what made the cycle look like one.** F-126.
 - Loop plumbed as built, valves in service positions. C-10's and C-07's blocked-on.
+  **PRODUCER: loop plumbed is PRODUCED, BB-32. VALVES IN SERVICE POSITIONS IS
+  UNPRODUCED** - no build section sets a valve position and no list of service
+  positions exists. Listed in 12.4.
 - **SEE SECTION 12, CHECK RESULT 2: C-11's blocked-on and D1 section 19 form a cycle.
   This stage cannot start until that is broken at the source.**
 
@@ -554,7 +592,13 @@ safe. Derived from the rows rather than assumed.
 - Stage 6 closed and stage 7 closed.
 - Loop running. Tokens applied at both ends of every per-channel core, per
   `channel-token.md`.
+  **PRODUCER: tokens applied is PRODUCED, BB-35, which labels every conductor at both
+  ends. LOOP RUNNING IS UNPRODUCED: stage 7 runs the loop to measure and its
+  postconditions are four figures, none of which is "the loop is left running".**
+  Listed in 12.4.
 - **G-06 serialises the heads, which is what makes this check possible at all.**
+  **PRODUCER: RULE.** A standing constraint, not a state. Nothing produces it and
+  nothing ends it.
 
 **TRUE AFTER THIS STAGE ENDS:**
 - Every channel's head, tube, jug and product are bound, and the binding is written into
@@ -656,8 +700,13 @@ it.**
 **MUST BE TRUE BEFORE THIS STAGE STARTS:**
 - **GATE 8 passed.**
 - Probes live, loop circulating, **no dose in flight** for C-08.
+  **PRODUCER: probes live is PRODUCED, stage 5. Loop circulating is UNPRODUCED, as
+  stage 8's. NO DOSE IN FLIGHT is OPERATOR** - a condition the person running the step
+  holds, produced by no section and ended by the next dose.
 - Day tank filled at the **HIGH end of the band** set at D8-32, circulation running,
   **chiller in NORMAL SERVICE**, per D-027.
+  **PRODUCER: PRODUCED, D8-32, stage 7** for the band's high end. **Circulation running
+  and the chiller in service are UNPRODUCED, as above.**
 - **SEE SECTION 12, CHECK RESULT 3: C-08's own window length is stated against the
   settling interval, which is C-02's output. That is a cycle and it is not broken here.**
 
@@ -739,6 +788,9 @@ discarded.**
 - **GATE 8 passed and GATE 9 passed.**
 - **C-17 recorded**, stage 6. C-01's blocked-on says C-17 is recorded first.
 - Heads mounted, tubing fitted, loop circulating.
+  **PRODUCER: heads mounted is PRODUCED, BB-18. Tubing fitted is PRODUCED, BB-33,
+  section 32a. Loop circulating is UNPRODUCED, as above** - the same missing
+  postcondition, met for the third time.
 - **F-075 SETTLED. D-102 attached that deadline to C-01 and it is the first step of this
   stage.**
 
@@ -920,6 +972,56 @@ Each is a blocker rather than an ordering defect, and each is named on its step.
   standstill figure is what sets the rail's real load - **and no document read for this
   checklist holds a rail load budget for it to land in.** `parts.md` holds the assumption
   it replaces. Owner: **BOSS** to say where the budget lives.
+
+### 12.6 THE PRODUCER PASS, 2026-09-23, D-229. THIS SECTION IS NOW MACHINE-CHECKED.
+
+**Every precondition in this document carries a PRODUCER tag naming what makes it true,
+or naming the reason nothing does.** `tools/cross-document-check.py` reads them and
+builds one graph across D1, D8 and D4.
+
+| Kind | Count | Meaning |
+|---|---|---|
+| **PRODUCED** | **17** | A section makes it true. The tag names the id |
+| **UNPRODUCED** | **7** | **Nothing in the build makes it true. These are the real gaps** |
+| OPEN ROW | 2 | Closed by agents agreeing an interface, not by a build step |
+| INVARIANT | 2 | True from the start. **The tag names what ENDS it, not what starts it** |
+| LOOKUP | 1 | A fact from outside the build. G-15 |
+| RULE | 1 | A standing constraint. Nothing produces it and nothing ends it |
+| OPERATOR | 1 | Held by the person running the step |
+| DECISION | 1 | Already made and frozen |
+| **UNTAGGED** | **0** | |
+
+**WHAT THE CHECK FOUND ONCE IT COULD SEE: ONE CROSS-DOCUMENT CYCLIC CLUSTER, FOURTEEN
+SECTIONS WIDE.**
+
+    D1 19, 20, 21, 22, 23, 24, 25, 27, 28, 30, 31 and D8 stages 2, 3 and 7
+
+**21 distinct paths run round it and they are one defect.** Section 12.2's check result
+2 named three of those fourteen. **The direction was right and the size was wrong by
+eleven sections, which is T-031 exactly.**
+
+**The arc that closes it was invisible until it was written down.** D1 section 19's
+dependency on C-11 lived in a BLOCKED note, and G-50 reads only preconditions. It is
+now a precondition.
+
+### 12.7 THE SEVEN GAPS. NOTHING IN THE BUILD MAKES THESE TRUE
+
+| # | State required | Stage | Who |
+|---|---|---|---|
+| 1 | **The watchdog fitted, and an external reset input confirmed to exist** | 5 | **DISPLAY-BOX. `build-book.md` contains no occurrence of "watchdog". NO BUILD SECTION FITS IT, and a stage requires a part the build never installs** |
+| 2 | **Valves in service positions** | 7 | **WATER. No section sets a valve position and no list of service positions exists anywhere** |
+| 3 | **The loop left running** | 8, 9, 10 | **Three stages need it and stage 7's postconditions are four measured figures, none of which is "the loop is left running." One missing postcondition, met three times** |
+| 4 | **Circulation running, chiller in NORMAL SERVICE** | 9 | As 3 |
+| 5 | **The supply powered with nothing else on the rail** | 4 | **F-125: the requirement contradicts its own reason and wants inverting, not relaxing. Owner** |
+| 6 | **No dose in flight** | 9 | **OPERATOR, not a gap in the build. Listed so it is not mistaken for one** |
+| 7 | **Loop circulating** at stage 10 | 10 | As 3 |
+
+**Three of the seven are ONE missing postcondition on stage 7.** Adding it is a
+one-line fix and it is INTEGRATOR's, not BOSS's - **G-54: the fact enters at the stage
+that produces it.**
+
+**Two are real absences in D1: a part nobody installs, and a valve state nobody sets.**
+Both routed.
 
 ### 12.5 What this check cannot see
 

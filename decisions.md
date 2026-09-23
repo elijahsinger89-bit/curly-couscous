@@ -5126,3 +5126,92 @@ on.**
 D1 already carries.** Convergence, and it is an import under G-53 rather than a second
 source: **D1 took its assembly order from this same set.** F-075's shape. It confirms
 nothing.
+
+---
+
+# D-229. THE PRODUCER PASS. THE CROSS-DOCUMENT CHECK NOW FINDS THE CYCLE ON ITS OWN. 2026-09-23
+
+**The owner: "Name the producers for all twenty-three. That is the whole remaining cost
+and it is the difference between a check and a decoration." Done, and the count was
+wrong in my favour.**
+
+## 1. FOUR OF THE TWENTY-THREE WERE MY PARSER'S, NOT THE DOCUMENTS'
+
+**Reported before they cost anybody an evening.**
+
+| Bug | What it did |
+|---|---|
+| **`startswith('*')` treats `**bold**` as a list marker** | A continuation line opening with markdown bold split its bullet in two. **Two false findings** |
+| **`^## (\d+)\.` does not match `## 32a.`** | Section 32a was invisible and its content was attributed to section 32, **so section 32a's precondition resolved to itself and was dropped as a self-edge. Two more** |
+
+**Nineteen were real. Eighteen after the heading fix.**
+
+## 2. EVERY PRECONDITION NOW CARRIES A PRODUCER TAG
+
+**Not every unmatched precondition was a missing arc, and forcing them all into the
+graph would have been the wrong fix.** Seven kinds:
+
+**PRODUCED** names the id. **INVARIANT** is true from the start and the tag names what
+ENDS it, not what starts it. **LOOKUP** is a fact from outside the build. **OPEN ROW**
+closes by agents agreeing an interface. **RULE** is a standing constraint. **OPERATOR**
+is held by the person running the step. **UNPRODUCED** means nothing makes it true, and
+that is the build's defect rather than the check's blindness.
+
+**17 PRODUCED, 7 UNPRODUCED, 6 of the other kinds, 0 UNTAGGED.**
+
+## 3. THREE D1 POSTCONDITIONS DESCRIBED A BUILD THIS IS NOT
+
+**Found by asking what produces a state, which is a question nobody had asked of them.**
+
+| | Was | Now |
+|---|---|---|
+| **BB-17** | "with the ground bar fitted" | **BOTH bars and the inter-bar jumper.** D-192 put two bonded bars in the panel and C-25 checks the jumper. **The postcondition described a panel this build does not have** |
+| **BB-18** | motors, heads, drivers, local ground bar | **plus every driver's heatsink.** Step 14-07 fits them and D8 stage 6 requires them. **14-07 is BLOCKED, so BB-18 is now blocked with it - correct, and previously hidden** |
+| **BB-35** | conductors cut, routed, labelled, landed, ticked | **plus every pull-down landed at the driver end**, and **BB-35a** for the wet-joint cure confirmation, which step 31-02 did and no postcondition carried. **D8 stage 2 had to cite a STEP NUMBER where every other precondition cites a state - a precondition reaching past the interface into another document's internals** |
+
+## 4. THE ARC THAT CLOSED THE CYCLE WAS ONE LINE IN THE WRONG PLACE
+
+**D1 section 19's dependency on C-11 lived in a BLOCKED note. G-50 reads only
+preconditions.** Lifted. **F-126 proposes removing the dependency entirely; until the
+owner rules it is written where a check can see it rather than where it reads well.**
+
+## 5. THE RESULT, AND MY OWN HEADLINE WAS WRONG BY ELEVEN SECTIONS
+
+**The check now finds the cycle mechanically, with nobody pointing at it.**
+
+    NODES 52   EDGES 133   CROSS-DOCUMENT EDGES 32
+    CYCLIC CLUSTERS: 1   (21 distinct paths round it)
+    D1 19 20 21 22 23 24 25 27 28 30 31, D8 stages 2 3 7
+    UNTAGGED AND UNRESOLVED: 0
+    GENUINE GAPS: 7
+
+**I reported this cycle as three sections. It is FOURTEEN.** Right about direction,
+wrong about magnitude, on the finding I led a turn with. **T-031, and it is the second
+time this month.** The instrument caught what the description of the instrument's first
+result had got wrong.
+
+**21 paths is one defect and the tool now says so.** A count that inflates with the
+graph's density is a count nobody can act on, so the headline counts CLUSTERS and the
+paths sit underneath it.
+
+## 6. THE SEVEN GAPS, AND THREE OF THEM ARE ONE MISSING LINE
+
+**Stage 7 measures the loop and its postconditions are four figures. None of them is
+"the loop is left running", and stages 8, 9 and 10 all require it.** One missing
+postcondition, met three times. **INTEGRATOR's to add, under G-54.**
+
+**Two are real absences in D1:**
+
+- **THE WATCHDOG. `build-book.md` contains no occurrence of the word.** D8 stage 5
+  requires it fitted. **A commissioning stage requires a part the build never installs.**
+  DISPLAY-BOX's.
+- **VALVES IN SERVICE POSITIONS.** No section sets a valve position and no list of
+  service positions exists anywhere in the tree. WATER's.
+
+**One is F-125's, routed. One is an OPERATOR condition and is listed only so it is not
+mistaken for a gap.**
+
+**Both real absences were sitting behind the 23 and neither was visible while the count
+was a single number.** That is the difference the tags bought: **an arc this check
+cannot see is the check's blindness; a state nothing produces is the build's. Reported
+as one number, the second hides inside the first.**

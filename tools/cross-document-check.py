@@ -19,9 +19,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # (file, node prefix, section-heading regex, pre-block marker, post-block marker)
 DOCS = [
-    ("build-book.md",            "D1", r"^## (\d+)\.\s+(.*)$",
+    ("build-book.md",            "D1", r"^## (\d+[a-z]?)\.\s+(.*)$",
      r"MUST BE TRUE BEFORE THIS SECTION STARTS", r"TRUE AFTER IT ENDS"),
-    ("commissioning-checklist.md","D8", r"^## (\d+)\.\s+(.*)$",
+    ("commissioning-checklist.md","D8", r"^## (\d+[a-z]?)\.\s+(.*)$",
      r"MUST BE TRUE BEFORE THIS STAGE STARTS",   r"TRUE AFTER THIS STAGE ENDS"),
     ("wiring-instructions.md",   "D4", r"^## PAGE (\d+)[.:]?\s*(.*)$",
      r"MUST BE TRUE BEFORE",                     r"TRUE AFTER"),
@@ -42,7 +42,10 @@ def bullets(lines, i):
             j += 1
             if out: break
             continue
-        if s.startswith(('-', '*')):
+        # A BULLET IS '- ' OR '* ', NEVER '**'. A continuation line that opens with
+        # markdown bold reads as a list marker to a naive startswith, and the bullet
+        # splits in two. That produced two of this check's own false findings.
+        if re.match(r'^[-*]\s', s):
             out.append(s.lstrip('-* ').strip()); j += 1; continue
         if out and raw[:1] in ' \t':
             out[-1] += ' ' + s; j += 1; continue
@@ -93,8 +96,17 @@ for ln in raw8.split('\n'):
     m = re.match(r'^## (\d+)\.\s+STAGE (\d+)\b', ln)
     if m: stage_node[m.group(2)] = f"D8\u00a7{m.group(1)}"
 
+# A precondition may carry an explicit PRODUCER tag naming what makes it true, or
+# saying that nothing does and why. Untagged preconditions are the ones this check
+# cannot reason about at all.
+KINDS = ("PRODUCED", "INVARIANT", "LOOKUP", "OPEN ROW", "RULE", "OPERATOR",
+         "DECISION", "UNPRODUCED")
+def kinds_in(t):
+    u = t.upper()
+    return [k for k in KINDS if "PRODUCER:" in u and k in u.split("PRODUCER:", 1)[1]]
+
 # --- edges ----------------------------------------------------------------
-edges, unmatched = [], []
+edges, unmatched, tagged, gaps = [], [], [], []
 for node, s in secs.items():
     doc = node.split('§')[0]
     for t in s["pre"]:
@@ -112,10 +124,14 @@ for node, s in secs.items():
             k = g[0] or g[1]
             n = stage_node.get(k)
             if n and n != node: hits.append((n, f"stage {k}"))
-        if hits:
-            for src, via in hits:
-                edges.append((src, node, via, t[:110]))
-        else:
+        ks = kinds_in(t)
+        for src, via in hits:
+            edges.append((src, node, via, t[:110]))
+        if ks:
+            tagged.append((node, ks, t[:120]))
+            if "UNPRODUCED" in ks:
+                gaps.append((node, t[:150]))
+        elif not hits:
             unmatched.append((node, t[:130]))
 
 # --- cycles ---------------------------------------------------------------
@@ -132,6 +148,40 @@ def walk(start, node, path, vias):
             walk(start, nxt, path + [node], vias + [via])
 for n in list(adj): walk(n, n, [], [])
 
+# 21 paths round one loop is one defect, not 21. Group the cycles into strongly
+# connected components so the headline counts DEFECTS and the paths stay available
+# underneath it. A count that inflates with the graph's density is a count nobody
+# can act on.
+def sccs():
+    plain = {k: [d for d, _ in v] for k, v in adj.items()}
+    rev = {}
+    for k, vs in plain.items():
+        for v in vs: rev.setdefault(v, []).append(k)
+    order, seen_n = [], set()
+    def push(n):
+        stack = [(n, iter(plain.get(n, [])))]
+        seen_n.add(n)
+        while stack:
+            v, it = stack[-1]
+            for w in it:
+                if w not in seen_n:
+                    seen_n.add(w); stack.append((w, iter(plain.get(w, [])))); break
+            else:
+                order.append(stack.pop()[0])
+    for n in set(list(plain) + [x for v in plain.values() for x in v]): 
+        if n not in seen_n: push(n)
+    comp, assigned = [], set()
+    for n in reversed(order):
+        if n in assigned: continue
+        grp, stack = [], [n]; assigned.add(n)
+        while stack:
+            v = stack.pop(); grp.append(v)
+            for w in rev.get(v, []):
+                if w not in assigned: assigned.add(w); stack.append(w)
+        if len(grp) > 1: comp.append(sorted(grp))
+    return comp
+clusters = sccs()
+
 # --- report ---------------------------------------------------------------
 print(f"NODES {len(secs)}   EDGES {len(edges)}   CROSS-DOCUMENT EDGES "
       f"{sum(1 for s,d,_,_ in edges if s.split(chr(0xa7))[0] != d.split(chr(0xa7))[0])}")
@@ -139,19 +189,37 @@ print()
 if unmatched:
     print("=" * 78)
     print("THE GRAPH IS INCOMPLETE. THE CYCLE RESULT BELOW IS NOT A CLEAN BILL.")
-    print(f"{len(unmatched)} preconditions name a state in prose and no postcondition")
-    print("anywhere claims to produce it. Each is a MISSING ARC. A cycle whose arcs")
-    print("are missing cannot be found, and the detector prints 0 either way.")
-    print("ZERO HERE MEANS NOT YET LOOKED, NOT NONE.")
+    print(f"{len(unmatched)} preconditions carry neither a resolved reference nor a")
+    print("PRODUCER tag. Each is an arc this check cannot see, and a cycle whose arcs")
+    print("are missing cannot be found. ZERO HERE WOULD MEAN NOT YET LOOKED, NOT NONE.")
     print("=" * 78)
     print()
-print(f"CYCLES: {len(cycles)}" + ("   <- ON AN INCOMPLETE GRAPH" if unmatched else ""))
-for path, vias in cycles:
-    docs = {p.split('§')[0] for p in path}
+print(f"CYCLIC CLUSTERS: {len(clusters)}   ({len(cycles)} distinct paths round them)"
+      + ("   <- ON AN INCOMPLETE GRAPH" if unmatched else ""))
+for c in clusters:
+    docs = {n.split('\u00a7')[0] for n in c}
+    print(f"  {'CROSS-DOCUMENT' if len(docs) > 1 else 'within one document':>20}: "
+          + ", ".join(c))
+print()
+print(f"PATHS: {len(cycles)}")
+for path, vias in cycles[:6]:
+    docs = {p.split('\u00a7')[0] for p in path}
     print(f"  {'CROSS-DOCUMENT' if len(docs) > 1 else 'within ' + list(docs)[0]:>16}  "
           + " -> ".join(path) + f" -> {path[0]}")
     for v in vias: print(f"                      via {v}")
+if len(cycles) > 6: print(f"  ... and {len(cycles)-6} more round the same cluster")
 print()
-print(f"PRECONDITIONS NO POSTCONDITION ANYWHERE PRODUCES: {len(unmatched)}")
+print(f"UNTAGGED AND UNRESOLVED: {len(unmatched)}")
 for node, t in unmatched: print(f"  {node:<8} {t}")
-sys.exit(1 if (cycles or unmatched) else 0)
+print()
+print(f"TAGGED WITH A PRODUCER: {len(tagged)}")
+from collections import Counter
+for k, n in sorted(Counter(k for _, ks, _ in tagged for k in ks).items()):
+    print(f"  {n:>3}  {k}")
+print()
+print(f"GENUINE GAPS - TAGGED UNPRODUCED, NOTHING IN THE BUILD MAKES THEM TRUE: {len(gaps)}")
+for node, t in gaps: print(f"  {node:<8} {t}")
+print()
+print("A GAP IS NOT A MISSING ARC. An arc this check cannot see is its own blindness;")
+print("a gap is the build's. The two must never be reported as one number.")
+sys.exit(1 if (clusters or unmatched or gaps) else 0)

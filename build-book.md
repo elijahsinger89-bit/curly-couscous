@@ -945,7 +945,10 @@ from a live accept condition to BLOCKED.**
 
 **TRUE AFTER IT ENDS:**
 - **BB-17.** The main panel backplate is populated and installed in the mounted
-  enclosure, with the ground bar fitted and nothing landed on it.
+  enclosure, with **BOTH ground bars fitted and the inter-bar jumper made**, and nothing
+  else landed on either. **CORRECTED 2026-09-23, D-229: this read "the ground bar"
+  singular. D-192 put TWO bonded bars in the main panel and C-25 checks the jumper
+  between them, so the postcondition described a panel this build does not have.**
 
 **EVERY CUT IN THIS SECTION HAPPENS ON A BARE PLATE.** Rail and duct are cut to
 length before a single device goes on.
@@ -1027,8 +1030,11 @@ on the one class of conductor the book says has nowhere else to go.**
 
 **TRUE AFTER IT ENDS:**
 - **BB-18.** Each pump box carries its motors and heads on its lid, its drivers and
-  its local ground bar on its box body, every driver in a box set the same way round,
-  with the lids not yet fitted.
+  its local ground bar on its box body, **every driver's heatsink fitted**, every driver
+  in a box set the same way round, with the lids not yet fitted. **HEATSINKS ADDED
+  2026-09-23, D-229: step 14-07 fits them and the postcondition did not say so, while
+  D8 stage 6 requires them. 14-07 is BLOCKED on its D7 line, so this postcondition is
+  now blocked with it - which is correct and was previously hidden.**
 
 **Do both boxes together, one operation at a time across the pair.** **Which channels
 are in which box is D-178's fact and channel-token.md's, and this book does not carry
@@ -1416,6 +1422,12 @@ with its own reason.**
 
 **MUST BE TRUE BEFORE THIS SECTION STARTS:**
 - BB-22, section 18.
+- **C-11's figures: the day tank working volume and both ends of the fill band.**
+  **LIFTED FROM A BLOCKED NOTE INTO A PRECONDITION 2026-09-23, D-229.** It was stated
+  four lines below as "BLOCKED. Missing: C-11", **and G-50 only reads preconditions, so
+  no check in either document could see the arc.** That is the arc that closes the
+  D1-to-D8 cycle. **F-126 proposes removing this dependency entirely; until the owner
+  rules, it is written where a check can see it rather than where it reads well.**
 
 **TRUE AFTER IT ENDS:**
 - **BB-23.** Every height in each tank's freeboard stack is decided and recorded: the
@@ -2404,7 +2416,12 @@ times against records no step had ever written.**
 
 **TRUE AFTER IT ENDS:**
 - **BB-35.** Every conductor in D5 is cut, routed, labelled at both ends, landed and
-  ticked.
+  ticked, **and every pull-down resistor is landed at the driver end.**
+- **BB-35a.** EXTENDED 2026-09-23, D-229: **every wet joint's cure is confirmed against
+  the joint-time records, not against anybody's memory.** Step 31-02 already did this
+  and no postcondition carried it, **so D8 stage 2 had to name a STEP where every other
+  precondition names a state.** A precondition that cites a step number is reaching past
+  the interface into the other document's internals.
 
 ### THIS SECTION OWNS THE ORDER AND NOTHING ELSE
 
