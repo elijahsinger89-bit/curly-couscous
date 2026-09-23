@@ -4494,3 +4494,33 @@ overstated and is now correctly sized.**
 **And that is the whole argument for the rule: the misfiling happened in the same
 exchange that produced the rule, by the agent that wrote it.**
 
+**D-206 THE FIVE CROSS-BOX RUN LENGTHS ARE AN IMPORT, NOT A MEASUREMENT OF THIS
+WALL. G-53 APPLIES AND THE OWNER APPLIED IT HIMSELF BEFORE SENDING THEM.**
+
+From the parallel build's wall, with a cut rule of **wall run plus 3 ft - 6 in drip
+loop per grip, 12 in service per end**:
+
+| Run | Parallel build's wall |
+|---|---|
+| Panel to pump box A | 6 ft |
+| Panel to pump box B | 8 ft |
+| Panel to display box | 4 ft |
+| Display to pump box A | 4 ft |
+| Display to pump box B | 6 ft |
+
+**ORDER OF MAGNITUDE ONLY. They are given so D3 can be shaped against plausible
+numbers rather than none, and the survey will give the real ones, which may differ.**
+
+**NOTHING IS CUT TO THESE AND NO RUN- LENGTH CELL IS FILLED FROM THEM.** Under T-018
+a number that arrives without a measurement behind it is a seed, **and these arrive
+with a measurement behind them that was taken on a different wall - which is the
+worse case, because they look measured.**
+
+**Crossing 6 in the G-53 ledger. IN.**
+
+**The cut rule itself is a different matter and is NOT an import: D-090 already
+froze wall run plus 3 ft for this build.** What the parallel build adds is **what the
+3 ft is made of - 6 in of drip loop per grip and 12 in of service per end** - and
+that decomposition is worth having, **because it says which half of the allowance a
+layout change spends.**
+

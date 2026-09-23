@@ -167,6 +167,26 @@ each jacket" - EVERY CABLE IN THE BUILD UNDER ONE STEP NUMBER.**
 the rule.** Merged into this entry at the owner's instruction rather than filed as a
 second trap: **it is one pattern with five instances, not five patterns.**
 
+**A SIXTH, 2026-09-23, AND IT IS THE PUREST OF THEM: G-53 WAS BROKEN BY BOTH PARTIES
+IN THE ACT OF CREATING IT.**
+
+The owner's message asking for the rule contained, **in consecutive lines**, "both
+builds independently arrived" and "record it as a convergence WITH ITS DIRECTION" -
+**two claims that cannot both be true.** BOSS then filed P-09's silence as a
+convergence. **It was an import: the parallel build reached it first and said so.**
+
+**So the rule against blurring import and convergence was broken by the person who
+commissioned it and by the agent that wrote it, simultaneously, about the example
+being used to justify it.** Caught only when **the rule's own author opened the ledger
+it requires** - which is the rule working at the first possible moment rather than
+the rule failing.
+
+**The owner counts this the fourth in a narrower family - a rule broken WHILE IT IS
+BEING WRITTEN - with three from the parallel build's continuity read.** Recorded here
+rather than as a new entry, per his instruction. **BOSS states no total across the two
+families, because they are counted on different definitions and adding them would be
+the arithmetic this tree keeps refusing to do.**
+
 **And the fifth changes what the entry claims.** The first four were a rule being
 forgotten. **This one is the ORIGINAL DEFECT reappearing inside its own remedy** -
 which means holding the rule in mind is not a partial defence, it is no defence at
