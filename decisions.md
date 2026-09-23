@@ -5215,3 +5215,34 @@ mistaken for a gap.**
 was a single number.** That is the difference the tags bought: **an arc this check
 cannot see is the check's blindness; a state nothing produces is the build's. Reported
 as one number, the second hides inside the first.**
+
+
+---
+
+# D-230. G-59 FROZEN, AT THE OWNER'S INSTRUCTION, ON THE GENERAL FORM OF F-123. 2026-09-23
+
+**The owner: "I closed a gate I did not know was a gate, by sending plate dimensions
+for a different reason. Record it as the general form."**
+
+> **G-59. A COMPLETENESS CLAIM ASSEMBLED FROM ONE PARTY'S VIEW IS A CLAIM ABOUT THAT
+> PARTY, NOT ABOUT THE WORK.**
+>
+> "Gated on M-02 and ONLY on M-02" was built from MAIN-PANEL's list of what MAIN-PANEL
+> was waiting on. **Three sheets belonging to two other agents were blocked on a
+> dimension that appeared on no list at all, because the agents who owned them had not
+> started and so had not discovered their own blocker.**
+>
+> **An "only", an "every", a "nothing else" and a "no other" are all this claim.** Each
+> is true about the list it was read off and says nothing about the ones nobody wrote.
+
+**The owner's instruction attached: every "only" in this tree needs checking for the
+same shape.** Recorded as an instruction and NOT run as a sweep - **he said in the same
+message that another sweep is not what is short.** It is carried as a standing test
+applied when an "only" is written or read, **which is where it costs nothing, rather
+than as a pass over 58 rules, which is where it costs an evening and finds what the
+next reader would have found anyway.**
+
+**The distinguishing question, so the rule is usable rather than admired: WHOSE LIST IS
+THIS BUILT FROM, AND WHO ELSE HAS A ROW IN THIS DOCUMENT?** F-123's answer was
+"MAIN-PANEL's, and two other agents have sheets here" - **and that answer was available
+the day the claim was written.**

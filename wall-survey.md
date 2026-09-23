@@ -50,6 +50,27 @@ you measured to.**
 questions: **holes are what a person drills, outline is what collides with the next
 thing.**
 
+### 2a. THE MOUNTING HOLE PATTERNS THEMSELVES. ADDED 2026-09-23, F-124
+
+**THE FOUR OUTLINES AND PLATES ARE NOW ON FILE. NO HOLE PATTERN IS, FOR ANY BOX,
+INCLUDING THE MAIN PANEL.** Searched parts.md, enclosure-layout.md, build-book.md and
+purchase-package.md.
+
+**Without them a complete wall survey still produces no drill step.** M-02 gives the
+position of the box on the wall; the pattern gives where the holes are relative to the
+box. **One without the other locates nothing a drill can use.**
+
+**Measured off the part, not looked up. It is the same evening and the same tape.**
+
+| Per box | Why it is wanted and not just nice |
+|---|---|
+| **Hole centre spacing, both axes** | It is what gets drilled |
+| **Hole or slot diameter** | A slot is an adjustment and a hole is not, **and which one it is changes whether the wall marking has to be exact** |
+| **Through the back wall, or in external feet or flanges** | **A through-the-back hole BREAKS THE SEAL and an external foot does not.** This changes the gasketing question, not just the drilling, and it is the one that cannot be inferred from a listing photograph |
+
+**Four boxes. Three figures each. Twelve numbers and it unblocks every mounting step in
+D1 and the drill half of D3 sheet 3.8.**
+
 ## 3. THE CONSTRAINTS. What must not change if something moves.
 
 **For each item, one line: what fixes it there.** If nothing does, say "free" - that
