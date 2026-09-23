@@ -8,7 +8,7 @@ the remaining six wait on, and what closing the two open gates would release.
 | | |
 |---|---|
 | **F-106, the terminal survey** | **Unblocks all 125 joints in D4 and 128 cells in D5. It releases no NEW document.** It converts two documents from unusable to usable |
-| **M-02, the wall** | **Releases D3 and the last of D6, and it is the only gate on either.** It is the one that turns documents into buildable pages |
+| **M-02, the wall** | **Releases D3 sheet 3.8 and the last of D6.** ~~and it is the only gate on either~~ **CORRECTED 2026-09-23, F-123 and F-124: it was never the only gate on D3, and sheet 3.8 now needs a mounting-hole pattern as well** |
 | **Neither gate** | **D7 and D11 can start now. D8 can be drafted now** |
 | **Nothing unlocks D9** | It is a record of a commissioning that has not happened |
 
@@ -27,7 +27,20 @@ dimension on it, which is M-02 and the float heights.
 
 **It is the biggest single piece of unwritten work and none of it is blocked.**
 
-### D3, the enclosure layout sheets. GATED ON M-02, AND ONLY ON M-02.
+### D3, the enclosure layout sheets. THE "ONLY" IN THIS HEADING WAS WRONG.
+
+**CORRECTED 2026-09-23, D-226, F-123. This heading read "GATED ON M-02, AND ONLY ON
+M-02" and it was a COMPLETENESS CLAIM ABOUT BLOCKERS.** Three of D3's sheets - pump
+box A, pump box B and the display box interiors - **were gated on their plate
+dimensions, which no list carried, because D3 recorded them as "unwritten rather than
+blocked".** The owner supplied all three on 2026-09-23 **without knowing that was what
+he was closing**, which is the cost of a blocker nobody wrote down.
+
+**M-02 remains the gate on sheet 3.8 and on nothing else in this document. Sheet 3.8
+now has a SECOND gate, F-124: no mounting-hole pattern exists for any of the four
+boxes, and 3.8 asks for the hole coordinates because holes are what a person drills.**
+
+### D3, sheet 3.8, the wall position. GATED ON M-02 AND ON F-124.
 
 **The main panel's faces exist** - five 22 mm holes on top, cord grips on the bottom,
 D-146's allocation, D-110 and F-088 on the top face. **What is missing is where
@@ -81,7 +94,7 @@ commissioning order.** channel-register.md is already the file.
 
 **M-02, measuring the wall:**
 
-- **D3 becomes writable at all.** It is gated on nothing else.
+- **D3 sheet 3.8 becomes writable.** ~~It is gated on nothing else~~ - **and only if F-124 has also closed, because 3.8 wants hole coordinates and no box in this build has a hole pattern on file.** The other ten sheets do not wait on M-02 at all.
 - **D6's last position and spacing cells fill**, which is the whole remaining
   balance of the cable schedule.
 - **D1 can carry its dimensioned half.**

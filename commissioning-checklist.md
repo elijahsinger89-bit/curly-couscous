@@ -702,7 +702,7 @@ with its commanded state recorded against every sample, per D-027** - the state 
 RECORDED rather than eliminated, so that if the chiller does corrupt a reading the data
 will show it.
 ACCEPT: **the run's CONDITIONS held, and that is all that can be checked here. THE
-FIGURE HAS NO ACCEPTANCE CRITERION AND CANNOT HAVE ONE: C-08 IS the baseline everything
+FIGURE IS **STRUCTURALLY CRITERION-FREE** AND IS NOT A MISSING CRITERION, D-225: C-08 IS the baseline everything
 else is compared against.** Marked N/A with its reason per G-46 rather than left blank.
 Owner of that marking: **BOSS.**
 RECORD: D9 rows **MR-18** and **MR-19**.
@@ -719,7 +719,7 @@ BEFORE, AND READ THIS BEFORE OPENING THAT FILE: **F-079. That file gates the set
 timer on the manifold pump being COMMANDED ON, and under G-26 and D-052 no such signal
 exists. DO NOT LOOK FOR IT AND DO NOT WAIT FOR IT.** C-23 governs this measurement and
 the operator is the enforcement. D8-44 is ticked for this run.
-ACCEPT: **the run's conditions held. THE TWO FIGURES HAVE NO ACCEPTANCE CRITERION AND
+ACCEPT: **the run's conditions held. THE TWO FIGURES ARE STRUCTURALLY CRITERION-FREE AND ARE NOT MISSING CRITERIA, D-225. THEY HAVE NO ACCEPTANCE CRITERION AND
 CANNOT HAVE ONE: C-02 DEFINES them.** Marked N/A with its reason per G-46. Owner of that
 marking: **BOSS.**
 RECORD: D9 rows **MR-20** and **MR-21**.
@@ -1038,7 +1038,7 @@ somebody works a stage from it and finds nothing.
 accounted for: **23 are run by a step, C-05 is NOT SCHEDULED and C-12 is VOID**, and both
 appear in D9 marked N/A with their reason rather than omitted, per G-46.
 
-**TWENTY OF THE 56 STEPS CARRY NO ACCEPTANCE CRITERION**, each saying so on its own ACCEPT
+**TWENTY OF THE 56 STEPS CARRY NO ACCEPTANCE CRITERION. TWO OF THE TWENTY - D8-46 running C-08 and D8-47 running C-02 - ARE STRUCTURALLY CRITERION-FREE AND ARE MARKED AS THAT RATHER THAN AS MISSING, D-225: they DEFINE the figures every other step is judged against, so there is nothing to judge them by. EIGHTEEN ARE GENUINELY OWED**, each saying so on its own ACCEPT
 line with its owner named. **Eighteen of those are rows that owe a criterion. Two are
 structurally criterion-free** - C-08 and C-02 define the figures everything else is
 compared against, and there is nothing behind them to compare to.

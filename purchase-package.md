@@ -220,7 +220,7 @@ beyond what is stated there are not decided and no agent may assume one.**
 | A-15 | Main panel | Mean Well NDR-240-24, 24 Vdc, 10 A, 240 W | OWNED | 1 | ea | decisions.md owned table. **VERTICAL MOUNTING ONLY, AC in at the bottom, DC out at the top. Any other orientation voids the cooling figures** |
 | A-16 | Main panel | Main panel enclosure | OWNED | 1 | ea | decisions.md owned table, 20.7 x 16.6 in. **D-199 closes the enclosure study on this box and withdraws D-196's 16 x 14 verdict: no further enclosure is specified.** See cart audit CA-08 - `parts.md` lookup 2 and D-199 describe two different boxes and only one is on the shelf |
 | A-17 | Pump boxes | Pump box enclosure, 16 x 8 x 6 in, sealed | OWNED | 2 | ea | decisions.md owned table; parts.md enclosures. **The heads mount THROUGH the lids** |
-| A-18 | Display box | Display box enclosure, roughly 300 x 250 x 130 mm, NEMA 4X polycarbonate, gasketed display cutout | OWNED | 1 | ea | decisions.md owned table; parts.md enclosures |
+| A-18 | Display box | Display box enclosure, **300 x 300 x 150 mm, plate 260 x 260**, NEMA 4X polycarbonate, gasketed display cutout. **CORRECTED 2026-09-23, D-226: this line read "roughly 300 x 250 x 130 mm" and the middle and depth figures were both wrong** | OWNED | 1 | ea | decisions.md owned table; parts.md enclosures |
 | A-19 | Display box | ULN2003 | OWNED | 12 | ea | terminal-survey.md, "12 held, fewer used". **One drives the single Pi-driven coil, S-09** |
 | A-20 | Display box | 74AHCT125 | OWNED | 4 | ea | terminal-survey.md, "4 held" |
 | A-21 | Main panel | Inrush current limiter | OWNED | 2 | ea | terminal-survey.md Group 3. **No position is assigned in anything read for this document** |

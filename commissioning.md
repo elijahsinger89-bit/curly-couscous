@@ -54,6 +54,24 @@ knowing whether a signal is visible needs a band. DOSING caught it. The order is
    signal, so timing is read off a trace that is unambiguous.
 3. C-03 and C-04 last, at real dose sizes, using the timing established in step 2.
 
+**NOT REORDERED, AND HERE IS THE PHYSICAL REASON THE OWNER ASKED FOR. 2026-09-23,
+D-225.** The owner ruled C-02 first, on the correct observation that a measurement
+whose duration is defined by the measurement it precedes cannot run first. **C-08 was
+placed first for a reason that is physical and that the ruling would spend: C-08
+measures noise and drift WITH NOTHING HAPPENING, and C-02 deliberately puts an
+OVERSIZED dose into the tank.** After C-02 has run, "nothing happening" no longer
+exists, and getting back to it means waiting out the settle - **whose length is C-02's
+answer.** Reversing the order does not break the circle. It moves it.
+
+**THE CIRCLE DISSOLVES WITHOUT A REORDER, AND IT COSTS NOTHING.** C-08's constraint is
+**AT LEAST as long as the settling interval**, which is a FLOOR and not an equality.
+**Run C-08 first over a window longer than any settle this system could plausibly
+have, then let C-02's figure either validate that window or require one re-run of
+C-08.** The order stands, the dependency becomes a check instead of an input, and the
+only cost is a second C-08 run in the case where the first window was too short.
+
+**THE OWNER RULES. Until he does, the order above stands as written.**
+
 Timing first with a big dose, magnitudes second with real ones.
 
 ## Re-measure triggers
@@ -118,3 +136,60 @@ that actually bites was never written down.**
 **And one postcondition nothing consumes: C-13's standstill current names the rail
 load budget as its consumer, AND NO DOCUMENT HOLDS A RAIL LOAD BUDGET.** BOSS's.
 
+
+
+## C-16, WHAT IT ACTUALLY MEASURES. ANSWERED 2026-09-23, D-225, F-125
+
+**The owner asked what C-16 measures before ruling, because if it needs power it
+cannot be a build step. IT NEEDS POWER.**
+
+| | |
+|---|---|
+| What it measures | **The DC voltage of the 24 V rail, at the rail, with a meter** |
+| What it needs | **The NDR-240-24 energised.** There is no version of this reading taken dead |
+| So the owner's first option | **Is foreclosed. C-16 cannot become a step taken while the rail is bare**, because a bare rail with the supply off reads nothing and a bare rail with the supply on is not bare |
+
+**AND THE PRECONDITION CONTRADICTS C-16's OWN STATED REASON. F-125.** C-16 exists
+because **"the rail is settable from 23.76 to 28.28 V and nothing fixes it. Every
+device on it sees whatever it is at."** A rail measured with nothing else connected is
+**not the rail those devices see** - it is the supply's no-load trim. **The clause
+that makes the row unrunnable is also the clause that makes its answer the wrong
+number.**
+
+**So the requirement does not need to be relaxed to be achievable. It needs to be
+INVERTED: measure the rail AS THE DEVICES SEE IT, with everything landed.** That is
+achievable on the day the supply is first energised, it needs no bare-rail state, and
+it answers the question the row was written to answer.
+
+**Not fixed here. The owner said he would rule and this changes what gets measured.**
+**What is fixed here is the diagnosis: the barrier was never the build's ordering.**
+
+---
+
+## C-11's BLOCKED-ON CELL IS WHAT PUT A COMMISSIONING ROW UNDER D1 SECTION 19. F-126
+
+**The owner ruled: break it at section 19, not at C-11, because a build section blocked
+on a commissioning row is backwards. The split he asked for does not divide where he
+expected. 2026-09-23, D-225.**
+
+**Nothing in D1 section 19 requires a live transfer chain.** Section 19 is a DECISION
+section - it cuts nothing and marks nothing, and every step in it reads "Decide X."
+The chain requirement was never section 19's own. **It was imported from THIS FILE:
+C-11's blocked-on cell reads "Tank as built, floats chosen and set, transfer chain
+live FOR THE SURGE MEASUREMENT."**
+
+**The surge is the only term in C-11 that needs a running chain, and the surge is not
+an input to any mark.** It sets whether the gap between the fill-stop mark and the
+high-high mark is big enough - **which is a CHECK on marks already chosen, not a figure
+they are chosen from.** Every other term of C-11 needs a tank and water and nothing
+running.
+
+**So neither of the owner's two outcomes applies.** Section 19 does not split and it
+does not move. **The over-stated cell does.**
+
+**PROPOSED, NOT APPLIED, because it changes what the machine is asked to tell us:**
+strike "transfer chain live" from C-11's blocked-on cell, and carry the surge as its
+own row - **verify the fill-stop overshoot does not reach the high-high mark, with the
+transfer chain live.** Section 19 then waits on a tank, water and WATER's figures, all
+of which precede commissioning, **and the cycle the cross-document check was built to
+find has nothing left to run round.**

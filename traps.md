@@ -742,3 +742,23 @@ files.**
 whether anything stated as structurally impossible is only currently impossible.
 Nobody had asked that question of any document before, and it found six.
 
+
+
+---
+
+## T-032. A NUMBER THAT MATCHES ANOTHER NUMBER FOR NO REASON. 2026-09-23, D-228
+
+**The 1st Edition dosing board is 72 in long. That is 1828.8 mm. The owner's measured
+eye level is 1829 mm.**
+
+**They are the same number and they share nothing else.** One is the length of a sheet
+of HDPE. The other is a height above a floor. **The board is not even floor-mounted -
+the tank sits under it.**
+
+**THE TRAP IS THAT A COINCIDENCE READS AS A CONFIRMATION.** Anybody meeting both figures
+in the same file will assume the board was cut to eye level, and will then treat "the
+manifold is 17 in above the bottom edge" as a height above the floor, which it is not.
+
+**Guard: a matching number is evidence of nothing until something says why it matches.**
+G-53 already says a figure carries its frame. **This is what it looks like when two
+frames produce the same digits.**

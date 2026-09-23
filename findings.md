@@ -415,3 +415,146 @@ open on a low-pressure tap is a valve that fails closed for the wrong reason.
 
 **Not a search, a note for whoever fits it:** the unions either side are a
 property of the INSTALLATION and survive any later change of valve.
+
+
+---
+
+## F-122. THE MAIN PANEL'S WHOLE OPERATOR INTERFACE IS ON A HORIZONTAL FACE, AND THE SIGHTLINE PUTS IT AT OR ABOVE EYE LEVEL. 2026-09-23
+
+**FOUND BY BEING ASKED TO CHOOSE BETWEEN TWO PLACEMENTS AND FINDING THAT BOTH FAIL.**
+
+**The owner gave the sightline as 1829 mm and asked whether that is the MIDDLE of the
+main panel or its TOP, on operator reach and door swing. Neither works, and the reason
+is not reach or swing.**
+
+**D3 sheet 3.6: the main panel's five 22 mm devices - E-STOP, PL-R, PL-Y, PL-G and
+RESET - are on the TOP FACE, 419 x 201 mm, and they HANG DOWN FROM THE ROOF.** That is
+the upward-facing face, and D-047 put them there needing gasketed devices precisely
+because it is horizontal and water can stand on it.
+
+| Placement offered | Where the top face lands | What the operator gets |
+|---|---|---|
+| **Sightline at the panel's TOP** | **1829 mm** | The devices are AT eye level and are seen EDGE-ON. A horizontal face at eye height shows a person its edge |
+| **Sightline at the panel's MIDDLE** | **2039 mm**, 6 ft 8 in | Above eye level entirely. The devices cannot be seen at all and the E-STOP is above shoulder height |
+
+**THE E-STOP IS THE ONE THAT MATTERS AND IT IS NOT AN ERGONOMIC PREFERENCE.** D3 placed
+it at one end of the face **"so a struck palm lands on nothing else"**, which is a
+statement that this device is struck with a palm. **A palm strike is a chest-height
+action.** At 1829 mm it is a reach; at 2039 mm it is a reach above the shoulder, from a
+person who by definition is not thinking clearly at that moment.
+
+**THIS IS G-56 ON GEOMETRY AND IT IS WHY NEITHER DOCUMENT CAUGHT IT.** D3 sheet 3.6
+owns WHERE ON THE FACE each device sits and checks that. The survey owns WHERE THE FACE
+IS and checks that. **The E-stop's height above the floor is the product of the two and
+is stated in neither, so it is owned by neither and checked by neither.** Both were
+internally correct.
+
+**NOT RESOLVED HERE AND NOT MINE TO RESOLVE.** Three routes exist and each costs
+something: lower the main panel and give up the shared sightline; move the five devices
+to the door face, which reopens D-047's gasketing and sheet 3.6 entire; or accept the
+height and record that the E-stop is an overhead reach. **The owner rules. What is
+fixed here is that "pick middle or top" has no correct answer.**
+
+---
+
+## F-123. THREE OF D3's SHEETS WERE RECORDED AS UNWRITTEN WHEN THEY WERE BLOCKED, AND THE BLOCKER WAS ON NO LIST. 2026-09-23
+
+**D3 section 4.2 lists eight open items, including other agents' and the owner's. The
+pump box and display box interior sheets are not among them.** D3 says twice that they
+are **"not blocked - unwritten, by PUMP-BOXES and DISPLAY-BOX."**
+
+**They were blocked.** The main panel's seven interior sheets exist because its plate
+is 468 x 379. **No plate dimension existed for the pump boxes or the display box** -
+parts.md carried "16 by 8 by 6 in" and "roughly 300 by 250 by 130 mm", both overall
+sizes with no plate. **An interior sheet cannot be drawn against an overall size.**
+
+**THE SHAPE: a blocker that belongs to a sheet another agent owns appears on nobody's
+blocker list.** MAIN-PANEL's section 4.2 lists what MAIN-PANEL is waiting on.
+PUMP-BOXES and DISPLAY-BOX have not written their sheets and so have not discovered
+what would block them. **The unlock map then inherited the gap and stated "D3 is gated
+on M-02, AND ONLY ON M-02" - a completeness claim about blockers, made from a list that
+was never complete.**
+
+**CLOSED THE SAME DAY IT WAS FOUND, and by accident.** The owner supplied all three
+plate sizes as part of the footprint table, **not knowing that was what he was
+closing.** Had he not, the three sheets would have sat as "unwritten" indefinitely and
+nobody would have been able to say why nothing was being written.
+
+---
+
+## F-124. NO MOUNTING-HOLE PATTERN EXISTS FOR ANY OF THE FOUR ENCLOSURES. 2026-09-23
+
+**Searched: parts.md, enclosure-layout.md, build-book.md, purchase-package.md. Nothing,
+under "mounting hole" or "mount hole", for any box including the Qilipsu.**
+
+**wall-survey.md section 2 asks, for the main panel, for "THE MOUNTING-HOLE
+COORDINATES, because that is what gets drilled", and separately for the outline
+"because that is what collides".** They are different questions and the tree can answer
+neither.
+
+**SO A COMPLETE WALL SURVEY WOULD STILL NOT PRODUCE A DRILL STEP.** M-02 gives the
+position of the box; the hole pattern gives where the holes are relative to the box.
+**One without the other locates nothing a drill can use.**
+
+**This is a second gate on D3 sheet 3.8 and on every D1 mounting step**, and until
+today it was invisible because M-02 was blocking the same rows for a different reason.
+**A row with two blockers looks exactly like a row with one until the first clears.**
+
+**REQUIREMENT AND SEARCH TERM, for the owner's lookup under G-15.** Wanted per box:
+**the hole centre spacing in both axes, the hole or slot diameter, and whether the
+holes are through the back wall or in external feet or flanges** - because a
+through-the-back hole breaks the enclosure's seal and an external foot does not, and
+that changes the gasketing question, not just the drilling.
+
+| Box | Search term |
+|---|---|
+| Main panel | `Qilipsu 508 x 419 x 201 enclosure mounting foot dimensions`; `Qilipsu wall mounting bracket hole spacing` |
+| Display box | `300 x 300 x 150 NEMA 4X polycarbonate enclosure wall mounting bracket spacing` |
+| Pump boxes | `16 x 8 x 6 enclosure mounting foot hole spacing` |
+
+**Or, and this is cheaper and is the owner's call: MEASURE THEM. All four boxes are in
+his hands, and a hole pattern measured off the part is better than one read off a
+listing.** It is the same evening as the wall survey and it uses the same tape.
+
+---
+
+## F-125. C-16's PRECONDITION CONTRADICTS C-16's OWN STATED REASON. 2026-09-23
+
+**C-16 measures the 24 V rail with a meter and IT NEEDS THE SUPPLY POWERED**, so it
+cannot become a build step taken while the rail is bare. That much answers the owner's
+question.
+
+**The sharper half: its precondition asks for "the supply powered, before anything else
+is connected to the rail", and its REASON is "every device on it sees whatever it is
+at".** A rail measured with nothing else connected is the supply's no-load trim. **It
+is not the voltage any device sees.** The clause that makes the row unrunnable would
+also make its answer the wrong number.
+
+**So the requirement does not want relaxing. It wants inverting: measure the rail
+LOADED, as the devices see it.** That is achievable with every conductor landed, which
+is the state D1 actually produces. **Routed to the owner. It changes what gets
+measured, so it is not mine.**
+
+---
+
+## F-126. D1 SECTION 19's DEPENDENCY ON A COMMISSIONING ROW WAS IMPORTED, NOT ITS OWN. 2026-09-23
+
+**The owner ruled: break it at section 19, because a build section blocked on a
+commissioning row is backwards. The split does not fall where either of us expected.**
+
+**Nothing in section 19 requires a live transfer chain.** It is a decision section - it
+cuts nothing, marks nothing, and every step reads "Decide X." **The chain requirement
+came from C-11's blocked-on cell: "Tank as built, floats chosen and set, transfer chain
+live FOR THE SURGE MEASUREMENT."**
+
+**The surge is the only term needing a running chain, and it is not an input to any
+mark.** It decides whether the gap between the fill-stop mark and the high-high mark is
+big enough - **a CHECK on marks already chosen, not a figure they are chosen from.**
+
+**The same section already caught the same defect once and did not generalise it.**
+Step 19-01 records that C-11's cell "reads as though the volume waits on the floats. It
+does not." **The cell over-states its dependencies in two places and 19-01 only
+answered one.**
+
+**So neither of the owner's two outcomes applies: section 19 does not split and it does
+not move. The over-stated cell does.** Proposal in commissioning.md, not applied.

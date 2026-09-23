@@ -344,11 +344,27 @@ it is one carrier each for pH and EC, and none for RTD, for a stated reason.
 
 ## Enclosures
 
-| Box | Size | Note |
-|---|---|---|
-| Main panel | roughly 20.7 by 16.6 in | |
-| Two pump boxes | 16 by 8 by 6 in, already owned | Sealed. Heads pass through the lids |
-| Display box | roughly 300 by 250 by 130 mm | NEMA 4X polycarbonate, gasketed display cutout |
+**ALL FOUR FOOTPRINTS AND ALL FOUR PLATES ARE NOW OWNER-GIVEN, 2026-09-23, D-226.**
+Outlines and plates only. **MOUNTING HOLE PATTERNS ARE NOT GIVEN FOR ANY OF THE FOUR,
+main panel included, and none has ever been in this tree. F-124.**
+
+| Box | Overall, mm | Overall, in | Plate, mm | Note |
+|---|---|---|---|---|
+| Main panel | **508 x 419 x 201** | 20.0 x 16.5 x 7.9 | **468 x 379** | Qilipsu. Ordered and delivered, T-030 |
+| Display box | **300 x 300 x 150** | 11.8 x 11.8 x 5.9 | **260 x 260** | NEMA 4X polycarbonate, gasketed display cutout |
+| Pump box A | **406 x 203 x 152** | 16.0 x 8.0 x 6.0 | **381 x 178** | Sealed. Heads pass through the lid |
+| Pump box B | **406 x 203 x 152** | 16.0 x 8.0 x 6.0 | **381 x 178** | Sealed. Heads pass through the lid |
+
+**CORRECTION, and it is a real one, not a tightening: the display box was carried here
+and in D7 as "roughly 300 by 250 by 130 mm".** It is **300 x 300 x 150**. The middle
+dimension is 50 mm larger and the depth 20 mm larger. **Nothing was sized against the
+old figures - the display box interior sheet was never written - so the correction
+costs nothing today and would have cost a sheet tomorrow.**
+
+**THE THREE NEW PLATE FIGURES ARE WHAT MATTER MORE THAN THE OUTLINES. F-123.** The main
+panel's interior sheets exist only because 468 x 379 was known. **The pump box and
+display box interior sheets were recorded in D3 as "unwritten rather than blocked" -
+they were blocked, on these three figures, and no list carried the blocker.**
 
 **Plastic gives no bonding path, so every equipment ground lands on a ground bar
 rather than on the box.**
@@ -468,6 +484,48 @@ a contact rather than as a word, is MAIN-PANEL's to answer.
 enclosures, the manifold, the tubing raceway and the jug stations.**
 
 Z5, M-02 and the station run are all consequences of how those are placed inside it.
+
+### The sightline. ONE REAL COORDINATE, 2026-09-23, D-226
+
+**EYE LEVEL IS 1829 mm FROM THE FLOOR, 6 ft. Owner-measured.** It is the first real
+number on the Y axis and it is the only one. **X is still entirely open and so is
+every other Y.**
+
+**M-02 IS NOT CLOSED BY IT.** wall-survey.md asks for coordinates from one named datum
+per item, and a single Y shared by four items is neither a datum nor per item.
+
+**WHAT IT DOES NOT DO, counted rather than characterised, per T-031:**
+
+| | |
+|---|---|
+| RUN- cut lengths | **Still blocked.** Wall run is dominated by X and X is open |
+| D6's position and spacing cells | **Still blocked** |
+| D1's dimensioned half | **Still blocked** |
+| D3 sheet 3.8 | **Still blocked, and now on TWO things**: the survey, and a mounting-hole pattern for any box at all. F-124 |
+
+**WHAT IT DOES DO: three of D3's sheets become writable, and it is the plates that do
+it, not the sightline.** Pump box A, pump box B and the display box interiors, owned by
+PUMP-BOXES and DISPLAY-BOX.
+
+### The anti-siphon constraint belongs to the JUG SHELF. G-58, D-227
+
+**EVERY LIQUID LEVEL STAYS BELOW THE MANIFOLD, so a failed tube cannot siphon a
+container into the tank.**
+
+**THE CONSTRAINED THING IS THE CONTAINER LEVEL AND NOT THE PUMP POSITION.** The siphon
+path runs container to manifold. **The pump head is not on that path and its height
+does not appear in it.**
+
+| Item | What the rule says about it |
+|---|---|
+| **Jug shelf** | **BELOW the manifold. This is the constraint and it is the whole of it** |
+| Pump box A, Pump box B | **FREE with respect to siphoning.** Above the manifold is safe, below it is safe |
+| Manifold | The ceiling the jug shelf is measured against |
+
+**Recorded here as owner's correction of his own earlier framing, which attached the
+rule to the pump boxes.** G-58: **a constraint attaches to the thing whose value it
+bounds, and a constraint filed against the wrong item is a constraint the next editor
+satisfies without fixing anything.**
 
 ## Cable runs, measured on the wall, and the CUT LENGTHS
 

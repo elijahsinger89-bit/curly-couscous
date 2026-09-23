@@ -4941,3 +4941,188 @@ as-set VREF although C-22 requires it set per driver** - INTEGRATOR deliberately
 D9 no row for it, **because adding one would have put the view ahead of its source.**
 G-54 observed unprompted, by an agent, against its own convenience.
 
+
+
+---
+
+# D-224. THE CROSS-DOCUMENT CHECK IS BUILT, AND ITS FIRST RESULT IS THAT IT CANNOT YET SEE. 2026-09-23
+
+**The owner asked whether a cross-document check is buildable, on the reasoning that if
+every document's preconditions and postconditions are already structured then the graph
+is the union of them and the check is the same test against the combined set. THE
+REASONING IS RIGHT. THE PREMISE IS NOT TRUE YET.**
+
+`tools/cross-document-check.py`. Reads the files, writes nothing, exits 1 on a finding.
+
+| | |
+|---|---|
+| Nodes | **51** sections and stages across D1, D8 and D4 |
+| Edges | **106**, of which **6 cross a document boundary** |
+| Cycles found | **0** |
+| **Preconditions no postcondition anywhere produces** | **23** |
+
+**THE 23 ARE THE RESULT. Each is a MISSING ARC, not a missing state.** They are
+preconditions written in prose - "transfer chain live", "loop running", "the tanks are
+empty and dry" - **naming a condition that some section certainly produces and no
+section claims to.** D1's BB-nn ids are machine-readable and its internal edges resolve
+cleanly. D8 references D1 by prose. D3, D7 and D9 state no pre- or postconditions at
+all.
+
+**SO THE CHECK CANNOT CURRENTLY SEE THE CYCLE IT WAS BUILT TO FIND.** D1 section 19's
+dependency on C-11 lives in a blocked note rather than a precondition; D8's "transfer
+chain live" names no producer. **Both arcs of the known cycle are among the 23, and the
+detector prints 0.**
+
+## G-57 IS FROZEN, AND IT IS THE REASON THIS CHECK SHIPS WITH A GUARD
+
+> **A CHECK BUILT ON A GRAPH PARSED FROM PROSE REPORTS CLEAN WHEN THE PROSE IS
+> UNSTRUCTURED, AND CLEAN IS THE SAME OUTPUT AS CORRECT. A check must refuse to
+> report a result it cannot support.**
+
+The script prints the incomplete-graph banner before the cycle count and annotates the
+count itself. **A silent 0 from this tool would have been worse than no tool**, because
+it would have been read as the cross-document check passing - **which is exactly the
+false reassurance G-56 was frozen about, arriving one level up, from the instrument
+built to catch it.**
+
+**WHAT IT COSTS TO MAKE IT SEE: the 23 prose preconditions get a producer named, the
+way D1's BB- ids already do.** That is a naming pass, not a restructure, and it is the
+only work between here and a check that would have caught the cycle on its own.
+
+**WHAT THIS CHECK WILL NEVER CATCH, stated so it is not over-trusted: a fact two
+documents jointly imply and neither states.** F-122, the E-stop's height above the
+floor, is exactly that and is invisible to it. **A dependency check finds dependencies.**
+
+---
+
+# D-225. THE THREE ORDERING DECISIONS. ONE APPLIED, ONE HELD WITH A PHYSICAL REASON, ONE THAT SPLITS SOMEWHERE ELSE. 2026-09-23
+
+## 1. C-11 and D1 section 19: the split does not fall in section 19. F-126
+
+**Nothing in section 19 needs a live transfer chain.** The requirement was imported
+from C-11's blocked-on cell, which over-states what C-11 needs. **The surge is the only
+term needing a running chain and it checks a gap rather than setting a mark.**
+
+**Neither "split it" nor "move it whole" applies. The over-stated cell is what moves.**
+Proposal written into commissioning.md, not applied, because it changes what the
+machine is asked to tell us.
+
+## 2. C-08 and C-02: THE PHYSICAL REASON THE OWNER ASKED ABOUT EXISTS, AND HIS RULING WOULD SPEND IT
+
+**NOT REORDERED.** The owner ruled C-02 first and invited the counter-case. Here it is:
+**C-08 measures noise and drift WITH NOTHING HAPPENING. C-02 deliberately puts an
+OVERSIZED dose into the tank.** After C-02 runs, "nothing happening" is gone until the
+settle completes - **and the settle's length is C-02's own answer.** Reversing does not
+break the circle, it moves it.
+
+**THE CIRCLE DISSOLVES WITHOUT A REORDER AND IT COSTS NOTHING.** C-08's constraint is
+**AT LEAST as long as the settling interval** - a FLOOR, not an equality. Run C-08
+first over a generously long window; C-02's figure then validates that window or
+requires one re-run. **The dependency becomes a check instead of an input.**
+
+**The owner rules. The order stands as written until he does.**
+
+## 3. C-16: it needs power, so the owner's instinct is foreclosed. F-125
+
+**C-16 measures the 24 V rail with a meter, with the supply energised.** There is no
+dead version. **It cannot become a build step taken on a bare rail.**
+
+**And its precondition contradicts its own reason.** The rail "every device sees" is not
+the rail measured with nothing connected. **The requirement wants inverting rather than
+relaxing: measure it LOADED.** Routed. It changes what gets measured.
+
+## 4. The acceptance criteria, corrected count
+
+**D8-46 and D8-47 are now marked STRUCTURALLY CRITERION-FREE rather than missing**, per
+the owner and per G-46. **Eighteen of the 56 are genuinely owed, not twenty.** BOSS owns
+nine and they are listed to him.
+
+---
+
+# D-226. THE SURVEY'S FIRST COORDINATE AND THE FOUR FOOTPRINTS. WHAT THEY MOVE, COUNTED. 2026-09-23
+
+**Owner-given: eye level 1829 mm, and all four enclosures' overall dimensions and
+mounting plates.**
+
+| | |
+|---|---|
+| **Moved** | **Three of D3's eleven sheets become writable** - pump box A, pump box B and display box interiors. **The plate figures did it, not the sightline** |
+| **Corrected** | The display box was carried as "roughly 300 by 250 by 130 mm". It is **300 x 300 x 150, plate 260 x 260**. parts.md and D7 A-18 both fixed |
+| **Not moved** | RUN- cut lengths, D6's position and spacing cells, D1's dimensioned half, D3 sheet 3.8. **All four are dominated by X, and X is untouched** |
+| **Newly blocked, and it was always blocked** | Sheet 3.8 and every D1 mounting step, on **F-124**: no mounting-hole pattern exists for any of the four boxes |
+| **Found, and it has no correct answer** | **F-122.** Both offered sightline placements put the main panel's E-STOP at or above eye level, because its whole operator interface is on the upward-facing top face |
+
+**F-123 is the one worth carrying forward: the three plate figures closed a blocker that
+was on no list, and the owner supplied them without knowing that was what he was
+closing.** The unlock map's "D3 is gated on M-02, AND ONLY ON M-02" was a completeness
+claim about blockers. **Corrected.**
+
+---
+
+# D-227. THE ANTI-SIPHON CONSTRAINT MOVES TO THE JUG SHELF. G-58 FROZEN. 2026-09-23
+
+**Owner's correction of his own framing, and he is right.** Every liquid level stays
+below the manifold so a failed tube cannot siphon a container into the tank. **The
+siphon path runs container to manifold. The pump head is not on that path.**
+
+| Item | Constraint |
+|---|---|
+| **Jug shelf** | **BELOW the manifold.** This is the rule and it is the whole of it |
+| Pump box A, Pump box B | **FREE.** Above the manifold is safe, below is safe |
+
+> **G-58. A CONSTRAINT ATTACHES TO THE THING WHOSE VALUE IT BOUNDS. Filed against the
+> wrong item, it is a constraint the next editor satisfies without fixing anything** -
+> and the item that actually needed bounding stays unbounded while the record shows the
+> rule as honoured.
+
+**Recorded in parts.md against the jug shelf. The pump boxes' vertical position is now
+explicitly FREE, which is the most useful kind of answer wall-survey.md section 3 asks
+for.**
+
+---
+
+# D-228. THE 1ST EDITION DOSING WALL, READ. WHAT SURVIVES IS METHOD AND CONSTRAINT. 2026-09-23
+
+**Read rather than waited for, at the owner's instruction. Under G-53 every figure in
+it is an IMPORT from the previous arrangement and a T-018 candidate.**
+
+## The constraints that survive, because they are about what breaks and not about where things are
+
+| Constraint | Why it survives the change of arrangement |
+|---|---|
+| **Every liquid level below the manifold** | Already carried. D-227 puts it on the jug shelf |
+| **Ports tap the TOP of the run** | A port on the side or bottom drains the manifold into the line |
+| **Port order keeps calcium away from both phosphate sources** | Chemistry, not geometry. **Survives any wall** |
+| **All twelve tubes enter ONE raceway; a tube leaves only at its own port or container** | A routing discipline. It is what makes a tube traceable by eye |
+| **DRIP TRAY OFFSET so a leak cannot fall into the reservoir** | **NEITHER OF US HAS STATED THIS IN THIS BUILD. It is new here and it is worth having** |
+| **Cord grips on the BOTTOM face only, drip loop outside the box** | Already carried, D-146 |
+| **The plastic box is not a bonding path** | Already carried, D-192 |
+| **Leave clearance below each head to change tubing** | A maintenance constraint that a layout drawn to fit will delete |
+
+## The figures, which are imports and are NOT adopted
+
+**Board 1/2 in HDPE at 72 x 44 in. Manifold 17 in above the board's bottom edge. Wire
+duct 7578K14 at 1-1/2 x 1 in. Buckets on a 2-shelf floor rack, 1 L bottles on a board
+shelf.**
+
+**ONE OF THEM IS A TRAP AND IT IS THE ONE THAT LOOKS MOST USABLE. The 1st Edition board
+is 72 in, which is 1828.8 mm, and the owner's measured eye level is 1829 mm.** They are
+the same number and they mean different things: **one is a board's length, the other is
+a height above a floor.** And the board is not floor-mounted - the 1st Edition sheet
+puts the day tank, the circulation pump and the probe glands **on the floor below it.**
+
+**So "manifold 17 in above the bottom edge" is not a height above the floor and must
+never be read as one.** G-53's direction-of-travel rule, on a figure that would have
+imported silently and looked right. **T-018.**
+
+## The build order, which is method and is adopted in shape
+
+1. Drill and tap the plate. 2. Mount rails and duct. 3. Clip on devices. 4. Step-drill
+the face and fit every grip. 5. **Land every field cable and STOP.** 6. Make up the
+short internal wires on the bench. 7. **Mark BOTH ends of every wire before the lids go
+on.**
+
+**Step 5 and step 7 are the two that a builder in a hurry deletes, and they are the two
+D1 already carries.** Convergence, and it is an import under G-53 rather than a second
+source: **D1 took its assembly order from this same set.** F-075's shape. It confirms
+nothing.
