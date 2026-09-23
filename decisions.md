@@ -4122,3 +4122,48 @@ point and nothing bonds anywhere else, **so a bar with no spare way is a bar tha
 cannot take the next thing that has to bond** - and the next thing is already named
 three times over.
 
+**D-192 TWO BONDED BARS ARE ONE GROUND POINT. F-117 CLOSES, AND THE SINGLE-POINT
+RULE IS RESTATED AGAINST THE THING IT IS ACTUALLY ABOUT.** The owner bought two
+12-way bars rather than one, and asks whether a second bar violates D-165.
+
+**IT DOES NOT, AND HIS READING IS RIGHT. But the rule needs restating, because
+D-165 names THE BAR and the bar was never the point: D-165 IS ABOUT THERE BEING ONE
+GROUND POINT, and two bars bonded together are one.** A bar is a piece of copper.
+**The single point is the BONDED ASSEMBLY.**
+
+**TWO CONDITIONS, AND BOTH EXIST BECAUSE OF THE SAME FAILURE:**
+
+**1. THE INTER-BAR JUMPER IS NOT A LANDING. It is fitted first, it is never removed
+to free a way, and it is not a terminal that anything else may share.** If it is
+treated as a landing, **somebody eventually removes it to make room - and at that
+moment half the equipment grounds in the build are floating.**
+
+**2. THE BARS ARE NEVER SPLIT BY CLASS.** The temptation with two bars is to put
+24 V grounds on one and 120 V on the other. **That is the single-point rule defeated
+by tidiness** - it makes the jumper carry fault current between two classes, and it
+makes a removed jumper look deliberate.
+
+**AND THE REASON BOTH CONDITIONS MATTER IS THAT THE FAILURE IS SILENT: a missing or
+backed-out jumper leaves everything looking correctly built, every ground landed on a
+bar, and nothing anywhere measures it.** That is the class this build keeps meeting -
+**and here it is introduced by the fix rather than by the defect.**
+
+**So C-25 is added: confirm continuity across the inter-bar jumper with a meter,
+before anything else lands on either bar.** One measurement, no instrument beyond a
+meter. **It is the same shape as C-24, which proves a claim about floats that nothing
+else reaches.**
+
+**F-117's underlying count is unchanged and is now satisfied: twelve landings
+enumerated, and the three uncounted additions - the WB200's EGC, the enclosure's own
+bonding if metal, and any spare - have somewhere to go.**
+
+**D-193 THE LOOKUP LIST IS ELEVEN AND THE STUDY CONTRADICTS ITSELF ONCE, SAYING
+NINETEEN IN ONE PLACE.** Section 9 enumerates eleven and section 8 says nineteen.
+**Eleven is the list; nineteen is unsupported by anything in the file.** Flagged
+rather than corrected, because the file is MAIN-PANEL's.
+
+**Four more are NOT lookups because no device is chosen: the main disconnect, the two
+overcurrent devices, the R-PI fuse holder and KM-CHIL.** Four rail positions whose
+footprint **cannot be looked up because nobody has said what they are**, and they
+were open before this study.
+
