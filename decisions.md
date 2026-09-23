@@ -4524,3 +4524,56 @@ froze wall run plus 3 ft for this build.** What the parallel build adds is **wha
 that decomposition is worth having, **because it says which half of the allowance a
 layout change spends.**
 
+**D-207 THE READ HAPPENS NOW. THE FRACTION THAT UNBLOCKED IS SMALL AND THE COUNT IS
+STATED WITH ITS METHOD.**
+
+**246 blocked steps in D1, classified by what their "Missing:" line names:**
+
+| Cause | Steps |
+|---|---|
+| Inherits an earlier step | 120 |
+| Other, not classified by the pass | 69 |
+| **M-02, positions and dimensions** | **37** |
+| **ENCLOSURE** | **9** |
+| **DEVICE CHOICE** | **4** |
+| F-106, terminals | 3 |
+| Float and C-11 | 3 |
+| **RECEPTACLE** | **1** |
+
+**SO WHAT LANDED SINCE UNBLOCKS ABOUT 14 DIRECTLY, plus whatever inherits from
+them.** Even if the inheritance chains triple it, **it is under a quarter and the
+bulk - M-02's 37 and the 120 that inherit - is untouched by anything decided this
+week.**
+
+**THE METHOD IS STATED BECAUSE THE NUMBER IS INDICATIVE RATHER THAN EXACT: this is a
+keyword classification of each step's Missing line, not a read.** The "other" bucket
+at 69 is unclassified, not empty. **The decision is robust to the error bars, which
+is why it is defensible on a count this rough** - a small fraction stays small even
+if it doubles.
+
+**SO: READ NOW.** Waiting would buy the read a few real steps in place of
+placeholders and cost it the thing it is for.
+
+**And D4 is the highest-risk of the three by its own history: it was REGENERATED TO A
+FORMAT INSTRUCTION AFTER ITS ROWS EXISTED**, which is precisely when the parallel
+build duplicated three steps across two sections **and its count check did not catch
+it, because both halves were internally consistent.** The count check here passed
+too.
+
+**D-208 D3 IS SPLIT INTO TWO HALVES AND ONLY ONE IS BLOCKED. G-46 APPLIED TO A
+DOCUMENT.** Owner's instruction, 2026-09-23.
+
+**An enclosure layout sheet has two independent halves: WHERE THE BOX SITS ON THE
+WALL, and WHAT SITS INSIDE THE BOX. The second needs no survey at all.**
+
+**The interior is fully determined by things now settled**: the enclosure at 508 x
+419 x 201 with a 468 x 379 plate, the five device widths, the rail lengths, the duct
+runs, the grip positions on the bottom face and the device positions on the top face.
+
+**So D3's interior sheets are produced now and the wall-position sheet is left EMPTY
+WITH ITS BLOCKER NAMED, rather than the document waiting as a whole.** A document
+half of which is blocked is not a blocked document, **and a completion count that
+treats it as one is wrong in the flattering direction's opposite - understating
+readiness, which is the error nobody catches because it never embarrasses
+anyone.**
+
