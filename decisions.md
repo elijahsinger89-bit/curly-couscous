@@ -91,6 +91,7 @@ changed reports to BOSS and does not act.
 | G-51 | **PREFER THE SMALLEST ENCLOSURE THAT ACTUALLY FITS, AND MOUNT EVERYTHING VERTICAL - PORTRAIT, NOT LANDSCAPE, ON EVERY BOX. SPEND DOUBLE-STACKED BLOCKS AND TIGHTER RAIL PACKING TO GET THERE. NEVER SPEND A PROTECTION, A MARGIN OR A CLEARANCE** | Frozen 2026-09-11, D-188, the owner's KISS applied to enclosures. **If a box only fits by crowding a 120 V rail against a 24 V one, or by losing the separation that keeps a sense conductor away from a mains pair, THE BOX IS TOO SMALL and that is the answer to report.** **And a double-deck block is a real trade, not a free win: two terminals in one footprint makes the TIER PAIRING a build fact - hot with hot, neutral with neutral, so a slip between tiers shorts LIKE TO LIKE. That hazard exists only because the part exists.** The parallel build bought them and decided against them. **Take them if the box needs it and say so on the face. Do not take them for tidiness**. **AMENDED 2026-09-11 by D-190: THE STATED HAZARD IS INVERTED ON A SERIES INTERLOCK CHAIN. Like-to-like assumes every terminal in a bank sits at the same potential. In a series chain each one sits at a DIFFERENT POINT of the chain, so a tier slip does not short like to like - IT BYPASSES THE PROTECTION and makes a float permanently MADE.** So on an interlock bank a double-deck is not a smaller box for a new failure mode, **it is a smaller box for the inverse of the topology's whole purpose** |
 | G-52 | **ANY FASTENER SPACING THAT ASSUMES THE PART IS STATIONARY HAS IGNORED THE TOOL.** Space for a fitting is not space to FIT it | Frozen 2026-09-23, D-195, the owner's generalisation of lookup 1. **No manufacturer publishes a minimum centre-to-centre for a cord grip, so geometry decides - and the floor is NOT the flat width.** **Across-corners is about 1.15x flats and that is what collides first WHEN A NUT ROTATES.** A spacing that fits two nuts sitting still does not fit two being tightened. **It generalises past cord grips to every threaded fitting, every terminal screw reached with a driver, and every nut on a crowded plate** |
 | G-53 | **EVERY FACT, TRAP OR FINDING THAT CROSSES BETWEEN THE TWO BUILDS CARRIES ITS ORIGIN AND ITS DIRECTION, PERMANENTLY** | Frozen 2026-09-23, D-205. **Two builds agreeing is worth nothing when one told the other.** **Without the direction recorded, every imported trap becomes independent corroboration six months later, and the whole value of running two builds evaporates into an ECHO.** It binds on convergence as hard as on import: **a conclusion both builds reached is only independent if neither was told** |
+| G-54 | **A FACT ENTERS AT THE SOURCE, NEVER AT THE VIEW. A VIEW THAT IS AHEAD OF ITS SOURCE IS NO LONGER A VIEW** | Frozen 2026-09-23, D-209. **BOSS sent a settled decision to the document that DISPLAYS conductor facts instead of to the one that HOLDS them.** D4 now states the box division as settled in four places while D5 marks the same rows OPEN. **G-45 made them one source so they could not disagree; feeding the view directly defeats that at the only point where it can be defeated - the hand that types.** **The mechanism is only as good as the discipline about where facts are injected** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -4576,4 +4577,57 @@ half of which is blocked is not a blocked document, **and a completion count tha
 treats it as one is wrong in the flattering direction's opposite - understating
 readiness, which is the error nobody catches because it never embarrasses
 anyone.**
+
+**D-209 THE BUILDER READ OF D4, D5 AND D6 IS BACK. THE FEARED FAILURE DID NOT HAPPEN
+AND A DIFFERENT ONE DID - AND IT IS BOSS'S.**
+
+**WHAT WAS FEARED AND IS CLEAN: the regeneration duplicated or dropped NOTHING.** No
+CDR- id appears twice on any page, **D4's set and D5's 64 rows match exactly both
+ways**, every spanning conductor is on exactly two pages, the only three appearing
+once are the branch-circuit ends, **and 125 plus 48 reproduces.** Read for, then
+confirmed - not taken from the count check that had already passed.
+
+**And the inverse acceptance defect is clean too: ZERO blocked steps carry a live
+ACCEPT, and all 125 name what is missing and who owns it.** That was seven in D1's
+first issue. **The D1 lesson did not have to be learned twice.**
+
+**WHAT BROKE INSTEAD: D4 STATES THE CH1-TO-CH4 / CH5-TO-CH8 BOX DIVISION AS SETTLED
+IN FOUR PLACES - INCLUDING TWO PAGE TITLES AND ALL SIXTEEN STEP-AND-DIRECTION STEPS -
+WHILE D5 MARKS COLUMN 2 OPEN ON EVERY ONE OF THOSE ROWS AND D6 BLOCKS THE SAME RUN.**
+F-119.
+
+**A VIEW IS AHEAD OF ITS SOURCE, WHICH MEANS IT IS NOT A VIEW.**
+
+**AND THE CAUSE IS BOSS. D-178 settled the division, and BOSS sent it to D4's
+generator.** G-45 made D4 and D5 one source **so they could not disagree - and
+feeding the view directly defeats that at the only point where it can be defeated,
+which is the hand that types.** Frozen as G-54: **a fact enters at the SOURCE, never
+at the view.**
+
+**THREE MORE THAT MATTER:**
+
+**G-50 IS ABSENT FROM D4 ENTIRELY.** No page states a precondition or postcondition
+except one paragraph. **G-50 was frozen the day D4 was regenerated and the
+regeneration predates it by hours** - the rule exists and the document does not carry
+it.
+
+**NOTHING IS MOUNTED, FITTED OR FED THROUGH AN ENTRY BEFORE THE FIRST JOINT. There is
+no assembly step anywhere in D4 and its exclusions list does not mention mounting**,
+so a builder holding page 1 lands a conductor into a box nothing told him to hang.
+**That is the untold-assumption category, and it is the one that found the most in
+D1.**
+
+**AND ONE CONDUCTOR IS DROPPED UPSTREAM: D6 requires an EGC in RUN-015 and D5
+enumerates none, so page 8 has two steps where it should have three.** A missing
+conductor is not a formatting defect.
+
+**Logged and routed, not expanded here: two blocked steps name the WRONG blocker;
+D4's own blocked table miscounts three rows; the eight "look then land" steps are one
+shape with only one copy carrying the stop rule; D5 twice describes D4 as "one page
+per conductor", which D-171 corrected; and D6 flags an unstable relay name that D4
+uses both ways on one page.**
+
+**The reader also said plainly, in a section of its own, that the documents are
+strong where they were feared weak.** Recorded because **a read that reports only
+defects is a read nobody can calibrate.**
 
