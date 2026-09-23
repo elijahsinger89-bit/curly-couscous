@@ -4243,3 +4243,70 @@ them is inside the enclosure except the twelve conductors and their grips.**
 **G-52 IS FROZEN FROM LOOKUP 1'S GENERALISATION**, in the owner's words: **any
 fastener spacing that assumes the part is stationary has ignored the tool.**
 
+**D-196 THE VERDICT: BUY A 16 BY 14. THE BOX ON THE SHELF IS NOT THE RIGHT SIZE AND
+A TRUE 16 BY 12 IS SHORT OUTRIGHT.** Panel 374.65 by 327.15 mm.
+subsystems/main-panel-plate-area.md Issue 2.
+
+**MAIN-PANEL OVERTURNED ITS OWN HEADLINE AND THAT IS THE FIRST THING TO RECORD.
+ISSUE 1 SAID WIDTH DECIDES IT. WIDTH DOES NOT.** It had treated the bottom face as a
+LINE when it is a RECTANGLE. **Fifteen grips need 17.36 in in one row and 9.66 in in
+TWO ROWS of 8 and 7** - which clears every candidate with room, **and two rows makes
+the F-029 and SEG-A ordering EASIER rather than harder.**
+
+**And the gland count rose from 11 to 15 while the constraint relaxed**, because
+lookup 11 moved the four receptacle feeds out through grips.
+
+**WHAT ACTUALLY DECIDES IT IS THE NDR'S 185 MM BAND, and the comparison is
+RAIL-MILLIMETRES:**
+
+| | Rail mm |
+|---|---|
+| **Demand** | **568** - six envelopes 180, two 22.32s 35, 57 ways at 6.2 = 353 |
+| 14 x 12 | 379 |
+| QLINE I 400x300 | 557 |
+| **QILISU, the box on the shelf** | **590** |
+| **16 x 14** | **758** |
+
+**The QILISU clears by +22 mm and QLINE I misses by -11 mm. BOTH NUMBERS ARE SMALLER
+THAN ONE UNCHOSEN 17.5 MM MODULE, AND THERE ARE FOUR OF THEM.** And **353 of the 568
+is a terminal bank at 57 ways, which is a FLOOR excluding every panel-internal
+conductor.** So the shelf box clears on a number that four unchosen devices and an
+unwritten conductor list can each erase on their own.
+
+**PORTRAIT IS VINDICATED RATHER THAN PENALISED: landscape on the same box gives 545
+mm, 45 mm WORSE.** G-51's mounting instruction pays for itself on the arithmetic that
+tested it.
+
+**The one thing that would reverse the verdict is named and refused: two half-inch
+ducts instead of two 25 mm would give the QILISU 665 mm - but that is designing to
+NFPA 79's 50 percent LIMIT, and CHOOSING A DUCT BEFORE A CONDUCTOR IS THE WRONG
+ORDER.** Correct refusal under G-51: **no margin is spent to make a box fit.**
+
+**WHAT THE 16 BY 14 COSTS, stated because the owner asked for it: a new enclosure, a
+new plate layout, and every face hole re-derived.**
+
+**D-197 LOOKUP 11 CONTRADICTS D-046, AND THE PHYSICAL FACT WINS.** D-046 froze
+"receptacles are panel mounted and cords are not fed through grips."
+
+**A STANDARD 15 A DUPLEX DOES NOT PANEL-MOUNT AT ALL. It screws to a DEVICE BOX by
+the yoke.** The owner's answer already supersedes it: **weatherproof boxes on the
+wall BESIDE the panel, fed through cord grips** - which is the exact arrangement
+D-046 forbade.
+
+**D-046 is corrected rather than annotated, because a frozen decision that a part
+cannot obey is not a decision, it is an error.** Both entries stay.
+
+**Consequences, all BOSS's: P-03, P-04 and P-05's End A need restating; RUN-018,
+RUN-019 and RUN-020's A-face cell changes; and the R-PI feed needs a NEW RUN- id
+under D-149.** Being done now.
+
+**D-198 THE FOUR DEVICE REQUIREMENTS, AND ONE OF THEM MAY NOT NEED A PART AT ALL.**
+
+| Device | What it must be |
+|---|---|
+| **Disconnect** | **Protects nothing.** Must break every entering circuit TOGETHER - **D-137 makes that two** - break under load, and have a readable position. **AND THE G-48 QUESTION COMES FIRST: a lockable building breaker satisfies the same requirement for ZERO rail millimetres** |
+| **Overcurrent, BUS-A** | Routine, and selective with the building breaker |
+| **Overcurrent, BUS-B** | **The hard one. 7.5 A continuous with a trip curve chosen against an UNPUBLISHED locked-rotor current - and a nuisance trip here is SILENT, because D-108 leaves nothing in the panel wired to the chiller** |
+| **R-PI fuse holder** | Protects BUS-A from a fault on the Pi feed, sized against the brick's plug-in surge. **It needs a BLOWN-FUSE INDICATOR specifically here, because nothing can power-cycle the Pi and a blown fuse presents as a dead Pi with no cause** |
+| **KM-CHIL** | **Motor duty, not AC-1. Sized on INRUSH, not running current.** Must drop out cleanly on a sagging rail. **BLOCKED on the open rung that decides its coil's bus - which decides whether the Pi can stop the water system, so no part may be chosen first** |
+
