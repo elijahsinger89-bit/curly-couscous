@@ -5595,3 +5595,59 @@ it.**
 end travels furthest when the door opens and is the likeliest of the five to be knocked.
 **That resolves in the SAFE DIRECTION - a knocked E-stop stops the machine - so it is not
 an objection.**
+
+---
+
+# D-235. TWO SMALL THINGS THE OWNER SETTLED, AND ONE PART DECISION ROUTED. 2026-09-23
+
+## 1. S-18's Pi-READ EXIT IS TAKEN, WITH ITS LIMIT ON THE ROW
+
+**The owner: "Record it with that limit stated on the row, because a signal that reports a
+weaker fact than its name suggests is exactly how the achieved-value family starts."**
+Written onto S-18.
+
+**KM-CHIL's auxiliary says THE RECEPTACLE IS ENERGISED. It does not say the compressor is
+running.** D-108's finding stands: the chiller cycles its own compressor internally and
+nothing in the panel sees that.
+
+**So a tag built from this signal means POWER WAS AVAILABLE. Any verification window that
+treats it as COOLING HAPPENED is reading a stronger fact than the signal carries.** Named
+on the row so nobody makes that move later.
+
+## 2. THE HINGE REASON, WITHDRAWN BY THE OWNER, RULING UNCHANGED
+
+**He withdrew "the arc is largest and a palm strike lands squarely": the door is closed
+when anybody strikes the E-stop, so both ends strike equally.** The ruling stands on the
+reason that actually carries it - **RESET is the deepest body and lands at the smallest
+arc.**
+
+**Second time this week a RIGHT RULING ARRIVED WITH A WRONG REASON ATTACHED**, and both
+times the ruling was kept and the reason was not inherited. **That is worth a line
+because the tempting move is the opposite: accept the ruling and carry its reason forward
+as though the ruling proved it.**
+
+## 3. THE RTC BATTERY. ROUTED AS A DECISION, NOT A LOOKUP
+
+**The elapsed-time term is ANSWERABLE and the owner answered it: the Pi 5 has a real-time
+clock, it needs a battery on the RTC connector, that is a separate part, and HE HAS NOT
+BOUGHT ONE.**
+
+| | |
+|---|---|
+| **Today** | **NO clock survives a power cut.** A window spanning a restart is VOID rather than carry an untrustworthy elapsed time. software-spec 9.1(7) and 9.4 |
+| **If the battery is bought** | The clock survives, **and a window spanning a restart could carry a trustworthy elapsed time** |
+| **What it costs** | **A few dollars and one part.** The owner's words |
+| **What it buys** | **A window survives a reboot instead of being voided.** Every void window is a measurement thrown away and a batch the operator has to decide about |
+
+**ROUTED AS A DECISION AND NOT AS A LOOKUP, at the owner's instruction, and the
+distinction is the point: the FACT is known. What is open is whether to buy it.**
+
+**BOSS's position, stated because he asked for one and not because it is BOSS's to
+decide: the cautious behaviour does not change either way.** A void window is the safe
+direction and stays available. **What the battery buys is fewer void windows, not a
+safer machine** - so it is a convenience purchase with a real benefit, **and it is not a
+protection and must never be recorded as one.**
+
+**IT DOES NOT BLOCK ANYTHING.** software-spec already states the without-battery
+behaviour and it is the cautious one. **If the battery arrives, 9.1(7) gains a condition
+rather than being rewritten.**
