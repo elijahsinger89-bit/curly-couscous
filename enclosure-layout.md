@@ -400,13 +400,16 @@ CONSEQUENCE WAS NEVER WEIGHED AGAINST IT.**
 the operator faces the panel, which is a datum statement and not a description, **and
 that sentence is as true of a door as of a roof.**
 
+**ORDER REVERSED 2026-09-23, D-234, when the hinge was answered. See 3.6.7: every reason
+below is a positional relation and none names an end, so the reversal changes no reason.**
+
 | Position | Device | Why here |
 |---|---|---|
-| 1 | **E-STOP** | At one end, so a struck palm lands on nothing else |
-| 2 | **PL-R**, permissive lost | Adjacent to E-STOP, because E-STOP is what causes it. **Reading the two together is the diagnosis** |
+| 1, **HINGE end** | **RESET** | **At the opposite end from E-STOP**, so a person clearing a trip cannot strike the E-stop while reaching for it. **And it is the deepest body, now at the smallest arc** |
+| 2 | **PL-G**, filling | |
 | 3 | **PL-Y**, healthy | |
-| 4 | **PL-G**, filling | |
-| 5 | **RESET** | **At the opposite end from E-STOP**, so a person clearing a trip cannot strike the E-stop while reaching for it |
+| 4 | **PL-R**, permissive lost | Adjacent to E-STOP, because E-STOP is what causes it. **Reading the two together is the diagnosis** |
+| 5, **LATCH end** | **E-STOP** | At one end, so a struck palm lands on nothing else |
 
 **And nothing in D4, D5 or D6 changes. The five devices' conductors land where they
 landed. Only the face they pass through moves.** Zero rows, zero joints, zero runs.
@@ -476,9 +479,50 @@ that assumes the door is stationary has ignored the swing.**
 rule against whatever the door sweeps past**: the enclosure's own frame, and anything
 mounted on the wall beside the panel.
 
-**WHICH SIDE IS HINGED IS NOT ON FILE.** It decides which end of the row - E-STOP's or
-RESET's - is the one with the small arc, **and therefore which end's body is the one
-that could foul the frame.** Owner's, in the same measurement batch.
+**ANSWERED 2026-09-23, see 3.6.7. HINGED ON THE LEFT AS THE OPERATOR FACES IT.** The
+clearance question against the frame and against anything on the wall beside the panel
+**stays open and is what the door-to-plate and usable-area measurements feed.**
+
+### 3.6.7 THE HINGE IS ANSWERED, AND THE DEVICE ORDER REVERSES. D-234
+
+**Owner, 2026-09-23, without a tape: THE DOOR IS HINGED ON THE LEFT AS HE FACES IT, so
+the latch is on the right, and THE E-STOP GOES AT THE LATCH END.**
+
+**He asked for this to be CONFIRMED against the order rather than adopted, because the
+order was written for a different face. CONFIRMED, AND THE ORDER REVERSES.**
+
+**Every reason in 3.6.1 is a POSITIONAL RELATION AND NOT AN ABSOLUTE END:**
+
+| The reason as written | Does it name an end? |
+|---|---|
+| E-STOP "at one end, so a struck palm lands on nothing else" | **No. AN end** |
+| PL-R "adjacent to E-STOP, because E-STOP is what causes it" | **No. Relative to E-STOP** |
+| RESET "at the opposite end from E-STOP" | **No. Opposite to E-STOP** |
+
+**So reversing the whole row satisfies all three unchanged.**
+
+    RESET   PL-G   PL-Y   PL-R   E-STOP
+    hinge ...................... latch
+
+**AND THE REVERSAL BUYS SOMETHING NOBODY DESIGNED FOR. RESET IS THE DEEPEST BODY** - at
+least two NO blocks and a third if it proves the lamps, 55 to 68 mm, against E-STOP's one
+row at 43 mm - **and the reversal lands it at the HINGE, which is the SMALLEST ARC. The
+deepest body gets the least swing, for free.**
+
+**ONE THING THAT IS NOT A REASON, AND IT IS THE OWNER'S OWN: "the arc is largest and a
+palm strike lands squarely" does not decide it.** The door is CLOSED when anybody strikes
+the E-stop, **so both ends strike equally.** The arc bears on clearance while swinging,
+not on the strike. **The ruling is right and the stated reason is not the one that
+carries it; the real one is the RESET depth above.**
+
+**AND ONE OBJECTION, RAISED AND ANSWERED SO NOBODY RE-RAISES IT: an E-stop at the latch
+end travels furthest when the door opens and is the most likely of the five to be knocked
+by the door swinging into something. THAT RESOLVES IN THE SAFE DIRECTION** - a knocked
+E-stop stops the machine - **so it is not an objection.**
+
+**Consequence for D5 section 5.1: the flexing loop lives on the HINGE side, so E-STOP's
+conductors now cross the full door width to reach their clamp. A length, not a problem,
+and the longest of the five.**
 
 ### 3.6.6 The top face, now
 

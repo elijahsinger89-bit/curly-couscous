@@ -100,7 +100,7 @@ for ln in raw8.split('\n'):
 # saying that nothing does and why. Untagged preconditions are the ones this check
 # cannot reason about at all.
 KINDS = ("PRODUCED", "INVARIANT", "LOOKUP", "OPEN ROW", "RULE", "OPERATOR",
-         "DECISION", "UNPRODUCED")
+         "DECISION", "SOFTWARE STATE", "UNPRODUCED")
 def kinds_in(t):
     u = t.upper()
     return [k for k in KINDS if "PRODUCER:" in u and k in u.split("PRODUCER:", 1)[1]]

@@ -75,7 +75,7 @@ changed reports to BOSS and does not act.
 | G-35 | **A QUESTION ANSWERED NO IS CLOSED. WHAT THE NO FORCES IS A SEPARATE OPEN ITEM, WITH ITS OWN ID.** An answered question left open because its consequence is unresolved reads, a month later, as an unanswered question, and the answer gets asked for twice. **And the reverse failure is worse: closing the question and letting its consequence close with it silently** | Frozen 2026-09-03. Established by three instances in one turn: P-09 answered NO by documentation, which forced C-18 as its own item, D-070. F-059's level question answered, which forced F-072's sizing item. DIAG answered NO, which forced F-073. **In each case the answer and the consequence wanted different lifetimes** |
 | G-36 | **IMPOSSIBLE HAS TWO GRADES AND THEY ARE NOT INTERCHANGEABLE. STRUCTURALLY impossible follows from a frozen rule or from physics and no addition could change it. CURRENTLY impossible follows from what has been bought, wired or decided so far, and something already on the table would change it. ANY CLAIM OF IMPOSSIBILITY NAMES ITS GRADE, AND A CURRENT ONE NAMES WHAT WOULD CHANGE IT** | Frozen 2026-09-03, D-101. **The reason it is a rule and not a style note: a structural claim removes the reason to keep paying for the door, so it makes itself true retroactively.** A claim of fact gets re-derived by the next agent that needs it. A claim of impossibility gets copied, because there is nothing to re-derive. T-023. **AMENDED 2026-09-03 by D-103, and the amendment is the half that costs money: A CURRENT CLAIM ALSO SAYS WHETHER DECLINING TO PAY MAKES IT TRUE. Some wrong impossibilities are expensive and RECOVERABLE - the thing can still be bought later. Some are SELF-FULFILLING: they remove the reason to pay for the capability, the capability is then not bought, and the claim becomes true with no step anyone would notice.** The tree had no marking that distinguished the two and G-36 as first frozen did not require one. AUDIT found four of the second kind in decisions.md alone |
 | G-37 | **A CITATION IS NOT A SOURCE. CITE THE FROZEN ROW, NOT THE DOCUMENT THAT QUOTES IT.** **Two files where one cites the other and neither cites the source is a SECOND-SOURCE ILLUSION: it reads as corroboration and is one claim wearing two hats.** A citation chain that terminates in itself has the same shape as a check anchored to its own inputs | Frozen 2026-09-03, D-102. From F-074: the settle-window claim sat in software-spec.md and in commissioning C-23, C-23 citing the spec, **and neither cited D-060, which contradicts it, or S-20, which would deliver the capability.** Two files agreeing is worth nothing when one of them is the other's only source. G-32's shape - an expectation derived from a label rather than a measurement - arriving on provenance instead of on chemistry |
-| G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
+| G-38 | **A GRADE IS ONLY TRUE AGAINST THE TREE IT WAS GRADED ON. WHEN A DECISION MOVES, THE IMPOSSIBILITY CLAIMS DOWNSTREAM OF IT ARE RE-GRADED, NOT INHERITED** | Frozen 2026-09-03, D-112. **Two instances the same day, in opposite directions: D-064's chiller tagging was graded CURRENT on S-18's Pi-read exit, and D-108 removed the chiller contactor, so it is STRUCTURAL. THAT SECOND EXAMPLE IS ITSELF STALE AND IS RE-GRADED 2026-09-23, D-234, BY THIS RULE, AGAINST THIS RULE'S OWN ANNOTATION. D-137 created KM-CHIL - a switching element for the chiller and loop-pump RECEPTACLE, which is not the chiller contactor D-108 removed - and parts.md holds an ABB AF09-30-10-13 for it, whose 30-10 designation carries a built-in NO auxiliary contact. So the spare pole S-18's Pi-read exit needed EXISTS, and the grade moves from STRUCTURAL back to CURRENT. WITH ONE HONEST QUALIFICATION THAT MAKES THE EXIT WEAKER THAN D-027 WANTED: KM-CHIL's auxiliary says the RECEPTACLE IS ENERGISED, not that the compressor is running, because D-108's finding stands - the chiller cycles its own compressor internally. The exit is available and it answers a weaker question. S-18's, and the owner's.** software-spec.md section 12's "six of the eight channels" was correctly STRUCTURAL when written, and D-105 made the count an assignment, so it is CURRENT.** F-085. A grade is a relation between a claim and a tree, not a property of the claim, **and that is exactly why G-36's naming requirement matters: a claim that names what would change it tells the next reader when to re-grade it** |
 | G-39 | **WHEN CHOOSING AN ACTUATOR, ASK WHAT IT DOES WITH NO POWER BEFORE ASKING ANYTHING ELSE. EVERY OTHER PROPERTY IS A PREFERENCE. THAT ONE IS THE FAILURE MODE** | Frozen 2026-09-03, D-114, at the owner's instruction and placed beside G-22 deliberately. **G-22 asks what a severed conductor does and what a short to a neighbour does. NEITHER ASKS WHAT A DEAD PANEL DOES**, and an actuator is the only class of device where that is a different question. **Established by the owner reversing his own part choice within one exchange: he proposed a motorized ball valve, reasoned about it for a paragraph, and withdrew it on the fail state. The deciding property was not the first thing either party looked at.** Voltage, size, speed and control type are all preferences. Hold-last on a valve that fills a tank is a flood. **EXTENDED 2026-09-05, D-170: THE QUESTION IS ASKED OF EVERY POWERED DEVICE IN A SAFETY CHAIN, NOT ONLY OF ACTUATORS.** A powered SENSE device fails the same way an actuator does - **its contact goes somewhere when its own supply dies, and if that contact sits in a permissive chain, where it goes IS the safe state or is not.** Found by writing D5: the leak console is powered, its Form C legs sit in the permissive chain, and what the contact does when its own 24 V fails is on file nowhere |
 | G-40 | **THE 1ST EDITION SET IS A CITATION, NOT A SOURCE, AND NOTHING IN IT BECOMES A DEFAULT BY BEING THE ONLY THING ON THE PAGE.** Where it disagrees with this tree, THE TREE WINS. Anything taken from it is recorded as "observed in the 1st Edition set, unverified" and its verification is routed to the owner. **Its figures are T-018 candidates, its parts may have been superseded, returned or never bought, and its impossibility claims are UNGRADED - which under G-36 means they are not claims anyone can check** | Frozen 2026-09-03, D-115, the owner's caveat made a rule so it binds on subsystems that never read the message. **The specific danger it exists to stop: an OPEN question closing because the old set already answered it, with nobody deciding to close it.** AUDIT found a live instance on the first read - see D-116 |
 | G-41 | **IN ANY DOCUMENT THAT SUPPLEMENTS ANOTHER, ASK OF EVERY SECTION WHETHER ITS MEANING IS ABSOLUTE OR A DELTA. ASSEMBLY STEPS ARE ABSOLUTE AND SHOULD REPEAT. QUANTITIES, COUNTS AND TOTALS ARE DELTAS AND MUST NEVER REPEAT.** **If a table can be read either way, it will be read as ABSOLUTE by whoever is holding a credit card** | Frozen 2026-09-04, D-135, at the owner's instruction and BEFORE this build's generated set exists. T-028. **Established by a real cost in the 1st Edition set: an add-on parts table listed four floats where its own text said three arrive, so buying per both sheets yields nine floats for eight positions.** The cause is structural rather than careless - an add-on is written for someone who may not hold the base set, which is RIGHT for assembly and WRONG for quantities. **An add-on parts table is a thing this project will eventually write** |
@@ -5413,3 +5413,185 @@ that assumes the door is stationary has ignored the swing.**
 or RESET's - has the small arc and therefore which body could foul the frame. **Owner's,
 in the same measurement batch as the door-to-plate depth, the usable door area inside
 the sealing perimeter, and the mounting holes.**
+
+---
+
+# D-233. THE WATCHDOG IS A SOFTWARE MECHANISM WITH NO HARDWARE, AND TWO SAFE DIRECTIONS ARE ANSWERED. 2026-09-23
+
+## 1. THE WATCHDOG. A CHOICE, NOT A DISCOVERY, AND THE OWNER SAYS SO
+
+**THE Pi 5 SoC's OWN INTERNAL WATCHDOG. Enabled in software, it reboots the Pi when the
+daemon stops petting it. NO EXTERNAL PART, NO PIN, NO PANEL DEVICE. Nothing gets
+installed because there is nothing to install.**
+
+**C-20's "confirmation that an external reset input exists at all" is ANSWERED NO, BY
+DECISION RATHER THAN BY LOOKUP.** The blocked-on cell is struck.
+
+**AND STAGE 5's "FITTED" WAS THE WHOLE DEFECT.** Fitted reads as a part. Everything on
+file described software. **Neither end was wrong and nobody wrote the join.** The
+precondition now reads: **the watchdog daemon is ENABLED AND PETTING, verifiable by
+READING ITS STATE rather than by looking at a plate.**
+
+**It leaves the build's dependency graph entirely, which is why no D1 section produces
+it and none should.**
+
+**`software-spec.md` 9.3 said "its mechanism is DISPLAY-BOX's" and is corrected. That
+sentence is where the part-shaped reading came from.**
+
+## 2. WHAT STATE THE MACHINE IS IN AFTER A WATCHDOG REBOOT
+
+**The owner's question, against the risk that a silent reboot abandons a batch and leaves
+a partial recipe in the tank. THE TREE ALREADY ANSWERED IT, IN THREE SECTIONS, AND
+NOWHERE IN ONE PLACE.** Collected into software-spec 9.4 rather than added.
+
+**Permissive coil DROPPED on every path including a watchdog reset. No channel commanded.
+ARMING IS A HUMAN ACT. Every open settle window VOID and marked `INDETERMINATE - RESET`.
+Latched faults re-raised including a weld. An open pH attribution window refuses the
+opposing channel until an operator resolves it. A dose in flight has its BOUNDS presented
+and requires an explicit operator decision - NEVER auto-resumed.**
+
+**And two things record it, answering different questions: the CLEAN-SHUTDOWN MARKER,
+whose absence on boot is the only way software learns a cut happened; and the WATCHDOG
+RESET COUNT, durable, because otherwise REBOOT-HANG-REBOOT LOOKS LIKE UPTIME.**
+
+**SO THE PARTIAL RECIPE IS NOT SILENT. What the software cannot tell you is HOW MUCH went
+in** - it presents the BOUNDS, not the amount, because nothing measures delivered volume.
+**G-04's known residual, not made worse by a reboot: it is the same residual the operator
+meets after any F-DROP.**
+
+**ONE TERM STAYS OPEN AND IS NAMED: elapsed time across a restart is not computed unless
+the display box provides a clock surviving a power cut.** A DISPLAY-BOX fact adjacent to
+S-12. **Until then a window spanning a restart is VOID rather than carry an untrustworthy
+elapsed time - the cautious direction, at the cost of a window.**
+
+**G-16 now also appears on the watchdog's own must-not list as item 8**, because that is
+the list a reader checks the watchdog against, **and "no crash exemption" was two
+sections away from it.**
+
+## 3. S-20. OPEN ON LOSS, AND IT IS WRITTEN ON THE ROW NOW
+
+**A SEVERED READBACK CONDUCTOR READS AS NOT PULLED IN.** The readback tells the controller
+whether the contactor answered its coil, **and the alternative is a controller that
+believes motor power is present when it is not.**
+
+**Same direction as everything else in this machine: the failure reports the more cautious
+state.**
+
+**The row previously said only that its fail direction "is established rather than
+inherited, per F-017's lesson" and did not say what it was.** G-37's shape - **a claim
+citing its own establishment without stating its content - and D8-18 could not have been
+run on that conductor.**
+
+## 4. S-11. AN UNREADABLE PROBE STOPS DOSING
+
+**A probe that fails to respond on the bus raises a fault, THE FAULT IS LATCHING, and no
+batch may start or continue while it is raised.**
+
+**Forbidden: a fallback to a last-known value, a default, a substitution, under any name.**
+
+**The owner's reason, and it is the one that generalises: THE DOSE DIVIDES BY A
+MEASUREMENT, AND A MEASUREMENT THAT DOES NOT EXIST CANNOT BE SUBSTITUTED FOR.** A
+last-known value is the laundered version - **the same shape as the resume button G-16
+forbids: a number computed from something unknown, wearing the name of something
+measured.**
+
+**CONTROL-SOFTWARE's to implement. A decision, not a lookup. Written into software-spec
+9.5 and onto S-11.**
+
+**AND IT IS THE FIRST CONDUCTOR D8-18 MEETS**, because that step disconnects AT THE GLAND
+and the probe cable is what is at the gland. **D8-18 now says so, with the consequence
+spelled out: IF THE SOFTWARE DOES NOTHING VISIBLE WHEN A PROBE CONDUCTOR IS PULLED, THE
+STEP HAS FOUND SOMETHING RATHER THAN PASSING. Silence is the failure here, not the pass.**
+
+## 5. ROUTED: MAIN-PANEL ASSEMBLES THE 24 V BUDGET
+
+**One driver running plus seven at standstill plus everything else on the rail, against
+the NDR-240-24's 10 A.** parts.md's 8.0 A worst case never occurs, because G-06 runs one
+head at a time. **D8-25 then cites a budget rather than citing the owner.**
+
+**Fourth surfacing of D-222's unconsumed-postcondition defect, and the first with a number
+attached to it.**
+
+---
+
+# D-234. THE RULES SWEEP, AND THE HINGE. 2026-09-23
+
+## 1. THE SWEEP THE OWNER ASKED FOR, BOUNDED AS HE BOUNDED IT
+
+**"Which rules carry an example or an annotation naming a specific row, part or figure,
+and is that thing still true." NOT a general sweep. Fifty-nine rules read, once.**
+
+**A citation of provenance - "Frozen 2026-08-30, D-035" - is not an attached fact and was
+not counted.** What was counted is an annotation ASSERTING A STATE OF THE WORLD: an open
+item, a live absence, a part, a figure.
+
+| | |
+|---|---|
+| Rules carrying an attached fact of that kind | **9** |
+| **Stale** | **2** |
+| Still true | 7 |
+
+**G-39, found and fixed 2026-09-23 at D-231:** its founding example said the leak
+console's behaviour on loss of its own supply was "on file nowhere". **F-115 closed it and
+the owner answered it.**
+
+**G-38, found by this sweep, and it is the better one because the rule caught itself.**
+
+## 2. G-38's SECOND EXAMPLE IS STALE, AND G-38 IS THE RULE THAT SAYS SO
+
+**G-38's annotation grades D-064's chiller tagging STRUCTURALLY impossible because
+"D-108 removed the chiller contactor".**
+
+**D-108 is correctly quoted and the conclusion no longer holds.** D-137 created
+**KM-CHIL** - a switching element for the chiller and loop-pump **RECEPTACLE**, which is
+not the chiller contactor D-108 removed - **and parts.md holds an ABB AF09-30-10-13 for
+it, whose 30-10 designation carries a built-in NO auxiliary contact.**
+
+**So the spare pole S-18's Pi-read exit needed EXISTS, and the grade moves from
+STRUCTURAL back to CURRENT** - which is precisely what G-38 exists to make happen.
+
+**AND THE HONEST QUALIFICATION, because the exit is weaker than D-027 wanted: KM-CHIL's
+auxiliary says the RECEPTACLE IS ENERGISED, not that the compressor is running.** D-108's
+finding stands - the chiller cycles its own compressor internally. **The exit is available
+and it answers a weaker question than the one that was asked.** S-18's, and the owner's.
+
+## 3. WHAT THE SWEEP'S SIZE MEANS
+
+**Two in fifty-nine is a small number and it is the result rather than a disappointment.
+The place nothing looks was mostly clean.**
+
+**What it hid was not a wrong rule. Both times the rule was right and the FACT STAPLED TO
+IT had moved**, and in one case the stale fact was being used to grade an impossibility -
+**which under G-36 is the claim that gets copied rather than re-derived, because there is
+nothing to re-derive.**
+
+**A RULE IS THE LAST PLACE ANYBODY LOOKS FOR A STALE FACT**, and an impossibility graded
+against one is the most expensive thing that can hide there.
+
+## 4. THE HINGE: CONFIRMED, NOT ADOPTED, AND THE ORDER REVERSES
+
+**The owner: hinged on the LEFT as he faces it, latch on the right, E-STOP at the LATCH
+end. Confirm against sheet 3.6's order rather than adopt it, because the order was
+written for a different face.**
+
+**CONFIRMED. Every reason in 3.6.1 is a POSITIONAL RELATION AND NONE NAMES AN END** -
+E-STOP at *an* end, PL-R *adjacent to* E-STOP, RESET *opposite* E-STOP. **Reversing the
+whole row satisfies all three unchanged.**
+
+    RESET   PL-G   PL-Y   PL-R   E-STOP
+    hinge ...................... latch
+
+**AND THE REVERSAL BUYS SOMETHING NOBODY DESIGNED FOR: RESET IS THE DEEPEST BODY** - 55
+to 68 mm against E-STOP's 43 - **and it lands at the HINGE, the smallest arc. The deepest
+body gets the least swing, free.**
+
+**ONE THING THAT IS NOT A REASON, AND IT IS THE OWNER'S OWN: "the arc is largest and a
+palm strike lands squarely" does not decide it. THE DOOR IS CLOSED WHEN ANYBODY STRIKES
+THE E-STOP, so both ends strike equally.** The arc bears on clearance while swinging, not
+on the strike. **The ruling is right and its stated reason is not the one that carries
+it.**
+
+**AND ONE OBJECTION RAISED AND ANSWERED SO NOBODY RE-RAISES IT:** an E-stop at the latch
+end travels furthest when the door opens and is the likeliest of the five to be knocked.
+**That resolves in the SAFE DIRECTION - a knocked E-stop stops the machine - so it is not
+an objection.**

@@ -342,15 +342,16 @@ does not schedule would put the view ahead of its source. G-54.
 - Stage 4 closed.
 - Sense circuits built and the Pi reading them. C-19's blocked-on.
   **PRODUCER: PRODUCED, BB-19 and BB-35.**
-- The watchdog fitted, **and confirmation that an external reset input exists at all.**
-  C-20's blocked-on. **BLOCKED TODAY: no file read for this checklist confirms it.**
-  Owner: DISPLAY-BOX.
-  **PRODUCER: UNPRODUCED, AND THE REASON IS SHARPER THAN "NOBODY INSTALLED IT".
-  THE WATCHDOG IS SPECIFIED AT ONE END ONLY.** D-033 and software-spec 2.4.10 say how it
-  is FED - from the sequencer and state loop, never from an independent timer thread.
-  **NOTHING ANYWHERE SAYS WHAT IT DRIVES.** P-07 says nothing in the panel can power
-  cycle the Pi, so a watchdog is the only recovery path, **and the path itself has no
-  owner, no part and no mechanism.** Routed 2026-09-23, D-231. Section 12.11.
+- **The watchdog daemon is ENABLED AND PETTING, verifiable by reading its state.**
+  **REWRITTEN 2026-09-23, D-233. It read "the watchdog fitted, and confirmation that an
+  external reset input exists at all", and "FITTED" WAS THE WHOLE DEFECT: it reads as a
+  part, and everything on file describes software.** The owner has chosen the Pi 5 SoC's
+  own internal watchdog - **no part, no pin, no panel device, and the external reset
+  input answered NO by decision.** Nothing gets installed because there is nothing to
+  install.
+  **PRODUCER: SOFTWARE STATE, not a build state, D-233.** No section produces it and
+  none should: **the SoC watchdog is enabled by the application at start-up and is
+  verified by reading its state.** It leaves the build's dependency graph entirely.
 - **S-12 is an OPEN interface row.** Rule 9: nothing is built against it. **Every step in
   this stage needs the Pi reading a pin, so this stage cannot run while S-12 is open.**
   **PRODUCER: OPEN ROW.** Closed by DISPLAY-BOX and CONTROL-SOFTWARE agreeing the pin
@@ -378,8 +379,16 @@ FILLING and dosing is inhibited. Readback severed reads as NOT PULLED IN.**
 **The tick is on the direction. The CDR- id and the actual report go in the record.**
 
 **AND IF A CONDUCTOR'S SAFE DIRECTION IS NOT STATED, IT IS NOT GUESSED AT THE BENCH.**
-It is a gap and it goes to the owner. **Three are known today and are listed in section
-12.8.**
+It is a gap and it goes to the owner. **Section 12.8 carries the table, and every entry
+in it is now answered, 2026-09-23.**
+
+**START WITH A PROBE CONDUCTOR AND KNOW WHAT YOU ARE LOOKING FOR, D-233.** The step
+disconnects AT THE GLAND, **and the probe cable is what is at the gland, so S-11 is the
+first conductor this step meets.** Its answer is not a direction: **an unreadable probe
+raises a LATCHING fault and no batch may start or continue while it is raised.**
+
+**SO IF THE SOFTWARE DOES NOTHING VISIBLE WHEN A PROBE CONDUCTOR IS PULLED, THE STEP HAS
+FOUND SOMETHING RATHER THAN PASSING.** Silence is the failure here, not the pass.
 **ORIGIN: ELIJAH, 2026-09-23.** **SUPPLIED, and its content is derived from G-22 rather than chosen.**
 RECORD: D9 group **MR-G3**, one row per sense conductor.
 COST AND WHAT IT BUYS: **no instrument and no part.** It is the only thing that converts
@@ -1122,9 +1131,9 @@ G-27, G-29 and D-049.
 | **S-03 NC leg**, fill in progress | Severed reads as FILLING, dosing inhibited | **STATED.** D-042 |
 | **S-03 NO leg**, dose inhibit | Complement of the above on the same pole | **STATED by construction.** G-27: any state where both agree is a broken sense path |
 | **S-08**, the 22.32 readback | Severed leaves the Pi input high, reads contact open, reads a drop | **STATED, and named as a CHOSEN property rather than an inheritance** |
-| **S-20 and its complement leg**, K-DRY | | **NOT STATED. GAP 1.** The row says its fail direction "is established rather than inherited, per F-017's lesson" **and does not print what it is.** G-37's shape: a claim that cites its own establishment without stating its content |
+| **S-20 and its complement leg**, K-DRY | **OPEN ON LOSS. A severed readback reads as NOT PULLED IN.** The readback tells the controller whether the contactor answered its coil, **and the alternative is a controller that believes motor power is present when it is not** | **ANSWERED 2026-09-23 by the owner, D-233, and written onto the row.** It was established-but-unstated, G-37's shape |
 | **S-04**, the leak console's Form C legs | **C-NC: OPENS on power loss OR on leak.** A dead console and a wet floor do the same thing, so the unsafe case does not exist | **STATED.** F-115, closed by the owner and recorded in D5 section 6 |
-| **S-11**, the probe conductors | | **NOT STATED, AND G-22'S FRAME DOES NOT FIT. GAP 2.** A severed I2C conductor is not a two-state loop failing in a direction - **it makes a probe unreadable, and whether unreadable INHIBITS dosing is a software question. Searched `software-spec.md`: no row says what an unreadable probe does** |
+| **S-11**, the probe conductors | **AN UNREADABLE PROBE STOPS DOSING.** A probe that fails to respond on the bus raises a fault, **the fault is LATCHING, and no batch may start or continue while it is raised.** Not a fallback, not a last-known value, not a default: **the dose divides by a measurement, and a measurement that does not exist cannot be substituted for** | **ANSWERED 2026-09-23 by the owner, D-233. CONTROL-SOFTWARE's to implement.** G-22's frame does not fit it. A severed I2C conductor is not a two-state loop failing in a direction - **it makes a probe unreadable, and whether unreadable INHIBITS dosing is a software question. Searched `software-spec.md`: no row says what an unreadable probe does** |
 
 **D8-18 disconnects at the GLAND, and S-11's probe cable is the most likely conductor a
 person reaches for there.** So gap 2 is not academic: **it is the first conductor the

@@ -1055,6 +1055,66 @@ decides whether the watchdog is real:**
    silent restart. **Liveness only.**
 6. **It must not loop silently.** The reset count is durable and surfaced.
 7. **It must not come up with the permissive coil commanded** (9.1).
+8. **It must not resume anything. ADDED 2026-09-23, D-233.** G-16 has no crash exemption
+   and a watchdog reboot IS crash recovery. **The Pi comes back and resumes nothing: it
+   does not restart a batch, it does not re-command a dose, and whatever was running is
+   abandoned.** Already true by 2.2.4 and 9.1(6); **stated here because this is the list
+   a reader checks the watchdog against.**
+
+### 9.4 WHAT STATE THE MACHINE IS IN AFTER A WATCHDOG REBOOT, AND WHAT RECORDS IT
+
+**Asked by the owner 2026-09-23 against the risk that a silent reboot abandons a batch
+and leaves a partial recipe in the tank. ANSWERED FROM 9.1 AND 8.x, WHICH ALREADY CARRY
+IT - collected here rather than added, because it was spread across three sections and
+the question is asked in one.**
+
+| | |
+|---|---|
+| **The permissive coil command** | **DROPPED.** The application does not command the coil as part of coming up, **on any path, including after a watchdog reset** |
+| **Channels** | **None commanded. ARMING IS A HUMAN ACT** |
+| **Any open settle window** | **VOID**, marked `INDETERMINATE - RESET`, not resumable. The baseline is stale and the mixing history is unknown, **and the application cannot tell a permissive drop from a power cut and must not pretend to** |
+| **Latched faults** | **Re-raised, including a weld** |
+| **An open pH attribution window** | **The opposing pH channel is REFUSED until an operator resolves it** |
+| **A dose that was in flight** | **Its BOUNDS are presented and an explicit operator decision is required. NEVER auto-resumed** |
+
+**AND YES, TWO THINGS RECORD THAT ONE HAPPENED, and they answer different questions:**
+
+| Record | What it catches |
+|---|---|
+| **The clean-shutdown marker** | **Its ABSENCE on boot is the only way software learns a cut happened.** Everything else is useless without it |
+| **The watchdog reset count**, durable | **Otherwise reboot-hang-reboot LOOKS LIKE UPTIME.** A machine that reboots every ninety seconds and comes up clean each time reports itself healthy |
+
+**SO THE PARTIAL RECIPE IS NOT SILENT. What the software cannot tell you is HOW MUCH went
+in:** it presents the BOUNDS of the in-flight dose, not the amount, **because nothing in
+this system measures delivered volume.** That is G-04's known residual. **A reboot does
+not make it worse - it is the same residual the operator meets after any F-DROP.**
+
+**ONE TERM STAYS OPEN AND IT BELONGS HERE: elapsed time across a restart is not
+computed** unless the display box provides a clock that survives a power cut. A
+DISPLAY-BOX fact adjacent to S-12. **Until it is answered a window spanning a restart is
+VOID rather than carry an untrustworthy elapsed time**, which is the cautious direction
+and costs a window.
+
+### 9.5 AN UNREADABLE PROBE STOPS DOSING. D-233
+
+**The owner's decision, 2026-09-23, answering what a severed probe conductor does.**
+G-22 asks what a severed conductor READS AS, and **a probe conductor does not read as
+anything: it makes the probe unreadable, which is a different question and needed its
+own answer.**
+
+| | |
+|---|---|
+| **A probe that fails to respond on the bus** | **Raises a fault** |
+| **The fault** | **LATCHING** |
+| **While it is raised** | **No batch may START or CONTINUE** |
+| **What is forbidden** | **A fallback to a last-known value. A default. A substitution. Any of them, under any name** |
+
+**The reason, and it is the owner's: THE DOSE DIVIDES BY A MEASUREMENT, AND A MEASUREMENT
+THAT DOES NOT EXIST CANNOT BE SUBSTITUTED FOR.** A last-known value is the laundered
+version - **it is the same shape as the resume button G-16 forbids: a number computed
+from something unknown, wearing the name of something measured.**
+
+**CONTROL-SOFTWARE's to implement. It is a decision, not a lookup.**
 
 ---
 
