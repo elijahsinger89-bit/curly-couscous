@@ -558,3 +558,38 @@ answered one.**
 
 **So neither of the owner's two outcomes applies: section 19 does not split and it does
 not move. The over-stated cell does.** Proposal in commissioning.md, not applied.
+
+---
+
+## F-127. ONE CELL IN A RAIL COLUMN HELD AN EXPRESSION WHERE EVERY OTHER HELD A FIGURE. 2026-09-23
+
+**FOUND BY THE ROUND-TRIP PROOF ON ITS FIRST RUN, and it is the only D3 defect the run
+found among 37 initial mismatches.**
+
+D3 sheet 3.3, band B1, position 1:
+
+    | 1 | **NDR-240-24** | 63 mm + 5 mm each side = **73** | ... |
+
+**Every other cell in that column is a bare figure. This one is an arithmetic
+expression, and the figure it resolves to is the LAST number in it rather than the
+first.**
+
+| Reader | Gets |
+|---|---|
+| A person | **73.** The bold and the equals sign carry them to it |
+| A machine taking the first number | **63** |
+| **The occupancy** | **73** |
+
+**Ten millimetres, on the one device in the panel whose clearances are not tradeable.**
+
+**It would not have been found by reading.** The cell is correct, it is legible, and a
+human reads it right every time. **It is only wrong to something that reads the column
+uniformly - which is exactly what a drawing generator does, and exactly what nobody had
+until today.**
+
+**FIXED: the cell holds 73 and the derivation moved into the note column, where the rest
+of that row's reasoning already lives.** The column is now uniform.
+
+**And the guard in the extractor is kept rather than removed with the cell: `num()` takes
+what follows an equals sign, because the next expression cell somebody writes will be
+found by the proof instead of read wrongly.**

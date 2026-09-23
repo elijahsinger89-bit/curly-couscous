@@ -166,7 +166,7 @@ conductor crosses the plate to reach its own class's duct.**
 
 | Position | Device | Rail | Note |
 |---|---|---|---|
-| 1 | **NDR-240-24** | 63 mm + 5 mm each side = **73** | **AC terminals DOWN, DC terminals UP. Vertical only.** 40 mm clear above to B2's rail, 20 mm clear below, 15 mm from any other heat source |
+| 1 | **NDR-240-24** | **73** | **63 mm body plus 5 mm each side. CORRECTED 2026-09-23, F-127: this cell read "63 mm + 5 mm each side = 73", which is an EXPRESSION where every other cell in this column is a FIGURE, and a reader taking the first number gets 63 against an occupancy of 73.** **AC terminals DOWN, DC terminals UP. Vertical only.** 40 mm clear above to B2's rail, 20 mm clear below, 15 mm from any other heat source |
 | 2 | **BUS-A overcurrent** | 17.5 | Protects the supply primary, FV-1 and the transfer, manifold and R-PI feeds |
 | 3 | **BUS-B overcurrent** | 17.5 | The dedicated chiller circuit |
 | 4 | **R-PI fuse holder** | 6.2 | Indicating type. **The lamp sits across the fuse, not in series with the load** |

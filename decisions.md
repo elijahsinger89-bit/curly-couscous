@@ -5651,3 +5651,108 @@ protection and must never be recorded as one.**
 **IT DOES NOT BLOCK ANYTHING.** software-spec already states the without-battery
 behaviour and it is the cautious one. **If the battery arrives, 9.1(7) gains a condition
 rather than being rewritten.**
+
+---
+
+# D-236. THE GEOMETRY MODEL EXISTS AND THE ROUND TRIP IS CLEAN. 2026-09-23
+
+**`model/main-panel.json` and `tools/roundtrip_d3.py`. 135 FIELD COMPARISONS, ZERO
+MISMATCHES. Nothing is drawn yet, per the owner's order.**
+
+## 1. WHAT THE MODEL IS, AND WHAT IT IS NOT
+
+**It is a MACHINE-READABLE COPY of figures D3 already held. It decides nothing.** A
+figure enters at D3 under G-54 and arrives here. **Where D3 leaves a cell empty, the
+model holds `null` and the proof FAILS if the model ever fills one by inference** - six
+such cells are checked explicitly.
+
+**It is not a new source. If it were, this build would have bought exactly the drift
+surface it has spent the whole project removing.**
+
+## 2. WHAT THE PROOF COVERS, STATED SO IT IS NOT OVER-TRUSTED
+
+**THE FIGURES. Not D3's prose, not its reasons, not its blockers' wording.**
+
+A drawing consumes figures, so figures are what the proof has to cover. **Claiming it
+proves the document would be the thing this build keeps deleting.**
+
+It reads `enclosure-layout.md` independently - **it does not import the model's own
+printer**, which would prove only that a file equals itself.
+
+| Covered | Sheets 3.1, 3.2, 3.3, 3.5, 3.6, 3.7, plus the terminal envelope in 3.2.2 |
+|---|---|
+| **Not covered** | Sheet 3.4's fill arithmetic, which has no figure to check, and sheet 3.8, which is empty |
+
+## 3. THE HONEST ACCOUNT OF 37 MISMATCHES TO ZERO
+
+**A round trip that passes only after the extractor is adjusted is weaker than one that
+passes first time, and saying so is the point of running it.** The 37:
+
+| | Count | What they were |
+|---|---|---|
+| **A real D3 defect** | **1** | **F-127.** A rail cell holding an expression where every other holds a figure. **D3 is corrected; the model was right** |
+| Extractor defects | 30 | B3 and B4 have no Position column and B1 and B2 do; a regex that could not match a hyphen in "Twenty-four"; a device table and a depth table sharing a sheet |
+| **Label alignments** | **6** | D3's label won every time. The model is a copy, so where they differed the model changed |
+
+**NO FIGURE IN THE MODEL WAS CHANGED TO MAKE THE PROOF PASS.** The one figure in dispute
+- the NDR's 73 mm of rail - **was right in the model and misread by the extractor**, and
+the fix was to teach the extractor what an expression cell is.
+
+## 4. WHAT THE ROUND TRIP BUYS THAT READING DOES NOT
+
+**F-127 would never have been found by reading.** The cell is correct and legible and a
+person gets 73 from it every time. **It is only wrong to something that reads the column
+uniformly - which is what a drawing generator does and what nobody had until today.**
+
+**So the first useful output of the geometry model was a defect in the document it was
+copied from, before a single line was drawn.**
+
+## 5. THE EMPTY DEPTH CELLS, FOR THE OWNER'S ONE SEARCH
+
+**He asked which devices have an empty depth cell so he can run ONE lookup rather than
+one at a time. Six part numbers cover eleven positions, because the relay band is six
+instances of one part.**
+
+| Part | Covers | Known today |
+|---|---|---|
+| **Finder 55.34 on a 94.74SMA socket** | **6 positions**: K-FILL-S, K-FILL-D-P, K-DRY-P, K-PERM, K-FILL-D-Q, K-DRY-Q | Rail 30 mm. **Depth and height above rail EMPTY** |
+| **Altech 1C15UL** | BUS-A overcurrent | Rail 17.5. **Depth and height EMPTY** |
+| **Altech 1D15UL** | BUS-B overcurrent | Rail 17.5. **Depth and height EMPTY** |
+| **Phoenix PT 4-HESILED 250** or ST 4-HESILED 250 | R-PI fuse holder | Rail 6.2. **Depth and height EMPTY** |
+| **ABB AF09-30-10-13** | KM-CHIL | Rail 45. **Depth and height EMPTY** |
+
+**ALREADY KNOWN AND NOT TO BE LOOKED UP AGAIN:** the NDR-240-24 at 113.5 deep and 125.2
+high; **KM-DRV, a Finder 22.32, at 60.8 deep and 88.8 above rail**; and **every terminal
+way at 56 mm off the rail face and 44 mm above it** - which covers all 42 ways in B3 and
+B4 with one figure that is already on file.
+
+**ASK FOR BOTH FIGURES IN THE ONE SEARCH: DEPTH OFF THE RAIL AND HEIGHT ABOVE THE RAIL.**
+The section view needs depth; the band heights need height; **and the terminal block is
+already the cautionary case - McMaster's 70 mm is overall INCLUDING THE DIN CLIP and is
+not height above the rail, which got the terminal band wrong once already.**
+
+**The five sense-circuit burdens are NOT on this list.** Their carrier type is EMPTY with
+its own blocker, **so there is no part to look up rather than a part whose figures are
+missing** - G-46's distinction, on a lookup instead of on a cell.
+
+## 6. THE RTC BATTERY: DECLINED, WITH THE REASON
+
+**Not unbought. DECLINED.** The owner: a void window is already the safe direction, so
+the battery buys fewer void windows rather than a safer machine, **and he has nothing
+pressing enough to spend a window on.**
+
+> **IT MUST NEVER BE RECORDED AS A PROTECTION.** If somebody later reads an RTC battery
+> on a requirements list they will assume it protects something. **It does not. It
+> reduces how often a measurement is thrown away.**
+
+**Reversible cheaply: if he changes his mind, software-spec 9.1(7) GAINS A CONDITION
+rather than being rewritten**, which is the right shape for a decision that can reverse.
+
+## 7. NEXT, AND NOT STARTED
+
+**The plate elevation, as SVG, from this model.** Then the faces once the grip X
+positions land from INTERCONNECT. Then the wall after M-02.
+
+**The section view stays blocked and it is not the model's fault:** door-to-plate clear
+depth, usable door area, and the five depth figures above. **Three are in the owner's
+measurement batch and one is his lookup.**
