@@ -4310,3 +4310,108 @@ under D-149.** Being done now.
 | **R-PI fuse holder** | Protects BUS-A from a fault on the Pi feed, sized against the brick's plug-in surge. **It needs a BLOWN-FUSE INDICATOR specifically here, because nothing can power-cycle the Pi and a blown fuse presents as a dead Pi with no cause** |
 | **KM-CHIL** | **Motor duty, not AC-1. Sized on INRUSH, not running current.** Must drop out cleanly on a sagging rail. **BLOCKED on the open rung that decides its coil's bus - which decides whether the Pi can stop the water system, so no part may be chosen first** |
 
+**D-199 THE ENCLOSURE STUDY IS CLOSED. THE BOX IS THE ONE ON THE SHELF. D-196'S
+16 BY 14 VERDICT IS WITHDRAWN AND NO FURTHER ENCLOSURE IS SPECIFIED.**
+
+**Qilipsu 20.3 x 16.4 x 7.9 in - overall 508 x 419 x 201 mm, MOUNTING PLATE 468 x
+379 mm.**
+
+**IT CLEARS ON EVERY AXIS AND IT CLEARS BY COMPARISON RATHER THAN BY A NEW
+DERIVATION:**
+
+| | Verdict called for | On the shelf | Margin |
+|---|---|---|---|
+| Plate width | 374.65 mm | **468 mm** | +93 |
+| Plate height | 327.15 mm | **379 mm** | +52 |
+| Rail available | 758 mm at 16 x 14 | **814 mm**, two rails at 407 usable | +56 over the larger candidate |
+| Rail demand | 568 with a 70 mm placeholder | **584.2** with the five devices at their real 86.2 | **clears by 230 mm** |
+
+**The five devices cost 16.2 mm MORE than the placeholder assumed, and the
+disconnect returned 35 mm of that by needing no part at all.**
+
+**AND THE THING THAT CLOSES IT IS NOT THE ARITHMETIC. THE PARALLEL BUILD HAS A
+SHIPPED LAYOUT ON THIS EXACT PLATE**, with the same or a heavier component set - four
+relays in sockets, two contactors, the supply, breakers, a fuse holder, a 12-way bar,
+two ducts, **and 51 terminal footprints on one rail using 316 mm of 66 available
+positions. 29 mm and four positions spare.**
+
+**That is not an estimate. It is a document set that has shipped through a gate fifty
+times, and under G-40b it is the default where this build has no reason to differ.**
+
+**AND IT ANSWERS THE LARGEST UNKNOWN IN THE DEMAND FIGURE. MAIN-PANEL flagged that
+353 of the 568 was a 57-way terminal FLOOR excluding every panel-internal conductor,
+and said that floor was the biggest thing that could move.** The parallel build
+carries **129 conductors on 51 terminal footprints.** Not this build's number and not
+adopted as one - **but it says the 57-way floor is close to final rather than about
+to double**, which is the difference between a margin and a guess.
+
+**D-200 THE FIVE DEVICES ARE CHOSEN, AND ONE OF THEM IS NO PART AT ALL.** Full
+specifications in parts.md.
+
+**THE DISCONNECT NEEDS NO PART AND COSTS ZERO RAIL MILLIMETRES.** A lockable 2-pole
+building breaker upstream opens both incoming legs together and can be locked OFF.
+**OSHA and NFPA 79 care that the source is isolated and locked, not that a second
+isolator sits on the plate.** G-48's question, asked first, returned the best possible
+answer: **the requirement was already satisfied by something already there.**
+
+**And the condition under which that changes is recorded rather than the part being
+bought against it: a DIN isolator earns its place only if a LOCAL VISIBLE open point
+is needed without walking to the building panel, or if the two entering circuits are
+not on the same 2-pole breaker.** Neither holds here.
+
+**TWO RULES COME OUT OF THE BREAKERS AND BOTH ARE REQUIREMENTS RATHER THAN
+PREFERENCES:**
+
+**UL 489, NOT UL 1077, ON THE LINE.** A supplementary protector is not legal branch
+protection under the NEC. **The common IEC parts are all UL 1077, many fully rated
+only two-pole at 240 or 415 V with the single-pole 120 V interrupt weaker or
+unlisted.** Recorded as a requirement on the line.
+
+**AND THE D CURVE DOES NOT SOLVE THE UNKNOWN LRA - IT MOVES THE MAGNETIC WALL FROM
+5-10x TO 10-20x.** Under 150 A it will not instantaneous trip; 150 to 240 A may or
+may not, **and a nuisance trip there is SILENT under D-108**; over 240 A clears in
+under 100 ms, which is a stall rather than a start. **So the COMPRESSOR NAMEPLATE
+READING decides whether this breaker is correct** - if the measured LRA is over 120
+to 150 A the answer is a larger breaker sized to the wire, or a motor-rated
+protector. **A margin row became a measurement.**
+
+**THE FUSE INDICATOR'S MECHANISM KILLS A WHOLE CLASS OF WORRY: THE LAMP SITS ACROSS
+THE FUSE, NOT IN SERIES WITH THE LOAD.** Fuse good, LED shorted out, dark. Fuse open,
+full 120 V across the LED, lamp lights. **So there is no minimum load current, the
+Pi brick's 0.23 A is irrelevant, and when the fuse blows the load current is ZERO and
+the lamp still sees 120 V.** The datasheet's sub-milliamp figure is **leakage through
+the indicator while the fuse is open, not a lighting threshold.** Use the 250 V
+version - a 24 V LED version dies on 120 V.
+
+**D-201 THE FINDER 22.32 IS THE WRONG PART FOR KM-CHIL, AND THIS CHANGES THE PANEL.**
+Its 25 A is **AC-1 resistive; its AC-3 motor rating is typically 8 A or less**, and it
+is not built for compressor make and break. The load is **8.7 A** - 7.2 A compressor
+FLA plus 1.5 A pump.
+
+**KM-CHIL BECOMES A MOTOR-RATED CONTACTOR, AND THE COIL DECIDES WHICH ONE.** A
+standard AC magnet coil **chatters and can weld on a brown-out**, dropping out only
+between 0.3 and 0.6x Un. **An electronic coil operating across 100 to 250 V stays
+sealed to about 100 V and then opens cleanly. That REMOVES the failure mode rather
+than tolerating it**, which is G-48's test and the owner's own stated requirement.
+
+**CONSEQUENCE FOR THE TREE: the second 22.32 was KM-CHIL in D-157 and in the ladder.
+It is no longer that part.** Rail demand rises accordingly and is already in D-199's
+figure. **What becomes of the freed 22.32 is not decided here.**
+
+**KM-CHIL STAYS BLOCKED on the open rung that decides its coil's bus**, which decides
+whether the Pi can stop the water system.
+
+**D-202 THREE OF THE FIVE MAY ALREADY BE ON THE SHELF, AND ONE DIFFERENCE BETWEEN THE
+TWO BUILDS IS WORTH RECORDING AS ONE.**
+
+**The owner holds a 1P 15 A C-curve and a 1P 15 A D-curve DIN breaker, plus a 6 A D.
+Whether they are UL 489 or UL 1077 is unknown, AND BY THE REQUIREMENT ABOVE THAT
+DECIDES WHETHER THEY ARE USABLE.** The specified parts are the SPECIFICATION; the
+shelf parts are CANDIDATES pending that check.
+
+**AND THE PARALLEL BUILD'S Pi FEED HAS NO BLOWN-FUSE INDICATOR.** It specified a
+plain DIN fuse holder before anyone asked for one. **This build identified why it
+needs one: nothing can power-cycle the Pi, so a blown fuse presents as a DEAD PI WITH
+NO CAUSE.** Recorded as a real difference between the builds rather than as a
+preference - **it is the first thing this build has that the shipped one does not.**
+
