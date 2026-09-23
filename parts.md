@@ -723,9 +723,13 @@ then 16 x 14 x 7 or 8. **And the panel is always smaller than the box by roughly
 | 16 x 14 | 14.75 x 12.88 |
 | Hoffman QLINE I 400 x 300 | 14.17 x 10.24 |
 
-**THE BOX THE OWNER ACTUALLY HOLDS IS A QILISU, measured from its own drawing:
-overall 425 x 340 x 183 mm, MOUNTING PLATE 359 x 271 mm, plate mounting holes
-300 x 199 mm, plate thickness 4.5 mm.**
+> **STRUCK 2026-09-23 BY THE OWNER. THIS BOX WAS NEVER OWNED.**
+>
+> ~~The box the owner actually holds is a QILISU, overall 425 x 340 x 183 mm, mounting plate 359 x 271 mm.~~
+>
+> **IT IS A LISTING HE WAS LOOKING AT WHILE SHOPPING. He pasted the drawing and it entered this file as though it were the box on his shelf.** It is a box he CONSIDERED AND DID NOT BUY.
+>
+> **THE BOX IS THE QILIPSU: overall 508 x 419 x 201 mm, MOUNTING PLATE 468 x 379 mm.** Ordered and delivered. **One box, not two.** F-120 closed, T-030.
 
 **A 16 x 14 step-down gives 375 x 327. A true 16 x 12 gives about 360 x 260 at best,
 and that is metric QLINE I rather than a 16 x 12.**

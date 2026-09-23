@@ -92,6 +92,8 @@ changed reports to BOSS and does not act.
 | G-52 | **ANY FASTENER SPACING THAT ASSUMES THE PART IS STATIONARY HAS IGNORED THE TOOL.** Space for a fitting is not space to FIT it | Frozen 2026-09-23, D-195, the owner's generalisation of lookup 1. **No manufacturer publishes a minimum centre-to-centre for a cord grip, so geometry decides - and the floor is NOT the flat width.** **Across-corners is about 1.15x flats and that is what collides first WHEN A NUT ROTATES.** A spacing that fits two nuts sitting still does not fit two being tightened. **It generalises past cord grips to every threaded fitting, every terminal screw reached with a driver, and every nut on a crowded plate** |
 | G-53 | **EVERY FACT, TRAP OR FINDING THAT CROSSES BETWEEN THE TWO BUILDS CARRIES ITS ORIGIN AND ITS DIRECTION, PERMANENTLY** | Frozen 2026-09-23, D-205. **Two builds agreeing is worth nothing when one told the other.** **Without the direction recorded, every imported trap becomes independent corroboration six months later, and the whole value of running two builds evaporates into an ECHO.** It binds on convergence as hard as on import: **a conclusion both builds reached is only independent if neither was told** |
 | G-54 | **A FACT ENTERS AT THE SOURCE, NEVER AT THE VIEW. A VIEW THAT IS AHEAD OF ITS SOURCE IS NO LONGER A VIEW** | Frozen 2026-09-23, D-209. **BOSS sent a settled decision to the document that DISPLAYS conductor facts instead of to the one that HOLDS them.** D4 now states the box division as settled in four places while D5 marks the same rows OPEN. **G-45 made them one source so they could not disagree; feeding the view directly defeats that at the only point where it can be defeated - the hand that types.** **The mechanism is only as good as the discipline about where facts are injected** |
+| G-55 | **A SINGLE-SOURCE ARCHITECTURE PROTECTS AGAINST DRIFT AND NOT AGAINST A WRITER WHO EDITS THE WRONG FILE** | Frozen 2026-09-23, D-213, the owner's general form of G-54. **The architecture was sound and the process went around it.** **Every mechanism in this tree that makes two documents agree has the same exposure: it constrains what the documents do to each other and not what a hand does to a document.** G-45 is the mechanism, G-54 is the discipline, **and this is the statement of why the mechanism alone was never going to be enough** |
+| G-53b | **A NUMBER CORRECT IN ITS OWN FRAME, IMPORTED WITHOUT ITS FRAME, IS WRONG AND LOOKS RIGHT** | Frozen 2026-09-23, D-213, the owner's naming of G-53's cousin. **407 mm of usable rail was correct on the parallel build's layout and impossible on a plate stood the other way up.** **The five cross-box run lengths are the same shape caught in time: measured, and measured on a different wall.** So an imported figure carries its FRAME - the orientation, the datum, the assumption it was measured under - **or it does not cross at all** |
 | G-40b | **THE 1ST EDITION SET IS THE DEFAULT SHAPE TO LEAN ON, NOT A REFERENCE TO CONSULT.** Where it did something and this build has no reason to differ, **DO WHAT IT DID.** Deriving a fresh answer to a question it already answered is work nobody asked for | Frozen 2026-09-04, D-152, amending the posture of G-40 and NOT its safety half. **What still binds: figures are T-018 candidates and unverified, its parts may be superseded, its impossibility claims are ungraded, and where it disagrees with a FROZEN row the tree wins.** **What changes: on anything the tree has NO position on, the old set's answer is the starting point rather than a proposal. It is a build that got built** |
 | G-32 | **AN EXPECTED SIGN COMES FROM A MEASUREMENT, NEVER FROM A LABEL.** If a check derives what it expects from a product name on a token, **a mislabelled jug produces a mislabelled expectation and the check CONFIRMS the swap instead of catching it** | Frozen 2026-09-01, D-083. The reference sign is the measured step for that token from C-03, and it is only as good as C-09. **A swap present at commissioning is baked into the reference and confirms itself forever**. **AMENDED 2026-09-03 by D-105: THE SAME RULE NOW BINDS ON ROLE. With role a per-channel SETTING, a wrong role is worse than a wrong product - it makes the signed check expect the wrong direction, so the check CONFIRMS the error instead of catching it. C-09 verifies the ROLE, not only the product** |
 | G-30 | **DUTY IS SEPARATED BY RELAY, NOT BY CONTACT MATERIAL.** A power pole and a sense pole never share a relay. **All four poles share one volume in a dust-protected, not-wash-tight plug-in, and a 7 A break throws silver vapour, oxide and carbon onto the quiet pole. Gold plating survives and the contact still degrades, by a path that no contact material and no burden value addresses** | Frozen 2026-09-01, D-067. It supersedes the contact-material remedy as the answer to mixed duty, and it is why the browser build deleted its low-level contact rather than improving it |
@@ -114,7 +116,7 @@ not decided and no agent may assume one.
 | 100 gal cone bottom storage tank, open top | WATER |
 | 40 gal food-grade day tank, open top | WATER |
 | Anbull transfer pump, 120 V corded | WATER |
-| Two hi-flow submersibles, 120 V corded | WATER, one circulation and one chiller loop |
+| ~~Two hi-flow submersibles, 120 V corded~~ **STRUCK 2026-09-23, D-214. NOT OWNED.** | WATER, one manifold pump and one chiller loop. **BOTH ARE SPECIFIED AND NEITHER IS PURCHASED.** The owner has not ordered the Aqua-Mag; D-137 is correct and this row was wrong. **Caught by D7, which is built on the already-owned / specified-not-bought distinction and could not file it as either** |
 | JBJ Arctica DBE-200 chiller, 115 V, 6 A, no internal pump | WATER |
 | All the PVC | WATER and DOSING |
 | Eight peristaltic pump heads | PUMP-BOXES |
@@ -4733,4 +4735,62 @@ namespace is BOSS's and G-43 is a BOSS rule.** One pass, D7-A-nn through D7-D-nn
 **Four of the five things it found beyond its brief are cart-audit items and stay
 there. The fifth is F-120, already open: two boxes under one name, and every rail and
 gland position downstream reads one of the two.**
+
+**D-213 THE BOX IS THE QILIPSU AND THERE WAS NEVER A SECOND ONE. F-120 CLOSES ON A
+NEW TRAP RATHER THAN ON A CORRECTION.**
+
+**508 x 419 x 201, plate 468 x 379, ordered and delivered.** The QILISU entry is
+struck from parts.md.
+
+**HOW IT GOT IN IS THE PART WORTH HAVING, AND NEITHER BUILD HAD LOGGED THE SHAPE: A
+PART CONSIDERED DURING SHOPPING ENTERED THE RECORD AS A PART OWNED.** T-030.
+
+**Nothing distinguished the two sources.** A listing being browsed and a drawing of
+the thing in hand **both arrive as a drawing with dimensions**, and the record has a
+column for what a part IS and none for **whether it exists in the room.**
+
+**And the name is what let it survive: QILISU against QILIPSU is ONE LETTER, so the
+difference read as a transcription variant rather than as two different boxes. A name
+one letter apart is worse than a name completely different, because completely
+different gets questioned.**
+
+**What caught it was neither file. It was an agent asked to DRAW against both, which
+had to pick one and could not.**
+
+**D-214 THE CHILLER LOOP PUMP IS NOT BOUGHT. THE OWNED TABLE IS WRONG AND D-137 IS
+RIGHT.** Owner, 2026-09-23. **Two submersibles are SPECIFIED and NEITHER IS
+PURCHASED.** The 2026-08-30 entry saying two are held is corrected.
+
+**D-215 THE THREE LOCAL GROUND BARS: REQUIREMENT AND SEARCH TERM, NO PART.** F-121,
+and the owner is buying them.
+
+**THE REQUIREMENT.** One bar in each remote enclosure - **both pump boxes and the
+display box.** Each must:
+
+- **Land every equipment ground entering that enclosure, plus the green conductor
+  that daisies it home to the main panel's bonded assembly** under D-165. **So its way
+  count is the enclosure's grounds PLUS ONE, and the plus one is not optional.**
+- **Take the conductor sizes that actually land there**, which D5 names per
+  enclosure.
+- **Be mounted to a NON-CONDUCTIVE plate or wall.** All three enclosures are plastic,
+  **so a bare block bonds to nothing - which is D-195's dependency, and it must be
+  CHECKED rather than assumed, because the block looks identical either way.**
+
+**THE SEARCH TERMS:**
+- `ground bar 4 position insulated standoff DIN` and `copper ground bar small enclosure tapped`
+- `ground bar mounting standoff insulator kit`
+- `equipment ground bar wire range 14 to 6 AWG`
+
+**What is wanted is the SMALLEST bar that takes the enclosure's grounds plus one**,
+not a 12-way. **G-44: the main panel's 12-way was sized for a bonded assembly at the
+single point; a remote bar serves one box.**
+
+**AND ONE THING TO CARRY FROM THE MAIN PAIR: whether these arrive WITH insulators and
+mounting hardware or as bare blocks like the 2450K14s.** F-118's surprise was that
+the part on the shelf was not the part the tree had assumed, **and the same question
+asked before purchase costs nothing.**
+
+**D-216 ORDER ITEM 3's DERIVED SOCKET COUNT CARRIES THE T-018 LABEL.** A derived
+quantity in a buy list **reads as recorded**, and the reader holding a credit card
+cannot tell which it is. Labelled in order.md rather than re-derived.
 

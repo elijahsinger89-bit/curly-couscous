@@ -3,6 +3,38 @@
 Failure modes this project has actually hit, written so the next agent
 recognises one. Not hypotheticals. A trap goes in here after it has bitten.
 
+## T-030 A part considered during shopping enters the record as a part owned
+
+Hit 2026-09-23, by the owner, and caught by MAIN-PANEL drawing against both entries.
+
+**A drawing was pasted from a listing he was browsing. It entered parts.md as though
+it were the box on his shelf.** It was a box he **considered and did not buy.** The
+tree then held **two enclosures under one name** and every rail and gland position
+downstream read one of the two.
+
+**THE MECHANISM IS THAT NOTHING DISTINGUISHES THE TWO SOURCES.** A listing he is
+looking at and a drawing of the thing in his hands **both arrive as a drawing with
+dimensions.** The record has a column for what a part IS and no column for **whether
+it exists in the room.**
+
+**AND THE NAME IS WHAT LET IT SURVIVE.** QILISU against QILIPSU - **one letter.** Two
+entries that looked like the same box from two sources, **and the difference read as
+a transcription variant rather than as two different boxes.** A name one letter apart
+is worse than a name completely different: **completely different gets questioned.**
+
+**It is T-018's family and a new member of it.** T-018 was a seed read as a
+measurement. **This is a CANDIDATE read as a POSSESSION** - and both are a number
+whose meaning depends on a context that did not travel with it.
+
+**The recognition test, and it is a question about the room rather than the part: IS
+THIS THING HERE?** Not is it specified, not is it chosen, not is it ordered. **Is it
+on the shelf.** D7 is built on exactly that distinction - already owned, specified and
+not bought, requirement only - **and it was D7's structure that made the contradiction
+visible enough to ask about.**
+
+**What caught it was neither of the two files: it was an agent asked to DRAW against
+them, which had to pick one and could not.**
+
 ## T-029 A sound finding is not automatically a finding worth having
 
 Called 2026-09-04 by the owner, on F-104, in four words: an unnecessary rabbit

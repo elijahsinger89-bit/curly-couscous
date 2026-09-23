@@ -139,8 +139,8 @@ this.** D7 declined to decide it and that was right - **two timers that arrive i
 sentence are not one timer.**
 
 **ITEM 3'S FOUR SOCKETS ARE DERIVED from this file's own arithmetic rather than
-recorded anywhere.** Flagged for a count rather than trusted. **A derived quantity in
-a buy list is T-018's shape on a purchase.**
+recorded anywhere. LABELLED T-018, D-216: A DERIVED QUANTITY IN A BUY LIST READS AS
+RECORDED, and the reader holding a credit card cannot tell which it is.** Count them before ordering rather than re-deriving them.
 
 **And one line this file never had: THREE LOCAL GROUND BARS for the remote
 enclosures.** F-121. D6 needs four, two are bought, and D-192 puts both of those in
