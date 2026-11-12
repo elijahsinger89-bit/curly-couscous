@@ -10,6 +10,19 @@ USE
   The .json file is the input store (it replaces the Excel sheets).
   Blank work offset X/Y/Z: you are asked Yes/No before anything is written.
 
+STEP BUILDER (tab 1)
+  First step, Last step, Increment, then Build steps: one row per step.
+  Program names are B_[part]_[step]_[machine] from Header > Part number and
+  Machine (letters, digits, _ only). The step is padded to 3 digits, 4 when
+  a step is 1000 or more. Names over 24 characters (NC limit) are left
+  blank and listed, with the longest machine name that would fit.
+  If the table already has data you choose:
+    Overwrite all    every row replaced, all names regenerated
+    Keep existing    every current row untouched, missing steps added,
+                     rows sorted by step number
+    Cancel           nothing changes
+  "Fill blank program names" uses the same pattern on blank names only.
+
 WHERE THE FILES GO
   DEF/UGUD.DEF    definitions directory (_N_DEF_DIR, file _N_UGUD_DEF)
   CUS/L_*.SPF     user cycles directory (_N_CUS_DIR). Called by name.
@@ -77,12 +90,24 @@ RESTART
   at that step and nest. For a new pallet set GV_STEP=0 first.
   Max breaks in a step: park and hold until reset (LOOP / M0).
 
+FIRST RUN ON THE MACHINE (prove-out, single block, low feed override)
+  1. Probe one nest. On an outside feature, watch the probe go DOWN by
+     S_ID from the start height (negative S_ID lowers in G17).
+  2. After probing, read $P_UIFR[5,X,FI] (nest 1). Not 0 = MD18600 works
+     and the FI tolerance check is live.
+  3. Force a break on the laser: BL9908_MOD must return 19.19, the nest
+     goes to 100+step, the next nest gets a sister tool.
+  4. Reset mid-step, restart: RESUMING AT STEP / NEST must name the nest
+     that was cutting, and the job must resume there.
+  5. Out-of-tolerance nest: status 2, MSG, M0; that nest is skipped later.
+
 BLUM MACROS (outside the Siemens manuals, not verified)
   BL9908_MOD must return 19.19 in its last parameter on a break and disable
   the tool. BL9902 and its ;NCG# lines in L_TOOL_MEAS are copied verbatim
   from the old package (inch values). S3750 is the laser speed in both.
 
 TESTS (tests/, for whoever maintains the generator)
-  node tests/run_fixtures.js OUT    engine on 7 fixture jobs + 28 bad jobs
+  node tests/run_fixtures.js OUT    engine on 7 fixture jobs, 28 bad jobs,
+                                    step builder cases
   python3 tests/nc_lint.py OUT/f*   manual rules on every generated file
   node tests/e2e.js OUT2            browser test, file://, network blocked

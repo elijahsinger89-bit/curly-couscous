@@ -90,6 +90,87 @@ const fmt = [[S.fix(-0.0001, 3), '0.000'], [S.fix(1.0005, 3), '1.001'], [S.fix(-
   [S.compact(0.04, 4), '0.04'], [S.compact(1, 4), '1'], [S.fix(-1e-17, 3), '0.000']];
 for (const [got, want] of fmt) if (got !== want) fail('format ' + got + ' != ' + want); else console.log('ok   format ' + want);
 
+/* ---- step builder (first / last / increment) ---- */
+function bjob(over, hdr) {
+  const j = S.defaultJob();
+  j.header.part = '00223344'; j.header.machine = 'HF5';
+  Object.assign(j.header, hdr || {});
+  Object.assign(j.builder, over || {});
+  return j;
+}
+function eq(got, want, label) {
+  const g = JSON.stringify(got), w = JSON.stringify(want);
+  if (g !== w) fail(label + ': got ' + g + ' want ' + w); else console.log('ok   ' + label);
+}
+let r = S.buildSteps(bjob({ first: '10', last: '60', inc: '10' }), 'overwrite');
+eq(r.error, '', 'builder 10-60/10: no error');
+eq(r.steps.map(s => s.step), ['10', '20', '30', '40', '50', '60'], 'builder 10-60/10: six rows');
+eq(r.steps.map(s => s.program), ['B_00223344_010_HF5', 'B_00223344_020_HF5', 'B_00223344_030_HF5',
+  'B_00223344_040_HF5', 'B_00223344_050_HF5', 'B_00223344_060_HF5'], 'builder names B_PART_STEP_MACHINE');
+eq(r.probeProgram, 'B_00223344_001_HF5', 'builder names the probe program');
+eq([r.steps[0].meas, r.steps[0].measAlways, r.steps[0].brk, r.steps[0].maxBrk, r.steps[0].life, r.steps[0].setpiece],
+  [true, false, true, '2', '1', true], 'builder rows get the default flags');
+{
+  const j = bjob({ first: '10', last: '40', inc: '10' });
+  const keep30 = Object.assign(S.blankStep(30), { tool: 'EM_12', program: 'MY_CAM_PROG', brkTol: '0.2', life: '5', debug: true });
+  const keep35 = Object.assign(S.blankStep(35), { tool: 'DR_6' });
+  j.steps = [keep35, keep30];
+  j.probeStep.program = 'B_CUSTOM_PROBE';
+  const k = S.buildSteps(j, 'keep');
+  eq(k.steps.map(s => s.step), ['10', '20', '30', '35', '40'], 'keep: missing steps added, rows sorted, 35 kept');
+  eq(k.steps[2], keep30, 'keep: existing row 30 untouched');
+  eq(k.steps[3], keep35, 'keep: row 35 outside the range untouched (blank name stays blank)');
+  eq(k.probeProgram, 'B_CUSTOM_PROBE', 'keep: existing probe name kept');
+  eq(k.added, 3, 'keep: three rows added');
+  eq(j.steps.length, 2, 'keep: the job itself is not mutated');
+  const o = S.buildSteps(j, 'overwrite');
+  eq(o.steps.map(s => [s.step, s.tool, s.program]), [['10', '', 'B_00223344_010_HF5'], ['20', '', 'B_00223344_020_HF5'],
+    ['30', '', 'B_00223344_030_HF5'], ['40', '', 'B_00223344_040_HF5']], 'overwrite: every row fresh');
+  eq(o.probeProgram, 'B_00223344_001_HF5', 'overwrite: probe name regenerated');
+  eq(S.hasStepData(j), true, 'hasStepData true with a tool');
+  eq(S.hasStepData(S.defaultJob()), false, 'hasStepData false on the starter row');
+}
+const bad = [
+  ['last below first', { first: '50', last: '10', inc: '10' }, null, 'must not be below'],
+  ['increment 0', { first: '10', last: '50', inc: '0' }, null, 'Increment'],
+  ['not whole', { first: '10', last: '5x', inc: '10' }, null, 'whole numbers'],
+  ['first <= probe step', { first: '1', last: '50', inc: '10' }, null, 'after the probe step'],
+  ['more than 100 rows', { first: '10', last: '2000', inc: '10' }, null, 'max 100'],
+  ['machine with a space', { first: '10', last: '50', inc: '10' }, { machine: 'HF 5' }, 'Machine'],
+  ['no part number', { first: '10', last: '50', inc: '10' }, { part: '' }, 'part number'],
+];
+for (const [label, b, h, want] of bad) {
+  const e = S.buildSteps(bjob(b, h), 'overwrite').error;
+  if (!e.includes(want)) fail('builder should reject ' + label + ' (got "' + e + '")'); else console.log('ok   builder rejects ' + label);
+}
+r = S.buildSteps(bjob({ first: '990', last: '1010', inc: '10' }), 'overwrite');
+eq(r.steps.map(s => s.program), ['B_00223344_0990_HF5', 'B_00223344_1000_HF5', 'B_00223344_1010_HF5'], 'step >= 1000 pads to 4 digits');
+eq(r.probeProgram, 'B_00223344_0001_HF5', 'probe name uses the same width');
+r = S.buildSteps(bjob({ first: '10', last: '30', inc: '10' }, { part: '02215800_001', machine: 'HAAS_EC500' }), 'overwrite');
+eq(r.unnamed, [1, 10, 20, 30], 'names over 24 chars are left blank and listed');
+eq(r.steps.map(s => s.program), ['', '', ''], 'no over-long name is written');
+eq(r.maxMachine, 5, 'max machine length reported (24 - B_02215800_001_010_)');
+r = S.buildSteps(bjob({ first: '10', last: '20', inc: '10' }, { machine: '' }), 'overwrite');
+eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank machine gives B_PART_STEP');
+{
+  const j = bjob();
+  j.steps = [Object.assign(S.blankStep(10), { program: 'KEEP_ME' }), S.blankStep(20)];
+  j.probeStep.program = '';
+  const f = S.fillNames(j);
+  eq([f.probeProgram, f.steps[0].program, f.steps[1].program, f.filled], ['B_00223344_001_HF5', 'KEEP_ME', 'B_00223344_020_HF5', 2],
+    'fill names touches only blank names');
+}
+{
+  let threw = false;
+  try { S.generate(S.defaultJob()); } catch (e) { threw = /not valid/.test(e.message); }
+  eq(threw, true, 'generate() refuses an invalid job (no WKS/.SPF)');
+}
+{
+  const old = JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f1_old_package.json'), 'utf8'));
+  delete old.builder;
+  eq(S.normalizeJob(old).builder, { first: '10', last: '', inc: '10' }, 'v1.0 job without builder loads with defaults');
+}
+
 /* ---- JSON round trip ---- */
 const j1 = base();
 const j2 = S.normalizeJob(JSON.parse(JSON.stringify(j1)));

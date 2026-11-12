@@ -107,15 +107,10 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
   <section class="tab" id="tab-wcs"></section>
   <section class="tab" id="tab-output"></section>
 </main>
-<dialog id="dlgBlank">
-  <h2>Blank work offsets</h2>
-  <p id="dlgBlankText"></p>
-  <p>Those X / Y / Z values will be written as <b>0.000 = machine zero</b>, not the part. In a multi-nest job that is almost always a mistake.</p>
-  <p><b>Generate anyway?</b></p>
-  <div class="btns">
-    <button type="button" id="dlgBlankNo" class="primary">No – stop</button>
-    <button type="button" id="dlgBlankYes">Yes – write 0.000</button>
-  </div>
+<dialog id="dlg">
+  <h2 id="dlgTitle"></h2>
+  <div id="dlgBody"></div>
+  <div class="btns" id="dlgBtns"></div>
 </dialog>
 
 <script id="engine">
@@ -129,7 +124,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.0.0';
+var GEN_VERSION = '1.1.0';
 var MAX_NESTS = 32;
 var AXES = ['NONE', 'A', 'B', 'C'];
 var XY_METHODS = ['SPLIT EXTERIOR', 'BORE', 'BOSS', 'RECT POCKET', 'RECT SPIGOT', 'NONE'];
@@ -158,6 +153,7 @@ function defaultJob() {
     config: { units: 'METRIC', trunnion: 'NONE', rotary: 'B', mode: 'TOMBSTONE',
               faces: '4', nestsPerFace: '2', totalNests: '8' },
     probeStep: { enabled: true, step: '1', program: '' },
+    builder: { first: '10', last: '', inc: '10' },
     steps: [blankStep(10)],
     probing: {
       tool: 'PROBE', limitClear: '', feed: '', searchDist: '', prnum: '1', probeOnM: 'M56',
@@ -186,6 +182,7 @@ function normalizeJob(src) {
   mergeFlat(d.header, src.header);
   mergeFlat(d.config, src.config);
   mergeFlat(d.probeStep, src.probeStep);
+  mergeFlat(d.builder, src.builder);
   mergeFlat(d.probing, src.probing);
   if (Array.isArray(src.steps)) {
     d.steps = src.steps.map(function (s) { return mergeFlat(blankStep(''), s); });
@@ -245,6 +242,111 @@ function toolNameError(name) {
   if (/["]/.test(t)) return 'tool name must not contain a double quote';
   if (/[^\x20-\x7E]/.test(t)) return 'tool name must be plain ASCII';
   return '';
+}
+
+/* ---------------- step builder: first / last / increment ----------------
+   Program names B_[part]_[step]_[machine], step zero-padded to 3 digits
+   (4 when any step >= 1000), max 24 characters (NC naming rules).        */
+var NAME_PART_RE = /^[A-Za-z0-9_]+$/;
+var MAX_BUILD_ROWS = 100;
+function nameParts(job) {
+  return { part: String(job.header.part || '').trim(), mach: String(job.header.machine || '').trim() };
+}
+function nameInputsError(job) {
+  var n = nameParts(job);
+  if (!n.part) return 'Enter the part number (Header) first: program names are B_[part]_[step]_[machine].';
+  if (!NAME_PART_RE.test(n.part)) return 'Part number "' + n.part + '" can only use letters, numbers and _ to be part of a program name.';
+  if (n.mach && !NAME_PART_RE.test(n.mach)) return 'Machine "' + n.mach + '" can only use letters, numbers and _ to be part of a program name (or leave Machine blank).';
+  return '';
+}
+function nameWidth(stepNos) {
+  var hi = 0;
+  stepNos.forEach(function (s) { if (isFinite(s) && s > hi) hi = s; });
+  return hi >= 1000 ? 4 : 3;
+}
+function rawName(job, stepNo, width) {
+  var n = nameParts(job), s = String(stepNo);
+  while (s.length < width) s = '0' + s;
+  return 'B_' + n.part + '_' + s + (n.mach ? '_' + n.mach : '');
+}
+function progName(job, stepNo, width) {
+  var nm = rawName(job, stepNo, width);
+  return progNameError(nm) ? '' : nm;
+}
+function maxMachineLen(job, width) {
+  return 24 - (2 + nameParts(job).part.length + 1 + width + 1);
+}
+function allStepNos(steps, ps) {
+  var a = [];
+  steps.forEach(function (s) { if (isInt(s.step)) a.push(num(s.step)); });
+  if (ps.enabled && isInt(ps.step)) a.push(num(ps.step));
+  return a;
+}
+function cloneStep(s) { return JSON.parse(JSON.stringify(s)); }
+function hasStepData(job) {
+  return job.steps.some(function (s) { return !isBlank(s.tool) || !isBlank(s.program) || !isBlank(s.brkTol); });
+}
+/* mode 'overwrite': a fresh row per step of the range, every name generated.
+   mode 'keep': every current row untouched, missing steps added, sorted.   */
+function buildSteps(job, mode) {
+  var b = job.builder, ps = job.probeStep;
+  var R = { steps: null, probeProgram: ps.program, unnamed: [], error: '', count: 0, added: 0, width: 3 };
+  var ne = nameInputsError(job);
+  if (ne) { R.error = ne; return R; }
+  if (!isInt(b.first) || !isInt(b.last) || !isInt(b.inc)) { R.error = 'First step, last step and increment must be whole numbers.'; return R; }
+  var first = num(b.first), last = num(b.last), inc = num(b.inc);
+  if (first < 1 || last > 99999) { R.error = 'Step numbers must be 1-99999.'; return R; }
+  if (last < first) { R.error = 'Last step (' + last + ') must not be below first step (' + first + ').'; return R; }
+  if (inc < 1) { R.error = 'Increment must be at least 1.'; return R; }
+  var count = Math.floor((last - first) / inc) + 1;
+  if (count > MAX_BUILD_ROWS) { R.error = 'That range makes ' + count + ' steps (max ' + MAX_BUILD_ROWS + ').'; return R; }
+  if (ps.enabled && isInt(ps.step) && first <= num(ps.step)) { R.error = 'First step must come after the probe step (' + num(ps.step) + ').'; return R; }
+  var range = [];
+  for (var s = first; s <= last; s += inc) range.push(s);
+  var steps, fresh = [];
+  if (mode === 'keep') {
+    steps = job.steps.map(cloneStep);
+    var have = {};
+    steps.forEach(function (st) { if (isInt(st.step)) have[num(st.step)] = 1; });
+    range.forEach(function (n) { if (!have[n]) { var r = blankStep(n); fresh.push(r); steps.push(r); } });
+    steps.sort(function (a, c) {
+      var x = isInt(a.step) ? num(a.step) : Infinity, y = isInt(c.step) ? num(c.step) : Infinity;
+      return x - y;
+    });
+  } else {
+    steps = range.map(function (n) { var r = blankStep(n); fresh.push(r); return r; });
+  }
+  var w = nameWidth(allStepNos(steps, ps));
+  fresh.forEach(function (st) {
+    var nm = progName(job, num(st.step), w);
+    if (nm) st.program = nm; else R.unnamed.push(num(st.step));
+  });
+  if (ps.enabled && isInt(ps.step) && (mode !== 'keep' || isBlank(ps.program))) {
+    var pn = progName(job, num(ps.step), w);
+    if (pn) R.probeProgram = pn; else R.unnamed.unshift(num(ps.step));
+  }
+  R.steps = steps; R.count = range.length; R.added = fresh.length; R.width = w;
+  R.maxMachine = maxMachineLen(job, w);
+  return R;
+}
+/* "Fill blank program names": same pattern, only blank names are touched */
+function fillNames(job) {
+  var ps = job.probeStep;
+  var R = { steps: job.steps.map(cloneStep), probeProgram: ps.program, unnamed: [], error: '', filled: 0 };
+  var ne = nameInputsError(job);
+  if (ne) { R.error = ne; return R; }
+  var w = nameWidth(allStepNos(job.steps, ps));
+  R.width = w; R.maxMachine = maxMachineLen(job, w);
+  if (ps.enabled && isBlank(ps.program) && isInt(ps.step)) {
+    var pn = progName(job, num(ps.step), w);
+    if (pn) { R.probeProgram = pn; R.filled++; } else R.unnamed.push(num(ps.step));
+  }
+  R.steps.forEach(function (st) {
+    if (!isBlank(st.program) || !isInt(st.step)) return;
+    var nm = progName(job, num(st.step), w);
+    if (nm) { st.program = nm; R.filled++; } else R.unnamed.push(num(st.step));
+  });
+  return R;
 }
 
 /* ---------------- resolve the job into numbers ---------------- */
@@ -1661,6 +1763,9 @@ function fReadme(R) {
 /* ---------------- generate ---------------- */
 function generate(job, opts) {
   opts = opts || {};
+  /* never emit files for an invalid job, even when called outside the UI */
+  var v = validate(job);
+  if (v.errors.length) throw new Error('Job is not valid: ' + v.errors.map(function (e) { return e.msg; }).join('; '));
   var R = resolve(job);
   R.date = opts.date || today();
   var files = [];
@@ -1740,7 +1845,9 @@ G.SNG = {
   OUTSIDE: OUTSIDE, INSIDE: INSIDE,
   defaultJob: defaultJob, normalizeJob: normalizeJob, blankStep: blankStep, validate: validate,
   resolve: resolve, generate: generate, makeZip: makeZip, crc32: crc32, fix: fix, compact: compact,
-  isBlank: isBlank, num: num, isNum: isNum, isInt: isInt, today: today, ascii: ascii
+  isBlank: isBlank, num: num, isNum: isNum, isInt: isInt, today: today, ascii: ascii,
+  progName: progName, rawName: rawName, nameInputsError: nameInputsError, buildSteps: buildSteps,
+  fillNames: fillNames, hasStepData: hasStepData, nameWidth: nameWidth, allStepNos: allStepNos
 };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -1806,7 +1913,7 @@ function def(v) { return S.compact(v, 4) + ' (auto)'; }
 function renderConfig() {
   var c = job.config, single = c.mode === 'SINGLE PART';
   var h = '';
-  h += '<h2>Header <span class="pill">comments only</span></h2><div class="grid">' +
+  h += '<h2>Header <span class="pill">comments + program names</span></h2><div class="grid">' +
     txt('header.part', 'Part number') + txt('header.material', 'Material') + txt('header.stock', 'Stock') +
     txt('header.machine', 'Machine') + txt('header.programmer', 'Programmer') + '</div>';
   h += '<h2>Machine &amp; job</h2><div class="grid">' +
@@ -1824,6 +1931,10 @@ function renderConfig() {
     txt('probeStep.step', 'Probe step #', { dis: !job.probeStep.enabled }) +
     txt('probeStep.program', 'Probe program name (generated)', { dis: !job.probeStep.enabled, ph: 'B_PART_001' }) +
     '</div><p class="note">The probe tool and every probing setting are on tab 2.</p></div>';
+  h += '<div class="box"><b>Step builder</b><div class="grid" style="margin-top:6px">' +
+    txt('builder.first', 'First step') + txt('builder.last', 'Last step') + txt('builder.inc', 'Increment') +
+    '<div style="display:flex;align-items:flex-end"><button type="button" data-act="build">Build steps</button></div></div>' +
+    '<p class="note" id="builderNote">' + builderNote() + '</p></div>';
   h += '<div class="tblwrap" style="margin-top:10px"><table class="t"><thead><tr>' +
     '<th>Step #</th><th>Tool name</th><th>Brk tol (' + U().u + ')</th><th>Cutting program</th>' +
     '<th class="c">Measure</th><th class="c">Always</th><th class="c">Brk check</th><th>Max brk</th>' +
@@ -1848,10 +1959,23 @@ function renderConfig() {
   });
   h += '</tbody></table></div>';
   h += '<div class="actions" style="margin-top:8px"><button type="button" data-act="add">+ Add step</button>' +
-    '<button type="button" data-act="names">Fill blank program names from part #</button></div>';
+    '<button type="button" data-act="names">Fill blank program names</button></div>';
   h += '<p class="note">Rows run top to bottom. Always = measure before every nest; off = smart (measure while ' +
     '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest.</p>';
   $('#tab-config').innerHTML = h;
+}
+function builderNote() {
+  var base = 'One row per step from first to last by the increment. Program names are B_[part]_[step]_[machine] from the Header ' +
+    '(step padded to 3 digits, 4 when a step is 1000 or more; max 24 characters). ';
+  var ne = S.nameInputsError(job);
+  if (ne) return esc(base + ne);
+  var b = job.builder, nos = S.allStepNos(job.steps, job.probeStep);
+  if (S.isInt(b.last)) nos.push(S.num(b.last));
+  var w = S.nameWidth(nos);
+  var first = S.isInt(b.first) ? S.num(b.first) : 10;
+  var ex = S.rawName(job, first, w);
+  return esc(base + 'Example: ') + '<b>' + esc(ex) + '</b>' +
+    (ex.length > 24 ? ' <span style="color:var(--bad)">(' + ex.length + ' characters: too long)</span>' : '');
 }
 
 /* ---- tab: probing ---- */
@@ -1993,16 +2117,71 @@ function runValidate() {
   renderAll();
   return v;
 }
-function askBlank(list) {
+/* generic modal: paragraphs of plain text, buttons [{label, value, primary}];
+   Escape answers escValue */
+function askChoice(title, paras, buttons, escValue) {
   return new Promise(function (resolve) {
-    var d = $('#dlgBlank');
-    $('#dlgBlankText').textContent = 'Nest' + (list.length > 1 ? 's ' : ' ') + list.join(', ') + ' ' +
-      (list.length > 1 ? 'have' : 'has') + ' a blank X, Y or Z work offset.';
-    function done(ans) { d.close(); $('#dlgBlankYes').onclick = null; $('#dlgBlankNo').onclick = null; resolve(ans); }
-    $('#dlgBlankYes').onclick = function () { done(true); };
-    $('#dlgBlankNo').onclick = function () { done(false); };
-    d.oncancel = function (ev) { ev.preventDefault(); done(false); };
+    var d = $('#dlg');
+    $('#dlgTitle').textContent = title;
+    var body = $('#dlgBody'), btns = $('#dlgBtns');
+    body.innerHTML = ''; btns.innerHTML = '';
+    paras.forEach(function (t) { var p = document.createElement('p'); p.textContent = t; body.appendChild(p); });
+    function done(v) { d.close(); d.oncancel = null; btns.innerHTML = ''; resolve(v); }
+    buttons.forEach(function (b) {
+      var el = document.createElement('button');
+      el.type = 'button'; el.textContent = b.label; el.dataset.choice = b.value;
+      if (b.primary) el.className = 'primary';
+      el.onclick = function () { done(b.value); };
+      btns.appendChild(el);
+    });
+    d.oncancel = function (ev) { ev.preventDefault(); done(escValue); };
     d.showModal();
+  });
+}
+function askBlank(list) {
+  return askChoice('Blank work offsets', [
+    'Nest' + (list.length > 1 ? 's ' : ' ') + list.join(', ') + ' ' + (list.length > 1 ? 'have' : 'has') + ' a blank X, Y or Z work offset.',
+    'Those X / Y / Z values will be written as 0.000 = machine zero, not the part. In a multi-nest job that is almost always a mistake.',
+    'Generate anyway?'
+  ], [
+    { label: 'No – stop', value: 'no', primary: true },
+    { label: 'Yes – write 0.000', value: 'yes' }
+  ], 'no').then(function (v) { return v === 'yes'; });
+}
+
+/* ---- step builder ---- */
+function namesMsg(r) {
+  if (!r.unnamed.length) return '';
+  var m = ' Step' + (r.unnamed.length > 1 ? 's ' : ' ') + r.unnamed.join(', ') + ' got no program name: B_[part]_[step]_[machine] would be over 24 characters.';
+  m += r.maxMachine > 0 ? ' With this part number the machine name can be at most ' + r.maxMachine + ' characters.'
+    : ' The part number is too long for the pattern; type these names by hand.';
+  return m;
+}
+function runBuilder() {
+  var check = S.buildSteps(job, 'overwrite');
+  if (check.error) { showMsgs('bad', 'Step builder: ' + check.error); return Promise.resolve(null); }
+  var withData = job.steps.filter(function (s) { return !S.isBlank(s.tool) || !S.isBlank(s.program) || !S.isBlank(s.brkTol); }).length;
+  var b = job.builder;
+  var range = 'steps ' + S.num(b.first) + ' to ' + S.num(b.last) + ' by ' + S.num(b.inc) + ' (' + check.count + ' rows)';
+  var gate = S.hasStepData(job) ? askChoice('Step table already has data', [
+    'The table has ' + job.steps.length + ' row' + (job.steps.length === 1 ? '' : 's') + ', ' + withData + ' with a tool, program or tolerance filled in.',
+    'Overwrite all: replace every row with ' + range + '. Everything typed in the table is lost.',
+    'Keep existing: leave every current row exactly as it is, add the steps of the range that are missing, and sort by step number.'
+  ], [
+    { label: 'Overwrite all', value: 'overwrite' },
+    { label: 'Keep existing, add missing', value: 'keep', primary: true },
+    { label: 'Cancel', value: 'cancel' }
+  ], 'cancel') : Promise.resolve('overwrite');
+  return gate.then(function (mode) {
+    if (mode === 'cancel') { showMsgs('warn', 'Step builder cancelled. Nothing changed.'); return null; }
+    var r = S.buildSteps(job, mode);
+    if (r.error) { showMsgs('bad', 'Step builder: ' + r.error); return null; }
+    job.steps = r.steps; job.probeStep.program = r.probeProgram;
+    dirty = true; errPaths = {}; renderAll(); showTab('config');
+    var msg = (mode === 'keep' ? 'Kept every existing row and added ' + r.added + ' of ' + range + '.'
+      : 'Step table rebuilt: ' + range + '.') + ' Fill in tool, breakage tolerance and life per row.' + namesMsg(r);
+    showMsgs(r.unnamed.length ? 'warn' : 'ok', msg);
+    return mode;
   });
 }
 function build(download) {
@@ -2044,6 +2223,11 @@ function onEdit(e) {
   setPath(job, p, v);
   dirty = true;
   if (errPaths[p] && e.type === 'input') { delete errPaths[p]; el.classList.remove('err'); }
+  if (/^(header\.(part|machine)|builder\.)/.test(p)) {   /* live, no re-render */
+    var bn = $('#builderNote'); if (bn) bn.innerHTML = builderNote();
+    var part = S.ascii(job.header.part);
+    $('#jobLabel').textContent = part ? '· Job ' + part : '';
+  }
   if (e.type !== 'change') return;
   if (p === 'config.faces' || p === 'config.nestsPerFace') {
     var f = S.num(job.config.faces), n = S.num(job.config.nestsPerFace);
@@ -2051,11 +2235,22 @@ function onEdit(e) {
       job.config.totalNests = String(Math.min(f * n, S.MAX_NESTS));
   }
   if (p === 'config.mode' && job.config.mode === 'SINGLE PART') { /* kept, not used */ }
-  if (STRUCT.test(p) || p === 'header.part') {
-    var a = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.path : null;
-    renderAll();
-    if (a) { var b = document.querySelector('[data-path="' + a + '"]'); if (b) b.focus(); }
-  }
+  if (STRUCT.test(p)) scheduleRender();
+}
+/* A change event fires on blur, which can be the mousedown of a button
+   click. Re-rendering then would replace the button and swallow the click,
+   so the re-render waits until the mouse button is released. */
+var pointerDown = false, pendingRender = false;
+document.addEventListener('mousedown', function () { pointerDown = true; }, true);
+document.addEventListener('mouseup', function () {
+  pointerDown = false;
+  if (pendingRender) { pendingRender = false; setTimeout(doRender, 0); }
+}, true);
+function scheduleRender() { if (pointerDown) pendingRender = true; else doRender(); }
+function doRender() {
+  var a = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.path : null;
+  renderAll();
+  if (a) { var b = document.querySelector('[data-path="' + a + '"]'); if (b) b.focus(); }
 }
 function onClick(e) {
   var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto]');
@@ -2076,16 +2271,13 @@ function onClick(e) {
   } else if (act === 'down' && i < job.steps.length - 1) {
     var b = job.steps[i + 1]; job.steps[i + 1] = job.steps[i]; job.steps[i] = b; dirty = true; errPaths = {}; renderAll();
   } else if (act === 'names') {
-    var part = S.ascii(job.header.part).replace(/[^A-Za-z0-9_]/g, '_');
-    if (!part) { showMsgs('warn', 'Enter the part number first (Header).'); return; }
-    var all = job.steps.map(function (s) { return S.num(s.step); });
-    if (job.probeStep.enabled) all.push(S.num(job.probeStep.step));
-    var w = Math.max.apply(null, all.filter(function (x) { return !isNaN(x); }).concat([0])) >= 1000 ? 4 : 3;
-    function nm(st) { return 'B_' + part + '_' + ('0000' + st).slice(-w); }
-    if (job.probeStep.enabled && S.isBlank(job.probeStep.program) && S.isInt(job.probeStep.step)) job.probeStep.program = nm(S.num(job.probeStep.step));
-    job.steps.forEach(function (s) { if (S.isBlank(s.program) && S.isInt(s.step)) s.program = nm(S.num(s.step)); });
+    var r = S.fillNames(job);
+    if (r.error) { showMsgs('bad', r.error); return; }
+    job.steps = r.steps; job.probeStep.program = r.probeProgram;
     dirty = true; renderAll();
-  } else if (act === 'preview') { build(false); }
+    showMsgs(r.unnamed.length ? 'warn' : 'ok', 'Filled ' + r.filled + ' blank program name' + (r.filled === 1 ? '' : 's') + '.' + namesMsg(r));
+  } else if (act === 'build') { runBuilder(); }
+  else if (act === 'preview') { build(false); }
   else if (act === 'zip') { build(true); }
   else if (act === 'dlone' && lastFiles) {
     var f = lastFiles[selFile];

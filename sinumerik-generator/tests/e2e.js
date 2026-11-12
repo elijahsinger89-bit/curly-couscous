@@ -44,8 +44,8 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     const dl = page.waitForEvent('download', { timeout: 5000 }).catch(() => null);
     await page.click('#btnGenerate');
     if (expectDialog) {
-      await page.waitForSelector('#dlgBlank[open]');
-      await page.click(answer ? '#dlgBlankYes' : '#dlgBlankNo');
+      await page.waitForSelector('#dlg[open]');
+      await page.click('#dlg button[data-choice="' + (answer ? 'yes' : 'no') + '"]');
     }
     return dl;
   }
@@ -54,6 +54,56 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     fs.mkdirSync(dest, { recursive: true });
     execFileSync('unzip', ['-o', '-q', zipPath, '-d', dest]);
   }
+
+  /* 0. step builder on a fresh page */
+  const rows = () => page.$$eval('#tab-config tbody tr', r => r.length);
+  const stepVals = f => page.$$eval('[data-path$=".' + f + '"]', l => l.filter(i => /^steps\./.test(i.dataset.path)).map(i => i.value));
+  await page.fill('[data-path="header.part"]', '00223344');
+  await page.fill('[data-path="header.machine"]', 'HF5');
+  await page.fill('[data-path="builder.last"]', '60');
+  check((await page.textContent('#builderNote')).includes('B_00223344_010_HF5'), 'builder note shows the example name live');
+  /* type into a structural field, then click Build straight away: the
+     re-render must not swallow the click */
+  await page.fill('[data-path="config.faces"]', '3');
+  await page.click('[data-act="build"]');
+  check(await page.$('#dlg[open]') === null, 'Build on the blank starter row asks nothing');
+  check(await rows() === 6, 'Build 10-60 by 10 makes 6 rows (click right after typing still works)');
+  check(JSON.stringify(await stepVals('program')) === JSON.stringify(['B_00223344_010_HF5', 'B_00223344_020_HF5', 'B_00223344_030_HF5',
+    'B_00223344_040_HF5', 'B_00223344_050_HF5', 'B_00223344_060_HF5']), 'rows named B_PART_STEP_MACHINE');
+  check(await page.$eval('[data-path="probeStep.program"]', e => e.value) === 'B_00223344_001_HF5', 'probe program named');
+  check(await page.$eval('[data-path="config.totalNests"]', e => e.value) === '6', 'deferred re-render applied faces 3 x 2 = 6 nests');
+  await page.fill('[data-path="steps.2.tool"]', 'EM_12');
+  await page.dispatchEvent('[data-path="steps.2.tool"]', 'change');
+  await page.fill('[data-path="builder.inc"]', '5');
+  await page.fill('[data-path="builder.last"]', '50');
+  await page.click('[data-act="build"]');
+  await page.waitForSelector('#dlg[open]');
+  const dtext = await page.textContent('#dlgBody');
+  check(dtext.includes('6 rows, 6 with a tool, program or tolerance'), 'dialog says how many rows hold data: ' + dtext.slice(0, 80));
+  await page.click('#dlg button[data-choice="cancel"]');
+  check(await rows() === 6 && (await stepVals('tool'))[2] === 'EM_12', 'Cancel changes nothing');
+  await page.click('[data-act="build"]');
+  await page.waitForSelector('#dlg[open]');
+  await page.keyboard.press('Escape');
+  check(await rows() === 6, 'Escape = cancel');
+  await page.click('[data-act="build"]');
+  await page.waitForSelector('#dlg[open]');
+  await page.click('#dlg button[data-choice="keep"]');
+  check(JSON.stringify(await stepVals('step')) === JSON.stringify(['10', '15', '20', '25', '30', '35', '40', '45', '50', '60']),
+    'Keep: missing steps added, step 60 kept, sorted');
+  check((await stepVals('tool'))[4] === 'EM_12' && (await stepVals('program'))[4] === 'B_00223344_030_HF5', 'Keep: edited row 30 preserved');
+  await page.click('[data-act="build"]');
+  await page.waitForSelector('#dlg[open]');
+  await page.click('#dlg button[data-choice="overwrite"]');
+  check(await rows() === 9 && (await stepVals('tool')).every(t => t === ''), 'Overwrite: 9 fresh rows 10-50 by 5');
+  await page.fill('[data-path="builder.first"]', '50');
+  await page.fill('[data-path="builder.last"]', '10');
+  await page.click('[data-act="build"]');
+  check((await page.textContent('#msgs')).includes('must not be below'), 'builder range error is shown');
+  await page.screenshot({ path: path.join(out, 'shot_builder_light.png'), clip: { x: 0, y: 0, width: 1360, height: 900 } });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.screenshot({ path: path.join(out, 'shot_builder_dark.png'), clip: { x: 0, y: 0, width: 1360, height: 900 } });
+  await page.emulateMedia({ colorScheme: 'light' });
 
   /* 1. load the old-package job and generate */
   await loadJob('f1_old_package');
@@ -83,7 +133,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   d = await generate(true, false);
   check(d === null, 'blank WO: answering No downloads nothing');
   check((await page.textContent('#msgs')).includes('Generation stopped'), 'blank WO: No shows "Generation stopped"');
-  const dlgText = await page.textContent('#dlgBlankText');
+  const dlgText = await page.textContent('#dlgBody p');
   check(dlgText.includes('17'), 'blank WO dialog lists nest 17: ' + dlgText.trim());
   d = await generate(true, true);
   check(!!d, 'blank WO: answering Yes generates');
@@ -129,6 +179,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   const back = JSON.parse(fs.readFileSync(saved, 'utf8'));
   const norm = await page.evaluate(o => JSON.stringify(window.SNG.normalizeJob(o)), orig);
   check(JSON.stringify(back) === norm, 'saved JSON equals the loaded job');
+  check(back.builder && back.builder.first === '10' && back.builder.inc === '10', 'saved JSON carries the builder fields');
   d = await generate(false);
   await d.saveAs(path.join(out, 'f2a.zip'));
   const [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#btnLoad')]);
