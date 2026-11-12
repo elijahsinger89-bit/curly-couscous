@@ -1,0 +1,2136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SINUMERIK ONE Generator</title>
+<style>
+:root {
+  --bg: #f4f5f7; --panel: #ffffff; --ink: #1d2330; --muted: #5d6677; --line: #d5d9e0;
+  --accent: #0b6e8a; --accent-ink: #ffffff; --bad: #b3261e; --bad-bg: #fdecea; --warn: #8a5a00;
+  --warn-bg: #fff4dc; --ok: #1e7a3c; --ok-bg: #e7f5ec; --field: #ffffff; --off: #eceef2; --code: #f7f8fa;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171c; --panel: #1c2027; --ink: #e3e6eb; --muted: #9aa3b2; --line: #343a45;
+    --accent: #3fa7c4; --accent-ink: #0d1014; --bad: #ff8a80; --bad-bg: #3a1d1b; --warn: #f0c060;
+    --warn-bg: #3a3018; --ok: #7fd49a; --ok-bg: #1b3324; --field: #232831; --off: #2a2f38; --code: #171a20;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14171c; --panel: #1c2027; --ink: #e3e6eb; --muted: #9aa3b2; --line: #343a45;
+  --accent: #3fa7c4; --accent-ink: #0d1014; --bad: #ff8a80; --bad-bg: #3a1d1b; --warn: #f0c060;
+  --warn-bg: #3a3018; --ok: #7fd49a; --ok-bg: #1b3324; --field: #232831; --off: #2a2f38; --code: #171a20;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+header.top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+header.top h1 { font-size: 17px; margin: 0; }
+header.top .sub { color: var(--muted); font-size: 12px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); background: var(--field); color: var(--ink); border-radius: 6px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+button.small { padding: 2px 8px; font-size: 12px; }
+nav.tabs { display: flex; gap: 4px; padding: 8px 16px 0; overflow-x: auto; }
+nav.tabs button { border-radius: 6px 6px 0 0; border-bottom: none; background: transparent; color: var(--muted); }
+nav.tabs button.active { background: var(--panel); color: var(--ink); border-color: var(--line); font-weight: 600; }
+main { padding: 0 16px 32px; }
+.tab { display: none; background: var(--panel); border: 1px solid var(--line); border-radius: 0 8px 8px 8px; padding: 16px; }
+.tab.active { display: block; }
+h2 { font-size: 15px; margin: 18px 0 8px; }
+h2:first-child { margin-top: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 16px; }
+label.f { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); }
+label.f.chk { flex-direction: row; align-items: center; gap: 6px; color: var(--ink); font-size: 13px; }
+input, select { font: inherit; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 5px; padding: 5px 7px; min-width: 0; }
+input[type=checkbox] { width: 16px; height: 16px; }
+input:disabled, select:disabled { background: var(--off); color: var(--muted); }
+input.err, select.err { border-color: var(--bad); background: var(--bad-bg); }
+.note { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
+.box { border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-top: 10px; }
+.tblwrap { overflow-x: auto; }
+table.t { border-collapse: collapse; width: 100%; font-size: 13px; }
+table.t th, table.t td { border-bottom: 1px solid var(--line); padding: 4px 5px; text-align: left; white-space: nowrap; }
+table.t th { color: var(--muted); font-weight: 600; font-size: 12px; }
+table.t input[type=text] { width: 100%; min-width: 64px; }
+table.t td.c, table.t th.c { text-align: center; }
+table.t td.ro { color: var(--muted); font-variant-numeric: tabular-nums; }
+#msgs { margin: 10px 16px 0; }
+.msg { border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; border: 1px solid; }
+.msg.bad { background: var(--bad-bg); border-color: var(--bad); }
+.msg.ok { background: var(--ok-bg); border-color: var(--ok); }
+.msg.warn { background: var(--warn-bg); border-color: var(--warn); }
+.msg ul { margin: 6px 0 0; padding-left: 20px; }
+.msg a { color: inherit; }
+.out { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 12px; }
+@media (max-width: 760px) { .out { grid-template-columns: 1fr; } }
+.flist { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 8px; max-height: 70vh; overflow: auto; }
+.flist li { padding: 6px 10px; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
+.flist li.sel { background: var(--off); font-weight: 600; }
+.flist .dir { color: var(--muted); font-size: 11px; }
+.viewer { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.viewer .vh { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+.viewer pre { margin: 0; padding: 8px 0; background: var(--code); max-height: 70vh; overflow: auto; font: 12.5px/1.45 ui-monospace, Consolas, "Courier New", monospace; }
+.viewer pre span.ln { display: inline-block; width: 4.2em; padding-right: 10px; text-align: right; color: var(--muted); user-select: none; }
+dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); max-width: 560px; width: calc(100% - 32px); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 10px; background: var(--off); color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>SINUMERIK ONE Program Generator</h1>
+    <div class="sub">Tombstone / single-part nest framework. Offline. <span id="jobLabel"></span></div>
+  </div>
+  <div class="actions">
+    <button id="btnLoad" type="button">Load job…</button>
+    <input type="file" id="fileLoad" accept=".json,application/json" hidden>
+    <button id="btnSave" type="button">Save job</button>
+    <button id="btnValidate" type="button">Validate</button>
+    <button id="btnGenerate" type="button" class="primary">Generate ZIP</button>
+  </div>
+</header>
+<nav class="tabs" role="tablist">
+  <button type="button" data-tab="config" class="active">1 · Config &amp; steps</button>
+  <button type="button" data-tab="probing">2 · Probing</button>
+  <button type="button" data-tab="wcs">3 · Work offsets</button>
+  <button type="button" data-tab="output">4 · Output</button>
+</nav>
+<div id="msgs"></div>
+<main>
+  <section class="tab active" id="tab-config"></section>
+  <section class="tab" id="tab-probing"></section>
+  <section class="tab" id="tab-wcs"></section>
+  <section class="tab" id="tab-output"></section>
+</main>
+<dialog id="dlgBlank">
+  <h2>Blank work offsets</h2>
+  <p id="dlgBlankText"></p>
+  <p>Those X / Y / Z values will be written as <b>0.000 = machine zero</b>, not the part. In a multi-nest job that is almost always a mistake.</p>
+  <p><b>Generate anyway?</b></p>
+  <div class="btns">
+    <button type="button" id="dlgBlankNo" class="primary">No – stop</button>
+    <button type="button" id="dlgBlankYes">Yes – write 0.000</button>
+  </div>
+</dialog>
+
+<script id="engine">
+/* ==========================================================================
+   ENGINE: pure functions. No DOM. Also loaded by the test harness (Node).
+   Every emitted construct was checked against:
+     SINUMERIK ONE Measuring cycles PM 07/2025 (MC)
+     SINUMERIK ONE NC programming PM 07/2025   (NC)
+     SINUMERIK ONE System variables LM 07/2022 (SV)
+   ========================================================================== */
+(function (G) {
+'use strict';
+
+var GEN_VERSION = '1.0.0';
+var MAX_NESTS = 32;
+var AXES = ['NONE', 'A', 'B', 'C'];
+var XY_METHODS = ['SPLIT EXTERIOR', 'BORE', 'BOSS', 'RECT POCKET', 'RECT SPIGOT', 'NONE'];
+var OUTSIDE = { 'SPLIT EXTERIOR': 1, 'BOSS': 1, 'RECT SPIGOT': 1 };
+var INSIDE = { 'BORE': 1, 'RECT POCKET': 1 };
+var LASER_RPM = 3750;               /* shop laser speed - fixed */
+var UNIT = {
+  METRIC: { key: 'METRIC', dec: 3, g: 'G71', label: 'METRIC (MM)', u: 'mm',
+            clr: 1, feed: 300, fa: 5, travel: 15, zTol: 0.1, xyTol: 0.1, outClr: 25, inMargin: 1 },
+  INCH:   { key: 'INCH', dec: 4, g: 'G70', label: 'INCH (IN)', u: 'in',
+            clr: 0.04, feed: 12, fa: 0.2, travel: 0.6, zTol: 0.004, xyTol: 0.004, outClr: 1, inMargin: 0.04 }
+};
+
+/* ---------------- job model ---------------- */
+function blankWcsRow() { return { x: '', y: '', z: '', trunnion: '', rotary: '', notes: '' }; }
+function blankStep(stepNo) {
+  return { step: String(stepNo), tool: '', brkTol: '', program: '', meas: true, measAlways: false,
+           brk: true, maxBrk: '2', debug: false, life: '1', setpiece: true };
+}
+function defaultJob() {
+  var wcs = [];
+  for (var i = 0; i < MAX_NESTS; i++) wcs.push(blankWcsRow());
+  return {
+    format: 'SINUMERIK_ONE_GENERATOR_JOB', version: 1,
+    header: { part: '', material: '', stock: '', machine: '', programmer: '' },
+    config: { units: 'METRIC', trunnion: 'NONE', rotary: 'B', mode: 'TOMBSTONE',
+              faces: '4', nestsPerFace: '2', totalNests: '8' },
+    probeStep: { enabled: true, step: '1', program: '' },
+    steps: [blankStep(10)],
+    probing: {
+      tool: 'PROBE', limitClear: '', feed: '', searchDist: '', prnum: '1', probeOnM: 'M56',
+      partCheck: true, maxTravel: '', chkAlt: false, chkX: '', chkY: '', chkZ: '',
+      skipZ: false, zAlt: false, zX: '', zY: '', zZ: '', zNom: '0', zTol: '',
+      xyMethod: 'SPLIT EXTERIOR', widthX: '', widthY: '', diameter: '', appX: '0', appY: '0',
+      probeZ: '', xyTol: '', approachClr: '',
+      health: false, hX: '', hY: '', hStartZ: '', hTargetZ: '', hFeed: ''
+    },
+    wcs: wcs
+  };
+}
+/* merge a loaded object over the defaults; unknown keys are dropped */
+function normalizeJob(src) {
+  var d = defaultJob();
+  if (!src || typeof src !== 'object') return d;
+  function mergeFlat(def, s) {
+    if (!s || typeof s !== 'object') return def;
+    Object.keys(def).forEach(function (k) {
+      if (!(k in s) || s[k] === null || s[k] === undefined) return;
+      if (typeof def[k] === 'boolean') def[k] = (s[k] === true || s[k] === 'true' || s[k] === 1 || s[k] === 'YES');
+      else def[k] = String(s[k]);
+    });
+    return def;
+  }
+  mergeFlat(d.header, src.header);
+  mergeFlat(d.config, src.config);
+  mergeFlat(d.probeStep, src.probeStep);
+  mergeFlat(d.probing, src.probing);
+  if (Array.isArray(src.steps)) {
+    d.steps = src.steps.map(function (s) { return mergeFlat(blankStep(''), s); });
+  }
+  if (Array.isArray(src.wcs)) {
+    for (var i = 0; i < MAX_NESTS; i++) d.wcs[i] = mergeFlat(blankWcsRow(), src.wcs[i]);
+  }
+  return d;
+}
+
+/* ---------------- numbers and text ---------------- */
+function isBlank(v) { return v === undefined || v === null || String(v).trim() === ''; }
+function num(v) {
+  if (isBlank(v)) return NaN;
+  var t = String(v).trim();
+  if (!/^[+-]?(\d+(\.\d*)?|\.\d+)$/.test(t)) return NaN;
+  return Number(t);
+}
+function isNum(v) { return !isNaN(num(v)); }
+function isInt(v) { var n = num(v); return !isNaN(n) && Math.floor(n) === n; }
+function fix(v, d) {
+  var p = Math.pow(10, d);
+  var a = Math.round(Math.abs(v) * p + 1e-7) / p;
+  var s = a.toFixed(d);
+  if (Number(s) !== 0 && v < 0) s = '-' + s;
+  return s;
+}
+function compact(v, maxDec) {
+  var s = fix(v, maxDec);
+  if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
+  return s;
+}
+function ascii(s) {
+  return String(s === undefined || s === null ? '' : s).replace(/[\r\n\t]+/g, ' ')
+    .replace(/[^\x20-\x7E]/g, '?').trim();
+}
+function pad(s, w) { s = String(s); while (s.length < w) s += ' '; return s; }
+function today() {
+  var d = new Date();
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+var PROG_RE = /^[A-Za-z_][A-Za-z_][A-Za-z0-9_]{0,22}$/;
+var RESERVED = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9',
+                'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
+function progNameError(name) {
+  if (isBlank(name)) return 'program name is required';
+  var t = String(name).trim();
+  if (t.length > 24) return 'program name is ' + t.length + ' characters (max 24, NC 3.3)';
+  if (!PROG_RE.test(t)) return 'program name must use A-Z, 0-9, _ and start with two letters/underscores (NC naming rules)';
+  if (RESERVED.indexOf(t.toUpperCase()) >= 0) return 'program name ' + t + ' is reserved';
+  return '';
+}
+function toolNameError(name) {
+  if (isBlank(name)) return 'tool name is required';
+  var t = String(name).trim();
+  if (t.length > 25) return 'tool name is ' + t.length + ' characters (max 25, the L_ cycles take STRING[25])';
+  if (/["]/.test(t)) return 'tool name must not contain a double quote';
+  if (/[^\x20-\x7E]/.test(t)) return 'tool name must be plain ASCII';
+  return '';
+}
+
+/* ---------------- resolve the job into numbers ---------------- */
+function resolve(job) {
+  var c = job.config, R = {};
+  R.units = c.units === 'INCH' ? 'INCH' : 'METRIC';
+  R.U = UNIT[R.units];
+  R.single = c.mode === 'SINGLE PART';
+  R.mode = R.single ? 'SINGLE PART' : 'TOMBSTONE';
+  R.trunnion = AXES.indexOf(c.trunnion) >= 0 ? c.trunnion : 'NONE';
+  R.rotary = AXES.indexOf(c.rotary) >= 0 ? c.rotary : 'NONE';
+  R.faces = R.single ? 1 : num(c.faces);
+  R.npf = R.single ? 1 : num(c.nestsPerFace);
+  R.total = R.single ? 1 : num(c.totalNests);
+  R.clr = R.U.clr;
+  R.header = {
+    part: ascii(job.header.part), material: ascii(job.header.material), stock: ascii(job.header.stock),
+    machine: ascii(job.header.machine), programmer: ascii(job.header.programmer)
+  };
+  R.nests = [];
+  var tot = isNaN(R.total) ? 0 : Math.min(R.total, MAX_NESTS);
+  for (var n = 1; n <= tot; n++) {
+    var w = job.wcs[n - 1] || blankWcsRow();
+    var face = R.single ? 1 : Math.ceil(n / R.npf);
+    var defRot = R.single ? 0 : (face - 1) * 360 / R.faces;
+    R.nests.push({
+      n: n, face: face, frame: n + 4,
+      x: isNum(w.x) ? num(w.x) : 0, y: isNum(w.y) ? num(w.y) : 0, z: isNum(w.z) ? num(w.z) : 0,
+      blank: isBlank(w.x) || isBlank(w.y) || isBlank(w.z),
+      trun: isBlank(w.trunnion) ? 0 : num(w.trunnion),
+      rot: isBlank(w.rotary) ? defRot : num(w.rotary),
+      defRot: defRot, notes: ascii(w.notes)
+    });
+  }
+  R.probeStep = { enabled: !!job.probeStep.enabled, step: num(job.probeStep.step),
+                  program: String(job.probeStep.program || '').trim() };
+  R.steps = job.steps.map(function (s) {
+    return {
+      step: num(s.step), tool: ascii(s.tool), brkTol: isBlank(s.brkTol) ? 0 : num(s.brkTol),
+      program: String(s.program || '').trim(), meas: !!s.meas, measAlways: !!s.measAlways, brk: !!s.brk,
+      maxBrk: isBlank(s.maxBrk) ? 1 : num(s.maxBrk), debug: !!s.debug,
+      life: isBlank(s.life) ? 1 : num(s.life), setpiece: !!s.setpiece
+    };
+  });
+  var all = R.steps.map(function (s) { return s.step; });
+  if (R.probeStep.enabled) all.push(R.probeStep.step);
+  R.lastStep = all.length ? Math.max.apply(null, all) : 0;
+  R.P = resolveProbe(job.probing, R);
+  return R;
+}
+function orDefault(v, d) { return isBlank(v) ? d : num(v); }
+function resolveProbe(p, R) {
+  var U = R.U, P = {};
+  P.tool = ascii(p.tool) || 'PROBE';
+  P.clr = orDefault(p.limitClear, U.clr);
+  P.feed = orDefault(p.feed, U.feed);
+  P.fa = orDefault(p.searchDist, U.fa);
+  P.prnum = orDefault(p.prnum, 1);
+  P.probeOnM = String(p.probeOnM || '').trim().toUpperCase();
+  P.partCheck = !!p.partCheck;
+  P.maxTravel = orDefault(p.maxTravel, U.travel);
+  P.chkAlt = !!p.chkAlt; P.chkX = num(p.chkX); P.chkY = num(p.chkY); P.chkZ = num(p.chkZ);
+  P.skipZ = !!p.skipZ; P.zAlt = !!p.zAlt; P.zX = num(p.zX); P.zY = num(p.zY); P.zZ = num(p.zZ);
+  P.zNom = num(p.zNom); P.zTol = orDefault(p.zTol, U.zTol);
+  P.xyMethod = XY_METHODS.indexOf(p.xyMethod) >= 0 ? p.xyMethod : 'NONE';
+  P.outside = !!OUTSIDE[P.xyMethod]; P.inside = !!INSIDE[P.xyMethod];
+  P.widthX = num(p.widthX); P.widthY = num(p.widthY); P.diameter = num(p.diameter);
+  P.appX = num(p.appX); P.appY = num(p.appY); P.probeZ = num(p.probeZ);
+  P.xyTol = orDefault(p.xyTol, U.xyTol);
+  P.approachSet = !isBlank(p.approachClr);
+  /* MC 4.3.7: CYCLE978 start "somewhat greater" than DFA from the surface */
+  P.clrIn = P.approachSet ? num(p.approachClr) : P.fa + U.inMargin;
+  P.clrOut = P.approachSet ? num(p.approachClr) : U.outClr;
+  P.health = !!p.health; P.hX = num(p.hX); P.hY = num(p.hY);
+  P.hStartZ = num(p.hStartZ); P.hTargetZ = num(p.hTargetZ); P.hFeed = orDefault(p.hFeed, P.feed);
+  P.zLoc = P.zAlt ? { x: P.zX, y: P.zY, z: P.zZ } : { x: P.appX, y: P.appY, z: P.zNom + P.clrIn };
+  P.chkLoc = P.chkAlt ? { x: P.chkX, y: P.chkY, z: P.chkZ } : P.zLoc;
+  P.chkTarget = P.chkLoc.z - P.maxTravel;
+  P.xyStartZ = P.zNom + (P.outside ? P.clrOut : P.clrIn);
+  P.sid = P.outside ? P.probeZ - P.xyStartZ : 0;
+  P.hasWork = P.health || P.partCheck || !P.skipZ || P.xyMethod !== 'NONE';
+  return P;
+}
+
+/* ---------------- validation ---------------- */
+function validate(job) {
+  var E = [];
+  function err(path, msg) { E.push({ path: path, msg: msg }); }
+  function needNum(path, v, label) { if (!isNum(v)) err(path, label + ' must be a number'); }
+  var c = job.config;
+  if (['METRIC', 'INCH'].indexOf(c.units) < 0) err('config.units', 'Units must be METRIC or INCH');
+  if (AXES.indexOf(c.trunnion) < 0) err('config.trunnion', 'Trunnion axis must be NONE, A, B or C');
+  if (AXES.indexOf(c.rotary) < 0) err('config.rotary', 'Rotary axis must be NONE, A, B or C');
+  if (c.trunnion !== 'NONE' && c.trunnion === c.rotary) err('config.trunnion', 'Trunnion and rotary cannot be the same axis');
+  var single = c.mode === 'SINGLE PART';
+  if (!single && c.mode !== 'TOMBSTONE') err('config.mode', 'Mode must be TOMBSTONE or SINGLE PART');
+  if (!single) {
+    if (c.rotary === 'NONE') err('config.rotary', 'Tombstone mode needs a rotary axis (A, B or C)');
+    var okF = isInt(c.faces) && num(c.faces) >= 1 && num(c.faces) <= MAX_NESTS;
+    var okN = isInt(c.nestsPerFace) && num(c.nestsPerFace) >= 1 && num(c.nestsPerFace) <= MAX_NESTS;
+    if (!okF) err('config.faces', 'Faces must be a whole number 1-32');
+    if (!okN) err('config.nestsPerFace', 'Nests per face must be a whole number 1-32');
+    if (!isInt(c.totalNests) || num(c.totalNests) < 1) err('config.totalNests', 'Total nests must be a whole number of at least 1');
+    else if (num(c.totalNests) > MAX_NESTS) err('config.totalNests', 'Total nests is ' + num(c.totalNests) + ' (max 32)');
+    else if (okF && okN && num(c.totalNests) > num(c.faces) * num(c.nestsPerFace))
+      err('config.totalNests', 'Total nests (' + num(c.totalNests) + ') exceeds faces x nests per face (' + (num(c.faces) * num(c.nestsPerFace)) + ')');
+  }
+  /* steps */
+  var seen = {};
+  var ps = job.probeStep;
+  if (ps.enabled) {
+    if (!isInt(ps.step) || num(ps.step) < 1 || num(ps.step) > 99999) err('probeStep.step', 'Probe step number must be a whole number 1-99999');
+    else seen[num(ps.step)] = 'probeStep.step';
+    var pe = progNameError(ps.program); if (pe) err('probeStep.program', 'Probe step: ' + pe);
+  }
+  if (!job.steps.length) err('steps', 'Add at least one cutting step');
+  job.steps.forEach(function (s, i) {
+    var p = 'steps.' + i + '.', tag = 'Step row ' + (i + 1) + ': ';
+    if (!isInt(s.step) || num(s.step) < 1 || num(s.step) > 99999) err(p + 'step', tag + 'step number must be a whole number 1-99999');
+    else if (seen[num(s.step)]) err(p + 'step', tag + 'step number ' + num(s.step) + ' is used twice');
+    else seen[num(s.step)] = p + 'step';
+    if (ps.enabled && isInt(s.step) && isInt(ps.step) && num(s.step) <= num(ps.step))
+      err(p + 'step', tag + 'cutting step ' + num(s.step) + ' must come after probe step ' + num(ps.step));
+    var te = toolNameError(s.tool); if (te) err(p + 'tool', tag + te);
+    var ge = progNameError(s.program); if (ge) err(p + 'program', tag + ge);
+    if (s.brk) {
+      if (!isNum(s.brkTol) || num(s.brkTol) <= 0) err(p + 'brkTol', tag + 'breakage tolerance must be a number > 0');
+      if (!isInt(s.maxBrk) || num(s.maxBrk) < 1) err(p + 'maxBrk', tag + 'max breaks must be a whole number >= 1');
+    } else {
+      if (!isBlank(s.brkTol) && !isNum(s.brkTol)) err(p + 'brkTol', tag + 'breakage tolerance must be a number');
+      if (!isBlank(s.maxBrk) && (!isInt(s.maxBrk) || num(s.maxBrk) < 1)) err(p + 'maxBrk', tag + 'max breaks must be a whole number >= 1');
+    }
+    if (s.setpiece) { if (!isInt(s.life) || num(s.life) < 1) err(p + 'life', tag + 'tool life count must be a whole number >= 1'); }
+    else if (!isBlank(s.life) && !isInt(s.life)) err(p + 'life', tag + 'tool life count must be a whole number');
+  });
+  /* cutting program names must not equal the probe program */
+  job.steps.forEach(function (s, i) {
+    if (ps.enabled && String(s.program).trim() && String(s.program).trim().toUpperCase() === String(ps.program).trim().toUpperCase())
+      err('steps.' + i + '.program', 'Step row ' + (i + 1) + ': cutting program has the same name as the probe program');
+  });
+  /* work offsets: numeric check (blanks are asked about separately) */
+  var total = single ? 1 : (isInt(c.totalNests) ? Math.min(num(c.totalNests), MAX_NESTS) : 0);
+  var blanks = [];
+  for (var n = 1; n <= total; n++) {
+    var w = job.wcs[n - 1], pw = 'wcs.' + (n - 1) + '.';
+    ['x', 'y', 'z'].forEach(function (k) {
+      if (isBlank(w[k])) return;
+      if (!isNum(w[k])) err(pw + k, 'Nest ' + n + ': work offset ' + k.toUpperCase() + ' "' + w[k] + '" is not a number');
+    });
+    if (isBlank(w.x) || isBlank(w.y) || isBlank(w.z)) blanks.push(n);
+    if (c.trunnion !== 'NONE' && !isBlank(w.trunnion) && !isNum(w.trunnion)) err(pw + 'trunnion', 'Nest ' + n + ': trunnion angle must be a number');
+    if (c.rotary !== 'NONE' && !isBlank(w.rotary) && !isNum(w.rotary)) err(pw + 'rotary', 'Nest ' + n + ': rotary angle must be a number');
+  }
+  /* probing */
+  if (ps.enabled) validateProbe(job, err, needNum);
+  return { errors: E, blankNests: blanks };
+}
+function validateProbe(job, err, needNum) {
+  var p = job.probing, U = UNIT[job.config.units === 'INCH' ? 'INCH' : 'METRIC'];
+  var te = toolNameError(p.tool); if (te) err('probing.tool', 'Probe tool: ' + te);
+  function optPos(path, v, label) { if (!isBlank(v) && (!isNum(v) || num(v) <= 0)) err(path, label + ' must be a number > 0'); }
+  optPos('probing.limitClear', p.limitClear, 'Limit clearance');
+  optPos('probing.feed', p.feed, 'Probe feed');
+  optPos('probing.searchDist', p.searchDist, 'Measuring path (search distance)');
+  if (!isBlank(p.prnum) && (!isInt(p.prnum) || num(p.prnum) < 1 || num(p.prnum) > 40)) err('probing.prnum', 'Probe calibration data set must be 1-40 (MC S_PRNUM)');
+  var fa = orDefault(p.searchDist, U.fa);
+  var P = resolveProbe(p, { U: U });
+  if (!P.hasWork) err('probing.xyMethod', 'The probe step has nothing to do: health check off, part check off, Z skipped and XY method NONE');
+  var needsMeas = P.health || P.partCheck;
+  if (!isBlank(p.probeOnM) && !/^M\d{1,4}$/.test(String(p.probeOnM).trim().toUpperCase())) err('probing.probeOnM', 'Probe-on M code must look like M56 (or be blank)');
+  if (!isBlank(p.approachClr) && (!isNum(p.approachClr) || num(p.approachClr) <= 0)) err('probing.approachClr', 'Approach clearance must be a number > 0 (or blank for auto)');
+  if (!isNum(p.zNom)) err('probing.zNom', 'Z nominal must be a number');
+  /* Z datum */
+  if (!p.skipZ) {
+    optPos('probing.zTol', p.zTol, 'Z tolerance');
+    if (isNum(fa) && P.zTol >= fa) err('probing.zTol', 'Z tolerance must be smaller than the measuring path ' + fa);
+    if (p.zAlt) {
+      needNum('probing.zX', p.zX, 'Alternate Z location X'); needNum('probing.zY', p.zY, 'Alternate Z location Y');
+      needNum('probing.zZ', p.zZ, 'Alternate Z location Z (start height)');
+      if (isNum(p.zZ) && isNum(p.zNom) && num(p.zZ) - num(p.zNom) <= fa)
+        err('probing.zZ', 'Alternate Z start height must be more than the measuring path (' + fa + ') above Z nominal (MC 4.3.7)');
+    } else {
+      if (P.inside) err('probing.zAlt', 'Z datum at the XY approach point of a ' + p.xyMethod + ' probes into empty space: set an alternate Z location or skip Z');
+      needNum('probing.appX', p.appX, 'Approach X'); needNum('probing.appY', p.appY, 'Approach Y');
+      if (P.approachSet && isNum(p.approachClr) && num(p.approachClr) <= fa)
+        err('probing.approachClr', 'Approach clearance must be larger than the measuring path ' + fa + ' (Z datum start, MC 4.3.7)');
+    }
+  }
+  /* part check (MEAS touch) */
+  if (p.partCheck) {
+    optPos('probing.maxTravel', p.maxTravel, 'Max probe travel');
+    if (p.chkAlt) {
+      needNum('probing.chkX', p.chkX, 'Alternate check X'); needNum('probing.chkY', p.chkY, 'Alternate check Y');
+      needNum('probing.chkZ', p.chkZ, 'Alternate check Z (start height)');
+    } else {
+      if (p.zAlt ? false : P.inside) err('probing.chkAlt', 'Part check at the XY approach point of a ' + p.xyMethod + ' touches nothing: set an alternate check location');
+      if (p.zAlt) { needNum('probing.zX', p.zX, 'Alternate Z location X'); needNum('probing.zY', p.zY, 'Alternate Z location Y'); needNum('probing.zZ', p.zZ, 'Alternate Z location Z'); }
+      else { needNum('probing.appX', p.appX, 'Approach X'); needNum('probing.appY', p.appY, 'Approach Y'); }
+      var gap = P.zLoc.z - P.zNom;
+      if (isFinite(gap) && isFinite(P.maxTravel) && P.maxTravel <= gap)
+        err('probing.maxTravel', 'Max probe travel (' + P.maxTravel + ') must exceed the start-to-surface gap (' + compact(gap, 4) + '), or every nest reads "no part"');
+    }
+  }
+  if (needsMeas && isBlank(p.probeOnM)) { /* allowed: some probes are always on */ }
+  /* XY datum */
+  if (P.xyMethod !== 'NONE') {
+    needNum('probing.appX', p.appX, 'Approach X'); needNum('probing.appY', p.appY, 'Approach Y');
+    needNum('probing.probeZ', p.probeZ, 'Probe depth Z');
+    optPos('probing.xyTol', p.xyTol, 'XY tolerance');
+    if (isNum(fa) && P.xyTol >= fa) err('probing.xyTol', 'XY tolerance must be smaller than the measuring path ' + fa);
+    if (P.xyMethod === 'SPLIT EXTERIOR' || P.xyMethod === 'RECT POCKET' || P.xyMethod === 'RECT SPIGOT') {
+      if (!isNum(p.widthX) || num(p.widthX) <= 0) err('probing.widthX', 'Part width X must be a number > 0 for ' + P.xyMethod);
+      if (!isNum(p.widthY) || num(p.widthY) <= 0) err('probing.widthY', 'Part width Y must be a number > 0 for ' + P.xyMethod);
+    }
+    if (P.xyMethod === 'BORE' || P.xyMethod === 'BOSS') {
+      if (!isNum(p.diameter) || num(p.diameter) <= 0) err('probing.diameter', 'Diameter must be a number > 0 for ' + P.xyMethod);
+    }
+    if (isNum(p.probeZ) && isNum(p.zNom) && !(num(p.probeZ) < P.xyStartZ))
+      err('probing.probeZ', 'Probe depth Z must be below the XY start height (' + compact(P.xyStartZ, 4) + ')');
+  }
+  /* health check */
+  if (p.health) {
+    needNum('probing.hX', p.hX, 'Health check X'); needNum('probing.hY', p.hY, 'Health check Y');
+    needNum('probing.hStartZ', p.hStartZ, 'Health check start Z'); needNum('probing.hTargetZ', p.hTargetZ, 'Health check target Z');
+    if (isNum(p.hStartZ) && isNum(p.hTargetZ) && num(p.hTargetZ) >= num(p.hStartZ)) err('probing.hTargetZ', 'Health check target Z must be below the start Z');
+    optPos('probing.hFeed', p.hFeed, 'Health check feed');
+  }
+}
+
+/* ---------------- NC helpers ---------------- */
+function retract(clr) { return 'G0 SUPA G17 G90 Z=$MA_POS_LIMIT_PLUS[AX3]-' + compact(clr, 4) + ' D0'; }
+function kinDesc(R) {
+  if (R.trunnion === 'NONE' && R.rotary === 'NONE') return '3-AXIS: NO ROTARY AXIS';
+  if (R.trunnion === 'NONE') return '4-AXIS HORIZONTAL: ' + R.rotary + ' = ROTARY';
+  if (R.rotary === 'NONE') return R.trunnion + ' = TRUNNION/4TH, NO ROTARY';
+  return R.trunnion + R.rotary + ' MACHINE: ' + R.trunnion + ' = TRUNNION/4TH, ' + R.rotary + ' = ROTARY';
+}
+function orientLine(R) {
+  var a = [];
+  if (R.trunnion !== 'NONE') a.push(R.trunnion + '0');
+  if (R.rotary !== 'NONE') a.push(R.rotary + '0');
+  return a.join(' ');
+}
+function L(R) { return { lines: [], len: function (v) { return fix(v, R.U.dec); } }; }
+function rev(lines, R) {
+  lines.push(';--------------------');
+  lines.push(';  REVISION CONTROL');
+  lines.push(';--------------------');
+  lines.push('; REV  DATE        BY            DESCRIPTION');
+  lines.push(';  00  ' + R.date + '  ' + pad(R.header.programmer || 'XXXX', 13) + ' Generated');
+}
+function hdr(lines, R, prog, func, extra) {
+  lines.push('; PROGRAM      : ' + prog);
+  lines.push('; PRG FUNCTION : ' + func);
+  lines.push('; CONTROL      : SINUMERIK ONE');
+  (extra || []).forEach(function (e) { lines.push(e); });
+  lines.push('; GENERATED    : ' + R.date + ' BY SINUMERIK_GENERATOR.HTML V' + GEN_VERSION);
+}
+function modeDesc(R) {
+  return R.single ? 'SINGLE PART: 1 NEST (G505)'
+    : 'TOMBSTONE: ' + R.faces + ' FACES x ' + R.npf + ' NESTS/FACE, ' + R.total + ' NESTS USED';
+}
+function text(lines) { return lines.join('\n') + '\n'; }
+function q(s) { return '"' + s + '"'; }
+
+/* ---------------- static framework files ---------------- */
+function fUGUD() {
+  return text([
+    ';UGUD.DEF',
+    ';Global variables that survive power-off.',
+    ';Reset the NCK after changing this file.',
+    ';',
+    'DEF NCK INT GV_STEP                    ;current machining step',
+    'DEF NCK INT GV_NEST                    ;current nest',
+    'DEF NCK INT GV_NEST_STATUS[33]         ;per-nest status (1-32):',
+    '                                       ; 0 = off (operator turned it off)',
+    '                                       ; 1 = running',
+    '                                       ; 2 = no part (probe found nothing',
+    '                                       ;     or out of tolerance)',
+    '                                       ; 100+step = tool failed at that step',
+    '                                       ;   (e.g. 110 = failed at step 10)',
+    'DEF NCK INT GV_WO[33]                  ;work offset frame per nest (1-32)',
+    'DEF NCK INT GV_SKIP                    ;1 = every nest is off, skip the step',
+    'DEF NCK INT GV_BRK_COUNT               ;tool breaks this step',
+    'DEF NCK INT GV_NESTS_CUT               ;nests actually cut this step',
+    'DEF NCK INT GV_PROBE_CHK               ;1 = probe health check done this job',
+    ';',
+    'M30',
+    ';'
+  ]);
+}
+function fHome(R) {
+  return text([
+    ';C_P1_HOME.SPF',
+    ';Move to a safe height at the top of Z travel.',
+    ';SUPA suppresses all frames for this block. Clearance below the',
+    ';software limit MD36110: ' + compact(R.clr, 4) + ' (' + R.U.u + ').',
+    retract(R.clr),
+    'RET',
+    ';'
+  ]);
+}
+function fLoadWO() {
+  return text([
+    ';C_P1_LOAD_WO.SPF',
+    ';Loads the current nest\'s work offset into G54.',
+    ';GV_NEST is set by the A_ program before this runs.',
+    ';',
+    ';Every B_ program and the probe program run in G54. This copies',
+    ';the whole frame of the active nest into G54 in one shot, so the',
+    ';B_ programs never need to know which offset or which axes the',
+    ';machine has. The frame carries the rotary zero offset, not motion.',
+    ';Writing $P_UIFR does not activate it; the next G54 does (NC 4.8).',
+    ';',
+    'L_PAL_CHECK(1)',
+    '$P_UIFR[1]=$P_UIFR[GV_WO[GV_NEST]]',
+    'STOPRE',
+    'RET',
+    ';'
+  ]);
+}
+function fPalCheck() {
+  return text([
+    'PROC L_PAL_CHECK(INT LD_PALNUM)',
+    ';L_PAL_CHECK.SPF',
+    ';Checks the right pallet is in the machine.',
+    ';Does nothing until you wire in the PLC pallet variable.',
+    ';Swap GD_PALNR for your machine\'s pallet ID, then',
+    ';uncomment the block below.',
+    ';',
+    ';IF (LD_PALNUM<>GD_PALNR)',
+    ';  LOOP',
+    ';    MSG("ERROR: WRONG PALLET IN WORK AREA")',
+    ';    M0',
+    ';    STOPRE',
+    ';  ENDLOOP',
+    ';ENDIF',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fSkipCheck() {
+  return text([
+    'PROC L_SKIP_CHECK(INT LD_TOTAL)',
+    ';L_SKIP_CHECK.SPF',
+    ';Sets GV_SKIP=1 when every nest is turned off, so the',
+    ';step can skip itself. LD_TOTAL is the nest count.',
+    ';',
+    'DEF INT LV_I, LV_ACTIVE',
+    'LV_ACTIVE=0',
+    'LV_I=1',
+    'WHILE (LV_I<=LD_TOTAL)',
+    '  IF (GV_NEST_STATUS[LV_I]==1)',
+    '    LV_ACTIVE=LV_ACTIVE+1',
+    '  ENDIF',
+    '  LV_I=LV_I+1',
+    'ENDWHILE',
+    'IF (LV_ACTIVE==0)',
+    '  GV_SKIP=1',
+    'ELSE',
+    '  GV_SKIP=0',
+    'ENDIF',
+    'RET',
+    ';'
+  ]);
+}
+function fStepError() {
+  return text([
+    ';L_STEP_ERROR.SPF',
+    ';Reached only if GV_STEP holds a step that doesn\'t exist.',
+    ';Holds the machine here so a bad restart can\'t run on.',
+    ';',
+    'IF (GV_STEP<>0)',
+    '  LOOP',
+    '    MSG("UNKNOWN GV_STEP VALUE: " << GV_STEP)',
+    '    M0',
+    '    STOPRE',
+    '  ENDLOOP',
+    'ENDIF',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fNestError() {
+  return text([
+    ';L_NEST_ERROR.SPF',
+    ';Reached only if GV_NEST holds a nest that doesn\'t exist.',
+    ';Holds the machine here so it can\'t run on by accident.',
+    ';',
+    'IF (GV_NEST<>0)',
+    '  LOOP',
+    '    MSG("UNKNOWN GV_NEST VALUE: " << GV_NEST)',
+    '    M0',
+    '    STOPRE',
+    '  ENDLOOP',
+    'ENDIF',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fStepLog() {
+  return text([
+    'PROC L_STEP_LOG(INT LD_STEP, STRING[25] LD_TOOL, INT LD_NESTS, INT LD_BREAKS, REAL LD_START)',
+    ';L_STEP_LOG.SPF',
+    ';Works out how long a step took and hands it to L_DATA_LOG.',
+    ';Pass LD_START as the time the step began (seconds of the day).',
+    ';Step 0 is the whole-cycle total; LD_NESTS is then the good-part count.',
+    ';',
+    'DEF REAL LV_ELAPSED',
+    ';',
+    'LV_ELAPSED=$A_HOUR*3600+$A_MINUTE*60+$A_SECOND-LD_START',
+    ';Add a day\'s worth of seconds if the clock rolled past midnight.',
+    'IF (LV_ELAPSED<0)',
+    '  LV_ELAPSED=LV_ELAPSED+86400',
+    'ENDIF',
+    'L_DATA_LOG(LD_STEP,LD_TOOL,LV_ELAPSED,LD_NESTS,LD_BREAKS)',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fDataLog() {
+  return text([
+    'PROC L_DATA_LOG(INT LD_STEP, STRING[25] LD_TOOL, REAL LD_TIME, INT LD_NESTS, INT LD_BREAKS)',
+    ';L_DATA_LOG.SPF',
+    ';Adds one line to the log file CYCLE_LOG.SPF in the directory of',
+    ';the selected program (NC 4.5.1 WRITE). Needs file-write access',
+    ';on the control (protection level >= the file\'s WRITE right).',
+    ';Max file size: MD11420 $MN_LEN_PROTOCOL_FILE.',
+    ';',
+    ';Line format:',
+    ';  DATE,TIME,STEP,TOOL,STEP_SEC,NESTS_CUT,BREAKS',
+    ';',
+    'DEF INT LV_ERR',
+    'DEF STRING[2] LV_MO, LV_DY, LV_HH, LV_MM, LV_SS',
+    'DEF REAL LV_TIME_R',
+    ';',
+    ';Pad month, day, hour, min, sec to two digits (08 not 8).',
+    'IF ($A_MONTH<10)',
+    '  LV_MO="0"<<$A_MONTH',
+    'ELSE',
+    '  LV_MO=""<<$A_MONTH',
+    'ENDIF',
+    'IF ($A_DAY<10)',
+    '  LV_DY="0"<<$A_DAY',
+    'ELSE',
+    '  LV_DY=""<<$A_DAY',
+    'ENDIF',
+    'IF ($A_HOUR<10)',
+    '  LV_HH="0"<<$A_HOUR',
+    'ELSE',
+    '  LV_HH=""<<$A_HOUR',
+    'ENDIF',
+    'IF ($A_MINUTE<10)',
+    '  LV_MM="0"<<$A_MINUTE',
+    'ELSE',
+    '  LV_MM=""<<$A_MINUTE',
+    'ENDIF',
+    'IF ($A_SECOND<10)',
+    '  LV_SS="0"<<$A_SECOND',
+    'ELSE',
+    '  LV_SS=""<<$A_SECOND',
+    'ENDIF',
+    ';',
+    ';Round the step time to one decimal.',
+    'LV_TIME_R=ROUND(LD_TIME*10)/10',
+    ';',
+    'WRITE(LV_ERR,"CYCLE_LOG_SPF","" << $A_YEAR << "-" << LV_MO << "-" << LV_DY << "," << LV_HH << ":" << LV_MM << ":" << LV_SS << "," << LD_STEP << "," << LD_TOOL << "," << LV_TIME_R << "," << LD_NESTS << "," << LD_BREAKS)',
+    ';',
+    'IF (LV_ERR<>0)',
+    '  MSG("LOG WRITE ERROR: " << LV_ERR)',
+    'ENDIF',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fToolLoad(R) {
+  return text([
+    'PROC L_TOOL_LOAD(STRING[25] LD_TNAME)',
+    ';L_TOOL_LOAD.SPF',
+    ';Loads the step\'s tool by name and retracts to a safe height.',
+    ';Measuring is not done here: L_RUN_NESTS measures each tool',
+    ';right before it cuts, first tool or sister alike.',
+    ';SETPIECE(0) after the change clears the previous step\'s tool',
+    ';from the piece-count list (SV $A_USEDND: edges used since the',
+    ';last SETPIECE plus the active edge), so it is not counted again.',
+    ';',
+    'CYCLE800()',
+    'TRAFOOF',
+    retract(R.clr),
+    'T=LD_TNAME',
+    'M6',
+    'STOPRE',
+    'SETPIECE(0)',
+    'RET',
+    ';'
+  ]);
+}
+function fToolMeas(R) {
+  return text([
+    'PROC L_TOOL_MEAS(STRING[25] LD_TNAME)',
+    '; PROGRAM      : L_TOOL_MEAS.SPF',
+    '; PRG FUNCTION : MEASURE THE SPINDLE TOOL ON THE BLUM LASER',
+    '; CONTROL      : SINUMERIK ONE',
+    ';-------------------------------------------',
+    '; CALLED BY L_RUN_NESTS BEFORE A NEST WHEN THE TOOL',
+    '; NEEDS MEASURING. T="NAME" M6 KEEPS / SELECTS THE TOOL',
+    '; OF THE SISTER GROUP, THEN BLUM BL9902 MEASURES IT.',
+    '; S3750 = SHOP LASER SPEED.',
+    ';',
+    '; THE ;NCG# LINES ARE THE BLUM SCREEN-FORM RECORD OF THE',
+    '; BL9902 CALL BELOW. THEY ARE COPIED VERBATIM FROM THE',
+    '; ORIGINAL PACKAGE (INCH VALUES). REGENERATE THEM WITH THE',
+    '; BLUM SCREEN FORM ON THE CONTROL IF YOUR SETUP DIFFERS.',
+    ';',
+    '; PARAMETERS:',
+    ';   LD_TNAME : TOOL NAME STRING',
+    ';-------------------------------------------',
+    ';',
+    '; CANCEL TRANSFORMATIONS',
+    'CYCLE800()',
+    'TRAFOOF',
+    ';',
+    '; SAFE POSITION',
+    retract(R.clr),
+    ';',
+    '; LOAD TOOL BY NAME AND SPIN FOR THE LASER',
+    'T=LD_TNAME',
+    'M6',
+    'S' + LASER_RPM,
+    'M3',
+    'STOPRE',
+    ';',
+    '; MEASURE TOOL (BLUM)',
+    ';NCG#BL9902#bguilas.com#PRGCODE#*NCG;*RO*;*HD*',
+    ';##"0=Measure"##1#1#23#1####0.196850393700787EX-002#0#0#0.393700787401575EX-003#"\\\\"#""#"\\\\"#"png"#"png"#"png"#1###2#0#25.4#0#7#1#0#"BL9902"#"PRGCODE"#*NCG;*RO*;*HD*',
+    'BL9902(0,,0,0,0.393700787401575EX-003)',
+    ';#END#*NCG;*RO*;*HD*',
+    ';',
+    'STOPRE',
+    ';',
+    '; SAFE RETRACT AFTER MEASUREMENT',
+    retract(R.clr),
+    ';',
+    '; CLEAR THE PIECE-COUNT LIST (NO DECREMENT)',
+    'SETPIECE(0)',
+    ';',
+    'RET',
+    ';'
+  ]);
+}
+function fToolBrk(R) {
+  return text([
+    'PROC L_TOOL_BRK(STRING[25] LD_TNAME, REAL LD_BRK_TOL)',
+    '; PROGRAM      : L_TOOL_BRK.SPF',
+    '; PRG FUNCTION : TOOL BREAKAGE CHECK ON THE BLUM LASER',
+    '; CONTROL      : SINUMERIK ONE',
+    ';-------------------------------------------',
+    '; CHECKS THE TOOL AFTER EACH NEST CUT WITH THE MODIFIED',
+    '; BLUM MACRO BL9908_MOD, WHICH RETURNS AN ERROR CODE IN',
+    '; LV_EC INSTEAD OF ALARMING.',
+    ';',
+    '; ON BREAKAGE (LV_EC = 19.19):',
+    ';   GV_NEST_STATUS[GV_NEST] = GV_STEP + 100',
+    ';   (+100 KEEPS IT CLEAR OF 0/1/2, E.G. 110 = STEP 10).',
+    ';   THE NEST IS OFF FOR THE REST OF THE JOB. RETURNS',
+    ';   WITHOUT ALARM; L_RUN_NESTS SWAPS TO A SISTER.',
+    '; ON OK: SETPIECE(0) CLEARS THE PIECE-COUNT LIST SO THE',
+    ';   CALLER\'S SETPIECE COUNTS ONLY THE SPINDLE TOOL.',
+    ';',
+    '; S3750 = SHOP LASER SPEED. M5/M9 HANDLED HERE.',
+    ';',
+    '; PARAMETERS:',
+    ';   LD_TNAME   : TOOL NAME (FOR THE MESSAGE)',
+    ';   LD_BRK_TOL : BREAKAGE TOLERANCE (' + R.U.u.toUpperCase() + ')',
+    ';',
+    '; PREREQUISITE: BL9908_MOD.SPF INSTALLED ON THE CONTROL',
+    ';-------------------------------------------',
+    ';',
+    'DEF REAL LV_EC                     ;BLUM ERROR CODE',
+    ';',
+    'LV_EC=0',
+    ';',
+    '; CANCEL TRANSFORMATIONS',
+    'CYCLE800()',
+    'TRAFOOF',
+    'D0',
+    ';',
+    '; SAFE POSITION FOR LASER',
+    retract(R.clr),
+    ';',
+    '; STOP SPINDLE AND COOLANT',
+    'M5',
+    'M9',
+    ';',
+    '; SPIN TOOL FOR LASER CHECK',
+    'D1',
+    'S' + LASER_RPM + ' M3',
+    ';',
+    'BL9908_MOD(0,-1,LD_BRK_TOL,0,LV_EC)',
+    'STOPRE',
+    'IF (LV_EC==19.19)',
+    '  GV_NEST_STATUS[GV_NEST]=GV_STEP+100',
+    '  STOPRE',
+    '  M5',
+    '  MSG("BROKEN: " << LD_TNAME << " NEST " << GV_NEST << " STEP " << GV_STEP)',
+    '  D1',
+    'ELSE',
+    '  SETPIECE(0)',
+    '  M5',
+    '  D1',
+    'ENDIF',
+    'STOPRE',
+    'RET',
+    ';'
+  ]);
+}
+function fRunNests() {
+  return text([
+    'PROC L_RUN_NESTS(STRING[25] LD_TNAME, REAL LD_BRK_TOL, INT LD_TOTAL, STRING[32] LD_PROG, INT LD_MEAS, INT LD_ALWAYS, INT LD_USEBRK, INT LD_MAXBRK, INT LD_DEBUG, INT LD_LIFE, INT LD_USESP)',
+    'DEF INT LV_TNO                    ;spindle tool T number (GETEXET)',
+    ';L_RUN_NESTS.SPF',
+    ';Runs one machining step across all its nests.',
+    ';GV_NEST is set by the caller: 1 on a fresh run, or the nest',
+    ';that was running when the job stopped (restart). Loops from',
+    ';there to LD_TOTAL.',
+    ';',
+    ';NEW TOOL (top of each running nest): GETEXET reads the tool in',
+    ';the spindle ($P_TOOLNO is not reliable with magazine management,',
+    ';SV). If it is disabled ($TC_TP8 bit 2, set when a break is found)',
+    ';or its piece count is used up ($TC_MOP13>0 and $TC_MOP4<=0),',
+    ';T/M6 by name brings in a sister.',
+    ';MEASURE: LD_ALWAYS=1 measures before every nest. LD_ALWAYS=0',
+    ';measures only while $TC_TP8 bit 7 (tool was in use) is 0.',
+    ';STOPRE after the cut: the nest is finished before anything is',
+    ';counted or GV_NEST moves on, so a restart never skips a half-cut',
+    ';nest.',
+    ';Results come back in GV_NESTS_CUT and GV_BRK_COUNT.',
+    ';',
+    ';  LD_TNAME   - tool name',
+    ';  LD_BRK_TOL - break tolerance',
+    ';  LD_TOTAL   - nest count',
+    ';  LD_PROG    - B_ program (called per nest)',
+    ';  LD_MEAS    - 1 = measuring on (laser)',
+    ';  LD_ALWAYS  - 1 = always measure, 0 = smart (bit 7)',
+    ';  LD_USEBRK  - 1 = break check after each nest',
+    ';  LD_MAXBRK  - breaks this step before a hard stop',
+    ';  LD_DEBUG   - 1 = M1 optional stop between nests',
+    ';  LD_LIFE    - pieces to count per good nest (SETPIECE)',
+    ';  LD_USESP   - 1 = SETPIECE on',
+    ';',
+    'GV_BRK_COUNT=0',
+    'GV_NESTS_CUT=0',
+    ';',
+    '_RN_LOOP:',
+    'IF (GV_NEST_STATUS[GV_NEST]==1)',
+    '  GETEXET(LV_TNO)',
+    '  ;--- new tool needed? (disabled by breakage, or used up) ---',
+    '  IF (($TC_TP8[LV_TNO] B_AND 4)>0) OR (($TC_MOP13[LV_TNO,1]>0) AND ($TC_MOP4[LV_TNO,1]<=0))',
+    '    T=LD_TNAME',
+    '    M6',
+    '    STOPRE',
+    '    GETEXET(LV_TNO)',
+    '  ENDIF',
+    '  ;--- measure the tool in the spindle ---',
+    '  IF (LD_MEAS==1)',
+    '    IF (LD_ALWAYS==1)',
+    '      L_TOOL_MEAS(LD_TNAME)',
+    '    ELSE',
+    '      IF (($TC_TP8[LV_TNO] B_AND 128)==0)',
+    '        L_TOOL_MEAS(LD_TNAME)',
+    '      ENDIF',
+    '    ENDIF',
+    '  ENDIF',
+    '  C_P1_LOAD_WO',
+    '  CALL LD_PROG',
+    '  STOPRE',
+    '  IF (LD_USEBRK==1)',
+    '    L_TOOL_BRK(LD_TNAME,LD_BRK_TOL)',
+    '    IF (GV_NEST_STATUS[GV_NEST]<>1)',
+    '      GV_BRK_COUNT=GV_BRK_COUNT+1',
+    '    ELSE',
+    '      GV_NESTS_CUT=GV_NESTS_CUT+1',
+    '      IF (LD_USESP==1)',
+    '        SETPIECE(LD_LIFE)',
+    '      ENDIF',
+    '    ENDIF',
+    '  ELSE',
+    '    GV_NESTS_CUT=GV_NESTS_CUT+1',
+    '    IF (LD_USESP==1)',
+    '      SETPIECE(LD_LIFE)',
+    '    ENDIF',
+    '  ENDIF',
+    'ENDIF',
+    ';--- too many breaks? (jump kept outside the IF blocks, NC 4.1.7) ---',
+    'IF (GV_BRK_COUNT>0) AND (GV_BRK_COUNT>=LD_MAXBRK) GOTOF _RN_MAXBRK',
+    'IF (LD_DEBUG==1)',
+    '  M1',
+    'ENDIF',
+    'GV_NEST=GV_NEST+1',
+    'IF (GV_NEST<=LD_TOTAL) GOTOB _RN_LOOP',
+    'RET',
+    ';',
+    ';--- too many breaks this step: park and hold until reset ---',
+    ';A restart resumes at GV_STEP / GV_NEST; broken nests stay off.',
+    '_RN_MAXBRK:',
+    'C_P1_HOME',
+    'LOOP',
+    '  MSG("MAX BREAKAGE: " << GV_BRK_COUNT << " AT STEP " << GV_STEP << " - CHECK SETUP")',
+    '  M0',
+    '  STOPRE',
+    'ENDLOOP',
+    'RET',
+    ';'
+  ]);
+}
+function fBTemplate(R) {
+  return text([
+    '; PROGRAM      : B_TEMPLATE.SPF',
+    '; PRG FUNCTION : CAM STUB - REFERENCE FOR THE CAM POST',
+    '; PART NUMBER  : ' + (R.header.part || 'XXXX'),
+    '; MATERIAL     : ' + (R.header.material || 'XXXX'),
+    '; MACHINE      : ' + (R.header.machine || 'XXXX'),
+    '; CONTROL      : SINUMERIK ONE',
+    ';===========================================',
+    '; THIS IS A STUB. THE REAL B_ PROGRAMS COME FROM CAM.',
+    '; IT HAS NO MOTION. RULES FOR EVERY B_ CUTTING PROGRAM:',
+    ';  1. CUTS ONE NEST PER CALL (L_RUN_NESTS CALLS IT PER NEST',
+    ';     WITH CALL LD_PROG; NO PARAMETERS)',
+    ';  2. RUNS IN G54 (C_P1_LOAD_WO COPIES THE NEST WO INTO G54',
+    ';     JUST BEFORE THE CALL)',
+    ';  3. NO T / M6 (L_TOOL_LOAD AND L_RUN_NESTS LOAD THE TOOL',
+    ';     AND ITS SISTERS)',
+    ';  4. ORIENTS PER FACE WITH CYCLE800(0,"H",...) FROM CAM',
+    ';  5. STARTS SPINDLE AND COOLANT (M3 Sxxxx, M8)',
+    ';  6. ENDS WITH THE BLOCK BELOW: STOP, CANCEL SWIVEL /',
+    ';     HIGH-SPEED SETTINGS / TRANSFORMATION, SAFE Z, RET',
+    ';===========================================',
+    ';',
+    'G54 D1',
+    ';',
+    ';--- CAM TOOLPATH GOES HERE ---',
+    ';',
+    ';--- PROGRAM END (KEEP) ---',
+    'M5',
+    'M9',
+    'CYCLE800()',
+    'CYCLE832()',
+    'TRAFOOF',
+    retract(R.clr),
+    'RET',
+    ';'
+  ]);
+}
+
+/* ---------------- generated job files ---------------- */
+function fWO(R) {
+  var o = [], len = function (v) { return fix(v, R.U.dec); };
+  hdr(o, R, 'C_P1_WO.SPF', R.single ? 'WRITE THE WORK OFFSET FOR THE SINGLE PART' : 'WRITE WORK OFFSET VALUES FOR ALL NESTS', [
+    '; PALLET       : 1',
+    '; MODE         : ' + modeDesc(R),
+    '; KINEMATICS   : ' + kinDesc(R),
+    '; UNITS        : ' + R.U.label + ' - MUST MATCH THE BASIC SYSTEM MD10240'
+  ]);
+  rev(o, R);
+  o.push(';');
+  o.push(';-------------------');
+  o.push('; GLOBAL VARIABLES');
+  o.push(';-------------------');
+  o.push(';GV_WO[#]  - WO FRAME INDEX PER NEST ($P_UIFR[5] = G505)');
+  o.push(';-------------------');
+  o.push('; LOCAL VARIABLES');
+  o.push(';-------------------');
+  o.push('DEF INT LV_NEST');
+  o.push('L_PAL_CHECK(1)');
+  o.push(';-------------------------------------------');
+  o.push('; THE FRAME CARRIES THE ROTARY ZERO OFFSET, NOT MOTION.');
+  o.push('; LOAD THE OFFSET AND COMMAND ' + (orientLine(R) || 'THE ROTARY AXIS AT 0') + ': THE TABLE');
+  o.push('; SWIVELS TO PRESENT THIS NEST\'S FACE.');
+  o.push('; CTRANS WRITES X/Y/Z AND CLEARS EVERY OTHER COMPONENT,');
+  o.push('; FINE OFFSETS INCLUDED. ROTARY AXES GET THEIR OWN TR LINE.');
+  o.push(';-------------------------------------------');
+  o.push('; VALUES WRITE ONLY ON A FRESH START (GV_STEP==0).');
+  o.push('; A RESTART SKIPS THIS SO PROBED OFFSETS SURVIVE.');
+  o.push('IF (GV_STEP==0)');
+  var lastFace = -1;
+  R.nests.forEach(function (nn) {
+    if (!R.single && nn.face !== lastFace) {
+      lastFace = nn.face;
+      var first = (nn.face - 1) * R.npf + 1, last = Math.min(nn.face * R.npf, R.total);
+      o.push('  ;-------------------------------------------');
+      o.push('  ; FACE ' + nn.face + ': NESTS ' + first + (last > first ? '-' + last : ''));
+      o.push('  ;-------------------------------------------');
+    }
+    o.push('  ;NEST ' + nn.n + ' G5' + ('0' + (nn.frame)).slice(-2) + (nn.notes ? ' - ' + nn.notes : '') + (nn.blank ? ' (BLANK X/Y/Z WRITTEN AS 0)' : ''));
+    o.push('  LV_NEST=' + nn.n);
+    o.push('  GV_WO[LV_NEST]=' + nn.frame);
+    o.push('  $P_UIFR[GV_WO[LV_NEST]]=CTRANS(X,' + len(nn.x) + ',Y,' + len(nn.y) + ',Z,' + len(nn.z) + ')');
+    if (R.trunnion !== 'NONE') o.push('  $P_UIFR[GV_WO[LV_NEST],' + R.trunnion + ',TR]=' + fix(nn.trun, 3));
+    if (R.rotary !== 'NONE') o.push('  $P_UIFR[GV_WO[LV_NEST],' + R.rotary + ',TR]=' + fix(nn.rot, 3));
+    o.push('  STOPRE');
+  });
+  o.push('ENDIF');
+  o.push(';');
+  o.push('RET');
+  o.push(';');
+  return text(o);
+}
+function fNests(R) {
+  var o = [];
+  hdr(o, R, 'C_P1_NESTS.SPF', R.single ? 'SET NEST STATUS FOR THE SINGLE PART' : 'SET NEST ACTIVATION STATUS', [
+    '; PALLET       : 1',
+    '; MODE         : ' + modeDesc(R)
+  ]);
+  rev(o, R);
+  o.push(';');
+  o.push(';-------------------');
+  o.push('; GLOBAL VARIABLES');
+  o.push(';-------------------');
+  o.push(';GV_NEST_STATUS[#] - NEST STATUS');
+  o.push(';  0     = INACTIVE (OPERATOR DISABLED)');
+  o.push(';  1     = ACTIVE');
+  o.push(';  2     = NO PART / OUT OF TOLERANCE (PROBE)');
+  o.push(';  100+N = TOOL FAILURE AT STEP N');
+  o.push(';GV_NEST       - RESET TO 0 SO STEP 1 STARTS AT NEST 1');
+  o.push(';GV_PROBE_CHK  - RESET SO THE PROBE HEALTH CHECK RUNS ONCE');
+  o.push(';-------------------------------------------');
+  o.push('; ONLY INITIALIZED ON A FRESH START (GV_STEP==0).');
+  o.push('; ON RESTART THE VALUES ARE KEPT SO AUTO-DISABLED');
+  o.push('; NESTS STAY DISABLED.');
+  o.push(';-------------------------------------------');
+  o.push('L_PAL_CHECK(1)');
+  o.push(';');
+  o.push('IF (GV_STEP==0)');
+  o.push('  GV_PROBE_CHK=0');
+  o.push('  GV_NEST=0');
+  var lastFace = -1;
+  R.nests.forEach(function (nn) {
+    if (!R.single && nn.face !== lastFace) {
+      lastFace = nn.face;
+      o.push('  ;-----------');
+      o.push('  ; FACE ' + nn.face);
+      o.push('  ;-----------');
+    }
+    var a = '  GV_NEST_STATUS[' + nn.n + ']=1';
+    o.push(pad(a, 34) + ';NEST ' + nn.n + ' - G5' + ('0' + nn.frame).slice(-2));
+  });
+  o.push('ENDIF');
+  o.push(';');
+  o.push('STOPRE');
+  o.push('RET');
+  o.push(';');
+  return text(o);
+}
+
+/* ---- probe program ---- */
+function cyc977(R, mvar, setv, setv0, setv1, sid, ma) {
+  var P = R.P, len = function (v) { return fix(v, R.U.dec); };
+  var a = [];
+  a[0] = String(mvar);            /* S_MVAR  1xx = WO correction            */
+  a[1] = 'GV_WO[GV_NEST]';        /* S_KNUM  adjustable WO, fine (MC 5.1.7) */
+  a[2] = '';                      /* S_KNUM1                                */
+  a[3] = String(P.prnum);         /* S_PRNUM probe data set                 */
+  a[4] = len(setv);               /* S_SETV  diameter / width               */
+  a[5] = len(setv0);              /* S_SETV0 rectangle X                    */
+  a[6] = len(setv1);              /* S_SETV1 rectangle Y                    */
+  a[7] = len(P.fa);               /* S_FA    measurement path               */
+  a[8] = len(P.fa);               /* S_TSA   safe area = S_FA               */
+  a[9] = '0';                     /* S_STA1  starting angle                 */
+  a[10] = len(sid);               /* S_ID    lowering for outside features  */
+  a[11] = '0';                    /* S_SZA                                  */
+  a[12] = '0';                    /* S_SZO                                  */
+  a[13] = String(ma);             /* S_MA                                   */
+  a[14] = '1';                    /* S_NMSP                                 */
+  a[15] = '""';                   /* S_TNAME                                */
+  for (var i = 16; i <= 24; i++) a[i] = '';   /* S_DLNUM..S_MCBIT */
+  a[25] = '1';                    /* _DMODE  G17 inside the cycle           */
+  a[26] = '0';                    /* _AMODE  no dimensional tolerance       */
+  return 'CYCLE977(' + a.join(',') + ')';
+}
+function cyc978(R) {
+  var P = R.P, len = function (v) { return fix(v, R.U.dec); };
+  var a = [];
+  a[0] = '100';                   /* S_MVAR  surface, WO correction         */
+  a[1] = 'GV_WO[GV_NEST]';        /* S_KNUM  adjustable WO, fine            */
+  a[2] = '';                      /* S_KNUM1                                */
+  a[3] = String(P.prnum);         /* S_PRNUM                                */
+  a[4] = len(P.zNom);             /* S_SETV  setpoint Z                     */
+  a[5] = len(P.fa);               /* S_FA                                   */
+  a[6] = len(P.fa);               /* S_TSA = S_FA                           */
+  a[7] = '3';                     /* S_MA    3rd axis of the plane (Z)      */
+  a[8] = '2';                     /* S_MD    2 = negative direction         */
+  a[9] = '1';                     /* S_NMSP                                 */
+  a[10] = '""';                   /* S_TNAME                                */
+  for (var i = 11; i <= 19; i++) a[i] = '';   /* S_DLNUM..S_MCBIT */
+  a[20] = '1';                    /* _DMODE  G17 inside the cycle           */
+  a[21] = '0';                    /* _AMODE                                 */
+  return 'CYCLE978(' + a.join(',') + ')';
+}
+function tolCheck(o, R, axis, what) {
+  var tol = axis === 'Z' ? R.P.zTol : R.P.xyTol;
+  o.push('IF (ABS($P_UIFR[GV_WO[GV_NEST],' + axis + ',FI])>' + fix(tol, R.U.dec) + ')');
+  o.push('  GV_NEST_STATUS[GV_NEST]=2');
+  o.push('  MSG("NEST " << GV_NEST << " ' + what + ' ' + axis + ' OUT OF TOL: " << $P_UIFR[GV_WO[GV_NEST],' + axis + ',FI])');
+  o.push('  M0');
+  o.push('  STOPRE');
+  o.push('ENDIF');
+  o.push('IF (GV_NEST_STATUS[GV_NEST]<>1) GOTOF PROBE_END');
+}
+function fProbe(R) {
+  var P = R.P, o = [], U = R.U;
+  var len = function (v) { return fix(v, U.dec); };
+  var feed = function (v) { return compact(v, 2); };
+  var ret = retract(P.clr);
+  var name = R.probeStep.program;
+  var xyDesc = {
+    'SPLIT EXTERIOR': 'CYCLE977 RIB X (' + len(P.widthX) + ') THEN RIB Y (' + len(P.widthY) + '), OUTSIDE',
+    'BORE': 'CYCLE977 HOLE D' + len(P.diameter) + ', INSIDE',
+    'BOSS': 'CYCLE977 SPIGOT D' + len(P.diameter) + ', OUTSIDE',
+    'RECT POCKET': 'CYCLE977 RECTANGLE INSIDE ' + len(P.widthX) + ' x ' + len(P.widthY),
+    'RECT SPIGOT': 'CYCLE977 RECTANGLE OUTSIDE ' + len(P.widthX) + ' x ' + len(P.widthY),
+    'NONE': 'SKIPPED'
+  }[P.xyMethod];
+  hdr(o, R, name + '.SPF', 'PROBE ONE NEST (CALLED PER NEST BY A_P1)', [
+    '; PART NUMBER  : ' + (R.header.part || 'XXXX'),
+    '; UNITS        : ' + U.label
+  ]);
+  rev(o, R);
+  o.push(';');
+  o.push(';  HEALTH CHECK: ' + (P.health ? 'ONCE PER JOB (GV_PROBE_CHK), MEAS TOUCH' : 'OFF'));
+  o.push(';  PART CHECK  : ' + (P.partCheck ? 'MEAS TOUCH AT X' + len(P.chkLoc.x) + ' Y' + len(P.chkLoc.y) + (P.chkAlt ? ' (ALTERNATE)' : '') + ', NO TRIGGER = NO PART' : 'OFF'));
+  o.push(';  Z DATUM     : ' + (P.skipZ ? 'SKIPPED' : 'CYCLE978 Z' + len(P.zNom) + ' AT X' + len(P.zLoc.x) + ' Y' + len(P.zLoc.y) + (P.zAlt ? ' (ALTERNATE)' : '')));
+  o.push(';  XY DATUM    : ' + xyDesc);
+  o.push(';  S_FA        : ' + len(P.fa) + ' (SEARCH DISTANCE); S_TSA = S_FA');
+  o.push(';  CORRECTION  : FINE PART OF THE NEST WO GV_WO[GV_NEST]');
+  o.push(';                (S_KNUM 1-99, NEEDS MD18600 = 1)');
+  o.push(';  OUT OF TOL  : STATUS 2, MSG, M0, REST OF NEST SKIPPED');
+  o.push(';  NO PART     : STATUS 2, MSG, REST OF NEST SKIPPED');
+  o.push(';-------------------------------------------');
+  o.push(';');
+  o.push(';--- TOOL CALL ---');
+  o.push('T=' + q(P.tool) + ' M6');
+  o.push(ret);
+  o.push('CYCLE800()                         ;deselect any active swivel plane');
+  o.push('TRAFOOF                            ;cancel any active transformation');
+  o.push('G54 D1');
+  var ol = orientLine(R);
+  if (ol) o.push(pad(ol, 35) + ';swivel to this nest\'s face (angle is in the WO)');
+  o.push('M19');
+  o.push(';');
+  var mOn = P.probeOnM;
+  if (P.health) {
+    o.push(';--- PROBE HEALTH CHECK (ONCE PER JOB, FIRST ACTIVE NEST) ---');
+    o.push('IF (GV_PROBE_CHK==0)');
+    o.push('  G54 D1');
+    if (mOn) o.push('  ' + mOn + '                              ;probe on');
+    o.push('  G0 X=' + len(P.hX) + ' Y=' + len(P.hY));
+    o.push('  G0 Z=' + len(P.hStartZ));
+    o.push('  G1 MEAS=1 Z=' + len(P.hTargetZ) + ' F' + feed(P.hFeed));
+    o.push('  STOPRE');
+    o.push('  IF ($AC_MEA[1]==0)');
+    o.push('    ' + ret);
+    o.push('    LOOP');
+    o.push('      MSG("PROBE HEALTH CHECK FAILED - PROBE DID NOT TRIGGER")');
+    o.push('      M0');
+    o.push('      STOPRE');
+    o.push('    ENDLOOP');
+    o.push('  ENDIF');
+    o.push('  ' + ret);
+    o.push('  GV_PROBE_CHK=1');
+    o.push('ENDIF');
+    o.push(';');
+  }
+  if (P.partCheck) {
+    o.push(';--- PART EXISTENCE CHECK (MEAS TOUCH, NO ALARM) ---');
+    o.push(';  NO TRIGGER WITHIN ' + len(P.maxTravel) + ' OF TRAVEL = NO PART');
+    o.push('G54 D1');
+    if (mOn) o.push(mOn + '                                ;probe on');
+    o.push('G0 X=' + len(P.chkLoc.x) + ' Y=' + len(P.chkLoc.y));
+    o.push('G0 Z=' + len(P.chkLoc.z));
+    o.push('G1 MEAS=1 Z=' + len(P.chkTarget) + ' F' + feed(P.feed));
+    o.push('STOPRE');
+    o.push('IF ($AC_MEA[1]==0)');
+    o.push('  GV_NEST_STATUS[GV_NEST]=2');
+    o.push('  MSG("NEST " << GV_NEST << " - NO PART")');
+    o.push('ENDIF');
+    o.push(ret);
+    o.push('IF (GV_NEST_STATUS[GV_NEST]<>1) GOTOF PROBE_END');
+    o.push(';');
+  }
+  if (!P.skipZ) {
+    o.push(';--- Z DATUM: SURFACE (CYCLE978) ---');
+    o.push('G54 D1');
+    o.push('G0 X=' + len(P.zLoc.x) + ' Y=' + len(P.zLoc.y));
+    o.push('G0 Z=' + len(P.zLoc.z));
+    o.push(cyc978(R));
+    o.push('STOPRE');
+    tolCheck(o, R, 'Z', 'SURFACE');
+    o.push(ret);
+    o.push(';');
+  }
+  if (P.xyMethod !== 'NONE') {
+    o.push(';--- XY DATUM: ' + P.xyMethod + ' ---');
+    o.push('G54 D1');
+    o.push('G0 X=' + len(P.appX) + ' Y=' + len(P.appY));
+    if (P.outside) {
+      o.push('G0 Z=' + len(P.xyStartZ) + '                    ;start above the feature');
+      o.push(';  THE CYCLE LOWERS TO MEASURING HEIGHT ITSELF: S_ID = ' + len(P.sid));
+    } else {
+      o.push('G0 Z=' + len(P.xyStartZ));
+      o.push('G1 Z=' + len(P.probeZ) + ' F' + feed(P.feed) + '                 ;lower to probe depth');
+    }
+    var w = P.widthX, h = P.widthY, d = P.diameter, sid = P.sid;
+    switch (P.xyMethod) {
+      case 'SPLIT EXTERIOR':
+        o.push(';--- X RIB ---');
+        o.push(cyc977(R, 104, w, 0, 0, sid, 1));
+        o.push('STOPRE');
+        tolCheck(o, R, 'X', 'RIB');
+        o.push(';--- Y RIB (STARTS ABOVE THE CENTER, MC 4.3.10) ---');
+        o.push(cyc977(R, 104, h, 0, 0, sid, 2));
+        o.push('STOPRE');
+        tolCheck(o, R, 'Y', 'RIB');
+        break;
+      case 'BORE':
+        o.push(cyc977(R, 101, d, 0, 0, 0, 1));
+        o.push('STOPRE');
+        tolCheck(o, R, 'X', 'BORE'); tolCheck(o, R, 'Y', 'BORE');
+        break;
+      case 'BOSS':
+        o.push(cyc977(R, 102, d, 0, 0, sid, 1));
+        o.push('STOPRE');
+        tolCheck(o, R, 'X', 'BOSS'); tolCheck(o, R, 'Y', 'BOSS');
+        break;
+      case 'RECT POCKET':
+        o.push(cyc977(R, 105, 0, w, h, 0, 1));
+        o.push('STOPRE');
+        tolCheck(o, R, 'X', 'POCKET'); tolCheck(o, R, 'Y', 'POCKET');
+        break;
+      case 'RECT SPIGOT':
+        o.push(cyc977(R, 106, 0, w, h, sid, 1));
+        o.push('STOPRE');
+        tolCheck(o, R, 'X', 'SPIGOT'); tolCheck(o, R, 'Y', 'SPIGOT');
+        break;
+    }
+    o.push(';');
+  }
+  o.push('PROBE_END:');
+  o.push(';--- SAFE Z RETRACT ---');
+  o.push(ret);
+  o.push(';');
+  o.push('RET');
+  o.push(';');
+  return text(o);
+}
+
+/* ---- main program ---- */
+function aBound(o, R) {
+  o.push('IF (GV_NEST<1) OR (GV_NEST>' + R.total + ')');
+  o.push('  GV_NEST=1');
+  o.push('ENDIF');
+}
+function aStepStart(o) { o.push('LV_STEP_START=$A_HOUR*3600+$A_MINUTE*60+$A_SECOND'); }
+function fMain(R) {
+  var o = [], N = R.total, U = R.U;
+  o.push('; PROGRAM      : A_P1.MPF');
+  o.push('; PRG FUNCTION : MAIN PROGRAM - RUNS EVERY STEP ACROSS EVERY NEST');
+  o.push('; PART NUMBER  : ' + (R.header.part || 'XXXX'));
+  o.push('; MATERIAL     : ' + (R.header.material || 'XXXX'));
+  o.push('; STOCK        : ' + (R.header.stock || 'XXXX'));
+  o.push('; MACHINE      : ' + (R.header.machine || 'XXXX'));
+  o.push('; CONTROL      : SINUMERIK ONE');
+  o.push('; PROGRAMMER   : ' + (R.header.programmer || 'XXXX'));
+  o.push('; DATE CREATED : ' + R.date);
+  o.push('; PALLET       : 1');
+  o.push('; MODE         : ' + modeDesc(R));
+  o.push('; KINEMATICS   : ' + kinDesc(R));
+  o.push('; UNITS        : ' + U.label + ' - MUST MATCH THE BASIC SYSTEM MD10240');
+  o.push('; GENERATED    : SINUMERIK_GENERATOR.HTML V' + GEN_VERSION);
+  rev(o, R);
+  o.push(';');
+  o.push(';-------------------');
+  o.push('; GLOBAL VARIABLES (UGUD.DEF)');
+  o.push(';-------------------');
+  o.push(';GV_STEP           - CURRENT STEP (0 = FRESH PALLET)');
+  o.push(';GV_NEST           - CURRENT NEST');
+  o.push(';GV_NEST_STATUS[#] - 0 OFF, 1 RUNNING, 2 NO PART, 100+STEP FAILED');
+  o.push(';GV_WO[#]          - WO FRAME PER NEST');
+  o.push(';GV_SKIP           - 1 = EVERY NEST OFF, SKIP THE STEP');
+  o.push(';GV_BRK_COUNT      - BREAKS THIS STEP');
+  o.push(';GV_NESTS_CUT      - NESTS CUT THIS STEP');
+  o.push(';GV_PROBE_CHK      - 1 = PROBE HEALTH CHECK DONE THIS JOB');
+  o.push(';-----------------');
+  o.push('; LOCAL VARIABLES (DEFINITIONS FIRST, NC 4.1.1.4)');
+  o.push(';-----------------');
+  o.push('DEF INT LV_GOOD_PARTS              ;GOOD PART COUNT AT END');
+  o.push('DEF INT LV_I                       ;LOOP COUNTER');
+  o.push('DEF REAL LV_CYCLE_START            ;CYCLE START TIME (SECONDS)');
+  o.push('DEF REAL LV_STEP_START             ;STEP START TIME (SECONDS)');
+  o.push('DEF REAL LV_CYCLE_TIME             ;CYCLE TIME (SECONDS)');
+  o.push(';----------------');
+  o.push('; SUB PROGRAMS');
+  o.push(';----------------');
+  o.push(';C_P1_WO       - WRITE WO FOR ALL NESTS (FRESH START ONLY)');
+  o.push(';C_P1_NESTS    - SET NEST STATUS (FRESH START ONLY)');
+  o.push(';C_P1_LOAD_WO  - LOAD G54 WITH THE CURRENT NEST WO');
+  o.push(';C_P1_HOME     - SAFE Z AT THE TOP OF TRAVEL');
+  if (R.probeStep.enabled) o.push(';' + pad(R.probeStep.program, 14) + '- PROBE ONE NEST');
+  o.push(';L_PAL_CHECK   - CHECK PALLET NUMBER (CYCLE DIR)');
+  o.push(';L_SKIP_CHECK  - SKIP A STEP IF EVERY NEST IS OFF');
+  o.push(';L_TOOL_LOAD   - LOAD THE STEP TOOL BY NAME');
+  o.push(';L_RUN_NESTS   - RUN ONE STEP ACROSS EVERY NEST');
+  o.push(';L_TOOL_MEAS   - BLUM LASER TOOL MEASURE');
+  o.push(';L_TOOL_BRK    - BLUM LASER BREAKAGE CHECK');
+  o.push(';L_STEP_LOG    - STEP TIME + DATA LOGGING');
+  o.push(';L_DATA_LOG    - PRODUCTION DATA LOG LINE');
+  o.push(';L_STEP_ERROR  - HOLD IF GV_STEP IS UNKNOWN');
+  o.push(';');
+  o.push('GROUP_BEGIN(0,"SETUP",0,0)');
+  o.push(pad(U.g, 35) + ';' + (R.units === 'INCH' ? 'INCH' : 'METRIC') + ' - SAME AS THE BASIC SYSTEM');
+  o.push(';=== ' + modeDesc(R) + ' ===');
+  o.push(';--------------------');
+  o.push(';  PALLET & WCS SETUP');
+  o.push(';--------------------');
+  o.push('L_PAL_CHECK(1)');
+  o.push('C_P1_WO');
+  o.push('C_P1_NESTS');
+  if (!R.single) {
+    o.push(';--------------------');
+    o.push(';  TURN OFF A NEST');
+    o.push(';--------------------');
+    o.push('; Delete the ; in front of a nest below to skip');
+    o.push('; it this run (no probing, no machining).');
+    o.push(';--------------------');
+    for (var n = 1; n <= N; n++) o.push(';GV_NEST_STATUS[' + n + ']=0');
+  }
+  o.push('STOPRE');
+  o.push(';--------------------');
+  o.push(';   HOME POSITION');
+  o.push(';--------------------');
+  o.push('C_P1_HOME');
+  o.push('GROUP_END(0,0)');
+  o.push('GROUP_BEGIN(0,"STEP LIST",0,0)');
+  o.push(';=====================');
+  o.push(';     STEP LIST');
+  o.push(';=====================');
+  if (R.probeStep.enabled) {
+    o.push(';STEP ' + R.probeStep.step + ': PROBE');
+    o.push(';   PROG: ' + R.probeStep.program);
+    o.push(';   TOOL: ' + R.P.tool);
+    o.push(';');
+  }
+  R.steps.forEach(function (s) {
+    o.push(';STEP ' + s.step + ':');
+    o.push(';   PROG: ' + s.program);
+    o.push(';   TOOL: ' + s.tool);
+    o.push(';   MEAS=' + (s.meas ? (s.measAlways ? 'ALWAYS' : 'SMART') : 'OFF') + ' BRK=' + (s.brk ? 'ON TOL ' + fix(s.brkTol, U.dec) + ' MAX ' + s.maxBrk : 'OFF') +
+           ' SETPIECE=' + (s.setpiece ? s.life : 'OFF') + (s.debug ? ' DEBUG M1' : ''));
+    o.push(';');
+  });
+  o.push('GROUP_END(0,0)');
+  o.push(';--------------------');
+  o.push(';      RE-START');
+  o.push(';--------------------');
+  o.push(';GV_STEP<>0 MEANS THE LAST RUN DID NOT FINISH: THE JOB');
+  o.push(';RESUMES AT THAT STEP AND NEST. A FRESH SISTER TOOL IS');
+  o.push(';MEASURED AUTOMATICALLY.');
+  o.push('LV_CYCLE_START=$A_HOUR*3600+$A_MINUTE*60+$A_SECOND');
+  o.push('IF (GV_STEP<>0)');
+  o.push('  MSG("RESUMING AT STEP " << GV_STEP << " NEST " << GV_NEST << " - FOR A NEW PALLET SET GV_STEP=0 THEN RESTART")');
+  o.push('  M0');
+  o.push('  STOPRE');
+  o.push('ENDIF');
+  if (R.probeStep.enabled) o.push('IF (GV_STEP==' + R.probeStep.step + ') GOTOF STEP' + R.probeStep.step);
+  R.steps.forEach(function (s) { o.push('IF (GV_STEP==' + s.step + ') GOTOF STEP' + s.step); });
+  o.push('L_STEP_ERROR');
+  if (R.probeStep.enabled) {
+    if (R.single) singleProbeStep(o, R); else probeStep(o, R);
+  }
+  R.steps.forEach(function (s) { cutStep(o, R, s); });
+  if (R.single) singleEnd(o, R); else tombEnd(o, R);
+  return text(o);
+}
+function stepBanner(o, s, l2, l3) {
+  o.push(';================================');
+  o.push(';          STEP ' + s);
+  o.push(';        ' + l2);
+  if (l3) o.push(';        ' + l3);
+  o.push(';================================');
+}
+function probeStep(o, R) {
+  var s = R.probeStep.step, N = R.total;
+  stepBanner(o, s, 'PROBE ALL NESTS', R.probeStep.program);
+  o.push('GV_STEP=' + s);
+  o.push('STEP' + s + ':');
+  o.push('MSG("STEP ' + s + ' / ' + R.lastStep + ' - PROBE")');
+  aStepStart(o);
+  o.push(';--- resume at the nest that was running, or start at 1 ---');
+  aBound(o, R);
+  o.push('STEP' + s + '_NEST:');
+  o.push('IF (GV_NEST_STATUS[GV_NEST]==1)');
+  o.push('  C_P1_LOAD_WO');
+  o.push('  ' + R.probeStep.program);
+  o.push('  STOPRE');
+  o.push('ENDIF');
+  o.push('GV_NEST=GV_NEST+1');
+  o.push('IF (GV_NEST<=' + N + ') GOTOB STEP' + s + '_NEST');
+  o.push(';---- STEP ' + s + ' END ----');
+  o.push('L_STEP_LOG(' + s + ',' + q('PROBE') + ',0,0,LV_STEP_START)');
+  o.push('STOPRE');
+}
+function singleProbeStep(o, R) {
+  var s = R.probeStep.step;
+  stepBanner(o, s, 'PROBE PART', R.probeStep.program);
+  o.push('GV_STEP=' + s);
+  o.push('STEP' + s + ':');
+  o.push('MSG("STEP ' + s + ' / ' + R.lastStep + ' - PROBE")');
+  aStepStart(o);
+  o.push('GV_NEST=1');
+  o.push('IF (GV_NEST_STATUS[1]==1)');
+  o.push('  C_P1_LOAD_WO');
+  o.push('  ' + R.probeStep.program);
+  o.push('  STOPRE');
+  o.push('ENDIF');
+  o.push(';--- single part: no part or out of tolerance = hold ---');
+  o.push('IF (GV_NEST_STATUS[1]<>1)');
+  o.push('  C_P1_HOME');
+  o.push('  LOOP');
+  o.push('    MSG("NO PART, OUT OF TOLERANCE OR NEST OFF AT STEP ' + s + '")');
+  o.push('    M0');
+  o.push('    STOPRE');
+  o.push('  ENDLOOP');
+  o.push('ENDIF');
+  o.push(';---- STEP ' + s + ' END ----');
+  o.push('L_STEP_LOG(' + s + ',' + q('PROBE') + ',0,0,LV_STEP_START)');
+  o.push('STOPRE');
+}
+function cutStep(o, R, s) {
+  var U = R.U, N = R.total;
+  stepBanner(o, s.step, q(s.tool), s.program);
+  o.push('GV_STEP=' + s.step);
+  o.push('STEP' + s.step + ':');
+  o.push(';--- resume at the nest that was running, or start at 1 ---');
+  aBound(o, R);
+  o.push('MSG("STEP ' + s.step + ' / ' + R.lastStep + ' - ' + s.tool + '")');
+  o.push('GV_NESTS_CUT=0 GV_BRK_COUNT=0');
+  aStepStart(o);
+  o.push('L_SKIP_CHECK(' + N + ')');
+  o.push('IF (GV_SKIP==1) GOTOF STEP' + s.step + '_DONE');
+  o.push('L_TOOL_LOAD(' + q(s.tool) + ')');
+  o.push('L_RUN_NESTS(' + [q(s.tool), fix(s.brkTol, U.dec), N, q(s.program), s.meas ? 1 : 0, s.measAlways ? 1 : 0,
+    s.brk ? 1 : 0, s.maxBrk, s.debug ? 1 : 0, s.life, s.setpiece ? 1 : 0].join(',') + ')');
+  o.push('STEP' + s.step + '_DONE:');
+  o.push(';---- STEP ' + s.step + ' END ----');
+  o.push('L_STEP_LOG(' + s.step + ',' + q(s.tool) + ',GV_NESTS_CUT,GV_BRK_COUNT,LV_STEP_START)');
+  o.push('STOPRE');
+}
+function cycleTime(o) {
+  o.push('LV_CYCLE_TIME=$A_HOUR*3600+$A_MINUTE*60+$A_SECOND-LV_CYCLE_START');
+  o.push('IF (LV_CYCLE_TIME<0)');
+  o.push('  LV_CYCLE_TIME=LV_CYCLE_TIME+86400');
+  o.push('ENDIF');
+}
+function tombEnd(o, R) {
+  var N = R.total;
+  o.push(';===================');
+  o.push(';   PROGRAM END');
+  o.push(';===================');
+  o.push(';--- COUNT GOOD PARTS, LOG THE CYCLE ---');
+  o.push('LV_GOOD_PARTS=0');
+  o.push('LV_I=1');
+  o.push('WHILE (LV_I<=' + N + ')');
+  o.push('  IF (GV_NEST_STATUS[LV_I]==1)');
+  o.push('    LV_GOOD_PARTS=LV_GOOD_PARTS+1');
+  o.push('  ENDIF');
+  o.push('  LV_I=LV_I+1');
+  o.push('ENDWHILE');
+  o.push('L_STEP_LOG(0,' + q('TOTAL') + ',LV_GOOD_PARTS,0,LV_CYCLE_START)');
+  cycleTime(o);
+  o.push(';--- SAFE HOME, THEN REPORT EVERY NEST THAT IS NOT GOOD ---');
+  o.push('C_P1_HOME');
+  o.push('LV_I=1');
+  o.push('WHILE (LV_I<=' + N + ')');
+  o.push('  IF (GV_NEST_STATUS[LV_I]==0)');
+  o.push('    MSG("NEST " << LV_I << " = INACTIVE (OPERATOR)")');
+  o.push('    M0');
+  o.push('    STOPRE');
+  o.push('  ENDIF');
+  o.push('  IF (GV_NEST_STATUS[LV_I]==2)');
+  o.push('    MSG("NEST " << LV_I << " = NO PART OR OUT OF TOLERANCE (PROBE)")');
+  o.push('    M0');
+  o.push('    STOPRE');
+  o.push('  ENDIF');
+  o.push('  IF (GV_NEST_STATUS[LV_I]>=100)');
+  o.push('    MSG("NEST " << LV_I << " = TOOL FAILURE AT STEP " << (GV_NEST_STATUS[LV_I]-100))');
+  o.push('    M0');
+  o.push('    STOPRE');
+  o.push('  ENDIF');
+  o.push('  LV_I=LV_I+1');
+  o.push('ENDWHILE');
+  o.push('MSG("CYCLE COMPLETE - " << LV_GOOD_PARTS << " OF ' + N + ' GOOD - " << LV_CYCLE_TIME << " SEC")');
+  endClear(o);
+}
+function singleEnd(o, R) {
+  o.push(';===================');
+  o.push(';   PROGRAM END');
+  o.push(';===================');
+  o.push('LV_GOOD_PARTS=0');
+  o.push('IF (GV_NEST_STATUS[1]==1)');
+  o.push('  LV_GOOD_PARTS=1');
+  o.push('ENDIF');
+  o.push('L_STEP_LOG(0,' + q('TOTAL') + ',LV_GOOD_PARTS,0,LV_CYCLE_START)');
+  cycleTime(o);
+  o.push('C_P1_HOME');
+  o.push('IF (GV_NEST_STATUS[1]==1)');
+  o.push('  MSG("CYCLE COMPLETE - GOOD PART - " << LV_CYCLE_TIME << " SEC")');
+  o.push('ELSE');
+  o.push('  IF (GV_NEST_STATUS[1]>=100)');
+  o.push('    MSG("CYCLE COMPLETE - TOOL FAILURE AT STEP " << (GV_NEST_STATUS[1]-100) << " - " << LV_CYCLE_TIME << " SEC")');
+  o.push('  ELSE');
+  o.push('    IF (GV_NEST_STATUS[1]==2)');
+  o.push('      MSG("CYCLE COMPLETE - NO PART - " << LV_CYCLE_TIME << " SEC")');
+  o.push('    ELSE');
+  o.push('      MSG("CYCLE COMPLETE - NEST OFF - " << LV_CYCLE_TIME << " SEC")');
+  o.push('    ENDIF');
+  o.push('  ENDIF');
+  o.push('ENDIF');
+  endClear(o);
+}
+function endClear(o) {
+  o.push(';');
+  o.push(';--- CLEAR STEP FOR THE NEXT PALLET ---');
+  o.push('GV_STEP=0');
+  o.push('GV_NEST=0');
+  o.push(';');
+  o.push('M30');
+  o.push(';');
+}
+
+/* ---- README inside the NC zip ---- */
+function fReadme(R) {
+  var r = [];
+  var frames = R.total + 5;
+  r.push('SINUMERIK ONE NEST FRAMEWORK - GENERATED NC FILES');
+  r.push('Generated ' + R.date + ' by SINUMERIK_GENERATOR.html v' + GEN_VERSION);
+  r.push('Part: ' + (R.header.part || '-') + '   Machine: ' + (R.header.machine || '-'));
+  r.push('Mode: ' + modeDesc(R));
+  r.push('Kinematics: ' + kinDesc(R) + '   Units: ' + R.U.label);
+  r.push('');
+  r.push('WHERE THE FILES GO');
+  r.push('  DEF/UGUD.DEF   Definitions directory (_N_DEF_DIR, file _N_UGUD_DEF).');
+  r.push('  CUS/L_*.SPF    User cycles directory (_N_CUS_DIR). Called by name;');
+  r.push('                 no EXTERN anywhere (NC 4.2.3.2: cycles need none).');
+  r.push('  WKS/*          The job\'s workpiece directory, next to the CAM B_');
+  r.push('                 programs. Select A_P1.MPF and start.');
+  r.push('');
+  r.push('GLOBAL VARIABLES (UGUD.DEF, all DEF NCK INT, kept through power-off)');
+  r.push('  GV_STEP            current step (0 = fresh pallet)');
+  r.push('  GV_NEST            current nest');
+  r.push('  GV_NEST_STATUS[33] per nest: 0 off, 1 running, 2 no part / out of');
+  r.push('                     tolerance, 100+step = tool failed at that step');
+  r.push('  GV_WO[33]          work offset frame per nest (5 = G505)');
+  r.push('  GV_SKIP            1 = every nest off, skip the step');
+  r.push('  GV_BRK_COUNT       breaks this step');
+  r.push('  GV_NESTS_CUT       nests cut this step');
+  r.push('  GV_PROBE_CHK       1 = probe health check done this job');
+  r.push('  After any change to UGUD.DEF: activate the definitions and do an');
+  r.push('  NCK reset. GUD space: MD18120 $MN_MM_NUM_GUD_NAMES_NCK and');
+  r.push('  MD18150 $MN_MM_GUD_VALUES_MEM must have room for these 8 names.');
+  r.push('');
+  r.push('MACHINE DATA');
+  r.push('  MD18600 $MN_MM_FRAME_FINE_TRANS = 1');
+  r.push('    The probe cycles write their correction into the FINE part of');
+  r.push('    the nest work offset (S_KNUM ten-thousands digit 0). Without');
+  r.push('    MD18600 the cycles fall back to the coarse part (MC 5.1.7 note 6),');
+  r.push('    $P_UIFR[..,FI] stays 0 and the tolerance check never trips.');
+  r.push('  MD28080 $MC_MM_NUM_USER_FRAMES >= ' + frames);
+  r.push('    Nest n uses G5(n+4): nest 1 = G505 = $P_UIFR[5].');
+  r.push('  MD10240 $MN_SCALING_SYSTEM_IS_METRIC must match the units used here');
+  r.push('    (' + R.U.label + '). G70/G71 convert only geometry; work offsets,');
+  r.push('    feeds and the $MA_POS_LIMIT_PLUS retract stay in the basic system.');
+  r.push('');
+  r.push('RESTART');
+  r.push('  Offsets (C_P1_WO) and nest status (C_P1_NESTS) are written only when');
+  r.push('  GV_STEP==0. A reset mid-job leaves GV_STEP/GV_NEST set; the next start');
+  r.push('  shows RESUMING AT STEP, holds on M0, then resumes at that step and');
+  r.push('  nest. For a new pallet set GV_STEP=0 first.');
+  r.push('  Max breaks in a step: the machine parks and holds until reset.');
+  r.push('');
+  r.push('PROBING');
+  r.push('  Health check and part check use MEAS=1 touch moves and $AC_MEA[1].');
+  r.push('  No trigger on the part check = nest status 2, no alarm. CYCLE978 is');
+  r.push('  not used for the part check: it alarms 61301 when nothing is found.');
+  r.push('  Z / XY datums use CYCLE978 / CYCLE977 with S_TSA = S_FA, _DMODE=1,');
+  r.push('  _AMODE=0. Your FI tolerance check then disables the nest.');
+  r.push('');
+  r.push('B_ PROGRAMS');
+  r.push('  B_TEMPLATE.SPF is a CAM stub with no motion. The cutting B_ programs');
+  r.push('  come from CAM: one nest per call, run in G54, no T/M6, orient per face');
+  r.push('  with CYCLE800(0,"H",...), end with the block in the template.');
+  if (R.probeStep.enabled) r.push('  ' + R.probeStep.program + '.SPF is the generated probe program (complete).');
+  r.push('');
+  r.push('BLUM MACROS (not in the Siemens manuals, not verified here)');
+  r.push('  BL9908_MOD (L_TOOL_BRK) must return 19.19 in its last parameter on a');
+  r.push('  break. BL9902 and its ;NCG# lines (L_TOOL_MEAS) are copied verbatim');
+  r.push('  from the original package (inch values).');
+  return r.join('\n') + '\n';
+}
+
+/* ---------------- generate ---------------- */
+function generate(job, opts) {
+  opts = opts || {};
+  var R = resolve(job);
+  R.date = opts.date || today();
+  var files = [];
+  function add(path, txt) { files.push({ path: path, text: txt }); }
+  add('README.txt', fReadme(R));
+  add('WKS/A_P1.MPF', fMain(R));
+  add('WKS/C_P1_WO.SPF', fWO(R));
+  add('WKS/C_P1_NESTS.SPF', fNests(R));
+  add('WKS/C_P1_LOAD_WO.SPF', fLoadWO(R));
+  add('WKS/C_P1_HOME.SPF', fHome(R));
+  if (R.probeStep.enabled) add('WKS/' + R.probeStep.program + '.SPF', fProbe(R));
+  add('WKS/B_TEMPLATE.SPF', fBTemplate(R));
+  add('CUS/L_RUN_NESTS.SPF', fRunNests(R));
+  add('CUS/L_TOOL_LOAD.SPF', fToolLoad(R));
+  add('CUS/L_TOOL_MEAS.SPF', fToolMeas(R));
+  add('CUS/L_TOOL_BRK.SPF', fToolBrk(R));
+  add('CUS/L_SKIP_CHECK.SPF', fSkipCheck(R));
+  add('CUS/L_PAL_CHECK.SPF', fPalCheck(R));
+  add('CUS/L_STEP_LOG.SPF', fStepLog(R));
+  add('CUS/L_DATA_LOG.SPF', fDataLog(R));
+  add('CUS/L_STEP_ERROR.SPF', fStepError(R));
+  add('CUS/L_NEST_ERROR.SPF', fNestError(R));
+  add('DEF/UGUD.DEF', fUGUD(R));
+  return { files: files, R: R };
+}
+
+/* ---------------- ZIP (STORE, CRC-32), no library ---------------- */
+var CRC_TABLE = (function () {
+  var t = new Uint32Array(256);
+  for (var n = 0; n < 256; n++) {
+    var c = n;
+    for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(b) {
+  var c = 0xFFFFFFFF;
+  for (var i = 0; i < b.length; i++) c = CRC_TABLE[(c ^ b[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function asciiBytes(s) {
+  var b = new Uint8Array(s.length);
+  for (var i = 0; i < s.length; i++) { var c = s.charCodeAt(i); b[i] = c < 128 ? c : 63; }
+  return b;
+}
+function makeZip(files, when) {
+  var d = when || new Date();
+  var dosTime = (d.getHours() << 11) | (d.getMinutes() << 5) | (Math.floor(d.getSeconds() / 2));
+  var dosDate = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  var parts = [], central = [], offset = 0;
+  function u16(v) { return [v & 0xFF, (v >>> 8) & 0xFF]; }
+  function u32(v) { return [v & 0xFF, (v >>> 8) & 0xFF, (v >>> 16) & 0xFF, (v >>> 24) & 0xFF]; }
+  files.forEach(function (f) {
+    var name = asciiBytes(f.path), data = asciiBytes(f.text), crc = crc32(data);
+    var local = [].concat(u32(0x04034b50), u16(20), u16(0), u16(0), u16(dosTime), u16(dosDate),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0));
+    parts.push(new Uint8Array(local), name, data);
+    central.push(new Uint8Array([].concat(u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(dosTime), u16(dosDate),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0),
+      u32(0), u32(offset))), name);
+    offset += local.length + name.length + data.length;
+  });
+  var cdSize = 0;
+  central.forEach(function (c) { cdSize += c.length; });
+  var end = new Uint8Array([].concat(u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+    u32(cdSize), u32(offset), u16(0)));
+  var all = parts.concat(central, [end]), total = 0;
+  all.forEach(function (p) { total += p.length; });
+  var out = new Uint8Array(total), pos = 0;
+  all.forEach(function (p) { out.set(p, pos); pos += p.length; });
+  return out;
+}
+
+G.SNG = {
+  GEN_VERSION: GEN_VERSION, MAX_NESTS: MAX_NESTS, AXES: AXES, XY_METHODS: XY_METHODS, UNIT: UNIT,
+  OUTSIDE: OUTSIDE, INSIDE: INSIDE,
+  defaultJob: defaultJob, normalizeJob: normalizeJob, blankStep: blankStep, validate: validate,
+  resolve: resolve, generate: generate, makeZip: makeZip, crc32: crc32, fix: fix, compact: compact,
+  isBlank: isBlank, num: num, isNum: isNum, isInt: isInt, today: today, ascii: ascii
+};
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+<script id="ui">
+(function () {
+'use strict';
+var S = window.SNG;
+var job = S.defaultJob();
+var dirty = false;
+var lastFiles = null, selFile = 0;
+var errPaths = {};
+
+function $(sel, root) { return (root || document).querySelector(sel); }
+function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, function (c) {
+  return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function getPath(o, p) { return p.split('.').reduce(function (a, k) { return a == null ? a : a[k]; }, o); }
+function setPath(o, p, v) {
+  var ks = p.split('.'), last = ks.pop();
+  var t = ks.reduce(function (a, k) { return a[k]; }, o);
+  t[last] = v;
+}
+function U() { return S.UNIT[job.config.units === 'INCH' ? 'INCH' : 'METRIC']; }
+
+/* ---- field builders ---- */
+function txt(path, label, opts) {
+  opts = opts || {};
+  var v = getPath(job, path);
+  return '<label class="f">' + esc(label) +
+    '<input type="text" data-path="' + path + '" value="' + esc(v) + '"' +
+    (opts.ph !== undefined ? ' placeholder="' + esc(opts.ph) + '"' : '') +
+    (opts.dis ? ' disabled' : '') + (opts.w ? ' style="width:' + opts.w + '"' : '') +
+    (errPaths[path] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label>';
+}
+function chk(path, label, opts) {
+  opts = opts || {};
+  return '<label class="f chk"><input type="checkbox" data-path="' + path + '"' + (getPath(job, path) ? ' checked' : '') +
+    (opts.dis ? ' disabled' : '') + '>' + esc(label) + '</label>';
+}
+function sel(path, label, options, opts) {
+  opts = opts || {};
+  var v = getPath(job, path);
+  return '<label class="f">' + esc(label) + '<select data-path="' + path + '"' + (opts.dis ? ' disabled' : '') +
+    (errPaths[path] ? ' class="err"' : '') + '>' +
+    options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') +
+    '</select></label>';
+}
+function cellTxt(path, opts) {
+  opts = opts || {};
+  var v = getPath(job, path);
+  return '<input type="text" data-path="' + path + '" value="' + esc(v) + '"' +
+    (opts.ph !== undefined ? ' placeholder="' + esc(opts.ph) + '"' : '') + (opts.dis ? ' disabled' : '') +
+    (errPaths[path] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"' +
+    (opts.size ? ' style="min-width:' + opts.size + 'px"' : '') + '>';
+}
+function cellChk(path, opts) {
+  opts = opts || {};
+  return '<input type="checkbox" data-path="' + path + '"' + (getPath(job, path) ? ' checked' : '') + (opts.dis ? ' disabled' : '') + '>';
+}
+function def(v) { return S.compact(v, 4) + ' (auto)'; }
+
+/* ---- tab: config & steps ---- */
+function renderConfig() {
+  var c = job.config, single = c.mode === 'SINGLE PART';
+  var h = '';
+  h += '<h2>Header <span class="pill">comments only</span></h2><div class="grid">' +
+    txt('header.part', 'Part number') + txt('header.material', 'Material') + txt('header.stock', 'Stock') +
+    txt('header.machine', 'Machine') + txt('header.programmer', 'Programmer') + '</div>';
+  h += '<h2>Machine &amp; job</h2><div class="grid">' +
+    sel('config.units', 'Machine units (= MD10240 basic system)', ['METRIC', 'INCH']) +
+    sel('config.trunnion', 'Trunnion / 4th axis', S.AXES) +
+    sel('config.rotary', 'Rotary axis', S.AXES) +
+    sel('config.mode', 'Mode', ['TOMBSTONE', 'SINGLE PART']) +
+    txt('config.faces', 'Number of faces', { dis: single }) +
+    txt('config.nestsPerFace', 'Nests per face', { dis: single }) +
+    txt('config.totalNests', 'Total nests (max 32)', { dis: single }) + '</div>';
+  h += '<p class="note">Nests are numbered face by face. Nest n uses work offset G5(n+4): nest 1 = G505. ' +
+    (single ? 'Single part: one nest, G505.' : 'Total nests defaults to faces × nests per face and can be lower.') + '</p>';
+  h += '<h2>Step sequence</h2>';
+  h += '<div class="box"><div class="grid">' + chk('probeStep.enabled', 'Probe step (runs first)') +
+    txt('probeStep.step', 'Probe step #', { dis: !job.probeStep.enabled }) +
+    txt('probeStep.program', 'Probe program name (generated)', { dis: !job.probeStep.enabled, ph: 'B_PART_001' }) +
+    '</div><p class="note">The probe tool and every probing setting are on tab 2.</p></div>';
+  h += '<div class="tblwrap" style="margin-top:10px"><table class="t"><thead><tr>' +
+    '<th>Step #</th><th>Tool name</th><th>Brk tol (' + U().u + ')</th><th>Cutting program</th>' +
+    '<th class="c">Measure</th><th class="c">Always</th><th class="c">Brk check</th><th>Max brk</th>' +
+    '<th class="c">Debug M1</th><th>Life count</th><th class="c">SETPIECE</th><th></th></tr></thead><tbody>';
+  job.steps.forEach(function (s, i) {
+    var p = 'steps.' + i + '.';
+    h += '<tr>' +
+      '<td>' + cellTxt(p + 'step', { size: 60 }) + '</td>' +
+      '<td>' + cellTxt(p + 'tool', { size: 130 }) + '</td>' +
+      '<td>' + cellTxt(p + 'brkTol', { size: 70, dis: !s.brk }) + '</td>' +
+      '<td>' + cellTxt(p + 'program', { size: 170 }) + '</td>' +
+      '<td class="c">' + cellChk(p + 'meas') + '</td>' +
+      '<td class="c">' + cellChk(p + 'measAlways', { dis: !s.meas }) + '</td>' +
+      '<td class="c">' + cellChk(p + 'brk') + '</td>' +
+      '<td>' + cellTxt(p + 'maxBrk', { size: 50, dis: !s.brk }) + '</td>' +
+      '<td class="c">' + cellChk(p + 'debug') + '</td>' +
+      '<td>' + cellTxt(p + 'life', { size: 50, dis: !s.setpiece }) + '</td>' +
+      '<td class="c">' + cellChk(p + 'setpiece') + '</td>' +
+      '<td><button type="button" class="small" data-act="up" data-i="' + i + '" title="Move up">↑</button> ' +
+      '<button type="button" class="small" data-act="down" data-i="' + i + '" title="Move down">↓</button> ' +
+      '<button type="button" class="small" data-act="del" data-i="' + i + '" title="Remove step">✕</button></td></tr>';
+  });
+  h += '</tbody></table></div>';
+  h += '<div class="actions" style="margin-top:8px"><button type="button" data-act="add">+ Add step</button>' +
+    '<button type="button" data-act="names">Fill blank program names from part #</button></div>';
+  h += '<p class="note">Rows run top to bottom. Always = measure before every nest; off = smart (measure while ' +
+    '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest.</p>';
+  $('#tab-config').innerHTML = h;
+}
+
+/* ---- tab: probing ---- */
+function renderProbing() {
+  var p = job.probing, u = U(), dis = !job.probeStep.enabled;
+  var faVal = S.isBlank(p.searchDist) ? u.fa : S.num(p.searchDist);
+  var h = '';
+  if (dis) h += '<div class="msg warn">The probe step is off (tab 1). These settings are kept but not used.</div>';
+  h += '<h2>Common</h2><div class="grid">' +
+    txt('probing.tool', 'Probe tool name') +
+    txt('probing.limitClear', 'Limit clearance (' + u.u + ')', { ph: def(u.clr) }) +
+    txt('probing.feed', 'Probe feed (' + u.u + '/min)', { ph: def(u.feed) }) +
+    txt('probing.searchDist', 'Measuring path S_FA (' + u.u + ')', { ph: def(u.fa) }) +
+    txt('probing.prnum', 'Probe calibration data set (S_PRNUM)', { ph: '1' }) +
+    txt('probing.probeOnM', 'Probe-on M code (MEAS moves)', { ph: 'none' }) +
+    txt('probing.approachClr', 'Approach clearance (' + u.u + ')', { ph: 'auto' }) + '</div>';
+  h += '<p class="note">Approach clearance blank = auto: Z datum and inside features start S_FA + ' + S.compact(u.inMargin, 4) +
+    ' above Z nominal (' + S.compact(faVal + u.inMargin, 4) + '), outside features ' + S.compact(u.outClr, 4) +
+    ' above it. S_TSA (safe area) is set to S_FA.</p>';
+  h += '<h2>Probe health check <span class="pill">once per job</span></h2><div class="grid">' +
+    chk('probing.health', 'Enable') +
+    txt('probing.hX', 'Check X', { dis: !p.health }) + txt('probing.hY', 'Check Y', { dis: !p.health }) +
+    txt('probing.hStartZ', 'Start Z (above surface)', { dis: !p.health }) +
+    txt('probing.hTargetZ', 'Target Z (past surface)', { dis: !p.health }) +
+    txt('probing.hFeed', 'Feed', { dis: !p.health, ph: 'probe feed' }) + '</div>';
+  h += '<p class="note">MEAS=1 touch on a known surface in the first nest\'s G54. No trigger = retract and hold (LOOP / M0).</p>';
+  h += '<h2>Part existence check</h2><div class="grid">' +
+    chk('probing.partCheck', 'Enable') +
+    txt('probing.maxTravel', 'Max probe travel (' + u.u + ')', { dis: !p.partCheck, ph: def(u.travel) }) +
+    chk('probing.chkAlt', 'Use alternate location', { dis: !p.partCheck }) +
+    txt('probing.chkX', 'Alternate X', { dis: !p.partCheck || !p.chkAlt }) +
+    txt('probing.chkY', 'Alternate Y', { dis: !p.partCheck || !p.chkAlt }) +
+    txt('probing.chkZ', 'Alternate start Z', { dis: !p.partCheck || !p.chkAlt }) + '</div>';
+  h += '<p class="note">MEAS=1 touch from the start height down by the max travel. No trigger = no part: nest status 2, nest skipped, no alarm. ' +
+    'Default location = the Z datum location.</p>';
+  h += '<h2>Z datum <span class="pill">CYCLE978</span></h2><div class="grid">' +
+    chk('probing.skipZ', 'Skip Z probe') +
+    txt('probing.zNom', 'Z nominal (' + u.u + ')') +
+    txt('probing.zTol', 'Z tolerance (' + u.u + ')', { dis: p.skipZ, ph: def(u.zTol) }) +
+    chk('probing.zAlt', 'Use alternate location', { dis: p.skipZ && !p.partCheck }) +
+    txt('probing.zX', 'Alternate X', { dis: !p.zAlt }) + txt('probing.zY', 'Alternate Y', { dis: !p.zAlt }) +
+    txt('probing.zZ', 'Alternate start Z', { dis: !p.zAlt }) + '</div>';
+  h += '<p class="note">Default location = XY approach X/Y, start at Z nominal + clearance. Corrects the fine Z of the nest WO.</p>';
+  h += '<h2>XY datum <span class="pill">CYCLE977</span></h2><div class="grid">' +
+    sel('probing.xyMethod', 'XY method', S.XY_METHODS) +
+    txt('probing.widthX', 'Part width X', { dis: ['SPLIT EXTERIOR', 'RECT POCKET', 'RECT SPIGOT'].indexOf(p.xyMethod) < 0 }) +
+    txt('probing.widthY', 'Part width Y', { dis: ['SPLIT EXTERIOR', 'RECT POCKET', 'RECT SPIGOT'].indexOf(p.xyMethod) < 0 }) +
+    txt('probing.diameter', 'Diameter', { dis: ['BORE', 'BOSS'].indexOf(p.xyMethod) < 0 }) +
+    txt('probing.appX', 'Approach X (feature center)') + txt('probing.appY', 'Approach Y (feature center)') +
+    txt('probing.probeZ', 'Probe depth Z', { dis: p.xyMethod === 'NONE' }) +
+    txt('probing.xyTol', 'XY tolerance (' + u.u + ')', { dis: p.xyMethod === 'NONE', ph: def(u.xyTol) }) + '</div>';
+  h += '<p class="note">SPLIT EXTERIOR = 104 twice (X rib, Y rib), BOSS = 102, RECT SPIGOT = 106: outside. The probe starts above the ' +
+    'center and the cycle lowers to the probe depth itself (S_ID). BORE = 101, RECT POCKET = 105: inside. The probe feeds down to the probe depth ' +
+    'and the cycle measures sideways. The start point is the setpoint center (MC 3.13.2).</p>';
+  $('#tab-probing').innerHTML = h;
+}
+
+/* ---- tab: work offsets ---- */
+function renderWcs() {
+  var R = S.resolve(job), c = job.config;
+  var n = R.nests.length;
+  var h = '<h2>Work offsets <span class="pill">' + n + ' nest' + (n === 1 ? '' : 's') + '</span></h2>';
+  if (!n) { $('#tab-wcs').innerHTML = h + '<p class="note">Set a valid nest count on tab 1.</p>'; return; }
+  h += '<p class="note">X / Y / Z in ' + U().u + ' (machine position of the nest with the table at its face). ' +
+    'Blank X/Y/Z writes 0.000 = machine zero; you will be asked before generating. Angles in degrees; blank = the default shown.</p>';
+  h += '<div class="tblwrap"><table class="t"><thead><tr><th>Nest</th><th>Face</th><th>WO</th><th>X</th><th>Y</th><th>Z</th>' +
+    '<th>Trunnion ' + esc(c.trunnion) + '</th><th>Rotary ' + esc(c.rotary) + '</th><th>Notes</th></tr></thead><tbody>';
+  R.nests.forEach(function (nn) {
+    var p = 'wcs.' + (nn.n - 1) + '.';
+    h += '<tr><td class="ro">' + nn.n + '</td><td class="ro">' + (R.single ? '-' : nn.face) + '</td>' +
+      '<td class="ro">G5' + ('0' + nn.frame).slice(-2) + '</td>' +
+      '<td>' + cellTxt(p + 'x', { size: 90 }) + '</td><td>' + cellTxt(p + 'y', { size: 90 }) + '</td><td>' + cellTxt(p + 'z', { size: 90 }) + '</td>' +
+      '<td>' + cellTxt(p + 'trunnion', { size: 80, dis: c.trunnion === 'NONE', ph: c.trunnion === 'NONE' ? 'n/a' : '0.000' }) + '</td>' +
+      '<td>' + cellTxt(p + 'rotary', { size: 80, dis: c.rotary === 'NONE', ph: c.rotary === 'NONE' ? 'n/a' : S.fix(nn.defRot, 3) }) + '</td>' +
+      '<td>' + cellTxt(p + 'notes', { size: 160 }) + '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  $('#tab-wcs').innerHTML = h;
+}
+
+/* ---- tab: output ---- */
+function renderOutput() {
+  var h = '<div class="actions" style="margin-bottom:10px"><button type="button" data-act="preview">Preview files</button>' +
+    '<button type="button" data-act="zip" class="primary">Generate ZIP</button>' +
+    (lastFiles ? '<button type="button" data-act="dlone">Download this file</button>' : '') + '</div>';
+  if (!lastFiles) {
+    h += '<p class="note">Press Preview files to build every NC file and read it here before saving. Generate ZIP builds and downloads them all.</p>';
+    $('#tab-output').innerHTML = h; return;
+  }
+  h += '<div class="out"><ul class="flist">';
+  lastFiles.forEach(function (f, i) {
+    var parts = f.path.split('/'), nm = parts.pop(), dir = parts.join('/');
+    h += '<li data-file="' + i + '"' + (i === selFile ? ' class="sel"' : '') + '><span>' + esc(nm) +
+      (dir ? ' <span class="dir">' + esc(dir) + '/</span>' : '') + '</span><span class="dir">' + f.text.split('\n').length + ' ln</span></li>';
+  });
+  h += '</ul><div class="viewer"><div class="vh"><b>' + esc(lastFiles[selFile].path) + '</b>' +
+    '<span class="pill">' + (dirty ? 'form changed since this preview' : 'current') + '</span></div><pre>';
+  var lines = lastFiles[selFile].text.replace(/\n$/, '').split('\n');
+  h += lines.map(function (l, i) { return '<span class="ln">' + (i + 1) + '</span>' + esc(l); }).join('\n');
+  h += '</pre></div></div>';
+  $('#tab-output').innerHTML = h;
+}
+
+function renderAll() {
+  renderConfig(); renderProbing(); renderWcs(); renderOutput();
+  var part = S.ascii(job.header.part);
+  $('#jobLabel').textContent = part ? '· Job ' + part : '';
+}
+
+/* ---- messages ---- */
+function showMsgs(kind, title, items) {
+  var h = '<div class="msg ' + kind + '"><b>' + esc(title) + '</b>';
+  if (items && items.length) h += '<ul>' + items.map(function (e) {
+    return '<li>' + (e.path ? '<a href="#" data-goto="' + esc(e.path) + '">' + esc(e.msg) + '</a>' : esc(e.msg || e)) + '</li>'; }).join('') + '</ul>';
+  h += '</div>';
+  $('#msgs').innerHTML = h;
+}
+function clearMsgs() { $('#msgs').innerHTML = ''; }
+function tabOf(path) {
+  if (/^probing\./.test(path)) return 'probing';
+  if (/^wcs\./.test(path)) return 'wcs';
+  return 'config';
+}
+function showTab(name) {
+  document.querySelectorAll('nav.tabs button').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
+  document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('active', t.id === 'tab-' + name); });
+}
+function gotoPath(path) {
+  showTab(tabOf(path));
+  var el = document.querySelector('[data-path="' + path + '"]');
+  if (el) { el.focus(); el.scrollIntoView({ block: 'center' }); }
+}
+
+/* ---- validation flow ---- */
+function runValidate() {
+  var v = S.validate(job);
+  errPaths = {};
+  v.errors.forEach(function (e) { errPaths[e.path] = 1; });
+  renderAll();
+  return v;
+}
+function askBlank(list) {
+  return new Promise(function (resolve) {
+    var d = $('#dlgBlank');
+    $('#dlgBlankText').textContent = 'Nest' + (list.length > 1 ? 's ' : ' ') + list.join(', ') + ' ' +
+      (list.length > 1 ? 'have' : 'has') + ' a blank X, Y or Z work offset.';
+    function done(ans) { d.close(); $('#dlgBlankYes').onclick = null; $('#dlgBlankNo').onclick = null; resolve(ans); }
+    $('#dlgBlankYes').onclick = function () { done(true); };
+    $('#dlgBlankNo').onclick = function () { done(false); };
+    d.oncancel = function (ev) { ev.preventDefault(); done(false); };
+    d.showModal();
+  });
+}
+function build(download) {
+  var v = runValidate();
+  if (v.errors.length) {
+    showMsgs('bad', 'Cannot generate. Fix these first (' + v.errors.length + '):', v.errors);
+    return Promise.resolve(null);
+  }
+  var gate = v.blankNests.length ? askBlank(v.blankNests) : Promise.resolve(true);
+  return gate.then(function (yes) {
+    if (!yes) { showMsgs('warn', 'Generation stopped. Fill in the blank work offsets on tab 3, then generate again.'); return null; }
+    var g = S.generate(job);
+    lastFiles = g.files; selFile = 0; dirty = false;
+    if (download) {
+      var z = S.makeZip(g.files);
+      var name = (S.ascii(job.header.part).replace(/[^A-Za-z0-9_-]+/g, '_') || 'SINUMERIK') + '_NC_' + g.R.date + '.zip';
+      saveBlob(new Blob([z], { type: 'application/zip' }), name);
+      showMsgs('ok', 'Generated ' + g.files.length + ' files into ' + name + '.' + (v.blankNests.length ? ' Blank offsets written as 0 for nest(s) ' + v.blankNests.join(', ') + '.' : ''));
+    } else {
+      showMsgs('ok', 'Preview built: ' + g.files.length + ' files. Nothing saved yet.');
+    }
+    showTab('output'); renderOutput();
+    return g;
+  });
+}
+function saveBlob(blob, name) {
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
+/* ---- edits ---- */
+var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist)$|steps\.\d+\.(brk|meas|setpiece)$)/;
+function onEdit(e) {
+  var el = e.target, p = el.dataset && el.dataset.path;
+  if (!p) return;
+  var v = el.type === 'checkbox' ? el.checked : el.value;
+  setPath(job, p, v);
+  dirty = true;
+  if (errPaths[p] && e.type === 'input') { delete errPaths[p]; el.classList.remove('err'); }
+  if (e.type !== 'change') return;
+  if (p === 'config.faces' || p === 'config.nestsPerFace') {
+    var f = S.num(job.config.faces), n = S.num(job.config.nestsPerFace);
+    if (S.isInt(job.config.faces) && S.isInt(job.config.nestsPerFace) && f > 0 && n > 0)
+      job.config.totalNests = String(Math.min(f * n, S.MAX_NESTS));
+  }
+  if (p === 'config.mode' && job.config.mode === 'SINGLE PART') { /* kept, not used */ }
+  if (STRUCT.test(p) || p === 'header.part') {
+    var a = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.path : null;
+    renderAll();
+    if (a) { var b = document.querySelector('[data-path="' + a + '"]'); if (b) b.focus(); }
+  }
+}
+function onClick(e) {
+  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto]');
+  if (!t) return;
+  if (t.dataset.tab) { showTab(t.dataset.tab); return; }
+  if (t.dataset.goto) { e.preventDefault(); gotoPath(t.dataset.goto); return; }
+  if (t.dataset.file !== undefined) { selFile = Number(t.dataset.file); renderOutput(); return; }
+  var act = t.dataset.act, i = Number(t.dataset.i);
+  if (act === 'add') {
+    var last = job.steps.length ? S.num(job.steps[job.steps.length - 1].step) : NaN;
+    var next = isNaN(last) ? 10 : Math.floor(last / 10) * 10 + 10;
+    job.steps.push(S.blankStep(next)); dirty = true; renderAll();
+  } else if (act === 'del') {
+    if (job.steps.length <= 1) { showMsgs('warn', 'A job needs at least one cutting step.'); return; }
+    job.steps.splice(i, 1); dirty = true; errPaths = {}; renderAll();
+  } else if (act === 'up' && i > 0) {
+    var a = job.steps[i - 1]; job.steps[i - 1] = job.steps[i]; job.steps[i] = a; dirty = true; errPaths = {}; renderAll();
+  } else if (act === 'down' && i < job.steps.length - 1) {
+    var b = job.steps[i + 1]; job.steps[i + 1] = job.steps[i]; job.steps[i] = b; dirty = true; errPaths = {}; renderAll();
+  } else if (act === 'names') {
+    var part = S.ascii(job.header.part).replace(/[^A-Za-z0-9_]/g, '_');
+    if (!part) { showMsgs('warn', 'Enter the part number first (Header).'); return; }
+    var all = job.steps.map(function (s) { return S.num(s.step); });
+    if (job.probeStep.enabled) all.push(S.num(job.probeStep.step));
+    var w = Math.max.apply(null, all.filter(function (x) { return !isNaN(x); }).concat([0])) >= 1000 ? 4 : 3;
+    function nm(st) { return 'B_' + part + '_' + ('0000' + st).slice(-w); }
+    if (job.probeStep.enabled && S.isBlank(job.probeStep.program) && S.isInt(job.probeStep.step)) job.probeStep.program = nm(S.num(job.probeStep.step));
+    job.steps.forEach(function (s) { if (S.isBlank(s.program) && S.isInt(s.step)) s.program = nm(S.num(s.step)); });
+    dirty = true; renderAll();
+  } else if (act === 'preview') { build(false); }
+  else if (act === 'zip') { build(true); }
+  else if (act === 'dlone' && lastFiles) {
+    var f = lastFiles[selFile];
+    saveBlob(new Blob([f.text], { type: 'text/plain' }), f.path.split('/').pop());
+  }
+}
+
+/* ---- save / load ---- */
+function saveJob() {
+  var name = (S.ascii(job.header.part).replace(/[^A-Za-z0-9_-]+/g, '_') || 'JOB') + '_job.json';
+  saveBlob(new Blob([JSON.stringify(job, null, 2) + '\n'], { type: 'application/json' }), name);
+  dirty = false;
+  showMsgs('ok', 'Saved ' + name + '. Load it with Load job… to reopen this job.');
+}
+function loadJob(file) {
+  var r = new FileReader();
+  r.onload = function () {
+    try {
+      var obj = JSON.parse(String(r.result));
+      if (!obj || obj.format !== 'SINUMERIK_ONE_GENERATOR_JOB') throw new Error('not a job file saved by this generator');
+      job = S.normalizeJob(obj); errPaths = {}; lastFiles = null; dirty = false;
+      renderAll(); showTab('config');
+      showMsgs('ok', 'Loaded ' + file.name + '.');
+    } catch (ex) { showMsgs('bad', 'Could not load ' + file.name + ': ' + ex.message); }
+  };
+  r.readAsText(file);
+}
+
+document.addEventListener('input', onEdit);
+document.addEventListener('change', onEdit);
+document.addEventListener('click', onClick);
+$('#btnValidate').addEventListener('click', function () {
+  var v = runValidate();
+  if (v.errors.length) showMsgs('bad', 'Validation: ' + v.errors.length + ' problem(s).', v.errors);
+  else if (v.blankNests.length) showMsgs('warn', 'Valid, but nest(s) ' + v.blankNests.join(', ') + ' have blank X/Y/Z (written as 0.000 = machine zero). You will be asked when you generate.');
+  else showMsgs('ok', 'Validation passed.');
+});
+$('#btnGenerate').addEventListener('click', function () { build(true); });
+$('#btnSave').addEventListener('click', saveJob);
+$('#btnLoad').addEventListener('click', function () { $('#fileLoad').value = ''; $('#fileLoad').click(); });
+$('#fileLoad').addEventListener('change', function () { if (this.files && this.files[0]) loadJob(this.files[0]); });
+window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+window.SNG_UI = { getJob: function () { return job; }, setJob: function (j) { job = S.normalizeJob(j); errPaths = {}; lastFiles = null; renderAll(); } };
+renderAll();
+})();
+</script>
+</body>
+</html>
