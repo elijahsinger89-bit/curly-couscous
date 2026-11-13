@@ -124,7 +124,17 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.1.0';
+var GEN_VERSION = '1.2.0';
+/* Framework revision of the fixed files installed once per machine
+   (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
+   RULE: any change to the code or text of a fixed file means bump FW_REV
+   and add a row to FW_HISTORY (tests/framework_revNN.sha256 enforces it). */
+var FW_REV = '01';
+var FW_HISTORY = [
+  ['00', '2026-11-11', ['EXCEL/VBA PACKAGE']],
+  ['01', '2026-11-12', ['REBUILT AND CHECKED AGAINST THE SINUMERIK ONE',
+                        'MANUALS (NC PROGRAMMING, MEASURING CYCLES 07/2025)']]
+];
 var MAX_NESTS = 32;
 var AXES = ['NONE', 'A', 'B', 'C'];
 var XY_METHODS = ['SPLIT EXTERIOR', 'BORE', 'BOSS', 'RECT POCKET', 'RECT SPIGOT', 'NONE'];
@@ -604,6 +614,30 @@ function hdr(lines, R, prog, func, extra) {
   lines.push('; CONTROL      : SINUMERIK ONE');
   (extra || []).forEach(function (e) { lines.push(e); });
   lines.push('; GENERATED    : ' + R.date + ' BY SINUMERIK_GENERATOR.HTML V' + GEN_VERSION);
+  lines.push(fwNeeds());
+}
+/* job files name the framework revision they were generated for */
+function fwNeeds() { return '; FRAMEWORK    : NEEDS NEST FRAMEWORK REV ' + FW_REV; }
+/* revision comment block for the fixed files (no dates of generation, no
+   generator version, so every job produces byte-identical fixed files) */
+function fwBlock(R, withUnits) {
+  var b = [';-------------------------------------------',
+           '; FRAMEWORK    : SINUMERIK ONE NEST FRAMEWORK REV ' + FW_REV];
+  if (withUnits) b.push('; UNITS        : ' + R.units + ' - RETRACT ' + compact(R.clr, 4) + ' BELOW THE Z SOFTWARE LIMIT');
+  b.push(';  REV  DATE        DESCRIPTION');
+  FW_HISTORY.forEach(function (h) {
+    h[2].forEach(function (d, i) {
+      b.push(i === 0 ? ';  ' + h[0] + '   ' + h[1] + '  ' + d : ';                   ' + d);
+    });
+  });
+  b.push(';-------------------------------------------');
+  return b;
+}
+/* insert the block after line 1 (the PROC line where there is one) */
+function fw(txt, R, withUnits) {
+  var lines = txt.split('\n');
+  Array.prototype.splice.apply(lines, [1, 0].concat(fwBlock(R, withUnits)));
+  return lines.join('\n');
 }
 function modeDesc(R) {
   return R.single ? 'SINGLE PART: 1 NEST (G505)'
@@ -1430,6 +1464,7 @@ function fMain(R) {
   o.push('; KINEMATICS   : ' + kinDesc(R));
   o.push('; UNITS        : ' + U.label + ' - MUST MATCH THE BASIC SYSTEM MD10240');
   o.push('; GENERATED    : SINUMERIK_GENERATOR.HTML V' + GEN_VERSION);
+  o.push(fwNeeds());
   rev(o, R);
   o.push(';');
   o.push(';-------------------');
@@ -1740,6 +1775,15 @@ function fReadme(R) {
   r.push('  nest. For a new pallet set GV_STEP=0 first.');
   r.push('  Max breaks in a step: the machine parks and holds until reset.');
   r.push('');
+  r.push('FRAMEWORK REVISION (comment only, nothing is checked on the control)');
+  r.push('  The fixed files - the L_ cycles, C_P1_HOME, C_P1_LOAD_WO and UGUD.DEF -');
+  r.push('  are installed once per machine and carry "NEST FRAMEWORK REV ' + FW_REV + '" with');
+  r.push('  a revision table near the top. Job files (A_P1, C_P1_WO, C_P1_NESTS,');
+  r.push('  the probe program) say "NEEDS NEST FRAMEWORK REV ' + FW_REV + '". If the machine');
+  r.push('  shows a lower revision, install the fixed files from this zip. The');
+  r.push('  revision only goes up when an installed file changes; every job');
+  r.push('  produces identical fixed files for the same units.');
+  r.push('');
   r.push('PROBING');
   r.push('  Health check and part check use MEAS=1 touch moves and $AC_MEA[1].');
   r.push('  No trigger on the part check = nest status 2, no alarm. CYCLE978 is');
@@ -1774,21 +1818,21 @@ function generate(job, opts) {
   add('WKS/A_P1.MPF', fMain(R));
   add('WKS/C_P1_WO.SPF', fWO(R));
   add('WKS/C_P1_NESTS.SPF', fNests(R));
-  add('WKS/C_P1_LOAD_WO.SPF', fLoadWO(R));
-  add('WKS/C_P1_HOME.SPF', fHome(R));
+  add('WKS/C_P1_LOAD_WO.SPF', fw(fLoadWO(R), R, false));
+  add('WKS/C_P1_HOME.SPF', fw(fHome(R), R, true));
   if (R.probeStep.enabled) add('WKS/' + R.probeStep.program + '.SPF', fProbe(R));
   add('WKS/B_TEMPLATE.SPF', fBTemplate(R));
-  add('CUS/L_RUN_NESTS.SPF', fRunNests(R));
-  add('CUS/L_TOOL_LOAD.SPF', fToolLoad(R));
-  add('CUS/L_TOOL_MEAS.SPF', fToolMeas(R));
-  add('CUS/L_TOOL_BRK.SPF', fToolBrk(R));
-  add('CUS/L_SKIP_CHECK.SPF', fSkipCheck(R));
-  add('CUS/L_PAL_CHECK.SPF', fPalCheck(R));
-  add('CUS/L_STEP_LOG.SPF', fStepLog(R));
-  add('CUS/L_DATA_LOG.SPF', fDataLog(R));
-  add('CUS/L_STEP_ERROR.SPF', fStepError(R));
-  add('CUS/L_NEST_ERROR.SPF', fNestError(R));
-  add('DEF/UGUD.DEF', fUGUD(R));
+  add('CUS/L_RUN_NESTS.SPF', fw(fRunNests(R), R, false));
+  add('CUS/L_TOOL_LOAD.SPF', fw(fToolLoad(R), R, true));
+  add('CUS/L_TOOL_MEAS.SPF', fw(fToolMeas(R), R, true));
+  add('CUS/L_TOOL_BRK.SPF', fw(fToolBrk(R), R, true));
+  add('CUS/L_SKIP_CHECK.SPF', fw(fSkipCheck(R), R, false));
+  add('CUS/L_PAL_CHECK.SPF', fw(fPalCheck(R), R, false));
+  add('CUS/L_STEP_LOG.SPF', fw(fStepLog(R), R, false));
+  add('CUS/L_DATA_LOG.SPF', fw(fDataLog(R), R, false));
+  add('CUS/L_STEP_ERROR.SPF', fw(fStepError(R), R, false));
+  add('CUS/L_NEST_ERROR.SPF', fw(fNestError(R), R, false));
+  add('DEF/UGUD.DEF', fw(fUGUD(R), R, false));
   return { files: files, R: R };
 }
 
@@ -1841,7 +1885,7 @@ function makeZip(files, when) {
 }
 
 G.SNG = {
-  GEN_VERSION: GEN_VERSION, MAX_NESTS: MAX_NESTS, AXES: AXES, XY_METHODS: XY_METHODS, UNIT: UNIT,
+  GEN_VERSION: GEN_VERSION, FW_REV: FW_REV, MAX_NESTS: MAX_NESTS, AXES: AXES, XY_METHODS: XY_METHODS, UNIT: UNIT,
   OUTSIDE: OUTSIDE, INSIDE: INSIDE,
   defaultJob: defaultJob, normalizeJob: normalizeJob, blankStep: blankStep, validate: validate,
   resolve: resolve, generate: generate, makeZip: makeZip, crc32: crc32, fix: fix, compact: compact,

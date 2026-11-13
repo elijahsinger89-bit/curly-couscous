@@ -26,6 +26,7 @@ function fail(msg) { failures++; console.log('FAIL ' + msg); }
 
 const fixtures = fs.readdirSync(path.join(here, 'fixtures')).filter(f => f.endsWith('.json')).sort();
 const expectBlank = { f4_32nests: [17] };
+const gens = [];
 for (const f of fixtures) {
   const id = f.replace(/\.json$/, '');
   const job = S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', f), 'utf8')));
@@ -34,6 +35,7 @@ for (const f of fixtures) {
   const eb = JSON.stringify(expectBlank[id] || []);
   if (JSON.stringify(v.blankNests) !== eb) fail(id + ' blank nests ' + JSON.stringify(v.blankNests) + ' expected ' + eb);
   const g = S.generate(job, { date: '2026-11-12' });
+  gens.push({ id, units: job.config.units, files: g.files });
   const dir = path.join(out, id);
   for (const file of g.files) {
     const p = path.join(dir, file.path);
@@ -43,6 +45,48 @@ for (const f of fixtures) {
   fs.writeFileSync(path.join(out, id + '.zip'), Buffer.from(S.makeZip(g.files, new Date(2026, 10, 12, 9, 30, 0))));
   fs.writeFileSync(path.join(out, id + '.manifest.json'), JSON.stringify(g.files.map(x => x.path)));
   console.log('ok   ' + id + ': ' + g.files.length + ' files');
+}
+
+/* ---- framework revision (comment only) ---- */
+const crypto = require('crypto');
+const isFixed = p => /^CUS\/L_|^WKS\/C_P1_(HOME|LOAD_WO)\.SPF$|^DEF\/UGUD\.DEF$/.test(p);
+const isJob = p => /^WKS\//.test(p) && !isFixed(p) && p !== 'WKS/B_TEMPLATE.SPF';
+const ref = {};          /* units -> {path: text} from the first fixture of those units */
+let fixedOk = true, jobOk = true, sameOk = true;
+for (const g of gens) {
+  const fixed = g.files.filter(f => isFixed(f.path));
+  if (fixed.length !== 13) { fail(g.id + ': expected 13 fixed files, got ' + fixed.length); }
+  for (const f of fixed) {
+    if (!f.text.includes('; FRAMEWORK    : SINUMERIK ONE NEST FRAMEWORK REV ' + S.FW_REV + '\n')) { fixedOk = false; fail(g.id + ' ' + f.path + ' lacks REV ' + S.FW_REV); }
+    if (/^PROC /.test(f.text) === false && /^L_(RUN_NESTS|TOOL|SKIP|PAL|STEP_LOG|DATA)/.test(f.path.slice(4))) { fixedOk = false; fail(g.id + ' ' + f.path + ' PROC is not line 1'); }
+    if (/GENERATED|2026-11-12  ES|SINUMERIK_GENERATOR/.test(f.text)) { fixedOk = false; fail(g.id + ' ' + f.path + ' carries a generation stamp'); }
+    ref[g.units] = ref[g.units] || {};
+    if (!(f.path in ref[g.units])) ref[g.units][f.path] = f.text;
+    else if (ref[g.units][f.path] !== f.text) { sameOk = false; fail(g.id + ' ' + f.path + ' differs from another ' + g.units + ' job'); }
+  }
+  for (const f of g.files.filter(x => isJob(x.path))) {
+    if (!f.text.includes('; FRAMEWORK    : NEEDS NEST FRAMEWORK REV ' + S.FW_REV + '\n')) { jobOk = false; fail(g.id + ' ' + f.path + ' lacks NEEDS REV'); }
+  }
+}
+if (fixedOk) console.log('ok   every fixed file carries REV ' + S.FW_REV + ' and no generation stamp');
+if (jobOk) console.log('ok   every job file says NEEDS NEST FRAMEWORK REV ' + S.FW_REV);
+if (sameOk) console.log('ok   fixed files byte-identical across jobs (' + Object.keys(ref).join(', ') + ')');
+/* hash guard: fixed-file content may only change together with FW_REV */
+const hashFile = path.join(here, 'framework_rev' + S.FW_REV + '.sha256');
+const hashLines = [];
+for (const u of Object.keys(ref).sort()) for (const p of Object.keys(ref[u]).sort())
+  hashLines.push(crypto.createHash('sha256').update(ref[u][p]).digest('hex') + '  ' + u + '/' + p);
+if (process.argv.includes('--write-hashes')) {
+  fs.writeFileSync(hashFile, hashLines.join('\n') + '\n');
+  console.log('wrote ' + hashFile);
+} else if (!fs.existsSync(hashFile)) {
+  fail('no ' + path.basename(hashFile) + ': new framework revision? run with --write-hashes once');
+} else {
+  const want = fs.readFileSync(hashFile, 'utf8').trim().split('\n');
+  const diff = hashLines.filter(l => !want.includes(l)).map(l => l.split('  ')[1]);
+  if (diff.length || want.length !== hashLines.length)
+    fail('framework changed without a revision bump (' + diff.join(', ') + '): bump FW_REV, add an FW_HISTORY row, run --write-hashes');
+  else console.log('ok   fixed files match ' + path.basename(hashFile) + ' (' + hashLines.length + ' hashes)');
 }
 
 /* ---- validator must reject broken jobs ---- */

@@ -58,6 +58,16 @@ MACHINE DATA
     generator. G70/G71 convert only geometry; work offsets, feeds and the
     $MA_POS_LIMIT_PLUS retract are in the basic system (NC PM 3.8.4.5).
 
+FRAMEWORK REVISION (comment only, nothing is checked on the control)
+  The fixed files - the 10 L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF -
+  are installed once per machine. Each carries "NEST FRAMEWORK REV 01" and
+  a revision table near the top (REV 00 = the Excel/VBA package). Job
+  files (A_P1, C_P1_WO, C_P1_NESTS, probe program) say "NEEDS NEST
+  FRAMEWORK REV 01". If the machine shows a lower revision, install the
+  fixed files from a new zip. The revision only goes up when an installed
+  file changes; every job produces identical fixed files for the same
+  units (metric and inch differ only in the retract clearance).
+
 B_ PROGRAMS
   B_TEMPLATE.SPF is a CAM stub with no motion. The real cutting B_ programs
   come from CAM: one nest per call, run in G54, no T/M6, orient per face
