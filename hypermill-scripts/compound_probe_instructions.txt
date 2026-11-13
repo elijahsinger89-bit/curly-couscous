@@ -1,4 +1,4 @@
-COMPOUND PROBE (read-only)
+COMPOUND PROBE v2 (read-only)
 
 Install
   Copy copy_to_python_folder\compound_probe into
