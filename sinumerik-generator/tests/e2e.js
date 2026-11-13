@@ -225,6 +225,9 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     const m1 = await p2.textContent('#msgs');
     check(m1.includes('Imported the 4 B programs') && m1.includes('1 step has break check on and no tolerance') &&
           m1.includes('Left out in hyperMILL: B_00948602_025_111_HF5'), 'import: message with blanks and left-out compound jobs');
+    check(await p2.$eval('[data-path="probeStep.program"]', e => e.value) === 'B_00948602_025_001_HF5' &&
+          !(await p2.$eval('[data-path="probeStep.program"]', e => e.classList.contains('err'))), 'import: probe program name filled, not red');
+    check(!m1.includes('probeStep') && !m1.includes('Probe step:'), 'import: no probe step error in the message');
     await p2.fill('[data-path="steps.0.tool"]', 'EDITED');
     await p2.dispatchEvent('[data-path="steps.0.tool"]', 'change');
     await importIt();
@@ -238,6 +241,36 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     await p2.click('#dlg button[data-choice="overwrite"]');
     await p2.waitForSelector('.msg');
     check((await vals('tool'))[0] === '905083900', 'import overwrite: rows replaced');
+    check(await p2.$eval('[data-path="probeStep.program"]', e => e.value) === 'B_00948602_025_001_HF5', 'import overwrite: probe program name kept generated');
+
+    /* column header boxes: all on / all off, per-row boxes still work */
+    const ticks = f => p2.$$eval('[data-path$=".' + f + '"]', l => l.filter(i => /^steps\./.test(i.dataset.path)).map(i => i.checked));
+    const dis = f => p2.$$eval('[data-path$=".' + f + '"]', l => l.filter(i => /^steps\./.test(i.dataset.path)).map(i => i.disabled));
+    const head = k => p2.$eval('[data-col="' + k + '"]', e => (e.disabled ? 'disabled ' : '') + (e.indeterminate ? 'dash' : e.checked ? 'ticked' : 'empty'));
+    check(await head('meas') === 'ticked' && await head('measAlways') === 'empty', 'header boxes: Measure ticked (all on), Always empty (all off)');
+    await p2.click('[data-col="meas"]');
+    check(JSON.stringify(await ticks('meas')) === '[false,false,false,false]' && await head('meas') === 'empty' &&
+          await head('measAlways') === 'disabled empty', 'Measure header: all off, Always header disabled');
+    await p2.click('[data-col="meas"]');
+    check(JSON.stringify(await ticks('meas')) === '[true,true,true,true]' && await head('meas') === 'ticked', 'Measure header: all on again');
+    await p2.click('[data-path="steps.1.meas"]');
+    check(JSON.stringify(await ticks('meas')) === '[true,false,true,true]' && await head('meas') === 'dash', 'one row unticked: row box works, header shows a dash');
+    await p2.click('[data-col="measAlways"]');
+    check(JSON.stringify(await ticks('measAlways')) === '[true,false,true,true]' && await head('measAlways') === 'ticked',
+          'Always header: on for the rows with Measure on only');
+    await p2.click('[data-col="meas"]');
+    check(JSON.stringify(await ticks('meas')) === '[true,true,true,true]', 'dash clicked: every row on');
+    await p2.click('[data-col="brk"]');
+    check(JSON.stringify(await ticks('brk')) === '[false,false,false,false]' &&
+          JSON.stringify(await dis('brkTol')) === '[true,true,true,true]' && JSON.stringify(await dis('maxBrk')) === '[true,true,true,true]',
+          'Brk check header off: tolerance and max brk disabled on every row');
+    await p2.click('[data-col="brk"]');
+    await p2.click('[data-col="debug"]');
+    await p2.click('[data-col="setpiece"]');
+    check(JSON.stringify(await ticks('brk')) === '[true,true,true,true]' && JSON.stringify(await ticks('debug')) === '[true,true,true,true]' &&
+          JSON.stringify(await ticks('setpiece')) === '[false,false,false,false]' && JSON.stringify(await dis('life')) === '[true,true,true,true]',
+          'Brk check all on, Debug M1 all on, SETPIECE all off (life disabled)');
+    await p2.screenshot({ path: path.join(out, 'shot_column_boxes.png'), clip: { x: 0, y: 0, width: 1360, height: 900 } });
     await p2.selectOption('[data-path="config.units"]', 'METRIC');
     await importIt();
     await p2.waitForSelector('#dlg[open]');

@@ -56,6 +56,7 @@ table.t th, table.t td { border-bottom: 1px solid var(--line); padding: 4px 5px;
 table.t th { color: var(--muted); font-weight: 600; font-size: 12px; }
 table.t input[type=text] { width: 100%; min-width: 64px; }
 table.t td.c, table.t th.c { text-align: center; }
+table.t th input.colall { margin: 3px 0 0; }
 table.t td.ro { color: var(--muted); font-variant-numeric: tabular-nums; }
 #msgs { margin: 10px 16px 0; }
 .msg { border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; border: 1px solid; }
@@ -126,7 +127,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.3.0';
+var GEN_VERSION = '1.3.1';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -393,8 +394,11 @@ function readBList(data) {
   return R;
 }
 /* mode 'overwrite': the list's rows replace the table. 'keep': current rows stay, list rows whose step
-   number is missing are added, rows sorted by step number (same as the step builder).               */
+   number is missing are added, rows sorted by step number (same as the step builder).
+   Probe program name: same rule as the step builder. Overwrite regenerates it from the header,
+   keep fills it only when blank. Probe step off: untouched.                                        */
 function applyBList(job, list, mode) {
+  var ps = job.probeStep;
   var fresh = list.steps.map(cloneStep), steps, added;
   if (mode === 'keep') {
     steps = job.steps.map(cloneStep);
@@ -410,7 +414,35 @@ function applyBList(job, list, mode) {
   } else {
     steps = fresh; added = fresh.length;
   }
-  return { steps: steps, added: added };
+  var R = { steps: steps, added: added, probeProgram: ps.program, unnamed: [], nameError: '', width: 3, maxMachine: 0 };
+  var w = nameWidth(allStepNos(steps, ps));
+  R.width = w; R.maxMachine = maxMachineLen(job, w);
+  if (ps.enabled && isInt(ps.step) && (mode !== 'keep' || isBlank(ps.program))) {
+    R.nameError = nameInputsError(job);
+    var pn = R.nameError ? '' : progName(job, num(ps.step), w);
+    R.probeProgram = pn;
+    if (!pn && !R.nameError) R.unnamed.push(num(ps.step));
+  }
+  return R;
+}
+
+/* ---------------- step table: tick a checkbox column all on / all off ----------------
+   Always (measAlways) only counts rows with Measure on: it is disabled on the others.  */
+var COL_KEYS = ['meas', 'measAlways', 'brk', 'debug', 'setpiece'];
+function colRows(steps, key) {
+  return key === 'measAlways' ? steps.filter(function (s) { return !!s.meas; }) : steps;
+}
+function colState(steps, key) {
+  var rows = colRows(steps, key);
+  if (!rows.length) return 'na';
+  var on = rows.filter(function (s) { return !!s[key]; }).length;
+  return on === rows.length ? 'all' : on ? 'some' : 'none';
+}
+function setColumn(steps, key, on) {
+  if (COL_KEYS.indexOf(key) < 0) return 0;
+  var n = 0;
+  colRows(steps, key).forEach(function (s) { if (!!s[key] !== !!on) { s[key] = !!on; n++; } });
+  return n;
 }
 
 /* ---------------- resolve the job into numbers ---------------- */
@@ -1946,7 +1978,8 @@ G.SNG = {
   isBlank: isBlank, num: num, isNum: isNum, isInt: isInt, today: today, ascii: ascii,
   progName: progName, rawName: rawName, nameInputsError: nameInputsError, buildSteps: buildSteps,
   fillNames: fillNames, hasStepData: hasStepData, nameWidth: nameWidth, allStepNos: allStepNos,
-  readBList: readBList, applyBList: applyBList, BLIST_FORMAT: BLIST_FORMAT
+  readBList: readBList, applyBList: applyBList, BLIST_FORMAT: BLIST_FORMAT,
+  COL_KEYS: COL_KEYS, colState: colState, setColumn: setColumn
 };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -2036,8 +2069,8 @@ function renderConfig() {
     '<p class="note" id="builderNote">' + builderNote() + '</p></div>';
   h += '<div class="tblwrap" style="margin-top:10px"><table class="t"><thead><tr>' +
     '<th>Step #</th><th>Tool name</th><th>Brk tol (' + U().u + ')</th><th>Cutting program</th>' +
-    '<th class="c">Measure</th><th class="c">Always</th><th class="c">Brk check</th><th>Max brk</th>' +
-    '<th class="c">Debug M1</th><th>Life count</th><th class="c">SETPIECE</th><th></th></tr></thead><tbody>';
+    colHead('meas', 'Measure') + colHead('measAlways', 'Always') + colHead('brk', 'Brk check') + '<th>Max brk</th>' +
+    colHead('debug', 'Debug M1') + '<th>Life count</th>' + colHead('setpiece', 'SETPIECE') + '<th></th></tr></thead><tbody>';
   job.steps.forEach(function (s, i) {
     var p = 'steps.' + i + '.';
     h += '<tr>' +
@@ -2060,8 +2093,19 @@ function renderConfig() {
   h += '<div class="actions" style="margin-top:8px"><button type="button" data-act="add">+ Add step</button>' +
     '<button type="button" data-act="names">Fill blank program names</button></div>';
   h += '<p class="note">Rows run top to bottom. Always = measure before every nest; off = smart (measure while ' +
-    '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest.</p>';
+    '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest. ' +
+    'The box under a column name turns that column on or off for every row (dash = mixed).</p>';
   $('#tab-config').innerHTML = h;
+  document.querySelectorAll('#tab-config [data-col]').forEach(function (el) {
+    el.indeterminate = S.colState(job.steps, el.dataset.col) === 'some';
+  });
+}
+/* header box of a checkbox column: ticked = all rows on, empty = all off, dash = mixed */
+function colHead(key, label) {
+  var st = S.colState(job.steps, key);
+  return '<th class="c">' + esc(label) + '<br><input type="checkbox" class="colall" data-col="' + key + '"' +
+    (st === 'all' ? ' checked' : '') + (st === 'na' ? ' disabled' : '') +
+    ' title="All rows on / off' + (key === 'measAlways' ? ' (rows with Measure on)' : '') + '"></th>';
 }
 function builderNote() {
   var base = 'One row per step from first to last by the increment. Program names are B_[part]_[step]_[machine] from the Header ' +
@@ -2316,7 +2360,15 @@ function saveBlob(blob, name) {
 /* ---- edits ---- */
 var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist)$|steps\.\d+\.(brk|meas|setpiece)$)/;
 function onEdit(e) {
-  var el = e.target, p = el.dataset && el.dataset.path;
+  var el = e.target;
+  if (el.dataset && el.dataset.col) {
+    if (e.type !== 'change') return;
+    S.setColumn(job.steps, el.dataset.col, el.checked);
+    dirty = true;
+    scheduleRender();
+    return;
+  }
+  var p = el.dataset && el.dataset.path;
   if (!p) return;
   var v = el.type === 'checkbox' ? el.checked : el.value;
   setPath(job, p, v);
@@ -2439,7 +2491,8 @@ function runImport(fname, L) {
       var withData = job.steps.filter(function (s) { return !S.isBlank(s.tool) || !S.isBlank(s.program) || !S.isBlank(s.brkTol); }).length;
       var rows = S.hasStepData(job) ? askChoice('Step table already has data', [
         'The table has ' + job.steps.length + ' row' + (job.steps.length === 1 ? '' : 's') + ', ' + withData + ' with a tool, program or tolerance filled in.',
-        'Overwrite all: replace every row with the ' + L.steps.length + ' B programs of the list.',
+        'Overwrite all: replace every row with the ' + L.steps.length + ' B programs of the list' +
+          (job.probeStep.enabled ? ', and regenerate the probe program name.' : '.'),
         'Keep existing: leave every current row as it is, add the list\'s steps that are missing, and sort by step number.'
       ], [{ label: 'Overwrite all', value: 'overwrite' }, { label: 'Keep existing, add missing', value: 'keep', primary: true },
           { label: 'Cancel', value: 'cancel' }], 'cancel') : Promise.resolve('overwrite');
@@ -2451,7 +2504,7 @@ function runImport(fname, L) {
           if (L.machine && (!hm || differs)) job.header.machine = L.machine;
         }
         var ap = S.applyBList(job, L, mode);
-        job.steps = ap.steps;
+        job.steps = ap.steps; job.probeStep.program = ap.probeProgram;
         dirty = true; lastFiles = null;
         var v = runValidate();
         showTab('config');
@@ -2459,7 +2512,8 @@ function runImport(fname, L) {
         var msg = (mode === 'keep' ? 'Kept the existing rows and added ' + ap.added + ' of the ' : 'Imported the ') +
           L.steps.length + ' B programs from ' + fname + ' (part ' + (L.part || '-') + ', machine ' + (L.machine || '-') + ', ' + L.units + ').' +
           (u === 'switch' ? ' Page switched to ' + L.units + '.' : '') +
-          (blank ? ' ' + blank + ' step' + (blank === 1 ? ' has' : 's have') + ' break check on and no tolerance: fill them (red).' : '');
+          (blank ? ' ' + blank + ' step' + (blank === 1 ? ' has' : 's have') + ' break check on and no tolerance: fill them (red).' : '') +
+          (ap.nameError ? ' Probe program name not generated: ' + ap.nameError : namesMsg(ap));
         var items = L.refused.map(function (x) { return { msg: 'Left out in hyperMILL: ' + x.name + ' (' + x.reason + ')' }; })
           .concat(v.errors);
         showMsgs(v.errors.length || L.refused.length ? 'warn' : 'ok', msg, items);

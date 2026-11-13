@@ -254,6 +254,58 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   for (const file of g.files) { const p = path.join(dir, file.path); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, file.text); }
   const a = g.files.find(f => f.path === 'WKS/A_P1.MPF').text;
   eq(a.includes('L_RUN_NESTS("905083900",0.0040,4,"B_00948602_025_010_HF5",1,0,1,2,0,1,1)'), true, 'A_P1 calls L_RUN_NESTS with the imported tool and program');
+
+  /* probe program name on import (1.3.1) */
+  const fresh = () => { const k = S.defaultJob(); k.header.part = rd.list.part; k.header.machine = rd.list.machine; return k; };
+  let k = fresh();
+  let r = S.applyBList(k, rd.list, 'overwrite');
+  eq([r.probeProgram, r.unnamed, r.nameError], ['B_00948602_025_001_HF5', [], ''], 'import overwrite on a fresh page: probe name generated');
+  k = fresh(); k.probeStep.program = 'B_OLDPART_001_HF5';
+  eq(S.applyBList(k, rd.list, 'overwrite').probeProgram, 'B_00948602_025_001_HF5', 'import overwrite: probe name regenerated');
+  k = fresh(); k.probeStep.program = 'MY_PROBE';
+  eq(S.applyBList(k, rd.list, 'keep').probeProgram, 'MY_PROBE', 'import keep: probe name typed by hand is kept');
+  k = fresh();
+  eq(S.applyBList(k, rd.list, 'keep').probeProgram, 'B_00948602_025_001_HF5', 'import keep: blank probe name filled');
+  k = fresh();
+  const L4 = JSON.parse(JSON.stringify(rd.list)); L4.steps[3].step = '1010'; L4.steps[3].program = 'B_00948602_025_1010_HF5';
+  eq(S.applyBList(k, L4, 'overwrite').probeProgram, 'B_00948602_025_0001_HF5', 'import with a step >= 1000: probe name 4 digits');
+  k = fresh(); k.probeStep.enabled = false;
+  r = S.applyBList(k, rd.list, 'overwrite');
+  eq([r.probeProgram, r.unnamed], ['', []], 'probe step off: probe name untouched');
+  k = fresh(); k.header.part = '';
+  r = S.applyBList(k, rd.list, 'overwrite');
+  eq([r.probeProgram, r.nameError.includes('part number')], ['', true], 'no part number: probe name blank, reason given');
+  k = fresh(); k.header.machine = 'HF5_MACHINE_X';
+  r = S.applyBList(k, rd.list, 'overwrite');
+  eq([r.probeProgram, r.unnamed], ['', [1]], 'name over 24 characters: probe name blank, step listed');
+  k = fresh();
+  k.steps = S.applyBList(k, rd.list, 'overwrite').steps; k.config.units = 'INCH';
+  k.probeStep.program = S.applyBList(k, rd.list, 'overwrite').probeProgram;
+  eq(S.validate(k).errors.map(e => e.path).filter(p => /^probeStep/.test(p)), [], 'imported job: no probe step error');
+}
+
+/* ---- step table: tick a checkbox column all on / all off (1.3.1) ---- */
+{
+  const rows = [S.blankStep(10), S.blankStep(20), S.blankStep(30)];
+  rows[1].meas = false;
+  eq(S.colState(rows, 'meas'), 'some', 'column state mixed = some');
+  eq(S.setColumn(rows, 'meas', true), 1, 'all on: 1 row changed');
+  eq([S.colState(rows, 'meas'), rows.every(s => s.meas)], ['all', true], 'all on: every row on');
+  eq(S.setColumn(rows, 'meas', false), 3, 'all off: 3 rows changed');
+  eq([S.colState(rows, 'meas'), rows.some(s => s.meas)], ['none', false], 'all off: every row off');
+  eq(S.colState(rows, 'measAlways'), 'na', 'Always with no row measuring: na (header box disabled)');
+  rows[0].meas = true; rows[2].meas = true;
+  eq(S.setColumn(rows, 'measAlways', true), 2, 'Always all on: only the 2 rows with Measure on');
+  eq([rows[0].measAlways, rows[1].measAlways, rows[2].measAlways, S.colState(rows, 'measAlways')], [true, false, true, 'all'],
+    'Always all on skips the Measure-off row');
+  for (const key of ['brk', 'debug', 'setpiece']) {
+    S.setColumn(rows, key, false);
+    const offOk = rows.every(s => s[key] === false);
+    S.setColumn(rows, key, true);
+    eq([offOk, rows.every(s => s[key] === true)], [true, true], key + ' column: all off, then all on');
+  }
+  eq(S.setColumn(rows, 'tool', true), 0, 'setColumn ignores non-checkbox keys');
+  eq(rows[0].tool, '', 'tool untouched');
 }
 
 /* ---- JSON round trip ---- */

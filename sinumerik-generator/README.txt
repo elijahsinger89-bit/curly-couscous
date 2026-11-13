@@ -23,13 +23,21 @@ STEP BUILDER (tab 1)
     Cancel           nothing changes
   "Fill blank program names" uses the same pattern on blank names only.
 
+STEP TABLE CHECKBOXES (tab 1)
+  The box under Measure, Always, Brk check, Debug M1 and SETPIECE turns
+  that column on or off for every row. Ticked = all on, empty = all off,
+  dash = mixed (a click turns all on). The per-row boxes work as before.
+  Always acts only on rows with Measure on.
+
 IMPORT B LIST (from hyperMILL)
   Import B list..., pick <document>_B_PROGRAMS.json written by the hyperMILL
   b_program_export script (later the go-to-machine script). Format:
   B_PROGRAM_LIST_FORMAT.txt.
   It fills the step table (step, tool ID, B program name, break check,
   breakage tolerance, measure, max breaks, life, SETPIECE), and part and
-  machine in the Header when they are blank. The probe step is left alone.
+  machine in the Header when they are blank. The probe program name is
+  generated from the Header (B_[part]_001_[machine]): overwrite regenerates
+  it, keep existing fills it only when blank. Probe step off: untouched.
   Asks first when: the list's units differ from the page (switch or
   cancel), part or machine differ from the Header (list's / page's /
   cancel), the table already has data (overwrite all / keep existing and
