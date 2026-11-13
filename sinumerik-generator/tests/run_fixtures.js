@@ -222,7 +222,7 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   eq(rd.error, '', 'B list sample reads');
   eq(rd.list.steps.map(s => [s.step, s.program, s.tool, s.brkTol]), [['10', 'B_00948602_025_010_HF5', '905083900', '0.0040'],
     ['20', 'B_00948602_025_020_HF5', '475080900', '0.0020'], ['30', 'B_00948602_025_030_HF5', '416580900', ''],
-    ['40', 'B_00948602_025_040_HF5', '350080900', '']], 'B list rows: step, program, tool, preset tolerance');
+    ['40', 'B_00948602_025_040_HF5', '350080900', '0.0006']], 'B list rows: step, program, tool, preset tolerance');
   eq([rd.list.part, rd.list.machine, rd.list.units, rd.list.refused.length], ['00948602_025', 'HF5', 'INCH', 2], 'B list header and refused');
   eq(rd.list.steps.every(s => s.brk && s.meas && !s.measAlways && s.maxBrk === '2' && s.life === '1' && s.setpiece), true,
     'B list presets map onto the row fields');
@@ -245,8 +245,8 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   j.steps = ov.steps; j.header.part = rd.list.part; j.header.machine = rd.list.machine; j.config.units = rd.list.units;
   j.probeStep.program = 'B_00948602_025_001_HF5';
   const v1 = S.validate(j);
-  eq(v1.errors.map(e => e.path).filter(p => /brkTol/.test(p)), ['steps.2.brkTol', 'steps.3.brkTol'], 'only the blank imported tolerances fail validation');
-  j.steps[2].brkTol = '0.0005'; j.steps[3].brkTol = '0.0005';
+  eq(v1.errors.map(e => e.path).filter(p => /brkTol/.test(p)), ['steps.2.brkTol'], 'only the blank imported tolerance fails validation');
+  j.steps[2].brkTol = '0.0005';
   const v2 = S.validate(j);
   eq(v2.errors, [], 'tolerances filled: imported job validates');
   const g = S.generate(j, { date: '2026-11-13' });

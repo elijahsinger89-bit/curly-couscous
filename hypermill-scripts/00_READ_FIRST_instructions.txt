@@ -244,8 +244,10 @@ break check, breakage tolerance, measure, always measure, max breaks, life, SETP
 Roughing / finishing: a job that leaves stock (*AUFMASS, *AUFMASS_Z or *AUFMASS_HORI above 0) is roughing, zero stock is
 finishing, a job without those settings (drilling, tapping, reaming) has neither. A compound job with a finishing job
 counts as finishing (the tighter tolerance).
-brk_rules.csv holds the shop standards: drills 0.002, roughing 0.004 (solid and inserted). Finishing (.00005-.0005) and
-tools without stock to leave are blank: the generator shows those steps in red until a value is entered.
+brk_rules.csv holds the shop standards (solid and inserted alike): drills 0.002, roughing 0.004, finishing by tool
+diameter: under 0.125 .0002, 0.125-0.250 .0003, 0.250-0.500 .0004, 0.500-1.000 .0006, 1.000 and over .0008.
+Tools without stock to leave (spot drills, taps, reamers, thread mills, boring bars) are blank: the generator shows
+those steps in red until a value is entered.
 Left out and listed: notes, compound jobs with more than one tool or a job without a tool, names that do not follow the
 rule for the part and machine given. Nothing is written when a step number is used twice.
 Log: b_program_export_log.txt.

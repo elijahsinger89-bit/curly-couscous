@@ -60,11 +60,14 @@ check(p["brk_tol"] == "0.254", "inch 0.01 row in a metric document -> 0.254 mm")
 r = bp.match_rule(rules, "drilTool", 3.0, False)
 check(r is rules[0], "3 mm drill in a metric document = 0.118 in < 0.125: small drill row")
 shipped = bp.load_rules(os.path.join(LIB, "brk_rules.csv"))
-check(len(shipped) == 4, "shipped brk_rules.csv: 4 rows (drills, rough, finish, rest)")
+check(len(shipped) == 8, "shipped brk_rules.csv: 8 rows (drills, rough, 5 finishing bands, rest)")
 tol = lambda t, purpose, d=0.5: bp.presets(bp.match_rule(shipped, t, d, True, purpose), True)["brk_tol"]
 check(tol("drilTool", "") == "0.0020" and tol("drilTool", "rough") == "0.0020", "standard: drills 0.002 whatever the stock")
 check(tol("faceMill", "rough", 2.0) == "0.0040" and tol("endMill", "rough") == "0.0040", "standard: roughing 0.004")
-check(tol("endMill", "finish") == "", "standard: finishing range .00005-.0005 left blank until set")
+bands = [tol("endMill", "finish", d) for d in (0.0625, 0.125, 0.249, 0.25, 0.5, 0.999, 1.0, 3.0)]
+check(bands == ["0.0002", "0.0003", "0.0003", "0.0004", "0.0006", "0.0006", "0.0008", "0.0008"], "finishing by diameter: .0002 / .0003 / .0004 / .0006 / .0008 " + str(bands))
+check(tol("endMill", "finish", None) == "", "finishing with unknown diameter: blank (no band fits)")
+check(bp.presets(bp.match_rule(shipped, "ballMill", 12.0, False, "finish"), False)["brk_tol"] == "0.010", "metric document: 12 mm finisher -> .0004 in -> 0.010 mm")
 check(tol("tapTool", "") == "", "no stock to leave (tap): blank")
 check(bp.presets(bp.match_rule(shipped, "drilTool", 20.0, False, ""), False)["brk_tol"] == "0.051", "metric document: drill 0.002 in -> 0.051 mm")
 J = om.Job
@@ -132,14 +135,14 @@ check([s["tool"] for s in data["steps"]] == ["905083900", "475080900", "41658090
 check(data["steps"][1]["tool_type"] == "drilTool" and abs(data["steps"][1]["diameter"] - 0.748) < 0.001,
       "19 mm drill exported as drilTool D0.748 in")
 check(data["steps"][0]["jobs"] == 2, "job count per compound job")
-check([s["brk_tol"] for s in data["steps"]] == ["0.0040", "0.0020", "", ""], "presets: face mill rough 0.004, drill 0.002, tap blank, rough+finish blank")
+check([s["brk_tol"] for s in data["steps"]] == ["0.0040", "0.0020", "", "0.0006"], "presets: face mill rough 0.004, drill 0.002, tap blank, 0.5 end mill rough+finish 0.0006")
 check([s["purpose"] for s in data["steps"]] == ["rough", "", "", "finish"], "purpose per B program")
 reasons = {r["name"]: r["reason"] for r in data["refused"]}
 check(set(reasons) == {"B_00948602_025_111_HF5", "00948602_025_B_OP299_01"}, "refused: mixed tools and old naming")
 check("more than one tool" in reasons["B_00948602_025_111_HF5"], "refused reason: more than one tool")
 check(not any("notes" in r["name"] for r in data["refused"]), "notes are not listed")
-check("4 B programs written" in flat(gui.BOXES[-1]) and "2 steps with break check on and no tolerance" in flat(gui.BOXES[-1]),
-      "final message: 4 written, 2 blank tolerances")
+check("4 B programs written" in flat(gui.BOXES[-1]) and "1 step with break check on and no tolerance" in flat(gui.BOXES[-1]),
+      "final message: 4 written, 1 blank tolerance")
 shutil.copy(pj, os.path.join(tmp, "sample.json"))
 
 # duplicate step -> nothing written

@@ -1,9 +1,9 @@
 {
  "format": "SINUMERIK_B_PROGRAM_LIST",
  "version": 1,
- "created": "2026-11-13 01:36:26",
+ "created": "2026-11-13 01:53:14",
  "source": "hyperMILL b_programs.py 2026-11-13",
- "document": "/tmp/bpe_pgpbcsui/job/00948602_025_A_OP200_03.hmc",
+ "document": "/tmp/bpe_n7v3ykib/job/00948602_025_A_OP200_03.hmc",
  "joblists": [
   "00948602-025_B_OP200_02"
  ],
@@ -79,13 +79,13 @@
    "purpose": "finish",
    "joblist": "00948602-025_B_OP200_02",
    "brk": true,
-   "brk_tol": "",
+   "brk_tol": "0.0006",
    "meas": true,
    "meas_always": false,
    "max_brk": 2,
    "life": 1,
    "setpiece": true,
-   "rule": "* finish - finishing: standard .00005-.0005 - set the value"
+   "rule": "* finish 0.5-1.0 finishing 0.500 to 1.000"
   }
  ],
  "refused": [

@@ -219,11 +219,11 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     check(JSON.stringify(await vals('program')) === JSON.stringify(['B_00948602_025_010_HF5', 'B_00948602_025_020_HF5',
       'B_00948602_025_030_HF5', 'B_00948602_025_040_HF5']), 'import: 4 B programs in the step table');
     check(JSON.stringify(await vals('tool')) === JSON.stringify(['905083900', '475080900', '416580900', '350080900']), 'import: tool IDs');
-    check(JSON.stringify(await vals('brkTol')) === JSON.stringify(['0.0040', '0.0020', '', '']), 'import: preset tolerances');
+    check(JSON.stringify(await vals('brkTol')) === JSON.stringify(['0.0040', '0.0020', '', '0.0006']), 'import: preset tolerances');
     check(await p2.$eval('[data-path="steps.2.brkTol"]', e => e.classList.contains('err')) &&
           !(await p2.$eval('[data-path="steps.0.brkTol"]', e => e.classList.contains('err'))), 'import: blank tolerances red, preset ones not');
     const m1 = await p2.textContent('#msgs');
-    check(m1.includes('Imported the 4 B programs') && m1.includes('2 steps have break check on and no tolerance') &&
+    check(m1.includes('Imported the 4 B programs') && m1.includes('1 step has break check on and no tolerance') &&
           m1.includes('Left out in hyperMILL: B_00948602_025_111_HF5'), 'import: message with blanks and left-out compound jobs');
     await p2.fill('[data-path="steps.0.tool"]', 'EDITED');
     await p2.dispatchEvent('[data-path="steps.0.tool"]', 'change');
