@@ -1,0 +1,243 @@
+hyperMILL AUTOMATION PACKAGE - INSTRUCTIONS
+===========================================
+
+WHAT IS IN THIS PACKAGE
+copy_to_python_folder
+  part_wizard_1    builds the toolpaths of a part (no tools, no macros)
+  part_wizard_2    puts a library tool and its cutting data in every toolpath
+  tool_center      one command for building tools: tool wizard, tool selector or tool generator (icon: tool_center.png)
+  b_program_rename renames compound jobs to SINUMERIK B program names B_<part>_<step>_<machine>
+                   (icon: b_program_rename.png)
+  tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
+                   part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
+                   B program name rule (b_programs.py)
+  icons            part and boundary pictures for part_wizard_1
+
+Nothing else is needed. The old scripts (part_wizard_step1, step2, direct, batch_apply_strategy, hole_plan, set_hole_properties,
+shop_feeds, strategies, probes) are replaced and stay in your archive. The macro databases are not used by anything here.
+
+INSTALL
+1. Copy everything inside copy_to_python_folder into C:\Users\Public\Documents\OPEN MIND\python
+2. Delete the old tool_wizard and tool_selector folders there (tool_center replaces both), and tool_wizard.py and
+   tool_selector.py inside tool_center (tool_flow.py replaces them).
+3. Restart hyperMILL so it re-reads the python folder.
+4. Button: tool_center\tool_center.png (32 x 32; tool_center.ico for dialogs that want an .ico).
+   Button: b_program_rename\b_program_rename.png (32 x 32; b_program_rename.ico).
+
+
+THE PART FLOW
+-------------
+Before part_wizard_1: one joblist per setup (Op10, Op20 ... the number picks the setup), each with its frame (NCS), model,
+material group (for example S - Titanium) and stock. Inch session.
+
+1  part_wizard_1
+   Screens: machine, spindle, industry, part type, recommended setups, setups, part features, joblists to fill, material,
+   stepover, plan, Add toolpaths, Create.
+   - Joblists to fill: it checks each ticked joblist for frame, model and material. Anything missing is listed; "Stop and fix"
+     ends the run, "Continue anyway" carries on and lists it at the end.
+   - Add toolpaths: optional. Pick a joblist, then any of the 77 milling and drilling toolpath types (2D, 3D, 5X, Drilling).
+     Repeat as often as needed, then "No - continue". Added toolpaths are made after the planned ones.
+   - Create: leave "Create the toolpaths now" unticked for a dry run (log only, nothing changes).
+     "Create the hole toolpaths from the mapped holes": hole groups more than 30 degrees from every joblist's axis are shown
+     with a dropdown each: pick the joblist (setup) the group belongs to, or Skip. One hole toolpath per operation and diameter
+     (taps and thread mills per thread) with the holes attached and the feature list's frame.
+     Opposing holes: two open-bottom holes (Through or Through_Hidden) of the same diameter facing each other on one axis
+     (a through hole broken by a pocket, or found from both sides) are drilled from one side only: the side with more hole
+     features, then the earlier joblist. The drill gets a break-through length to the far side, part_wizard_2 picks a drill
+     that reaches the full length, and the check list names both holes. Threaded holes keep both sides.
+     "Run hole and pocket feature mapping first": only when the file has no feature lists yet.
+   - Every toolpath is made with CreateJob. Its settings (stock to leave, stepdown, stepover, clearance, approach) come from
+     tool_library\job_settings.json for the material and operation. Types without saved settings are made with hyperMILL's
+     defaults and listed under "Check by hand".
+   - Jobs are named by operation and material ("Pocket Milling HEM Inconel 718"). part_wizard_2 reads the operation from that
+     name (and from a job list part_wizard_1 writes to the temp folder).
+   - Boundary pictures follow, one per toolpath that needs a boundary or surface selection.
+   Log: C:\Users\Public\Documents\OPEN MIND\part_wizard_1_log.txt
+
+2  By hand: attach the pocket features (and any other features) to the milling toolpaths, set the stock references.
+
+3  part_wizard_2
+   Screens: machine, spindle (the last choice is offered first), tool manufacturer, performance level (Walter and GARR),
+   joblists, then: put the tools in now (unticked = dry run), replace tools already in jobs, calculate and check afterwards.
+   Per toolpath the operation sets the tool shape and the primary usage; attached features set the size:
+   - holes: diameter and depth of the attached holes pick the drill, chamfer mill, tap, thread mill, reamer, boring tool or
+     helical end mill (same rules as before). Drills for reamed holes are under size by the ream allowance.
+   - roughing (Pocket, Rough HEM, Rough Traditional, Arbitrary Stock, Form Pocket, 5X roughing): largest first-choice end mill
+     at or below 0.8 x the pocket diameter limit (and 0.05 in clear), flute at least the deepest pocket + 0.05 in.
+   - finishing and rest (Contour, Z Level, rest, corner rest, pencil, swarf ...): also no larger than 2 x the smallest pocket
+     corner radius; only the reach has to clear the depth (a necked tool is fine).
+   - floors (Plane): diameter limit; a floor corner radius turns a flat end mill into a corner radius end mill.
+   - no features attached: the operation's default tool size, flute at least 1 x D, and a "length not checked" note.
+   - Face Mill: Walter inserted face mill (2.0 in asked), else an end mill.
+   - Chamfer on 3D Model, Centering, deburring: Walter MC501 chamfer mill; Kennametal and GARR have none in the library, so a
+     90 degree spot drill of theirs is used (check hyperMILL accepts it in that cycle).
+   - T-slot, hale, tangent (barrel), back boring, gun drilling, hole brushing: no such tools in the library yet, tool by hand.
+   Among the first-choice tools the primary usage orders the families (same as the tool selector); the best-ranked family that has
+   catalog cutting data is used. When no tool reaches the depth, the longest one is used and flagged "too short".
+   Cutting data: the usage's set (Rough-HEM, Rough, Finish-2D-Radial, Finish-2D-Axial, Finish-Semi, Finish-3D), capped by the
+   spindle's max rpm. Milling jobs get SpindleRPM, FeedrateXY and FeedrateZ (plunge = 0.5 x feed); hole jobs SpindleRPM and
+   FeedrateZ. Milling jobs are also pointed at the tool's cutting-data set (*JOB_CPNAME); set SET_TECSET_LINK = False at the
+   top of the script to stop that.
+   Calculate and check: calculates the joblists, sets floor stock to leave to 0 on "Bottom higher than top" and recalculates,
+   then lists jobs whose .pof is under 12000 bytes (probably no toolpath).
+   Log: C:\Users\Public\Documents\OPEN MIND\part_wizard_2_log.txt
+
+4  Calculate.
+
+
+CONFIRMED IN hyperMILL (lower receiver, both wizards)
+part_wizard_1: CreateJob for every planned type, the saved settings, job names, milling area from the joblist model, hole
+features attached, hole jobs on the feature list frame (SetFeatures sets it). A formula the saved settings do not list is
+replaced by the saved value (the log shows "set by formula" for keys a formula still drives, such as the clearance plane F:Cl).
+part_wizard_2: tools built and attached, SpindleRPM, FeedrateXY and FeedrateZ set on the jobs.
+hyperMILL ignores *JOB_CPNAME set from Python, so the jobs keep the tool's "Rough - usage 1" set link; the speed and feed are
+set on the job directly. SET_TECSET_LINK is off.
+
+KNOWN SETTINGS hyperMILL KEEPS ITS OWN VALUE FOR (listed once in part_wizard_1's final pop-up)
+*POSITION_TYPE on drilling and centering jobs (saved 1, stays 0), *CONNECT_SMOOTH on Face Mill (saved 0, stays 2).
+
+NOT TESTED IN hyperMILL YET
+- CreateJob("DborX5") for Boring.
+
+
+TOOL CENTER
+One command, four paths. A message box first describes the four paths and when each is the most useful; untick
+"Show path descriptions at start" on the path screen to skip it (tick it again to bring it back). The screens are the same for all four up to the size screen:
+  1 machine model   2 spindle (its max rpm caps every speed and feed)   3 manufacturer
+  4 tool type and material (starts on the material of the document's joblists, the first joblist that has one);
+    the tool search has a search box in place of the tool type
+  5 size (diameter, thread or bore) + every limit for the tool type (cutting length, reach, flutes, corner radius, hole depth,
+    through coolant, hole type, tap form, thread length, max cutter, depth of cut, mount, slot width, bore depth: the ones that
+    apply) + primary usage (milling tools)
+Then:
+- Tool wizard: one drop-down with the best first-choice tool of each performance level (one tool each), flags in the text
+  (NOT 1ST CHOICE, LENGTH SHORT, nearest size, borrowed data, standard data). The tools come from the same list the selector
+  shows for that level. LENGTH SHORT = no tool at that level meets the length limits; the longest one is offered.
+  Full notes in the output window. Log: tool_wizard_log.txt
+- Tool selector: performance level (each level with its family and tool count; levels with nothing at the size are named in
+  the label), first-choice families (best fit first, "fit:" reason under each), family, tools with cutting data, tool.
+  Kennametal and tool types without levels skip the level screen. Log: tool_selector_log.txt
+- Tool generator: no level screen. EVERY tool of the type at the size (all performance levels, every rating), grouped by the
+  material's catalog rating: [ISO x primary], [ISO x suitable], [ISO x not rated]; the primary usage orders the families inside
+  each group. Solid end mills: every size within 8 percent of the request. Then family, tools, tool. Log: tool_generator_log.txt
+- Tool search: a search box in place of the tool type drop-down. Type what you know:
+    family code         md133, MD133 Supreme, h1te, X5, TD117, DC160
+    product name        harvi 4, HARVI IV, kor 5, maximet, gomill (Kennametal names: tool_library\kennametal_names.csv)
+    series              words of the series column (Walter "Solid carbide shoulder milling cutters", GARR titles)
+    catalog number      H1TE4RA0500S, TD117-UNC1/4, or the whole number; a Kennametal EDP number (the full number)
+  How the text is read:
+    - Upper/lower case does not matter.
+    - Spaces, dashes, dots, slashes, (TM) and (R) are dropped: "harvi 4", "harvi-4", "HARVI4" are the same search.
+    - A roman numeral I to X after a word of two or more letters is read as its number: "HARVI IV" = "harvi 4",
+      "HARVI II TE" = "harvi 2 te". A letter with no word in front stays a letter: "X 5" = "X5" (GARR), not 10 5.
+    - The search is "starts with / contains": "harvi" finds every HARVI family, "harvi 2" finds HARVI II, II TE and II Long,
+      "md13" finds MD133. Searching only "supreme" or "advance" lists every family of that Walter level.
+  Results, best kind of match only:
+    1. family code or product name starts with the text
+    2. family code, series or product name contains it
+    3. catalog number contains it (or equals the EDP number)
+    4. description, title or type contains it ("drill", "chamfered")
+  One match goes straight on; several -> a list, then pick (at most 60 shown; the header says when there are more).
+  Flat, radius and ball end mills of a family are one match ("End mill: flat / radius / ball" on the match list). The size
+  screen then has: Tool type (Any or one of the shapes the family has; not shown when the family has one shape), diameter,
+  corner radius (blank = any, 0 = square end, half the diameter = ball), min cutting length, min reach, flutes, primary usage.
+  Then every tool of that family at the size, any rating, each marked [ISO x primary / suitable / not rated], with cutting
+  data. Solid end mills and chamfer mills: every size within 8 percent of the diameter asked (same as the generator);
+  other tools: the exact size, else the family's nearest size (the header says so).
+  Catalog-number search: up to 40 matching tools are listed straight away, no size screen (taps, thread mills and boring
+  tools still ask for the thread or bore size, then only the matching numbers are listed).
+  Nothing found: the message says when the family is in the tables but has no tool type yet (routers, plunge, barrel,
+  chamfered-corner Kennametal mills, HSS drills, step drills, drill thread mills, orbital thread mills, PCD mills), and
+  which other manufacturer has a match ("harvi" under Walter -> found under Kennametal).
+  Walter: search by family code. The Walter 2026 catalogues sell Protostar, Paradur, Prototex, Protodyn and ConeFit as
+  separate product lines; they are not in the walter tables.
+  The search remembers its last text and, per family, its last size. Log: tool_search_log.txt
+Chamfer mill (90 degree) is a tool type in all four paths: Walter MC501 solid chamfer mills, size = large diameter Da
+(the catalog prints no cutting data for them). Tool types a manufacturer has no tools for are not listed.
+All four end the same way: cutting-data sets (end mills; the primary usage's set is pre-ticked) and Generate, then Next
+(another tool of the same type or family, start over or new search, change machine, end).
+Entries on the size screen (blank = any limit):
+  Diameter / Bore diameter / Large diameter Da   0.5, 1/2 or 1 1/2 (session units)
+  Thread                                          1/4-20 UNC, #10-32 UNF, M6, M8x1
+  Min cutting length, Min hole depth, Min thread length   1.5 (session units) or 3x (times the diameter)
+  Other lengths (reach, corner radius, max cutter, ap, slot width, bore depth)   session units
+  Corner radius on a search end mill   blank = any, 0 = square end, half the diameter = ball
+  Tool type on a search end mill       Any, Flat end mill, Radius end mill, Ball end mill (the shapes the family has)
+  Primary usage   Any = catalog order
+Every screen after the first has a Back choice; Cancel ends. Lists longer than the message box are complete in the output
+window. The last machine, spindle, manufacturer, tool type, material, level, size and usage are remembered
+(tool_center_last.json). The screens are in tool_center\tool_flow.py.
+
+
+FIRST CHOICE (all scripts; the tool generator shows every rating)
+A tool is first choice when the catalog rates it 2 (primary) for the ISO class of the material. A tool rated 1 (suitable) is
+used only when no rated-2 tool exists near the size, and is marked NOT FIRST CHOICE. Solid end mills may be up to 8 percent
+off the requested diameter before a rated-1 tool of the exact size is used. Drills, reamers: exact size first. Spot drills and
+insert drills: nearest larger.
+
+MANUFACTURERS AND DATA
+Walter, Kennametal and GARR TOOL. Tool tables and cutting data are the walter_*, kennametal_*, garr_* CSV files in tool_library.
+GARR: first choice = series listed in the RECOMMENDED catalog for the material group; cutting data from GARR TECHNICAL.
+Performance levels: Walter Supreme / Advance / Perform, GARR High performance / General purpose. Kennametal has one level.
+
+PRIMARY USAGE
+Any (catalog order), HEM / dynamic roughing, Traditional roughing, Slotting, Semi-finishing, Wall finishing, Floor finishing,
+3D profiling. Orders the first-choice families only (catalog usage tables, then generic geometry rules); no tool is removed.
+Traditional roughing = high-feed style: ae 0.75 x D; ap 0.30 x corner radius (corner radius tools, chip load raised by axial
+chip thinning, capped 2.5x) or 0.10 x D (square). High-feed tools keep their printed data. Settings at the top of
+tool_builder.py (ROUGH_*).
+
+USER CUTTING-DATA SETS
+Every tool the scripts build comes in with three extra cutting-data sets for the job material: "User - 1", "User - 2" and
+"User - 3", copies of the tool's catalog set (or of its invariant set when there is no catalog data). Edit them in the tool
+dialog (Technology tab). hyperMILL's Python API cannot add a set to a tool once it is in the document (probes 1 to 4).
+Change or empty the names in tool_library\tool_builder.py, USER_SETS.
+
+WHERE THE CUTTING DATA COMES FROM
+Every speed and feed is the tool's own printed catalog data unless the screen says otherwise. When it is not, the tool
+selector and tool wizard screens, the part wizard 2 check list and the tool comment in hyperMILL say so in plain words:
+  "cutting data borrowed from MD340, check before running"   the family prints no data for the material group (or for that
+        engagement), so a general purpose Walter family's printed data is used (Walter end mills; thread mills borrow TME).
+        When only some sets are borrowed the message names them (for example "roughing, slotting data borrowed from ...").
+        PCD, brazed, ceramic and inserted cutters never borrow solid carbide data: they get their own data or none.
+  "group N3 data used (catalog prints no N1 for this family)"   the family's own data for the neighbouring material group.
+  "standard reaming values, not catalog data for this reamer, check before running"   reamers whose family prints no
+        reaming data for the material group (Walter reamers otherwise use the Holemaking compendium data).
+"no catalog cutting data" means nothing is written: set speeds and feeds in the Tools tab.
+
+B PROGRAM RENAME
+Names compound jobs for the SINUMERIK nest framework. Each compound job posts as one NC file named after it
+(NC file mode: compound job as single job), and the generator's step table calls that file by name.
+Name: B_<part>_<step>_<machine>, for example B_00948602_025_010_HF5.
+  step     3 digits; 4 digits for every name when the last step is 1000 or more (B_00948602_025_0010_HF5)
+  part     letters, digits, _ (no - or spaces)
+  machine  letters, digits, _ ; may be blank (then B_<part>_<step>)
+  length   24 characters at most (SINUMERIK limit); the message says how long the machine name may be
+Screens:
+  1 Action (Rename compound jobs / Undo last rename) and Joblist (one, or All joblists)
+  2 Part number, Machine, Starting step, Advance, Compound jobs (All with one tool / Pick, 10 per screen).
+    The values are remembered. The title shows how many compound jobs will be renamed, how many are notes and how many
+    cannot be renamed.
+  3 Pick screens (only for "Pick"): untick a compound job to leave it as it is; it takes no step number.
+  4 Review: the old -> new list is in the output window, a summary in the message box, then Rename: No / Yes (No first).
+Rules:
+- Steps count up in tree order: the first compound job gets the starting step, each next one the step + advance.
+- Empty compound jobs (notes, dividers) are skipped: their text stays and they take no step number.
+- A compound job with jobs using more than one tool, or a job without a tool, is not renamed (a B program runs one tool).
+  The review lists them. Split them into one tool each and run again.
+- Starting step 2 or more: step 1 is the probe program the generator writes.
+- A new name may not belong to a compound job the run leaves alone (another joblist, unpicked, notes): listed, nothing renamed.
+- Each name is set and read back. If hyperMILL does not take it, the run stops there and says how many were renamed.
+Undo last rename: the old names are saved before renaming (b_program_rename_undo.json in C:\Users\Public\Documents\OPEN MIND).
+  Undo only works in the document that was renamed, and leaves alone any compound job renamed by hand since.
+Log: b_program_rename_log.txt. Last values: b_program_rename_last.json.
+
+MACHINE AND SPINDLE
+machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
+rpm caps every speed; the feed follows at the same chip load. The last choice is remembered for all scripts.
+
+FILES YOU MAY EDIT
+tool_library\job_settings.json   settings per material group > material > operation > stepover > params ("*KEY": "value")
+tool_library\strategies.py       part plans per industry and part type
+tool_library\job_types.py        toolpath types, their CreateJob codes and the tool rule part_wizard_2 uses
+tool_library\machines.csv        machines and spindles
