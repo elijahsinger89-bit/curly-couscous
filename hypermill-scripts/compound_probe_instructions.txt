@@ -1,0 +1,24 @@
+COMPOUND PROBE (read-only)
+
+Install
+  Copy copy_to_python_folder\compound_probe into
+  C:\Users\Public\Documents\OPEN MIND\python and restart hyperMILL.
+
+Run
+  Open a document with compound jobs. Best test document: one joblist with
+  a few compound jobs, one compound job holding two different tools, and one
+  job outside any compound job. Run compound_probe.
+
+Send back
+  C:\Users\Public\Documents\OPEN MIND\compound_probe_log.txt
+  and a screenshot of the job tree (to compare the order).
+
+What it reads
+  Job lists, jobs, compound jobs and their children, names, NC/file/post
+  settings on each job, the tool on each job, and each tool's ncTool id
+  (the name tool_load_mda writes into NEWT).
+
+What it changes
+  Nothing in the document. Write methods are listed in the log, never
+  called. Each tool is exported to a temp file to read its ID; the temp
+  file is deleted.
