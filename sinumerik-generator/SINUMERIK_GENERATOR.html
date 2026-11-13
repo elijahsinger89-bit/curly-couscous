@@ -89,6 +89,8 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
   <div class="actions">
     <button id="btnLoad" type="button">Load job…</button>
     <input type="file" id="fileLoad" accept=".json,application/json" hidden>
+    <button id="btnBList" type="button" title="Pre-fill from the hyperMILL B program list (_B_PROGRAMS.json)">Import B list…</button>
+    <input type="file" id="fileBList" accept=".json,application/json" hidden>
     <button id="btnSave" type="button">Save job</button>
     <button id="btnValidate" type="button">Validate</button>
     <button id="btnGenerate" type="button" class="primary">Generate ZIP</button>
@@ -124,7 +126,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.2.0';
+var GEN_VERSION = '1.3.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -357,6 +359,58 @@ function fillNames(job) {
     if (nm) { st.program = nm; R.filled++; } else R.unnamed.push(num(st.step));
   });
   return R;
+}
+
+/* ---------------- B program list import (hyperMILL b_program_export / go-to-machine) ----------------
+   Format: B_PROGRAM_LIST_FORMAT.txt. Version 1. Unknown keys are ignored.                          */
+var BLIST_FORMAT = 'SINUMERIK_B_PROGRAM_LIST';
+function readBList(data) {
+  var R = { error: '', list: null };
+  if (!data || typeof data !== 'object' || data.format !== BLIST_FORMAT) { R.error = 'Not a B program list (format tag missing). Pick the _B_PROGRAMS.json file the hyperMILL export wrote.'; return R; }
+  if (data.version !== 1) { R.error = 'B program list version ' + data.version + ' is not supported (this generator reads version 1).'; return R; }
+  if (data.units !== 'INCH' && data.units !== 'METRIC') { R.error = 'B program list units must be INCH or METRIC, not ' + data.units + '.'; return R; }
+  if (!Array.isArray(data.steps) || !data.steps.length) { R.error = 'The B program list has no steps.'; return R; }
+  var rows = [], bad = [];
+  data.steps.forEach(function (s, i) {
+    if (!s || !isInt(s.step) || num(s.step) < 1 || isBlank(s.program) || isBlank(s.tool)) {
+      bad.push('entry ' + (i + 1) + (s && s.program ? ' (' + s.program + ')' : ''));
+      return;
+    }
+    rows.push({
+      step: String(num(s.step)), tool: String(s.tool).trim(), program: String(s.program).trim(),
+      brkTol: (s.brk_tol === undefined || s.brk_tol === null) ? '' : String(s.brk_tol).trim(),
+      meas: s.meas !== false, measAlways: s.meas_always === true, brk: s.brk !== false,
+      maxBrk: String(isInt(s.max_brk) ? num(s.max_brk) : 2), debug: false,
+      life: String(isInt(s.life) ? num(s.life) : 1), setpiece: s.setpiece !== false
+    });
+  });
+  if (bad.length) { R.error = 'B program list entries without a whole step number, program or tool: ' + bad.join(', ') + '.'; return R; }
+  R.list = {
+    part: String(data.part || '').trim(), machine: String(data.machine || '').trim(), units: data.units,
+    document: String(data.document || ''), created: String(data.created || ''),
+    steps: rows, refused: Array.isArray(data.refused) ? data.refused : []
+  };
+  return R;
+}
+/* mode 'overwrite': the list's rows replace the table. 'keep': current rows stay, list rows whose step
+   number is missing are added, rows sorted by step number (same as the step builder).               */
+function applyBList(job, list, mode) {
+  var fresh = list.steps.map(cloneStep), steps, added;
+  if (mode === 'keep') {
+    steps = job.steps.map(cloneStep);
+    var have = {};
+    steps.forEach(function (st) { if (isInt(st.step)) have[num(st.step)] = 1; });
+    var add = fresh.filter(function (st) { return !have[num(st.step)]; });
+    added = add.length;
+    steps = steps.concat(add);
+    steps.sort(function (a, c) {
+      var x = isInt(a.step) ? num(a.step) : Infinity, y = isInt(c.step) ? num(c.step) : Infinity;
+      return x - y;
+    });
+  } else {
+    steps = fresh; added = fresh.length;
+  }
+  return { steps: steps, added: added };
 }
 
 /* ---------------- resolve the job into numbers ---------------- */
@@ -1891,7 +1945,8 @@ G.SNG = {
   resolve: resolve, generate: generate, makeZip: makeZip, crc32: crc32, fix: fix, compact: compact,
   isBlank: isBlank, num: num, isNum: isNum, isInt: isInt, today: today, ascii: ascii,
   progName: progName, rawName: rawName, nameInputsError: nameInputsError, buildSteps: buildSteps,
-  fillNames: fillNames, hasStepData: hasStepData, nameWidth: nameWidth, allStepNos: allStepNos
+  fillNames: fillNames, hasStepData: hasStepData, nameWidth: nameWidth, allStepNos: allStepNos,
+  readBList: readBList, applyBList: applyBList, BLIST_FORMAT: BLIST_FORMAT
 };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -2350,6 +2405,70 @@ function loadJob(file) {
   r.readAsText(file);
 }
 
+/* ---- import B program list (hyperMILL export) ---- */
+function importBList(file) {
+  var r = new FileReader();
+  r.onload = function () {
+    var data;
+    try { data = JSON.parse(String(r.result)); }
+    catch (ex) { showMsgs('bad', 'Could not read ' + file.name + ': ' + ex.message); return; }
+    var rd = S.readBList(data);
+    if (rd.error) { showMsgs('bad', file.name + ': ' + rd.error); return; }
+    runImport(file.name, rd.list);
+  };
+  r.readAsText(file);
+}
+function runImport(fname, L) {
+  var cancel = function () { showMsgs('warn', 'Import cancelled. Nothing changed.'); return null; };
+  var units = job.config.units;
+  var gate = L.units === units ? Promise.resolve('same') : askChoice('Units differ', [
+    'The B program list is ' + L.units + ', this page is ' + units + '. Its tolerances and diameters are ' + L.units + '.',
+    'Switch the page to ' + L.units + ' to import it.'
+  ], [{ label: 'Switch to ' + L.units, value: 'switch', primary: true }, { label: 'Cancel', value: 'cancel' }], 'cancel');
+  return gate.then(function (u) {
+    if (u === 'cancel') return cancel();
+    var hp = S.ascii(job.header.part), hm = S.ascii(job.header.machine);
+    var differs = (hp && hp !== L.part) || (hm && L.machine && hm !== L.machine);
+    var hdr = !differs ? Promise.resolve('file') : askChoice('Part number or machine differ', [
+      'Page: part ' + (hp || '-') + ', machine ' + (hm || '-') + '.',
+      'B program list: part ' + (L.part || '-') + ', machine ' + (L.machine || '-') + '.'
+    ], [{ label: 'Use the list\'s', value: 'file', primary: true }, { label: 'Keep the page\'s', value: 'page' },
+        { label: 'Cancel', value: 'cancel' }], 'cancel');
+    return hdr.then(function (h) {
+      if (h === 'cancel') return cancel();
+      var withData = job.steps.filter(function (s) { return !S.isBlank(s.tool) || !S.isBlank(s.program) || !S.isBlank(s.brkTol); }).length;
+      var rows = S.hasStepData(job) ? askChoice('Step table already has data', [
+        'The table has ' + job.steps.length + ' row' + (job.steps.length === 1 ? '' : 's') + ', ' + withData + ' with a tool, program or tolerance filled in.',
+        'Overwrite all: replace every row with the ' + L.steps.length + ' B programs of the list.',
+        'Keep existing: leave every current row as it is, add the list\'s steps that are missing, and sort by step number.'
+      ], [{ label: 'Overwrite all', value: 'overwrite' }, { label: 'Keep existing, add missing', value: 'keep', primary: true },
+          { label: 'Cancel', value: 'cancel' }], 'cancel') : Promise.resolve('overwrite');
+      return rows.then(function (mode) {
+        if (mode === 'cancel') return cancel();
+        if (u === 'switch') job.config.units = L.units;
+        if (h === 'file') {
+          if (!hp || differs) job.header.part = L.part;
+          if (L.machine && (!hm || differs)) job.header.machine = L.machine;
+        }
+        var ap = S.applyBList(job, L, mode);
+        job.steps = ap.steps;
+        dirty = true; lastFiles = null;
+        var v = runValidate();
+        showTab('config');
+        var blank = L.steps.filter(function (s) { return s.brk && S.isBlank(s.brkTol); }).length;
+        var msg = (mode === 'keep' ? 'Kept the existing rows and added ' + ap.added + ' of the ' : 'Imported the ') +
+          L.steps.length + ' B programs from ' + fname + ' (part ' + (L.part || '-') + ', machine ' + (L.machine || '-') + ', ' + L.units + ').' +
+          (u === 'switch' ? ' Page switched to ' + L.units + '.' : '') +
+          (blank ? ' ' + blank + ' step' + (blank === 1 ? ' has' : 's have') + ' break check on and no tolerance: fill them (red).' : '');
+        var items = L.refused.map(function (x) { return { msg: 'Left out in hyperMILL: ' + x.name + ' (' + x.reason + ')' }; })
+          .concat(v.errors);
+        showMsgs(v.errors.length || L.refused.length ? 'warn' : 'ok', msg, items);
+        return mode;
+      });
+    });
+  });
+}
+
 document.addEventListener('input', onEdit);
 document.addEventListener('change', onEdit);
 document.addEventListener('click', onClick);
@@ -2363,6 +2482,8 @@ $('#btnGenerate').addEventListener('click', function () { build(true); });
 $('#btnSave').addEventListener('click', saveJob);
 $('#btnLoad').addEventListener('click', function () { $('#fileLoad').value = ''; $('#fileLoad').click(); });
 $('#fileLoad').addEventListener('change', function () { if (this.files && this.files[0]) loadJob(this.files[0]); });
+$('#btnBList').addEventListener('click', function () { $('#fileBList').value = ''; $('#fileBList').click(); });
+$('#fileBList').addEventListener('change', function () { if (this.files && this.files[0]) importBList(this.files[0]); });
 window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
 window.SNG_UI = { getJob: function () { return job; }, setJob: function (j) { job = S.normalizeJob(j); errPaths = {}; lastFiles = null; renderAll(); } };
 renderAll();

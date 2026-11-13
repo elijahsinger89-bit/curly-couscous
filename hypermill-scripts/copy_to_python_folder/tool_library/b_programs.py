@@ -100,7 +100,7 @@ def classify(cj, joblist_name=""):
         jobs = list(cj.GetJobs())
     except Exception:
         jobs = []
-    ids, names, notool = [], [], 0
+    ids, names, notool, first_tool = [], [], 0, None
     for j in jobs:
         try:
             t = j.GetTool()
@@ -113,6 +113,8 @@ def classify(cj, joblist_name=""):
         if i not in ids:
             ids.append(i)
             names.append(text(getattr(t, "Name", "")))
+            if first_tool is None:
+                first_tool = t
     if not jobs:
         kind = "note"
     elif notool:
@@ -121,8 +123,44 @@ def classify(cj, joblist_name=""):
         kind = "mixed"
     else:
         kind = "one"
+    purposes = [job_purpose(j) for j in jobs]
     return dict(name=text(cj.Name), uuid=text(getattr(cj, "UUID", "")), joblist=joblist_name, kind=kind,
-                jobs=len(jobs), tools=ids, tool_names=names, obj=cj)
+                jobs=len(jobs), tools=ids, tool_names=names, obj=cj, tool_obj=first_tool,
+                purpose=compound_purpose(purposes), purposes=purposes)
+
+
+# ---------------- roughing / finishing from the stock to leave ----------------
+# A job with stock to leave (allowance) is roughing; zero stock to leave is finishing; a job without allowance settings
+# (drilling, tapping, reaming ...) has no purpose. Keys from tool_library\job_settings.json: *AUFMASS (stock to leave),
+# *AUFMASS_Z (axial), *AUFMASS_HORI (floors). Finishing ops there all use 0; roughing 0.0118-0.0197 in.
+ALLOWANCE_KEYS = ("*AUFMASS", "*AUFMASS_Z", "*AUFMASS_HORI")
+FINISH_MAX_STOCK = 0.0001       # stock to leave at or below this (document units) counts as zero = finishing
+
+
+def job_purpose(job):
+    try:
+        cfg = job.GetCfgParameters()
+    except Exception:
+        return ""
+    vals = []
+    for k in ALLOWANCE_KEYS:
+        try:
+            v = float(str(cfg.get(k, "")).strip())
+        except Exception:
+            continue
+        vals.append(abs(v))
+    if not vals:
+        return ""
+    return "finish" if max(vals) <= FINISH_MAX_STOCK else "rough"
+
+
+def compound_purpose(purposes):
+    """finish when any job finishes (the tighter break tolerance), rough when any roughs, else ''."""
+    if "finish" in purposes:
+        return "finish"
+    if "rough" in purposes:
+        return "rough"
+    return ""
 
 
 # ---------------- the plan ----------------
@@ -204,3 +242,184 @@ def set_name(cj, new):
         return False, how_err + "; *CPJOBNAME: did not change"
     except Exception as e:
         return False, how_err + "; *CPJOBNAME: %s" % e
+
+
+# ======================================================================================================================
+# B program list export (for the SINUMERIK generator's "Import B list"; the go-to-machine script calls build_export)
+# File format: B_PROGRAM_LIST_FORMAT.txt (tool_library and the generator folder hold the same text).
+# ======================================================================================================================
+import csv
+import json
+import os
+import tempfile
+import xml.etree.ElementTree as ET
+
+FORMAT = "SINUMERIK_B_PROGRAM_LIST"
+FORMAT_VERSION = 1
+MM = 25.4
+RULE_COLUMNS = ("tool_type", "purpose", "dia_min", "dia_max", "units", "brk_check", "brk_tol", "measure", "measure_always",
+                "max_brk", "life", "setpiece", "note")
+
+
+def step_of(name, part, machine):
+    """Step number from a B program name with this part and machine, else None."""
+    m = re.match(r"^B_%s_(\d{3,4})%s$" % (re.escape(part), ("_" + re.escape(machine)) if machine else ""), name)
+    return int(m.group(1)) if m else None
+
+
+def _f(x):
+    try:
+        return float(str(x).strip())
+    except Exception:
+        return None
+
+
+def tool_info(tool, inch):
+    """Type and diameter from the tool's own export (same reading as tool_load_mda), diameter in document units."""
+    d = dict(type="", dia=None)
+    name = re.sub(r"[^A-Za-z0-9_.-]", "_", text(getattr(tool, "Name", "")) or "tool")[:60]
+    p = os.path.join(tempfile.gettempdir(), "b_programs_%s.omtdx" % name)
+    try:
+        if not tool.Export(p):
+            return d
+        root = ET.parse(p).getroot()
+        t = root.find(".//tools/tool")
+        if t is not None:
+            d["type"] = t.get("type", "")
+            u = t.find("param[@name='lengthOfUnit']")
+            dia = t.find("param[@name='toolDiameter']")
+            if dia is not None and _f(dia.get("value")) is not None:
+                v = _f(dia.get("value"))
+                src_mm = str(u.get("value") if u is not None else "inch").lower().startswith("m")
+                d["dia"] = (v / MM if src_mm else v) if inch else (v if src_mm else v * MM)
+    except Exception:
+        pass
+    finally:
+        try:
+            os.remove(p)
+        except Exception:
+            pass
+    if not d["type"]:
+        d["type"] = text(getattr(tool, "Type", "")).split(".")[-1].split(":")[0]
+    return d
+
+
+def load_rules(path):
+    """brk_rules.csv -> list of dicts (UTF-8, # lines are comments)."""
+    rows = []
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        lines_ = [ln for ln in f if ln.strip() and not ln.lstrip().startswith("#")]
+    for r in csv.DictReader(lines_):
+        rows.append({k: (r.get(k) or "").strip() for k in RULE_COLUMNS})
+    return rows
+
+
+def _flag(v, default):
+    v = str(v).strip().lower()
+    if v in ("1", "yes", "y", "true", "on"):
+        return True
+    if v in ("0", "no", "n", "false", "off"):
+        return False
+    return default
+
+
+def match_rule(rules, tool_type, dia, inch, purpose=""):
+    """First row whose tool_type matches (* = any), whose purpose matches (rough / finish / none; * or blank = any)
+    and whose diameter range holds dia (in the row's units)."""
+    for r in rules:
+        rt = r["tool_type"]
+        if rt != "*" and rt.lower() != str(tool_type).lower():
+            continue
+        rp = r.get("purpose", "").lower()
+        if rp not in ("", "*") and rp != (purpose or "none"):
+            continue
+        row_inch = not r["units"].upper().startswith("M")
+        d = dia                                   # document units
+        if d is not None and inch and not row_inch:
+            d = d * MM                            # inch document, metric row
+        elif d is not None and not inch and row_inch:
+            d = d / MM                            # metric document, inch row
+        lo, hi = _f(r["dia_min"]), _f(r["dia_max"])
+        if d is not None and ((lo is not None and d < lo) or (hi is not None and d >= hi)):
+            continue
+        if d is None and (lo is not None or hi is not None):
+            continue
+        return r
+    return None
+
+
+def presets(rule, inch):
+    """Generator step flags from a rule row; tolerance in document units, blank stays blank."""
+    if rule is None:
+        return dict(brk=True, brk_tol="", meas=True, meas_always=False, max_brk=2, life=1, setpiece=True, rule="none")
+    tol = _f(rule["brk_tol"])
+    if tol is not None:
+        row_inch = not rule["units"].upper().startswith("M")
+        if row_inch and not inch:
+            tol = tol * MM
+        elif inch and not row_inch:
+            tol = tol / MM
+        tol = ("%.4f" if inch else "%.3f") % tol
+    life = _f(rule["life"])
+    mb = _f(rule["max_brk"])
+    return dict(brk=_flag(rule["brk_check"], True), brk_tol=tol if tol is not None else "",
+                meas=_flag(rule["measure"], True), meas_always=_flag(rule["measure_always"], False),
+                max_brk=int(mb) if mb else 2, life=int(life) if life else 1, setpiece=_flag(rule["setpiece"], True),
+                rule=("%s %s %s-%s %s" % (rule["tool_type"], rule.get("purpose", "") or "*", rule["dia_min"] or "", rule["dia_max"] or "", rule["note"])).strip())
+
+
+def build_export(chosen, part, machine, inch, rules, document, created):
+    """chosen: [(joblist name, classify() entries in tree order)]. Returns (data, problems)."""
+    steps, refused, problems, seen = [], [], [], {}
+    for jl_name, entries in chosen:
+        for e in entries:
+            if e["kind"] == "note":
+                continue
+            if e["kind"] in ("mixed", "notool"):
+                refused.append(dict(name=e["name"], joblist=jl_name,
+                                    reason="more than one tool (%s)" % ",".join(e["tools"]) if e["kind"] == "mixed"
+                                    else "a job has no tool"))
+                continue
+            st = step_of(e["name"], part, machine)
+            if st is None:
+                refused.append(dict(name=e["name"], joblist=jl_name, reason="not a B program name for part %s machine %s" % (part, machine or "-")))
+                continue
+            if st in seen:
+                problems.append("Step %d is used twice: %s and %s" % (st, seen[st], e["name"]))
+                continue
+            seen[st] = e["name"]
+            tool = e.get("tool_obj")
+            ti = tool_info(tool, inch) if tool is not None else dict(type="", dia=None)
+            rule = match_rule(rules, ti["type"], ti["dia"], inch, e.get("purpose", ""))
+            p = presets(rule, inch)
+            tid = e["tools"][0]
+            if len(tid) > 25 or '"' in tid:
+                problems.append("Tool ID %r of %s is longer than 25 characters or has a quote" % (tid, e["name"]))
+            steps.append(dict(step=st, program=e["name"], tool=tid, tool_name=(e["tool_names"] or [""])[0],
+                              tool_type=ti["type"], diameter=round(ti["dia"], 4) if ti["dia"] is not None else None,
+                              jobs=e["jobs"], purpose=e.get("purpose", ""), joblist=jl_name, brk=p["brk"], brk_tol=p["brk_tol"], meas=p["meas"],
+                              meas_always=p["meas_always"], max_brk=p["max_brk"], life=p["life"], setpiece=p["setpiece"],
+                              rule=p["rule"]))
+    order = [s["step"] for s in steps]
+    if order != sorted(order):
+        problems.append("Steps are not in ascending tree order (the generator runs them in tree order).")
+    data = dict(format=FORMAT, version=FORMAT_VERSION, created=created, source="hyperMILL b_programs.py " + VERSION,
+                document=document, joblists=[c[0] for c in chosen], part=part, machine=machine,
+                units="INCH" if inch else "METRIC", steps=steps, refused=refused)
+    return data, problems
+
+
+def write_export(data, folder, base):
+    """<base>_B_PROGRAMS.json and .csv in folder. Returns the two paths."""
+    pj = os.path.join(folder, base + "_B_PROGRAMS.json")
+    pc = os.path.join(folder, base + "_B_PROGRAMS.csv")
+    with open(pj, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=1)
+    cols = ("step", "program", "tool", "tool_name", "tool_type", "diameter", "jobs", "purpose", "brk", "brk_tol", "meas",
+            "meas_always", "max_brk", "life", "setpiece", "rule", "joblist")
+    with open(pc, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(cols)
+        for s in data["steps"]:
+            w.writerow([s.get(c, "") for c in cols])
+    return pj, pc

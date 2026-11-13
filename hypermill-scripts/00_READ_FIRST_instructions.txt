@@ -8,6 +8,8 @@ copy_to_python_folder
   tool_center      one command for building tools: tool wizard, tool selector or tool generator (icon: tool_center.png)
   b_program_rename renames compound jobs to SINUMERIK B program names B_<part>_<step>_<machine>
                    (icon: b_program_rename.png)
+  b_program_export writes the B program list (B programs + tool + breakage presets) for the SINUMERIK generator;
+                   the export step of the go-to-machine script, runnable on its own until that exists
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
                    B program name rule (b_programs.py)
@@ -232,6 +234,22 @@ Undo last rename: the old names are saved before renaming (b_program_rename_undo
   Undo only works in the document that was renamed, and leaves alone any compound job renamed by hand since.
 Log: b_program_rename_log.txt. Last values: b_program_rename_last.json.
 
+B PROGRAM EXPORT
+Writes <document>_B_PROGRAMS.json and .csv next to the document (else C:\Users\Public\Documents\OPEN MIND) for the
+SINUMERIK generator: Import B list, pick the .json. File format: tool_library\B_PROGRAM_LIST_FORMAT.txt.
+Screen: Joblist (one, or All joblists), Part number and Machine (start on the last B program rename).
+Per B program (tree order): step (from the name), program, tool ID (= tool name on the control, NEWT), tool type and
+diameter (from the tool export), job count, roughing / finishing, and the presets from tool_library\brk_rules.csv:
+break check, breakage tolerance, measure, always measure, max breaks, life, SETPIECE.
+Roughing / finishing: a job that leaves stock (*AUFMASS, *AUFMASS_Z or *AUFMASS_HORI above 0) is roughing, zero stock is
+finishing, a job without those settings (drilling, tapping, reaming) has neither. A compound job with a finishing job
+counts as finishing (the tighter tolerance).
+brk_rules.csv holds the shop standards: drills 0.002, roughing 0.004 (solid and inserted). Finishing (.00005-.0005) and
+tools without stock to leave are blank: the generator shows those steps in red until a value is entered.
+Left out and listed: notes, compound jobs with more than one tool or a job without a tool, names that do not follow the
+rule for the part and machine given. Nothing is written when a step number is used twice.
+Log: b_program_export_log.txt.
+
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
 rpm caps every speed; the feed follows at the same chip load. The last choice is remembered for all scripts.
@@ -241,3 +259,4 @@ tool_library\job_settings.json   settings per material group > material > operat
 tool_library\strategies.py       part plans per industry and part type
 tool_library\job_types.py        toolpath types, their CreateJob codes and the tool rule part_wizard_2 uses
 tool_library\machines.csv        machines and spindles
+tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export)

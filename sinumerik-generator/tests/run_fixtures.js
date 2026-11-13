@@ -24,7 +24,7 @@ fs.mkdirSync(out, { recursive: true });
 let failures = 0;
 function fail(msg) { failures++; console.log('FAIL ' + msg); }
 
-const fixtures = fs.readdirSync(path.join(here, 'fixtures')).filter(f => f.endsWith('.json')).sort();
+const fixtures = fs.readdirSync(path.join(here, 'fixtures')).filter(f => /^f\d.*\.json$/.test(f)).sort();
 const expectBlank = { f4_32nests: [17] };
 const gens = [];
 for (const f of fixtures) {
@@ -213,6 +213,47 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   const old = JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f1_old_package.json'), 'utf8'));
   delete old.builder;
   eq(S.normalizeJob(old).builder, { first: '10', last: '', inc: '10' }, 'v1.0 job without builder loads with defaults');
+}
+
+/* ---- B program list import (sample written by hypermill-scripts/tests/test_b_program_export.py) ---- */
+{
+  const sample = JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'b_list_sample.json'), 'utf8'));
+  const rd = S.readBList(sample);
+  eq(rd.error, '', 'B list sample reads');
+  eq(rd.list.steps.map(s => [s.step, s.program, s.tool, s.brkTol]), [['10', 'B_00948602_025_010_HF5', '905083900', '0.0040'],
+    ['20', 'B_00948602_025_020_HF5', '475080900', '0.0020'], ['30', 'B_00948602_025_030_HF5', '416580900', ''],
+    ['40', 'B_00948602_025_040_HF5', '350080900', '']], 'B list rows: step, program, tool, preset tolerance');
+  eq([rd.list.part, rd.list.machine, rd.list.units, rd.list.refused.length], ['00948602_025', 'HF5', 'INCH', 2], 'B list header and refused');
+  eq(rd.list.steps.every(s => s.brk && s.meas && !s.measAlways && s.maxBrk === '2' && s.life === '1' && s.setpiece), true,
+    'B list presets map onto the row fields');
+  for (const [label, mut, want] of [
+    ['no format tag', d => { delete d.format; }, 'format tag'],
+    ['version 2', d => { d.version = 2; }, 'version 2'],
+    ['bad units', d => { d.units = 'MM'; }, 'INCH or METRIC'],
+    ['no steps', d => { d.steps = []; }, 'no steps'],
+    ['step not whole', d => { d.steps[1].step = '20a'; }, 'entry 2'],
+  ]) {
+    const d = JSON.parse(JSON.stringify(sample)); mut(d);
+    const e = S.readBList(d).error;
+    if (!e.includes(want)) fail('B list should reject ' + label + ': got "' + e + '"'); else console.log('ok   B list rejects ' + label);
+  }
+  const j = S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f2_horizontal_inch.json'), 'utf8')));
+  const ov = S.applyBList(j, rd.list, 'overwrite');
+  eq(ov.steps.map(s => s.step), ['10', '20', '30', '40'], 'overwrite: the list replaces the table');
+  const kp = S.applyBList(j, rd.list, 'keep');
+  eq([kp.steps.map(s => s.step), kp.added, kp.steps[0].tool], [['10', '20', '30', '40'], 1, 'FM_3IN'], 'keep: existing 10-30 untouched, 40 added');
+  j.steps = ov.steps; j.header.part = rd.list.part; j.header.machine = rd.list.machine; j.config.units = rd.list.units;
+  j.probeStep.program = 'B_00948602_025_001_HF5';
+  const v1 = S.validate(j);
+  eq(v1.errors.map(e => e.path).filter(p => /brkTol/.test(p)), ['steps.2.brkTol', 'steps.3.brkTol'], 'only the blank imported tolerances fail validation');
+  j.steps[2].brkTol = '0.0005'; j.steps[3].brkTol = '0.0005';
+  const v2 = S.validate(j);
+  eq(v2.errors, [], 'tolerances filled: imported job validates');
+  const g = S.generate(j, { date: '2026-11-13' });
+  const dir = path.join(out, 'b_list_import');
+  for (const file of g.files) { const p = path.join(dir, file.path); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, file.text); }
+  const a = g.files.find(f => f.path === 'WKS/A_P1.MPF').text;
+  eq(a.includes('L_RUN_NESTS("905083900",0.0040,4,"B_00948602_025_010_HF5",1,0,1,2,0,1,1)'), true, 'A_P1 calls L_RUN_NESTS with the imported tool and program');
 }
 
 /* ---- JSON round trip ---- */

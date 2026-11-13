@@ -1,0 +1,17 @@
+# brk_rules.csv - breakage and measuring presets per tool for the B program list (b_program_export).
+# Shop breakage detection standards (inch):
+#   drills 0.002 (solid and inserted)   roughing 0.004 (solid and inserted)   finishing .00005-.0005 (solid and inserted)
+# The first row that matches a compound job's tool wins:
+#   tool_type  as written in the hyperMILL tool export (endMill, radiusMill, ballMill, faceMill, drilTool, tapTool ...); * = any
+#   purpose    rough = a job in the compound job leaves stock (*AUFMASS > 0), finish = a job leaves none,
+#              none = no stock-to-leave setting (drilling, tapping, reaming ...); * = any.
+#              A compound job with a finishing job counts as finish.
+#   dia_min, dia_max  diameter range dia_min <= D < dia_max in this row's units; blank = open
+#   units      INCH or METRIC (diameters and brk_tol of this row)
+# Flags 1 = on, 0 = off: brk_check (laser break check after each nest), measure, measure_always (else smart: new sisters).
+# brk_tol blank = the generator shows the step in red until you fill it. No value is guessed here.
+tool_type,purpose,dia_min,dia_max,units,brk_check,brk_tol,measure,measure_always,max_brk,life,setpiece,note
+drilTool,*,,,INCH,1,0.002,1,0,2,1,1,drills solid and inserted
+*,rough,,,INCH,1,0.004,1,0,2,1,1,roughing solid and inserted
+*,finish,,,INCH,1,,1,0,2,1,1,finishing: standard .00005-.0005 - set the value
+*,*,,,INCH,1,,1,0,2,1,1,no stock to leave (spot drill tap ream thread mill bore): set per type

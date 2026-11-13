@@ -1,0 +1,40 @@
+B PROGRAM LIST - FILE FORMAT (version 1)
+The same text sits in tool_library (hyperMILL side) and next to SINUMERIK_GENERATOR.html (generator side).
+Written by: b_program_export (later the go-to-machine script), tool_library\b_programs.py build_export / write_export.
+Read by: SINUMERIK_GENERATOR.html, button "Import B list".
+
+FILES
+  <document>_B_PROGRAMS.json   the generator reads this one (UTF-8)
+  <document>_B_PROGRAMS.csv    the same steps for people (UTF-8 with BOM, opens in Excel)
+
+JSON
+  format     "SINUMERIK_B_PROGRAM_LIST"   the generator rejects any other value
+  version    1
+  created    "YYYY-MM-DD HH:MM:SS"
+  source     writer and version
+  document   full path of the hyperMILL document
+  joblists   joblist names exported, in order
+  part       part number used in the names (B_<part>_<step>_<machine>)
+  machine    machine designation used in the names ("" = none)
+  units      "INCH" or "METRIC" (the document's units; diameters and brk_tol are in these units)
+  steps      one entry per B program, in tree order:
+    step         integer, from the name
+    program      the B program name = the compound job name = the NC file name
+    tool         tool ID (Common > ID) = the tool name on the control (NEWT, T="...")
+    tool_name    hyperMILL tool name (information)
+    tool_type    hyperMILL tool export type (endMill, drilTool ...)
+    diameter     number or null, document units
+    jobs         number of jobs in the compound job
+    joblist      joblist name
+    brk          true/false  laser break check after each nest
+    brk_tol      string, document units; "" = not set (the generator asks for it)
+    meas         true/false  measure the tool on the laser
+    meas_always  true/false  measure before every nest (false = smart: new sisters only)
+    max_brk      integer, breaks in the step before the machine holds
+    life         integer, pieces SETPIECE counts per good nest
+    setpiece     true/false
+    rule         the brk_rules.csv row that set the presets (information)
+  refused    compound jobs left out, with the reason:
+    name, joblist, reason   (more than one tool / a job has no tool / not a B program name)
+Notes (empty compound jobs) are not listed.
+Unknown keys are ignored by the reader, so later versions may add keys without breaking version 1 readers.

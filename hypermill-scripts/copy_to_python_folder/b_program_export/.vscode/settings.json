@@ -1,0 +1,5 @@
+
+{
+    "python.defaultInterpreterPath": "C:/Program Files/OPEN MIND/Shared/35.0/python/python.exe",
+    "python.analysis.extraPaths": ["C:/Users/Public/Documents/OPEN MIND/pythonlibrary", "C:/Users/Public/Documents/OPEN MIND/python/b_program_export/libs"]
+}

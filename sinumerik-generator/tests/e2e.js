@@ -196,6 +196,61 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   }
   check(same, 'reloaded job generates identical files');
 
+  /* 6b. Import B list on a fresh page (sample written by the hyperMILL export test) */
+  {
+    const p2 = await ctx.newPage();
+    p2.on('pageerror', e => errors.push(String(e)));
+    p2.on('dialog', d => d.dismiss());
+    await p2.goto(page_url);
+    const sample = path.join(here, 'fixtures', 'b_list_sample.json');
+    const importIt = async () => {
+      const [fc] = await Promise.all([p2.waitForEvent('filechooser'), p2.click('#btnBList')]);
+      await fc.setFiles(sample);
+    };
+    const vals = f => p2.$$eval('[data-path$=".' + f + '"]', l => l.filter(i => /^steps\./.test(i.dataset.path)).map(i => i.value));
+    await importIt();
+    await p2.waitForSelector('#dlg[open]');
+    check((await p2.textContent('#dlgBody')).includes('The B program list is INCH, this page is METRIC'), 'import: units differ -> asks');
+    await p2.click('#dlg button[data-choice="switch"]');
+    await p2.waitForSelector('.msg');
+    check(await p2.$eval('[data-path="config.units"]', e => e.value) === 'INCH', 'import: page switched to INCH');
+    check(await p2.$eval('[data-path="header.part"]', e => e.value) === '00948602_025' &&
+          await p2.$eval('[data-path="header.machine"]', e => e.value) === 'HF5', 'import: blank header filled with part and machine');
+    check(JSON.stringify(await vals('program')) === JSON.stringify(['B_00948602_025_010_HF5', 'B_00948602_025_020_HF5',
+      'B_00948602_025_030_HF5', 'B_00948602_025_040_HF5']), 'import: 4 B programs in the step table');
+    check(JSON.stringify(await vals('tool')) === JSON.stringify(['905083900', '475080900', '416580900', '350080900']), 'import: tool IDs');
+    check(JSON.stringify(await vals('brkTol')) === JSON.stringify(['0.0040', '0.0020', '', '']), 'import: preset tolerances');
+    check(await p2.$eval('[data-path="steps.2.brkTol"]', e => e.classList.contains('err')) &&
+          !(await p2.$eval('[data-path="steps.0.brkTol"]', e => e.classList.contains('err'))), 'import: blank tolerances red, preset ones not');
+    const m1 = await p2.textContent('#msgs');
+    check(m1.includes('Imported the 4 B programs') && m1.includes('2 steps have break check on and no tolerance') &&
+          m1.includes('Left out in hyperMILL: B_00948602_025_111_HF5'), 'import: message with blanks and left-out compound jobs');
+    await p2.fill('[data-path="steps.0.tool"]', 'EDITED');
+    await p2.dispatchEvent('[data-path="steps.0.tool"]', 'change');
+    await importIt();
+    await p2.waitForSelector('#dlg[open]');
+    check((await p2.textContent('#dlgTitle')) === 'Step table already has data', 'import over data: asks overwrite / keep');
+    await p2.click('#dlg button[data-choice="keep"]');
+    await p2.waitForSelector('.msg');
+    check((await vals('tool'))[0] === 'EDITED' && (await vals('step')).length === 4, 'import keep: edited row kept, nothing added');
+    await importIt();
+    await p2.waitForSelector('#dlg[open]');
+    await p2.click('#dlg button[data-choice="overwrite"]');
+    await p2.waitForSelector('.msg');
+    check((await vals('tool'))[0] === '905083900', 'import overwrite: rows replaced');
+    await p2.selectOption('[data-path="config.units"]', 'METRIC');
+    await importIt();
+    await p2.waitForSelector('#dlg[open]');
+    await p2.click('#dlg button[data-choice="cancel"]');
+    check((await p2.textContent('#msgs')).includes('Import cancelled') &&
+          await p2.$eval('[data-path="config.units"]', e => e.value) === 'METRIC', 'import cancel: page unchanged');
+    const [fc2] = await Promise.all([p2.waitForEvent('filechooser'), p2.click('#btnBList')]);
+    await fc2.setFiles(fx('f1_old_package'));
+    await p2.waitForSelector('.msg.bad');
+    check((await p2.textContent('#msgs')).includes('Not a B program list'), 'import: a job file is rejected as not a B program list');
+    await p2.close();
+  }
+
   /* 7. screenshots for review */
   await loadJob('f1_old_package');
   await page.screenshot({ path: path.join(out, 'shot_config.png'), fullPage: true });

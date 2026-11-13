@@ -1,0 +1,103 @@
+{
+ "format": "SINUMERIK_B_PROGRAM_LIST",
+ "version": 1,
+ "created": "2026-11-13 01:36:26",
+ "source": "hyperMILL b_programs.py 2026-11-13",
+ "document": "/tmp/bpe_pgpbcsui/job/00948602_025_A_OP200_03.hmc",
+ "joblists": [
+  "00948602-025_B_OP200_02"
+ ],
+ "part": "00948602_025",
+ "machine": "HF5",
+ "units": "INCH",
+ "steps": [
+  {
+   "step": 10,
+   "program": "B_00948602_025_010_HF5",
+   "tool": "905083900",
+   "tool_name": "2in Ceramic Facemill",
+   "tool_type": "faceMill",
+   "diameter": 2.0,
+   "jobs": 2,
+   "purpose": "rough",
+   "joblist": "00948602-025_B_OP200_02",
+   "brk": true,
+   "brk_tol": "0.0040",
+   "meas": true,
+   "meas_always": false,
+   "max_brk": 2,
+   "life": 1,
+   "setpiece": true,
+   "rule": "* rough - roughing solid and inserted"
+  },
+  {
+   "step": 20,
+   "program": "B_00948602_025_020_HF5",
+   "tool": "475080900",
+   "tool_name": "19mm Drill",
+   "tool_type": "drilTool",
+   "diameter": 0.748,
+   "jobs": 1,
+   "purpose": "",
+   "joblist": "00948602-025_B_OP200_02",
+   "brk": true,
+   "brk_tol": "0.0020",
+   "meas": true,
+   "meas_always": false,
+   "max_brk": 2,
+   "life": 1,
+   "setpiece": true,
+   "rule": "drilTool * - drills solid and inserted"
+  },
+  {
+   "step": 30,
+   "program": "B_00948602_025_030_HF5",
+   "tool": "416580900",
+   "tool_name": "1/4-20 Tap",
+   "tool_type": "tapTool",
+   "diameter": 0.25,
+   "jobs": 1,
+   "purpose": "",
+   "joblist": "00948602-025_B_OP200_02",
+   "brk": true,
+   "brk_tol": "",
+   "meas": true,
+   "meas_always": false,
+   "max_brk": 2,
+   "life": 1,
+   "setpiece": true,
+   "rule": "* * - no stock to leave (spot drill tap ream thread mill bore): set per type"
+  },
+  {
+   "step": 40,
+   "program": "B_00948602_025_040_HF5",
+   "tool": "350080900",
+   "tool_name": "1/2 End mill",
+   "tool_type": "endMill",
+   "diameter": 0.5,
+   "jobs": 2,
+   "purpose": "finish",
+   "joblist": "00948602-025_B_OP200_02",
+   "brk": true,
+   "brk_tol": "",
+   "meas": true,
+   "meas_always": false,
+   "max_brk": 2,
+   "life": 1,
+   "setpiece": true,
+   "rule": "* finish - finishing: standard .00005-.0005 - set the value"
+  }
+ ],
+ "refused": [
+  {
+   "name": "B_00948602_025_111_HF5",
+   "joblist": "00948602-025_B_OP200_02",
+   "reason": "more than one tool (416580900,850080900)"
+  },
+  {
+   "name": "00948602_025_B_OP299_01",
+   "joblist": "00948602-025_B_OP200_02",
+   "reason": "not a B program name for part 00948602_025 machine HF5"
+  }
+ ]
+}

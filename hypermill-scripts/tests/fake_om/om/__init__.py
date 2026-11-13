@@ -3,20 +3,32 @@ WRITES = []
 
 
 class Tool:
-    def __init__(self, tid, name=None):
+    def __init__(self, tid, name=None, ttype="endMill", dia=0.5, unit="inch"):
         self.ID = tid
         self.Number = int(tid) if tid.isdigit() else 0
         self.Name = name or tid
         self.UUID = "{T-%s}" % tid
+        self._type, self._dia, self._unit = ttype, dia, unit
+
+    def Export(self, path):
+        with open(path, "w", encoding="utf-8") as f:
+            f.write('<root><tools><tool type="%s"><param name="lengthOfUnit" value="%s"/>'
+                    '<param name="toolDiameter" value="%s"/></tool></tools>'
+                    '<ncTools><ncTool id="%s" name="%s"/></ncTools></root>' % (self._type, self._unit, self._dia, self.ID, self.Name))
+        return True
 
 
 class Job:
-    def __init__(self, name, tool):
+    def __init__(self, name, tool, cfg=None):
         self.Name = name
         self._tool = tool
+        self._cfg = dict(cfg or {})
 
     def GetTool(self):
         return self._tool
+
+    def GetCfgParameters(self):
+        return dict(self._cfg)
 
 
 class CompoundJob:

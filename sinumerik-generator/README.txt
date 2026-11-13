@@ -23,6 +23,20 @@ STEP BUILDER (tab 1)
     Cancel           nothing changes
   "Fill blank program names" uses the same pattern on blank names only.
 
+IMPORT B LIST (from hyperMILL)
+  Import B list..., pick <document>_B_PROGRAMS.json written by the hyperMILL
+  b_program_export script (later the go-to-machine script). Format:
+  B_PROGRAM_LIST_FORMAT.txt.
+  It fills the step table (step, tool ID, B program name, break check,
+  breakage tolerance, measure, max breaks, life, SETPIECE), and part and
+  machine in the Header when they are blank. The probe step is left alone.
+  Asks first when: the list's units differ from the page (switch or
+  cancel), part or machine differ from the Header (list's / page's /
+  cancel), the table already has data (overwrite all / keep existing and
+  add missing / cancel).
+  Steps with break check on and no tolerance show in red. Compound jobs
+  hyperMILL left out (more than one tool, wrong name) are listed.
+
 WHERE THE FILES GO
   DEF/UGUD.DEF    definitions directory (_N_DEF_DIR, file _N_UGUD_DEF)
   CUS/L_*.SPF     user cycles directory (_N_CUS_DIR). Called by name.
