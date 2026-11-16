@@ -14,7 +14,7 @@
 # tool_load_mda writes into NEWT).
 import re
 
-VERSION = "2026-11-13"
+VERSION = "2026-11-16"
 MAX_NAME = 24
 MAX_STEP = 9999
 PROBE_STEP = 1
@@ -167,8 +167,9 @@ def compound_purpose(purposes):
 def plan(entries, part, machine, start, advance, other_names):
     """entries: classify() dicts in tree order; an entry with pick=False is left as it is.
     other_names: names of compound jobs in the document that this run does not rename.
-    Returns dict(rows, renames, width, errors). Each row: entry + action + new name.
-      action: rename | same (already has its new name) | note | mixed | notool | unpicked"""
+    Returns dict(rows, renames, width, errors, warnings). Each row: entry + action + new name.
+      action: rename | same (already has its new name) | note | mixed | notool | unpicked
+    warnings: compound jobs this run leaves alone whose name is over MAX_NAME (notes excluded: they post nothing)."""
     s, a = as_int(start), as_int(advance)
     todo = [e for e in entries if e["kind"] == "one" and e.get("pick", True)]
     last = s + a * (len(todo) - 1) if todo else s
@@ -204,7 +205,16 @@ def plan(entries, part, machine, start, advance, other_names):
     if clash:
         errors.append("These names already belong to compound jobs this run does not rename: %s" % ", ".join(clash[:10]))
     renames = [r for r in rows if r["action"] == "rename"]
-    return dict(rows=rows, renames=renames, width=width, errors=errors)
+    warnings = [long_name_text(r["name"]) for r in rows if r["action"] in ("unpicked", "mixed", "notool") and too_long(r["name"])]
+    return dict(rows=rows, renames=renames, width=width, errors=errors, warnings=warnings)
+
+
+def too_long(name):
+    return len(name) > MAX_NAME
+
+
+def long_name_text(name):
+    return "%s is %d characters (SINUMERIK takes %d at most, without .SPF)" % (name, len(name), MAX_NAME)
 
 
 def row_text(r):
@@ -215,6 +225,8 @@ def row_text(r):
                                                      "   already named" if r["action"] == "same" else "")
     why = {"note": "note, skipped", "mixed": "NOT RENAMED: more than one tool (%s)" % tools,
            "notool": "NOT RENAMED: a job has no tool", "unpicked": "not picked, left as it is"}[r["action"]]
+    if r["action"] != "note" and too_long(r["name"]):
+        why += "   NAME OVER %d CHARACTERS" % MAX_NAME
     return "%-24s    %s   %s" % ("", r["name"], why)
 
 
@@ -395,6 +407,8 @@ def build_export(chosen, part, machine, inch, rules, document, created):
             tid = e["tools"][0]
             if len(tid) > 25 or '"' in tid:
                 problems.append("Tool ID %r of %s is longer than 25 characters or has a quote" % (tid, e["name"]))
+            if too_long(e["name"]):
+                problems.append("WARNING: %s. Written to the list; the generator refuses it until it is renamed." % long_name_text(e["name"]))
             steps.append(dict(step=st, program=e["name"], tool=tid, tool_name=(e["tool_names"] or [""])[0],
                               tool_type=ti["type"], diameter=round(ti["dia"], 4) if ti["dia"] is not None else None,
                               jobs=e["jobs"], purpose=e.get("purpose", ""), joblist=jl_name, brk=p["brk"], brk_tol=p["brk_tol"], meas=p["meas"],

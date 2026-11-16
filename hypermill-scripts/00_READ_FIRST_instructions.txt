@@ -229,6 +229,8 @@ Rules:
   The review lists them. Split them into one tool each and run again.
 - Starting step 2 or more: step 1 is the probe program the generator writes.
 - A new name may not belong to a compound job the run leaves alone (another joblist, unpicked, notes): listed, nothing renamed.
+- WARNING on the review screen: compound jobs the run leaves alone (unpicked, more than one tool, no tool) whose name is
+  over 24 characters. The rename still runs. Pick them or rename them by hand. Notes are never warned (they post nothing).
 - Each name is set and read back. If hyperMILL does not take it, the run stops there and says how many were renamed.
 Undo last rename: the old names are saved before renaming (b_program_rename_undo.json in C:\Users\Public\Documents\OPEN MIND).
   Undo only works in the document that was renamed, and leaves alone any compound job renamed by hand since.
@@ -246,10 +248,12 @@ finishing, a job without those settings (drilling, tapping, reaming) has neither
 counts as finishing (the tighter tolerance).
 brk_rules.csv holds the shop standards (solid and inserted alike): drills 0.002, roughing 0.004, finishing by tool
 diameter: under 0.125 .0002, 0.125-0.250 .0003, 0.250-0.500 .0004, 0.500-1.000 .0006, 1.000 and over .0008.
-Tools without stock to leave (spot drills, taps, reamers, thread mills, boring bars) are blank: the generator shows
-those steps in red until a value is entered.
+Tools without stock to leave take the closest type: spot drills (drilTool), taps and reamers = drill 0.002; thread
+mills, boring bars, chamfer and T-slot cutters and the rest = finishing by diameter. Blank only when hyperMILL gives no
+diameter: the generator shows that step in red until a value is entered.
 Left out and listed: notes, compound jobs with more than one tool or a job without a tool, names that do not follow the
 rule for the part and machine given. Nothing is written when a step number is used twice.
+WARNING (the list is still written): a B program name over 24 characters. The generator refuses it until it is renamed.
 Log: b_program_export_log.txt.
 
 MACHINE AND SPINDLE

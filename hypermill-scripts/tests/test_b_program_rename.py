@@ -25,6 +25,10 @@ def check(cond, label):
         fails.append(label)
 
 
+def flat(t):
+    return " ".join(str(t).split())
+
+
 def load_script():
     spec = importlib.util.spec_from_file_location("b_program_rename_under_test", SCRIPT)
     m = importlib.util.module_from_spec(spec)
@@ -156,6 +160,22 @@ m, left = run([inputs(which=1), untick_second, confirm(True)])
 check(names(L)[1:3] == ["B_00948602_025_010_HF5", "00948602_025_B_OP206_01"] and names(L)[4] == "B_00948602_025_020_HF5",
       "pick: unticked job keeps its name and takes no number")
 check(gui.SHOWN[2][0].endswith("pick 1 of 1") and sum(1 for f in gui.SHOWN[2][1] if f[0] == "bool") == 5, "pick screen shows the 5 candidates")
+
+# names over 24 that the run leaves alone: WARNING on the review screen (notes excluded), rename still runs
+fresh_tmp()
+L = build()
+cjs = L[0].GetCompoundJobs()
+cjs[2].Name = "00948602_025_B_OP206_LONG_NAME"          # one tool, unticked below (30 characters)
+cjs[-1].Name = "B_00948602_025_OP200_HF5_X"              # job without a tool (26 characters)
+m, left = run([inputs(which=1), untick_second, confirm(True)])
+review = flat(gui.BOXES[-2])
+check("WARNING - names over 24" in review and "00948602_025_B_OP206_LONG_NAME is 30 characters" in review
+      and "B_00948602_025_OP200_HF5_X is 26 characters" in review, "long names left alone: WARNING lists both with their length")
+check("Rough Top Down" not in review, "long note name: not warned (notes post nothing)")
+check(names(L)[1] == "B_00948602_025_010_HF5" and "Renamed 4 compound jobs" in gui.BOXES[-1], "warning only: the rename still runs")
+check(any("NAME OVER 24 CHARACTERS" in o for o in gui.OUTPUT), "output window marks the long names")
+check("WARNING: B_00948602_025_OP200_HF5_X" in open(os.path.join(tempfile.gettempdir(), "b_program_rename_log.txt")).read(),
+      "log holds the warning")
 
 # 4-digit steps
 fresh_tmp()

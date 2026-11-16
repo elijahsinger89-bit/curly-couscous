@@ -6,6 +6,7 @@
 #          3 pick screens (10 per screen), only when "Pick" was chosen
 #          4 review: old -> new list in the output window, then Rename yes / no
 # Rules: empty compound jobs (notes, dividers) are skipped, keep their text and take no step number.
+#        Compound jobs left alone with a name over 24 characters are listed as a WARNING on the review screen.
 #        A compound job whose jobs use more than one tool, or a job without a tool, is not renamed.
 #        Steps count up in tree order from the starting step by the advance. 3-digit steps, 4 when the last is 1000+.
 #        24 characters at most. A new name may not belong to a compound job the run leaves alone.
@@ -217,6 +218,12 @@ def do_rename(model, doc, bp, scope):
         summary.append("")
         summary.append("Not renamed (split them into one tool each):")
         summary += ["  %s  (T %s)" % (r["name"], ",".join(r["tools"]) or "none") for r in refused]
+    if pl["warnings"]:
+        summary.append("")
+        summary.append("WARNING - names over %d characters this run does not rename (pick them or rename by hand):" % bp.MAX_NAME)
+        summary += ["  " + w for w in pl["warnings"]]
+        for w in pl["warnings"]:
+            log("WARNING:", w)
     summary.append("")
     summary.append("First and last:")
     named = [r for r in pl["rows"] if r.get("new")]

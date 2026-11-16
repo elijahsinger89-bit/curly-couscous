@@ -60,7 +60,7 @@ check(p["brk_tol"] == "0.254", "inch 0.01 row in a metric document -> 0.254 mm")
 r = bp.match_rule(rules, "drilTool", 3.0, False)
 check(r is rules[0], "3 mm drill in a metric document = 0.118 in < 0.125: small drill row")
 shipped = bp.load_rules(os.path.join(LIB, "brk_rules.csv"))
-check(len(shipped) == 8, "shipped brk_rules.csv: 8 rows (drills, rough, 5 finishing bands, rest)")
+check(len(shipped) == 10, "shipped brk_rules.csv: 10 rows (drills, taps, reamers, rough, 5 diameter bands, no diameter)")
 tol = lambda t, purpose, d=0.5: bp.presets(bp.match_rule(shipped, t, d, True, purpose), True)["brk_tol"]
 check(tol("drilTool", "") == "0.0020" and tol("drilTool", "rough") == "0.0020", "standard: drills 0.002 whatever the stock")
 check(tol("faceMill", "rough", 2.0) == "0.0040" and tol("endMill", "rough") == "0.0040", "standard: roughing 0.004")
@@ -68,7 +68,11 @@ bands = [tol("endMill", "finish", d) for d in (0.0625, 0.125, 0.249, 0.25, 0.5, 
 check(bands == ["0.0002", "0.0003", "0.0003", "0.0004", "0.0006", "0.0006", "0.0008", "0.0008"], "finishing by diameter: .0002 / .0003 / .0004 / .0006 / .0008 " + str(bands))
 check(tol("endMill", "finish", None) == "", "finishing with unknown diameter: blank (no band fits)")
 check(bp.presets(bp.match_rule(shipped, "ballMill", 12.0, False, "finish"), False)["brk_tol"] == "0.010", "metric document: 12 mm finisher -> .0004 in -> 0.010 mm")
-check(tol("tapTool", "") == "", "no stock to leave (tap): blank")
+check(tol("tapTool", "") == "0.0020" and tol("reamer", "") == "0.0020", "closest type: tap and reamer = drill 0.002")
+check(tol("threadMill", "", 0.25) == "0.0004" and tol("boringBar", "", 0.75) == "0.0006", "closest type: thread mill, boring bar = finishing by diameter")
+check(tol("chamferedcutter", "", 0.5) == "0.0006" and tol("Tslotcutter", "", 1.25) == "0.0008", "closest type: chamfer, T-slot = finishing by diameter")
+check(tol("chamferedcutter", "rough", 0.5) == "0.0040", "chamfer cutter leaving stock = roughing 0.004")
+check(tol("threadMill", "", None) == "" and tol("endMill", "rough", None) == "0.0040", "no diameter: blank unless roughing")
 check(bp.presets(bp.match_rule(shipped, "drilTool", 20.0, False, ""), False)["brk_tol"] == "0.051", "metric document: drill 0.002 in -> 0.051 mm")
 J = om.Job
 check(bp.job_purpose(J("r", None, {"*AUFMASS": "0.019685", "*AUFMASS_HORI": "0"})) == "rough", "stock to leave 0.0197 = rough")
@@ -86,14 +90,15 @@ def build(doc_path, dup=False):
     T = om.Tool
     fm = T("905083900", "2in Ceramic Facemill", "faceMill", 2.0)
     dr = T("475080900", "19mm Drill", "drilTool", 19.0, "mm")
-    tap = T("416580900", "1/4-20 Tap", "tapTool", 0.25)
-    spot = T("850080900", "Spot", "spotDrill", 0.5)
+    tm = T("416580900", "Thread mill without diameter", "threadMill", None)
+    tap = T("416581000", "1/4-20 Tap", "tapTool", 0.25)
+    spot = T("850080900", "Spot", "drilTool", 0.5)
     rough, finish = {"*AUFMASS": "0.019685", "*AUFMASS_HORI": "0"}, {"*AUFMASS": "0", "*AUFMASS_Z": "0"}
     em = T("350080900", "1/2 End mill", "endMill", 0.5)
     cs = [om.CompoundJob("------ notes ------"),
           om.CompoundJob("B_00948602_025_010_HF5", [om.Job("a", fm, rough), om.Job("b", fm, rough)]),
           om.CompoundJob("B_00948602_025_020_HF5", [om.Job("c", dr)]),
-          om.CompoundJob("B_00948602_025_%s_HF5" % ("020" if dup else "030"), [om.Job("d", tap)]),
+          om.CompoundJob("B_00948602_025_%s_HF5" % ("020" if dup else "030"), [om.Job("d", tm)]),
           om.CompoundJob("B_00948602_025_040_HF5", [om.Job("h", em, rough), om.Job("i", em, finish)]),
           om.CompoundJob("B_00948602_025_111_HF5", [om.Job("e", tap), om.Job("f", spot)]),
           om.CompoundJob("00948602_025_B_OP299_01", [om.Job("g", fm)])]
@@ -135,7 +140,8 @@ check([s["tool"] for s in data["steps"]] == ["905083900", "475080900", "41658090
 check(data["steps"][1]["tool_type"] == "drilTool" and abs(data["steps"][1]["diameter"] - 0.748) < 0.001,
       "19 mm drill exported as drilTool D0.748 in")
 check(data["steps"][0]["jobs"] == 2, "job count per compound job")
-check([s["brk_tol"] for s in data["steps"]] == ["0.0040", "0.0020", "", "0.0006"], "presets: face mill rough 0.004, drill 0.002, tap blank, 0.5 end mill rough+finish 0.0006")
+check([s["brk_tol"] for s in data["steps"]] == ["0.0040", "0.0020", "", "0.0006"],
+      "presets: face mill rough 0.004, drill 0.002, thread mill without diameter blank, 0.5 end mill rough+finish 0.0006")
 check([s["purpose"] for s in data["steps"]] == ["rough", "", "", "finish"], "purpose per B program")
 reasons = {r["name"]: r["reason"] for r in data["refused"]}
 check(set(reasons) == {"B_00948602_025_111_HF5", "00948602_025_B_OP299_01"}, "refused: mixed tools and old naming")
@@ -155,6 +161,17 @@ check(not os.path.exists(pj) and "used twice" in flat(gui.BOXES[-1]), "duplicate
 build(doc)
 run([ans(Machine="F5000")])
 check("Nothing written" in flat(gui.BOXES[-1]), "names for another machine: nothing written")
+
+# B program name over 24 characters: WARNING, the list is still written
+os.remove(pj) if os.path.exists(pj) else None
+om._App.CurrentDocument = om.Document(doc, om.Model([om.JobList("OP200", [
+    om.CompoundJob("B_00948602_025_010_HF5LONG", [om.Job("a", om.Tool("905083900", "fm", "faceMill", 2.0), {"*AUFMASS": "0.02"})])])], inch=True))
+run([ans(Machine="HF5LONG")])
+box = flat(gui.BOXES[-1])
+check(os.path.exists(pj) and "1 B program written" in box, "name over 24: the list is still written")
+check("WARNING: B_00948602_025_010_HF5LONG is 26 characters (SINUMERIK takes 24 at most" in box and "generator refuses it" in box,
+      "name over 24: WARNING with the length in the final message")
+check("WARNING: B_00948602_025_010_HF5LONG" in open(os.path.join(tmp, "b_program_export_log.txt")).read(), "name over 24: WARNING in the log")
 
 # unwritable / Windows-style document path -> falls back to the OPEN MIND (here: temp) folder
 build(r"C:\jobs\OTHER_DOC.hmc")

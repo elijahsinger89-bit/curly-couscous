@@ -1,21 +1,27 @@
 # brk_rules.csv - breakage and measuring presets per tool for the B program list (b_program_export).
 # Shop breakage detection standards (inch), solid and inserted alike:
 #   drills 0.002   roughing 0.004   finishing by tool diameter .0002 (under 0.125) to .0008 (1.000 and over)
+# Tools with no stock-to-leave setting take the closest type: taps and reamers = drill 0.002;
+#   thread mills, boring bars, chamfer and T-slot cutters and the rest = finishing by diameter.
 # The first row that matches a compound job's tool wins:
-#   tool_type  as written in the hyperMILL tool export (endMill, radiusMill, ballMill, faceMill, drilTool, tapTool ...); * = any
+#   tool_type  as written in the hyperMILL tool export (endMill, radiusMill, ballMill, faceMill, drilTool, tapTool,
+#              reamer, threadMill, boringBar, chamferedcutter, Tslotcutter ...); * = any. Spot drills are drilTool.
 #   purpose    rough = a job in the compound job leaves stock (*AUFMASS > 0), finish = a job leaves none,
 #              none = no stock-to-leave setting (drilling, tapping, reaming ...); * = any.
 #              A compound job with a finishing job counts as finish.
 #   dia_min, dia_max  diameter range dia_min <= D < dia_max in this row's units; blank = open
 #   units      INCH or METRIC (diameters and brk_tol of this row)
 # Flags 1 = on, 0 = off: brk_check (laser break check after each nest), measure, measure_always (else smart: new sisters).
-# brk_tol blank = the generator shows the step in red until you fill it. No value is guessed here.
+# The diameter bands below have purpose * : roughing is taken by the rough row above them, so they hold finish and none.
+# brk_tol blank = the generator shows the step in red until you fill it (only when hyperMILL gives no diameter).
 tool_type,purpose,dia_min,dia_max,units,brk_check,brk_tol,measure,measure_always,max_brk,life,setpiece,note
-drilTool,*,,,INCH,1,0.002,1,0,2,1,1,drills solid and inserted
+drilTool,*,,,INCH,1,0.002,1,0,2,1,1,drills and spot drills solid and inserted
+tapTool,*,,,INCH,1,0.002,1,0,2,1,1,taps: closest type drill
+reamer,*,,,INCH,1,0.002,1,0,2,1,1,reamers: closest type drill
 *,rough,,,INCH,1,0.004,1,0,2,1,1,roughing solid and inserted
-*,finish,,0.125,INCH,1,0.0002,1,0,2,1,1,finishing under 0.125
-*,finish,0.125,0.25,INCH,1,0.0003,1,0,2,1,1,finishing 0.125 to 0.250
-*,finish,0.25,0.5,INCH,1,0.0004,1,0,2,1,1,finishing 0.250 to 0.500
-*,finish,0.5,1.0,INCH,1,0.0006,1,0,2,1,1,finishing 0.500 to 1.000
-*,finish,1.0,,INCH,1,0.0008,1,0,2,1,1,finishing 1.000 and over
-*,*,,,INCH,1,,1,0,2,1,1,no stock to leave (spot drill tap ream thread mill bore): set per type
+*,*,,0.125,INCH,1,0.0002,1,0,2,1,1,finishing and no stock to leave under 0.125
+*,*,0.125,0.25,INCH,1,0.0003,1,0,2,1,1,finishing and no stock to leave 0.125 to 0.250
+*,*,0.25,0.5,INCH,1,0.0004,1,0,2,1,1,finishing and no stock to leave 0.250 to 0.500
+*,*,0.5,1.0,INCH,1,0.0006,1,0,2,1,1,finishing and no stock to leave 0.500 to 1.000
+*,*,1.0,,INCH,1,0.0008,1,0,2,1,1,finishing and no stock to leave 1.000 and over
+*,*,,,INCH,1,,1,0,2,1,1,no diameter from hyperMILL: set by hand

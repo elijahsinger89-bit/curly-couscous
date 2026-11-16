@@ -6,6 +6,7 @@
 # Left out and listed: notes (empty compound jobs, silently), compound jobs with more than one tool or a job without a
 # tool, and names that do not follow the rule for this part and machine (run b_program_rename first).
 # Stops without writing when a step number is used twice.
+# Warns (and still writes) when a B program name is over 24 characters: the generator refuses it until it is renamed.
 # Output: <document folder>\<document>_B_PROGRAMS.json and .csv (else C:\Users\Public\Documents\OPEN MIND).
 # Format: tool_library\B_PROGRAM_LIST_FORMAT.txt
 # Log: C:\Users\Public\Documents\OPEN MIND\b_program_export_log.txt
@@ -155,7 +156,7 @@ def run():
             report += ["  %s  (%s)" % (r["name"], r["reason"]) for r in data["refused"]]
         if problems:
             report.append("")
-            report += ["PROBLEM: " + p for p in problems]
+            report += [p if p.startswith("WARNING") else "PROBLEM: " + p for p in problems]
         for ln in report:
             log(ln)
         output("\n".join(report))
