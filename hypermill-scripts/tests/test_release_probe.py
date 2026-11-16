@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Headless test of release_probe.py v2 (fake om in tests/fake_om): read-only, nothing imported, log written line by
-line, signatures listed, status compared, slow members read once, 60 compound job cap.
+"""Headless test of release_probe.py v3 (fake om in tests/fake_om).
+Built-in hyperMILL methods are imitated by functions marked _native that reject an unknown keyword the way pybind11
+does (the real mechanism was checked against a compiled pybind11 module: argument lists back, nothing run).
 Run: python3 tests/test_release_probe.py"""
 import os
 import sys
@@ -18,8 +19,8 @@ import om.cad.gui as gui       # noqa: E402  (fake)
 
 SCRIPT = os.path.join(ROOT, "copy_to_python_folder", "release_probe", "release_probe.py")
 fails = []
-CALLED = []          # members the probe must never run
-SEEN = {}            # evidence gathered inside reads
+RAN = []             # native methods that actually ran (must stay empty)
+SEEN = {}
 
 
 def check(cond, label):
@@ -28,117 +29,160 @@ def check(cond, label):
         fails.append(label)
 
 
+def native(sig):
+    """A fake built-in method: an unknown keyword is rejected before running, listing sig like pybind11."""
+    def deco(fn):
+        def wrapper(self, *a, **kw):
+            known = set(fn.__code__.co_varnames[1:fn.__code__.co_argcount])
+            if set(kw) - known:
+                raise TypeError("%s(): incompatible function arguments. The following argument types are supported:\n"
+                                "    1. %s\n\nInvoked with: <obj>, kwargs: %s" % (fn.__name__, sig, kw))
+            RAN.append(fn.__name__)
+            return fn(self, *a, **kw)
+        wrapper._native = True
+        wrapper.__name__ = fn.__name__
+        return wrapper
+    return deco
+
+
+class PS(enum.Enum):
+    UP_TO_DATE = 0
+    NEEDS_CALCULATION = 3
+
+
+class JS(enum.Enum):
+    UP_TO_DATE = 1
+    WARNINGS = 3
+
+
 tmp = tempfile.mkdtemp(prefix="rp_")
 tempfile.tempdir = tmp
 LOGP = os.path.join(tmp, "release_probe_log.txt")
 
 
 class SimJob(om.Job):
-    """A job with the kind of members the real API may have."""
-    slow_calls = 0
+    slow_reads = 0
 
-    def __init__(self, name, tool, simulated):
-        om.Job.__init__(self, name, tool, {"*AUFMASS": "0", "*SIM_STATUS": "1" if simulated else "0"})
-        self._sim = simulated
+    def __init__(self, name, tool, pof_ok, slow=False):
+        om.Job.__init__(self, name, tool, {})
+        self._pof, self._slow = pof_ok, slow
 
-    def IsSimulated(self):
+    @property
+    def POFStatus(self):
         if "log_at_first_read" not in SEEN:
             SEEN["log_at_first_read"] = open(LOGP, encoding="utf-8").read() if os.path.exists(LOGP) else ""
-        return self._sim
+        return PS.UP_TO_DATE if self._pof else PS.NEEDS_CALCULATION
 
-    def GetCalculationState(self):
-        return "CALCULATED"
+    @property
+    def Status(self):
+        if self._slow:
+            SimJob.slow_reads += 1
+            time.sleep(0.6)
+        return JS.UP_TO_DATE
 
-    def IsSlowCheck(self):
-        SimJob.slow_calls += 1
-        time.sleep(0.6)
+    @property
+    def PofFileName(self):
+        return r"C:\job\POF\00948602-025_B_OP200_02_%s.pof" % self.Name.split(":")[0]
+
+    @native("(self: om.cam._hmCoreX64.Job) -> bool")
+    def CheckPofStatus(self):
         return True
 
-    def GetMachiningTime(self):
-        CALLED.append("GetMachiningTime")
-        return 12.5
+    @native("(self: om.cam._hmCoreX64.Job, propName: str) -> bool")
+    def HasError(self, propName):
+        return False
 
-    def Isolate(self):
-        CALLED.append("Isolate")
-
-    def PostProcess(self, path):
-        """PostProcess(self: om.cam.Job, path: str) -> bool  Writes the NC file."""
-        CALLED.append("PostProcess")
-        raise RuntimeError("the probe must never call this")
-
-    def Simulate(self):
-        """Simulate(self) -> None"""
-        CALLED.append("Simulate")
+    @native("(self: om.cam._hmCoreX64.Job, params: dict) -> None")
+    def SetCfgParameters(self, params):
+        return None
 
 
-class PostList(om.JobList):
-    def PostCompoundJobs(self, jobs, folder):
-        """PostCompoundJobs(self, jobs: list, folder: str) -> int  Posts the compound jobs."""
-        CALLED.append("PostCompoundJobs")
+class FakeCompound(om.CompoundJob):
+    @native("(self: om.cam._hmCoreX64.CompoundJob) -> bool")
+    def HasNcStatus(self):
+        return False
 
-    def GetNcFileMode(self):
-        return "COMPOUNDJOB_AS_SINGLE_JOB"
-
-    def GetPostprocessorName(self):
-        CALLED.append("GetPostprocessorName")
-        return "SIEMENS_ONE"
+    @native("(self: om.cam._hmCoreX64.CompoundJob) -> om.cam._hmCoreX64.NcInfo")
+    def GetGenerateAndReleaseNcInfo(self):
+        return None
 
 
-class HeavyDoc(om.Document):
-    def GetBoundingBox(self):
-        CALLED.append("Document.GetBoundingBox")
-
-    def IsModified(self):
-        CALLED.append("Document.IsModified")
+class FakeJobList(om.JobList):
+    @native("(self: om.cam._hmCoreX64.JobList, path: str) -> bool")
+    def GenerateNCListFile(self, path):
         return True
 
+    @native("(self: om.cam._hmCoreX64.JobList) -> None")
+    def DeleteAllJobs(self):
+        return None
 
-om.SimulationState = enum.Enum("SimulationState", "NOT_SIMULATED SIMULATED COLLISION")
+
+class FakeJobListSet(om.JobListSet):
+    @native("(self: om.cam._hmCoreX64.JobListSet, jobLists: list, folder: str) -> bool")
+    def CalculateNC(self, jobLists, folder):
+        return True
+
+    @native("(self: om.cam._hmCoreX64.JobListSet) -> None")
+    def RunAll(self):
+        return None
+
 
 docdir = os.path.join(tmp, "job")
-os.makedirs(os.path.join(docdir, "sim"))
+for d in ("VNC", "POF", "NC"):
+    os.makedirs(os.path.join(docdir, d))
 doc = os.path.join(docdir, "PART_OP200.hmc")
-for p in (doc, os.path.join(docdir, "sim", "PART_OP200.simresult")):
-    open(p, "w").close()
-fm = om.Tool("905083900", "Facemill", "faceMill", 2.0)
-cs = [om.CompoundJob("---- note ----"),
-      om.CompoundJob("B_PART_010_HF5", [SimJob("a", fm, True), SimJob("b", fm, True)]),
-      om.CompoundJob("B_PART_020_HF5", [SimJob("c", fm, False)])]
-many = [om.CompoundJob("B_PART_%03d_HF5" % (100 + i), [SimJob("m%d" % i, fm, False)]) for i in range(70)]
-om._App.CurrentDocument = HeavyDoc(doc, om.Model([PostList("OP200", cs), PostList("OP300", many)]))
+open(doc, "w").close()
+with open(os.path.join(docdir, "VNC", "00948602-025_B_OP200_02.nclist"), "w", encoding="utf-8") as f:
+    f.write("B_PART_010_HF5\nB_PART_1240_HF5\n")
+with open(os.path.join(docdir, "POF", "00948602-025_B_OP200_02_410.pof"), "w") as f:
+    f.write("x")
+with open(os.path.join(docdir, "NC", "B_PART_010_HF5.mpf"), "w") as f:
+    f.write("x")
 
-before = set(k for k in sys.modules if k == "om" or k.startswith("om."))
+fm = om.Tool("905083900", "Facemill", "faceMill", 2.0)
+cs = [FakeCompound("---- note ----"),
+      FakeCompound("B_PART_010_HF5", [SimJob("1: rough", fm, True, slow=True), SimJob("2: rough", fm, True, slow=True)])]
+cs += [FakeCompound("B_PART_%03d_HF5" % (20 + 10 * i), [SimJob("%d: finish" % (400 + i), fm, i % 2 == 0)]) for i in range(80)]
+model = om.Model([FakeJobList("00948602-025_B_OP200_02", cs)])
+model.JobListSet = FakeJobListSet(model.JobListSet.GetJobLists())
+om._App.CurrentDocument = om.Document(doc, model)
+
 spec = importlib.util.spec_from_file_location("rp_under_test", SCRIPT)
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
+real_is_native = m.is_native
+m.is_native = lambda raw: getattr(raw, "_native", False) or real_is_native(raw)
+m.SLOW = 0.5
 gui.BOXES.clear()
-t = time.perf_counter()
+om.WRITES.clear()
 m.run()
-took = time.perf_counter() - t
-after = set(k for k in sys.modules if k == "om" or k.startswith("om."))
-check(os.path.exists(LOGP), "log written (fallback folder)")
 txt = open(LOGP, encoding="utf-8").read()
+
 check("FAILED" not in txt and txt.rstrip().endswith("finished"), "probe ran to the end without an error")
-check(CALLED == [], "nothing run that is not a status read: %s" % CALLED)
-check(after == before, "no om module imported (%s)" % sorted(after - before))
-check("reading SimJob.IsSimulated" in SEEN.get("log_at_first_read", ""), "log is on disk before each read of the first job (freeze shows where)")
-check("PostProcess(self: om.cam.Job, path: str) -> bool" in txt, "job posting signature in the log")
-check("PostCompoundJobs(self, jobs: list, folder: str) -> int" in txt, "joblist posting signature in the log")
-check("GetPostprocessorName" in txt, "joblist NC member listed (not called)")
-check("enum SimulationState: NOT_SIMULATED, SIMULATED, COLLISION" in txt, "status enum listed with its values")
-check("module om.cad.gui" in txt, "already loaded submodules listed")
-check("GetNcFileMode = 'COMPOUNDJOB_AS_SINGLE_JOB'" in txt, "NC file mode read")
-dif = [ln for ln in txt.splitlines() if "DIFFERS" in ln]
-check(any("J.IsSimulated" in ln and "False x" in ln and "True x2" in ln for ln in dif), "summary: IsSimulated differs")
-check(any("J.cfg *SIM_STATUS" in ln for ln in dif), "summary: cfg *SIM_STATUS differs")
-check(any("same" in ln and "J.GetCalculationState" in ln for ln in txt.splitlines()), "summary: a value that never changes is marked same")
-check(SimJob.slow_calls == 1 and "SLOW: SimJob.IsSlowCheck took" in txt, "slow member read once, then skipped")
-check("(stopped after 60 compound jobs)" in txt and "B_PART_157_HF5" in txt and "'B_PART_158_HF5'" not in txt,
-      "scan stops after 60 compound jobs")
-check(took < 10, "probe finished in %.1f s" % took)
-check("(note, empty)" in txt, "note compound job shown as a note")
-check(os.path.join("sim", "PART_OP200.simresult") in txt, "files next to the document listed")
-check("Send the log" in gui.BOXES[-1] and "Simulation Center" in gui.BOXES[-1], "final message asks for the log")
+check(set(RAN) == {"HasNcStatus"} and not om.WRITES, "only the HasNcStatus status read ran, nothing written (%s)" % sorted(set(RAN)))
+check("def   CalculateNC(self: om.cam._hmCoreX64.JobListSet, jobLists: list, folder: str) -> bool" in txt,
+      "CalculateNC arguments listed without running it")
+check("def   RunAll(self: om.cam._hmCoreX64.JobListSet) -> None" in txt, "RunAll (no arguments) listed without running it")
+check("def   GenerateNCListFile(self: om.cam._hmCoreX64.JobList, path: str) -> bool" in txt, "GenerateNCListFile arguments")
+check("def   GetGenerateAndReleaseNcInfo(self: om.cam._hmCoreX64.CompoundJob) -> om.cam._hmCoreX64.NcInfo" in txt,
+      "GetGenerateAndReleaseNcInfo arguments and return type")
+check("def   HasError(self: om.cam._hmCoreX64.Job, propName: str) -> bool" in txt, "job method arguments")
+check("def   SetCfgParameters  (changes the document: arguments not asked)" in txt and
+      "def   DeleteAllJobs  (changes the document: arguments not asked)" in txt, "write methods: name only, never called")
+check("def   GetJobs  (not a built-in method: skipped)" in txt, "plain Python method: skipped")
+check("prop  POFStatus" in txt, "properties listed")
+check("reading Job.POFStatus" in SEEN.get("log_at_first_read", ""), "log on disk before the first read")
+check("'B_PART_810_HF5'" in txt, "every compound job scanned (81, no 60 cap)")
+check("J '400: finish'" in txt and "POFStatus=UP_TO_DATE" in txt and "POFStatus=NEEDS_CALCULATION" in txt
+      and "PofFileName=00948602-025_B_OP200_02_401.pof" in txt, "job line: Status, POFStatus, POF file name")
+check("POFStatus=NEEDS_CALCULATION" in txt and "POFStatus=UP_TO_DATE " in txt.replace("\n", " ") and
+      any(ln.strip().startswith("POFStatus=UP_TO_DATE") and ln.strip().endswith("42") for ln in txt.splitlines()),
+      "totals: POFStatus counts (2 + 40 up to date)")
+check(SimJob.slow_reads == 1 and "SLOW: Job.Status took" in txt and "Status=<slow before: not read>" in txt,
+      "slow member read once, then skipped")
+check("    | B_PART_1240_HF5" in txt, "VNC .nclist text printed")
+check("00948602-025_B_OP200_02_410.pof" in txt and "B_PART_010_HF5.mpf" in txt, "newest POF and NC files listed")
+check("Send the log" in gui.BOXES[-1], "final message asks for the log")
 
 shutil.rmtree(tmp, ignore_errors=True)
 print()
