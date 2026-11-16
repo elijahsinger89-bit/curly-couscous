@@ -1,36 +1,37 @@
-RELEASE PROBE v1 (read-only) - for the go-to-machine script
+RELEASE PROBE v2 (read-only) - for the go-to-machine script
 
 What it is for
   1. The posting call: which om object posts NC files, and its arguments.
   2. How hyperMILL shows that a toolpath has or has not been run through
      Simulation Center.
 
+v2 (v1 froze hyperMILL)
+  - The log is written line by line. If hyperMILL freezes again, close it
+    and send the log anyway: its last line shows where it stopped.
+  - Nothing is imported. The application, document, CAM model and job
+    lists: names and signatures only, nothing read.
+  - Compound jobs and jobs: only status flags are read. A read slower than
+    0.5 s is not repeated. It stops after 60 compound jobs or 2 minutes.
+
 Install
   Copy copy_to_python_folder\release_probe into
-  C:\Users\Public\Documents\OPEN MIND\python and restart hyperMILL.
+  C:\Users\Public\Documents\OPEN MIND\python (replace v1) and restart
+  hyperMILL.
 
 Before running
-  Open a document with compound jobs (a copy of a real job is best).
-  Run Simulation Center on SOME compound jobs, not all. Write down which.
-  If you can, change one simulated compound job afterwards (recalculate it)
-  so it shows as out of date.
+  Save your work. Open a saved copy of a document with compound jobs.
+  Run Simulation Center on SOME of the first 60 compound jobs, not all.
+  Write down which. If you can, change one simulated compound job
+  afterwards (recalculate it) so it shows as out of date.
 
 Run
-  Run release_probe. It takes a few seconds and shows a message when done.
+  Run release_probe. It shows a message when done.
 
 Send back
   C:\Users\Public\Documents\OPEN MIND\release_probe_log.txt
   which compound jobs you simulated (and the one you changed after),
   and a screenshot of the job tree with its status icons.
 
-What it reads
-  The om modules (classes, enums, signatures of posting / NC / simulation
-  members), the document, joblists, compound jobs and jobs: every
-  status-like value on each, then a summary of which values differ
-  between simulated and not simulated jobs. Also the file names next to
-  the document (simulation results may be stored there).
-
 What it changes
-  Nothing. It only calls Get / Is / Has / Count methods without arguments.
-  Post, Simulate, Calc and every other write method are listed with their
-  signature, never called. No NC file is written.
+  Nothing. Post, Simulate, Calc and every other write method are listed
+  with their signature, never called. No NC file is written.
