@@ -1,6 +1,6 @@
 B PROGRAM LIST - FILE FORMAT (version 1)
 The same text sits in tool_library (hyperMILL side) and next to SINUMERIK_GENERATOR.html (generator side).
-Written by: b_program_export (later the go-to-machine script), tool_library\b_programs.py build_export / write_export.
+Written by: b_program_export and go_to_machine (after posting), tool_library\b_programs.py build_export / write_export.
 Read by: SINUMERIK_GENERATOR.html, button "Import B list".
 
 FILES

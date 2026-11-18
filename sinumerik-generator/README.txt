@@ -31,7 +31,7 @@ STEP TABLE CHECKBOXES (tab 1)
 
 IMPORT B LIST (from hyperMILL)
   Import B list..., pick <document>_B_PROGRAMS.json written by the hyperMILL
-  b_program_export script (later the go-to-machine script). Format:
+  b_program_export or go_to_machine script (after posting). Format:
   B_PROGRAM_LIST_FORMAT.txt.
   It fills the step table (step, tool ID, B program name, break check,
   breakage tolerance, measure, max breaks, life, SETPIECE), and part and

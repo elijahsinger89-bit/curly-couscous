@@ -1,4 +1,4 @@
-# b_programs.py - B program names for compound jobs (shared: b_program_rename now, the go-to-machine script later).
+# b_programs.py - B program names for compound jobs (shared: b_program_rename, b_program_export, go_to_machine).
 # Name rule (same as the SINUMERIK generator): B_<part>_<step>_<machine>
 #   step zero-padded to 3 digits, 4 when any step of the run is 1000 or more
 #   part and machine: letters, digits, _ ; machine may be blank (then B_<part>_<step>)
@@ -257,7 +257,7 @@ def set_name(cj, new):
 
 
 # ======================================================================================================================
-# B program list export (for the SINUMERIK generator's "Import B list"; the go-to-machine script calls build_export)
+# B program list export (for the SINUMERIK generator's "Import B list"; go_to_machine calls build_export after posting)
 # File format: B_PROGRAM_LIST_FORMAT.txt (tool_library and the generator folder hold the same text).
 # ======================================================================================================================
 import csv

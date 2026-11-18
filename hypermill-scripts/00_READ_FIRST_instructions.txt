@@ -8,8 +8,10 @@ copy_to_python_folder
   tool_center      one command for building tools: tool wizard, tool selector or tool generator (icon: tool_center.png)
   b_program_rename renames compound jobs to SINUMERIK B program names B_<part>_<step>_<machine>
                    (icon: b_program_rename.png)
-  b_program_export writes the B program list (B programs + tool + breakage presets) for the SINUMERIK generator;
-                   the export step of the go-to-machine script, runnable on its own until that exists
+  b_program_export writes the B program list (B programs + tool + breakage presets) for the SINUMERIK generator
+                   (go_to_machine writes the same list after posting; this one runs on its own)
+  go_to_machine    checks every B program (calculated, no errors, run through Simulation Center without a collision
+                   since its last change), posts them and writes the B program list (icon: go_to_machine.png)
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
                    B program name rule (b_programs.py)
@@ -25,6 +27,7 @@ INSTALL
 3. Restart hyperMILL so it re-reads the python folder.
 4. Button: tool_center\tool_center.png (32 x 32; tool_center.ico for dialogs that want an .ico).
    Button: b_program_rename\b_program_rename.png (32 x 32; b_program_rename.ico).
+   Button: go_to_machine\go_to_machine.png (32 x 32; go_to_machine.ico).
 
 
 THE PART FLOW
@@ -256,6 +259,32 @@ rule for the part and machine given. Nothing is written when a step number is us
 WARNING (the list is still written): a B program name over 24 characters. The generator refuses it until it is renamed.
 Log: b_program_export_log.txt.
 
+GO TO MACHINE
+Screen: Joblist (one, or All joblists), Part number, Machine (start on the last B program rename), Action:
+  Check only      every B program OK or FAIL with the reason per job; nothing posted, nothing written
+  Check and post  the same check, then posts and writes the B program list
+A B program is a compound job named B_<part>_<step>_<machine>. It passes when every job in it:
+  - is calculated (POF status up to date) and has no errors
+  - has been run through Simulation Center without a collision since its last change
+How the simulation is checked (tool_library\release_check.py, found with release_probe v1-v5):
+  each job's POF file has a toolpath id in its header; Simulation Center writes POF\<id>.ccrpt for every toolpath of the
+  run: CC_RESULT 1 = clean run, CC_RESULT 0 = the run had a collision (every toolpath of that run gets 0). Recalculating a
+  job gives it a new id and hyperMILL deletes its .ccrpt, so a changed job shows "not simulated, or changed since".
+  After fixing a collision, re-simulate the whole group: the others of that run keep CC_RESULT 0 until then.
+  The job tree's light bulb is the toolpath display, not a simulation status.
+Reasons shown: has errors / not calculated / no toolpath file / not simulated, or changed since it was simulated /
+  Simulation Center run had a collision: fix it and re-simulate.
+Posting: all pass -> Post: No / Yes (No first). Some fail -> a WARNING with the list, then Post: No - post nothing /
+  Post all (the log records "POSTED WITH FAILURES") / Post only the ones that pass.
+  Posted with JobListSet.CalculateNC(compound job UUIDs). The message lists the NC files written or updated in the
+  document folder and its NC folder, and any B program without a new NC file.
+Stops before posting when a step number is used twice. Warns about names over 24 characters. Compound jobs with more
+than one tool, a job without a tool, or a name not in the B rule are listed and never posted. Notes are skipped.
+After posting: <document>_B_PROGRAMS.json / .csv next to the document (else C:\Users\Public\Documents\OPEN MIND),
+the same list b_program_export writes. Generator: Import B list.
+NOT TESTED IN hyperMILL YET: CalculateNC with compound job UUIDs (the first post shows what it writes). Test on a copy.
+Log: go_to_machine_log.txt.
+
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
 rpm caps every speed; the feed follows at the same chip load. The last choice is remembered for all scripts.
@@ -265,4 +294,5 @@ tool_library\job_settings.json   settings per material group > material > operat
 tool_library\strategies.py       part plans per industry and part type
 tool_library\job_types.py        toolpath types, their CreateJob codes and the tool rule part_wizard_2 uses
 tool_library\machines.csv        machines and spindles
-tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export)
+tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export,
+                                 go_to_machine)

@@ -1,7 +1,7 @@
 # b_program_export.py - hyperMILL 35
 # Writes the B program list for the SINUMERIK generator ("Import B list"): every compound job named
 # B_<part>_<step>_<machine> with its tool and the breakage / measuring presets from tool_library\brk_rules.csv.
-# This is the export step of the go-to-machine script, runnable on its own until that script exists.
+# go_to_machine writes the same list after posting; this script writes it on its own.
 # Screen: joblist (one or all), part number, machine (defaults: the last B program rename).
 # Left out and listed: notes (empty compound jobs, silently), compound jobs with more than one tool or a job without a
 # tool, and names that do not follow the rule for this part and machine (run b_program_rename first).
