@@ -4,7 +4,8 @@ SINUMERIK ONE PROGRAM GENERATOR
 USE
   Double-click SINUMERIK_GENERATOR.html. It runs offline in Chrome, Edge or
   Firefox: no server, no internet, no install.
-  Fill the four tabs, press Generate ZIP. The zip holds every NC file.
+  Fill the tabs, press Generate ZIP. The zip holds every NC file.
+  Tab 5 (CMC) appears only while a step row has CMC ticked.
   Tab 4 previews every file before saving; "Download this file" saves one.
   Save job writes the whole form to a .json file; Load job reopens it.
   The .json file is the input store (it replaces the Excel sheets).
@@ -24,7 +25,7 @@ STEP BUILDER (tab 1)
   "Fill blank program names" uses the same pattern on blank names only.
 
 STEP TABLE CHECKBOXES (tab 1)
-  The box under Measure, Always, Brk check, Debug M1 and SETPIECE turns
+  The box under Measure, Always, Brk check, Debug M1, SETPIECE and CMC turns
   that column on or off for every row. Ticked = all on, empty = all off,
   dash = mixed (a click turns all on). The per-row boxes work as before.
   Always acts only on rows with Measure on.
@@ -44,11 +45,71 @@ IMPORT B LIST (from hyperMILL)
   add missing / cancel).
   Steps with break check on and no tolerance show in red. Compound jobs
   hyperMILL left out (more than one tool, wrong name) are listed.
+  From go_to_machine also, per B program: the number of toolpaths, G41/G42
+  found in the posted NC file and the R parameters it uses. Keep existing
+  refreshes these three on rows with the same program name.
+
+CMC - CUT / MEASURE / CUT (tick CMC on a step row, fill its card on tab 5)
+  The step runs C_P1_CMC<step> per nest in place of its B program:
+    1. first cut with first-cut wear (leaves stock);
+    2. measure with the probe (measure-only cycle, no correction);
+    3. final cut with the corrected wear;
+    4. optional verify: in tolerance = OK; out with material left = re-cut
+       (max re-cuts) or accept and log; past size = scrap.
+  Features: bore, boss, slot X/Y (inside two walls), web X/Y (outside two
+  walls), rectangle pocket / spigot (X and Y, correction from their mean),
+  bore / boss on a circle segment (3 or 4 points, CYCLE979), single wall
+  X/Y (material side), floor / face Z.
+  Protection zone (CYCLE977, MC PM 5.1.7): inside features = an island in
+  the middle (the probe starts above it at the approach Z and lowers
+  outside it), outside features = the wall around (a channel). Use it for
+  an ID or OD inside a round channel.
+  Probe swivel: paste the CYCLE800(...) line of the CAM program (a block
+  number and comment are dropped). Blank = the nest face. With a swivel the
+  card's X / Y / Z are in that plane.
+  Tool type: rotating = $TC_DP15 wear radius (floor: $TC_DP12 length 1),
+  +wear leaves material. Turning = $TC_DP12 length 1 (face: $TC_DP13), you
+  set what +wear does (larger / smaller) and radius or diameter. The field
+  and edge can be changed on the card.
+  Wear: the wear found on the edge before the CMC + the CMC wear while
+  cutting; the found wear is put back after every cut. Do not edit the
+  cutter wear during a CMC hold.
+  Math: first-cut wear w1 = stock on the material side; expected after it
+  E = nominal + stock (x2 for a diameter with radius wear); next wear =
+  wear used + (nominal - measured) / (+-1 or +-2). Your example: boss
+  2.000, first-cut wear .002 -> E 2.004, measured 2.0052 -> wear -.0006.
+  Holds (M0, message names the R to set: 0 measure again, 1 scrap, 2 as
+  the message says): measured more than the check window from expected,
+  correction above the limit, probe touched while lowering (G1 MEAS=1:
+  first cut missing, chip, wrong position), max re-cuts reached.
+  R parameters: 50 per CMC step from the first R (default R700), kept
+  through power-off: pass, nest, cutter T, sister, wear, measurement,
+  result per nest. A restart resumes inside the nest; wear is always
+  written as an absolute value, so a correction is never added twice.
+  The generator refuses a block that covers R999 (tool_load_mda), an R the
+  posted B programs use, or the last R on the control (MD28050). Check on
+  the machine that nothing else (tool change, Blum, OEM cycles, FIFO from
+  $MC_MM_START_FIFO) uses the range.
+  Back to the cutter: TCA loads the recorded sister (to confirm on the
+  machine); if it is gone or disabled, T M6 by name and that nest starts
+  again from the first cut (first-cut wear leaves stock). Or T M6 always.
+  Counting: L_RUN_NESTS still loads, laser-measures, break-checks and
+  counts. SETPIECE(0) at the end of each CMC nest drops the probe and the
+  extra cuts; the cutter is counted once. A scrap nest gets status 3 after
+  the step (A_P1), so later steps skip it; nests cut counts it (it was
+  machined). Log: CMC_LOG.SPF, one line per measurement and a step summary.
+  C_P1_CMC_CLEAR puts back wear a stopped cut left and clears the R blocks:
+  A_P1 runs it on a fresh start; run it by hand when a job is abandoned
+  part-way through a CMC step, before another job uses that cutter.
+  Warnings from the B list: more than one toolpath in the CMC B program
+  (all are re-cut), no G41/G42 with radius wear (the wear does nothing).
 
 WHERE THE FILES GO
   DEF/UGUD.DEF    definitions directory (_N_DEF_DIR, file _N_UGUD_DEF)
   CUS/L_*.SPF     user cycles directory (_N_CUS_DIR). Called by name.
-                  No EXTERN anywhere: cycles need none (NC PM 4.2.3.2).
+                  Cycles need no EXTERN (NC PM 4.2.3.2). The CMC programs
+                  call WKS sub-programs with parameters and declare them
+                  with EXTERN, as NC PM 4.2.3.2 requires there.
   WKS/*           the job's workpiece directory, next to the CAM B_ programs.
                   A_P1.MPF is the main program.
 
@@ -56,7 +117,8 @@ GLOBAL VARIABLES (UGUD.DEF, all DEF NCK INT, kept through power-off)
   GV_STEP            current step (0 = fresh pallet)
   GV_NEST            current nest
   GV_NEST_STATUS[33] per nest: 0 off, 1 running, 2 no part / out of
-                     tolerance, 100+step = tool failed at that step
+                     tolerance, 3 CMC scrap, 100+step = tool failed at that
+                     step
   GV_WO[33]          work offset frame per nest (nest n = G5(n+4))
   GV_SKIP            1 = every nest off, skip the step
   GV_BRK_COUNT       breaks this step
@@ -132,6 +194,9 @@ FIRST RUN ON THE MACHINE (prove-out, single block, low feed override)
   4. Reset mid-step, restart: RESUMING AT STEP / NEST must name the nest
      that was cutting, and the job must resume there.
   5. Out-of-tolerance nest: status 2, MSG, M0; that nest is skipped later.
+  6. CMC: first run on a scrap part with verify on. Check TCA brings back
+     the same sister (C_P1_CMC_BACK); watch the probe lower with MEAS=1;
+     read CMC_LOG.SPF; reset mid-nest and restart: no double correction.
 
 BLUM MACROS (outside the Siemens manuals, not verified)
   BL9908_MOD must return 19.19 in its last parameter on a break and disable
@@ -139,7 +204,9 @@ BLUM MACROS (outside the Siemens manuals, not verified)
   from the old package (inch values). S3750 is the laser speed in both.
 
 TESTS (tests/, for whoever maintains the generator)
-  node tests/run_fixtures.js OUT    engine on 7 fixture jobs, 28 bad jobs,
-                                    step builder cases
+  node tests/run_fixtures.js OUT    engine on 9 fixture jobs (2 CMC), bad
+                                    jobs, step builder, CMC math and R blocks
   python3 tests/nc_lint.py OUT/f*   manual rules on every generated file
+  python3 tests/test_lint_cmc.py OUT/f8_cmc_milling
+                                    the CMC lint rules catch broken output
   node tests/e2e.js OUT2            browser test, file://, network blocked

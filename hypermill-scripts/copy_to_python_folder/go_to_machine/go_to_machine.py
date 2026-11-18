@@ -13,7 +13,9 @@
 #   - the NC files written or updated (document folder and its NC folder, before / after)
 #   - when only some B programs were posted: B program list and tool sheet: Only the posted ones / All B programs
 #   - <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list;
-#     B programs left out are listed in it as "not posted"
+#     B programs left out are listed in it as "not posted"; for every posted B program the NC file is read:
+#     radius_comp = G41/G42 found (CMC radius wear needs cutter compensation), r_params = R parameters it uses
+#     (the generator keeps its CMC R blocks clear of them)
 #   - the tool sheet <document>_<joblist>_tool_order.csv: the columns and catalog lookup of the installed
 #     tool_order_list script (tool_order_list.py: catalog, tool_row), one row per tool of those B programs,
 #     "Toolpath names" = <B program>: <toolpath>
@@ -308,6 +310,55 @@ def tool_mda(progs, setpiece_ids, folder, doc_name, label):
     return out
 
 
+# ---------------- posted NC file facts (for the generator's CMC checks) ----------------
+_G4142 = re.compile(r"(?<![A-Z0-9_$])G4[12](?![0-9])")
+_RNUM = re.compile(r"(?<![A-Z0-9_$.])R([0-9]+)(?![0-9])")
+_RIND = re.compile(r"(?<![A-Z0-9_$.])R\[")
+
+
+def nc_facts(p):
+    """(radius_comp, sorted R numbers, indirect R used) of one NC file: comments (;) and strings left out."""
+    comp, rs, ind = False, set(), False
+    with open(p, encoding="latin-1", errors="replace") as f:
+        for raw in f:
+            code = re.sub(r'"[^"]*"', '""', raw.upper().split(";", 1)[0])
+            if _G4142.search(code):
+                comp = True
+            rs.update(int(m) for m in _RNUM.findall(code))
+            if _RIND.search(code):
+                ind = True
+    return comp, sorted(rs), ind
+
+
+def add_nc_facts(steps, found):
+    """radius_comp / r_params on the B list steps whose NC file was written now. Returns message lines."""
+    out, comp_no, with_r, ind = [], [], [], []
+    for s in steps:
+        p = found.get(str(s.get("program", "")).lower())
+        if not p:
+            continue
+        try:
+            comp, rs, indirect = nc_facts(p)
+        except Exception as e:
+            log("NC read failed:", p, e)
+            continue
+        s["radius_comp"], s["r_params"] = comp, rs
+        log("NC facts:", s["program"], "| G41/G42:", comp, "| R:", rs, "| indirect R:", indirect)
+        if not comp:
+            comp_no.append(s["program"])
+        if rs:
+            with_r.append("%s (R%s)" % (s["program"], ", R".join(str(r) for r in rs[:6]) + (" ..." if len(rs) > 6 else "")))
+        if indirect:
+            ind.append(s["program"])
+    if with_r:
+        out.append("R parameters in posted B programs (kept out of CMC R blocks): " + "; ".join(with_r))
+    if ind:
+        out.append("WARNING - R[...] with a computed number (cannot be checked): " + ", ".join(ind))
+    if comp_no:
+        out.append("No G41/G42 (CMC radius wear has no effect there): " + ", ".join(comp_no[:8]) + (" ..." if len(comp_no) > 8 else ""))
+    return out
+
+
 # ---------------- post ----------------
 def post(model, targets, folder):
     """CalculateNC with the compound job UUIDs; returns (returned value or error text, ok, written files)."""
@@ -448,10 +499,16 @@ def run():
                                           datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         for p in dropped:
             data["refused"].append(dict(name=p["name"], joblist=p["joblist"], reason="not posted: failed the go-to-machine check"))
+        try:
+            facts = add_nc_facts(data["steps"], found)
+        except Exception:
+            log("NC facts FAILED:", traceback.format_exc())
+            facts = []
         if data["steps"] and not any("used twice" in x for x in xproblems):
             pj, pc = bp.write_export(data, dest, base)
             log("B program list:", pj, "|", pc)
             msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
+            msg += ["  " + x for x in facts]
         for x in xproblems:
             log("export:", x)
         # ---- tool sheet ----

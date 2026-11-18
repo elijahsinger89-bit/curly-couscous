@@ -290,6 +290,11 @@ After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
     B program list and the tool sheet hold. B programs left out are listed in the B program list as "not posted", so the
     generator shows them and its main program does not call them.
   - <document>_B_PROGRAMS.json / .csv: the same list b_program_export writes. Generator: Import B list.
+    For each posted B program its NC file is read (comments and strings left out) and two keys are added:
+    radius_comp = G41/G42 found; r_params = the R parameters it uses. The message names B programs with R parameters,
+    R[...] with a computed number (cannot be checked) and B programs without G41/G42. The generator uses them for CMC:
+    it refuses a CMC R block that covers an R a B program uses, and warns when a CMC step corrects radius wear on a
+    program without G41/G42.
   - <document>_<joblist>_tool_order.csv: the tool sheet. Same columns and catalog lookup as the tool_order_list script
     (go_to_machine uses the installed tool_order_list\tool_order_list.py, so layout changes there show up here too);
     one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not
@@ -302,6 +307,7 @@ After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
 Log: go_to_machine_log.txt.
 
 TOOL LOAD MDA
+R999 holds the T number each NEWT returns. The generator never puts a CMC R block over R999.
 One Sinumerik MDA program that creates every tool and sister on the control: paste it into MDA and cycle start.
 Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
   of the B programs it posted). 2 Per tool, 10 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =

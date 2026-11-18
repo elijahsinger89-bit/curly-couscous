@@ -14,7 +14,7 @@
 # tool_load_mda writes into NEWT).
 import re
 
-VERSION = "2026-11-16"
+VERSION = "2026-11-18"
 MAX_NAME = 24
 MAX_STEP = 9999
 PROBE_STEP = 1
@@ -430,10 +430,10 @@ def write_export(data, folder, base):
     with open(pj, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=1)
     cols = ("step", "program", "tool", "tool_name", "tool_type", "diameter", "jobs", "purpose", "brk", "brk_tol", "meas",
-            "meas_always", "max_brk", "life", "setpiece", "rule", "joblist")
+            "meas_always", "max_brk", "life", "setpiece", "rule", "joblist", "radius_comp", "r_params")
     with open(pc, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(cols)
         for s in data["steps"]:
-            w.writerow([s.get(c, "") for c in cols])
+            w.writerow([" ".join(str(x) for x in s[c]) if isinstance(s.get(c), list) else s.get(c, "") for c in cols])
     return pj, pc

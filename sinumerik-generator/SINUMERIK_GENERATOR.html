@@ -102,6 +102,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
   <button type="button" data-tab="probing">2 · Probing</button>
   <button type="button" data-tab="wcs">3 · Work offsets</button>
   <button type="button" data-tab="output">4 · Output</button>
+  <button type="button" data-tab="cmc" id="tabBtnCmc" hidden>5 · CMC</button>
 </nav>
 <div id="msgs"></div>
 <main>
@@ -109,6 +110,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
   <section class="tab" id="tab-probing"></section>
   <section class="tab" id="tab-wcs"></section>
   <section class="tab" id="tab-output"></section>
+  <section class="tab" id="tab-cmc"></section>
 </main>
 <dialog id="dlg">
   <h2 id="dlgTitle"></h2>
@@ -3008,7 +3010,7 @@ function renderConfig() {
   h += '<div class="tblwrap" style="margin-top:10px"><table class="t"><thead><tr>' +
     '<th>Step #</th><th>Tool name</th><th>Brk tol (' + U().u + ')</th><th>Cutting program</th>' +
     colHead('meas', 'Measure') + colHead('measAlways', 'Always') + colHead('brk', 'Brk check') + '<th>Max brk</th>' +
-    colHead('debug', 'Debug M1') + '<th>Life count</th>' + colHead('setpiece', 'SETPIECE') + '<th></th></tr></thead><tbody>';
+    colHead('debug', 'Debug M1') + '<th>Life count</th>' + colHead('setpiece', 'SETPIECE') + colHead('cmc', 'CMC') + '<th></th></tr></thead><tbody>';
   job.steps.forEach(function (s, i) {
     var p = 'steps.' + i + '.';
     h += '<tr>' +
@@ -3023,6 +3025,7 @@ function renderConfig() {
       '<td class="c">' + cellChk(p + 'debug') + '</td>' +
       '<td>' + cellTxt(p + 'life', { size: 50, dis: !s.setpiece }) + '</td>' +
       '<td class="c">' + cellChk(p + 'setpiece') + '</td>' +
+      '<td class="c">' + cellChk(p + 'cmc') + '</td>' +
       '<td><button type="button" class="small" data-act="up" data-i="' + i + '" title="Move up">↑</button> ' +
       '<button type="button" class="small" data-act="down" data-i="' + i + '" title="Move down">↓</button> ' +
       '<button type="button" class="small" data-act="del" data-i="' + i + '" title="Remove step">✕</button></td></tr>';
@@ -3032,7 +3035,8 @@ function renderConfig() {
     '<button type="button" data-act="names">Fill blank program names</button></div>';
   h += '<p class="note">Rows run top to bottom. Always = measure before every nest; off = smart (measure while ' +
     '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest. ' +
-    'The box under a column name turns that column on or off for every row (dash = mixed).</p>';
+    'The box under a column name turns that column on or off for every row (dash = mixed). ' +
+    'CMC = cut / measure / cut: the step gets a card on tab 5.</p>';
   $('#tab-config').innerHTML = h;
   document.querySelectorAll('#tab-config [data-col]').forEach(function (el) {
     el.indeterminate = S.colState(job.steps, el.dataset.col) === 'some';
@@ -3160,8 +3164,97 @@ function renderOutput() {
   $('#tab-output').innerHTML = h;
 }
 
+/* ---- tab: CMC (shown only while a step row has CMC ticked) ---- */
+function cmcRows() { var r = []; job.steps.forEach(function (s, i) { if (s.cmc) r.push(i); }); return r; }
+function renderCmc() {
+  var rows = cmcRows(), u = U();
+  var btn = $('#tabBtnCmc');
+  btn.hidden = !rows.length;
+  if (!rows.length) {
+    $('#tab-cmc').innerHTML = '';
+    if (btn.classList.contains('active')) showTab('config');
+    return;
+  }
+  var cr = job.cmcR, first = S.isInt(cr.first) ? S.num(cr.first) : NaN;
+  var v = S.validate(job);
+  var warnBy = {};
+  v.warnings.forEach(function (w) { (warnBy[w.path] = warnBy[w.path] || []).push(w.msg); });
+  var h = '<h2>CMC · cut / measure / cut <span class="pill">' + rows.length + ' step' + (rows.length === 1 ? '' : 's') + '</span></h2>';
+  h += '<p class="note">Each CMC step runs its CMC program per nest in place of the B program: first cut with first-cut wear (leaves stock), ' +
+    'measure, final cut with the corrected wear, optional verify. Probe tool, feed, S_FA and probe-on M come from tab 2 ' +
+    '(the probe step itself can be off). Keep the CMC toolpath alone in its compound job.</p>';
+  h += '<div class="box"><b>R parameters</b> <span class="pill">kept through power-off</span><div class="grid" style="margin-top:6px">' +
+    txt('cmcR.first', 'First R number', { ph: '700' }) +
+    txt('cmcR.count', 'R parameters on the control (MD28050)', { ph: '1000' }) +
+    txt('cmcR.carrier', 'TCA tool carrier (spindle)', { ph: '1' }) + '</div>';
+  h += '<p class="note">' + S.CMC_BLOCK + ' R per CMC step: ' + rows.map(function (i, n) {
+    var s = job.steps[i], b = first + S.CMC_BLOCK * n;
+    return 'step ' + esc(s.step) + ' = ' + (isNaN(b) ? '?' : 'R' + b + '-R' + (b + S.CMC_BLOCK - 1));
+  }).join(', ') + '. R' + S.CMC_RESERVED_R.join(', R') + ' is used by tool_load_mda and is never in a CMC block. ' +
+    'Read MD28050 on the machine: R700 needs at least 750. Check no other program (tool change, Blum, OEM cycles, FIFO) uses this range.</p></div>';
+  rows.forEach(function (i) { h += cmcCard(i, warnBy); });
+  $('#tab-cmc').innerHTML = h;
+}
+function cmcCard(i, warnBy) {
+  var s = job.steps[i], p = 'steps.' + i + '.', u = U();
+  var d = S.CMC_DEF[s.cmcFeature] || S.CMC_DEF.BORE, kind = d.kind, rect = kind === 'rect', size = S.cmcIsSize(kind);
+  var turning = s.cmcTool === 'TURNING';
+  var h = '<div class="box cmccard" data-cmc-row="' + i + '"><b>Step ' + esc(s.step) + '</b> · ' + esc(s.tool || 'no tool') + ' · ' + esc(s.program || 'no program') +
+    ' <span class="pill">' + esc(S.cmcName(s.step)) + '</span>';
+  (warnBy[p + 'cmc'] || []).forEach(function (m) { h += '<div class="msg warn" style="margin-top:6px">' + esc(m) + '</div>'; });
+  var nomLabel = { size: d.mvar <= 2 ? 'Nominal diameter' : 'Nominal width', rect: 'Nominal length X', arc: 'Nominal diameter',
+    wall: 'Nominal wall position ' + (d.ma === 1 ? 'X' : 'Y'), floor: 'Nominal face position Z' }[kind];
+  h += '<div class="grid" style="margin-top:6px">' +
+    sel(p + 'cmcTool', 'Tool type', S.CMC_TOOLS) +
+    sel(p + 'cmcFeature', 'Feature', S.CMC_FEATURES) +
+    (kind === 'wall' ? sel(p + 'cmcSide', 'Material on the side', ['+', '-']) : '') +
+    txt(p + 'cmcNom', nomLabel + ' (' + u.u + ')') +
+    (rect ? txt(p + 'cmcNomY', 'Nominal length Y (' + u.u + ')') : '') +
+    txt(p + 'cmcTolP', 'Tolerance + (' + u.u + ')') + txt(p + 'cmcTolM', 'Tolerance - (' + u.u + ')') +
+    txt(p + 'cmcStock', 'First-cut wear (' + u.u + ')', { ph: 'leaves stock' }) +
+    txt(p + 'cmcWindow', 'Check window (' + u.u + ')', { ph: 'auto = first-cut wear' }) +
+    txt(p + 'cmcLimit', 'Correction limit (' + u.u + ')', { ph: def(S.CMC_LIMIT[u.key]) }) + '</div>';
+  h += '<div class="grid" style="margin-top:6px">' +
+    txt(p + 'cmcEdge', 'Edge (D)', { ph: '1' }) +
+    sel(p + 'cmcField', 'Wear field (AUTO = ' + S.cmcAutoField(turning ? 'TURNING' : 'ROTATING', kind) + ')', S.CMC_FIELDS) +
+    (turning ? sel(p + 'cmcUnit', 'Wear in', ['RADIUS', 'DIAMETER']) + sel(p + 'cmcSign', '+wear makes the measured value', ['', 'LARGER', 'SMALLER']) : '') +
+    sel(p + 'cmcReturn', 'Back to the cutter', ['TCA', 'T M6']) + '</div>';
+  var where = size ? 'Centre' : 'Point';
+  h += '<div class="grid" style="margin-top:6px">' +
+    (kind === 'wall' && d.ma === 1 ? '' : txt(p + 'cmcX', where + ' X')) +
+    (kind === 'wall' && d.ma === 2 ? '' : txt(p + 'cmcY', where + ' Y')) +
+    (kind === 'floor' ? '' : txt(p + 'cmcZ', 'Probe depth Z')) +
+    txt(p + 'cmcAppZ', 'Approach Z (clear above)') +
+    (d.cyc === 977 ? txt(p + 'cmcZone', (rect ? 'Protection zone X' : d.mvar <= 2 ? 'Protection zone diameter' : 'Protection zone width') + ' (' + u.u + ')', { ph: 'none' }) : '') +
+    (rect ? txt(p + 'cmcZoneY', 'Protection zone Y (' + u.u + ')', { ph: 'same as X' }) : '') +
+    (kind === 'arc' ? sel(p + 'cmcPoints', 'Measuring points', ['3', '4']) + txt(p + 'cmcStartAng', 'Start angle (deg)', { ph: '0' }) +
+      txt(p + 'cmcIncAng', 'Angle between points (deg, sign = direction)') : '') + '</div>';
+  h += '<div class="grid" style="margin-top:6px">' +
+    '<label class="f" style="grid-column:1/-1">Probe swivel: CYCLE800 line from the CAM program (blank = nest face; X / Y / Z above are then in that plane)' +
+    '<input type="text" data-path="' + p + 'cmcSwivel" value="' + esc(s.cmcSwivel) + '" placeholder="CYCLE800(0,&quot;H&quot;,200000,54,...)"' +
+    (errPaths[p + 'cmcSwivel'] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label></div>';
+  h += '<div class="grid" style="margin-top:6px">' +
+    sel(p + 'cmcClean', 'Probe cleaning', S.CMC_CLEAN) +
+    (s.cmcClean === 'M CODE' ? txt(p + 'cmcCleanM', 'Cleaning M code', { ph: 'M50' }) : '') +
+    chk(p + 'cmcVerify', 'Verify after the final cut') +
+    (s.cmcVerify ? sel(p + 'cmcOut', 'Out of tolerance after verify', ['RECUT', 'ACCEPT']) : '') +
+    (s.cmcVerify && s.cmcOut !== 'ACCEPT' ? txt(p + 'cmcMaxTry', 'Max re-cuts', { ph: '3' }) : '') + '</div>';
+  h += '<p class="note">' + esc(cmcSummary(s, kind)) + '</p>';
+  if (d.cyc === 977) h += '<p class="note">Protection zone: inside features = an island in the middle (the probe starts above it at the approach Z ' +
+    'and lowers outside it); outside features = the wall around (channel). Blank = none.</p>';
+  return h + '</div>';
+}
+function cmcSummary(s, kind) {
+  if (!S.isNum(s.cmcNom) || !S.isNum(s.cmcStock)) return 'Fill in nominal and first-cut wear to see the first cut.';
+  var c = S.cmcResolve(s, U()), n = function (v) { return S.compact(v, U().dec + 2); };
+  return 'First cut with CMC wear ' + n(c.w1) + ' on $TC_' + c.field + ' -> expected ' + n(c.E) + (kind === 'rect' ? ' x ' + n(c.E2) : '') +
+    '. Correction = wear used + (nominal - measured) / (' + n(c.div) + ')' + (kind === 'rect' ? ', mean of X and Y' : '') +
+    '. Scrap when the measurement is past nominal ' + (c.m > 0 ? '- ' + n(c.tolM) : '+ ' + n(c.tolP)) +
+    '. Hold (M0) when it is more than ' + n(c.window) + ' from expected or the wear exceeds ' + n(c.limit) + '.';
+}
+
 function renderAll() {
-  renderConfig(); renderProbing(); renderWcs(); renderOutput();
+  renderConfig(); renderProbing(); renderWcs(); renderOutput(); renderCmc();
   var part = S.ascii(job.header.part);
   $('#jobLabel').textContent = part ? '· Job ' + part : '';
 }
@@ -3177,6 +3270,7 @@ function showMsgs(kind, title, items) {
 function clearMsgs() { $('#msgs').innerHTML = ''; }
 function tabOf(path) {
   if (/^probing\./.test(path)) return 'probing';
+  if (/^cmcR\./.test(path) || /^steps\.\d+\.cmc[A-Z]/.test(path)) return 'cmc';
   if (/^wcs\./.test(path)) return 'wcs';
   return 'config';
 }
@@ -3276,13 +3370,14 @@ function build(download) {
     if (!yes) { showMsgs('warn', 'Generation stopped. Fill in the blank work offsets on tab 3, then generate again.'); return null; }
     var g = S.generate(job);
     lastFiles = g.files; selFile = 0; dirty = false;
+    var wtxt = v.warnings.length ? ' CMC warnings: ' + v.warnings.map(function (w) { return w.msg; }).join(' ') : '';
     if (download) {
       var z = S.makeZip(g.files);
       var name = (S.ascii(job.header.part).replace(/[^A-Za-z0-9_-]+/g, '_') || 'SINUMERIK') + '_NC_' + g.R.date + '.zip';
       saveBlob(new Blob([z], { type: 'application/zip' }), name);
-      showMsgs('ok', 'Generated ' + g.files.length + ' files into ' + name + '.' + (v.blankNests.length ? ' Blank offsets written as 0 for nest(s) ' + v.blankNests.join(', ') + '.' : ''));
+      showMsgs(wtxt ? 'warn' : 'ok', 'Generated ' + g.files.length + ' files into ' + name + '.' + (v.blankNests.length ? ' Blank offsets written as 0 for nest(s) ' + v.blankNests.join(', ') + '.' : '') + wtxt);
     } else {
-      showMsgs('ok', 'Preview built: ' + g.files.length + ' files. Nothing saved yet.');
+      showMsgs(wtxt ? 'warn' : 'ok', 'Preview built: ' + g.files.length + ' files. Nothing saved yet.' + wtxt);
     }
     showTab('output'); renderOutput();
     return g;
@@ -3296,7 +3391,7 @@ function saveBlob(blob, name) {
 }
 
 /* ---- edits ---- */
-var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist)$|steps\.\d+\.(brk|meas|setpiece)$)/;
+var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist)$|steps\.\d+\.(brk|meas|setpiece|step|tool|program|cmc\w*)$|cmcR\.)/;
 function onEdit(e) {
   var el = e.target;
   if (el.dataset && el.dataset.col) {
@@ -3324,6 +3419,12 @@ function onEdit(e) {
       job.config.totalNests = String(Math.min(f * n, S.MAX_NESTS));
   }
   if (p === 'config.mode' && job.config.mode === 'SINGLE PART') { /* kept, not used */ }
+  /* turning bore: +L1 makes the bore bigger (your setting); other turning features must be chosen */
+  var cm = /^steps\.(\d+)\.(cmcTool|cmcFeature)$/.exec(p);
+  if (cm) {
+    var st = job.steps[Number(cm[1])];
+    if (st.cmcTool === 'TURNING' && st.cmcFeature === 'BORE' && !st.cmcSign) st.cmcSign = 'LARGER';
+  }
   if (STRUCT.test(p)) scheduleRender();
 }
 /* A change event fires on blur, which can be the mousedown of a button
@@ -3468,6 +3569,7 @@ $('#btnValidate').addEventListener('click', function () {
   var v = runValidate();
   if (v.errors.length) showMsgs('bad', 'Validation: ' + v.errors.length + ' problem(s).', v.errors);
   else if (v.blankNests.length) showMsgs('warn', 'Valid, but nest(s) ' + v.blankNests.join(', ') + ' have blank X/Y/Z (written as 0.000 = machine zero). You will be asked when you generate.');
+  else if (v.warnings.length) showMsgs('warn', 'Valid. CMC warnings (' + v.warnings.length + '):', v.warnings);
   else showMsgs('ok', 'Validation passed.');
 });
 $('#btnGenerate').addEventListener('click', function () { build(true); });

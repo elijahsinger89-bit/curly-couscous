@@ -284,6 +284,68 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     await p2.close();
   }
 
+  /* 6c. CMC: tab 5 only while a row has CMC, cards, defaults, validation, zip */
+  {
+    await loadJob('f1_old_package');
+    const cmcBtn = () => page.$eval('#tabBtnCmc', b => !b.hidden);
+    check(!(await cmcBtn()), 'CMC tab hidden when no row has CMC');
+    check(await page.$('[data-col="cmc"]') !== null && await page.$('[data-path="steps.0.cmc"]') !== null, 'CMC column with header box in the step table');
+    await page.check('[data-path="steps.0.cmc"]');
+    await page.waitForFunction(() => !document.querySelector('#tabBtnCmc').hidden);
+    check(await cmcBtn(), 'ticking CMC shows tab 5');
+    await page.click('#tabBtnCmc');
+    check(await page.$$eval('.cmccard', l => l.length) === 1, 'one CMC card for the ticked row');
+    check(await page.$eval('[data-path="cmcR.first"]', e => e.placeholder) === '700', 'R block start shown (default R700)');
+    await page.selectOption('[data-path="steps.0.cmcTool"]', 'TURNING');
+    check(await page.$eval('[data-path="steps.0.cmcSign"]', e => e.value) === 'LARGER', 'turning bore: +wear makes the bore larger by default');
+    check(await page.$('[data-path="steps.0.cmcUnit"]') !== null, 'turning card shows the radius / diameter choice');
+    await page.selectOption('[data-path="steps.0.cmcFeature"]', 'RECT POCKET');
+    check(await page.$('[data-path="steps.0.cmcNomY"]') !== null && await page.$('[data-path="steps.0.cmcZoneY"]') !== null, 'rectangle card asks for Y length and zone Y');
+    await page.selectOption('[data-path="steps.0.cmcFeature"]', 'BORE ARC');
+    check(await page.$('[data-path="steps.0.cmcIncAng"]') !== null && await page.$('[data-path="steps.0.cmcZone"]') === null, 'circle segment card: angles, no protection zone');
+    await page.selectOption('[data-path="steps.0.cmcFeature"]', 'WALL Y');
+    check(await page.$('[data-path="steps.0.cmcSide"]') !== null && await page.$('[data-path="steps.0.cmcY"]') === null, 'wall Y card: material side, point X only');
+    d = await generate(false);
+    check(d === null, 'empty CMC card blocks Generate');
+    check((await page.textContent('#msgs')).includes('CMC step'), 'CMC errors listed');
+    await page.click('#msgs a:has-text("nominal")');
+    check(await page.evaluate(() => document.activeElement.dataset.path) === 'steps.0.cmcNom' &&
+          await page.$eval('#tab-cmc', t => t.classList.contains('active')), 'clicking a CMC error opens tab 5 at the field');
+    await page.click('nav.tabs button[data-tab="config"]');
+    await page.uncheck('[data-path="steps.0.cmc"]');
+    await page.waitForFunction(() => document.querySelector('#tabBtnCmc').hidden);
+    check(!(await cmcBtn()), 'unticking the last CMC row hides tab 5');
+    await page.click('[data-col="cmc"]');
+    check(await page.$$eval('[data-path$=".cmc"]', l => l.every(i => i.checked)) && await cmcBtn(), 'CMC header box ticks every row');
+    await page.click('#tabBtnCmc');
+    await page.evaluate(() => { const j = window.SNG_UI.getJob(); j.steps.forEach(s => { s.cmc = false; }); window.SNG_UI.setJob(j); });
+    check(!(await cmcBtn()) && await page.$eval('#tab-config', t => t.classList.contains('active')), 'tab 5 open when its last CMC row goes: back to tab 1');
+    await loadJob('f9_cmc_turning');
+    await page.click('#tabBtnCmc');
+    check(await page.$$eval('.cmccard', l => l.length) === 5, 'turning CMC job: 5 cards');
+    check((await page.textContent('#tab-cmc')).includes('R700-R749') && (await page.textContent('#tab-cmc')).includes('R900-R949'), 'R ranges listed per CMC step');
+    await page.screenshot({ path: path.join(out, 'shot_cmc.png'), fullPage: true });
+    d = await generate(false);
+    check(!!d, 'CMC job generates');
+    if (d) {
+      const zc = path.join(out, 'cmc.zip');
+      await d.saveAs(zc);
+      unzipCheck(zc, path.join(out, 'cmc'));
+      const w = n => fs.existsSync(path.join(out, 'cmc', 'WKS', n));
+      check(w('C_P1_CMC10.SPF') && w('C_P1_CMC10_M.SPF') && w('C_P1_CMC50.SPF') && w('C_P1_CMC_BACK.SPF') && w('C_P1_CMC_LOG.SPF') && w('C_P1_CMC_CLEAR.SPF'),
+            'zip holds the CMC programs');
+      const lint = require('child_process').spawnSync('python3', [path.join(here, 'nc_lint.py'), path.join(out, 'cmc')], { encoding: 'utf8' });
+      check(lint.status === 0, 'CMC zip passes the NC lint ' + (lint.status ? lint.stdout.slice(-400) : ''));
+    }
+    const sp2 = page.waitForEvent('download');
+    await page.click('#btnSave');
+    const sd2 = await sp2;
+    const saved2 = path.join(out, 'saved_cmc.json');
+    await sd2.saveAs(saved2);
+    const sj = JSON.parse(fs.readFileSync(saved2, 'utf8')), fj = JSON.parse(fs.readFileSync(fx('f9_cmc_turning'), 'utf8'));
+    check(sj.steps[0].cmcSwivel === fj.steps[0].cmcSwivel && sj.steps[1].cmcUnit === 'DIAMETER' && sj.cmcR.first === '700', 'CMC card saved in the job file');
+  }
+
   /* 7. screenshots for review */
   await loadJob('f1_old_package');
   await page.screenshot({ path: path.join(out, 'shot_config.png'), fullPage: true });

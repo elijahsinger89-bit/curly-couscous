@@ -242,6 +242,20 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   eq(ov.steps.map(s => s.step), ['10', '20', '30', '40'], 'overwrite: the list replaces the table');
   const kp = S.applyBList(j, rd.list, 'keep');
   eq([kp.steps.map(s => s.step), kp.added, kp.steps[0].tool], [['10', '20', '30', '40'], 1, 'FM_3IN'], 'keep: existing 10-30 untouched, 40 added');
+  /* go_to_machine facts of the posted NC file: G41/G42 and R parameters */
+  {
+    const d = JSON.parse(JSON.stringify(sample));
+    d.steps[0].radius_comp = true; d.steps[0].r_params = [1, 812]; d.steps[1].radius_comp = false; d.steps[1].jobs = 3;
+    const r2 = S.readBList(d).list;
+    eq(r2.steps.map(s => [s.rcomp, s.rparams, s.jobs]), [['YES', '1,812', '2'], ['NO', '', '3'], ['', '', '1'], ['', '', '2']],
+      'B list: radius_comp, r_params and jobs read per row (missing = unknown)');
+    const jj = S.normalizeJob(JSON.parse(JSON.stringify(j)));
+    jj.steps = S.applyBList(jj, rd.list, 'overwrite').steps;
+    jj.steps[0].tool = 'MY_EDIT';
+    const k2 = S.applyBList(jj, r2, 'keep');
+    eq([k2.steps[0].tool, k2.steps[0].rparams, k2.steps[0].rcomp, k2.steps[1].jobs], ['MY_EDIT', '1,812', 'YES', '3'],
+      'keep: an existing row keeps its edits but takes the new posted facts of its program');
+  }
   j.steps = ov.steps; j.header.part = rd.list.part; j.header.machine = rd.list.machine; j.config.units = rd.list.units;
   j.probeStep.program = 'B_00948602_025_001_HF5';
   const v1 = S.validate(j);

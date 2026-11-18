@@ -53,6 +53,14 @@ class PJob(om.Job):
         self.PofFileName, self.Status, self.POFStatus = pof, status, pofs
 
 
+# posted NC text per B program (G41/G42 and R parameter scan for the generator's CMC checks)
+NC_TEXT = {
+    "B_G17_SLIDE_010_HF5": "G1 G41 D1 X10\nR1=5 R12=R1+1 ; R700 in a comment\nMSG(\"R800\")\nG2 X1 Y1 CR=5\n",
+    "B_G17_SLIDE_020_HF5": "G0 X0\nCYCLE81(1,0,1,-5)\nTRAFOOF\nG40\n",
+    "B_G17_SLIDE_030_HF5": "G42 X0\nR[R2]=1\n",
+}
+
+
 class PostSet(om.JobListSet):
     """CalculateNC writes NC\\<compound job name>.mpf for each compound job UUID (or nothing / raises)."""
     calls = []
@@ -68,7 +76,7 @@ class PostSet(om.JobListSet):
                 for c in jl.GetCompoundJobs():
                     if c.UUID in uuids:
                         with open(os.path.join(DOCDIR, "NC", c.Name + ".mpf"), "w") as f:
-                            f.write("; " + c.Name)
+                            f.write(NC_TEXT.get(c.Name, "; " + c.Name))
         return True
 
 
@@ -279,6 +287,15 @@ check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and len(nc_files()) == 4, "po
 check("Posted although 3 fail the check." in flat(gui.BOXES[-1]), "post all: message says posted with failures")
 check("POSTED WITH FAILURES" in open(LOGP).read(), "post all: log records the override")
 check(len(gui.SHOWN) == 2 and len(sheet()) == 3, "post all: no list question; tool sheet with all 3 tools")
+facts = {s["program"]: (s.get("radius_comp"), s.get("r_params")) for s in json.load(open(BLIST))["steps"]}
+check(facts == {"B_G17_SLIDE_010_HF5": (True, [1, 12]), "B_G17_SLIDE_020_HF5": (False, []), "B_G17_SLIDE_030_HF5": (True, [2]),
+                "B_G17_SLIDE_040_HF5": (False, [])},
+      "posted NC read: G41/G42 and R numbers (comments, strings, CR= and G40 ignored) %s" % facts)
+box = flat(gui.BOXES[-1])
+check("R parameters in posted B programs" in box and "B_G17_SLIDE_010_HF5 (R1, R12)" in box and "R[...] with a computed number" in box and
+      "No G41/G42" in box, "message: R parameters, indirect R and missing G41/G42 named")
+csvrow = [r for r in csv.DictReader(open(BLIST[:-5] + ".csv", encoding="utf-8-sig")) if r["program"] == "B_G17_SLIDE_010_HF5"][0]
+check(csvrow["radius_comp"] == "True" and csvrow["r_params"] == "1 12", "csv: radius_comp and r_params columns")
 
 # ---------------- everything passes: confirm ----------------
 cs = build(all_pass=True)
