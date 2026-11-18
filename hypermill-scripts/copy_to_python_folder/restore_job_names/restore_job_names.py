@@ -1,6 +1,6 @@
 # restore_job_names.py - hyperMILL 35
 # Renames every toolpath (job) back to its number and toolpath type, e.g. "2: 3D Optimized Roughing", "7: Contour Turning".
-#   number        = the job's *JOBID setting (the number hyperMILL gave the job; falls back to the "N:" in front of the name)
+#   number        = the job number hyperMILL gave the job: Job.ID, else its *JOBID setting, else the "N:" in front of the name
 #   toolpath type = Job.LocCycleName (the cycle name hyperMILL puts in a new job's name)
 # Name format (first screen):  "N: Type"  or  "N: T<tool ID> Type"  (the default names in your documents carry the tool ID)
 # Compound jobs (B programs, dividers) keep their names. Toolpaths already named right are left alone.
@@ -80,12 +80,45 @@ def tool_id(job):
     return ""
 
 
-def number_of(job, name):
-    n = text(cfg_of(job).get("*JOBID", ""))
-    if re.match(r"^\d+$", n):
-        return n
+def whole(v):
+    """'12', 12, '12.0' -> '12'; anything else -> ''"""
+    t = text(v)
+    if re.match(r"^\d+(\.0*)?$", t):
+        n = int(float(t))
+        return str(n) if n > 0 else ""
+    return ""
+
+
+def name_number(name):
     m = re.match(r"^\s*(\d+)\s*:", name)
     return m.group(1) if m else ""
+
+
+def id_trusted(jobs):
+    """Job.ID is used only when it matches the "N:" of every toolpath that still has one (else it is not the job number)."""
+    pairs = [(whole(getattr(j, "ID", None)), name_number(text(getattr(j, "Name", "")))) for j in jobs]
+    pairs = [p for p in pairs if p[0] and p[1]]
+    bad = [p for p in pairs if p[0] != p[1]]
+    log("Job.ID check: %d toolpaths with N: and ID, %d differ -> Job.ID %s" % (len(pairs), len(bad), "NOT used" if bad else "used"))
+    return not bad
+
+
+def number_of(job, name, use_id=True):
+    for v in ((getattr(job, "ID", None) if use_id else None), cfg_of(job).get("*JOBID", "")):
+        n = whole(v)
+        if n:
+            return n
+    m = re.match(r"^\s*(\d+)\s*:", name)
+    return m.group(1) if m else ""
+
+
+def why_not(job):
+    """what the job holds, for the log when a toolpath is left alone"""
+    cfg = cfg_of(job)
+    ids = dict((k, text(v)) for k, v in cfg.items() if "ID" in str(k).upper() and len(text(v)) < 40) if hasattr(cfg, "items") else {}
+    return "ID=%r *JOBID=%r cfg *ID*=%s LocCycleName=%r CycleName=%r JobType=%r" % (
+        text(getattr(job, "ID", "")), text(cfg.get("*JOBID", "")), ids, text(getattr(job, "LocCycleName", "")),
+        text(getattr(job, "CycleName", "")), text(getattr(job, "JobType", "")))
 
 
 def type_of(job):
@@ -95,10 +128,10 @@ def type_of(job):
     return t
 
 
-def target(job, fmt):
+def target(job, fmt, use_id=True):
     """(new name, reason it can't be made)"""
     name = text(getattr(job, "Name", ""))
-    n, t = number_of(job, name), type_of(job)
+    n, t = number_of(job, name, use_id), type_of(job)
     if not n:
         return "", "no job number"
     if not t:
@@ -176,11 +209,14 @@ def run():
         for jl, n in zip(lists, names):
             if scope != "All joblists" and n != scope:
                 continue
-            for j in jobs_of(jl):
+            jobs = jobs_of(jl)
+            use_id = id_trusted(jobs)
+            for j in jobs:
                 old = text(getattr(j, "Name", ""))
-                new, why = target(j, fmt)
+                new, why = target(j, fmt, use_id)
                 if why:
                     skipped.append((old, why))
+                    log("left alone:", old, "|", why_not(j))
                 elif new == old:
                     same += 1
                 else:
