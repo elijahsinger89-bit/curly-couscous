@@ -17,7 +17,7 @@ KEYWORDS = {
     'ENDFOR', 'REPEAT', 'M0', 'M1', 'M3', 'M5', 'M6', 'M8', 'M9', 'M19', 'D0', 'D1', 'G54', 'G70', 'G71',
 }
 # Subprograms / cycles called by name that exist on the control, not in the zip.
-EXTERNAL_CALLS = {'CYCLE800', 'CYCLE832', 'CYCLE977', 'CYCLE978', 'BL9908_MOD', 'BL9902',
+EXTERNAL_CALLS = {'CYCLE800', 'CYCLE832', 'CYCLE977', 'CYCLE978', 'CYCLE979', 'BL9908_MOD', 'BL9902',
                   'GROUP_BEGIN', 'GROUP_END', 'MSG', 'WRITE', 'GETEXET', 'SETPIECE', 'CALL'}
 LABEL_RE = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*):$')
 PROG_RE = re.compile(r'^[A-Za-z_][A-Za-z_][A-Za-z0-9_]{0,22}$')
@@ -126,7 +126,7 @@ def num_or_none(s):
         return None
 
 
-def lint_file(path, sigs, progs, findings):
+def lint_file(path, sigs, progs, findings, cycles=frozenset()):
     name = os.path.basename(path)
     raw = open(path, 'rb').read()
 
@@ -176,6 +176,7 @@ def lint_file(path, sigs, progs, findings):
     stack = []
     seen_exec = False
     proc_seen = False
+    declared = set()
     for idx, (ln, c) in enumerate(code):
         up = c.upper()
         first = re.match(r'^([A-Za-z_$][A-Za-z0-9_]*)', c)
@@ -188,7 +189,27 @@ def lint_file(path, sigs, progs, findings):
                 proc_seen = True
                 continue
             if head == 'EXTERN' or head == 'EXTERNAL':
-                bad('EXTERN found; the framework uses none (NC 4.2.3.2: cycles need no EXTERN)', ln)
+                # NC 4.2.3.2: a sub-program with parameters in the workpiece / global sub-program directory
+                # is declared with EXTERN before it is called; cycles are not. Types and order must match PROC.
+                if seen_exec:
+                    bad('EXTERN after an executable statement (declare at the beginning, NC 4.2.3.2)', ln)
+                em = re.match(r'^EXTERN(?:AL)?\s+([A-Za-z_][A-Za-z0-9_]*)\s*\((.*)\)\s*$', c, re.I)
+                if not em:
+                    bad('malformed EXTERN', ln)
+                    continue
+                ename = em.group(1).upper()
+                if ename in cycles:
+                    bad('EXTERN for cycle %s (cycles need no EXTERN, NC 4.2.3.2)' % ename, ln)
+                elif ename not in sigs:
+                    bad('EXTERN for %s, which is not a generated PROC with parameters' % ename, ln)
+                else:
+                    want = [('VAR ' if v else '') + t for (t, _, v) in sigs[ename]]
+                    got = [re.sub(r'\s+', ' ', x.strip()).upper() for x in split_args(em.group(2))] if em.group(2).strip() else []
+                    if got != want:
+                        bad('EXTERN %s(%s) does not match PROC (%s) (NC 4.2.3.2: types and order must match)'
+                            % (ename, ','.join(got), ','.join(want)), ln)
+                declared.add(ename)
+                continue
             if head == 'DEF':
                 if seen_exec:
                     bad('DEF after an executable statement (definitions first, NC 4.1.1.4 / 4.1.7)', ln)
@@ -257,11 +278,15 @@ def lint_file(path, sigs, progs, findings):
                 pname = cm.group(1).upper()
                 args = split_args(cm.group(2)) if cm.group(2).strip() else []
                 params = sigs[pname]
+                if params and pname not in cycles and pname not in declared:
+                    bad('%s has parameters and is not a cycle: declare it with EXTERN first (NC 4.2.3.2)' % pname, ln)
                 if len(args) != len(params):
                     bad('%s called with %d args, PROC has %d' % (pname, len(args), len(params)), ln)
                 else:
-                    for a, (ptype, pnm) in zip(args, params):
+                    for a, (ptype, pnm, isvar) in zip(args, params):
                         is_str = a.startswith('"') and a.endswith('"')
+                        if isvar and not re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', a):
+                            bad('%s: VAR %s needs a variable name, got %r' % (pname, pnm, a), ln)
                         if ptype.startswith('STRING'):
                             mx = int(re.search(r'\[(\d+)\]', ptype).group(1))
                             if is_str and len(a) - 2 > mx:
@@ -274,7 +299,7 @@ def lint_file(path, sigs, progs, findings):
                             elif ptype == 'INT' and re.match(r'^-?\d*\.\d*$', a):
                                 bad('%s: INT %s given a decimal %s' % (pname, pnm, a), ln)
                 continue
-            if cm and cm.group(1).upper() in ('CYCLE977', 'CYCLE978'):
+            if cm and cm.group(1).upper() in ('CYCLE977', 'CYCLE978', 'CYCLE979'):
                 check_cycle(cm.group(1).upper(), split_args(cm.group(2)), bad, ln)
                 continue
             if re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', c) and up not in KEYWORDS and not re.match(r'^[GMDSHFABCXYZ]\d+$', up):
@@ -310,43 +335,99 @@ def check_jump(kind, target, idx, labels, bad, ln):
 
 
 def check_cycle(cname, a, bad, ln):
-    """Positions and values from MC 5.1.5 (CYCLE978) and 5.1.7 (CYCLE977)."""
+    """Positions and values from MC 5.1.5 (CYCLE978), 5.1.7 (CYCLE977) and 5.1.9 (CYCLE979).
+    Two kinds of call are generated: the probe step corrects the nest WO (S_KNUM = GV_WO[GV_NEST]),
+    CMC measures only (S_MVAR hundreds digit 0, S_KNUM 0)."""
+    def ival(x):
+        try:
+            return int(x)
+        except ValueError:
+            return None
     if cname == 'CYCLE977':
         if len(a) > 30:
             bad('CYCLE977 has %d args (max 30, MC 5.1.7)' % len(a), ln)
             return
-        mvar = a[0]
-        if mvar not in ('101', '102', '104', '105', '106'):
-            bad('CYCLE977 S_MVAR %s not a WO-correcting hole/spigot/rib/rectangle (MC 5.1.7)' % mvar, ln)
-        if a[1] != 'GV_WO[GV_NEST]':
-            bad('CYCLE977 S_KNUM must be GV_WO[GV_NEST]', ln)
+        mv = ival(a[0])
+        if mv is None:
+            bad('CYCLE977 S_MVAR %s is not a number' % a[0], ln)
+            return
+        unit, hund, thou = mv % 10, (mv // 100) % 10, (mv // 1000) % 10
+        if mv // 10000 or (mv // 10) % 10 or unit not in (1, 2, 3, 4, 5, 6) or hund not in (0, 1) or thou not in (0, 1):
+            bad('CYCLE977 S_MVAR %s: units 1-6, tens 0, hundreds 0 (measure) or 1 (WO), thousands 0/1 (MC 5.1.7)' % a[0], ln)
+            return
+        if hund == 1:
+            if unit == 3 or thou:
+                bad('CYCLE977 S_MVAR %s: the probe step uses no groove and no protection zone' % a[0], ln)
+            if a[1] != 'GV_WO[GV_NEST]':
+                bad('CYCLE977 S_KNUM must be GV_WO[GV_NEST] (WO correction)', ln)
+        else:
+            if a[1] != '0':
+                bad('CYCLE977 measure only (S_MVAR hundreds 0) needs S_KNUM 0 (no correction, MC 5.1.7)', ln)
         fa, tsa, sid, ma = num_or_none(a[7]), num_or_none(a[8]), num_or_none(a[10]), a[13]
+        sza, szo = num_or_none(a[11]), num_or_none(a[12])
         if fa is None or fa <= 0:
             bad('CYCLE977 S_FA (pos 8) must be > 0', ln)
         if tsa != fa:
             bad('CYCLE977 S_TSA (pos 9) must equal S_FA', ln)
-        if mvar in ('102', '104', '106') and (sid is None or sid >= 0):
+        outside = unit in (2, 4, 6)
+        if outside and (sid is None or sid >= 0):
             bad('CYCLE977 outside feature needs a negative S_ID (pos 11) to lower (MC 5.1.7)', ln)
-        if mvar in ('101', '105') and sid != 0:
-            bad('CYCLE977 inside feature must have S_ID = 0 (pos 11)', ln)
-        if mvar == '104' and ma not in ('1', '2'):
-            bad('CYCLE977 rib needs S_MA 1 or 2 (pos 14)', ln)
-        if mvar in ('101', '102', '104') and (num_or_none(a[4]) or 0) <= 0:
-            bad('CYCLE977 S_SETV (pos 5) must be the diameter/width > 0', ln)
-        if mvar in ('105', '106') and ((num_or_none(a[5]) or 0) <= 0 or (num_or_none(a[6]) or 0) <= 0):
-            bad('CYCLE977 rectangle needs S_SETV0/S_SETV1 (pos 6/7) > 0', ln)
+        if not outside and not thou and sid != 0:
+            bad('CYCLE977 inside feature without protection zone must have S_ID = 0 (pos 11)', ln)
+        if not outside and thou and (sid is None or sid >= 0):
+            bad('CYCLE977 inside feature with protection zone needs a negative S_ID (pos 11) from above the zone (MC 5.1.7)', ln)
+        if thou and (sza is None or sza <= 0):
+            bad('CYCLE977 protection zone (S_MVAR thousands 1) needs S_SZA (pos 12) > 0', ln)
+        if not thou and (sza != 0 or szo != 0):
+            bad('CYCLE977 without protection zone must have S_SZA/S_SZO (pos 12/13) = 0', ln)
+        if unit in (3, 4) and ma not in ('1', '2'):
+            bad('CYCLE977 groove / rib needs S_MA 1 or 2 (pos 14)', ln)
+        setv_ok = lambda x: (num_or_none(x) or 0) > 0 or re.match(r'^LD_SETV2?$', x or '')
+        if unit in (1, 2, 3, 4) and not setv_ok(a[4]):
+            bad('CYCLE977 S_SETV (pos 5) must be the diameter/width > 0 (or LD_SETV)', ln)
+        if unit in (5, 6) and (not setv_ok(a[5]) or not setv_ok(a[6])):
+            bad('CYCLE977 rectangle needs S_SETV0/S_SETV1 (pos 6/7) > 0 (or LD_SETV / LD_SETV2)', ln)
         if len(a) < 27 or a[25] != '1' or a[26] != '0':
             bad('CYCLE977 _DMODE (pos 26) must be 1 and _AMODE (pos 27) 0', ln)
+    elif cname == 'CYCLE979':
+        if len(a) > 27:
+            bad('CYCLE979 has %d args (max 27, MC 5.1.9)' % len(a), ln)
+            return
+        mv = ival(a[0])
+        if mv is None or mv % 10 not in (1, 2) or (mv // 10) % 10 or (mv // 100) % 10 or (mv // 1000) % 10 not in (0, 1) or mv // 10000:
+            bad('CYCLE979 S_MVAR %s: 1 hole / 2 spigot, measure only, thousands 0 = 3 points, 1 = 4 points (MC 5.1.9)' % a[0], ln)
+            return
+        if a[1] != '0':
+            bad('CYCLE979 measure only needs S_KNUM 0', ln)
+        fa, tsa = num_or_none(a[5]), num_or_none(a[6])
+        if fa is None or fa <= 0 or tsa != fa:
+            bad('CYCLE979 S_FA (pos 6) must be > 0 and S_TSA (pos 7) equal to it', ln)
+        sta, inc = num_or_none(a[9]), num_or_none(a[10])
+        if sta is None or abs(sta) > 360:
+            bad('CYCLE979 S_STA1 (pos 10) must be -360..360', ln)
+        lim = 90 if (mv // 1000) % 10 else 120
+        if inc is None or inc == 0 or abs(inc) > lim:
+            bad('CYCLE979 S_INCA (pos 11) must be >0..%d degrees for %d points (MC 5.1.9)' % (lim, 4 if lim == 90 else 3), ln)
+        if len(a) < 24 or a[22] != '1' or a[23] != '0':
+            bad('CYCLE979 _DMODE (pos 23) must be 1 and _AMODE (pos 24) 0', ln)
     else:
         if len(a) > 23:
             bad('CYCLE978 has %d args (max 23, MC 5.1.5)' % len(a), ln)
             return
-        if a[0] != '100':
-            bad('CYCLE978 S_MVAR must be 100 (surface, WO correction)', ln)
-        if a[1] != 'GV_WO[GV_NEST]':
-            bad('CYCLE978 S_KNUM must be GV_WO[GV_NEST]', ln)
-        if a[7] != '3' or a[8] != '2':
-            bad('CYCLE978 must measure Z (S_MA=3, pos 8) in the negative direction (S_MD=2, pos 9)', ln)
+        if a[0] == '100':
+            if a[1] != 'GV_WO[GV_NEST]':
+                bad('CYCLE978 S_KNUM must be GV_WO[GV_NEST]', ln)
+            if a[7] != '3' or a[8] != '2':
+                bad('CYCLE978 WO correction must measure Z (S_MA=3, pos 8) in the negative direction (S_MD=2, pos 9)', ln)
+        elif a[0] == '0':
+            if a[1] != '0':
+                bad('CYCLE978 measure only needs S_KNUM 0', ln)
+            if a[7] not in ('1', '2', '3') or a[8] not in ('1', '2'):
+                bad('CYCLE978 S_MA (pos 8) must be 1-3 and S_MD (pos 9) 1 or 2', ln)
+            if a[7] == '3' and a[8] != '2':
+                bad('CYCLE978 face in Z is measured in the negative direction (S_MD=2)', ln)
+        else:
+            bad('CYCLE978 S_MVAR must be 100 (surface, WO correction) or 0 (surface, measure only)', ln)
         if num_or_none(a[5]) != num_or_none(a[6]):
             bad('CYCLE978 S_TSA (pos 7) must equal S_FA (pos 6)', ln)
         if len(a) < 22 or a[20] != '1' or a[21] != '0':
@@ -380,6 +461,44 @@ def design_checks(files, findings):
                         findings.append('%s: %s not preceded by STOPRE (restart safety)' % (n, x))
             if c[-1] != 'M30':
                 findings.append('%s: last code line must be M30' % n)
+    # ----- CMC (cut / measure / cut) invariants -----
+    for n in files:
+        if re.match(r'^C_P1_CMC\d+\.SPF$', n):
+            c = code_of(n)
+            for i, x in enumerate(c):
+                if re.search(r'GV_NEST_STATUS\[[^\]]*\]\s*=(?!=)', x) or re.match(r'^GV_NEST\s*=', x) or re.search(r'\bGV_NEST=', x):
+                    findings.append('%s: writes %s (CMC must leave nest status and nest advancing to L_RUN_NESTS / A_P1)' % (n, x))
+                if x == 'CALL LV_B':
+                    if c[i + 1] != 'STOPRE':
+                        findings.append('%s: CALL LV_B must be followed by STOPRE (pass written after the cut is finished)' % n)
+                    if 'STOPRE' not in c[max(0, i - 4):i]:
+                        findings.append('%s: wear write and pass must be followed by STOPRE before CALL LV_B' % n)
+                m = re.match(r'^(R\d+)=9$', x)
+                if m and c[i - 1] != 'SETPIECE(0)':
+                    findings.append('%s: pass 9 must follow SETPIECE(0)' % n)
+                if re.match(r'^\$TC_DP1[2-5]\[', x) and '=' in x and not re.match(r'^\$TC_DP1[2-5]\[LV_T,LV_D\]=R\d+', x.split(';')[0]):
+                    findings.append('%s: wear must be written as an absolute value from R: %s' % (n, x))
+        if re.match(r'^C_P1_CMC\d+_M\.SPF$', n):
+            c = code_of(n)
+            for i, x in enumerate(c):
+                if re.match(r'^G1 ', x) and 'MEAS=1' not in x:
+                    findings.append('%s: probe lowering without MEAS=1: %s' % (n, x))
+                if re.match(r'^G1 MEAS=1 ', x) and (c[i + 1] != 'STOPRE' or c[i + 2] != 'IF ($AC_MEA[1]==1) GOTOF _CM_HIT'):
+                    findings.append('%s: G1 MEAS=1 must be followed by STOPRE and the $AC_MEA check' % n)
+            if not any(x.startswith('G17 G90 G94') for x in c):
+                findings.append('%s: G17 G90 G94 missing before the probe moves (turning programs leave G18 / G95)' % n)
+    for n in files:
+        if n.startswith('A_') and n.endswith('.MPF'):
+            c = code_of(n)
+            run = None
+            for x in c:
+                m = re.match(r'^L_RUN_NESTS\("[^"]*",[^,]*,[^,]*,"(C_P1_CMC\d+)"', x)
+                if m:
+                    run = m.group(1)
+                if re.match(r'^STEP\d+:$', x):
+                    run = None
+                if re.search(r'GV_NEST_STATUS\[LV_I\]=3$', x) and run is None:
+                    findings.append('%s: nest status 3 set outside the results loop after a CMC L_RUN_NESTS' % n)
     if 'C_P1_WO.SPF' in files:
         c = code_of('C_P1_WO.SPF')
         if 'IF (GV_STEP==0)' not in c:
@@ -405,6 +524,7 @@ def main(dirs):
                     files[n] = os.path.join(root, n)
         sigs = {}
         progs = set()
+        cycles = set()
         for n, p in files.items():
             progs.add(os.path.splitext(n)[0].upper())
             first = open(p).read().split('\n', 1)[0]
@@ -412,17 +532,19 @@ def main(dirs):
             if m:
                 params = []
                 for part in split_args(m.group(2)):
-                    pm = re.match(r'^(STRING\[\d+\]|INT|REAL)\s+([A-Za-z_][A-Za-z0-9_]*)$', part.strip())
+                    pm = re.match(r'^(VAR\s+)?(STRING\[\d+\]|INT|REAL)\s+([A-Za-z_][A-Za-z0-9_]*)$', part.strip())
                     if not pm:
                         findings.append('%s: cannot parse PROC parameter %r' % (n, part))
                         continue
-                    params.append((pm.group(1), pm.group(2)))
+                    params.append((pm.group(2), pm.group(3), bool(pm.group(1))))
                 sigs[m.group(1).upper()] = params
+                if os.sep + 'CUS' + os.sep in p:
+                    cycles.add(m.group(1).upper())
             elif n.startswith('L_') and n.endswith('.SPF') and first.startswith('PROC'):
                 findings.append('%s: malformed PROC line' % n)
         before = len(findings)
         for n in sorted(files):
-            lint_file(files[n], sigs, progs, findings)
+            lint_file(files[n], sigs, progs, findings, cycles)
             total += 1
         design_checks(files, findings)
         print('%s: %d files, %d findings' % (d, len(files), len(findings) - before))

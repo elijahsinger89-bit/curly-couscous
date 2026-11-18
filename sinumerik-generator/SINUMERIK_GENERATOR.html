@@ -156,13 +156,15 @@ function blankWcsRow() { return { x: '', y: '', z: '', trunnion: '', rotary: '',
 function blankStep(stepNo) {
   return { step: String(stepNo), tool: '', brkTol: '', program: '', meas: true, measAlways: false,
            brk: true, maxBrk: '2', debug: false, life: '1', setpiece: true,
-           /* from the hyperMILL B program list: toolpaths in the B program, G41/G42 found in its NC file */
-           jobs: '', rcomp: '',
+           /* from the hyperMILL B program list: toolpaths in the B program, G41/G42 found in its NC file,
+              R parameters its NC file uses (comma list) */
+           jobs: '', rcomp: '', rparams: '',
            /* CMC (cut / measure / cut) card, used when cmc is ticked */
            cmc: false, cmcTool: 'ROTATING', cmcFeature: 'BORE', cmcSide: '+', cmcEdge: '1', cmcField: 'AUTO',
            cmcUnit: 'RADIUS', cmcSign: '', cmcNom: '', cmcTolP: '', cmcTolM: '', cmcX: '', cmcY: '', cmcZ: '',
            cmcAppZ: '', cmcStock: '', cmcWindow: '', cmcLimit: '', cmcClean: 'NONE', cmcCleanM: '',
-           cmcVerify: false, cmcOut: 'RECUT', cmcMaxTry: '3', cmcReturn: 'TCA' };
+           cmcVerify: false, cmcOut: 'RECUT', cmcMaxTry: '3', cmcReturn: 'TCA',
+           cmcNomY: '', cmcZone: '', cmcZoneY: '', cmcPoints: '4', cmcStartAng: '', cmcIncAng: '', cmcSwivel: '' };
 }
 function defaultJob() {
   var wcs = [];
@@ -395,7 +397,8 @@ function readBList(data) {
       maxBrk: String(isInt(s.max_brk) ? num(s.max_brk) : 2), debug: false,
       life: String(isInt(s.life) ? num(s.life) : 1), setpiece: s.setpiece !== false,
       jobs: isInt(s.jobs) ? String(num(s.jobs)) : '',
-      rcomp: s.radius_comp === true ? 'YES' : (s.radius_comp === false ? 'NO' : '')
+      rcomp: s.radius_comp === true ? 'YES' : (s.radius_comp === false ? 'NO' : ''),
+      rparams: Array.isArray(s.r_params) ? s.r_params.filter(isInt).map(function (v) { return String(num(v)); }).join(',') : ''
     });
   });
   if (bad.length) { R.error = 'B program list entries without a whole step number, program or tool: ' + bad.join(', ') + '.'; return R; }
@@ -420,6 +423,13 @@ function applyBList(job, list, mode) {
   }), steps, added;
   if (mode === 'keep') {
     steps = job.steps.map(cloneStep);
+    /* facts read from the posted NC file follow the program: refresh them on rows with the same program */
+    var facts = {};
+    fresh.forEach(function (r) { facts[String(r.program).toUpperCase()] = r; });
+    steps.forEach(function (st) {
+      var f = facts[String(st.program).trim().toUpperCase()];
+      if (f) { st.jobs = f.jobs; st.rcomp = f.rcomp; st.rparams = f.rparams; }
+    });
     var have = {};
     steps.forEach(function (st) { if (isInt(st.step)) have[num(st.step)] = 1; });
     var add = fresh.filter(function (st) { return !have[num(st.step)]; });
@@ -466,20 +476,30 @@ function setColumn(steps, key, on) {
 /* ---------------- CMC: cut / measure / cut ----------------
    One feature per CMC step: cut with first-cut wear (leaves material), measure, re-cut with the correcting wear,
    optional verify. Wear is $TC_DP12..15[T,D] (SV: wear length 1/2/3, wear radius of edge D), written as absolute
-   values from R parameters and set back to 0 after every cut. Measuring: CYCLE977 / CYCLE978 measure only
-   (S_MVAR hundreds digit 0, S_KNUM 0, MC 5.1.5 / 5.1.7), actual value _OVR[4] (MC result parameters).
+   values from R parameters: the wear found on the edge before the CMC + the CMC wear while cutting, and the
+   wear found on the edge after every cut. Measuring: CYCLE977 / CYCLE978 / CYCLE979 measure only (S_MVAR
+   hundreds digit 0, S_KNUM 0, MC 5.1.5 / 5.1.7 / 5.1.9), actual value _OVR[4] (rectangle Y: _OVR[5]).
+   CYCLE977 protection zone: S_MVAR thousands digit 1, S_SZA (S_SZO rectangle Y), MC 5.1.7.
    One block of 50 R per CMC step from cmcR.first.                                                          */
-var CMC_FEATURES = ['BORE', 'BOSS', 'SLOT X', 'SLOT Y', 'WEB X', 'WEB Y', 'WALL X', 'WALL Y', 'FLOOR Z'];
+var CMC_FEATURES = ['BORE', 'BOSS', 'SLOT X', 'SLOT Y', 'WEB X', 'WEB Y', 'RECT POCKET', 'RECT SPIGOT',
+                    'BORE ARC', 'BOSS ARC', 'WALL X', 'WALL Y', 'FLOOR Z'];
+/* kind: size = one diameter / width (CYCLE977), rect = X and Y length (CYCLE977), arc = diameter from 3 or 4
+   points on a circle segment (CYCLE979), wall / floor = one surface position (CYCLE978)
+   m: +1 when more material makes the measured value larger                                           */
 var CMC_DEF = {
-  'BORE':    { cyc: 977, mvar: 1, kind: 'size', inside: true, m: -1, ma: 1, text: 'BORE DIAMETER' },
-  'BOSS':    { cyc: 977, mvar: 2, kind: 'size', inside: false, m: 1, ma: 1, text: 'BOSS DIAMETER' },
-  'SLOT X':  { cyc: 977, mvar: 3, kind: 'size', inside: true, m: -1, ma: 1, text: 'WIDTH BETWEEN TWO WALLS IN X (INSIDE)' },
-  'SLOT Y':  { cyc: 977, mvar: 3, kind: 'size', inside: true, m: -1, ma: 2, text: 'WIDTH BETWEEN TWO WALLS IN Y (INSIDE)' },
-  'WEB X':   { cyc: 977, mvar: 4, kind: 'size', inside: false, m: 1, ma: 1, text: 'WIDTH OVER TWO WALLS IN X (OUTSIDE)' },
-  'WEB Y':   { cyc: 977, mvar: 4, kind: 'size', inside: false, m: 1, ma: 2, text: 'WIDTH OVER TWO WALLS IN Y (OUTSIDE)' },
-  'WALL X':  { cyc: 978, kind: 'wall', ma: 1, text: 'WALL POSITION IN X' },
-  'WALL Y':  { cyc: 978, kind: 'wall', ma: 2, text: 'WALL POSITION IN Y' },
-  'FLOOR Z': { cyc: 978, kind: 'floor', ma: 3, m: 1, md: 2, text: 'FLOOR / FACE POSITION IN Z' }
+  'BORE':        { cyc: 977, mvar: 1, kind: 'size', inside: true,  m: -1, ma: 1, text: 'BORE DIAMETER' },
+  'BOSS':        { cyc: 977, mvar: 2, kind: 'size', inside: false, m: 1,  ma: 1, text: 'BOSS DIAMETER' },
+  'SLOT X':      { cyc: 977, mvar: 3, kind: 'size', inside: true,  m: -1, ma: 1, text: 'WIDTH BETWEEN TWO WALLS IN X (INSIDE)' },
+  'SLOT Y':      { cyc: 977, mvar: 3, kind: 'size', inside: true,  m: -1, ma: 2, text: 'WIDTH BETWEEN TWO WALLS IN Y (INSIDE)' },
+  'WEB X':       { cyc: 977, mvar: 4, kind: 'size', inside: false, m: 1,  ma: 1, text: 'WIDTH OVER TWO WALLS IN X (OUTSIDE)' },
+  'WEB Y':       { cyc: 977, mvar: 4, kind: 'size', inside: false, m: 1,  ma: 2, text: 'WIDTH OVER TWO WALLS IN Y (OUTSIDE)' },
+  'RECT POCKET': { cyc: 977, mvar: 5, kind: 'rect', inside: true,  m: -1, ma: 1, text: 'RECTANGULAR POCKET X AND Y' },
+  'RECT SPIGOT': { cyc: 977, mvar: 6, kind: 'rect', inside: false, m: 1,  ma: 1, text: 'RECTANGULAR SPIGOT X AND Y' },
+  'BORE ARC':    { cyc: 979, mvar: 1, kind: 'arc',  inside: true,  m: -1, text: 'BORE DIAMETER ON A CIRCLE SEGMENT' },
+  'BOSS ARC':    { cyc: 979, mvar: 2, kind: 'arc',  inside: false, m: 1,  text: 'BOSS DIAMETER ON A CIRCLE SEGMENT' },
+  'WALL X':      { cyc: 978, kind: 'wall', ma: 1, text: 'WALL POSITION IN X' },
+  'WALL Y':      { cyc: 978, kind: 'wall', ma: 2, text: 'WALL POSITION IN Y' },
+  'FLOOR Z':     { cyc: 978, kind: 'floor', ma: 3, m: 1, md: 2, text: 'FLOOR / FACE POSITION IN Z' }
 };
 var CMC_TOOLS = ['ROTATING', 'TURNING'];
 var CMC_FIELDS = ['AUTO', 'DP12', 'DP13', 'DP14', 'DP15'];
@@ -488,38 +508,66 @@ var CMC_CLEAN = ['NONE', 'M CODE', 'M0'];
 var CMC_BLOCK = 50;
 var CMC_LIMIT = { METRIC: 0.25, INCH: 0.010 };
 var CMC_SCRAP_STATUS = 3;
-/* nest results kept in R (block + 10 + nest - 1) and in the CMC log */
-var CMC_RES = { MEASURED: 0, OK: 1, OUT: 2, SCRAP: 3, HOLD: 4, SISTER: 5 };
+/* R used by other programs of this package: never inside a CMC block (tool_load_mda: R999 = NEWT result) */
+var CMC_RESERVED_R = [999];
+/* nest results kept in R (block + 10 + nest - 1) */
+var CMC_RES = { OK: 1, OUT: 2, SCRAP: 3 };
 
 function cmcName(stepNo) { return 'C_P1_CMC' + stepNo; }
 function cmcAutoField(tool, kind) {
   if (tool === 'TURNING') return kind === 'floor' ? 'DP13' : 'DP12';
   return kind === 'floor' ? 'DP12' : 'DP15';
 }
+function cmcIsSize(kind) { return kind === 'size' || kind === 'rect' || kind === 'arc'; }
+/* the CYCLE800 line pasted from the CAM program: drop a block number and a comment */
+function cmcSwivelText(v) {
+  return String(v || '').replace(/[\r\n\t]+/g, ' ').replace(/;.*$/, '').trim().replace(/^N\d+\s+/i, '').trim();
+}
+function cmcSwivelError(v) {
+  var t = cmcSwivelText(v);
+  if (!t) return '';
+  if (/[^\x20-\x7E]/.test(t)) return 'plain ASCII only';
+  if (!/^CYCLE800\s*\(.*\)$/i.test(t)) return 'paste one CYCLE800(...) line from the CAM program';
+  if ((t.match(/"/g) || []).length % 2) return 'unbalanced double quote';
+  var depth = 0;
+  for (var i = 0; i < t.length; i++) { if (t[i] === '(') depth++; if (t[i] === ')') depth--; if (depth < 0) break; }
+  if (depth !== 0) return 'unbalanced brackets';
+  if (/^CYCLE800\s*\(\s*\)$/i.test(t)) return 'CYCLE800() only deselects the swivel: leave the field blank for the nest face';
+  if (t.length > 200) return 'longer than 200 characters';
+  return '';
+}
 /* one CMC card (a step row with cmc ticked) -> numbers and the constants the NC uses
-   m   +1 when more material makes the measured value larger (boss, web, floor, wall with material on the - side)
+   m   +1 when more material makes the measured value larger (boss, web, spigot, floor, wall with material on the - side)
    p   +1 when +wear makes the measured value larger (rotating tools: p = m, +wear always leaves material;
        turning: from the card)
-   f   2 for a diameter / width with wear in radius, else 1
+   f   2 for a diameter / width / length with wear in radius, else 1
    w1  first-cut wear = m p stock (leaves material);  E = expected value after the first cut = nominal + m f stock
-   next wear after a measurement M = wear used + (nominal - M) / (p f)                                       */
+   next wear after a measurement M = wear used + (nominal - M) / (p f)
+   rectangle: the same with the mean of the X and Y deviations                                          */
 function cmcResolve(s, U) {
   var feat = CMC_DEF[s.cmcFeature] ? s.cmcFeature : 'BORE', d = CMC_DEF[feat];
-  var c = { feature: feat, d: d, kind: d.kind };
+  var c = { feature: feat, d: d, kind: d.kind, size: cmcIsSize(d.kind) };
   c.tool = s.cmcTool === 'TURNING' ? 'TURNING' : 'ROTATING';
   c.side = s.cmcSide === '-' ? '-' : '+';
   if (d.kind === 'wall') { c.m = c.side === '+' ? -1 : 1; c.md = c.side === '+' ? 1 : 2; }
   else { c.m = d.m; c.md = d.md || 0; }
   c.unit = c.tool === 'ROTATING' ? 'RADIUS' : (s.cmcUnit === 'DIAMETER' ? 'DIAMETER' : 'RADIUS');
-  c.f = d.kind === 'size' && c.unit === 'RADIUS' ? 2 : 1;
+  c.f = c.size && c.unit === 'RADIUS' ? 2 : 1;
   c.p = c.tool === 'ROTATING' ? c.m : (s.cmcSign === 'SMALLER' ? -1 : 1);
   c.field = CMC_FIELDS.indexOf(s.cmcField) > 0 ? s.cmcField : cmcAutoField(c.tool, d.kind);
   c.edge = isInt(s.cmcEdge) ? num(s.cmcEdge) : 1;
   c.nom = num(s.cmcNom); c.tolP = num(s.cmcTolP); c.tolM = num(s.cmcTolM);
+  c.nomY = d.kind === 'rect' ? num(s.cmcNomY) : c.nom;
   c.stock = num(s.cmcStock);
   c.window = isBlank(s.cmcWindow) ? c.stock : num(s.cmcWindow);
   c.limit = isBlank(s.cmcLimit) ? CMC_LIMIT[U.key] : num(s.cmcLimit);
   c.x = num(s.cmcX); c.y = num(s.cmcY); c.z = num(s.cmcZ); c.appZ = num(s.cmcAppZ);
+  c.zone = (d.cyc === 977 && !isBlank(s.cmcZone)) ? num(s.cmcZone) : 0;
+  c.zoneY = (d.kind === 'rect' && c.zone && !isBlank(s.cmcZoneY)) ? num(s.cmcZoneY) : c.zone;
+  c.points = s.cmcPoints === '3' ? 3 : 4;
+  c.a0 = isBlank(s.cmcStartAng) ? 0 : num(s.cmcStartAng);
+  c.inc = num(s.cmcIncAng);
+  c.swivel = cmcSwivelText(s.cmcSwivel);
   c.clean = CMC_CLEAN.indexOf(s.cmcClean) >= 0 ? s.cmcClean : 'NONE';
   c.cleanM = String(s.cmcCleanM || '').trim().toUpperCase();
   c.verify = !!s.cmcVerify;
@@ -528,18 +576,25 @@ function cmcResolve(s, U) {
   c.ret = s.cmcReturn === 'T M6' ? 'T M6' : 'TCA';
   c.w1 = c.m * c.p * c.stock;
   c.E = c.nom + c.m * c.f * c.stock;
+  c.E2 = c.nomY + c.m * c.f * c.stock;
   c.div = c.p * c.f;
   return c;
 }
-/* the decisions the generated NC makes after one measurement M with wear wUsed (pure: unit-tested) */
-function cmcMath(c, M, wUsed) {
-  var e = 1e-9;
-  var w = wUsed + (c.nom - M) / c.div;
+/* the decisions the generated NC makes after one measurement M (rectangle: M = X, M2 = Y) with CMC wear
+   wUsed; outWindow is the first-measurement check against E (pure: unit-tested) */
+function cmcMath(c, M, wUsed, M2) {
+  var e = 1e-9, rect = c.kind === 'rect';
+  if (!rect) M2 = M;
+  var dev = rect ? ((c.nom - M) + (c.nomY - M2)) / 2 : c.nom - M;
+  var w = wUsed + dev / c.div;
+  function inTol(v, n) { return v >= n - c.tolM - e && v <= n + c.tolP + e; }
+  function past(v, n) { return c.m > 0 ? (n - v) > c.tolM + e : (v - n) > c.tolP + e; }
   return {
     w: w,
-    inTol: M >= c.nom - c.tolM - e && M <= c.nom + c.tolP + e,
-    scrap: c.m > 0 ? (c.nom - M) > c.tolM + e : (M - c.nom) > c.tolP + e,
-    outWindow: Math.abs(M - c.E) > c.window + e,
+    inTol: inTol(M, c.nom) && inTol(M2, c.nomY),
+    scrap: past(M, c.nom) || past(M2, c.nomY),
+    outWindow: Math.abs(M - c.E) > c.window + e || Math.abs(M2 - c.E2) > c.window + e ||
+               (rect && Math.abs((M - c.E) - (M2 - c.E2)) > c.window + e),
     overLimit: Math.abs(w) > c.limit + e
   };
 }
@@ -733,24 +788,45 @@ function validateCmc(job, err, warn) {
     if (!isBlank(pr.prnum) && (!isInt(pr.prnum) || num(pr.prnum) < 1 || num(pr.prnum) > 40)) err('probing.prnum', 'CMC probe (tab 2): calibration data set must be 1-40 (MC S_PRNUM)');
     if (!isBlank(pr.probeOnM) && !/^M\d{1,4}$/.test(String(pr.probeOnM).trim().toUpperCase())) err('probing.probeOnM', 'CMC probe (tab 2): probe-on M code must look like M56 (or be blank)');
   }
+  /* R blocks */
   if (!isInt(cr.first) || num(cr.first) < 0) err('cmcR.first', 'CMC: first R number must be a whole number');
   if (!isInt(cr.count) || num(cr.count) < 1) err('cmcR.count', 'CMC: R parameters on the control (MD28050) must be a whole number');
-  if (isInt(cr.first) && isInt(cr.count)) {
-    var last = num(cr.first) + CMC_BLOCK * rows.length - 1;
-    if (last > num(cr.count) - 1)
-      err('cmcR.first', 'CMC: ' + rows.length + ' CMC step' + (rows.length > 1 ? 's use' : ' uses') + ' R' + num(cr.first) + '-R' + last +
+  if (isInt(cr.first) && num(cr.first) >= 0) {
+    var first = num(cr.first), last = first + CMC_BLOCK * rows.length - 1;
+    if (isInt(cr.count) && last > num(cr.count) - 1)
+      err('cmcR.first', 'CMC: ' + rows.length + ' CMC step' + (rows.length > 1 ? 's use' : ' uses') + ' R' + first + '-R' + last +
           ', above the last R on the control (R' + (num(cr.count) - 1) + ', MD28050 = ' + num(cr.count) + ')');
+    CMC_RESERVED_R.forEach(function (r) {
+      if (r >= first && r <= last)
+        err('cmcR.first', 'CMC: R' + first + '-R' + last + ' covers R' + r + ', which tool_load_mda uses (NEWT result). Move the first R so no CMC block covers it.');
+    });
+    /* R parameters the posted B programs use (go_to_machine scan) */
+    job.steps.forEach(function (s, i) {
+      String(s.rparams || '').split(',').forEach(function (v) {
+        if (!isInt(v)) return;
+        var r = num(v);
+        if (r >= first && r <= last)
+          err('cmcR.first', 'CMC: posted program ' + (String(s.program).trim() || 'of row ' + (i + 1)) + ' uses R' + r + ', inside the CMC R parameters R' + first + '-R' + last + '. Move the first R.');
+      });
+    });
   }
   if (!isInt(cr.carrier) || num(cr.carrier) < 1) err('cmcR.carrier', 'CMC: TCA tool carrier (spindle) must be a whole number >= 1');
-  var P = { fa: isBlank(job.probing.searchDist) ? U.fa : num(job.probing.searchDist) };
-  var clrIn = isBlank(job.probing.approachClr) ? P.fa + U.inMargin : num(job.probing.approachClr);
+  var fa = isBlank(job.probing.searchDist) ? U.fa : num(job.probing.searchDist);
+  var clrIn = isBlank(job.probing.approachClr) ? fa + U.inMargin : num(job.probing.approachClr);
+  var generated = { 'C_P1_CMC_BACK': 1, 'C_P1_CMC_LOG': 1, 'C_P1_CMC_CLEAR': 1 };
+  rows.forEach(function (i) { var s = job.steps[i]; if (isInt(s.step)) { generated[cmcName(num(s.step))] = 1; generated[cmcName(num(s.step)) + '_M'] = 1; } });
+  job.steps.forEach(function (s, i) {
+    if (generated[String(s.program).trim().toUpperCase()]) err('steps.' + i + '.program', 'Step row ' + (i + 1) + ': program name ' + String(s.program).trim() + ' is a CMC program the generator writes');
+  });
   rows.forEach(function (i) {
     var s = job.steps[i], p = 'steps.' + i + '.', tag = 'CMC step ' + (isInt(s.step) ? num(s.step) : 'row ' + (i + 1)) + ': ';
     var d = CMC_DEF[s.cmcFeature];
     if (!d) { err(p + 'cmcFeature', tag + 'pick the feature'); return; }
+    var size = cmcIsSize(d.kind), rect = d.kind === 'rect';
     if (CMC_TOOLS.indexOf(s.cmcTool) < 0) err(p + 'cmcTool', tag + 'tool type must be ROTATING or TURNING');
-    if (!isNum(s.cmcNom)) err(p + 'cmcNom', tag + 'nominal must be a number');
-    else if (d.kind === 'size' && num(s.cmcNom) <= 0) err(p + 'cmcNom', tag + 'nominal diameter / width must be > 0');
+    if (!isNum(s.cmcNom)) err(p + 'cmcNom', tag + (rect ? 'nominal X length' : 'nominal') + ' must be a number');
+    else if (size && num(s.cmcNom) <= 0) err(p + 'cmcNom', tag + 'nominal ' + (rect ? 'X length' : 'diameter / width') + ' must be > 0');
+    if (rect && (!isNum(s.cmcNomY) || num(s.cmcNomY) <= 0)) err(p + 'cmcNomY', tag + 'nominal Y length must be a number > 0');
     ['cmcTolP', 'cmcTolM'].forEach(function (k) {
       if (!isNum(s[k]) || num(s[k]) < 0) err(p + k, tag + 'tolerance ' + (k === 'cmcTolP' ? '+' : '-') + ' must be a number >= 0');
     });
@@ -763,9 +839,10 @@ function validateCmc(job, err, warn) {
     if (s.cmcTool === 'TURNING' && ['LARGER', 'SMALLER'].indexOf(s.cmcSign) < 0)
       err(p + 'cmcSign', tag + 'turning tool: say what +wear does to the measured value (larger / smaller)');
     /* location */
-    if (d.kind === 'size' || d.kind === 'floor') {
-      if (!isNum(s.cmcX)) err(p + 'cmcX', tag + (d.kind === 'size' ? 'centre X' : 'point X') + ' must be a number');
-      if (!isNum(s.cmcY)) err(p + 'cmcY', tag + (d.kind === 'size' ? 'centre Y' : 'point Y') + ' must be a number');
+    if (size || d.kind === 'floor') {
+      var what = d.kind === 'floor' ? 'point' : 'centre';
+      if (!isNum(s.cmcX)) err(p + 'cmcX', tag + what + ' X must be a number');
+      if (!isNum(s.cmcY)) err(p + 'cmcY', tag + what + ' Y must be a number');
     } else if (d.ma === 1) {
       if (!isNum(s.cmcY)) err(p + 'cmcY', tag + 'point Y along the wall must be a number');
     } else if (!isNum(s.cmcX)) err(p + 'cmcX', tag + 'point X along the wall must be a number');
@@ -775,6 +852,30 @@ function validateCmc(job, err, warn) {
       err(p + 'cmcAppZ', tag + 'approach Z must be above the probe depth');
     else if (d.kind === 'floor' && isNum(s.cmcNom) && isNum(s.cmcStock) && num(s.cmcAppZ) < num(s.cmcNom) + num(s.cmcStock) + clrIn)
       err(p + 'cmcAppZ', tag + 'approach Z must be at least ' + compact(num(s.cmcNom) + num(s.cmcStock) + clrIn, 4) + ' (floor + first-cut wear + S_FA clearance)');
+    /* protection zone (CYCLE977): inside features = island in the middle, outside = wall around */
+    if (d.cyc === 977 && !isBlank(s.cmcZone)) {
+      var zname = rect ? 'protection zone X' : d.mvar <= 2 ? 'protection zone diameter' : 'protection zone width';
+      if (!isNum(s.cmcZone) || num(s.cmcZone) <= 0) err(p + 'cmcZone', tag + zname + ' must be a number > 0 (or blank = none)');
+      else if (isNum(s.cmcNom) && isNum(s.cmcStock)) {
+        var c0 = cmcResolve(s, U);
+        if (d.inside && c0.zone >= c0.E) err(p + 'cmcZone', tag + zname + ' (' + compact(c0.zone, 4) + ') must be smaller than the expected size after the first cut (' + compact(c0.E, 4) + ')');
+        if (!d.inside && c0.zone <= c0.E) err(p + 'cmcZone', tag + zname + ' (' + compact(c0.zone, 4) + ') must be larger than the expected size after the first cut (' + compact(c0.E, 4) + ')');
+        if (rect && isNum(s.cmcNomY) && (isBlank(s.cmcZoneY) || isNum(s.cmcZoneY))) {
+          if (d.inside && c0.zoneY >= c0.E2) err(p + 'cmcZoneY', tag + 'protection zone Y (' + compact(c0.zoneY, 4) + ') must be smaller than the expected Y length (' + compact(c0.E2, 4) + ')');
+          if (!d.inside && c0.zoneY <= c0.E2) err(p + 'cmcZoneY', tag + 'protection zone Y (' + compact(c0.zoneY, 4) + ') must be larger than the expected Y length (' + compact(c0.E2, 4) + ')');
+        }
+      }
+      if (rect && !isBlank(s.cmcZoneY) && (!isNum(s.cmcZoneY) || num(s.cmcZoneY) <= 0)) err(p + 'cmcZoneY', tag + 'protection zone Y must be a number > 0 (blank = same as X)');
+    } else if (rect && !isBlank(s.cmcZoneY)) err(p + 'cmcZone', tag + 'protection zone Y needs protection zone X');
+    /* circle segment (CYCLE979, MC 5.1.9: start angle -360..360, increment >0..90 (4 points) / 120 (3 points)) */
+    if (d.kind === 'arc') {
+      if (['3', '4'].indexOf(String(s.cmcPoints)) < 0) err(p + 'cmcPoints', tag + 'measuring points must be 3 or 4');
+      if (!isBlank(s.cmcStartAng) && (!isNum(s.cmcStartAng) || Math.abs(num(s.cmcStartAng)) > 360)) err(p + 'cmcStartAng', tag + 'start angle must be -360 to 360');
+      var maxInc = String(s.cmcPoints) === '3' ? 120 : 90;
+      if (!isNum(s.cmcIncAng) || num(s.cmcIncAng) === 0 || Math.abs(num(s.cmcIncAng)) > maxInc)
+        err(p + 'cmcIncAng', tag + 'angle between points must be a number, not 0, at most ' + maxInc + ' degrees for ' + (maxInc === 90 ? 4 : 3) + ' points (sign = direction)');
+    }
+    var sw = cmcSwivelError(s.cmcSwivel); if (sw) err(p + 'cmcSwivel', tag + 'probe swivel: ' + sw);
     if (s.cmcClean === 'M CODE' && !/^M\d{1,4}$/i.test(String(s.cmcCleanM || '').trim()))
       err(p + 'cmcCleanM', tag + 'cleaning M code like M50');
     if (CMC_CLEAN.indexOf(s.cmcClean) < 0) err(p + 'cmcClean', tag + 'cleaning must be NONE, M CODE or M0');
@@ -1515,8 +1616,8 @@ function fNests(R) {
 }
 
 /* ---- probe program ---- */
-/* opt (CMC measure only): { knum: '0', setv: 'LD_SETV' } - S_KNUM 0 = no correction,
-   S_SETV given as a variable name. Without opt the output is the WO-correcting call. */
+/* opt (CMC measure only): { knum: '0', setv: 'LD_SETV', setv0, setv1, sza, szo } - S_KNUM 0 = no correction,
+   setpoints given as variable names, protection zone sizes. Without opt the output is the WO-correcting call. */
 function cyc977(R, mvar, setv, setv0, setv1, sid, ma, opt) {
   var P = R.P, len = function (v) { return fix(v, R.U.dec); };
   opt = opt || {};
@@ -1526,14 +1627,14 @@ function cyc977(R, mvar, setv, setv0, setv1, sid, ma, opt) {
   a[2] = '';                      /* S_KNUM1                                */
   a[3] = String(P.prnum);         /* S_PRNUM probe data set                 */
   a[4] = opt.setv || len(setv);   /* S_SETV  diameter / width               */
-  a[5] = len(setv0);              /* S_SETV0 rectangle X                    */
-  a[6] = len(setv1);              /* S_SETV1 rectangle Y                    */
+  a[5] = opt.setv0 || len(setv0); /* S_SETV0 rectangle X                    */
+  a[6] = opt.setv1 || len(setv1); /* S_SETV1 rectangle Y                    */
   a[7] = len(P.fa);               /* S_FA    measurement path               */
   a[8] = len(P.fa);               /* S_TSA   safe area = S_FA               */
   a[9] = '0';                     /* S_STA1  starting angle                 */
   a[10] = len(sid);               /* S_ID    lowering for outside features  */
-  a[11] = '0';                    /* S_SZA                                  */
-  a[12] = '0';                    /* S_SZO                                  */
+  a[11] = opt.sza ? len(opt.sza) : '0';   /* S_SZA protection zone (MC 5.1.7) */
+  a[12] = opt.szo ? len(opt.szo) : '0';   /* S_SZO rectangle zone Y           */
   a[13] = String(ma);             /* S_MA                                   */
   a[14] = '1';                    /* S_NMSP                                 */
   a[15] = '""';                   /* S_TNAME                                */
@@ -1741,11 +1842,41 @@ function cmcRLines(b, total) {
     ';   R' + b + ' PASS: 0 IDLE, 1 FIRST CUT, 2 FIRST CUT DONE, 3 CORRECTION SET,',
     ';        4 FINAL CUT, 5 FINAL CUT DONE, 6 VERIFY, 9 NEST DONE',
     ';   R' + (b + 1) + ' NEST   R' + (b + 2) + ' T NUMBER   R' + (b + 3) + ' SISTER (DUPLO)   R' + (b + 4) + ' EDGE',
-    ';   R' + (b + 5) + ' WEAR ON THE TOOL NOW   R' + (b + 6) + ' LAST MEASURED',
-    ';   R' + (b + 7) + ' CORRECTION WEAR   R' + (b + 8) + ' RE-CUTS',
+    ';   R' + (b + 5) + ' WEAR ON THE EDGE NOW   R' + (b + 6) + ' LAST MEASURED (RECTANGLE: X)',
+    ';   R' + (b + 7) + ' CMC CORRECTION WEAR   R' + (b + 8) + ' RE-CUTS',
     ';   R' + (b + 9) + ' OPERATOR DECISION AT A HOLD (M0)',
-    ';   R' + (b + 10) + '-R' + (b + 9 + total) + ' RESULT PER NEST 1-' + total + ': 0 NOT RUN, 1 OK, 2 OUT ACCEPTED, 3 SCRAP'
+    ';   R' + (b + 10) + '-R' + (b + 9 + total) + ' RESULT PER NEST 1-' + total + ': 0 NOT RUN, 1 OK, 2 OUT ACCEPTED, 3 SCRAP',
+    ';   R' + (b + 42) + ' LAST MEASURED Y (RECTANGLE)',
+    ';   R' + (b + 43) + ' WEAR FOUND ON THE EDGE BEFORE THE CMC (PUT BACK AFTER EVERY CUT)'
   ];
+}
+function cmcFeatureLine(c, R) {
+  var n = function (v) { return cmcNum(v, R); }, d = c.d;
+  var t = d.text + (d.kind === 'wall' ? ', MATERIAL ON THE ' + c.side + ' SIDE' : '');
+  if (c.zone) t += ', PROTECTION ZONE ' + n(c.zone) + (d.kind === 'rect' ? ' x ' + n(c.zoneY) : '');
+  if (d.kind === 'arc') t += ', ' + c.points + ' POINTS FROM ' + n(c.a0) + ' DEG, ' + n(c.inc) + ' DEG APART';
+  return t;
+}
+function cyc979(R, c, mvar) {
+  var P = R.P, len = function (v) { return fix(v, R.U.dec); };
+  var a = [];
+  a[0] = String(mvar);            /* S_MVAR  1 hole / 2 spigot, 1xxx = 4 points, hundreds 0 = measure only */
+  a[1] = '0';                     /* S_KNUM  no correction                  */
+  a[2] = '';                      /* S_KNUM1                                */
+  a[3] = String(P.prnum);         /* S_PRNUM                                */
+  a[4] = 'LD_SETV';               /* S_SETV  diameter                       */
+  a[5] = len(P.fa);               /* S_FA                                   */
+  a[6] = len(P.fa);               /* S_TSA = S_FA                           */
+  a[7] = len(c.x);                /* S_CPA   centre X                       */
+  a[8] = len(c.y);                /* S_CPO   centre Y                       */
+  a[9] = compact(c.a0, 4);        /* S_STA1  start angle                    */
+  a[10] = compact(c.inc, 4);      /* S_INCA  angle between the points       */
+  a[11] = '1';                    /* S_NMSP                                 */
+  a[12] = '""';                   /* S_TNAME                                */
+  for (var i = 13; i <= 21; i++) a[i] = '';   /* S_DLNUM..S_MCBIT */
+  a[22] = '1';                    /* _DMODE  G17 inside the cycle           */
+  a[23] = '0';                    /* _AMODE                                 */
+  return 'CYCLE979(' + a.join(',') + ')';
 }
 function fCmcMeas(R, s) {
   var c = s.cmc, d = c.d, P = R.P, U = R.U, o = [];
@@ -1753,32 +1884,48 @@ function fCmcMeas(R, s) {
   var feed = compact(P.feed, 2);
   var name = cmcName(s.step) + '_M';
   var ret = retract(P.clr);
-  var mvar = d.cyc === 977 ? String(d.mvar) : '0';
-  var meas = { knum: '0', setv: 'LD_SETV' };
-  o.push('PROC ' + name + '(REAL LD_SETV, VAR REAL LD_M)');
+  var turning = R.cmcList.some(function (x) { return x.cmc.tool === 'TURNING'; });
+  var cx = len(c.x), cy = len(c.y), z = len(c.z), clr = len(P.clrIn), fa = len(P.fa);
+  var zone = c.zone > 0, rect = d.kind === 'rect';
+  var mvar = d.cyc === 978 ? 0 : d.mvar + ((d.cyc === 977 && zone) || (d.cyc === 979 && c.points === 4) ? 1000 : 0);
+  /* protected lowering: G1 MEAS=1 stops on contact (NC: measurement with deletion of distance-to-go) */
+  function plunge(x, y, zz, why) {
+    o.push(';  ' + why);
+    o.push('G0 X=' + x + ' Y=' + y);
+    o.push('G0 Z=' + len(c.appZ));
+    o.push('G1 MEAS=1 Z=' + zz + ' F' + feed + '            ;stops if the probe touches on the way down');
+    o.push('STOPRE');
+    o.push('IF ($AC_MEA[1]==1) GOTOF _CM_HIT');
+  }
+  function along(off) { return d.ma === 2 ? [cx, cy + '+' + off] : [cx + '+' + off, cy]; }
+  o.push('PROC ' + name + '(REAL LD_SETV, REAL LD_SETV2, VAR REAL LD_M, VAR REAL LD_M2, VAR INT LD_HIT)');
   hdr(o, R, name + '.SPF', 'CMC STEP ' + s.step + ' - MEASURE ONLY, NO CORRECTION', [
     '; PART NUMBER  : ' + (R.header.part || 'XXXX'),
     '; UNITS        : ' + U.label
   ]);
   rev(o, R);
   o.push(';');
-  o.push(';  CALLED BY   : ' + cmcName(s.step) + ' AFTER THE FIRST CUT (LD_SETV = EXPECTED)');
-  o.push(';                AND TO VERIFY (LD_SETV = NOMINAL)');
-  o.push(';  FEATURE     : ' + d.text + (d.kind === 'wall' ? ', MATERIAL ON THE ' + c.side + ' SIDE' : ''));
-  o.push(';  CYCLE       : CYCLE' + d.cyc + ' S_MVAR=' + mvar + ' S_KNUM=0: MEASURE ONLY (MC 5.1.' + (d.cyc === 977 ? '7' : '5') + ')');
-  o.push(';  RESULT      : LD_M = _OVR[4] (ACTUAL VALUE)');
-  o.push(';  S_FA        : ' + len(P.fa) + ' (SEARCH DISTANCE); S_TSA = S_FA');
+  o.push(';  CALLED BY   : ' + cmcName(s.step) + ' AFTER THE FIRST CUT (SETPOINT = EXPECTED)');
+  o.push(';                AND TO VERIFY (SETPOINT = NOMINAL)');
+  o.push(';  FEATURE     : ' + cmcFeatureLine(c, R));
+  o.push(';  CYCLE       : CYCLE' + d.cyc + ' S_MVAR=' + mvar + ' S_KNUM=0: MEASURE ONLY (MC 5.1.' + { 977: '7', 978: '5', 979: '9' }[d.cyc] + ')');
+  o.push(';  RESULT      : LD_M = _OVR[4]' + (rect ? ' (X LENGTH), LD_M2 = _OVR[5] (Y LENGTH)' : ' (ACTUAL VALUE)'));
+  o.push(';  LD_HIT      : 1 = THE PROBE TOUCHED WHILE LOWERING (NOTHING MEASURED)');
+  o.push(';  S_FA        : ' + fa + ' (SEARCH DISTANCE); S_TSA = S_FA');
+  o.push(';  PLANE       : ' + (c.swivel ? 'CYCLE800 FROM THE CAM PROGRAM - X/Y/Z ARE IN THAT PLANE' : 'NEST FACE (G54 OF THE NEST)'));
   o.push(';  CLEANING    : ' + (c.clean === 'M CODE' ? c.cleanM : c.clean === 'M0' ? 'M0 - OPERATOR CLEANS' : 'NONE'));
   o.push(';-------------------------------------------');
-  o.push(';');
+  o.push('LD_HIT=0 LD_M=0 LD_M2=0');
   o.push(';--- TOOL CALL ---');
   o.push('T=' + q(P.tool) + ' M6');
   o.push(ret);
   o.push('CYCLE800()                         ;deselect any active swivel plane');
   o.push('TRAFOOF                            ;cancel any active transformation');
+  o.push(pad('G17 G90 G94' + (turning ? ' DIAMOF' : ''), 35) + ';turning programs can leave G18' + (turning ? ', DIAMON' : '') + ' or feed per rev');
   o.push('G54 D1');
   var ol = orientLine(R);
   if (ol) o.push(pad(ol, 35) + ';swivel to this nest\'s face (angle is in the WO)');
+  if (c.swivel) o.push(c.swivel + '   ;probe plane from the CAM program');
   o.push('M19');
   if (c.clean === 'M CODE') o.push(pad(c.cleanM, 35) + ';cleaning');
   if (c.clean === 'M0') {
@@ -1790,34 +1937,48 @@ function fCmcMeas(R, s) {
   if (P.probeOnM) o.push(pad(P.probeOnM, 35) + ';probe on');
   o.push(';');
   o.push(';--- ' + d.text + ' ---');
-  if (d.kind === 'size') {
-    o.push('G0 X=' + len(c.x) + ' Y=' + len(c.y));
-    o.push('G0 Z=' + len(c.appZ));
-    if (d.inside) {
-      o.push('G1 Z=' + len(c.z) + ' F' + feed + '                 ;lower to probe depth');
-      o.push(cyc977(R, d.mvar, 0, 0, 0, 0, d.ma, meas));
+  var sid = len(c.z - c.appZ);
+  if (d.kind === 'size' || rect) {
+    var mo = { knum: '0' };
+    if (rect) { mo.setv0 = 'LD_SETV'; mo.setv1 = 'LD_SETV2'; } else mo.setv = 'LD_SETV';
+    if (zone) { mo.sza = c.zone; if (rect) mo.szo = c.zoneY; }
+    if (d.inside && !zone) {
+      plunge(cx, cy, z, 'DOWN AT THE CENTRE');
+      o.push(cyc977(R, mvar, 0, 0, 0, 0, d.ma, mo));
     } else {
-      o.push(';  THE CYCLE LOWERS TO MEASURING HEIGHT ITSELF: S_ID = ' + len(c.z - c.appZ));
-      o.push(cyc977(R, d.mvar, 0, 0, 0, c.z - c.appZ, d.ma, meas));
+      var off = zone ? '(LD_SETV+' + len(c.zone) + ')/4' : 'LD_SETV/2+' + fa;
+      var pt = along(off);
+      plunge(pt[0], pt[1], z, zone ? 'TEST PLUNGE BETWEEN THE FEATURE AND THE PROTECTION ZONE' : 'TEST PLUNGE WHERE THE CYCLE LOWERS');
+      o.push('G0 Z=' + len(c.appZ));
+      o.push('G0 X=' + cx + ' Y=' + cy + '                ;start above the centre');
+      o.push(';  THE CYCLE LOWERS TO MEASURING HEIGHT ITSELF: S_ID = ' + sid);
+      o.push(cyc977(R, mvar, 0, 0, 0, c.z - c.appZ, d.ma, mo));
     }
+  } else if (d.kind === 'arc') {
+    var rr = '(LD_SETV/2' + (d.inside ? '-' : '+') + clr + ')';
+    plunge(cx + '+' + rr + '*COS(' + compact(c.a0, 4) + ')', cy + '+' + rr + '*SIN(' + compact(c.a0, 4) + ')', z,
+           'DOWN ' + clr + ' IN FRONT OF THE FIRST POINT (MC 4.3.15)');
+    o.push(cyc979(R, c, mvar));
   } else if (d.kind === 'wall') {
     var axis = d.ma === 1 ? 'X' : 'Y';
-    var st = 'LD_SETV' + (c.md === 1 ? '-' : '+') + len(P.clrIn);
-    o.push(';  START ' + len(P.clrIn) + ' OFF THE WALL ON THE FREE SIDE, MEASURE IN ' + (c.md === 1 ? '+' : '-') + axis);
-    o.push(d.ma === 1 ? 'G0 X=' + st + ' Y=' + len(c.y) : 'G0 X=' + len(c.x) + ' Y=' + st);
-    o.push('G0 Z=' + len(c.appZ));
-    o.push('G1 Z=' + len(c.z) + ' F' + feed + '                 ;lower to probe depth');
+    var st = 'LD_SETV' + (c.md === 1 ? '-' : '+') + clr;
+    plunge(d.ma === 1 ? st : cx, d.ma === 1 ? cy : st, z,
+           'DOWN ' + clr + ' OFF THE WALL ON THE FREE SIDE, MEASURE IN ' + (c.md === 1 ? '+' : '-') + axis);
     o.push(cyc978(R, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: d.ma, md: c.md }));
   } else {
-    o.push('G0 X=' + len(c.x) + ' Y=' + len(c.y));
-    o.push('G0 Z=' + len(c.appZ));
-    o.push('G1 Z=LD_SETV+' + len(P.clrIn) + ' F' + feed + '        ;start ' + len(P.clrIn) + ' above the face');
+    plunge(cx, cy, 'LD_SETV+' + clr, 'DOWN TO ' + clr + ' ABOVE THE FACE');
     o.push(cyc978(R, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: 3, md: 2 }));
   }
   o.push('STOPRE');
-  o.push('LD_M=_OVR[4]                       ;actual value');
+  o.push('LD_M=_OVR[4]');
+  o.push(rect ? 'LD_M2=_OVR[5]' : 'LD_M2=LD_M');
+  o.push('GOTOF _CM_END');
+  o.push('_CM_HIT:');
+  o.push('LD_HIT=1');
+  o.push('_CM_END:');
   o.push(';--- SAFE Z RETRACT ---');
   o.push(ret);
+  if (c.swivel) o.push('CYCLE800()                         ;probe plane off');
   o.push(';');
   o.push('RET');
   o.push(';');
@@ -1829,39 +1990,35 @@ function fCmc(R, s) {
   var n = function (v) { return cmcNum(v, R); };
   var nv = function (v) { return cmcVal(v, R); };
   var name = cmcName(s.step), meas = name + '_M';
+  var rect = d.kind === 'rect';
   var F = '$TC_' + c.field + '[LV_T,LV_D]';
   var res = 'R[' + (b + 9) + '+GV_NEST]';
   var tool = q(s.tool);
   var mode = c.ret === 'TCA' ? 0 : 1;
   var rnd = String(Math.pow(10, U.dec + 1));
+  var rd = function (e) { return 'ROUND(' + e + '*' + rnd + ')/' + rnd; };
   var tag = 'CMC STEP ' + s.step + ' NEST " << GV_NEST << "';
-  var lo = c.nom - c.tolM, hi = c.nom + c.tolP;
-  var inTol = 'IF (LV_M>=' + nv(lo) + ') AND (LV_M<=' + nv(hi) + ') GOTO? CMC_OK';
-  var scrap = c.m > 0 ? 'IF ((' + n(c.nom) + '-LV_M)>' + n(c.tolM) + ') GOTO? CMC_SCRAP'
-                      : 'IF ((LV_M-' + nv(c.nom) + ')>' + n(c.tolP) + ') GOTO? CMC_SCRAP';
-  var corr = 'LV_W=LV_WB+(' + n(c.nom) + '-LV_M)/(' + n(c.div) + ')';
+  var inTol = 'IF (LV_M>=' + nv(c.nom - c.tolM) + ') AND (LV_M<=' + nv(c.nom + c.tolP) + ')' +
+              (rect ? ' AND (LV_M2>=' + nv(c.nomY - c.tolM) + ') AND (LV_M2<=' + nv(c.nomY + c.tolP) + ')' : '') + ' GOTO? CMC_OK';
+  var scrap = [['LV_M', c.nom]].concat(rect ? [['LV_M2', c.nomY]] : []).map(function (a) {
+    return c.m > 0 ? 'IF ((' + n(a[1]) + '-' + a[0] + ')>' + n(c.tolM) + ') GOTO? CMC_SCRAP'
+                   : 'IF ((' + a[0] + '-' + nv(a[1]) + ')>' + n(c.tolP) + ') GOTO? CMC_SCRAP';
+  });
+  var corr = rect ? 'LV_W=LV_WB+((' + n(c.nom) + '-LV_M)+(' + n(c.nomY) + '-LV_M2))/2/(' + n(c.div) + ')'
+                  : 'LV_W=LV_WB+(' + n(c.nom) + '-LV_M)/(' + n(c.div) + ')';
   function log(result, pass) {
     o.push('LV_L="' + s.step + '," << GV_NEST << ",' + c.feature + ',' + s.tool + '," << ' + r(3) + ' << "," << ' + r(2) + ' << ",' + c.edge + '"');
-    o.push('LV_L=LV_L << ",' + n(c.nom) + '," << LV_E << "," << ROUND(LV_M*' + rnd + ')/' + rnd + ' << "," << ROUND((LV_M-LV_E)*' + rnd + ')/' + rnd);
-    o.push('LV_L=LV_L << "," << LV_WB << "," << ROUND(LV_W*' + rnd + ')/' + rnd + ' << "," << ' + pass + ' << "," << ' + r(8) + ' << ",' + result + '"');
+    o.push('LV_L=LV_L << ",' + n(c.nom) + '," << ' + rd('LV_E') + ' << "," << ' + rd('LV_M') + ' << ","' + (rect ? ' << ' + rd('LV_M2') : ''));
+    o.push('LV_L=LV_L << "," << ' + rd('(LV_M-LV_E)') + ' << "," << ' + rd('LV_WB') + ' << "," << ' + rd('LV_W'));
+    o.push('LV_L=LV_L << "," << ' + pass + ' << "," << ' + r(8) + ' << ",' + result + '"');
     o.push('C_P1_CMC_LOG(LV_L)');
-  }
-  function zeroRecorded(why) {
-    o.push(';--- WEAR BACK TO 0 ON THE RECORDED CUTTER (' + why + ') ---');
-    o.push('IF (' + r(2) + '>0)');
-    o.push('  LV_DUP=' + r(3));
-    o.push('  LV_T=GETT(' + tool + ',LV_DUP)');
-    o.push('  IF (LV_T==' + r(2) + ')');
-    o.push('    ' + F + '=0');
-    o.push('  ENDIF');
-    o.push('ENDIF');
   }
   function back() {
     o.push('LV_DUP=' + r(3) + ' LV_T=' + r(2));
     o.push('C_P1_CMC_BACK(' + tool + ',LV_DUP,LV_T,' + mode + ',LV_CHG)');
   }
   function cut(wear, pass, done, what) {
-    o.push(r(5) + '=' + wear);
+    o.push(r(5) + '=' + r(43) + '+' + wear);
     o.push(F + '=' + r(5));
     o.push(r(0) + '=' + pass);
     o.push('STOPRE');
@@ -1869,17 +2026,23 @@ function fCmc(R, s) {
     o.push('MSG("' + tag + ': ' + what + ')');
     o.push('CALL LV_B');
     o.push('STOPRE');
-    o.push(F + '=0');
-    o.push(r(5) + '=0');
+    o.push(F + '=' + r(43) + '                 ;wear found on the edge back');
+    o.push(r(5) + '=' + r(43));
     o.push('D' + c.edge);
     o.push(r(0) + '=' + done);
     o.push('STOPRE');
   }
-  function hold(label, setv, opt2, again) {
+  function measure(touch) {
+    o.push(meas + '(LV_E,LV_E2,LV_M,LV_M2,LV_HIT)');
+    o.push(r(6) + '=LV_M ' + r(42) + '=LV_M2');
+    o.push('IF (LV_HIT==1) GOTO? ' + touch);
+    o.push(corr);
+  }
+  function hold(label, what, opt2, again) {
     o.push(label + ':');
-    log('HOLD', 'LV_PS');
+    log(opt2[2], 'LV_PS');
     o.push(r(9) + '=0');
-    o.push('MSG("' + tag + ' MEASURED " << LV_M << " ' + setv + ' - SET ' + r(9) + ' 0=MEASURE AGAIN 1=SCRAP 2=' + opt2[0] + '")');
+    o.push('MSG("' + tag + ' ' + what + ' - SET ' + r(9) + ' 0=MEASURE AGAIN 1=SCRAP 2=' + opt2[0] + '")');
     o.push('M0');
     o.push('STOPRE');
     o.push('MSG()');
@@ -1887,6 +2050,7 @@ function fCmc(R, s) {
     o.push('IF (' + r(9) + '==2) GOTO? ' + opt2[1]);
     o.push('GOTO? ' + again);
   }
+  var measured = 'MEASURED " << LV_M << "' + (rect ? ' x " << LV_M2 << "' : '');
   hdr(o, R, name + '.SPF', 'CMC STEP ' + s.step + ' - CUT / MEASURE / CUT ONE NEST', [
     '; PART NUMBER  : ' + (R.header.part || 'XXXX'),
     '; UNITS        : ' + U.label
@@ -1898,35 +2062,47 @@ function fCmc(R, s) {
   o.push(';                STAY IN L_RUN_NESTS.');
   o.push(';  B PROGRAM   : ' + s.program + ' (CUT TWICE PER NEST, MORE WITH RE-CUTS)');
   o.push(';  CUTTER      : ' + s.tool + ' EDGE D' + c.edge + ', ' + c.tool + ' TOOL');
-  o.push(';  WEAR        : $TC_' + c.field + ' (' + CMC_FIELD_TEXT[c.field] + (c.tool === 'TURNING' ? ', ' + c.unit : '') + '), 0 AFTER EVERY CUT');
-  o.push(';  FEATURE     : ' + d.text + (d.kind === 'wall' ? ', MATERIAL ON THE ' + c.side + ' SIDE' : ''));
-  o.push(';  NOMINAL     : ' + n(c.nom) + ' +' + n(c.tolP) + ' / -' + n(c.tolM));
-  o.push(';  FIRST CUT   : WEAR ' + n(c.w1) + ' LEAVES ' + n(c.stock) + ', EXPECTED ' + n(c.E));
-  o.push(';  CORRECTION  : WEAR = WEAR USED + (NOMINAL - MEASURED) / (' + n(c.div) + ')');
-  o.push(';  HOLD (M0)   : |MEASURED - EXPECTED| > ' + n(c.window) + ' OR |WEAR| > ' + n(c.limit));
-  o.push(';  SCRAP       : MEASURED ' + (c.m > 0 ? '< ' + n(lo) : '> ' + n(hi)) + ' (A RE-CUT CAN ONLY REMOVE MATERIAL)');
+  o.push(';  WEAR        : $TC_' + c.field + ' (' + CMC_FIELD_TEXT[c.field] + (c.tool === 'TURNING' ? ', ' + c.unit : '') + '): THE WEAR FOUND ON THE');
+  o.push(';                EDGE + THE CMC WEAR WHILE CUTTING, THE WEAR FOUND AFTER EVERY CUT');
+  o.push(';  FEATURE     : ' + cmcFeatureLine(c, R));
+  o.push(';  NOMINAL     : ' + n(c.nom) + (rect ? ' x ' + n(c.nomY) : '') + ' +' + n(c.tolP) + ' / -' + n(c.tolM));
+  o.push(';  FIRST CUT   : CMC WEAR ' + n(c.w1) + ' LEAVES ' + n(c.stock) + ', EXPECTED ' + n(c.E) + (rect ? ' x ' + n(c.E2) : ''));
+  o.push(';  CORRECTION  : CMC WEAR = WEAR USED + (NOMINAL - MEASURED) / (' + n(c.div) + ')' + (rect ? ', MEAN OF X AND Y' : ''));
+  o.push(';  HOLD (M0)   : |MEASURED - EXPECTED| > ' + n(c.window) + (rect ? ' (X, Y OR X-Y DIFFERENCE)' : '') + ', |WEAR| > ' + n(c.limit) + ',');
+  o.push(';                OR THE PROBE TOUCHED WHILE LOWERING');
+  o.push(';  SCRAP       : MEASURED ' + (c.m > 0 ? 'BELOW NOMINAL - ' + n(c.tolM) : 'ABOVE NOMINAL + ' + n(c.tolP)) + ' (A RE-CUT CAN ONLY REMOVE MATERIAL)');
   o.push(';  VERIFY      : ' + (!c.verify ? 'OFF' : c.out === 'ACCEPT' ? 'ON - OUT OF TOLERANCE IS ACCEPTED AND LOGGED'
                                    : 'ON - RE-CUT UNTIL SIZED, MAX ' + c.maxTry + ' RE-CUTS'));
   o.push(';  BACK        : ' + (mode === 0 ? 'TCA LOADS THE SAME SISTER (CARRIER ' + R.cmcCarrier + ')' : 'T M6 BY NAME'));
   o.push(';                ANOTHER SISTER IN THE SPINDLE = THIS NEST AGAIN FROM THE');
   o.push(';                FIRST CUT (FIRST-CUT WEAR LEAVES STOCK)');
   o.push(';  LOG         : CMC_LOG.SPF, ONE LINE PER MEASUREMENT (C_P1_CMC_LOG)');
+  o.push(';  DO NOT EDIT THE CUTTER WEAR DURING A CMC HOLD: IT IS PUT BACK TO THE');
+  o.push(';  VALUE FOUND BEFORE THE NEST.');
   o.push(';');
   cmcRLines(b, R.total).forEach(function (l) { o.push(l); });
   o.push(';  WEAR IS WRITTEN AS AN ABSOLUTE VALUE FROM R, SO A RESTART NEVER');
   o.push(';  ADDS A CORRECTION TWICE.');
   o.push(';-------------------------------------------');
-  o.push('DEF INT LV_T, LV_D, LV_DUP, LV_CHG');
-  o.push('DEF REAL LV_M, LV_E, LV_WB, LV_W');
+  o.push('DEF INT LV_T, LV_D, LV_DUP, LV_CHG, LV_HIT');
+  o.push('DEF REAL LV_M, LV_M2, LV_E, LV_E2, LV_WB, LV_W');
   o.push('DEF STRING[32] LV_B');
   o.push('DEF STRING[8] LV_PS');
-  o.push('DEF STRING[160] LV_L');
-  o.push('EXTERN ' + meas + '(REAL,VAR REAL)');
+  o.push('DEF STRING[180] LV_L');
+  o.push('EXTERN ' + meas + '(REAL,REAL,VAR REAL,VAR REAL,VAR INT)');
   o.push('EXTERN C_P1_CMC_BACK(STRING[25],INT,INT,INT,VAR INT)');
-  o.push('EXTERN C_P1_CMC_LOG(STRING[160])');
+  o.push('EXTERN C_P1_CMC_LOG(STRING[180])');
   o.push(';');
   o.push('LV_B=' + q(s.program));
   o.push('LV_D=' + c.edge);
+  o.push(';--- A CUT STOPPED PART-WAY (PASS 1 OR 4): WEAR FOUND ON THE EDGE BACK ---');
+  o.push('IF ((' + r(0) + '==1) OR (' + r(0) + '==4)) AND (' + r(2) + '>0)');
+  o.push('  LV_DUP=' + r(3));
+  o.push('  LV_T=GETT(' + tool + ',LV_DUP)');
+  o.push('  IF (LV_T==' + r(2) + ')');
+  o.push('    ' + F + '=' + r(43));
+  o.push('  ENDIF');
+  o.push('ENDIF');
   o.push(';--- WHERE IS THIS NEST? (RESTART) ---');
   o.push('IF (' + r(1) + '<>GV_NEST) GOTO? CMC_NEW');
   o.push('IF (' + r(0) + '==9) GOTO? CMC_RET');
@@ -1937,29 +2113,31 @@ function fCmc(R, s) {
   o.push('IF (' + r(0) + '==5) GOTO? CMC_CUT2_DONE');
   if (c.verify) o.push('IF (' + r(0) + '==6) GOTO? CMC_VERIFY');
   o.push('CMC_NEW:');
-  o.push(r(1) + '=GV_NEST ' + r(5) + '=0 ' + r(6) + '=0 ' + r(7) + '=0 ' + r(8) + '=0 ' + r(9) + '=0');
+  o.push(r(1) + '=GV_NEST ' + r(0) + '=0 ' + r(6) + '=0 ' + r(7) + '=0 ' + r(8) + '=0 ' + r(9) + '=0 ' + r(42) + '=0');
   o.push(res + '=0');
   o.push('CMC_CUT1:');
-  zeroRecorded('A CUT STOPPED PART-WAY');
-  o.push(';--- RECORD THE CUTTER IN THE SPINDLE (L_RUN_NESTS LOADED AND MEASURED IT) ---');
+  o.push(';--- RECORD THE CUTTER IN THE SPINDLE AND THE WEAR ON ITS EDGE ---');
   o.push('STOPRE');
   o.push('GETEXET(LV_T)');
   o.push(r(2) + '=LV_T ' + r(3) + '=$TC_TP1[LV_T] ' + r(4) + '=LV_D');
-  o.push(';--- FIRST CUT: WEAR ' + n(c.w1) + ' LEAVES STOCK FOR THE MEASUREMENT ---');
-  cut(n(c.w1), 1, 2, 'FIRST CUT"');
+  o.push(r(43) + '=' + F);
+  o.push(';--- FIRST CUT: CMC WEAR ' + n(c.w1) + ' LEAVES STOCK FOR THE MEASUREMENT ---');
+  cut(nv(c.w1), 1, 2, 'FIRST CUT"');
   o.push('CMC_MEAS:');
   o.push(';--- MEASURE AFTER THE FIRST CUT ---');
-  o.push('LV_E=' + n(c.E) + ' LV_WB=' + n(c.w1));
+  o.push('LV_E=' + n(c.E) + ' LV_E2=' + n(c.E2) + ' LV_WB=' + n(c.w1));
   o.push('LV_PS="FIRST"');
-  o.push(meas + '(LV_E,LV_M)');
-  o.push(r(6) + '=LV_M');
-  o.push(corr);
+  measure('CMC_TOUCH1');
   o.push(';in tolerance already: nest done, no final cut');
   o.push(inTol);
   o.push(';far from the expected size (chip, wrong feature, broken cutter)');
   o.push('IF (ABS(LV_M-LV_E)>' + n(c.window) + ') GOTO? CMC_HOLD1');
+  if (rect) {
+    o.push('IF (ABS(LV_M2-LV_E2)>' + n(c.window) + ') GOTO? CMC_HOLD1');
+    o.push('IF (ABS((LV_M-LV_E)-(LV_M2-LV_E2))>' + n(c.window) + ') GOTO? CMC_HOLD1');
+  }
   o.push(';past size: a re-cut can only remove material');
-  o.push(scrap);
+  scrap.forEach(function (l) { o.push(l); });
   o.push(';correction larger than the limit');
   o.push('IF (ABS(LV_W)>' + n(c.limit) + ') GOTO? CMC_HOLD1');
   o.push('CMC_SET:');
@@ -1967,30 +2145,33 @@ function fCmc(R, s) {
   o.push('STOPRE');
   log('CUT', 'LV_PS');
   o.push('GOTO? CMC_BACK');
-  hold('CMC_HOLD1', 'EXPECTED ' + n(c.E), ['CUT', 'CMC_SET'], 'CMC_MEAS');
+  hold('CMC_HOLD1', measured + ' EXPECTED ' + n(c.E) + (rect ? ' x ' + n(c.E2) : ''), ['CUT', 'CMC_SET', 'HOLD'], 'CMC_MEAS');
+  hold('CMC_TOUCH1', 'PROBE TOUCHED WHILE LOWERING - FIRST CUT MISSING?', ['CUT AGAIN', 'CMC_REDO1', 'TOUCH'], 'CMC_MEAS');
+  o.push('CMC_REDO1:');
+  back();
+  o.push('IF (LV_CHG==1) GOTO? CMC_SISTER');
+  o.push('GOTO? CMC_CUT1');
   o.push('CMC_BACK:');
   o.push(';--- BACK TO THE CUTTER ---');
   back();
   o.push('IF (LV_CHG==1) GOTO? CMC_SISTER');
   o.push(';--- FINAL CUT WITH THE CORRECTION ---');
   o.push('LV_T=' + r(2));
-  cut(r(7), 4, 5, 'FINAL CUT, WEAR " << ' + r(7));
+  cut(r(7), 4, 5, 'FINAL CUT, CMC WEAR " << ' + r(7));
   o.push('CMC_CUT2_DONE:');
   if (!c.verify) {
     o.push(';--- VERIFY OFF: NEST DONE ---');
-    o.push(res + '=1');
+    o.push(res + '=' + CMC_RES.OK);
     o.push('GOTO? CMC_END');
   } else {
     o.push('CMC_VERIFY:');
     o.push(';--- VERIFY AGAINST NOMINAL ---');
     o.push(r(0) + '=6');
-    o.push('LV_E=' + n(c.nom) + ' LV_WB=' + r(7));
+    o.push('LV_E=' + n(c.nom) + ' LV_E2=' + n(c.nomY) + ' LV_WB=' + r(7));
     o.push('LV_PS="VERIFY"');
-    o.push(meas + '(LV_E,LV_M)');
-    o.push(r(6) + '=LV_M');
-    o.push(corr);
+    measure('CMC_TOUCH2');
     o.push(inTol);
-    o.push(scrap);
+    scrap.forEach(function (l) { o.push(l); });
     if (c.out === 'ACCEPT') {
       o.push(';out of tolerance, material left: accepted and logged');
       o.push('GOTO? CMC_OUT');
@@ -2002,8 +2183,13 @@ function fCmc(R, s) {
       o.push('STOPRE');
       log('RECUT', 'LV_PS');
       o.push('GOTO? CMC_BACK');
-      hold('CMC_HOLD2', 'NOMINAL ' + n(c.nom), ['ACCEPT', 'CMC_OUT'], 'CMC_VERIFY');
+      hold('CMC_HOLD2', measured + ' NOMINAL ' + n(c.nom) + (rect ? ' x ' + n(c.nomY) : ''), ['ACCEPT', 'CMC_OUT', 'HOLD'], 'CMC_VERIFY');
     }
+    hold('CMC_TOUCH2', 'PROBE TOUCHED WHILE LOWERING', ['CUT AGAIN', 'CMC_REDO2', 'TOUCH'], 'CMC_VERIFY');
+    o.push('CMC_REDO2:');
+    o.push(r(0) + '=3');
+    o.push('STOPRE');
+    o.push('GOTO? CMC_BACK');
   }
   o.push('CMC_SISTER:');
   o.push(';--- THE RECORDED SISTER IS DISABLED OR GONE: ANOTHER SISTER IS IN ---');
@@ -2022,12 +2208,12 @@ function fCmc(R, s) {
   o.push('GOTO? CMC_CUT1');
   o.push('CMC_OK:');
   log('OK', 'LV_PS');
-  o.push(res + '=1');
+  o.push(res + '=' + CMC_RES.OK);
   o.push('GOTO? CMC_END');
   if (c.verify) {
     o.push('CMC_OUT:');
     log('OUT', 'LV_PS');
-    o.push(res + '=2');
+    o.push(res + '=' + CMC_RES.OUT);
     o.push('GOTO? CMC_END');
   }
   o.push('CMC_SCRAP:');
@@ -2036,7 +2222,6 @@ function fCmc(R, s) {
   o.push('CMC_END:');
   o.push(';--- CUTTER BACK IN THE SPINDLE FOR L_RUN_NESTS (BREAK CHECK, SETPIECE) ---');
   back();
-  zeroRecorded('ALWAYS 0 AFTER THE NEST');
   o.push('SETPIECE(0)                        ;the probe and the extra passes are not counted');
   o.push(r(0) + '=9');
   o.push('STOPRE');
@@ -2093,7 +2278,7 @@ function fCmcBack(R) {
 }
 function fCmcLog(R) {
   var o = [];
-  o.push('PROC C_P1_CMC_LOG(STRING[160] LD_LINE)');
+  o.push('PROC C_P1_CMC_LOG(STRING[180] LD_LINE)');
   hdr(o, R, 'C_P1_CMC_LOG.SPF', 'CMC - ONE LINE INTO CMC_LOG.SPF', []);
   rev(o, R);
   o.push(';');
@@ -2101,8 +2286,10 @@ function fCmcLog(R) {
   o.push(';  THE SELECTED PROGRAM (NC 4.5.1 WRITE), LIKE L_DATA_LOG.');
   o.push(';  MEASUREMENT LINE:');
   o.push(';   DATE,TIME,STEP,NEST,FEATURE,TOOL,SISTER,T,EDGE,NOMINAL,EXPECTED,');
-  o.push(';   MEASURED,DEVIATION,WEAR_USED,WEAR_NEXT,PASS,RECUTS,RESULT');
-  o.push(';   RESULT: CUT, RECUT, OK, OUT, SCRAP, HOLD, SISTER');
+  o.push(';   MEASURED,MEASURED_Y,DEVIATION,WEAR_USED,WEAR_NEXT,PASS,RECUTS,RESULT');
+  o.push(';   (MEASURED_Y FOR RECTANGLES ONLY; WEAR = CMC WEAR ON TOP OF THE WEAR');
+  o.push(';   FOUND ON THE EDGE)');
+  o.push(';   RESULT: CUT, RECUT, OK, OUT, SCRAP, HOLD, TOUCH, SISTER');
   o.push(';  STEP LINE: DATE,TIME,STEP,SUMMARY,OK=n,OUT=n,SCRAP=n');
   o.push(';-------------------------------------------');
   o.push('DEF INT LV_ERR');
@@ -2124,26 +2311,27 @@ function fCmcLog(R) {
 }
 function fCmcClear(R) {
   var o = [];
-  hdr(o, R, 'C_P1_CMC_CLEAR.SPF', 'CMC - WEAR LEFT BY A STOPPED CMC BACK TO 0, R BLOCKS CLEARED', [
+  hdr(o, R, 'C_P1_CMC_CLEAR.SPF', 'CMC - WEAR LEFT BY A STOPPED CUT PUT BACK, R BLOCKS CLEARED', [
     '; PART NUMBER  : ' + (R.header.part || 'XXXX')
   ]);
   rev(o, R);
   o.push(';');
   o.push(';  A_P1 RUNS THIS ON A FRESH START (GV_STEP==0). RUN IT BY HAND WHEN A');
-  o.push(';  JOB IS ABANDONED PART-WAY THROUGH A CMC STEP: WEAR IS ONLY ON THE');
-  o.push(';  CUTTER WHILE THE PASS IS 1 (FIRST CUT) OR 4 (FINAL CUT).');
+  o.push(';  JOB IS ABANDONED PART-WAY THROUGH A CMC STEP, BEFORE ANOTHER JOB');
+  o.push(';  USES THE CUTTER. CMC WEAR IS ONLY ON THE CUTTER WHILE THE PASS IS');
+  o.push(';  1 (FIRST CUT) OR 4 (FINAL CUT); THE WEAR FOUND BEFORE IS PUT BACK.');
   o.push(';  GETT CHECKS THE RECORDED SISTER STILL HAS THE RECORDED T NUMBER.');
   o.push(';-------------------------------------------');
   o.push('DEF INT LV_T, LV_D, LV_DUP, LV_I');
   R.cmcList.forEach(function (s) {
     var b = s.cmcBase, c = s.cmc;
     o.push(';--- STEP ' + s.step + ': R' + b + '-R' + (b + CMC_BLOCK - 1) + ', ' + s.tool + ' D' + c.edge + ' $TC_' + c.field + ' ---');
-    o.push('IF (R' + b + '>=1) AND (R' + b + '<=6) AND (R' + (b + 2) + '>0)');
+    o.push('IF ((R' + b + '==1) OR (R' + b + '==4)) AND (R' + (b + 2) + '>0)');
     o.push('  LV_DUP=R' + (b + 3));
     o.push('  LV_T=GETT(' + q(s.tool) + ',LV_DUP)');
     o.push('  IF (LV_T==R' + (b + 2) + ')');
     o.push('    LV_D=' + c.edge);
-    o.push('    $TC_' + c.field + '[LV_T,LV_D]=0');
+    o.push('    $TC_' + c.field + '[LV_T,LV_D]=R' + (b + 43));
     o.push('  ENDIF');
     o.push('ENDIF');
     o.push('LV_I=' + b);
@@ -2157,23 +2345,26 @@ function fCmcClear(R) {
   o.push(';');
   return text(o);
 }
-/* A_P1 after a CMC step: count the nest results, scrap nests off (status 3), one log line */
+/* A_P1 after a CMC step: scrap nests off (status 3), count the nests still running, one log line */
 function cmcAfter(o, R, s) {
   var b = s.cmcBase, N = R.total;
   o.push(';--- CMC RESULTS R' + (b + 10) + '-R' + (b + 9 + N) + ': SCRAP NESTS OFF FOR THE LATER STEPS (STATUS ' + CMC_SCRAP_STATUS + ') ---');
+  o.push(';--- A NEST BROKEN IN THIS STEP KEEPS ITS TOOL-FAILURE STATUS              ---');
   o.push('LV_CMC_OK=0 LV_CMC_OUT=0 LV_CMC_SCRAP=0');
   o.push('LV_I=1');
   o.push('WHILE (LV_I<=' + N + ')');
-  o.push('  IF (R[' + (b + 9) + '+LV_I]==' + CMC_RES.OK + ')');
-  o.push('    LV_CMC_OK=LV_CMC_OK+1');
-  o.push('  ENDIF');
-  o.push('  IF (R[' + (b + 9) + '+LV_I]==' + CMC_RES.OUT + ')');
-  o.push('    LV_CMC_OUT=LV_CMC_OUT+1');
-  o.push('  ENDIF');
   o.push('  IF (R[' + (b + 9) + '+LV_I]==' + CMC_RES.SCRAP + ')');
   o.push('    LV_CMC_SCRAP=LV_CMC_SCRAP+1');
   o.push('    IF (GV_NEST_STATUS[LV_I]==1)');
   o.push('      GV_NEST_STATUS[LV_I]=' + CMC_SCRAP_STATUS);
+  o.push('    ENDIF');
+  o.push('  ENDIF');
+  o.push('  IF (GV_NEST_STATUS[LV_I]==1)');
+  o.push('    IF (R[' + (b + 9) + '+LV_I]==' + CMC_RES.OK + ')');
+  o.push('      LV_CMC_OK=LV_CMC_OK+1');
+  o.push('    ENDIF');
+  o.push('    IF (R[' + (b + 9) + '+LV_I]==' + CMC_RES.OUT + ')');
+  o.push('      LV_CMC_OUT=LV_CMC_OUT+1');
   o.push('    ENDIF');
   o.push('  ENDIF');
   o.push('  LV_I=LV_I+1');
@@ -2232,8 +2423,8 @@ function fMain(R) {
     o.push('DEF INT LV_CMC_OK                  ;CMC NESTS OK THIS STEP');
     o.push('DEF INT LV_CMC_OUT                 ;CMC NESTS OUT OF TOLERANCE, ACCEPTED');
     o.push('DEF INT LV_CMC_SCRAP               ;CMC NESTS SCRAP');
-    o.push('DEF STRING[160] LV_CMC_L           ;CMC LOG LINE');
-    o.push('EXTERN C_P1_CMC_LOG(STRING[160])   ;WKS SUB-PROGRAM WITH A PARAMETER (NC 4.2.3.2)');
+    o.push('DEF STRING[180] LV_CMC_L           ;CMC LOG LINE');
+    o.push('EXTERN C_P1_CMC_LOG(STRING[180])   ;WKS SUB-PROGRAM WITH A PARAMETER (NC 4.2.3.2)');
   }
   o.push(';----------------');
   o.push('; SUB PROGRAMS');
@@ -2250,7 +2441,7 @@ function fMain(R) {
   if (cmc) {
     o.push(';C_P1_CMC_BACK - CMC: RECORDED CUTTER BACK IN THE SPINDLE');
     o.push(';C_P1_CMC_LOG  - CMC: ONE LINE INTO CMC_LOG.SPF');
-    o.push(';C_P1_CMC_CLEAR - CMC: LEFT-OVER WEAR TO 0, R BLOCKS CLEARED');
+    o.push(';C_P1_CMC_CLEAR - CMC: WEAR A STOPPED CUT LEFT PUT BACK, R BLOCKS CLEARED');
   }
   o.push(';L_PAL_CHECK   - CHECK PALLET NUMBER (CYCLE DIR)');
   o.push(';L_SKIP_CHECK  - SKIP A STEP IF EVERY NEST IS OFF');
@@ -2273,7 +2464,7 @@ function fMain(R) {
   o.push('C_P1_NESTS');
   if (cmc) {
     o.push('IF (GV_STEP==0)');
-    o.push('  C_P1_CMC_CLEAR                   ;CMC: left-over wear to 0, R blocks cleared');
+    o.push('  C_P1_CMC_CLEAR                   ;CMC: wear a stopped cut left put back, R blocks cleared');
     o.push('ENDIF');
   }
   if (!R.single) {
@@ -2581,6 +2772,42 @@ function fReadme(R) {
   r.push('  with CYCLE800(0,"H",...), end with the block in the template.');
   if (R.probeStep.enabled) r.push('  ' + R.probeStep.program + '.SPF is the generated probe program (complete).');
   r.push('');
+  if (R.cmcList.length) {
+    r.push('CMC - CUT / MEASURE / CUT');
+    R.cmcList.forEach(function (s) {
+      r.push('  Step ' + s.step + ': ' + cmcName(s.step) + ' runs per nest in place of ' + s.program + ' (' + s.cmc.feature + ',');
+      r.push('    ' + s.tool + ' D' + s.cmc.edge + ' $TC_' + s.cmc.field + ', R' + s.cmcBase + '-R' + (s.cmcBase + CMC_BLOCK - 1) + ').');
+    });
+    r.push('  Per nest: first cut with first-cut wear (leaves stock), measure');
+    r.push('  (<program>_M, measure-only cycle), final cut with the corrected wear,');
+    r.push('  optional verify. Wear on the edge = the wear found before the CMC +');
+    r.push('  the CMC wear while cutting; the found wear is put back after every cut.');
+    r.push('  The R block of each step keeps the pass, cutter, sister and wear');
+    r.push('  through power-off; a restart resumes inside the nest and never adds a');
+    r.push('  correction twice. Holds (M0) name the R parameter to set:');
+    r.push('  0 measure again, 1 scrap the nest, 2 the option in the message.');
+    r.push('  The probe lowers with G1 MEAS=1: a touch on the way down holds');
+    r.push('  instead of crashing (first cut missing, chip, wrong position).');
+    r.push('  Back to the cutter: TCA loads the recorded sister (to confirm on the');
+    r.push('  machine); another sister = that nest again from the first cut.');
+    r.push('  Nest status 3 = CMC scrap, set by A_P1 after the step; later steps');
+    r.push('  skip it. SETPIECE(0) at the end of each nest: the probe and the extra');
+    r.push('  cuts are not counted; L_RUN_NESTS counts the cutter once.');
+    r.push('  C_P1_CMC_BACK  recorded cutter back in the spindle');
+    r.push('  C_P1_CMC_LOG   one line per measurement into CMC_LOG.SPF:');
+    r.push('    date,time,step,nest,feature,tool,sister,T,edge,nominal,expected,');
+    r.push('    measured,measured_y,deviation,wear_used,wear_next,pass,recuts,result');
+    r.push('  C_P1_CMC_CLEAR puts back the wear a stopped cut left and clears the R');
+    r.push('    blocks. A_P1 runs it on a fresh start. Run it by hand when a job is');
+    r.push('    abandoned part-way through a CMC step, before another job uses the');
+    r.push('    cutter.');
+    r.push('  These programs call WKS sub-programs with parameters and declare them');
+    r.push('  with EXTERN (NC 4.2.3.2: needed outside the cycle directories).');
+    r.push('  CHECK ON THE MACHINE: MD28050 $MC_MM_NUM_R_PARAM above the last CMC R;');
+    r.push('  no other program (tool change, Blum macros, OEM cycles, FIFO from');
+    r.push('  $MC_MM_START_FIFO) uses the CMC R range. tool_load_mda uses R999.');
+    r.push('');
+  }
   r.push('BLUM MACROS (not in the Siemens manuals, not verified here)');
   r.push('  BL9908_MOD (L_TOOL_BRK) must return 19.19 in its last parameter on a');
   r.push('  break. BL9902 and its ;NCG# lines (L_TOOL_MEAS) are copied verbatim');
@@ -2689,7 +2916,8 @@ G.SNG = {
   COL_KEYS: COL_KEYS, colState: colState, setColumn: setColumn,
   CMC_FEATURES: CMC_FEATURES, CMC_DEF: CMC_DEF, CMC_TOOLS: CMC_TOOLS, CMC_FIELDS: CMC_FIELDS, CMC_FIELD_TEXT: CMC_FIELD_TEXT,
   CMC_CLEAN: CMC_CLEAN, CMC_BLOCK: CMC_BLOCK, CMC_LIMIT: CMC_LIMIT, CMC_SCRAP_STATUS: CMC_SCRAP_STATUS, CMC_RES: CMC_RES,
-  cmcName: cmcName, cmcAutoField: cmcAutoField, cmcResolve: cmcResolve, cmcMath: cmcMath
+  CMC_RESERVED_R: CMC_RESERVED_R, cmcName: cmcName, cmcAutoField: cmcAutoField, cmcResolve: cmcResolve, cmcMath: cmcMath,
+  cmcIsSize: cmcIsSize, cmcSwivelText: cmcSwivelText, cmcSwivelError: cmcSwivelError
 };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>

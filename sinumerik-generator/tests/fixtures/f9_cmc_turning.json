@@ -1,0 +1,460 @@
+{
+  "format": "SINUMERIK_ONE_GENERATOR_JOB",
+  "version": 1,
+  "header": {
+    "part": "CMC_TURN",
+    "material": "",
+    "stock": "",
+    "machine": "H500",
+    "programmer": ""
+  },
+  "config": {
+    "units": "METRIC",
+    "trunnion": "NONE",
+    "rotary": "B",
+    "mode": "SINGLE PART",
+    "faces": "4",
+    "nestsPerFace": "2",
+    "totalNests": "8"
+  },
+  "probeStep": {
+    "enabled": false,
+    "step": "1",
+    "program": ""
+  },
+  "steps": [
+    {
+      "step": "10",
+      "tool": "BORE_BAR_20",
+      "brkTol": "0.2",
+      "program": "B_CMC_TURN_010",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true,
+      "cmc": true,
+      "cmcTool": "TURNING",
+      "cmcTolP": "0.01",
+      "cmcTolM": "0.01",
+      "cmcStock": "0.05",
+      "cmcAppZ": "5",
+      "cmcFeature": "BORE",
+      "cmcSign": "LARGER",
+      "cmcUnit": "RADIUS",
+      "cmcNom": "170",
+      "cmcX": "0",
+      "cmcY": "0",
+      "cmcZ": "-12",
+      "cmcSwivel": "N713 CYCLE800(0,\"H\",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101) ; A=DC(-90)",
+      "cmcVerify": true,
+      "cmcOut": "RECUT",
+      "cmcMaxTry": "2",
+      "cmcClean": "M0"
+    },
+    {
+      "step": "20",
+      "tool": "OD_TURN_25",
+      "brkTol": "0.2",
+      "program": "B_CMC_TURN_020",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true,
+      "cmc": true,
+      "cmcTool": "TURNING",
+      "cmcTolP": "0.01",
+      "cmcTolM": "0.01",
+      "cmcStock": "0.05",
+      "cmcAppZ": "5",
+      "cmcFeature": "BOSS",
+      "cmcSign": "SMALLER",
+      "cmcUnit": "DIAMETER",
+      "cmcNom": "60",
+      "cmcX": "0",
+      "cmcY": "0",
+      "cmcZ": "-10",
+      "cmcReturn": "T M6",
+      "cmcSwivel": "N713 CYCLE800(0,\"H\",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101) ; A=DC(-90)"
+    },
+    {
+      "step": "30",
+      "tool": "FACE_TURN_25",
+      "brkTol": "0.2",
+      "program": "B_CMC_TURN_030",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true,
+      "cmc": true,
+      "cmcTool": "TURNING",
+      "cmcTolP": "0.01",
+      "cmcTolM": "0.01",
+      "cmcStock": "0.05",
+      "cmcAppZ": "5",
+      "cmcFeature": "FLOOR Z",
+      "cmcSign": "LARGER",
+      "cmcNom": "-3",
+      "cmcX": "25",
+      "cmcY": "0"
+    },
+    {
+      "step": "40",
+      "tool": "EM_10",
+      "brkTol": "0.2",
+      "program": "B_CMC_TURN_040",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true,
+      "cmc": true,
+      "cmcTool": "ROTATING",
+      "cmcFeature": "WALL X",
+      "cmcSide": "+",
+      "cmcNom": "40",
+      "cmcTolP": "0.02",
+      "cmcTolM": "0.02",
+      "cmcStock": "0.05",
+      "cmcY": "10",
+      "cmcZ": "-8",
+      "cmcAppZ": "5",
+      "cmcVerify": true,
+      "cmcOut": "ACCEPT"
+    },
+    {
+      "step": "50",
+      "tool": "EM_10",
+      "brkTol": "0.2",
+      "program": "B_CMC_TURN_050",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true,
+      "cmc": true,
+      "cmcTool": "ROTATING",
+      "cmcFeature": "WALL Y",
+      "cmcSide": "-",
+      "cmcNom": "-25",
+      "cmcTolP": "0.02",
+      "cmcTolM": "0.02",
+      "cmcStock": "0.05",
+      "cmcX": "10",
+      "cmcZ": "-8",
+      "cmcAppZ": "5",
+      "cmcEdge": "2"
+    }
+  ],
+  "probing": {
+    "tool": "PROBE_3D",
+    "limitClear": "",
+    "feed": "",
+    "searchDist": "",
+    "prnum": "1",
+    "probeOnM": "M56",
+    "partCheck": true,
+    "maxTravel": "15",
+    "chkAlt": true,
+    "chkX": "40",
+    "chkY": "20",
+    "chkZ": "5",
+    "skipZ": false,
+    "zAlt": false,
+    "zX": "",
+    "zY": "",
+    "zZ": "",
+    "zNom": "0",
+    "zTol": "",
+    "xyMethod": "BOSS",
+    "widthX": "",
+    "widthY": "",
+    "diameter": "50",
+    "appX": "10",
+    "appY": "20",
+    "probeZ": "-10",
+    "xyTol": "",
+    "approachClr": "",
+    "health": false,
+    "hX": "",
+    "hY": "",
+    "hStartZ": "",
+    "hTargetZ": "",
+    "hFeed": ""
+  },
+  "wcs": [
+    {
+      "x": "100.0",
+      "y": "-50.0",
+      "z": "-300.0",
+      "trunnion": "",
+      "rotary": "45",
+      "notes": "FIXTURE A"
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    }
+  ],
+  "cmcR": {
+    "first": "700",
+    "count": "1000",
+    "carrier": "1"
+  }
+}

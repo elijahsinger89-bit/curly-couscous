@@ -308,6 +308,110 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
   eq(rows[0].tool, '', 'tool untouched');
 }
 
+/* ---- CMC: math, R blocks, validation, nest counting ---- */
+{
+  const U = S.UNIT.INCH, UM = S.UNIT.METRIC;
+  const card = (o) => Object.assign(S.blankStep(20), { tool: 'EM', program: 'B_X', cmc: true, cmcTolP: '0.0005', cmcTolM: '0.0005',
+    cmcStock: '0.002', cmcX: '0', cmcY: '0', cmcZ: '-0.5', cmcAppZ: '0.1' }, o);
+  const near = (a, b) => Math.abs(a - b) < 1e-9;
+  /* your example: boss 2.000, first-cut wear .002 -> expected 2.004; measured 2.0052 -> wear .002 -> -.0006 */
+  let c = S.cmcResolve(card({ cmcFeature: 'BOSS', cmcNom: '2.000' }), U);
+  eq([c.m, c.p, c.f, c.w1, near(c.E, 2.004)], [1, 1, 2, 0.002, true], 'CMC boss: m p f, first-cut wear .002, expected 2.004');
+  let k = S.cmcMath(c, 2.0052, c.w1);
+  eq([near(k.w, -0.0006), k.inTol, k.scrap, k.outWindow, k.overLimit], [true, false, false, false, false], 'CMC your example: measured 2.0052 -> wear -0.0006');
+  eq(S.cmcMath(c, 2.0003, c.w1).inTol, true, 'CMC boss in tolerance after the first cut');
+  eq(S.cmcMath(c, 1.9990, c.w1).scrap, true, 'CMC boss 1.999 = scrap (a re-cut can only remove)');
+  eq(S.cmcMath(c, 2.0070, c.w1).outWindow, true, 'CMC boss 2.007 = outside the check window (hold)');
+  /* bore: more wear leaves a smaller bore */
+  c = S.cmcResolve(card({ cmcFeature: 'BORE', cmcNom: '1.000' }), U);
+  k = S.cmcMath(c, 0.9962, c.w1);
+  eq([c.m, c.p, near(c.E, 0.996), near(k.w, 0.0001), k.scrap], [-1, -1, true, true, false], 'CMC bore: expected .996, measured .9962 -> wear .0001');
+  eq(S.cmcMath(c, 1.0007, c.w1).scrap, true, 'CMC bore 1.0007 = scrap');
+  /* walls: material side decides the sign; floor */
+  c = S.cmcResolve(card({ cmcFeature: 'WALL X', cmcSide: '+', cmcNom: '4' }), U);
+  eq([c.m, c.md, c.f, near(c.E, 3.998), near(S.cmcMath(c, 3.9985, c.w1).w, 0.0005)], [-1, 1, 1, true, true], 'CMC wall material + side: probe +X, wear .0005');
+  c = S.cmcResolve(card({ cmcFeature: 'WALL Y', cmcSide: '-', cmcNom: '-2.5' }), U);
+  eq([c.m, c.md, near(c.E, -2.498)], [1, 2, true], 'CMC wall material - side: probe -Y');
+  c = S.cmcResolve(card({ cmcFeature: 'FLOOR Z', cmcNom: '-0.5' }), U);
+  eq([c.field, c.m, near(c.E, -0.498), near(S.cmcMath(c, -0.4985, c.w1).w, 0.0005)], ['DP12', 1, true, true], 'CMC floor: length wear, wear .0005');
+  /* turning: sign from the card, diameter wear */
+  c = S.cmcResolve(card({ cmcFeature: 'BOSS', cmcTool: 'TURNING', cmcSign: 'SMALLER', cmcUnit: 'DIAMETER', cmcNom: '60', cmcStock: '0.05' }), UM);
+  eq([c.field, c.p, c.f, c.w1, near(c.E, 60.05), near(S.cmcMath(c, 60.06, c.w1).w, -0.05 + 0.06)], ['DP12', -1, 1, -0.05, true, true],
+    'CMC turning OD, +wear smaller, diameter: first-cut wear -0.05, measured 60.06 -> wear +0.01');
+  /* rectangle: mean of X and Y */
+  c = S.cmcResolve(card({ cmcFeature: 'RECT POCKET', cmcNom: '2.5', cmcNomY: '1.75' }), U);
+  k = S.cmcMath(c, 2.4962, c.w1, 1.7464);
+  eq([near(c.E, 2.496), near(c.E2, 1.746), near(k.w, 0.002 - (0.0038 + 0.0036) / 2 / 2), k.outWindow], [true, true, true, false], 'CMC rectangle: wear from the mean of X and Y');
+  eq(S.cmcMath(c, 2.4962, c.w1, 1.7490).outWindow, true, 'CMC rectangle: X and Y disagree = hold');
+  eq(S.cmcMath(c, 2.5003, c.w1, 1.7508).scrap, true, 'CMC rectangle: Y past size = scrap');
+  eq(S.cmcMath(c, 2.5003, c.w1, 1.7502).inTol, true, 'CMC rectangle: both in tolerance');
+  /* swivel text */
+  eq(S.cmcSwivelText('N713 CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101) ; A=DC(-90)'), 'CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)', 'CMC swivel: block number and comment dropped');
+  eq([S.cmcSwivelError(''), !!S.cmcSwivelError('G0 X0'), !!S.cmcSwivelError('CYCLE800()'), !!S.cmcSwivelError('CYCLE800(0,"H)')], ['', true, true, true], 'CMC swivel: blank ok, junk / deselect / bad quote refused');
+
+  /* R blocks, validation */
+  const cj = () => S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f9_cmc_turning.json'), 'utf8')));
+  const R9 = S.resolve(cj());
+  eq(R9.cmcList.map(s => [s.step, s.cmcBase]), [[10, 700], [20, 750], [30, 800], [40, 850], [50, 900]], 'CMC R blocks: 50 per CMC step from R700');
+  const cneg = [
+    ['CMC block over R999 (tool_load_mda)', j => { j.cmcR.first = '760'; j.cmcR.count = '2000'; }, 'cmcR.first'],
+    ['CMC block above MD28050', j => { j.cmcR.count = '900'; }, 'cmcR.first'],
+    ['CMC block over an R the posted program uses', j => { j.steps[0].rparams = '1,812'; }, 'cmcR.first'],
+    ['CMC carrier 0', j => { j.cmcR.carrier = '0'; }, 'cmcR.carrier'],
+    ['CMC no probe tool', j => { j.probing.tool = ''; }, 'probing.tool'],
+    ['CMC nominal missing', j => { j.steps[0].cmcNom = ''; }, 'steps.0.cmcNom'],
+    ['CMC first-cut wear 0', j => { j.steps[0].cmcStock = '0'; }, 'steps.0.cmcStock'],
+    ['CMC turning without sign', j => { j.steps[0].cmcSign = ''; }, 'steps.0.cmcSign'],
+    ['CMC approach below depth', j => { j.steps[0].cmcAppZ = '-20'; }, 'steps.0.cmcAppZ'],
+    ['CMC floor approach too low', j => { j.steps[2].cmcAppZ = '0'; }, 'steps.2.cmcAppZ'],
+    ['CMC wall X without Y point', j => { j.steps[3].cmcY = ''; }, 'steps.3.cmcY'],
+    ['CMC bore island larger than the bore', j => { j.steps[0].cmcZone = '200'; }, 'steps.0.cmcZone'],
+    ['CMC boss zone smaller than the boss', j => { j.steps[1].cmcZone = '50'; }, 'steps.1.cmcZone'],
+    ['CMC swivel junk', j => { j.steps[0].cmcSwivel = 'G0 X0'; }, 'steps.0.cmcSwivel'],
+    ['CMC edge 0', j => { j.steps[0].cmcEdge = '0'; }, 'steps.0.cmcEdge'],
+    ['CMC cleaning M code junk', j => { j.steps[0].cmcClean = 'M CODE'; j.steps[0].cmcCleanM = 'AIR'; }, 'steps.0.cmcCleanM'],
+    ['CMC max re-cuts 0', j => { j.steps[0].cmcMaxTry = '0'; }, 'steps.0.cmcMaxTry'],
+    ['CMC program named like a CMC program', j => { j.steps[2].program = 'C_P1_CMC10'; }, 'steps.2.program'],
+    ['CMC arc increment 0', j => { j.steps[0].cmcFeature = 'BORE ARC'; j.steps[0].cmcIncAng = '0'; }, 'steps.0.cmcIncAng'],
+    ['CMC arc 3 points 130 deg', j => { j.steps[0].cmcFeature = 'BORE ARC'; j.steps[0].cmcPoints = '3'; j.steps[0].cmcIncAng = '130'; }, 'steps.0.cmcIncAng'],
+    ['CMC rectangle without Y nominal', j => { j.steps[0].cmcFeature = 'RECT POCKET'; }, 'steps.0.cmcNomY'],
+    ['CMC zone Y without zone X', j => { j.steps[0].cmcFeature = 'RECT POCKET'; j.steps[0].cmcNomY = '100'; j.steps[0].cmcZoneY = '20'; }, 'steps.0.cmcZone'],
+  ];
+  for (const [label, mut, want] of cneg) {
+    const j = cj(); mut(j);
+    const v = S.validate(j);
+    if (!v.errors.some(e => e.path === want)) fail('validator missed "' + label + '" (want ' + want + ', got ' + JSON.stringify(v.errors.map(e => e.path)) + ')');
+    else console.log('ok   rejects: ' + label);
+  }
+  {
+    const j = cj(); j.steps[3].jobs = '3'; j.steps[3].rcomp = 'NO';
+    const v = S.validate(j);
+    eq([v.errors.length, v.warnings.length], [0, 2], 'CMC warnings: 3 toolpaths, no G41/G42 (job still valid)');
+  }
+  /* old jobs: CMC off, same files */
+  const old = S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f1_old_package.json'), 'utf8')));
+  eq([old.steps.every(s => s.cmc === false), old.cmcR.first, S.generate(old, { date: '2026-11-12' }).files.some(f => /CMC/.test(f.path))],
+    [true, '700', false], 'old job loads with CMC off and writes no CMC file');
+  /* nest counting: L_RUN_NESTS is unchanged and CMC never touches nest status / nest advancing */
+  const g9 = S.generate(cj(), { date: '2026-11-12' }).files;
+  const byPath = p => g9.find(f => f.path === p).text;
+  const codeOf = t => t.split('\n').map(l => l.replace(/;.*$/, '').trim()).filter(Boolean);
+  eq(g9.filter(f => /^WKS\/C_P1_CMC\d+\.SPF$/.test(f.path)).every(f => !codeOf(f.text).some(l => /GV_NEST_STATUS\[[^\]]*\]=(?!=)|GV_NEST=/.test(l))), true,
+    'CMC programs never write GV_NEST_STATUS or GV_NEST');
+  const a9 = codeOf(byPath('WKS/A_P1.MPF'));
+  const iRun = a9.indexOf('L_RUN_NESTS("BORE_BAR_20",0.200,1,"C_P1_CMC10",1,0,1,2,0,1,1)');
+  const iSet = a9.findIndex(l => l === 'GV_NEST_STATUS[LV_I]=3');
+  eq([iRun > 0, iSet > iRun, a9[iSet - 1], a9.indexOf('STEP10_DONE:') > iSet], [true, true, 'IF (GV_NEST_STATUS[LV_I]==1)', true],
+    'A_P1: CMC program in L_RUN_NESTS, status 3 only after it, only on running nests');
+  eq(a9.slice(a9.indexOf('C_P1_NESTS'), a9.indexOf('C_P1_NESTS') + 4), ['C_P1_NESTS', 'IF (GV_STEP==0)', 'C_P1_CMC_CLEAR', 'ENDIF'], 'A_P1: CMC clear on a fresh start only');
+  const c10 = codeOf(byPath('WKS/C_P1_CMC10.SPF'));
+  eq([c10.filter(l => l === 'SETPIECE(0)').length, c10[c10.indexOf('R700=9') - 1]], [1, 'SETPIECE(0)'], 'CMC: one SETPIECE(0), right before pass 9');
+  eq(c10.some(l => /^R701=GV_NEST R700=0 /.test(l)), true, 'CMC: new nest and pass 0 written in the same block');
+  const m10 = byPath('WKS/C_P1_CMC10_M.SPF');
+  eq([/CYCLE800\(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101\)/.test(m10), /DIAMOF/.test(m10), (m10.match(/^CYCLE800\(\)/mg) || []).length],
+    [true, true, 2], 'CMC turning measure: CAM swivel line, DIAMOF, swivel off after');
+}
+
 /* ---- JSON round trip ---- */
 const j1 = base();
 const j2 = S.normalizeJob(JSON.parse(JSON.stringify(j1)));
