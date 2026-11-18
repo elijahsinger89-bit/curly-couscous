@@ -21,6 +21,8 @@ SCRIPT = os.path.join(ROOT, "copy_to_python_folder", "go_to_machine", "go_to_mac
 LIB = os.path.join(ROOT, "copy_to_python_folder", "tool_library")
 TOL = os.path.join(HERE, "fake_tool_order_list", "tool_order_list.py")
 TOL_FILES = [TOL]
+TLM = os.path.join(ROOT, "copy_to_python_folder", "tool_load_mda", "tool_load_mda.py")
+TLM_FILES = [TLM]
 fails = []
 
 
@@ -103,7 +105,7 @@ def build(all_pass=False, dup=False):
         os.remove(os.path.join(POFDIR, n))
     shutil.rmtree(os.path.join(DOCDIR, "NC"), ignore_errors=True)
     for n in os.listdir(DOCDIR):
-        if n.endswith((".json", ".csv")):  # B lists and tool sheets
+        if n.endswith((".json", ".csv", ".MPF")):  # B lists, tool sheets, tool load programs
             os.remove(os.path.join(DOCDIR, n))
     T = om.Tool
     em, dr, fm = T("10047210", "End mill", "endMill", 0.4724), T("11039410", "Drill", "drilTool", 0.25), T("905083900", "Face", "faceMill", 2.0)
@@ -158,6 +160,7 @@ def run(answers):
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
     m.TOL_FILES = tuple(TOL_FILES)
+    m.TLM_FILES = tuple(TLM_FILES)
     m.run()
     left = len(gui.SCRIPT)
     gui.SCRIPT.clear()
@@ -172,6 +175,19 @@ def nc_files():
 LOGP = os.path.join(tmp, "go_to_machine_log.txt")
 BLIST = os.path.join(DOCDIR, "G17_SLIDE_OP10_B_PROGRAMS.json")
 SHEET = os.path.join(DOCDIR, "G17_SLIDE_OP10_Op10_tool_order.csv")
+MPF = os.path.join(DOCDIR, "G17_SLIDE_OP10_TOOL_LOAD.MPF")
+
+
+def counts(**by_id):
+    """Answer the tool load MDA screen: by_id = {tool id: (sisters, life)} as text."""
+    def f(dlg):
+        d = dlg.defaults()
+        for label in list(d):
+            for tid, (sv, lv) in by_id.items():
+                if label.startswith(tid + " "):
+                    d[label] = sv if label.endswith("sisters") else lv
+        return True, d
+    return f
 
 
 def sheet():
@@ -216,7 +232,7 @@ check(os.path.exists(LOGP) and "FAIL B_G17_SLIDE_030_HF5" in open(LOGP).read(), 
 
 # ---------------- check and post, failures: post nothing ----------------
 build()
-m, left = run([ans(Action="Check and post"), post_pick(0)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(0)])
 check(left == 0 and PostSet.calls == [] and "Nothing posted." in gui.BOXES[-1], "warning answered No: nothing posted")
 check(any("WARNING: 3 of 4 B programs fail the check." in b for b in gui.BOXES), "warning box before the choice")
 opts = gui.SHOWN[-1][1][0][2][0]
@@ -225,7 +241,7 @@ check(gui.SHOWN[-1][0].endswith("WARNING: 3 fail the check"), "warning dialog ti
 
 # ---------------- post only the ones that pass, list: only the posted ----------------
 cs = build()
-m, left = run([ans(Action="Check and post"), post_pick(2), include_pick(0)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(2), include_pick(0)])
 box = flat(gui.BOXES[-1])
 check(left == 0 and PostSet.calls == [[cs[1].UUID]], "post only passing: CalculateNC with the one passing compound job UUID")
 check(nc_files() == ["B_G17_SLIDE_010_HF5.mpf"] and "NC files written or updated: 1" in box and "NC/B_G17_SLIDE_010_HF5.mpf" in box.replace("\\", "/"),
@@ -247,7 +263,7 @@ check("Tool sheet: 1 tool" in box and "G17_SLIDE_OP10_Op10_tool_order.csv" in bo
 
 # ---------------- post only the ones that pass, list: all ----------------
 cs = build()
-m, left = run([ans(Action="Check and post"), post_pick(2), include_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(2), include_pick(1)])
 data = json.load(open(BLIST))
 check(left == 0 and PostSet.calls == [[cs[1].UUID]] and [s["step"] for s in data["steps"]] == [10, 20, 30, 40],
       "list: all B programs when chosen (only 010 posted)")
@@ -258,7 +274,7 @@ check(sorted(r["Designation"] for r in rows) == ["Drill", "End mill", "Face"] an
 
 # ---------------- post all ----------------
 cs = build()
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and len(nc_files()) == 4, "post all: 4 UUIDs, 4 NC files")
 check("Posted although 3 fail the check." in flat(gui.BOXES[-1]), "post all: message says posted with failures")
 check("POSTED WITH FAILURES" in open(LOGP).read(), "post all: log records the override")
@@ -266,35 +282,81 @@ check(len(gui.SHOWN) == 2 and len(sheet()) == 3, "post all: no list question; to
 
 # ---------------- everything passes: confirm ----------------
 cs = build(all_pass=True)
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
 check(gui.SHOWN[-1][0].endswith("confirm") and gui.SHOWN[-1][1][0][2][0] == ["No - do not post", "Yes - post 4 B programs"],
       "all pass: plain confirm, No first")
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and not any(b.startswith("WARNING") for b in gui.BOXES), "all pass: posted, no warning")
 build(all_pass=True)
-m, left = run([ans(Action="Check and post"), post_pick(0)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(0)])
 check(PostSet.calls == [] and "Nothing posted." in gui.BOXES[-1], "all pass, confirm No: nothing posted")
 
 # ---------------- duplicate step: stop ----------------
 build(dup=True)
-m, left = run([ans(Action="Check and post")])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False)])
 check(left == 0 and PostSet.calls == [] and "Nothing posted. Fix these first" in flat(gui.BOXES[-1]) and "used twice" in gui.BOXES[-1],
       "step used twice: stops before posting")
 
 # ---------------- CalculateNC fails / writes nothing ----------------
 build(all_pass=True)
 PostSet.mode = "raise"
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
 check("Posting failed: RuntimeError: post processor not found" in flat(gui.BOXES[-1]), "CalculateNC error reported")
 build(all_pass=True)
 PostSet.mode = "nothing"
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
 check("No NC file found for:" in gui.BOXES[-1] and "B_G17_SLIDE_040_HF5" in gui.BOXES[-1], "CalculateNC wrote nothing: B programs without an NC file listed")
 PostSet.mode = "write"
+
+# ---------------- tool load MDA ----------------
+for f in ("tool_load_mda_last.json",):
+    if os.path.exists(os.path.join(tmp, f)):
+        os.remove(os.path.join(tmp, f))
+cs = build(all_pass=True)
+m, left = run([ans(Action="Check and post"), post_pick(1), counts(**{"10047210": ("2", "50"), "905083900": ("0", "")})])
+box = flat(gui.BOXES[-1])
+labels = [f[1] for f in gui.SHOWN[-1][1]]
+check(left == 0 and gui.SHOWN[0][1][-1][:2] == ("bool", "Tool load MDA") and gui.SHOWN[0][1][-1][2] is True,
+      "first screen: Tool load MDA, ticked by default")
+check(gui.SHOWN[-1][0].startswith("Tool load MDA | tools 1-3 of 3") and "10047210  D0.4724  tool life (SETPIECE)" in labels,
+      "MDA screen after posting: the 3 tools of the B programs, SETPIECE tools marked")
+txt = open(MPF).read()
+check(txt.count('NEWT("10047210",') == 2 and 'NEWT("11039410",1)' in txt and "905083900" not in txt,
+      "MDA: 2 sisters of the end mill, 1 drill, face mill left out (0 sisters)")
+check(txt.count("$TC_MOP13[R999,1]=50") == 2 and "go_to_machine Op10" in txt, "MDA: tool life 50 on the end mill; source in the header")
+check("Tool load MDA: 3 tool entries (2 tools)" in box and "G17_SLIDE_OP10_TOOL_LOAD.MPF" in box, "message: MDA path and counts")
+check("left out (0 sisters): 905083900" in box and "WARNING - SETPIECE counts these tools but no tool life was entered" in box
+      and "11039410" in box.split("WARNING - SETPIECE")[1], "message: left out and SETPIECE-without-tool-life warning")
+check(json.load(open(os.path.join(tmp, "tool_load_mda_last.json"))).get("10047210") == [2, 50], "MDA values remembered")
+
+build(all_pass=True)
+m, left = run([ans(Action="Check and post"), post_pick(1), lambda dlg: (True, dlg.defaults())])
+fields = {f[1]: f[2] for f in gui.SHOWN[-1][1]}
+check(fields.get("10047210  D0.4724  sisters") == "2" and fields.get("10047210  D0.4724  tool life (SETPIECE)") == "50",
+      "second run: remembered sisters and tool life offered")
+
+build(all_pass=True)
+m, left = run([ans(Action="Check and post"), post_pick(1), lambda dlg: (False, {})])
+check(left == 0 and "Tool load MDA cancelled: not written." in flat(gui.BOXES[-1]) and not os.path.exists(MPF) and os.path.exists(BLIST),
+      "MDA screen cancelled: posted, list and sheet written, no MDA")
+
+build(all_pass=True)
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+check(left == 0 and not os.path.exists(MPF) and "Tool load MDA" not in gui.BOXES[-1], "MDA unticked: no screen, no program")
+
+build(all_pass=True)
+TLM_FILES[:] = [os.path.join(tmp, "nowhere", "tool_load_mda.py")]
+m, left = run([ans(Action="Check and post"), post_pick(1)])
+check(left == 0 and "Tool load MDA not written: tool_load_mda.py not found" in flat(gui.BOXES[-1]), "tool_load_mda missing: says so")
+TLM_FILES[:] = [TLM]
+
+build()
+m, left = run([ans(Action="Check only")])
+check(left == 0 and not os.path.exists(MPF), "check only: no MDA screen")
 
 # ---------------- tool_order_list not installed ----------------
 build(all_pass=True)
 TOL_FILES[:] = [os.path.join(tmp, "nowhere", "tool_order_list.py")]
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
 check("Tool sheet not written: tool_order_list.py not found" in flat(gui.BOXES[-1]) and not os.path.exists(SHEET) and os.path.exists(BLIST),
       "tool_order_list missing: B list still written, tool sheet skipped with the reason")
 TOL_FILES[:] = [TOL]

@@ -17,6 +17,10 @@
 #   - the tool sheet <document>_<joblist>_tool_order.csv: the columns and catalog lookup of the installed
 #     tool_order_list script (tool_order_list.py: catalog, tool_row), one row per tool of those B programs,
 #     "Toolpath names" = <B program>: <toolpath>
+#   - "Tool load MDA" ticked (first screen, on by default): <DOCUMENT>_TOOL_LOAD.MPF from the installed tool_load_mda
+#     script for the tools of those B programs: sisters and tool life per tool (remembered per tool ID), NEWT per sister.
+#     Tools of B programs that count with SETPIECE are marked "tool life (SETPIECE)"; left blank they get a warning,
+#     because the control only counts pieces with tool life monitoring ($TC_TP9=2, $TC_MOP13 / $TC_MOP4).
 # Log: C:\Users\Public\Documents\OPEN MIND\go_to_machine_log.txt
 import os, re, csv, json, time, tempfile, traceback, datetime, importlib.util
 
@@ -25,6 +29,8 @@ OUT_DIR  = r"C:\Users\Public\Documents\OPEN MIND"
 HERE     = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.join(PY_DIR, "go_to_machine")
 LIB_DIRS = (os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool_library"))
 TOL_FILES = (os.path.join(PY_DIR, "tool_order_list", "tool_order_list.py"), os.path.join(HERE, "..", "tool_order_list", "tool_order_list.py"))
+TLM_FILES = (os.path.join(PY_DIR, "tool_load_mda", "tool_load_mda.py"), os.path.join(HERE, "..", "tool_load_mda", "tool_load_mda.py"))
+MDA_LABEL = "Tool load MDA"
 TITLE    = "Go to machine"
 ACTIONS  = ["Check only", "Check and post"]
 MAX_BOX_LINES = 30
@@ -239,6 +245,69 @@ def tool_sheet(progs, folder, out_folder, base, label):
     return path, rows, missing
 
 
+# ---------------- tool load MDA ----------------
+def tool_mda(progs, setpiece_ids, folder, doc_name, label):
+    """<DOCUMENT>_TOOL_LOAD.MPF with the installed tool_load_mda script. Returns message lines."""
+    p = next((os.path.normpath(f) for f in TLM_FILES if os.path.exists(os.path.normpath(f))), None)
+    if p is None:
+        return ["", "Tool load MDA not written: tool_load_mda.py not found in %s" % os.path.join(PY_DIR, "tool_load_mda")]
+    spec = importlib.util.spec_from_file_location("hm_tool_load_mda", p)
+    tlm = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(tlm)
+    log("tool_load_mda:", p)
+    picked, seen = [], set()
+    for pr in progs:
+        for j in list(pr["obj"].GetJobs()):
+            try:
+                t = j.GetTool()
+            except Exception:
+                t = None
+            if t is None:
+                continue
+            u = str(val(getattr(t, "UUID", "")) or val(getattr(t, "Name", "")))
+            if u not in seen:
+                seen.add(u)
+                picked.append(t)
+    tools, ids, no_gage = [], set(), []
+    for t in picked:
+        d = tlm.tool_data(t)
+        if d["id"] in ids:
+            continue
+        if d["gage"] is None:
+            no_gage.append(d["id"])
+            continue
+        ids.add(d["id"])
+        tools.append(d)
+    for ln in getattr(tlm, "lines", []):
+        log("  tool_load_mda:", ln)
+    out = [""]
+    if not tools:
+        return out + ["Tool load MDA not written: no tool could be read (no gage length: %s)" % (", ".join(no_gage) or "-")]
+    tools.sort(key=lambda d: (tlm._f(d["id"]) is None, tlm._f(d["id"]) or 0, d["id"]))
+    need = set(i for i in setpiece_ids if i in ids)
+    counts = tlm.ask_counts(tools, tlm.load_last(), need)
+    if counts is None:
+        log("tool load MDA cancelled at sisters / tool life")
+        return out + ["Tool load MDA cancelled: not written."]
+    tlm.save_last(counts)
+    text, made = tlm.program(tools, counts, doc_name, "go_to_machine " + label)
+    if not made:
+        return out + ["Tool load MDA: every tool set to 0 sisters, not written."]
+    path = tlm.write_program(text, folder, doc_name)
+    left = [t["id"] for t in tools if counts.get(t["id"], (1, 0))[0] == 0]
+    blank = [t["id"] for t in tools if t["id"] in need and counts.get(t["id"], (1, 0))[0] > 0 and counts.get(t["id"], (1, 0))[1] == 0]
+    log("tool load MDA:", path, "|", made, "tool entries |", len(tools), "tools | left out:", left, "| no gage:", no_gage, "| SETPIECE without tool life:", blank)
+    out += ["Tool load MDA: %d tool entr%s (%d tool%s) - paste into MDA, cycle start:" % (
+        made, "y" if made == 1 else "ies", len(tools) - len(left), "" if len(tools) - len(left) == 1 else "s"), "  " + path]
+    if left:
+        out.append("  left out (0 sisters): " + ", ".join(left))
+    if no_gage:
+        out.append("  left out (no gage length): " + ", ".join(no_gage))
+    if blank:
+        out.append("  WARNING - SETPIECE counts these tools but no tool life was entered (the control will not count them): " + ", ".join(blank))
+    return out
+
+
 # ---------------- post ----------------
 def post(model, targets, folder):
     """CalculateNC with the compound job UUIDs; returns (returned value or error text, ok, written files)."""
@@ -285,13 +354,15 @@ def run():
         dlg.AddText("Part number", defaultValue=last.get("part", ""))
         dlg.AddText("Machine", defaultValue=last.get("machine", ""))
         dlg.AddDropDown("Action", ACTIONS, defaultIndex=0)
+        dlg.AddBool(MDA_LABEL, defaultValue=True)
         ok, v = dlg.Show()
         if not ok:
             log("cancelled"); return
         scope = scopes[pick_index(v.get("Joblist"), scopes)]
         part, machine = str(v.get("Part number", "")).strip(), str(v.get("Machine", "")).strip()
         action = pick_index(v.get("Action"), ACTIONS)
-        log("joblist:", scope, "| part:", part, "| machine:", machine or "-", "| action:", ACTIONS[action])
+        want_mda = bool(v.get(MDA_LABEL, True))
+        log("joblist:", scope, "| part:", part, "| machine:", machine or "-", "| action:", ACTIONS[action], "| tool load MDA:", want_mda)
         err = bp.input_errors(part, machine, "10", "10")
         if err:
             info("Fix these first:\n\n" + "\n".join(err)); return
@@ -396,6 +467,14 @@ def run():
                 msg.append("  not in tool_library: " + ", ".join(tmissing[:8]))
         else:
             msg += ["", "Tool sheet not written: " + ts]
+        # ---- tool load MDA ----
+        if want_mda:
+            setpiece_ids = set(s["tool"] for s in data["steps"] if s.get("setpiece"))
+            try:
+                msg += tool_mda(scope_progs, setpiece_ids, dest, base, "all" if scope == "All joblists" else scope)
+            except Exception:
+                log("tool load MDA FAILED:", traceback.format_exc())
+                msg += ["", "Tool load MDA failed (see go_to_machine_log.txt)."]
         for ln in msg:
             log(ln)
         info("\n".join(msg))

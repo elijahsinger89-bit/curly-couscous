@@ -11,7 +11,10 @@ copy_to_python_folder
   b_program_export writes the B program list (B programs + tool + breakage presets) for the SINUMERIK generator
                    (go_to_machine writes the same list after posting; this one runs on its own)
   go_to_machine    checks every B program (calculated, no errors, run through Simulation Center without a collision
-                   since its last change), posts them and writes the B program list (icon: go_to_machine.png)
+                   since its last change), posts them, writes the B program list, the tool sheet and the tool load MDA
+                   (icon: go_to_machine.png)
+  tool_load_mda    one MDA program that creates every tool and sister on the control (NEWT by tool ID), runnable on
+                   its own; go_to_machine uses it after posting (icon: tool_load_mda.png)
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
                    B program name rule (b_programs.py)
@@ -28,6 +31,7 @@ INSTALL
 4. Button: tool_center\tool_center.png (32 x 32; tool_center.ico for dialogs that want an .ico).
    Button: b_program_rename\b_program_rename.png (32 x 32; b_program_rename.ico).
    Button: go_to_machine\go_to_machine.png (32 x 32; go_to_machine.ico).
+   Button: tool_load_mda\tool_load_mda.png (32 x 32; tool_load_mda.ico).
 
 
 THE PART FLOW
@@ -290,7 +294,26 @@ After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
     (go_to_machine uses the installed tool_order_list\tool_order_list.py, so layout changes there show up here too);
     one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not
     installed, the message says so and only the tool sheet is skipped.
+  - "Tool load MDA" (first screen, ticked by default): <DOCUMENT>_TOOL_LOAD.MPF for the tools of those B programs, made
+    by the installed tool_load_mda script (see TOOL LOAD MDA). Its screen asks sisters and tool life per tool; the tool life
+    of tools whose B program counts with SETPIECE is labelled "tool life (SETPIECE)". Left blank, the message warns:
+    without tool life monitoring ($TC_TP9=2, $TC_MOP13 / $TC_MOP4) the control does not count those pieces.
+    Cancel on that screen: everything else is still done, the MDA is not written.
 Log: go_to_machine_log.txt.
+
+TOOL LOAD MDA
+One Sinumerik MDA program that creates every tool and sister on the control: paste it into MDA and cycle start.
+Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
+  of the B programs it posted). 2 Per tool, 10 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
+  no tool life monitoring). Both are remembered per tool ID (tool_load_mda_last.json) and offered next time.
+Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_DP1 = Siemens tool type, $TC_DP3 = gage
+  length, $TC_TPC4 = HD (4.0 below 4 in, else the diameter), $TC_TPC5 = HL (gage length); with tool life: $TC_TP9=2,
+  $TC_MOP13 = $TC_MOP4 = pieces. Tool name on the control = the NC tool ID (Common > ID), the same name the B program
+  list and the generator use.
+NEWT stops with an alarm when that name and sister already exist on the control: delete them first.
+Tools without a gage length are left out (listed in the log).
+Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types.
+Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND). Log: tool_load_mda_log.txt.
 
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
@@ -303,3 +326,4 @@ tool_library\job_types.py        toolpath types, their CreateJob codes and the t
 tool_library\machines.csv        machines and spindles
 tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export,
                                  go_to_machine)
+tool_load_mda\tool_load_mda.py   the SETTINGS block at the top: units, R999, HD minimum, hyperMILL -> Siemens tool types

@@ -13,9 +13,12 @@
 #   tool life entered: $TC_TP9 = 2 (piece count monitoring), $TC_MOP13 = $TC_MOP4 = pieces
 # Tool name on the control = the NC tool ID (Common > ID). NEWT stops with an alarm when a tool with that name and sister
 # number already exists on the control: delete those first.
+# The sisters and tool life entered are remembered per tool ID (tool_load_mda_last.json) and offered next time.
+# go_to_machine uses this script (tool_data, ask_counts, program, write_program, load_last, save_last) after posting;
+# there the tool life of tools whose B program counts with SETPIECE is marked "tool life (SETPIECE)".
 # Output: <document folder>\<document>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND\), opened in Notepad when done.
 # Log: C:\Users\Public\Documents\OPEN MIND\tool_load_mda_log.txt
-import os, re, tempfile, traceback, datetime
+import os, re, json, tempfile, traceback, datetime
 import xml.etree.ElementTree as ET
 
 # ---------------- SETTINGS ----------------
@@ -124,36 +127,85 @@ def hd_of(dia):
     hd_min = HD_MIN_IN if UNIT == "inch" else HD_MIN_IN * MM
     return hd_min if (dia is None or dia < hd_min - 1e-9) else dia
 
-def ask_counts(tools):
-    """Sisters and tool life per tool, PER_SCREEN tools per screen. Returns {id: (sisters, life)} or None when cancelled."""
+def last_path():
+    return os.path.join(OUT_DIR if os.path.isdir(OUT_DIR) else tempfile.gettempdir(), "tool_load_mda_last.json")
+
+
+def load_last():
+    """{tool ID: (sisters, life)} from the last runs."""
+    try:
+        with open(last_path(), encoding="utf-8") as f:
+            return {k: (int(v[0]), int(v[1])) for k, v in json.load(f).items()}
+    except Exception:
+        return {}
+
+
+def save_last(counts):
+    d = load_last()
+    d.update(counts)
+    try:
+        with open(last_path(), "w", encoding="utf-8") as f:
+            json.dump({k: list(v) for k, v in d.items()}, f, indent=1)
+    except Exception as e:
+        log("last values not saved:", e)
+
+
+def ask_counts(tools, defaults=None, need_life=None):
+    """Sisters and tool life per tool, PER_SCREEN tools per screen. Returns {id: (sisters, life)} or None when cancelled.
+    defaults: {id: (sisters, life)} shown instead of 1 / blank. need_life: IDs whose tool life field is labelled
+    "tool life (SETPIECE)" (their B program counts with SETPIECE, which needs tool life monitoring on the control)."""
     g = _gui()
+    defaults = defaults or {}
+    need_life = need_life or set()
     out = {}
+
+    def labels(t):
+        tag = "%s  D%.4f" % (t["id"], t["dia"]) if t["dia"] else t["id"]
+        return "%s  sisters" % tag, "%s  tool life%s" % (tag, " (SETPIECE)" if t["id"] in need_life else "")
+
     for start in range(0, len(tools), PER_SCREEN):
         page = tools[start:start + PER_SCREEN]
         dlg = g.InputDialog("%s | tools %d-%d of %d" % (TITLE, start + 1, start + len(page), len(tools)))
         for t in page:
-            tag = "%s  D%.4f" % (t["id"], t["dia"]) if t["dia"] else t["id"]
-            dlg.AddText("%s  sisters" % tag, defaultValue="1")
-            dlg.AddText("%s  tool life" % tag, defaultValue="")
+            ls, ll = labels(t)
+            sis, life = defaults.get(t["id"], (1, 0))
+            dlg.AddText(ls, defaultValue=str(sis))
+            dlg.AddText(ll, defaultValue=str(life) if life else "")
         ok, vals = dlg.Show()
         if not ok:
             return None
         for t in page:
-            tag = "%s  D%.4f" % (t["id"], t["dia"]) if t["dia"] else t["id"]
+            ls, ll = labels(t)
             def num(label):
                 s = str(vals.get(label) or "").strip()
                 try:
                     return max(0, int(float(s))) if s else 0
                 except Exception:
                     return None
-            sis = num("%s  sisters" % tag)
-            life = num("%s  tool life" % tag)
+            sis = num(ls)
+            life = num(ll)
             if sis is None or life is None:
                 info("%s: sisters and tool life must be whole numbers. Tool left out." % t["id"])
-                log("bad entry, left out:", t["id"], vals.get("%s  sisters" % tag), vals.get("%s  tool life" % tag))
+                log("bad entry, left out:", t["id"], vals.get(ls), vals.get(ll))
                 sis, life = 0, 0
             out[t["id"]] = (sis, life)
     return out
+
+
+def write_program(text, folder, doc_name):
+    """<DOCUMENT>_TOOL_LOAD.MPF in folder (else OUT_DIR, else the temp folder). Returns the path."""
+    fname = re.sub(r"[^A-Za-z0-9_]", "_", doc_name).upper()[:30] + "_TOOL_LOAD.MPF"
+    for d in (folder, OUT_DIR, tempfile.gettempdir()):
+        if not d:
+            continue
+        path = os.path.join(d, fname)
+        try:
+            with open(path, "w", newline="\n", encoding="ascii", errors="replace") as fh:
+                fh.write(text)
+            return path
+        except Exception:
+            continue
+    raise IOError("tool load program not written: no writable folder")
 
 def program(tools, counts, doc_name, source):
     f = lambda v: "%.4f" % v
@@ -223,9 +275,10 @@ def run():
         if not tools:
             info("None of the tools could be read. See tool_load_mda_log.txt."); return
         tools.sort(key=lambda d: (_f(d["id"]) is None, _f(d["id"]) or 0, d["id"]))
-        counts = ask_counts(tools)
+        counts = ask_counts(tools, load_last())
         if counts is None:
             log("cancelled at sisters / tool life"); return
+        save_last(counts)
         doc_name, folder = "document", OUT_DIR
         try:
             fp = str(val(doc.FullPath) or "")
@@ -237,16 +290,8 @@ def run():
         text, made = program(tools, counts, doc_name, source)
         if not made:
             info("Every tool was set to 0 sisters. No program written."); return
-        fname = re.sub(r"[^A-Za-z0-9_]", "_", doc_name).upper()[:30] + "_TOOL_LOAD.MPF"
-        path = os.path.join(folder, fname)
-        try:
-            fh = open(path, "w", newline="\n", encoding="ascii", errors="replace")
-        except Exception:
-            path = os.path.join(OUT_DIR, fname)
-            fh = open(path, "w", newline="\n", encoding="ascii", errors="replace")
-        with fh:
-            fh.write(text)
-        left = [t["id"] for t in tools if counts.get(t["id"], (1, 0))[0] == 0]
+        path = write_program(text, folder, doc_name)
+        left =[t["id"] for t in tools if counts.get(t["id"], (1, 0))[0] == 0]
         log("written:", path, "|", made, "tool entries |", len(tools), "tools |", "left out (0 sisters):", left)
         info("%d tool(s) with sisters written to:\n%s\n\nPaste it into MDA and cycle start.%s" % (
             made, path, ("\nLeft out (0 sisters): " + ", ".join(left)) if left else ""))

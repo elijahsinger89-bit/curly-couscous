@@ -3,18 +3,20 @@ WRITES = []
 
 
 class Tool:
-    def __init__(self, tid, name=None, ttype="endMill", dia=0.5, unit="inch"):
+    def __init__(self, tid, name=None, ttype="endMill", dia=0.5, unit="inch", gage=3.0):
         self.ID = tid
         self.Number = int(tid) if tid.isdigit() else 0
         self.Name = name or tid
         self.UUID = "{T-%s}" % tid
-        self._type, self._dia, self._unit = ttype, dia, unit
+        self._type, self._dia, self._unit, self._gage = ttype, dia, unit, gage
 
     def Export(self, path):
+        gage = '<param name="gageLength" value="%s"/>' % self._gage if self._gage is not None else ""
         with open(path, "w", encoding="utf-8") as f:
             f.write('<root><tools><tool type="%s"><param name="lengthOfUnit" value="%s"/>'
                     '<param name="toolDiameter" value="%s"/></tool></tools>'
-                    '<ncTools><ncTool id="%s" name="%s"/></ncTools></root>' % (self._type, self._unit, self._dia, self.ID, self.Name))
+                    '<ncTools><ncTool id="%s" name="%s"><param name="lengthOfUnit" value="%s"/>%s</ncTool></ncTools></root>'
+                    % (self._type, self._unit, self._dia, self.ID, self.Name, self._unit, gage))
         return True
 
 
@@ -86,9 +88,25 @@ class JobListSet:
         return list(self._l)
 
 
+class ToolSet:
+    def __init__(self, model):
+        self._m = model
+
+    def GetTools(self):
+        out, seen = [], set()
+        for jl in self._m.JobListSet.GetJobLists():
+            for j in jl.GetJobs():
+                t = j.GetTool()
+                if t is not None and t.UUID not in seen:
+                    seen.add(t.UUID)
+                    out.append(t)
+        return out
+
+
 class Model:
     def __init__(self, lists, inch=True):
         self.JobListSet = JobListSet(lists)
+        self.ToolSet = ToolSet(self)
         self._inch = inch
 
     def IsInchMode(self):
