@@ -1,31 +1,31 @@
-RELEASE PROBE v3 (read-only) - for the go-to-machine script
+RELEASE PROBE v4 (read-only) - for the go-to-machine script
 
 What it is for
-  1. The arguments of the posting calls (JobListSet.CalculateNC, Run, RunAll,
-     JobList.GenerateNCListFile, GetGenerateAndReleaseNcInfo ...).
-     hyperMILL's API has no help text, so v3 asks each built-in method with a
-     made-up argument name: hyperMILL refuses the call before running
-     anything and lists the arguments it accepts. Methods that change the
-     document (Set, Create, Delete, Remove, Reset ...) are not asked.
-  2. Status and POFStatus of EVERY job (v2 stopped at 60 compound jobs) and
-     the POF file name of each job.
-  3. The text of the VNC\ files Simulation Center writes (.nclist,
-     .settings), and the newest files in POF\ and NC\.
+  How to tell that a job has been run through Simulation Center and has not
+  changed since. Known so far: Simulation Center writes POF\<uuid>.ccrpt
+  (13 bytes) for each job it simulates and nothing for the others.
+  v4 shows, per job:
+    - name, compound job, UUID, Status, POFStatus, POF file and its date
+    - the .ccrpt of that UUID: date and its 13 bytes (text and hex)
+    - the toolpath checksum (PofFile.GetMovementsCheckSum), read from a
+      temporary COPY of the job's POF file
+  It also lists how PofFile is used (arguments asked without running
+  anything), .ccrpt files no job matches, and the .omgcfg file Simulation
+  Center points to.
 
 Install
   Copy copy_to_python_folder\release_probe into
-  C:\Users\Public\Documents\OPEN MIND\python (replace v2) and restart
+  C:\Users\Public\Documents\OPEN MIND\python (replace v3) and restart
   hyperMILL.
 
-Run
-  Save your work. Open the same saved copy as before, right after a
-  Simulation Center run (some compound jobs simulated, not all; note which).
-  Run release_probe. The log is written line by line; if hyperMILL freezes,
-  close it and send the log anyway.
-
-Send back
-  C:\Users\Public\Documents\OPEN MIND\release_probe_log.txt
-  and which compound jobs you simulated.
+Test (same document: simulated / not simulated / not calculated)
+  1. Leave "simulated" as it is. Run release_probe. Keep the log
+     (rename it release_probe_log_1.txt).
+  2. Change one job in "simulated" (for example its feed rate) and
+     recalculate it. Run release_probe again.
+  3. Send both logs and say which job you changed.
 
 What it changes
-  Nothing. No NC file is written, nothing is calculated.
+  Nothing in the document and nothing in the POF folder. No NC file is
+  written, nothing is calculated. The log is written line by line; if
+  hyperMILL freezes, close it and send the log anyway.
