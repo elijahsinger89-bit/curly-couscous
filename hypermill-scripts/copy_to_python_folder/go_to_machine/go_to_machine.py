@@ -9,15 +9,22 @@
 #   "CC_RESULT 1").
 # When B programs fail: a warning with the list, then Post: No - post nothing / Post all / Post only the ones that pass.
 # Stops without posting when a step number is used twice. Warns about names over 24 characters.
-# After posting: the NC files written or updated (document folder and its NC folder, before / after), and
-# <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list.
+# After posting:
+#   - the NC files written or updated (document folder and its NC folder, before / after)
+#   - when only some B programs were posted: B program list and tool sheet: Only the posted ones / All B programs
+#   - <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list;
+#     B programs left out are listed in it as "not posted"
+#   - the tool sheet <document>_<joblist>_tool_order.csv: the columns and catalog lookup of the installed
+#     tool_order_list script (tool_order_list.py: catalog, tool_row), one row per tool of those B programs,
+#     "Toolpath names" = <B program>: <toolpath>
 # Log: C:\Users\Public\Documents\OPEN MIND\go_to_machine_log.txt
-import os, json, time, tempfile, traceback, datetime, importlib.util
+import os, re, csv, json, time, tempfile, traceback, datetime, importlib.util
 
 PY_DIR   = r"C:\Users\Public\Documents\OPEN MIND\python"
 OUT_DIR  = r"C:\Users\Public\Documents\OPEN MIND"
 HERE     = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.join(PY_DIR, "go_to_machine")
 LIB_DIRS = (os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool_library"))
+TOL_FILES = (os.path.join(PY_DIR, "tool_order_list", "tool_order_list.py"), os.path.join(HERE, "..", "tool_order_list", "tool_order_list.py"))
 TITLE    = "Go to machine"
 ACTIONS  = ["Check only", "Check and post"]
 MAX_BOX_LINES = 30
@@ -179,6 +186,59 @@ def report_lines(progs, left, problems, head):
     return rep
 
 
+# ---------------- tool sheet ----------------
+def tool_sheet(progs, folder, out_folder, base, label):
+    """<base>_<label>_tool_order.csv from the installed tool_order_list script. Returns (path, rows, missing) or a
+    reason string when it was not written."""
+    p = next((os.path.normpath(f) for f in TOL_FILES if os.path.exists(os.path.normpath(f))), None)
+    if p is None:
+        return "tool_order_list.py not found in %s" % os.path.join(PY_DIR, "tool_order_list")
+    spec = importlib.util.spec_from_file_location("hm_tool_order_list", p)
+    tol = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(tol)
+    log("tool_order_list:", p)
+    used, order = {}, []
+    for pr in progs:
+        for j in list(pr["obj"].GetJobs()):
+            try:
+                t = j.GetTool()
+            except Exception:
+                t = None
+            if t is None:
+                continue
+            u = str(val(getattr(t, "UUID", "")) or val(getattr(t, "Name", ""))).strip("{}").upper()
+            if u not in used:
+                used[u] = (t, [])
+                order.append(u)
+            used[u][1].append("%s: %s" % (pr["name"], str(val(getattr(j, "Name", "")))))
+    if not order:
+        return "no tools in those B programs"
+    cat = tol.catalog()
+    rows = []
+    for u in order:
+        t, jobs = used[u]
+        try:
+            rows.append(tol.tool_row(t, jobs, cat))
+        except Exception:
+            log("tool sheet row FAILED:", val(getattr(t, "Name", "?")), traceback.format_exc()[-300:])
+    for ln in getattr(tol, "lines", []):
+        log("  tool_order_list:", ln)
+    if not rows:
+        return "no tool row could be read"
+    try:
+        rows.sort(key=lambda r: (r.get("Manufacturer", ""), r.get("Tool type", ""), tol._f(r.get("Diameter (in)")) or 0, r.get("Designation", "")))
+    except Exception:
+        pass
+    path = os.path.join(out_folder, "%s_%s_tool_order.csv" % (base, re.sub(r"[^A-Za-z0-9_-]", "_", label)))
+    with open(path, "w", newline="", encoding="utf-8-sig") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        w.writerows(rows)
+    missing = [r.get("Designation", "?") for r in rows if r.get("In tool_library", "yes") != "yes"]
+    log("tool sheet:", path, "|", len(rows), "tools |", len(missing), "not in tool_library:", missing)
+    return path, rows, missing
+
+
 # ---------------- post ----------------
 def post(model, targets, folder):
     """CalculateNC with the compound job UUIDs; returns (returned value or error text, ok, written files)."""
@@ -297,19 +357,45 @@ def run():
             msg += ["", "No NC file found for:"] + ["  " + n for n in missing]
         if pick == 1 and nfail:
             msg += ["", "Posted although %d fail the check." % nfail]
+        # ---- what the B program list and the tool sheet hold ----
+        scope_progs = targets
+        if len(targets) != len(progs):
+            inc = ["Only the %d posted" % len(targets), "All %d B programs" % len(progs)]
+            if choose(TITLE + " | B program list and tool sheet", "Include", inc) == 1:
+                scope_progs = progs
+            log("B program list and tool sheet:", "all B programs" if scope_progs is progs else "only the posted ones")
+        keep = set(p["name"] for p in scope_progs)
+        dropped = [p for p in progs if p["name"] not in keep]
+        drop_names = set(p["name"] for p in dropped)
+        dest = folder if folder and writable(folder) else out_dir()
+        base = os.path.splitext(path.replace("\\", "/").split("/")[-1])[0] or "document"
         # ---- B program list for the generator ----
         rules_path = lib_file("brk_rules.csv")
         rules = bp.load_rules(rules_path) if rules_path else []
-        data, xproblems = bp.build_export(chosen, part, machine, inch, rules, path,
+        chosen_x = [(n, [e for e in es if e["name"] not in drop_names]) for n, es in chosen]
+        data, xproblems = bp.build_export(chosen_x, part, machine, inch, rules, path,
                                           datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        for p in dropped:
+            data["refused"].append(dict(name=p["name"], joblist=p["joblist"], reason="not posted: failed the go-to-machine check"))
         if data["steps"] and not any("used twice" in x for x in xproblems):
-            dest = folder if folder and writable(folder) else out_dir()
-            base = os.path.splitext(path.replace("\\", "/").split("/")[-1])[0] or "document"
             pj, pc = bp.write_export(data, dest, base)
             log("B program list:", pj, "|", pc)
-            msg += ["", "B program list for the generator (Import B list):", "  " + pj]
+            msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
         for x in xproblems:
             log("export:", x)
+        # ---- tool sheet ----
+        try:
+            ts = tool_sheet(scope_progs, folder, dest, base, "all" if scope == "All joblists" else scope)
+        except Exception:
+            log("tool sheet FAILED:", traceback.format_exc())
+            ts = "failed (see go_to_machine_log.txt)"
+        if isinstance(ts, tuple):
+            tp, trows, tmissing = ts
+            msg += ["", "Tool sheet: %d tool%s" % (len(trows), "" if len(trows) == 1 else "s"), "  " + tp]
+            if tmissing:
+                msg.append("  not in tool_library: " + ", ".join(tmissing[:8]))
+        else:
+            msg += ["", "Tool sheet not written: " + ts]
         for ln in msg:
             log(ln)
         info("\n".join(msg))

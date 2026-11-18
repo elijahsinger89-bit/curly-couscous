@@ -280,9 +280,16 @@ Posting: all pass -> Post: No / Yes (No first). Some fail -> a WARNING with the 
   document folder and its NC folder, and any B program without a new NC file.
 Stops before posting when a step number is used twice. Warns about names over 24 characters. Compound jobs with more
 than one tool, a job without a tool, or a name not in the B rule are listed and never posted. Notes are skipped.
-After posting: <document>_B_PROGRAMS.json / .csv next to the document (else C:\Users\Public\Documents\OPEN MIND),
-the same list b_program_export writes. Generator: Import B list.
-NOT TESTED IN hyperMILL YET: CalculateNC with compound job UUIDs (the first post shows what it writes). Test on a copy.
+  Tested 17 Nov 2026: CalculateNC posted exactly the B programs given, one NC\<B program>.mpf each, next to the document.
+After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
+  - When only some B programs were posted: "Include" - Only the ones posted (first) / All B programs. This sets what the
+    B program list and the tool sheet hold. B programs left out are listed in the B program list as "not posted", so the
+    generator shows them and its main program does not call them.
+  - <document>_B_PROGRAMS.json / .csv: the same list b_program_export writes. Generator: Import B list.
+  - <document>_<joblist>_tool_order.csv: the tool sheet. Same columns and catalog lookup as the tool_order_list script
+    (go_to_machine uses the installed tool_order_list\tool_order_list.py, so layout changes there show up here too);
+    one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not
+    installed, the message says so and only the tool sheet is skipped.
 Log: go_to_machine_log.txt.
 
 MACHINE AND SPINDLE

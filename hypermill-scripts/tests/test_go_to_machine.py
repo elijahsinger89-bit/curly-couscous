@@ -15,9 +15,12 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(HERE, "fake_om"))
 import om                      # noqa: E402  (fake)
 import om.cad.gui as gui       # noqa: E402  (fake)
+import csv                     # noqa: E402
 
 SCRIPT = os.path.join(ROOT, "copy_to_python_folder", "go_to_machine", "go_to_machine.py")
 LIB = os.path.join(ROOT, "copy_to_python_folder", "tool_library")
+TOL = os.path.join(HERE, "fake_tool_order_list", "tool_order_list.py")
+TOL_FILES = [TOL]
 fails = []
 
 
@@ -100,7 +103,7 @@ def build(all_pass=False, dup=False):
         os.remove(os.path.join(POFDIR, n))
     shutil.rmtree(os.path.join(DOCDIR, "NC"), ignore_errors=True)
     for n in os.listdir(DOCDIR):
-        if n.endswith((".json", ".csv")):
+        if n.endswith((".json", ".csv")):  # B lists and tool sheets
             os.remove(os.path.join(DOCDIR, n))
     T = om.Tool
     em, dr, fm = T("10047210", "End mill", "endMill", 0.4724), T("11039410", "Drill", "drilTool", 0.25), T("905083900", "Face", "faceMill", 2.0)
@@ -143,6 +146,10 @@ def post_pick(i):
     return lambda dlg: (True, {"Post": i})
 
 
+def include_pick(i):
+    return lambda dlg: (True, {"Include": i})
+
+
 def run(answers):
     gui.SCRIPT[:] = answers
     gui.BOXES.clear()
@@ -150,6 +157,7 @@ def run(answers):
     spec = importlib.util.spec_from_file_location("gtm_under_test", SCRIPT)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
+    m.TOL_FILES = tuple(TOL_FILES)
     m.run()
     left = len(gui.SCRIPT)
     gui.SCRIPT.clear()
@@ -163,6 +171,12 @@ def nc_files():
 
 LOGP = os.path.join(tmp, "go_to_machine_log.txt")
 BLIST = os.path.join(DOCDIR, "G17_SLIDE_OP10_B_PROGRAMS.json")
+SHEET = os.path.join(DOCDIR, "G17_SLIDE_OP10_Op10_tool_order.csv")
+
+
+def sheet():
+    with open(SHEET, encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
 
 # ---------------- release_check on its own ----------------
 spec = importlib.util.spec_from_file_location("rc_under_test", os.path.join(LIB, "release_check.py"))
@@ -209,17 +223,38 @@ opts = gui.SHOWN[-1][1][0][2][0]
 check(opts == ["No - post nothing", "Post all 4 (3 fail the check)", "Post only the 1 that pass"], "warning choices: %s" % opts)
 check(gui.SHOWN[-1][0].endswith("WARNING: 3 fail the check"), "warning dialog title")
 
-# ---------------- post only the ones that pass ----------------
+# ---------------- post only the ones that pass, list: only the posted ----------------
 cs = build()
-m, left = run([ans(Action="Check and post"), post_pick(2)])
+m, left = run([ans(Action="Check and post"), post_pick(2), include_pick(0)])
 box = flat(gui.BOXES[-1])
-check(PostSet.calls == [[cs[1].UUID]], "post only passing: CalculateNC with the one passing compound job UUID")
+check(left == 0 and PostSet.calls == [[cs[1].UUID]], "post only passing: CalculateNC with the one passing compound job UUID")
 check(nc_files() == ["B_G17_SLIDE_010_HF5.mpf"] and "NC files written or updated: 1" in box and "NC/B_G17_SLIDE_010_HF5.mpf" in box.replace("\\", "/"),
       "post: written NC file found and listed")
 check("No NC file found" not in box and "Posted 1 B program (CalculateNC returned True)." in box, "post: message")
-check(os.path.exists(BLIST) and "Import B list" in box, "B program list written after posting")
+inc = gui.SHOWN[-1]
+check(inc[0].endswith("B program list and tool sheet") and inc[1][0][2][0] == ["Only the 1 posted", "All 4 B programs"],
+      "only some posted: asks what the list and tool sheet hold (only posted first)")
 data = json.load(open(BLIST))
-check([s["step"] for s in data["steps"]] == [10, 20, 30, 40], "B program list holds every B program of the joblist")
+check([s["step"] for s in data["steps"]] == [10] and "B program list for the generator (Import B list): 1 B program" in box,
+      "list: only the posted B program")
+nposted = [r["name"] for r in data["refused"] if r["reason"].startswith("not posted")]
+check(nposted == ["B_G17_SLIDE_020_HF5", "B_G17_SLIDE_030_HF5", "B_G17_SLIDE_040_HF5"], "list: the 3 not posted listed as refused 'not posted'")
+rows = sheet()
+check(len(rows) == 1 and rows[0]["Designation"] == "End mill" and rows[0]["Manufacturer"] == "Walter" and
+      rows[0]["Toolpath names"] == "B_G17_SLIDE_010_HF5: 1: Contour ; B_G17_SLIDE_010_HF5: 2: Contour finish" and rows[0]["Toolpaths using it"] == "2",
+      "tool sheet: the posted B program's one tool, its toolpaths named by B program")
+check("Tool sheet: 1 tool" in box and "G17_SLIDE_OP10_Op10_tool_order.csv" in box, "message: tool sheet path")
+
+# ---------------- post only the ones that pass, list: all ----------------
+cs = build()
+m, left = run([ans(Action="Check and post"), post_pick(2), include_pick(1)])
+data = json.load(open(BLIST))
+check(left == 0 and PostSet.calls == [[cs[1].UUID]] and [s["step"] for s in data["steps"]] == [10, 20, 30, 40],
+      "list: all B programs when chosen (only 010 posted)")
+check(not any(r["reason"].startswith("not posted") for r in data["refused"]), "list: nothing marked not posted")
+rows = sheet()
+check(sorted(r["Designation"] for r in rows) == ["Drill", "End mill", "Face"] and "not in tool_library: " in flat(gui.BOXES[-1]),
+      "tool sheet: every tool of the 4 B programs; tools not in tool_library named")
 
 # ---------------- post all ----------------
 cs = build()
@@ -227,6 +262,7 @@ m, left = run([ans(Action="Check and post"), post_pick(1)])
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and len(nc_files()) == 4, "post all: 4 UUIDs, 4 NC files")
 check("Posted although 3 fail the check." in flat(gui.BOXES[-1]), "post all: message says posted with failures")
 check("POSTED WITH FAILURES" in open(LOGP).read(), "post all: log records the override")
+check(len(gui.SHOWN) == 2 and len(sheet()) == 3, "post all: no list question; tool sheet with all 3 tools")
 
 # ---------------- everything passes: confirm ----------------
 cs = build(all_pass=True)
@@ -254,6 +290,14 @@ PostSet.mode = "nothing"
 m, left = run([ans(Action="Check and post"), post_pick(1)])
 check("No NC file found for:" in gui.BOXES[-1] and "B_G17_SLIDE_040_HF5" in gui.BOXES[-1], "CalculateNC wrote nothing: B programs without an NC file listed")
 PostSet.mode = "write"
+
+# ---------------- tool_order_list not installed ----------------
+build(all_pass=True)
+TOL_FILES[:] = [os.path.join(tmp, "nowhere", "tool_order_list.py")]
+m, left = run([ans(Action="Check and post"), post_pick(1)])
+check("Tool sheet not written: tool_order_list.py not found" in flat(gui.BOXES[-1]) and not os.path.exists(SHEET) and os.path.exists(BLIST),
+      "tool_order_list missing: B list still written, tool sheet skipped with the reason")
+TOL_FILES[:] = [TOL]
 
 # ---------------- input errors and no B programs ----------------
 build()
