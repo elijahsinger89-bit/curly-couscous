@@ -129,7 +129,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.4.0';
+var GEN_VERSION = '1.5.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -166,7 +166,11 @@ function blankStep(stepNo) {
            cmcUnit: 'RADIUS', cmcSign: '', cmcNom: '', cmcTolP: '', cmcTolM: '', cmcX: '', cmcY: '', cmcZ: '',
            cmcAppZ: '', cmcStock: '', cmcWindow: '', cmcLimit: '', cmcClean: 'NONE', cmcCleanM: '',
            cmcVerify: false, cmcOut: 'RECUT', cmcMaxTry: '3', cmcReturn: 'TCA',
-           cmcNomY: '', cmcZone: '', cmcZoneY: '', cmcPoints: '4', cmcStartAng: '', cmcIncAng: '', cmcSwivel: '' };
+           cmcNomY: '', cmcZone: '', cmcZoneY: '', cmcPoints: '4', cmcStartAng: '', cmcIncAng: '', cmcSwivel: '',
+           cmcSwMode: 'AUTO', cmcSwFrom: '', cmcSwA: '', cmcSwB: '', cmcSwC: '',
+           /* from go_to_machine: the single CYCLE800 plane of the posted B program; planeState '' unknown,
+              ONE, NONE (no plane = nest face), SEVERAL, TURNING (only a turning-tool alignment) */
+           plane: '', planeState: '' };
 }
 function defaultJob() {
   var wcs = [];
@@ -185,7 +189,9 @@ function defaultJob() {
       skipZ: false, zAlt: false, zX: '', zY: '', zZ: '', zNom: '0', zTol: '',
       xyMethod: 'SPLIT EXTERIOR', widthX: '', widthY: '', diameter: '', appX: '0', appY: '0',
       probeZ: '', xyTol: '', approachClr: '',
-      health: false, hX: '', hY: '', hStartZ: '', hTargetZ: '', hFeed: ''
+      health: false, hX: '', hY: '', hStartZ: '', hTargetZ: '', hFeed: '',
+      /* probe swivel (probe step) and the shared swivel settings (probe step + CMC) */
+      swMode: 'NONE', swFrom: '', swLine: '', swA: '', swB: '', swC: '', swBlock: '', swDir: '', swPrnum: ''
     },
     /* CMC R parameters: first R of the first CMC block (50 per CMC step), R count on the control (MD28050),
        tool carrier for TCA (spindle) */
@@ -213,7 +219,12 @@ function normalizeJob(src) {
   mergeFlat(d.probing, src.probing);
   mergeFlat(d.cmcR, src.cmcR);
   if (Array.isArray(src.steps)) {
-    d.steps = src.steps.map(function (s) { return mergeFlat(blankStep(''), s); });
+    d.steps = src.steps.map(function (s) {
+      var st = mergeFlat(blankStep(''), s);
+      /* a 1.4.0 card: blank swivel = nest face (NONE), a pasted line = PASTE (audit 5) */
+      if (s && typeof s === 'object' && !('cmcSwMode' in s) && st.cmc) st.cmcSwMode = isBlank(st.cmcSwivel) ? 'NONE' : 'PASTE';
+      return st;
+    });
   }
   if (Array.isArray(src.wcs)) {
     for (var i = 0; i < MAX_NESTS; i++) d.wcs[i] = mergeFlat(blankWcsRow(), src.wcs[i]);
@@ -400,7 +411,10 @@ function readBList(data) {
       life: String(isInt(s.life) ? num(s.life) : 1), setpiece: s.setpiece !== false,
       jobs: isInt(s.jobs) ? String(num(s.jobs)) : '',
       rcomp: s.radius_comp === true ? 'YES' : (s.radius_comp === false ? 'NO' : ''),
-      rparams: Array.isArray(s.r_params) ? s.r_params.filter(isInt).map(function (v) { return String(num(v)); }).join(',') : ''
+      rparams: Array.isArray(s.r_params) ? s.r_params.filter(isInt).map(function (v) { return String(num(v)); }).join(',') : '',
+      plane: typeof s.cycle800 === 'string' ? s.cycle800.trim() : '',
+      planeState: typeof s.cycle800 === 'string' ? (s.cycle800.trim() ? 'ONE' : 'NONE')
+        : (s.cycle800_note === 'SEVERAL' || s.cycle800_note === 'TURNING' ? s.cycle800_note : '')
     });
   });
   if (bad.length) { R.error = 'B program list entries without a whole step number, program or tool: ' + bad.join(', ') + '.'; return R; }
@@ -430,7 +444,7 @@ function applyBList(job, list, mode) {
     fresh.forEach(function (r) { facts[String(r.program).toUpperCase()] = r; });
     steps.forEach(function (st) {
       var f = facts[String(st.program).trim().toUpperCase()];
-      if (f) { st.jobs = f.jobs; st.rcomp = f.rcomp; st.rparams = f.rparams; }
+      if (f) { st.jobs = f.jobs; st.rcomp = f.rcomp; st.rparams = f.rparams; st.plane = f.plane; st.planeState = f.planeState; }
     });
     var have = {};
     steps.forEach(function (st) { if (isInt(st.step)) have[num(st.step)] = 1; });
@@ -538,6 +552,165 @@ function cmcSwivelError(v) {
   if (t.length > 200) return 'longer than 200 characters';
   return '';
 }
+
+/* ---------------- probe swivel (CYCLE800, NC 4.27.1.34) ----------------
+   One swivel for the whole probe program (probe step) or one CMC measurement. Sources:
+     NONE       nest face (no swivel)
+     B PROGRAM  the single plane go_to_machine found in that B program's posted NC file
+     PASTE      a CYCLE800(...) line copied from the CAM program
+     ANGLES     rotations about X, Y, Z typed in; data block and direction from the shared swivel settings
+     AUTO       (CMC only) the plane of the card's own B program
+   CYCLE800(_FR,_TC,_ST,_MODE,_X0,_Y0,_Z0,_A,_B,_C,_X1,_Y1,_Z1,_DIR,_FR_I,_DMODE)                         */
+var SW_MODES = ['NONE', 'B PROGRAM', 'PASTE', 'ANGLES'];
+var CMC_SW_MODES = ['AUTO', 'NONE', 'B PROGRAM', 'PASTE', 'ANGLES'];
+var SW_ARGS = ['FR', 'TC', 'ST', 'MODE', 'X0', 'Y0', 'Z0', 'A', 'B', 'C', 'X1', 'Y1', 'Z1', 'DIR', 'FRI', 'DMODE'];
+var SW_PLANE_KEYS = ['TC', 'MODE', 'X0', 'Y0', 'Z0', 'A', 'B', 'C', 'X1', 'Y1', 'Z1'];
+function swSplit(inner) {
+  var out = [], cur = '', ins = false, depth = 0;
+  for (var i = 0; i < inner.length; i++) {
+    var ch = inner[i];
+    if (ch === '"') ins = !ins;
+    if (!ins && (ch === '(' || ch === '[')) depth++;
+    if (!ins && (ch === ')' || ch === ']')) depth--;
+    if (!ins && depth === 0 && ch === ',') { out.push(cur.trim()); cur = ''; continue; }
+    cur += ch;
+  }
+  out.push(cur.trim());
+  return out;
+}
+/* line -> { err, a: {FR, TC, ST, MODE, ..., DIR}, text } ; every argument must be a literal (audit 3) */
+function swivelParse(v) {
+  var t = cmcSwivelText(v), r = { err: '', a: null, line: t };
+  if (!t) { r.err = 'blank'; return r; }
+  var e = cmcSwivelError(t);
+  if (e) { r.err = e; return r; }
+  var parts = swSplit(t.replace(/^CYCLE800\s*\(/i, '').replace(/\)\s*$/, ''));
+  if (parts.length > SW_ARGS.length) { r.err = 'more than ' + SW_ARGS.length + ' parameters'; return r; }
+  var a = {};
+  for (var i = 0; i < SW_ARGS.length; i++) {
+    var k = SW_ARGS[i], p = i < parts.length ? parts[i] : '';
+    if (k === 'TC') {
+      if (!/^"[^"]*"$/.test(p)) { r.err = 'the swivel data block (2nd parameter) must be a name in quotes'; return r; }
+      a.TC = p.slice(1, -1);
+    } else if (p === '') {
+      a[k] = k === 'DIR' ? -1 : 0;          /* NC 4.27.1.34: _DIR default -1 */
+    } else if (isNum(p)) {
+      a[k] = num(p);
+    } else { r.err = 'parameter ' + (i + 1) + ' (' + p + ') is not a number: the line cannot be checked'; return r; }
+  }
+  if (parts.length < 4 || parts[3] === '') { r.err = 'no swivel mode (4th parameter)'; return r; }
+  r.a = a;
+  return r;
+}
+/* reasons a CYCLE800 line cannot be the probe plane (audit 1, 2; plan: deselect, tool alignment) */
+function swivelProblem(a) {
+  var st = Math.abs(Math.round(a.ST));
+  if (a.TC === '0') return 'data block "0" deselects the swivel';
+  var h = Math.floor(st / 100) % 10;
+  if (h === 2 || h === 3) return 'it aligns a ' + (h === 2 ? 'turning' : 'milling') + ' tool (3rd parameter hundreds digit ' + h + '), it is not a plane for the probe';
+  if (Math.floor(st / 10) % 10 === 1) return 'it tracks the tool tip (TRAORI, 3rd parameter tens digit 1); probing runs without it';
+  var tt = Math.floor(st / 10000) % 10;
+  if (tt === 1 || tt === 2 || a.DIR === 0) return 'it does not move the rotary axes ("swivel no": _DIR 0 or 3rd parameter ten-thousands digit ' + tt + ')';
+  if (a.DIR !== 1 && a.DIR !== -1) return 'direction (14th parameter) must be -1 or +1';
+  return '';
+}
+function swAxis(code) { return { 1: 'X', 2: 'Y', 3: 'Z' }[code] || '?'; }
+function swDeg(v) { return compact(v, 4); }
+/* plain words for a parsed line */
+function swivelDecode(a) {
+  var kind = (a.MODE >> 6) & 3, d;
+  if (kind === 0 || kind === 2) {
+    d = (kind === 0 ? 'axis by axis' : 'projection angle') + ': about ' + swAxis(a.MODE & 3) + ' ' + swDeg(a.A) +
+        ', about ' + swAxis((a.MODE >> 2) & 3) + ' ' + swDeg(a.B) + ', about ' + swAxis((a.MODE >> 4) & 3) + ' ' + swDeg(a.C);
+  } else if (kind === 1) d = 'solid angle: ' + swDeg(a.A) + ', ' + swDeg(a.B);
+  else d = 'rotary axes direct: ' + swDeg(a.A) + ', ' + swDeg(a.B);
+  return 'data block ' + (a.TC === '' ? '(none)' : a.TC) + ', ' + d + ', direction ' + (a.DIR > 0 ? '+1' : '-1');
+}
+/* key that is the same for two lines of the same plane (audit 4) */
+function swivelPlaneKey(a) { return SW_PLANE_KEYS.map(function (k) { return k === 'TC' ? a.TC : compact(a[k], 6); }).join('|'); }
+/* one line checked for probing: { line, text, err } */
+function swivelCheck(v) {
+  var p = swivelParse(v);
+  if (p.err) return { line: '', text: '', err: p.err };
+  var e = swivelProblem(p.a);
+  return { line: p.line, text: swivelDecode(p.a), err: e };
+}
+function swAngle(v) { return isBlank(v) ? 0 : num(v); }
+/* the line for a swivel source. src: { mode, from, paste, a, b, c, own (the card's own step row, AUTO) }
+   -> { line ('' = nest face), text, err, where (field with the error) } */
+function swivelFrom(src, job) {
+  var pr = job.probing;
+  function bad(msg, where) { return { line: '', text: '', err: msg, where: where }; }
+  function fromRow(row, where, own) {
+    var name = String(row.program || '').trim() || 'step ' + row.step;
+    var st = row.planeState;
+    if (st === 'ONE') {
+      var c = swivelCheck(row.plane);
+      if (c.err) return bad('the plane of ' + name + ' cannot be used: ' + c.err, where);
+      return { line: c.line, text: c.text + ' (from ' + name + ')', err: '' };
+    }
+    if (st === 'NONE') return { line: '', text: 'nest face (' + name + ' has no CYCLE800 plane)', err: '' };
+    if (st === 'SEVERAL') return bad(name + ' has several CYCLE800 planes: pick the probe plane (B PROGRAM / PASTE / ANGLES)', where);
+    if (st === 'TURNING') return bad(name + ' only aligns a turning tool: pick the probe plane (B PROGRAM / PASTE / ANGLES)', where);
+    return bad('the plane of ' + name + ' is unknown: post it through go_to_machine and import the list, or choose NONE / B PROGRAM / PASTE / ANGLES', where);
+  }
+  switch (src.mode) {
+    case 'NONE': return { line: '', text: 'nest face (no swivel)', err: '' };
+    case 'AUTO': return fromRow(src.own, src.paths.mode, true);
+    case 'B PROGRAM': {
+      var want = String(src.from || '').trim().toUpperCase();
+      if (!want) return bad('pick the B program whose plane to use', src.paths.from);
+      var row = null;
+      job.steps.forEach(function (s) { if (!row && String(s.program || '').trim().toUpperCase() === want) row = s; });
+      if (!row) return bad('B program ' + src.from + ' is not in the step table', src.paths.from);
+      return fromRow(row, src.paths.from, false);
+    }
+    case 'PASTE': {
+      if (isBlank(src.paste)) return bad('paste the CYCLE800 line', src.paths.paste);
+      var c = swivelCheck(src.paste);
+      return c.err ? bad(c.err, src.paths.paste) : { line: c.line, text: c.text, err: '' };
+    }
+    case 'ANGLES': {
+      var block = String(pr.swBlock || '').trim();
+      if (!block) return bad('swivel data block is required for ANGLES (tab 2, swivel settings)', 'probing.swBlock');
+      if (/["]/.test(block) || /[^\x20-\x7E]/.test(block) || block.length > 32) return bad('swivel data block: plain ASCII, no quote, max 32 characters', 'probing.swBlock');
+      if (['+1', '1', '-1'].indexOf(String(pr.swDir).trim()) < 0) return bad('swivel direction is required for ANGLES: -1 or +1 (tab 2, swivel settings)', 'probing.swDir');
+      var ang = [src.a, src.b, src.c];
+      for (var i = 0; i < 3; i++) {
+        if (!isBlank(ang[i]) && (!isNum(ang[i]) || Math.abs(num(ang[i])) > 360)) return bad('angle about ' + 'XYZ'[i] + ' must be a number -360..360 (blank = 0)', src.paths.angles[i]);
+      }
+      if (!ang.some(function (x) { return swAngle(x) !== 0; })) return bad('every angle is 0: choose NONE for the nest face', src.paths.angles[0]);
+      var dir = num(String(pr.swDir).trim().replace(/^\+/, ''));
+      var line = 'CYCLE800(0,"' + block + '",0,57,0,0,0,' + ang.map(function (x) { return swDeg(swAngle(x)); }).join(',') + ',0,0,0,' + dir + ',0,1)';
+      var c2 = swivelCheck(line);
+      return c2.err ? bad(c2.err, src.paths.angles[0]) : { line: c2.line, text: c2.text, err: '' };
+    }
+  }
+  return bad('pick the swivel source', src.paths.mode);
+}
+function probeSwivelSrc(job) {
+  var p = job.probing;
+  return { mode: SW_MODES.indexOf(p.swMode) >= 0 ? p.swMode : 'NONE', from: p.swFrom, paste: p.swLine, a: p.swA, b: p.swB, c: p.swC,
+           paths: { mode: 'probing.swMode', from: 'probing.swFrom', paste: 'probing.swLine', angles: ['probing.swA', 'probing.swB', 'probing.swC'] } };
+}
+function cmcSwivelSrc(s, i) {
+  var p = 'steps.' + i + '.';
+  return { mode: CMC_SW_MODES.indexOf(s.cmcSwMode) >= 0 ? s.cmcSwMode : 'AUTO', from: s.cmcSwFrom, paste: s.cmcSwivel,
+           a: s.cmcSwA, b: s.cmcSwB, c: s.cmcSwC, own: s,
+           paths: { mode: p + 'cmcSwMode', from: p + 'cmcSwFrom', paste: p + 'cmcSwivel', angles: [p + 'cmcSwA', p + 'cmcSwB', p + 'cmcSwC'] } };
+}
+/* defaults for ANGLES (audit 6): data block and direction of the first plane the job knows */
+function swivelDefaults(job) {
+  var lines = [];
+  job.steps.forEach(function (s) { if (s.planeState === 'ONE') lines.push(s.plane); });
+  if (!isBlank(job.probing.swLine)) lines.push(job.probing.swLine);
+  job.steps.forEach(function (s) { if (!isBlank(s.cmcSwivel)) lines.push(s.cmcSwivel); });
+  for (var i = 0; i < lines.length; i++) {
+    var p = swivelParse(lines[i]);
+    if (!p.err && !swivelProblem(p.a)) return { block: p.a.TC, dir: p.a.DIR > 0 ? '+1' : '-1' };
+  }
+  return null;
+}
 /* one CMC card (a step row with cmc ticked) -> numbers and the constants the NC uses
    m   +1 when more material makes the measured value larger (boss, web, spigot, floor, wall with material on the - side)
    p   +1 when +wear makes the measured value larger (rotating tools: p = m, +wear always leaves material;
@@ -569,7 +742,7 @@ function cmcResolve(s, U) {
   c.points = s.cmcPoints === '3' ? 3 : 4;
   c.a0 = isBlank(s.cmcStartAng) ? 0 : num(s.cmcStartAng);
   c.inc = num(s.cmcIncAng);
-  c.swivel = cmcSwivelText(s.cmcSwivel);
+  c.swivel = '';                  /* set by resolve() from the card's swivel source */
   c.clean = CMC_CLEAN.indexOf(s.cmcClean) >= 0 ? s.cmcClean : 'NONE';
   c.cleanM = String(s.cmcCleanM || '').trim().toUpperCase();
   c.verify = !!s.cmcVerify;
@@ -654,6 +827,8 @@ function resolve(job) {
     if (!s.cmc) return;
     var rs = R.steps[i];
     rs.cmc = cmcResolve(s, R.U);
+    var swv = swivelFrom(cmcSwivelSrc(s, i), job);
+    rs.cmc.swivel = swv.line; rs.cmc.swivelText = swv.text;
     rs.cmcBase = R.cmcFirst + CMC_BLOCK * R.cmcList.length;
     R.cmcList.push(rs);
   });
@@ -661,6 +836,8 @@ function resolve(job) {
   if (R.probeStep.enabled) all.push(R.probeStep.step);
   R.lastStep = all.length ? Math.max.apply(null, all) : 0;
   R.P = resolveProbe(job.probing, R);
+  R.P.sw = R.probeStep.enabled ? swivelFrom(probeSwivelSrc(job), job) : { line: '', text: '' };
+  R.P.swPrnum = orDefault(job.probing.swPrnum, R.P.prnum);
   return R;
 }
 function orDefault(v, d) { return isBlank(v) ? d : num(v); }
@@ -768,6 +945,9 @@ function validate(job) {
   }
   /* probing */
   if (ps.enabled) validateProbe(job, err, needNum);
+  if (ps.enabled) { var psw = swivelFrom(probeSwivelSrc(job), job); if (psw.err) err(psw.where, 'Probe swivel: ' + psw.err); }
+  var swp = job.probing.swPrnum;
+  if (!isBlank(swp) && (!isInt(swp) || num(swp) < 1 || num(swp) > 40)) err('probing.swPrnum', 'Probe data set for swivelled measuring must be 1-40 (MC S_PRNUM)');
   /* CMC cards (errors block generating, warnings are shown) */
   var W = [];
   validateCmc(job, err, function (path, msg) { W.push({ path: path, msg: msg }); });
@@ -877,7 +1057,7 @@ function validateCmc(job, err, warn) {
       if (!isNum(s.cmcIncAng) || num(s.cmcIncAng) === 0 || Math.abs(num(s.cmcIncAng)) > maxInc)
         err(p + 'cmcIncAng', tag + 'angle between points must be a number, not 0, at most ' + maxInc + ' degrees for ' + (maxInc === 90 ? 4 : 3) + ' points (sign = direction)');
     }
-    var sw = cmcSwivelError(s.cmcSwivel); if (sw) err(p + 'cmcSwivel', tag + 'probe swivel: ' + sw);
+    var sw = swivelFrom(cmcSwivelSrc(s, i), job); if (sw.err) err(sw.where, tag + 'probe swivel: ' + sw.err);
     if (s.cmcClean === 'M CODE' && !/^M\d{1,4}$/i.test(String(s.cmcCleanM || '').trim()))
       err(p + 'cmcCleanM', tag + 'cleaning M code like M50');
     if (CMC_CLEAN.indexOf(s.cmcClean) < 0) err(p + 'cmcClean', tag + 'cleaning must be NONE, M CODE or M0');
@@ -1676,8 +1856,12 @@ function tolCheck(o, R, axis, what) {
   o.push('ENDIF');
   o.push('IF (GV_NEST_STATUS[GV_NEST]<>1) GOTOF PROBE_END');
 }
+/* R with the probe data set for swivelled measuring (blank = the normal one) */
+function swR(R) { return { P: Object.assign({}, R.P, { prnum: R.P.swPrnum }), U: R.U }; }
 function fProbe(R) {
   var P = R.P, o = [], U = R.U;
+  var sw = P.sw && P.sw.line ? P.sw : null, RC = sw ? swR(R) : R;
+  var g54 = sw ? 'D1' : 'G54 D1';   /* after the swivel: D1 only, G54 stays selected (G54, then CYCLE800) */
   var len = function (v) { return fix(v, U.dec); };
   var feed = function (v) { return compact(v, 2); };
   var ret = retract(P.clr);
@@ -1705,6 +1889,11 @@ function fProbe(R) {
   o.push(';                (S_KNUM 1-99, NEEDS MD18600 = 1)');
   o.push(';  OUT OF TOL  : STATUS 2, MSG, M0, REST OF NEST SKIPPED');
   o.push(';  NO PART     : STATUS 2, MSG, REST OF NEST SKIPPED');
+  if (sw) {
+    o.push(';  SWIVEL      : ' + sw.text.toUpperCase());
+    o.push(';                EVERY X / Y / Z BELOW IS IN THE SWIVELLED PLANE; CYCLE800() AT THE END');
+    if (P.swPrnum !== P.prnum) o.push(';  S_PRNUM     : ' + P.swPrnum + ' (PROBE CALIBRATED IN THE SWIVELLED POSITION)');
+  }
   o.push(';-------------------------------------------');
   o.push(';');
   o.push(';--- TOOL CALL ---');
@@ -1715,13 +1904,14 @@ function fProbe(R) {
   o.push('G54 D1');
   var ol = orientLine(R);
   if (ol) o.push(pad(ol, 35) + ';swivel to this nest\'s face (angle is in the WO)');
+  if (sw) o.push(sw.line + '   ;probe plane');
   o.push('M19');
   o.push(';');
   var mOn = P.probeOnM;
   if (P.health) {
     o.push(';--- PROBE HEALTH CHECK (ONCE PER JOB, FIRST ACTIVE NEST) ---');
     o.push('IF (GV_PROBE_CHK==0)');
-    o.push('  G54 D1');
+    o.push('  ' + g54);
     if (mOn) o.push('  ' + mOn + '                              ;probe on');
     o.push('  G0 X=' + len(P.hX) + ' Y=' + len(P.hY));
     o.push('  G0 Z=' + len(P.hStartZ));
@@ -1743,7 +1933,7 @@ function fProbe(R) {
   if (P.partCheck) {
     o.push(';--- PART EXISTENCE CHECK (MEAS TOUCH, NO ALARM) ---');
     o.push(';  NO TRIGGER WITHIN ' + len(P.maxTravel) + ' OF TRAVEL = NO PART');
-    o.push('G54 D1');
+    o.push(g54);
     if (mOn) o.push(mOn + '                                ;probe on');
     o.push('G0 X=' + len(P.chkLoc.x) + ' Y=' + len(P.chkLoc.y));
     o.push('G0 Z=' + len(P.chkLoc.z));
@@ -1759,10 +1949,10 @@ function fProbe(R) {
   }
   if (!P.skipZ) {
     o.push(';--- Z DATUM: SURFACE (CYCLE978) ---');
-    o.push('G54 D1');
+    o.push(g54);
     o.push('G0 X=' + len(P.zLoc.x) + ' Y=' + len(P.zLoc.y));
     o.push('G0 Z=' + len(P.zLoc.z));
-    o.push(cyc978(R));
+    o.push(cyc978(RC));
     o.push('STOPRE');
     tolCheck(o, R, 'Z', 'SURFACE');
     o.push(ret);
@@ -1770,7 +1960,7 @@ function fProbe(R) {
   }
   if (P.xyMethod !== 'NONE') {
     o.push(';--- XY DATUM: ' + P.xyMethod + ' ---');
-    o.push('G54 D1');
+    o.push(g54);
     o.push('G0 X=' + len(P.appX) + ' Y=' + len(P.appY));
     if (P.outside) {
       o.push('G0 Z=' + len(P.xyStartZ) + '                    ;start above the feature');
@@ -1783,31 +1973,31 @@ function fProbe(R) {
     switch (P.xyMethod) {
       case 'SPLIT EXTERIOR':
         o.push(';--- X RIB ---');
-        o.push(cyc977(R, 104, w, 0, 0, sid, 1));
+        o.push(cyc977(RC, 104, w, 0, 0, sid, 1));
         o.push('STOPRE');
         tolCheck(o, R, 'X', 'RIB');
         o.push(';--- Y RIB (STARTS ABOVE THE CENTER, MC 4.3.10) ---');
-        o.push(cyc977(R, 104, h, 0, 0, sid, 2));
+        o.push(cyc977(RC, 104, h, 0, 0, sid, 2));
         o.push('STOPRE');
         tolCheck(o, R, 'Y', 'RIB');
         break;
       case 'BORE':
-        o.push(cyc977(R, 101, d, 0, 0, 0, 1));
+        o.push(cyc977(RC, 101, d, 0, 0, 0, 1));
         o.push('STOPRE');
         tolCheck(o, R, 'X', 'BORE'); tolCheck(o, R, 'Y', 'BORE');
         break;
       case 'BOSS':
-        o.push(cyc977(R, 102, d, 0, 0, sid, 1));
+        o.push(cyc977(RC, 102, d, 0, 0, sid, 1));
         o.push('STOPRE');
         tolCheck(o, R, 'X', 'BOSS'); tolCheck(o, R, 'Y', 'BOSS');
         break;
       case 'RECT POCKET':
-        o.push(cyc977(R, 105, 0, w, h, 0, 1));
+        o.push(cyc977(RC, 105, 0, w, h, 0, 1));
         o.push('STOPRE');
         tolCheck(o, R, 'X', 'POCKET'); tolCheck(o, R, 'Y', 'POCKET');
         break;
       case 'RECT SPIGOT':
-        o.push(cyc977(R, 106, 0, w, h, sid, 1));
+        o.push(cyc977(RC, 106, 0, w, h, sid, 1));
         o.push('STOPRE');
         tolCheck(o, R, 'X', 'SPIGOT'); tolCheck(o, R, 'Y', 'SPIGOT');
         break;
@@ -1817,6 +2007,7 @@ function fProbe(R) {
   o.push('PROBE_END:');
   o.push(';--- SAFE Z RETRACT ---');
   o.push(ret);
+  if (sw) o.push('CYCLE800()                         ;swivel back to the nest face');
   o.push(';');
   o.push('RET');
   o.push(';');
@@ -1890,6 +2081,7 @@ function fCmcMeas(R, s) {
   var cx = len(c.x), cy = len(c.y), z = len(c.z), clr = len(P.clrIn), fa = len(P.fa);
   var zone = c.zone > 0, rect = d.kind === 'rect';
   var mvar = d.cyc === 978 ? 0 : d.mvar + ((d.cyc === 977 && zone) || (d.cyc === 979 && c.points === 4) ? 1000 : 0);
+  var RC = c.swivel ? swR(R) : R;   /* probe data set for swivelled measuring */
   /* protected lowering: G1 MEAS=1 stops on contact (NC: measurement with deletion of distance-to-go) */
   function plunge(x, y, zz, why) {
     o.push(';  ' + why);
@@ -1914,7 +2106,8 @@ function fCmcMeas(R, s) {
   o.push(';  RESULT      : LD_M = _OVR[4]' + (rect ? ' (X LENGTH), LD_M2 = _OVR[5] (Y LENGTH)' : ' (ACTUAL VALUE)'));
   o.push(';  LD_HIT      : 1 = THE PROBE TOUCHED WHILE LOWERING (NOTHING MEASURED)');
   o.push(';  S_FA        : ' + fa + ' (SEARCH DISTANCE); S_TSA = S_FA');
-  o.push(';  PLANE       : ' + (c.swivel ? 'CYCLE800 FROM THE CAM PROGRAM - X/Y/Z ARE IN THAT PLANE' : 'NEST FACE (G54 OF THE NEST)'));
+  o.push(';  PLANE       : ' + (c.swivel ? String(c.swivelText).toUpperCase() : 'NEST FACE (G54 OF THE NEST)'));
+  if (c.swivel) o.push(';                X / Y / Z OF THE CARD ARE IN THAT PLANE; CYCLE800() AT THE END');
   o.push(';  CLEANING    : ' + (c.clean === 'M CODE' ? c.cleanM : c.clean === 'M0' ? 'M0 - OPERATOR CLEANS' : 'NONE'));
   o.push(';-------------------------------------------');
   o.push('LD_HIT=0 LD_M=0 LD_M2=0');
@@ -1927,7 +2120,7 @@ function fCmcMeas(R, s) {
   o.push('G54 D1');
   var ol = orientLine(R);
   if (ol) o.push(pad(ol, 35) + ';swivel to this nest\'s face (angle is in the WO)');
-  if (c.swivel) o.push(c.swivel + '   ;probe plane from the CAM program');
+  if (c.swivel) o.push(c.swivel + '   ;probe plane');
   o.push('M19');
   if (c.clean === 'M CODE') o.push(pad(c.cleanM, 35) + ';cleaning');
   if (c.clean === 'M0') {
@@ -1946,7 +2139,7 @@ function fCmcMeas(R, s) {
     if (zone) { mo.sza = c.zone; if (rect) mo.szo = c.zoneY; }
     if (d.inside && !zone) {
       plunge(cx, cy, z, 'DOWN AT THE CENTRE');
-      o.push(cyc977(R, mvar, 0, 0, 0, 0, d.ma, mo));
+      o.push(cyc977(RC, mvar, 0, 0, 0, 0, d.ma, mo));
     } else {
       var off = zone ? '(LD_SETV+' + len(c.zone) + ')/4' : 'LD_SETV/2+' + fa;
       var pt = along(off);
@@ -1954,22 +2147,22 @@ function fCmcMeas(R, s) {
       o.push('G0 Z=' + len(c.appZ));
       o.push('G0 X=' + cx + ' Y=' + cy + '                ;start above the centre');
       o.push(';  THE CYCLE LOWERS TO MEASURING HEIGHT ITSELF: S_ID = ' + sid);
-      o.push(cyc977(R, mvar, 0, 0, 0, c.z - c.appZ, d.ma, mo));
+      o.push(cyc977(RC, mvar, 0, 0, 0, c.z - c.appZ, d.ma, mo));
     }
   } else if (d.kind === 'arc') {
     var rr = '(LD_SETV/2' + (d.inside ? '-' : '+') + clr + ')';
     plunge(cx + '+' + rr + '*COS(' + compact(c.a0, 4) + ')', cy + '+' + rr + '*SIN(' + compact(c.a0, 4) + ')', z,
            'DOWN ' + clr + ' IN FRONT OF THE FIRST POINT (MC 4.3.15)');
-    o.push(cyc979(R, c, mvar));
+    o.push(cyc979(RC, c, mvar));
   } else if (d.kind === 'wall') {
     var axis = d.ma === 1 ? 'X' : 'Y';
     var st = 'LD_SETV' + (c.md === 1 ? '-' : '+') + clr;
     plunge(d.ma === 1 ? st : cx, d.ma === 1 ? cy : st, z,
            'DOWN ' + clr + ' OFF THE WALL ON THE FREE SIDE, MEASURE IN ' + (c.md === 1 ? '+' : '-') + axis);
-    o.push(cyc978(R, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: d.ma, md: c.md }));
+    o.push(cyc978(RC, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: d.ma, md: c.md }));
   } else {
     plunge(cx, cy, 'LD_SETV+' + clr, 'DOWN TO ' + clr + ' ABOVE THE FACE');
-    o.push(cyc978(R, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: 3, md: 2 }));
+    o.push(cyc978(RC, { mvar: '0', knum: '0', setv: 'LD_SETV', ma: 3, md: 2 }));
   }
   o.push('STOPRE');
   o.push('LD_M=_OVR[4]');
@@ -2767,6 +2960,12 @@ function fReadme(R) {
   r.push('  not used for the part check: it alarms 61301 when nothing is found.');
   r.push('  Z / XY datums use CYCLE978 / CYCLE977 with S_TSA = S_FA, _DMODE=1,');
   r.push('  _AMODE=0. Your FI tolerance check then disables the nest.');
+  if (R.probeStep.enabled && R.P.sw && R.P.sw.line) {
+    r.push('  Swivel: ' + R.P.sw.line);
+    r.push('    = ' + R.P.sw.text + '.');
+    r.push('    Runs after the tool call; every probing move is in that plane;');
+    r.push('    CYCLE800() at the end. Probe data set ' + R.P.swPrnum + '.');
+  }
   r.push('');
   r.push('B_ PROGRAMS');
   r.push('  B_TEMPLATE.SPF is a CAM stub with no motion. The cutting B_ programs');
@@ -2919,7 +3118,10 @@ G.SNG = {
   CMC_FEATURES: CMC_FEATURES, CMC_DEF: CMC_DEF, CMC_TOOLS: CMC_TOOLS, CMC_FIELDS: CMC_FIELDS, CMC_FIELD_TEXT: CMC_FIELD_TEXT,
   CMC_CLEAN: CMC_CLEAN, CMC_BLOCK: CMC_BLOCK, CMC_LIMIT: CMC_LIMIT, CMC_SCRAP_STATUS: CMC_SCRAP_STATUS, CMC_RES: CMC_RES,
   CMC_RESERVED_R: CMC_RESERVED_R, cmcName: cmcName, cmcAutoField: cmcAutoField, cmcResolve: cmcResolve, cmcMath: cmcMath,
-  cmcIsSize: cmcIsSize, cmcSwivelText: cmcSwivelText, cmcSwivelError: cmcSwivelError
+  cmcIsSize: cmcIsSize, cmcSwivelText: cmcSwivelText, cmcSwivelError: cmcSwivelError,
+  SW_MODES: SW_MODES, CMC_SW_MODES: CMC_SW_MODES, swivelCheck: swivelCheck, swivelParse: swivelParse, swivelDecode: swivelDecode,
+  swivelProblem: swivelProblem, swivelPlaneKey: swivelPlaneKey, swivelFrom: swivelFrom, probeSwivelSrc: probeSwivelSrc,
+  cmcSwivelSrc: cmcSwivelSrc, swivelDefaults: swivelDefaults
 };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -3080,13 +3282,25 @@ function renderProbing() {
   h += '<p class="note">Approach clearance blank = auto: Z datum and inside features start S_FA + ' + S.compact(u.inMargin, 4) +
     ' above Z nominal (' + S.compact(faVal + u.inMargin, 4) + '), outside features ' + S.compact(u.outClr, 4) +
     ' above it. S_TSA (safe area) is set to S_FA.</p>';
+  h += '<h2>Swivel <span class="pill">CYCLE800</span></h2>';
+  h += swivelBox(S.probeSwivelSrc(job), S.SW_MODES, 'Probe step swivel');
+  h += '<p class="note">Rotate, probe, swivel back: the probe program runs CYCLE800 after the tool call, probes everything in that plane ' +
+    '(every X / Y / Z on this tab is then in the swivelled plane) and ends with CYCLE800(). B PROGRAM = the plane go_to_machine found ' +
+    'in that posted B program.</p>';
+  h += '<div class="box"><b>Swivel settings</b> <span class="pill">probe step and CMC</span><div class="grid" style="margin-top:6px">' +
+    txt('probing.swBlock', 'Swivel data block (ANGLES)', { ph: 'e.g. H' }) +
+    sel('probing.swDir', 'Direction (ANGLES)', ['', '+1', '-1']) +
+    txt('probing.swPrnum', 'Probe data set when swivelled (S_PRNUM)', { ph: 'same as above' }) + '</div>' +
+    '<p class="note">ANGLES writes CYCLE800(0,"block",0,57,0,0,0,X,Y,Z,0,0,0,direction,0,1): rotate about X, then Y, then Z. ' +
+    'Calibrate the probe in the swivelled position into its own data set.</p></div>';
   h += '<h2>Probe health check <span class="pill">once per job</span></h2><div class="grid">' +
     chk('probing.health', 'Enable') +
     txt('probing.hX', 'Check X', { dis: !p.health }) + txt('probing.hY', 'Check Y', { dis: !p.health }) +
     txt('probing.hStartZ', 'Start Z (above surface)', { dis: !p.health }) +
     txt('probing.hTargetZ', 'Target Z (past surface)', { dis: !p.health }) +
     txt('probing.hFeed', 'Feed', { dis: !p.health, ph: 'probe feed' }) + '</div>';
-  h += '<p class="note">MEAS=1 touch on a known surface in the first nest\'s G54. No trigger = retract and hold (LOOP / M0).</p>';
+  h += '<p class="note">MEAS=1 touch on a known surface in the first nest\'s G54. No trigger = retract and hold (LOOP / M0).' +
+    (p.swMode !== 'NONE' ? ' With the swivel on, these X / Y / Z are in the swivelled plane.' : '') + '</p>';
   h += '<h2>Part existence check</h2><div class="grid">' +
     chk('probing.partCheck', 'Enable') +
     txt('probing.maxTravel', 'Max probe travel (' + u.u + ')', { dis: !p.partCheck, ph: def(u.travel) }) +
@@ -3229,10 +3443,7 @@ function cmcCard(i, warnBy) {
     (rect ? txt(p + 'cmcZoneY', 'Protection zone Y (' + u.u + ')', { ph: 'same as X' }) : '') +
     (kind === 'arc' ? sel(p + 'cmcPoints', 'Measuring points', ['3', '4']) + txt(p + 'cmcStartAng', 'Start angle (deg)', { ph: '0' }) +
       txt(p + 'cmcIncAng', 'Angle between points (deg, sign = direction)') : '') + '</div>';
-  h += '<div class="grid" style="margin-top:6px">' +
-    '<label class="f" style="grid-column:1/-1">Probe swivel: CYCLE800 line from the CAM program (blank = nest face; X / Y / Z above are then in that plane)' +
-    '<input type="text" data-path="' + p + 'cmcSwivel" value="' + esc(s.cmcSwivel) + '" placeholder="CYCLE800(0,&quot;H&quot;,200000,54,...)"' +
-    (errPaths[p + 'cmcSwivel'] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label></div>';
+  h += swivelBox(S.cmcSwivelSrc(s, i), S.CMC_SW_MODES, 'Probe swivel');
   h += '<div class="grid" style="margin-top:6px">' +
     sel(p + 'cmcClean', 'Probe cleaning', S.CMC_CLEAN) +
     (s.cmcClean === 'M CODE' ? txt(p + 'cmcCleanM', 'Cleaning M code', { ph: 'M50' }) : '') +
@@ -3243,6 +3454,25 @@ function cmcCard(i, warnBy) {
   if (d.cyc === 977) h += '<p class="note">Protection zone: inside features = an island in the middle (the probe starts above it at the approach Z ' +
     'and lowers outside it); outside features = the wall around (channel). Blank = none.</p>';
   return h + '</div>';
+}
+/* swivel source box (probe step and CMC card): source, its fields only, the line that will be written */
+function swivelBox(src, modes, label) {
+  var P = src.paths, mode = src.mode;
+  var planes = job.steps.filter(function (s) { return s.planeState === 'ONE' && !S.isBlank(s.program); })
+    .map(function (s) { return String(s.program).trim(); });
+  var h = '<div class="grid" style="margin-top:6px">' + sel(P.mode, label, modes);
+  if (mode === 'B PROGRAM') h += sel(P.from, 'Plane of B program', [''].concat(planes));
+  if (mode === 'ANGLES') h += txt(P.angles[0], 'About X (A, deg)', { ph: '0' }) + txt(P.angles[1], 'About Y (B, deg)', { ph: '0' }) +
+    txt(P.angles[2], 'About Z (C, deg)', { ph: '0' });
+  if (mode === 'PASTE') h += '<label class="f" style="grid-column:1/-1">CYCLE800 line from the CAM program' +
+    '<input type="text" data-path="' + P.paste + '" value="' + esc(getPath(job, P.paste)) + '" placeholder="CYCLE800(0,&quot;H&quot;,200000,54,...)"' +
+    (errPaths[P.paste] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label>';
+  h += '</div>';
+  var r = S.swivelFrom(src, job);
+  if (r.err) h += '<p class="note swline" style="color:var(--bad)">' + esc(r.err) + '</p>';
+  else h += '<p class="note swline">' + (r.line ? '<code>' + esc(r.line) + '</code> = ' : '') + esc(r.text) + '</p>';
+  if (mode === 'B PROGRAM' && !planes.length) h += '<p class="note">No imported B program has a single plane yet: post through go_to_machine and Import B list.</p>';
+  return h;
 }
 function cmcSummary(s, kind) {
   if (!S.isNum(s.cmcNom) || !S.isNum(s.cmcStock)) return 'Fill in nominal and first-cut wear to see the first cut.';
@@ -3391,7 +3621,7 @@ function saveBlob(blob, name) {
 }
 
 /* ---- edits ---- */
-var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist)$|steps\.\d+\.(brk|meas|setpiece|step|tool|program|cmc\w*)$|cmcR\.)/;
+var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist|sw\w+)$|steps\.\d+\.(brk|meas|setpiece|step|tool|program|cmc\w*)$|cmcR\.)/;
 function onEdit(e) {
   var el = e.target;
   if (el.dataset && el.dataset.col) {
@@ -3424,6 +3654,11 @@ function onEdit(e) {
   if (cm) {
     var st = job.steps[Number(cm[1])];
     if (st.cmcTool === 'TURNING' && st.cmcFeature === 'BORE' && !st.cmcSign) st.cmcSign = 'LARGER';
+  }
+  /* ANGLES: data block and direction from the first known plane when blank (audit 6) */
+  if (/(^probing\.swMode|\.cmcSwMode)$/.test(p) && v === 'ANGLES' && S.isBlank(job.probing.swBlock) && S.isBlank(job.probing.swDir)) {
+    var dflt = S.swivelDefaults(job);
+    if (dflt) { job.probing.swBlock = dflt.block; job.probing.swDir = dflt.dir; }
   }
   if (STRUCT.test(p)) scheduleRender();
 }

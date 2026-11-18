@@ -295,6 +295,9 @@ After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
     R[...] with a computed number (cannot be checked) and B programs without G41/G42. The generator uses them for CMC:
     it refuses a CMC R block that covers an R a B program uses, and warns when a CMC step corrects radius wear on a
     program without G41/G42.
+    A third key, cycle800, holds the B program's CYCLE800 plane when it has exactly one ("" = none, nest face). Several
+    different planes or only a turning-tool alignment store none (the message names them). The generator offers the
+    plane as the probe swivel: probe step (rotate, probe, CYCLE800() back) and CMC.
   - <document>_<joblist>_tool_order.csv: the tool sheet. Same columns and catalog lookup as the tool_order_list script
     (go_to_machine uses the installed tool_order_list\tool_order_list.py, so layout changes there show up here too);
     one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not

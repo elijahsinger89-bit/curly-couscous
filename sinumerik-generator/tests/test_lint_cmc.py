@@ -58,6 +58,15 @@ case('status 3 before the CMC step', W + 'A_P1.MPF', 'L_TOOL_LOAD("EM_0500")\n',
 case('measure-only cycle with WO number', W + 'C_P1_CMC20_M.SPF', 'CYCLE977(1001,0,', 'CYCLE977(1001,5,', 'needs S_KNUM 0')
 case('protection zone without S_SZA', W + 'C_P1_CMC20_M.SPF', ',-1.0000,1.5000,0,', ',-1.0000,0,0,', 'needs S_SZA')
 case('arc increment too large', W + 'C_P1_CMC80_M.SPF', ',200,-35,', ',200,-150,', 'S_INCA')
+# probe swivel (f10_swivel output next to the CMC job)
+SW = os.path.join(os.path.dirname(SRC), 'f10_swivel')
+if os.path.isdir(SW):
+    SRC = SW
+    case('swivel: G54 after the swivel', W + 'C_P1_PROBE.SPF', ';--- Z DATUM: SURFACE (CYCLE978) ---\nD1', ';--- Z DATUM: SURFACE (CYCLE978) ---\nG54 D1', 'G54 selected again after the swivel')
+    case('swivel: no CYCLE800() at the end', W + 'C_P1_PROBE.SPF', 'CYCLE800()                         ;swivel back', ';CYCLE800()', 'no CYCLE800() between the swivel and RET')
+    case('swivel: CMC measure no CYCLE800() at the end', W + 'C_P1_CMC10_M.SPF', 'CYCLE800()                         ;probe plane off', ';', 'no CYCLE800() between the swivel and RET')
+else:
+    fails.append('f10_swivel output not found next to ' + SRC)
 print()
 print('FAILURES: %d' % len(fails) if fails else 'ALL CMC LINT CHECKS PASSED')
 sys.exit(1 if fails else 0)

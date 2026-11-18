@@ -15,7 +15,9 @@
 #   - <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list;
 #     B programs left out are listed in it as "not posted"; for every posted B program the NC file is read:
 #     radius_comp = G41/G42 found (CMC radius wear needs cutter compensation), r_params = R parameters it uses
-#     (the generator keeps its CMC R blocks clear of them)
+#     (the generator keeps its CMC R blocks clear of them), cycle800 = the B program's CYCLE800 plane when it has
+#     exactly one ("" = none = nest face; several, or only a turning-tool alignment: cycle800_note SEVERAL / TURNING),
+#     offered by the generator as the probe swivel for the probe step and CMC
 #   - the tool sheet <document>_<joblist>_tool_order.csv: the columns and catalog lookup of the installed
 #     tool_order_list script (tool_order_list.py: catalog, tool_row), one row per tool of those B programs,
 #     "Toolpath names" = <B program>: <toolpath>
@@ -316,34 +318,97 @@ _RNUM = re.compile(r"(?<![A-Z0-9_$.])R([0-9]+)(?![0-9])")
 _RIND = re.compile(r"(?<![A-Z0-9_$.])R\[")
 
 
+_C800 = re.compile(r"^(?:N[0-9]+\s+)?(CYCLE800\s*\((.*)\))\s*$", re.I)
+_PLANE_ARGS = (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)    # _TC _MODE _X0.._Z0 _A.._C _X1.._Z1 (0-based)
+
+
+def _split_args(t):
+    out, cur, ins, depth = [], "", False, 0
+    for ch in t:
+        if ch == '"':
+            ins = not ins
+        if not ins and ch in "([":
+            depth += 1
+        if not ins and ch in ")]":
+            depth -= 1
+        if not ins and depth == 0 and ch == ",":
+            out.append(cur.strip())
+            cur = ""
+            continue
+        cur += ch
+    out.append(cur.strip())
+    return out
+
+
+def _num(x):
+    try:
+        return round(float(x), 6) if x != "" else 0.0
+    except ValueError:
+        return x
+
+
+def plane_of(line):
+    """None for CYCLE800() (deselect); ("TURNING", line) for a tool alignment (_ST hundreds 2 or 3);
+    (key, line) for a plane - the key leaves out retraction, direction and display mode."""
+    m = _C800.match(line.strip())
+    if not m or not m.group(2).strip():
+        return None
+    args = _split_args(m.group(2))
+    args += [""] * (16 - len(args))
+    try:
+        st = abs(int(float(args[2] or 0)))
+    except ValueError:
+        st = 0
+    if (st // 100) % 10 in (2, 3):
+        return ("TURNING", m.group(1))
+    return (tuple(args[1] if i == 1 else _num(args[i]) for i in _PLANE_ARGS), m.group(1))
+
+
 def nc_facts(p):
-    """(radius_comp, sorted R numbers, indirect R used) of one NC file: comments (;) and strings left out."""
-    comp, rs, ind = False, set(), False
+    """(radius_comp, sorted R numbers, indirect R used, CYCLE800 planes {key: first line}, turning alignment seen)
+    of one NC file: comments (;) and strings left out."""
+    comp, rs, ind, planes, turning = False, set(), False, {}, False
     with open(p, encoding="latin-1", errors="replace") as f:
         for raw in f:
+            pl = plane_of(raw.split(";", 1)[0])
+            if pl and pl[0] == "TURNING":
+                turning = True
+            elif pl and pl[0] not in planes:
+                planes[pl[0]] = pl[1]
             code = re.sub(r'"[^"]*"', '""', raw.upper().split(";", 1)[0])
             if _G4142.search(code):
                 comp = True
             rs.update(int(m) for m in _RNUM.findall(code))
             if _RIND.search(code):
                 ind = True
-    return comp, sorted(rs), ind
+    return comp, sorted(rs), ind, planes, turning
 
 
 def add_nc_facts(steps, found):
     """radius_comp / r_params on the B list steps whose NC file was written now. Returns message lines."""
-    out, comp_no, with_r, ind = [], [], [], []
+    out, comp_no, with_r, ind, several, turn = [], [], [], [], [], []
     for s in steps:
         p = found.get(str(s.get("program", "")).lower())
         if not p:
             continue
         try:
-            comp, rs, indirect = nc_facts(p)
+            comp, rs, indirect, planes, turning = nc_facts(p)
         except Exception as e:
             log("NC read failed:", p, e)
             continue
         s["radius_comp"], s["r_params"] = comp, rs
-        log("NC facts:", s["program"], "| G41/G42:", comp, "| R:", rs, "| indirect R:", indirect)
+        if len(planes) == 1:
+            s["cycle800"] = list(planes.values())[0]
+        elif len(planes) > 1:
+            s["cycle800_note"] = "SEVERAL"
+            several.append(s["program"])
+        elif turning:
+            s["cycle800_note"] = "TURNING"
+            turn.append(s["program"])
+        else:
+            s["cycle800"] = ""
+        log("NC facts:", s["program"], "| G41/G42:", comp, "| R:", rs, "| indirect R:", indirect,
+            "| CYCLE800 planes:", list(planes.values()), "| turning alignment:", turning)
         if not comp:
             comp_no.append(s["program"])
         if rs:
@@ -356,6 +421,10 @@ def add_nc_facts(steps, found):
         out.append("WARNING - R[...] with a computed number (cannot be checked): " + ", ".join(ind))
     if comp_no:
         out.append("No G41/G42 (CMC radius wear has no effect there): " + ", ".join(comp_no[:8]) + (" ..." if len(comp_no) > 8 else ""))
+    if several:
+        out.append("Several CYCLE800 planes, none stored (pick the probe plane in the generator): " + ", ".join(several))
+    if turn:
+        out.append("Only a turning-tool CYCLE800, no plane stored (pick the probe plane in the generator): " + ", ".join(turn))
     return out
 
 

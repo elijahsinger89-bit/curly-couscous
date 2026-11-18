@@ -40,6 +40,12 @@ JSON
     r_params     list of integers, go_to_machine only: the R parameters the posted NC file uses
                  (comments and strings left out). The generator refuses a CMC R block that covers one.
                  Missing = unknown.
+    cycle800     string, go_to_machine only: the B program's CYCLE800 plane when its NC file has exactly
+                 one (lines that differ only in retraction, direction or display mode count once;
+                 CYCLE800() deselects skipped). "" = no CYCLE800 plane (nest face).
+                 The generator offers it as the probe swivel (probe step, CMC: AUTO / B PROGRAM).
+    cycle800_note  "SEVERAL" = several different planes, "TURNING" = only a turning-tool alignment
+                 (3rd parameter hundreds digit 2 or 3); cycle800 is then missing. Both missing = unknown.
   refused    compound jobs left out, with the reason:
     name, joblist, reason   (more than one tool / a job has no tool / not a B program name)
 Notes (empty compound jobs) are not listed.

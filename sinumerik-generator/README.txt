@@ -6,6 +6,29 @@ USE
   Firefox: no server, no internet, no install.
   Fill the tabs, press Generate ZIP. The zip holds every NC file.
   Tab 5 (CMC) appears only while a step row has CMC ticked.
+
+PROBE SWIVEL (tab 2 for the probe step, each CMC card)
+  Rotate, probe, swivel back. The probe program runs the CYCLE800 line right
+  after the tool call (after G54 D1 and the nest rotary line), probes
+  everything in that plane (health check, part check, Z datum, XY datum)
+  and ends with CYCLE800(). Every X / Y / Z for it is in the swivelled plane.
+  Source of the line:
+    NONE       nest face, no swivel
+    B PROGRAM  the plane go_to_machine found in that posted B program
+    PASTE      a CYCLE800(...) line from the CAM program (block number and
+               comment are dropped)
+    ANGLES     about X, Y, Z typed in; data block and direction in "Swivel
+               settings" (prefilled from the first known plane). Written as
+               CYCLE800(0,"block",0,57,0,0,0,X,Y,Z,0,0,0,direction,0,1).
+    AUTO       (CMC) the plane of the card's own B program. Unknown (not
+               posted through go_to_machine), several planes or a turning
+               B program = choose another source.
+  Refused as a probe plane: CYCLE800() / data block "0", a turning-tool
+  alignment, tool-tip tracking (TRAORI), lines that don't move the rotary
+  axes, lines with variables. The page shows the line and what it does.
+  "Probe data set when swivelled" = S_PRNUM of the probe calibrated in the
+  swivelled position (blank = the normal one).
+  1.4.0 jobs: a CMC card keeps its pasted line (PASTE) or nest face (NONE).
   Tab 4 previews every file before saving; "Download this file" saves one.
   Save job writes the whole form to a .json file; Load job reopens it.
   The .json file is the input store (it replaces the Excel sheets).
@@ -197,6 +220,8 @@ FIRST RUN ON THE MACHINE (prove-out, single block, low feed override)
   6. CMC: first run on a scrap part with verify on. Check TCA brings back
      the same sister (C_P1_CMC_BACK); watch the probe lower with MEAS=1;
      read CMC_LOG.SPF; reset mid-nest and restart: no double correction.
+  7. Swivelled probe step (e.g. A-90): one nest, single block: watch the
+     swivel, the probe moves in that plane, CYCLE800() turns back at the end.
 
 BLUM MACROS (outside the Siemens manuals, not verified)
   BL9908_MOD must return 19.19 in its last parameter on a break and disable
@@ -204,7 +229,7 @@ BLUM MACROS (outside the Siemens manuals, not verified)
   from the old package (inch values). S3750 is the laser speed in both.
 
 TESTS (tests/, for whoever maintains the generator)
-  node tests/run_fixtures.js OUT    engine on 9 fixture jobs (2 CMC), bad
+  node tests/run_fixtures.js OUT    engine on 10 fixture jobs (2 CMC, 1 swivel), bad
                                     jobs, step builder, CMC math and R blocks
   python3 tests/nc_lint.py OUT/f*   manual rules on every generated file
   python3 tests/test_lint_cmc.py OUT/f8_cmc_milling

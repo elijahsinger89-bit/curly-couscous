@@ -487,6 +487,18 @@ def design_checks(files, findings):
                     findings.append('%s: G1 MEAS=1 must be followed by STOPRE and the $AC_MEA check' % n)
             if not any(x.startswith('G17 G90 G94') for x in c):
                 findings.append('%s: G17 G90 G94 missing before the probe moves (turning programs leave G18 / G95)' % n)
+    # ----- probe swivel: G54, then CYCLE800(...); no G54 after it; CYCLE800() before RET -----
+    for n in files:
+        c = code_of(n)
+        sw = [i for i, x in enumerate(c) if re.match(r'^CYCLE800\(.+\)$', x) and x != 'CYCLE800()']
+        if not sw or n.startswith(('L_', 'B_')):
+            continue
+        i0 = sw[0]
+        if any(re.match(r'^G5[0-9]', x) for x in c[i0 + 1:]):
+            findings.append('%s: G54 selected again after the swivel (select G54 before CYCLE800)' % n)
+        rets = [i for i, x in enumerate(c) if x == 'RET' and i > i0]
+        if not rets or 'CYCLE800()' not in c[i0 + 1:rets[-1]]:
+            findings.append('%s: no CYCLE800() between the swivel and RET' % n)
     for n in files:
         if n.startswith('A_') and n.endswith('.MPF'):
             c = code_of(n)

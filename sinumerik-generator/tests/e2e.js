@@ -346,6 +346,49 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     check(sj.steps[0].cmcSwivel === fj.steps[0].cmcSwivel && sj.steps[1].cmcUnit === 'DIAMETER' && sj.cmcR.first === '700', 'CMC card saved in the job file');
   }
 
+  /* 6d. probe swivel: tab 2 box, CMC card box, sources, decoded line, defaults, zip */
+  {
+    await loadJob('f10_swivel');
+    await page.click('nav.tabs button[data-tab="probing"]');
+    const swText = () => page.$eval('#tab-probing .swline', e => e.textContent);
+    check(await page.$eval('[data-path="probing.swMode"]', e => e.value) === 'ANGLES' && await page.$('[data-path="probing.swA"]') !== null &&
+          await page.$('[data-path="probing.swLine"]') === null, 'tab 2 swivel: ANGLES shows only the angles');
+    check((await swText()).includes('about X -90') && (await swText()).includes('CYCLE800(0,"H",0,57,0,0,0,-90,0,0,0,0,0,1,0,1)'), 'tab 2 swivel: line and decoded text shown');
+    await page.selectOption('[data-path="probing.swMode"]', 'B PROGRAM');
+    const opts = await page.$$eval('[data-path="probing.swFrom"] option', l => l.map(o => o.value));
+    check(JSON.stringify(opts) === JSON.stringify(['', 'B_SWIVEL_CHUCK_010']), 'B PROGRAM dropdown lists only B programs with one plane: ' + opts);
+    await page.selectOption('[data-path="probing.swFrom"]', 'B_SWIVEL_CHUCK_010');
+    check((await swText()).includes('about X -90') && (await swText()).includes('from B_SWIVEL_CHUCK_010'), 'B PROGRAM: the plane of that B program, decoded');
+    await page.selectOption('[data-path="probing.swMode"]', 'PASTE');
+    await page.fill('[data-path="probing.swLine"]', 'CYCLE800(0,"TURN_TRAFO",210,57,,,,0,0,0,,,,-1,0,102)');
+    await page.dispatchEvent('[data-path="probing.swLine"]', 'change');
+    check((await swText()).includes('aligns a turning tool'), 'PASTE: a turning-tool alignment is refused on the page');
+    await page.selectOption('[data-path="probing.swMode"]', 'NONE');
+    check(await page.$('[data-path="probing.swA"]') === null && (await swText()).includes('nest face'), 'NONE: no fields, nest face');
+    await page.fill('[data-path="probing.swBlock"]', ''); await page.dispatchEvent('[data-path="probing.swBlock"]', 'change');
+    await page.selectOption('[data-path="probing.swDir"]', '');
+    await page.selectOption('[data-path="probing.swMode"]', 'ANGLES');
+    check(await page.$eval('[data-path="probing.swBlock"]', e => e.value) === 'H' && await page.$eval('[data-path="probing.swDir"]', e => e.value) === '+1',
+          'ANGLES: data block and direction prefilled from the imported plane');
+    await page.click('#tabBtnCmc');
+    const card0 = await page.$eval('.cmccard[data-cmc-row="0"] .swline', e => e.textContent);
+    check(await page.$eval('[data-path="steps.0.cmcSwMode"]', e => e.value) === 'AUTO' && card0.includes('from B_SWIVEL_CHUCK_010'), 'CMC card: AUTO = the plane of its own B program');
+    await page.screenshot({ path: path.join(out, 'shot_swivel_cmc.png'), fullPage: false });
+    await page.click('nav.tabs button[data-tab="probing"]');
+    await page.screenshot({ path: path.join(out, 'shot_swivel_probing.png'), fullPage: true });
+    d = await generate(false);
+    check(!!d, 'swivel job generates');
+    if (d) {
+      const zs = path.join(out, 'swivel.zip');
+      await d.saveAs(zs);
+      unzipCheck(zs, path.join(out, 'swivel'));
+      const pr = fs.readFileSync(path.join(out, 'swivel', 'WKS', 'C_P1_PROBE.SPF'), 'utf8');
+      check(pr.includes('CYCLE800(0,"H",0,57,0,0,0,-90,0,0,0,0,0,1,0,1)') && /CYCLE800\(\)\s+;swivel back/.test(pr), 'probe program: swivel, then CYCLE800() at the end');
+      const lint = require('child_process').spawnSync('python3', [path.join(here, 'nc_lint.py'), path.join(out, 'swivel')], { encoding: 'utf8' });
+      check(lint.status === 0, 'swivel zip passes the NC lint ' + (lint.status ? lint.stdout.slice(-400) : ''));
+    }
+  }
+
   /* 7. screenshots for review */
   await loadJob('f1_old_package');
   await page.screenshot({ path: path.join(out, 'shot_config.png'), fullPage: true });

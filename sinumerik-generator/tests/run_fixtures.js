@@ -426,6 +426,67 @@ eq(r.steps.map(s => s.program), ['B_00223344_010', 'B_00223344_020'], 'blank mac
     [true, true, 2], 'CMC turning measure: CAM swivel line, DIAMOF, swivel off after');
 }
 
+/* ---- probe swivel (CYCLE800) ---- */
+{
+  const cv = 'N713 CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101) ; A=DC(-90)';
+  const c1 = S.swivelCheck(cv);
+  eq([c1.err, c1.line, c1.text], ['', 'CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)',
+    'data block H, axis by axis: about Y 0, about X -90, about Z 0, direction +1'], 'swivel: your CV74715 line decodes to about X -90');
+  const bad = [
+    ['turning tool alignment', 'CYCLE800(0,"TURN_TRAFO",210,57,,,,0,0,0,,,,-1,0,102)', 'aligns a turning tool'],
+    ['deselect', 'CYCLE800(0,"0",0,57,0,0,0,0,0,0,0,0,0,1,0,1)', 'deselects'],
+    ['swivel no (_DIR 0)', 'CYCLE800(0,"H",0,57,0,0,0,-90,0,0,0,0,0,0,0,1)', 'does not move the rotary axes'],
+    ['swivel no (_ST 10000)', 'CYCLE800(0,"H",10000,57,0,0,0,-90,0,0,0,0,0,1,0,1)', 'does not move the rotary axes'],
+    ['tool tip tracking', 'CYCLE800(0,"H",10,57,0,0,0,-90,0,0,0,0,0,1,0,1)', 'tracks the tool tip'],
+    ['variable angle', 'CYCLE800(0,"H",0,57,0,0,0,R1,0,0,0,0,0,1,0,1)', 'not a number'],
+    ['not CYCLE800', 'G0 X0', 'paste one CYCLE800'],
+  ];
+  for (const [label, line, want] of bad) {
+    const e = S.swivelCheck(line).err;
+    if (!e.includes(want)) fail('swivel should refuse ' + label + ': got "' + e + '"'); else console.log('ok   swivel refuses ' + label);
+  }
+  const sj = () => S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f10_swivel.json'), 'utf8')));
+  const R10 = S.resolve(sj());
+  eq([R10.P.sw.line, R10.P.swPrnum], ['CYCLE800(0,"H",0,57,0,0,0,-90,0,0,0,0,0,1,0,1)', 2], 'probe step ANGLES A-90: data block H, +1, probe data set 2');
+  eq(R10.cmcList.map(s => s.cmc.swivel), ['CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)', 'CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)',
+    'CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)', 'CYCLE800(0,"H",0,57,0,0,0,-90,0,45,0,0,0,1,0,1)'], 'CMC swivel: AUTO, B PROGRAM, PASTE, ANGLES');
+  const swneg = [
+    ['AUTO with an unknown plane', j => { j.steps[0].planeState = ''; }, 'steps.0.cmcSwMode', 'unknown'],
+    ['AUTO on a turning B program', j => { j.steps[2].cmcSwMode = 'AUTO'; }, 'steps.2.cmcSwMode', 'turning tool'],
+    ['AUTO with several planes', j => { j.steps[3].cmcSwMode = 'AUTO'; }, 'steps.3.cmcSwMode', 'several'],
+    ['B PROGRAM without a plane', j => { j.steps[1].cmcSwFrom = 'B_SWIVEL_CHUCK_040'; }, 'steps.1.cmcSwFrom', 'several'],
+    ['B PROGRAM not in the table', j => { j.steps[1].cmcSwFrom = 'B_NOPE'; }, 'steps.1.cmcSwFrom', 'not in the step table'],
+    ['ANGLES all zero', j => { j.probing.swA = '0'; }, 'probing.swA', 'every angle is 0'],
+    ['ANGLES without data block', j => { j.probing.swBlock = ''; }, 'probing.swBlock', 'data block'],
+    ['ANGLES without direction', j => { j.probing.swDir = ''; }, 'probing.swDir', 'direction'],
+    ['paste a turning alignment', j => { j.steps[2].cmcSwivel = 'CYCLE800(0,"TURN_TRAFO",210,57,,,,0,0,0,,,,-1,0,102)'; }, 'steps.2.cmcSwivel', 'turning tool'],
+    ['swivel probe data set 50', j => { j.probing.swPrnum = '50'; }, 'probing.swPrnum', '1-40'],
+  ];
+  for (const [label, mut, want, txt] of swneg) {
+    const j = sj(); mut(j);
+    const v = S.validate(j);
+    if (!v.errors.some(e => e.path === want && e.msg.includes(txt))) fail('swivel: validator missed "' + label + '" (got ' + JSON.stringify(v.errors) + ')');
+    else console.log('ok   rejects: swivel ' + label);
+  }
+  eq(S.validate(sj()).errors, [], 'swivel job validates');
+  /* defaults for ANGLES from the first known plane */
+  eq(S.swivelDefaults(sj()), { block: 'H', dir: '+1' }, 'ANGLES defaults: data block and direction of the first imported plane');
+  /* old CMC cards: blank swivel = NONE, pasted = PASTE; other old rows AUTO */
+  const o9 = S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f9_cmc_turning.json'), 'utf8')));
+  eq(o9.steps.map(s => s.cmcSwMode), ['PASTE', 'PASTE', 'NONE', 'NONE', 'NONE'], '1.4.0 CMC cards keep their swivel (PASTE) or nest face (NONE)');
+  /* B list keys */
+  const d = JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'b_list_sample.json'), 'utf8'));
+  d.steps[0].cycle800 = 'CYCLE800(0,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)'; d.steps[1].cycle800 = ''; d.steps[2].cycle800_note = 'TURNING';
+  eq(S.readBList(d).list.steps.map(s => s.planeState), ['ONE', 'NONE', 'TURNING', ''], 'B list: cycle800 / cycle800_note -> plane state');
+  /* the probe program: swivel after G54 D1, D1 only after it, CYCLE800() at the end */
+  const g10 = S.generate(sj(), { date: '2026-11-12' }).files;
+  const code = t => t.split('\n').map(l => l.replace(/;.*$/, '').trim()).filter(Boolean);
+  const pr = code(g10.find(f => f.path === 'WKS/C_P1_PROBE.SPF').text);
+  const iSw = pr.indexOf('CYCLE800(0,"H",0,57,0,0,0,-90,0,0,0,0,0,1,0,1)');
+  eq([pr[iSw - 2], pr.slice(iSw + 1).some(l => /^G54/.test(l)), pr[pr.length - 2], pr.filter(l => /CYCLE97[78]\(/.test(l)).every(l => l.split(',')[3] === '2')],
+    ['G54 D1', false, 'CYCLE800()', true], 'probe program: G54, swivel, D1 only, data set 2, CYCLE800() before RET');
+}
+
 /* ---- JSON round trip ---- */
 const j1 = base();
 const j2 = S.normalizeJob(JSON.parse(JSON.stringify(j1)));

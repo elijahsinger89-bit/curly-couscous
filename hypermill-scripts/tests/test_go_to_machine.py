@@ -55,9 +55,13 @@ class PJob(om.Job):
 
 # posted NC text per B program (G41/G42 and R parameter scan for the generator's CMC checks)
 NC_TEXT = {
-    "B_G17_SLIDE_010_HF5": "G1 G41 D1 X10\nR1=5 R12=R1+1 ; R700 in a comment\nMSG(\"R800\")\nG2 X1 Y1 CR=5\n",
-    "B_G17_SLIDE_020_HF5": "G0 X0\nCYCLE81(1,0,1,-5)\nTRAFOOF\nG40\n",
-    "B_G17_SLIDE_030_HF5": "G42 X0\nR[R2]=1\n",
+    "B_G17_SLIDE_010_HF5": "N10 CYCLE800(1,\"H\",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101) ; A=DC(-90)\nG1 G41 D1 X10\n"
+                           "R1=5 R12=R1+1 ; R700 in a comment\nMSG(\"R800\")\nG2 X1 Y1 CR=5\nCYCLE800()\n"
+                           "CYCLE800(0,\"H\",200000,54,0,0,0,0,-90,0,0,0,0,-1,0,1)\n",
+    "B_G17_SLIDE_020_HF5": "G0 X0\nCYCLE81(1,0,1,-5)\nTRAFOOF\nG40\nCYCLE800()\n",
+    "B_G17_SLIDE_030_HF5": "CYCLE800(0,\"H\",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)\nG42 X0\nR[R2]=1\n"
+                           "CYCLE800(0,\"H\",200000,54,0,0,0,0,0,0,0,0,0,1,0,101)\n",
+    "B_G17_SLIDE_040_HF5": "CYCLE800(0,\"TURN_TRAFO\",210,57,,,,0,0,0,,,,-1,0,102)\nG1 X1\n",
 }
 
 
@@ -294,7 +298,14 @@ check(facts == {"B_G17_SLIDE_010_HF5": (True, [1, 12]), "B_G17_SLIDE_020_HF5": (
 box = flat(gui.BOXES[-1])
 check("R parameters in posted B programs" in box and "B_G17_SLIDE_010_HF5 (R1, R12)" in box and "R[...] with a computed number" in box and
       "No G41/G42" in box, "message: R parameters, indirect R and missing G41/G42 named")
+pl = {s["program"]: (s.get("cycle800"), s.get("cycle800_note")) for s in json.load(open(BLIST))["steps"]}
+check(pl == {"B_G17_SLIDE_010_HF5": ('CYCLE800(1,"H",200000,54,0,0,0,0,-90,0,0,0,0,1,0,101)', None),
+             "B_G17_SLIDE_020_HF5": ("", None), "B_G17_SLIDE_030_HF5": (None, "SEVERAL"), "B_G17_SLIDE_040_HF5": (None, "TURNING")},
+      "CYCLE800 planes: one (retraction / direction ignored), none, several, turning alignment only %s" % pl)
+check("Several CYCLE800 planes, none stored" in box and "B_G17_SLIDE_030_HF5" in box and "Only a turning-tool CYCLE800" in box,
+      "message: several planes and turning alignment named")
 csvrow = [r for r in csv.DictReader(open(BLIST[:-5] + ".csv", encoding="utf-8-sig")) if r["program"] == "B_G17_SLIDE_010_HF5"][0]
+check(csvrow["cycle800"].startswith("CYCLE800(1,") , "csv: cycle800 column")
 check(csvrow["radius_comp"] == "True" and csvrow["r_params"] == "1 12", "csv: radius_comp and r_params columns")
 
 # ---------------- everything passes: confirm ----------------

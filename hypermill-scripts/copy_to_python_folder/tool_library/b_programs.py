@@ -430,7 +430,7 @@ def write_export(data, folder, base):
     with open(pj, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=1)
     cols = ("step", "program", "tool", "tool_name", "tool_type", "diameter", "jobs", "purpose", "brk", "brk_tol", "meas",
-            "meas_always", "max_brk", "life", "setpiece", "rule", "joblist", "radius_comp", "r_params")
+            "meas_always", "max_brk", "life", "setpiece", "rule", "joblist", "radius_comp", "r_params", "cycle800", "cycle800_note")
     with open(pc, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(cols)
