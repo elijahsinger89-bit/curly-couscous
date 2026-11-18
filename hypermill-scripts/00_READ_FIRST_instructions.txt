@@ -15,6 +15,8 @@ copy_to_python_folder
                    (icon: go_to_machine.png)
   tool_load_mda    one MDA program that creates every tool and sister on the control (NEWT by tool ID), runnable on
                    its own; go_to_machine uses it after posting (icon: tool_load_mda.png)
+  restore_job_names puts every toolpath's name back to its number and toolpath type ("2: 3D Optimized Roughing")
+                   (icon: restore_job_names.png)
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
                    B program name rule (b_programs.py)
@@ -32,6 +34,7 @@ INSTALL
    Button: b_program_rename\b_program_rename.png (32 x 32; b_program_rename.ico).
    Button: go_to_machine\go_to_machine.png (32 x 32; go_to_machine.ico).
    Button: tool_load_mda\tool_load_mda.png (32 x 32; tool_load_mda.ico).
+   Button: restore_job_names\restore_job_names.png (32 x 32; restore_job_names.ico).
 
 
 THE PART FLOW
@@ -325,6 +328,17 @@ Tools without a gage length are left out (listed in the log).
 Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types.
 Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND); from go_to_machine:
 <document folder>\go to machine\. Log: tool_load_mda_log.txt.
+
+RESTORE JOB NAMES
+Renames toolpaths (jobs) back to "<number>: <toolpath type>" after someone renamed them by hand.
+  number        = the job number hyperMILL gave the job (its *JOBID setting; if missing, the "N:" in front of the name)
+  toolpath type = the cycle name hyperMILL puts in a new job's name (Job.LocCycleName): 2D Contour, 3D Optimized Roughing,
+                  Contour Turning ...
+Screens: Joblist (one or all), Name format ("N: Type" or "N: T<tool ID> Type") -> the list old -> new in the output window
+  -> Rename: No (first) / Yes.
+Compound jobs (B programs, dividers) keep their names. Toolpaths already named right are left alone. A toolpath without a
+number or a type is listed and left alone.
+Log: restore_job_names_log.txt holds old -> new for every toolpath, so a name can be typed back.
 
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max

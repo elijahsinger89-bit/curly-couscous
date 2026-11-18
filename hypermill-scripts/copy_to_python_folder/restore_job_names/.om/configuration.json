@@ -1,0 +1,5 @@
+{
+    "ShowContent": false,
+    "StartupFile": "restore_job_names.py",
+    "Type": "Script"
+}
