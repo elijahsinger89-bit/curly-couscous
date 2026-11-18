@@ -116,9 +116,7 @@ def build(all_pass=False, dup=False):
     for n in os.listdir(POFDIR):
         os.remove(os.path.join(POFDIR, n))
     shutil.rmtree(os.path.join(DOCDIR, "NC"), ignore_errors=True)
-    for n in os.listdir(DOCDIR):
-        if n.endswith((".json", ".csv", ".MPF")):  # B lists, tool sheets, tool load programs
-            os.remove(os.path.join(DOCDIR, n))
+    shutil.rmtree(OUTDIR, ignore_errors=True)    # B lists, tool sheets, tool load programs
     T = om.Tool
     em, dr, fm = T("10047210", "End mill", "endMill", 0.4724), T("11039410", "Drill", "drilTool", 0.25), T("905083900", "Face", "faceMill", 2.0)
     j1 = PJob("1: Contour", em, pof(1, UC["a"]))
@@ -185,9 +183,10 @@ def nc_files():
 
 
 LOGP = os.path.join(tmp, "go_to_machine_log.txt")
-BLIST = os.path.join(DOCDIR, "G17_SLIDE_OP10_B_PROGRAMS.json")
-SHEET = os.path.join(DOCDIR, "G17_SLIDE_OP10_Op10_tool_order.csv")
-MPF = os.path.join(DOCDIR, "G17_SLIDE_OP10_TOOL_LOAD.MPF")
+OUTDIR = os.path.join(DOCDIR, "go to machine")   # every output except the NC files
+BLIST = os.path.join(OUTDIR, "G17_SLIDE_OP10_B_PROGRAMS.json")
+SHEET = os.path.join(OUTDIR, "G17_SLIDE_OP10_Op10_tool_order.csv")
+MPF = os.path.join(OUTDIR, "G17_SLIDE_OP10_TOOL_LOAD.MPF")
 
 
 def counts(**by_id):
@@ -291,6 +290,10 @@ check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and len(nc_files()) == 4, "po
 check("Posted although 3 fail the check." in flat(gui.BOXES[-1]), "post all: message says posted with failures")
 check("POSTED WITH FAILURES" in open(LOGP).read(), "post all: log records the override")
 check(len(gui.SHOWN) == 2 and len(sheet()) == 3, "post all: no list question; tool sheet with all 3 tools")
+check(os.path.exists(BLIST) and os.path.exists(SHEET) and
+      not [n for n in os.listdir(DOCDIR) if n.endswith((".json", ".csv", ".MPF"))] and
+      ("go to machine" + os.sep + "G17_SLIDE_OP10_B_PROGRAMS.json") in gui.BOXES[-1],
+      "outputs in <document folder>\\go to machine, none next to the document; NC files stay in NC")
 facts = {s["program"]: (s.get("radius_comp"), s.get("r_params")) for s in json.load(open(BLIST))["steps"]}
 check(facts == {"B_G17_SLIDE_010_HF5": (True, [1, 12]), "B_G17_SLIDE_020_HF5": (False, []), "B_G17_SLIDE_030_HF5": (True, [2]),
                 "B_G17_SLIDE_040_HF5": (False, [])},

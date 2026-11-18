@@ -9,7 +9,8 @@
 #   "CC_RESULT 1").
 # When B programs fail: a warning with the list, then Post: No - post nothing / Post all / Post only the ones that pass.
 # Stops without posting when a step number is used twice. Warns about names over 24 characters.
-# After posting:
+# After posting (everything except the NC files goes into the "go to machine" folder in the document folder;
+# if it cannot be written: C:\Users\Public\Documents\OPEN MIND):
 #   - the NC files written or updated (document folder and its NC folder, before / after)
 #   - when only some B programs were posted: B program list and tool sheet: Only the posted ones / All B programs
 #   - <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list;
@@ -35,6 +36,7 @@ LIB_DIRS = (os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool
 TOL_FILES = (os.path.join(PY_DIR, "tool_order_list", "tool_order_list.py"), os.path.join(HERE, "..", "tool_order_list", "tool_order_list.py"))
 TLM_FILES = (os.path.join(PY_DIR, "tool_load_mda", "tool_load_mda.py"), os.path.join(HERE, "..", "tool_load_mda", "tool_load_mda.py"))
 MDA_LABEL = "Tool load MDA"
+OUT_SUB  = "go to machine"          # folder in the document folder for the B program list, tool sheet and MDA
 TITLE    = "Go to machine"
 ACTIONS  = ["Check only", "Check and post"]
 MAX_BOX_LINES = 30
@@ -558,7 +560,15 @@ def run():
         keep = set(p["name"] for p in scope_progs)
         dropped = [p for p in progs if p["name"] not in keep]
         drop_names = set(p["name"] for p in dropped)
-        dest = folder if folder and writable(folder) else out_dir()
+        dest = os.path.join(folder, OUT_SUB) if folder else ""
+        if dest:
+            try:
+                os.makedirs(dest, exist_ok=True)
+            except Exception as e:
+                log("cannot create", dest, e)
+        if not dest or not writable(dest):
+            dest = out_dir()
+        log("output folder:", dest)
         base = os.path.splitext(path.replace("\\", "/").split("/")[-1])[0] or "document"
         # ---- B program list for the generator ----
         rules_path = lib_file("brk_rules.csv")

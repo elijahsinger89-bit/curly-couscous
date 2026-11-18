@@ -285,7 +285,8 @@ Posting: all pass -> Post: No / Yes (No first). Some fail -> a WARNING with the 
 Stops before posting when a step number is used twice. Warns about names over 24 characters. Compound jobs with more
 than one tool, a job without a tool, or a name not in the B rule are listed and never posted. Notes are skipped.
   Tested 17 Nov 2026: CalculateNC posted exactly the B programs given, one NC\<B program>.mpf each, next to the document.
-After posting, next to the document (else C:\Users\Public\Documents\OPEN MIND):
+After posting, in the folder "go to machine" in the document folder (made when needed; if it cannot be written:
+C:\Users\Public\Documents\OPEN MIND). The NC files stay where hyperMILL posts them:
   - When only some B programs were posted: "Include" - Only the ones posted (first) / All B programs. This sets what the
     B program list and the tool sheet hold. B programs left out are listed in the B program list as "not posted", so the
     generator shows them and its main program does not call them.
@@ -322,7 +323,8 @@ Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_D
 NEWT stops with an alarm when that name and sister already exist on the control: delete them first.
 Tools without a gage length are left out (listed in the log).
 Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types.
-Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND). Log: tool_load_mda_log.txt.
+Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND); from go_to_machine:
+<document folder>\go to machine\. Log: tool_load_mda_log.txt.
 
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
