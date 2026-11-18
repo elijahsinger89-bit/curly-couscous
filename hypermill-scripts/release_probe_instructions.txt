@@ -1,29 +1,25 @@
-RELEASE PROBE v4 (read-only) - for the go-to-machine script
+RELEASE PROBE v5 (read-only) - for the go-to-machine script
 
 What it is for
-  How to tell that a job has been run through Simulation Center and has not
-  changed since. Known so far: Simulation Center writes POF\<uuid>.ccrpt
-  (13 bytes) for each job it simulates and nothing for the others.
-  v4 shows, per job:
-    - name, compound job, UUID, Status, POFStatus, POF file and its date
-    - the .ccrpt of that UUID: date and its 13 bytes (text and hex)
-    - the toolpath checksum (PofFile.GetMovementsCheckSum), read from a
-      temporary COPY of the job's POF file
-  It also lists how PofFile is used (arguments asked without running
-  anything), .ccrpt files no job matches, and the .omgcfg file Simulation
-  Center points to.
+  Which Simulation Center result (POF\<ucid>.ccrpt) belongs to which job.
+  Known so far: each simulated toolpath gets a .ccrpt named by a toolpath id
+  (ucid, not the job UUID); changing a job deletes its .ccrpt; regrouping
+  keeps it. v5 looks for each job's ucid:
+    - in the job's POF file (every GUID in it; each .ccrpt ucid as text or
+      UTF-16), read only
+    - in PofFile.GetCfgParameters(), read from a temporary COPY of the POF
+    - in the job's own settings
+    - the POF file's CRC32 against the crc values in the .omgcfg
+  The summary at the end lists each .ccrpt and the job it belongs to.
 
 Install
   Copy copy_to_python_folder\release_probe into
-  C:\Users\Public\Documents\OPEN MIND\python (replace v3) and restart
+  C:\Users\Public\Documents\OPEN MIND\python (replace v4) and restart
   hyperMILL.
 
-Test (same document: simulated / not simulated / not calculated)
-  1. Leave "simulated" as it is. Run release_probe. Keep the log
-     (rename it release_probe_log_1.txt).
-  2. Change one job in "simulated" (for example its feed rate) and
-     recalculate it. Run release_probe again.
-  3. Send both logs and say which job you changed.
+Run
+  Same document as v4, as it is now (4 .ccrpt files left). Run
+  release_probe and send the log.
 
 What it changes
   Nothing in the document and nothing in the POF folder. No NC file is

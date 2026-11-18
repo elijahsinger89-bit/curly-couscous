@@ -1,29 +1,31 @@
-# release_probe.py - hyperMILL 35 - release probe v4 (read-only)
-# For the go-to-machine (release) script: how to tell a job has been run through Simulation Center, and is unchanged.
-# Known from v1-v3: Simulation Center writes POF\<uuid>.ccrpt (13 bytes) and POF\<uuid>_@...rsf for each simulated job,
-#   and nothing for jobs it did not simulate. Job.POFStatus does not tell simulated from not simulated. The job tree shows
-#   no simulation status (the light bulb is the toolpath display). POF files are rewritten without toolpath changes
-#   (regrouping), so dates cannot tell "changed since simulated".
-# v4 reads:
-#   1. PofFile: its constructor and members (arguments asked with a made-up keyword: hyperMILL refuses the call before
-#      running anything), and every method of the core classes whose arguments mention PofFile
-#   2. every job (also jobs outside compound jobs): UUID, ID, Status, POFStatus, PofFileName, the POF file's date, the
-#      .ccrpt of that UUID (date, the 13 bytes as text and hex), and - when PofFile opens a file by name - the
-#      GetMovementsCheckSum() of a temporary COPY of the job's POF file, next to the .ccrpt bytes
-#   3. .ccrpt files no job matches, the VNC\ files and the .omgcfg they point to
-# Changes nothing in the document. Methods that change the document are never called or asked.
-# A read slower than 2 s is not repeated; the job scan stops after 300 s.
+# release_probe.py - hyperMILL 35 - release probe v5 (read-only)
+# For the go-to-machine (release) script: which toolpath ID (ucid) belongs to which job.
+# Known from v1-v4:
+#   - Simulation Center writes POF\<ucid>.ccrpt ("CC_RESULT 1") per simulated toolpath. The ucid is not the job UUID.
+#   - Changing a job deletes its .ccrpt; regrouping (POF rewritten, toolpath unchanged) keeps it.
+#   - C:\TEMP\OPEN MIND\VMCenter\<joblist>\<joblist>.omgcfg lists the simulated POF files with ucid and crc (POF names
+#     from the time of the simulation).
+#   - GetMovementsCheckSum covers movements only (a feed change keeps it): not used.
+# v5 reads, per job:
+#   - the job's POF file bytes (read only): every GUID in it, and where each .ccrpt ucid appears (ASCII and UTF-16)
+#   - PofFile.GetCfgParameters() of a temporary COPY of the POF file (hyperMILL never opens the original)
+#   - the job's own settings (GetCfgParameters): values that are GUIDs or ucids
+#   - the CRC32 of the POF file, compared with the crc values in the .omgcfg
+# then a summary: each .ccrpt ucid and the job(s) it was found in.
+# Changes nothing in the document and nothing in the POF folder. A read slower than 2 s is not repeated.
 # Log (written line by line): C:\Users\Public\Documents\OPEN MIND\release_probe_log.txt
 import os
 import re
 import sys
 import time
 import types
+import zlib
+import shutil
 import datetime
 import tempfile
 import traceback
 
-VERSION = "release_probe v4"
+VERSION = "release_probe v5"
 OUT_DIR = r"C:\Users\Public\Documents\OPEN MIND"
 LOG_NAME = "release_probe_log.txt"
 TITLE = "Release probe"
@@ -31,13 +33,12 @@ MAX_LINE = 2000
 MAX_LINES = 40000
 MAX_SECONDS = 300.0
 SLOW = 2.0
-SIG_KW = "release_probe_signature_only_9f3c"      # no hyperMILL method has an argument with this name
-SIG_SKIP = ("Set", "Create", "Delete", "Remove", "Clear", "Reset", "Move", "Rename", "Insert", "Lock", "Replace", "Write",
-            "Import", "Export", "Clone", "Link", "Enable", "Optimize", "Sync", "Resort", "Update", "Apply", "Copy", "Paste",
-            "Override", "Change", "Add", "Run", "Calculate", "Generate", "Post", "Simulate", "Save", "Load", "Open",
-            "Close", "Execute", "Start", "Stop")
-MAX_TEXT_FILE = 65536
-MAX_TEXT_LINES = 300
+SIG_KW = "release_probe_signature_only_9f3c"
+MAX_POF_BYTES = 64 * 1024 * 1024
+MAX_GUIDS = 12
+FULL_CFG_JOBS = 2                    # PofFile.GetCfgParameters printed in full for the first jobs with a POF
+GUID = re.compile(rb"[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}")
+GUID_S = re.compile(r"[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}")
 
 lines = []
 _log = {"f": None}
@@ -75,13 +76,6 @@ def short(v, n=160):
     return s if len(s) <= n else s[:n] + "..."
 
 
-def public(obj):
-    try:
-        return [n for n in dir(obj) if not n.startswith("_")]
-    except Exception:
-        return []
-
-
 def name_of(obj):
     try:
         v = obj.Name
@@ -96,7 +90,6 @@ def stamp(t):
 
 
 def timed(label, fn):
-    """Calls fn once, unless this member was slow before. Returns (value, note)."""
     if label in slow:
         return None, "<slow before: not read>"
     t = time.perf_counter()
@@ -117,13 +110,24 @@ def enum_name(v):
     return s.split(".")[-1].split(":")[0].strip("<> ") if "." in s else s
 
 
-def uuid_key(u):
+def key(u):
     return str(u).strip().strip("{}").lower()
 
 
-# ---------------- arguments without running anything ----------------
+def read_bytes(p, n):
+    try:
+        with open(p, "rb") as f:
+            return f.read(n)
+    except Exception:
+        return None
+
+
+def printable(b):
+    return "".join(chr(c) if 32 <= c < 127 else "." for c in b)
+
+
+# ---------------- PofFile class (arguments asked without running, as v4) ----------------
 def is_native(raw):
-    """A built-in (compiled) hyperMILL function: rejects an unknown keyword argument before running."""
     f = getattr(raw, "__func__", raw)
     return isinstance(f, types.BuiltinFunctionType) and type(raw).__name__ in ("instancemethod", "builtin_function_or_method")
 
@@ -143,156 +147,115 @@ def overloads(text):
 
 
 def ask(fn):
-    """fn calls something with the made-up keyword. Returns (overloads, note)."""
     try:
         fn()
-        return [], "!! accepted the made-up argument (it may have run)"
+        return [], "!! accepted the made-up argument"
     except TypeError as e:
-        ov = overloads(e)
-        return ov, ("" if ov else "<%s>" % (str(e).splitlines() or ["TypeError"])[0][:200])
+        return overloads(e), ""
     except Exception as e:
-        return [], "<%s: %s>" % (type(e).__name__, (str(e).splitlines() or [""])[0][:200])
+        return [], "<%s>" % type(e).__name__
 
 
-def is_prop(raw):
-    return isinstance(raw, property) or type(raw).__name__ in ("property", "getset_descriptor", "member_descriptor")
-
-
-def find_class(name, near):
+def find_pof_class(job):
     mods = []
-    m = sys.modules.get(getattr(type(near), "__module__", "") or "")
+    m = sys.modules.get(getattr(type(job), "__module__", "") or "")
     if m is not None:
         mods.append(m)
     mods += [v for k, v in sorted(sys.modules.items()) if v is not None and (k == "om" or k.startswith("om."))]
     for mod in mods:
-        try:
-            c = mod.__dict__.get(name)
-        except Exception:
-            c = None
+        c = mod.__dict__.get("PofFile") if hasattr(mod, "__dict__") else None
         if isinstance(c, type):
-            return c, mod
-    return None, None
+            ov, _ = ask(lambda: c(**{SIG_KW: None}))
+            by_name = any(re.match(r"^\((self: [^,()]+, )?\w+: str\)( -> None)?$", o) for o in ov)
+            f = getattr(c, "GetCfgParameters", None)
+            cfg_ok = False
+            if f is not None and is_native(f):
+                ov2, _ = ask(lambda: f(**{SIG_KW: None}))
+                cfg_ok = any(re.match(r"^\(self: [^,()]+\) -> ", o) for o in ov2)
+            log("PofFile: %s.PofFile  opens by name: %s  GetCfgParameters without arguments: %s" % (mod.__name__, by_name, cfg_ok))
+            return c if (by_name and cfg_ok) else None
+    log("PofFile: not found in the loaded om modules")
+    return None
 
 
-def pof_class(job):
-    """PofFile: constructor and members. Returns (class, opens_by_name, checksum_without_args)."""
-    log("")
-    log("=== 1. PofFile (arguments asked, nothing run) ===")
-    cls, mod = find_class("PofFile", job)
-    if cls is None:
-        log("  PofFile class not found in the loaded om modules")
-        return None, False, False
-    log("  %s.PofFile" % mod.__name__)
-    ov, note = ask(lambda: cls(**{SIG_KW: None}))
-    for o in ov:
-        log("  init  PofFile%s" % o)
-    if note:
-        log("  init  %s" % note)
-    # pybind11 writes constructors as "PofFile(fileName: str)" (no self, no result)
-    by_name = any(re.match(r"^\((self: [^,()]+, )?\w+: str\)( -> None)?$", o) for o in ov)
-    cs_ok = False
-    for n in public(cls):
-        try:
-            raw = cls.__dict__[n] if n in cls.__dict__ else getattr(cls, n)
-        except Exception:
-            continue
-        if is_prop(raw):
-            log("  prop  %s" % n)
-            continue
-        f = getattr(cls, n, None)
-        if not callable(f) or isinstance(f, type) or n.startswith(SIG_SKIP) or not is_native(f):
-            log("  def   %s  (not asked)" % n)
-            continue
-        ov, note = ask(lambda f=f: f(**{SIG_KW: None}))
-        for o in ov:
-            log("  def   %s%s" % (n, o))
-            if n == "GetMovementsCheckSum" and re.match(r"^\(self: [^,()]+\) -> ", o):
-                cs_ok = True
-        if note:
-            log("  def   %s  %s" % (n, note))
-    log("  opens a POF file by name: %s | GetMovementsCheckSum without arguments: %s" % (by_name, cs_ok))
-    return cls, by_name, cs_ok
-
-
-def who_returns_pof(job):
-    """Methods of the core classes whose arguments or result mention PofFile."""
-    log("")
-    log("--- methods that take or return a PofFile ---")
-    mod = sys.modules.get(getattr(type(job), "__module__", "") or "")
-    if mod is None:
-        log("  core module not in sys.modules: skipped")
-        return
-    hits, asked = 0, 0
-    for cname in sorted(mod.__dict__):
-        c = mod.__dict__[cname]
-        if not isinstance(c, type) or hasattr(c, "__members__"):
-            continue
-        for n in public(c):
-            if n.startswith(SIG_SKIP):
-                continue
-            f = getattr(c, n, None)
-            if f is None or is_prop(c.__dict__.get(n)) or not callable(f) or isinstance(f, type) or not is_native(f):
-                continue
-            asked += 1
-            ov, _ = ask(lambda f=f: f(**{SIG_KW: None}))
-            for o in ov:
-                if "PofFile" in o or "CheckSum" in o or "Simul" in o or "Collision" in o:
-                    log("  %s.%s%s" % (cname, n, o))
-                    hits += 1
-    log("  %d methods asked, %d mention PofFile / CheckSum / Simul / Collision" % (asked, hits))
-
-
-# ---------------- 2. every job ----------------
-def read_bytes(p, n=4096):
-    try:
-        with open(p, "rb") as f:
-            return f.read(n)
-    except Exception as e:
-        return None
-
-
-def show_bytes(b):
-    if b is None:
-        return "not read"
-    try:
-        t = b.decode("utf-8")
-    except Exception:
-        t = None
-    return "text=%r hex=%s" % (t if t is not None else "(binary)", b.hex(" "))
-
-
-def checksum(pof_cls, pof):
-    """GetMovementsCheckSum of a temporary COPY of the POF file: the job's own POF file is only read, never opened by
-    hyperMILL's PofFile (in case opening it writes)."""
-    import shutil
+def pof_cfg(pof_cls, pof):
+    """PofFile.GetCfgParameters() of a temporary COPY of the POF file."""
     tmpdir = tempfile.mkdtemp(prefix="release_probe_")
     cp = os.path.join(tmpdir, os.path.basename(pof))
     try:
         shutil.copyfile(pof, cp)
         obj, note = timed("PofFile(name)", lambda: pof_cls(cp))
         if obj is None:
-            return "not read: %s" % note
-        cs, note = timed("PofFile.GetMovementsCheckSum", lambda: obj.GetMovementsCheckSum())
+            return None, note
+        cfg, note = timed("PofFile.GetCfgParameters", lambda: obj.GetCfgParameters())
         del obj
-        return note or "%s%s" % (short(cs), ("  (hex %x)" % cs) if isinstance(cs, int) and not isinstance(cs, bool) else "")
+        return cfg, note
     except Exception as e:
-        return "not read: %s" % e
+        return None, str(e)
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 
 
-def scan(joblists, folder, pof_cls, by_name, cs_ok):
-    log("")
-    log("=== 2. EVERY JOB: UUID, status, POF file, .ccrpt (Simulation Center), checksum ===")
-    pofdir = os.path.join(folder, "POF")
+# ---------------- .ccrpt and .omgcfg ----------------
+def ccrpt_files(pofdir):
+    out = {}
     try:
-        names = {n.lower(): n for n in os.listdir(pofdir)}
+        for n in os.listdir(pofdir):
+            if n.lower().endswith(".ccrpt"):
+                p = os.path.join(pofdir, n)
+                b = read_bytes(p, 256) or b""
+                out[key(n[:-6])] = dict(name=n, text=b.decode("utf-8", "replace").strip(), time=os.stat(p).st_mtime)
     except Exception as e:
-        names = {}
         log("  POF folder not listed: %s" % e)
-    used = set()
+    return out
+
+
+def omgcfg_entries(folder):
+    """[(pof file, ucid, crc)] from every .omgcfg the VNC\\*.nclist files point to."""
+    out = []
+    vnc = os.path.join(folder, "VNC")
+    if not os.path.isdir(vnc):
+        return out
+    for n in sorted(os.listdir(vnc)):
+        if not n.lower().endswith(".nclist"):
+            continue
+        t = (read_bytes(os.path.join(vnc, n), 65536) or b"").decode("utf-8", "replace")
+        for m in re.finditer(r'omgcfg file="([^"]+)"', t):
+            g = (read_bytes(m.group(1), 1 << 20) or b"").decode("utf-8", "replace")
+            for e in re.finditer(r'<pof file="([^"]+)"\s+ucid="([^"]+)"\s+crc="([^"]+)"', g):
+                out.append((e.group(1), key(e.group(2)), e.group(3)))
+    return out
+
+
+# ---------------- per job ----------------
+def search_pof(b, ccr):
+    """GUIDs in the POF bytes, and the offsets of each .ccrpt ucid (ASCII any case, UTF-16LE)."""
+    guids, seen = [], set()
+    for m in GUID.finditer(b):
+        g = m.group().decode().lower()
+        if g not in seen:
+            seen.add(g)
+            guids.append((g, m.start()))
+    low = b.lower()                     # ASCII letters only: also lower-cases UTF-16LE text
+    hits = []
+    for u in ccr:
+        for form, needle in (("ascii", u.encode()), ("utf16", u.encode("utf-16-le"))):
+            i = low.find(needle)
+            if i >= 0:
+                hits.append((u, form, i, printable(b[max(0, i - 40):i + len(needle) + 20])))
+    return guids, hits
+
+
+def scan(joblists, folder, pof_cls, ccr, omg):
+    log("")
+    log("=== 2. EVERY JOB ===")
+    pofdir = os.path.join(folder, "POF")
+    found = {u: [] for u in ccr}
+    omg_by_crc = {}
+    for f, u, c in omg:
+        omg_by_crc.setdefault(c, []).append((f, u))
     t0 = time.perf_counter()
-    first = True
+    full = 0
     for jl in joblists:
         log("")
         log("joblist %r" % name_of(jl))
@@ -300,90 +263,66 @@ def scan(joblists, folder, pof_cls, by_name, cs_ok):
         for c in list(jl.GetCompoundJobs()):
             for j in list(c.GetJobs()):
                 u, _ = timed("Job.UUID", lambda j=j: j.UUID)
-                owner[uuid_key(u)] = name_of(c)
+                owner[key(u)] = name_of(c)
         for j in list(jl.GetJobs()):
             if time.perf_counter() - t0 > MAX_SECONDS:
                 log("  (stopped after %d s)" % int(MAX_SECONDS))
-                return used, names
+                return found
             vals = {}
             for n in ("UUID", "ID", "Status", "POFStatus", "PofFileName"):
-                if first:
-                    log("    reading Job.%s" % n)
                 v, note = timed("Job." + n, lambda n=n: getattr(j, n))
                 vals[n] = note or (enum_name(v) if n in ("Status", "POFStatus") else v)
-            first = False
-            key = uuid_key(vals["UUID"])
+            jname = name_of(j)
             log("")
-            log("  J %r  in %r" % (name_of(j), owner.get(key, "(no compound job)")))
+            log("  J %r  in %r" % (jname, owner.get(key(vals["UUID"]), "(no compound job)")))
             log("      UUID=%s  ID=%s  Status=%s  POFStatus=%s" % (vals["UUID"], vals["ID"], vals["Status"], vals["POFStatus"]))
+            # the job's own settings
+            jc, note = timed("Job.GetCfgParameters", lambda: j.GetCfgParameters())
+            if isinstance(jc, dict):
+                gk = [(k, v) for k, v in sorted(jc.items(), key=lambda kv: str(kv[0])) if GUID_S.search(str(v))]
+                log("      job settings with a GUID value: %s" % (", ".join("%s=%s" % (k, v) for k, v in gk[:MAX_GUIDS]) or "none"))
+                for k, v in jc.items():
+                    for u in ccr:
+                        if u in str(v).lower():
+                            found[u].append("%s (job setting %s)" % (jname, k))
+            else:
+                log("      job settings not read: %s" % note)
+            # the POF file
             pf = str(vals["PofFileName"] or "")
             pof = pf if os.path.isabs(pf) or re.match(r"^[A-Za-z]:[\\/]", pf) else os.path.join(pofdir, pf)
-            try:
-                st = os.stat(pof)
-                log("      POF  %s  %s  %d bytes" % (pf, stamp(st.st_mtime), st.st_size))
-            except Exception:
+            if not os.path.isfile(pof):
                 log("      POF  %s  (file not found)" % pf)
-            cc = names.get(key + ".ccrpt")
-            if cc:
-                used.add(cc)
-                p = os.path.join(pofdir, cc)
-                b = read_bytes(p)
-                log("      CCRPT %s  %s  %s" % (cc, stamp(os.stat(p).st_mtime), show_bytes(b)))
-            else:
-                log("      CCRPT none (not simulated)")
-            rsf = [names[k] for k in names if k.startswith(key + "_@") and k.endswith(".rsf")]
-            if rsf:
-                log("      RSF  %s" % ", ".join(sorted(rsf)))
-            if pof_cls is not None and by_name and cs_ok and os.path.exists(pof):
-                log("      CHECKSUM %s" % checksum(pof_cls, pof))
-    return used, names
-
-
-# ---------------- 3. files ----------------
-def show_text(p, label):
-    try:
-        st = os.stat(p)
-    except Exception:
-        log("  %s  (not found: %s)" % (label, p))
-        return
-    log("")
-    log("  %s  %d bytes  %s" % (label, st.st_size, stamp(st.st_mtime)))
-    b = read_bytes(p, MAX_TEXT_FILE)
-    txt = None
-    for enc in ("utf-8-sig", "utf-16", "cp1252"):
-        try:
-            txt = b.decode(enc)
-            break
-        except Exception:
-            pass
-    for i, ln in enumerate((txt or repr(b[:2000])).splitlines()):
-        if i >= MAX_TEXT_LINES:
-            log("    | ... (%d lines shown)" % MAX_TEXT_LINES)
-            break
-        log("    | " + ln)
-
-
-def files(folder, used, names):
-    log("")
-    log("=== 3. FILES ===")
-    rest = sorted(v for k, v in names.items() if k.endswith(".ccrpt") and v not in used)
-    log("  .ccrpt files no job matches: %d" % len(rest))
-    for cc in rest:
-        p = os.path.join(folder, "POF", cc)
-        log("    %s  %s  %s" % (cc, stamp(os.stat(p).st_mtime), show_bytes(read_bytes(p))))
-    vnc = os.path.join(folder, "VNC")
-    if not os.path.isdir(vnc):
-        log("  no VNC folder")
-        return
-    for n in sorted(os.listdir(vnc)):
-        p = os.path.join(vnc, n)
-        if not os.path.isfile(p):
-            continue
-        show_text(p, "VNC\\" + n)
-        if n.lower().endswith(".nclist"):
-            b = read_bytes(p, MAX_TEXT_FILE) or b""
-            for m in re.finditer(r'omgcfg file="([^"]+)"', b.decode("utf-8", "replace")):
-                show_text(m.group(1), "omgcfg " + m.group(1))
+                continue
+            st = os.stat(pof)
+            b = read_bytes(pof, MAX_POF_BYTES) or b""
+            crc = str(zlib.crc32(b) & 0xFFFFFFFF)
+            log("      POF  %s  %s  %d bytes  crc32=%s%s" % (os.path.basename(pof), stamp(st.st_mtime), st.st_size, crc,
+                  ("  = omgcfg crc of %s" % ", ".join("%s ucid %s" % (os.path.basename(f), u) for f, u in omg_by_crc[crc]))
+                  if crc in omg_by_crc else ""))
+            guids, hits = search_pof(b, ccr)
+            log("      GUIDs in the POF file: %s" % (", ".join("%s@%d" % g for g in guids[:MAX_GUIDS]) or "none") +
+                (" (+%d more)" % (len(guids) - MAX_GUIDS) if len(guids) > MAX_GUIDS else ""))
+            for u, form, i, ctx in hits:
+                log("      UCID %s in the POF file (%s, offset %d): %s" % (u, form, i, ctx))
+                found[u].append("%s (POF file %s)" % (jname, form))
+            if pof_cls is not None:
+                cfg, note = pof_cfg(pof_cls, pof)
+                if isinstance(cfg, dict):
+                    if full < FULL_CFG_JOBS:
+                        log("      PofFile.GetCfgParameters: %d keys" % len(cfg))
+                        for k in sorted(cfg, key=str):
+                            log("        %s = %s" % (k, short(cfg[k], 200)))
+                        full += 1
+                    else:
+                        gk = [(k, v) for k, v in sorted(cfg.items(), key=lambda kv: str(kv[0])) if GUID_S.search(str(v))]
+                        log("      PofFile settings with a GUID value: %s" % (", ".join("%s=%s" % (k, v) for k, v in gk[:MAX_GUIDS]) or "none"))
+                    for k, v in cfg.items():
+                        for u in ccr:
+                            if u in str(v).lower():
+                                found[u].append("%s (PofFile setting %s)" % (jname, k))
+                else:
+                    log("      PofFile settings not read: %s" % note)
+    return found
 
 
 # ---------------- main ----------------
@@ -399,19 +338,29 @@ def main():
     log("document: %s" % short(path, 300))
     folder = os.path.dirname(str(path))
     joblists = list(doc.CamModel.JobListSet.GetJobLists())
+    log("")
+    log("=== 1. .ccrpt FILES AND THE .omgcfg ===")
+    ccr = ccrpt_files(os.path.join(folder, "POF"))
+    for u, d in sorted(ccr.items()):
+        log("  %s  %s  %r" % (d["name"], stamp(d["time"]), d["text"]))
+    if not ccr:
+        log("  no .ccrpt files")
+    omg = omgcfg_entries(folder)
+    for f, u, c in omg:
+        log("  omgcfg  %s  ucid %s  crc %s  %s" % (os.path.basename(f), u, c, ".ccrpt exists" if u in ccr else "no .ccrpt"))
     job = next((j for jl in joblists for j in list(jl.GetJobs())), None)
-    pof_cls, by_name, cs_ok = (None, False, False)
-    if job is not None:
-        pof_cls, by_name, cs_ok = pof_class(job)
-        who_returns_pof(job)
-    used, names = scan(joblists, folder, pof_cls, by_name, cs_ok)
-    files(folder, used, names)
+    pof_cls = find_pof_class(job) if job is not None else None
+    found = scan(joblists, folder, pof_cls, ccr, omg)
+    log("")
+    log("=== 3. SUMMARY: each .ccrpt ucid and where it was found ===")
+    for u in sorted(found):
+        log("  %s  %r  ->  %s" % (u, ccr[u]["text"], "; ".join(found[u]) or "NOT FOUND in any job"))
     log("")
     log("reads made: %d" % calls["n"])
     if slow:
         log("slow members (read once): " + ", ".join("%s %.1f s" % (k, v) for k, v in sorted(slow.items())))
     log("finished")
-    return "Release probe v4 finished.\nSend the log:\n%s" % os.path.join(out_dir(), LOG_NAME)
+    return "Release probe v5 finished.\nSend the log:\n%s" % os.path.join(out_dir(), LOG_NAME)
 
 
 def run():
