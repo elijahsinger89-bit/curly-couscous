@@ -77,6 +77,10 @@ check(txt.count("$TC_MOP13[R999,1]=50") == 2 and txt.count("$TC_TP9[R999]=2") ==
 check("$TC_DP1[R999,1]=120" in txt and "$TC_DP1[R999,1]=200" in txt and "$TC_DP1[R999,1]=140" in txt, "Siemens types 120 / 200 / 140")
 check("$TC_DP3[R999,1]=4.7244" in txt and "$TC_TPC4[R999]=4.0000" in txt, "metric face mill: gage 120 mm -> 4.7244 in, HD 4.0 below 4 in")
 check("M_NOGAGE" not in txt and txt.rstrip().endswith("M30"), "tool without a gage length left out; ends with M30")
+check(txt.count('R999=GETT("M_10047210",2)') == 1 and txt.count("IF (R999<=0)") == txt.count("ENDIF") == txt.count("=NEWT(") == 4,
+      "every tool and sister: GETT first, NEWT only inside IF (R999<=0) ... ENDIF (already on the control = left as it is)")
+i = txt.index('R999=GETT("M_50016110",1)')
+check(txt[i:].split("\n")[1] == "IF (R999<=0)" and txt[i:].split("\n")[2] == '  R999=NEWT("M_50016110",1)', "GETT, IF, NEWT in that order")
 check("written to" in gui.BOXES[-1] and "Paste it into MDA" in gui.BOXES[-1], "final message")
 last = json.load(open(os.path.join(tmp, "tool_load_mda_last.json")))
 check(last.get("M_10047210") == [2, 50] and last.get("M_50016110") == [1, 0], "sisters and tool life remembered per tool ID")

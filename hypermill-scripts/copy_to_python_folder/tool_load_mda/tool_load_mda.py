@@ -4,6 +4,8 @@
 #          2 per tool (5 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
 #            (blank or 0 = no tool life monitoring)
 # Per tool and sister the program writes:
+#   R999=GETT("<ID>",<sister>)        is that tool and sister already on the control? (-1 = no)
+#   IF (R999<=0) ... ENDIF            only then:
 #   R999=NEWT("<ID>",<sister>)        creates the tool; the control picks the internal T number and returns it in R999
 #   $TC_TP8   = 2                       status: enabled
 #   $TC_DP1   = Siemens tool type       from the hyperMILL tool type (SIEMENS_TYPE below)
@@ -11,8 +13,8 @@
 #   $TC_TPC4  = HD                      HD_MIN for tools smaller than HD_MIN, the tool diameter at or above it
 #   $TC_TPC5  = HL                      gage length
 #   tool life entered: $TC_TP9 = 2 (piece count monitoring), $TC_MOP13 = $TC_MOP4 = pieces
-# Tool name on the control = the NC tool ID (Common > ID). NEWT stops with an alarm when a tool with that name and sister
-# number already exists on the control: delete those first.
+# Tool name on the control = the NC tool ID (Common > ID). A tool and sister already on the control are left exactly as
+# they are (measured length, remaining life): NEWT would stop with alarm 14020 on them. Running the program twice is safe.
 # The sisters and tool life entered are remembered per tool ID (tool_load_mda_last.json) and offered next time.
 # go_to_machine uses this script (tool_data, ask_counts, program, write_program, load_last, save_last) after posting;
 # there the tool life of tools whose B program counts with SETPIECE is marked "tool life (SETPIECE)".
@@ -211,20 +213,22 @@ def program(tools, counts, doc_name, source):
     f = lambda v: "%.4f" % v
     p = ["; TOOL LOAD - %s - %s - %s" % (doc_name, source, datetime.datetime.now().strftime("%Y-%m-%d %H:%M")),
          "; units %s | name = NC tool ID | HL = gage length | HD = %s below %s, else diameter" % (UNIT, f(hd_of(None)), f(hd_of(None))),
-         "; NEWT alarms if a tool with the same name and sister number already exists: delete it first", ""]
+         "; a tool and sister already on the control (GETT finds it) is left as it is; running this twice is safe", ""]
     made = 0
     for t in tools:
         sis, life = counts.get(t["id"], (1, 0))
         for s in range(1, sis + 1):
-            p += ['%s=NEWT("%s",%d)' % (R_VAR, t["id"], s),
-                  "$TC_TP8[%s]=2" % R_VAR,
-                  "$TC_DP1[%s,1]=%d" % (R_VAR, siemens_type(t["htype"])),
-                  "$TC_DP3[%s,1]=%s" % (R_VAR, f(t["gage"])),
-                  "$TC_TPC4[%s]=%s" % (R_VAR, f(hd_of(t["dia"]))),
-                  "$TC_TPC5[%s]=%s" % (R_VAR, f(t["gage"]))]
+            p += ['%s=GETT("%s",%d)' % (R_VAR, t["id"], s),
+                  "IF (%s<=0)" % R_VAR,
+                  '  %s=NEWT("%s",%d)' % (R_VAR, t["id"], s),
+                  "  $TC_TP8[%s]=2" % R_VAR,
+                  "  $TC_DP1[%s,1]=%d" % (R_VAR, siemens_type(t["htype"])),
+                  "  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["gage"])),
+                  "  $TC_TPC4[%s]=%s" % (R_VAR, f(hd_of(t["dia"]))),
+                  "  $TC_TPC5[%s]=%s" % (R_VAR, f(t["gage"]))]
             if life:
-                p += ["$TC_TP9[%s]=2" % R_VAR, "$TC_MOP13[%s,1]=%d" % (R_VAR, life), "$TC_MOP4[%s,1]=%d" % (R_VAR, life)]
-            p.append("")
+                p += ["  $TC_TP9[%s]=2" % R_VAR, "  $TC_MOP13[%s,1]=%d" % (R_VAR, life), "  $TC_MOP4[%s,1]=%d" % (R_VAR, life)]
+            p += ["ENDIF", ""]
             made += 1
     p.append("M30")
     return "\n".join(p) + "\n", made

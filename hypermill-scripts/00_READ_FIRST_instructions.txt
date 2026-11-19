@@ -325,7 +325,9 @@ Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_D
   length, $TC_TPC4 = HD (4.0 below 4 in, else the diameter), $TC_TPC5 = HL (gage length); with tool life: $TC_TP9=2,
   $TC_MOP13 = $TC_MOP4 = pieces. Tool name on the control = the NC tool ID (Common > ID), the same name the B program
   list and the generator use.
-NEWT stops with an alarm when that name and sister already exist on the control: delete them first.
+Each tool and sister is checked first (R999=GETT("<tool ID>",<sister>)): already on the control = left exactly as it is
+(measured length, remaining life), so running the program twice is safe. Only missing ones get NEWT, inside
+IF (R999<=0) ... ENDIF. (NEWT on an existing name and sister stops with alarm 14020.)
 Tools without a gage length are left out (listed in the log).
 Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types.
 Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND); from go_to_machine:
