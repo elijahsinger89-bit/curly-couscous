@@ -89,11 +89,41 @@ if (process.argv.includes('--write-hashes')) {
   else console.log('ok   fixed files match ' + path.basename(hashFile) + ' (' + hashLines.length + ' hashes)');
 }
 
+/* ---- machine type (1.7.0): old jobs map to a type, HF = axes A/B ---- */
+{
+  const fx = n => JSON.parse(fs.readFileSync(path.join(here, 'fixtures', n + '.json'), 'utf8'));
+  const kin = j => j.config.kinStyle + '/' + j.config.machineType + '/' + j.config.trunnion + '/' + j.config.rotary;
+  const a = S.normalizeJob(fx('f1_old_package')), b = S.normalizeJob(fx('f2_horizontal_inch')), c = S.normalizeJob(fx('f4_32nests'));
+  if (a.config.kinStyle === 'MACHINE' && a.config.machineType === 'HF') console.log('ok   old job A/B loads as machine type HF');
+  else fail('old A/B job: ' + kin(a));
+  if (b.config.kinStyle === 'MACHINE' && b.config.machineType === 'H4_B') console.log('ok   old job NONE/B loads as machine type 4-axis B');
+  else fail('old NONE/B job: ' + kin(b));
+  if (c.config.kinStyle === 'AXES' && c.config.trunnion === 'A' && c.config.rotary === 'C') console.log('ok   old job A/C loads as axes by hand');
+  else fail('old A/C job: ' + kin(c));
+  const d = S.defaultJob();
+  if (d.config.kinStyle === 'MACHINE' && d.config.machineType === 'HF' && d.config.trunnion === 'A' && d.config.rotary === 'B')
+    console.log('ok   new job: machine type HF (A/B kept in step)');
+  else fail('default job: ' + kin(d));
+  /* HF and axes A/B write the same NC apart from the KINEMATICS comment */
+  const hand = S.normalizeJob(fx('f1_old_package')); hand.config.kinStyle = 'AXES';
+  const strip = g => g.files.map(f => f.path + '\n' + f.text.split('\n').filter(l => !/KINEMATICS|^Kinematics:/.test(l)).join('\n')).join('\n');
+  const g1 = S.generate(a, { date: '2026-11-12' }), g2 = S.generate(hand, { date: '2026-11-12' });
+  if (strip(g1) === strip(g2) && strip(g1).length > 1000) console.log('ok   machine type HF = axes A/B (only the KINEMATICS comment differs)');
+  else fail('machine type HF writes different NC from axes A/B');
+  const wo = g1.files.find(f => f.path === 'WKS/C_P1_WO.SPF').text;
+  if (wo.includes('; KINEMATICS   : HF HORIZONTAL 5-AXIS, 5TH AXIS IN THE TABLE: A = TRUNNION, B = ROTARY')) console.log('ok   C_P1_WO names the machine type');
+  else fail('C_P1_WO KINEMATICS comment');
+  const rt = S.normalizeJob(JSON.parse(JSON.stringify(a)));
+  if (kin(rt) === kin(a)) console.log('ok   machine type survives save / load'); else fail('machine type round trip ' + kin(rt));
+}
+
 /* ---- validator must reject broken jobs ---- */
 const base = () => S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f1_old_package.json'), 'utf8')));
 const negatives = [
-  ['tombstone without rotary', j => { j.config.rotary = 'NONE'; }, 'config.rotary'],
-  ['trunnion equals rotary', j => { j.config.trunnion = 'B'; }, 'config.trunnion'],
+  ['tombstone without rotary', j => { j.config.kinStyle = 'AXES'; j.config.rotary = 'NONE'; }, 'config.rotary'],
+  ['trunnion equals rotary', j => { j.config.kinStyle = 'AXES'; j.config.trunnion = 'B'; }, 'config.trunnion'],
+  ['head machine without its layout', j => { j.config.machineType = 'F_H_NUT'; }, 'config.machineType'],
+  ['unknown machine type', j => { j.config.machineType = 'XYZ'; }, 'config.machineType'],
   ['total above faces x nests', j => { j.config.totalNests = '9'; }, 'config.totalNests'],
   ['total above 32', j => { j.config.faces = '8'; j.config.nestsPerFace = '5'; j.config.totalNests = '40'; }, 'config.totalNests'],
   ['duplicate step', j => { j.steps[1].step = '10'; }, 'steps.1.step'],

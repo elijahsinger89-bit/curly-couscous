@@ -78,6 +78,15 @@ table.t td.ro { color: var(--muted); font-variant-numeric: tabular-nums; }
 dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); max-width: 560px; width: calc(100% - 32px); }
 dialog::backdrop { background: rgba(0,0,0,.45); }
 dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+.kintoggle { display: flex; align-items: center; gap: 0; margin: 0 0 10px; }
+.kintoggle span { color: var(--muted); font-size: 12px; margin-right: 10px; }
+.kintoggle button { border-radius: 0; margin: 0; }
+.kintoggle button:first-of-type { border-radius: 6px 0 0 6px; }
+.kintoggle button:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
+.kintoggle button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.grid > label.f.wide { grid-column: span 2; }
+.kinaxes { display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; font-size: 13px; }
+.kinaxes span { color: var(--muted); font-size: 12px; }
 .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; background: var(--off); color: var(--muted); font-size: 12px; }
 /* 1.6.0 cards: boxes left, picture and help right */
 :root { --hi: #d9480f; --hi-bg: #fff0e6; --metal: #c9ced6; --metal2: #e4e7ec; --zone: #e9d9b0; }
@@ -203,7 +212,7 @@ dl.live dd.bad { color: var(--bad); font-weight: 600; }
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.6.1';
+var GEN_VERSION = '1.7.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -219,6 +228,47 @@ var FW_HISTORY = [
 ];
 var MAX_NESTS = 32;
 var AXES = ['NONE', 'A', 'B', 'C'];
+/* Machine types (tab 1, "Machine type"): the trunnion / table rotary the nest frames and the A0 B0
+   line use. nc = the KINEMATICS comment. ready: false = kinematics layout not set up yet (an error
+   until it is; use "Axes by hand" meanwhile). */
+var MACHINE_TYPES = [
+  { key: 'H4_B', label: 'Horizontal 4-axis, B only', ready: true, trunnion: 'NONE', rotary: 'B',
+    axes: 'B = rotary (table), no trunnion', nc: '4-AXIS HORIZONTAL: B = ROTARY' },
+  { key: 'HF', label: 'Horizontal 5-axis, 5th axis in the table (HF)', ready: true, trunnion: 'A', rotary: 'B',
+    axes: 'A = trunnion (table), B = rotary (table)',
+    nc: 'HF HORIZONTAL 5-AXIS, 5TH AXIS IN THE TABLE: A = TRUNNION, B = ROTARY' },
+  { key: 'F_H_NUT', label: 'Horizontal 5-axis, nutating head (F)', ready: false },
+  { key: 'F_H_SWIVEL', label: 'Horizontal 5-axis, swivel head (F)', ready: false },
+  { key: 'F_V_NUT', label: 'Vertical 5-axis, nutating head (F)', ready: false },
+  { key: 'F_V_SWIVEL', label: 'Vertical 5-axis, swivel head (F)', ready: false }
+];
+function machineType(key) {
+  for (var i = 0; i < MACHINE_TYPES.length; i++) if (MACHINE_TYPES[i].key === key) return MACHINE_TYPES[i];
+  return null;
+}
+/* the ready machine type with these axes, or null */
+function machineFromAxes(trunnion, rotary) {
+  for (var i = 0; i < MACHINE_TYPES.length; i++) {
+    var t = MACHINE_TYPES[i];
+    if (t.ready && t.trunnion === trunnion && t.rotary === rotary) return t;
+  }
+  return null;
+}
+/* the axes a job uses: { style, type, trunnion, rotary, problem } */
+function kinOf(c) {
+  if (c.kinStyle === 'AXES') return { style: 'AXES', type: null, trunnion: c.trunnion, rotary: c.rotary };
+  var t = machineType(c.machineType);
+  if (!t) return { style: 'MACHINE', type: null, trunnion: 'NONE', rotary: 'NONE', problem: 'Choose a machine type' };
+  if (!t.ready) return { style: 'MACHINE', type: t, trunnion: 'NONE', rotary: 'NONE',
+    problem: t.label + ': kinematics layout not set up yet. Use "Axes by hand" until it is.' };
+  return { style: 'MACHINE', type: t, trunnion: t.trunnion, rotary: t.rotary };
+}
+/* keep config.trunnion / config.rotary in step with a ready machine type (older generators read them) */
+function syncKin(c) {
+  var k = kinOf(c);
+  if (k.style === 'MACHINE' && k.type && k.type.ready) { c.trunnion = k.trunnion; c.rotary = k.rotary; }
+  return c;
+}
 var XY_METHODS = ['SPLIT EXTERIOR', 'BORE', 'BOSS', 'RECT POCKET', 'RECT SPIGOT', 'NONE'];
 var OUTSIDE = { 'SPLIT EXTERIOR': 1, 'BOSS': 1, 'RECT SPIGOT': 1 };
 var INSIDE = { 'BORE': 1, 'RECT POCKET': 1 };
@@ -259,7 +309,8 @@ function defaultJob() {
   return {
     format: 'SINUMERIK_ONE_GENERATOR_JOB', version: 1,
     header: { part: '', material: '', stock: '', machine: '', programmer: '' },
-    config: { units: 'METRIC', trunnion: 'NONE', rotary: 'B', mode: 'TOMBSTONE',
+    /* kinStyle MACHINE: the axes come from machineType (MACHINE_TYPES); AXES: trunnion / rotary by hand */
+    config: { units: 'METRIC', kinStyle: 'MACHINE', machineType: 'HF', trunnion: 'A', rotary: 'B', mode: 'TOMBSTONE',
               faces: '4', nestsPerFace: '2', totalNests: '8' },
     probeStep: { enabled: true, step: '1', program: '' },
     builder: { first: '10', last: '', inc: '10' },
@@ -297,6 +348,14 @@ function normalizeJob(src) {
   }
   mergeFlat(d.header, src.header);
   mergeFlat(d.config, src.config);
+  /* a job saved before 1.7.0 has axes only: a machine type when they match one, else axes by hand */
+  if (!src.config || typeof src.config !== 'object' || !('kinStyle' in src.config)) {
+    var mt = machineFromAxes(d.config.trunnion, d.config.rotary);
+    d.config.kinStyle = mt ? 'MACHINE' : 'AXES';
+    if (mt) d.config.machineType = mt.key;
+  }
+  if (d.config.kinStyle !== 'AXES') d.config.kinStyle = 'MACHINE';
+  syncKin(d.config);
   mergeFlat(d.probeStep, src.probeStep);
   mergeFlat(d.builder, src.builder);
   mergeFlat(d.probing, src.probing);
@@ -866,8 +925,10 @@ function resolve(job) {
   R.U = UNIT[R.units];
   R.single = c.mode === 'SINGLE PART';
   R.mode = R.single ? 'SINGLE PART' : 'TOMBSTONE';
-  R.trunnion = AXES.indexOf(c.trunnion) >= 0 ? c.trunnion : 'NONE';
-  R.rotary = AXES.indexOf(c.rotary) >= 0 ? c.rotary : 'NONE';
+  var kin = kinOf(c);
+  R.trunnion = AXES.indexOf(kin.trunnion) >= 0 ? kin.trunnion : 'NONE';
+  R.rotary = AXES.indexOf(kin.rotary) >= 0 ? kin.rotary : 'NONE';
+  R.mtype = kin.type && kin.type.ready ? kin.type : null;
   R.faces = R.single ? 1 : num(c.faces);
   R.npf = R.single ? 1 : num(c.nestsPerFace);
   R.total = R.single ? 1 : num(c.totalNests);
@@ -964,13 +1025,17 @@ function validate(job) {
   function needNum(path, v, label) { if (!isNum(v)) err(path, label + ' must be a number'); }
   var c = job.config;
   if (['METRIC', 'INCH'].indexOf(c.units) < 0) err('config.units', 'Units must be METRIC or INCH');
-  if (AXES.indexOf(c.trunnion) < 0) err('config.trunnion', 'Trunnion axis must be NONE, A, B or C');
-  if (AXES.indexOf(c.rotary) < 0) err('config.rotary', 'Rotary axis must be NONE, A, B or C');
-  if (c.trunnion !== 'NONE' && c.trunnion === c.rotary) err('config.trunnion', 'Trunnion and rotary cannot be the same axis');
+  var kin = kinOf(c), kp = kin.style === 'MACHINE';
+  if (kin.problem) err('config.machineType', kin.problem);
+  else {
+    if (AXES.indexOf(kin.trunnion) < 0) err(kp ? 'config.machineType' : 'config.trunnion', 'Trunnion axis must be NONE, A, B or C');
+    if (AXES.indexOf(kin.rotary) < 0) err(kp ? 'config.machineType' : 'config.rotary', 'Rotary axis must be NONE, A, B or C');
+    if (kin.trunnion !== 'NONE' && kin.trunnion === kin.rotary) err(kp ? 'config.machineType' : 'config.trunnion', 'Trunnion and rotary cannot be the same axis');
+  }
   var single = c.mode === 'SINGLE PART';
   if (!single && c.mode !== 'TOMBSTONE') err('config.mode', 'Mode must be TOMBSTONE or SINGLE PART');
   if (!single) {
-    if (c.rotary === 'NONE') err('config.rotary', 'Tombstone mode needs a rotary axis (A, B or C)');
+    if (!kin.problem && kin.rotary === 'NONE') err(kp ? 'config.machineType' : 'config.rotary', 'Tombstone mode needs a rotary axis (A, B or C)');
     var okF = isInt(c.faces) && num(c.faces) >= 1 && num(c.faces) <= MAX_NESTS;
     var okN = isInt(c.nestsPerFace) && num(c.nestsPerFace) >= 1 && num(c.nestsPerFace) <= MAX_NESTS;
     if (!okF) err('config.faces', 'Faces must be a whole number 1-32');
@@ -1023,8 +1088,8 @@ function validate(job) {
       if (!isNum(w[k])) err(pw + k, 'Nest ' + n + ': work offset ' + k.toUpperCase() + ' "' + w[k] + '" is not a number');
     });
     if (isBlank(w.x) || isBlank(w.y) || isBlank(w.z)) blanks.push(n);
-    if (c.trunnion !== 'NONE' && !isBlank(w.trunnion) && !isNum(w.trunnion)) err(pw + 'trunnion', 'Nest ' + n + ': trunnion angle must be a number');
-    if (c.rotary !== 'NONE' && !isBlank(w.rotary) && !isNum(w.rotary)) err(pw + 'rotary', 'Nest ' + n + ': rotary angle must be a number');
+    if (kin.trunnion !== 'NONE' && !isBlank(w.trunnion) && !isNum(w.trunnion)) err(pw + 'trunnion', 'Nest ' + n + ': trunnion angle must be a number');
+    if (kin.rotary !== 'NONE' && !isBlank(w.rotary) && !isNum(w.rotary)) err(pw + 'rotary', 'Nest ' + n + ': rotary angle must be a number');
   }
   /* probing */
   if (ps.enabled) validateProbe(job, err, needNum);
@@ -1243,6 +1308,7 @@ function validateProbe(job, err, needNum) {
 /* ---------------- NC helpers ---------------- */
 function retract(clr) { return 'G0 SUPA G17 G90 Z=$MA_POS_LIMIT_PLUS[AX3]-' + compact(clr, 4) + ' D0'; }
 function kinDesc(R) {
+  if (R.mtype) return R.mtype.nc;
   if (R.trunnion === 'NONE' && R.rotary === 'NONE') return '3-AXIS: NO ROTARY AXIS';
   if (R.trunnion === 'NONE') return '4-AXIS HORIZONTAL: ' + R.rotary + ' = ROTARY';
   if (R.rotary === 'NONE') return R.trunnion + ' = TRUNNION/4TH, NO ROTARY';
@@ -3257,6 +3323,7 @@ function makeZip(files, when) {
 
 G.SNG = {
   GEN_VERSION: GEN_VERSION, FW_REV: FW_REV, MAX_NESTS: MAX_NESTS, AXES: AXES, XY_METHODS: XY_METHODS, UNIT: UNIT,
+  MACHINE_TYPES: MACHINE_TYPES, machineType: machineType, machineFromAxes: machineFromAxes, kinOf: kinOf, syncKin: syncKin,
   OUTSIDE: OUTSIDE, INSIDE: INSIDE,
   defaultJob: defaultJob, normalizeJob: normalizeJob, blankStep: blankStep, validate: validate,
   resolve: resolve, generate: generate, makeZip: makeZip, crc32: crc32, fix: fix, compact: compact,
@@ -3328,6 +3395,15 @@ function sel(path, label, options, opts) {
     options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') +
     '</select>' + ferr(path) + '</label>';
 }
+/* select with value / text pairs */
+function selKV(path, label, pairs, opts) {
+  opts = opts || {};
+  var v = getPath(job, path);
+  return '<label class="' + fcls(path, opts) + '">' + esc(label) + '<select data-path="' + path + '"' + (opts.dis ? ' disabled' : '') +
+    (errPaths[path] ? ' class="err"' : '') + '>' +
+    pairs.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === v ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') +
+    '</select>' + ferr(path) + '</label>';
+}
 function cellTxt(path, opts) {
   opts = opts || {};
   var v = getPath(job, path);
@@ -3349,10 +3425,19 @@ function renderConfig() {
   h += '<h2>Header <span class="pill">comments + program names</span></h2><div class="grid">' +
     txt('header.part', 'Part number') + txt('header.material', 'Material') + txt('header.stock', 'Stock') +
     txt('header.machine', 'Machine') + txt('header.programmer', 'Programmer') + '</div>';
-  h += '<h2>Machine &amp; job</h2><div class="grid">' +
+  var mach = c.kinStyle !== 'AXES', mt = S.machineType(c.machineType);
+  h += '<h2>Machine &amp; job</h2>' +
+    '<div class="kintoggle" role="group" aria-label="Kinematics"><span>Kinematics</span>' +
+    '<button type="button" data-kin="MACHINE" aria-pressed="' + mach + '"' + (mach ? ' class="on"' : '') + '>Machine type</button>' +
+    '<button type="button" data-kin="AXES" aria-pressed="' + !mach + '"' + (!mach ? ' class="on"' : '') + '>Axes by hand</button></div>' +
+    '<div class="grid">' +
     sel('config.units', 'Machine units (= MD10240 basic system)', ['METRIC', 'INCH']) +
-    sel('config.trunnion', 'Trunnion / 4th axis', S.AXES) +
-    sel('config.rotary', 'Rotary axis', S.AXES) +
+    (mach
+      ? selKV('config.machineType', 'Machine type', S.MACHINE_TYPES.map(function (t) {
+          return [t.key, t.label + (t.ready ? '' : ' - layout needed')]; }), { wide: true }) +
+        '<div class="kinaxes"><span>Axes</span><b>' + esc(mt ? (mt.ready ? mt.axes : 'layout needed') : '-') + '</b></div>'
+      : sel('config.trunnion', 'Trunnion / 4th axis', S.AXES) +
+        sel('config.rotary', 'Rotary axis', S.AXES)) +
     sel('config.mode', 'Mode', ['TOMBSTONE', 'SINGLE PART']) +
     txt('config.faces', 'Number of faces', { dis: single }) +
     txt('config.nestsPerFace', 'Nests per face', { dis: single }) +
@@ -3996,7 +4081,7 @@ function swivelBox(src, modes, label) {
 
 /* ---- tab: work offsets ---- */
 function renderWcs() {
-  var R = S.resolve(job), c = job.config;
+  var R = S.resolve(job), c = { trunnion: R.trunnion, rotary: R.rotary };
   var n = R.nests.length;
   var h = '<h2>Work offsets <span class="pill">' + n + ' nest' + (n === 1 ? '' : 's') + '</span></h2>';
   if (!n) { $('#tab-wcs').innerHTML = h + '<p class="note">Set a valid nest count on tab 1.</p>'; return; }
@@ -4210,6 +4295,7 @@ function onEdit(e) {
       job.config.totalNests = String(Math.min(f * n, S.MAX_NESTS));
   }
   if (p === 'config.mode' && job.config.mode === 'SINGLE PART') { /* kept, not used */ }
+  if (p === 'config.machineType') S.syncKin(job.config);
   /* turning bore: +L1 makes the bore bigger (your setting); other turning features must be chosen */
   var cm = /^steps\.(\d+)\.(cmcTool|cmcFeature)$/.exec(p);
   if (cm) {
@@ -4238,9 +4324,21 @@ function doRender() {
   renderAll();
   if (a) { var b = document.querySelector('[data-path="' + a + '"]'); if (b) b.focus(); }
 }
+/* Machine type <-> Axes by hand. Axes by hand starts from the machine type's axes; back to Machine
+   type picks the type with those axes when there is one. */
+function setKinStyle(style) {
+  var c = job.config;
+  if (style === c.kinStyle) return;
+  if (style === 'MACHINE') { var mt = S.machineFromAxes(c.trunnion, c.rotary); if (mt) c.machineType = mt.key; }
+  c.kinStyle = style;
+  S.syncKin(c);
+  dirty = true; errPaths = {};
+  renderAll();
+}
 function onClick(e) {
-  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto],[data-jump]');
+  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto],[data-jump],[data-kin]');
   if (!t) return;
+  if (t.dataset.kin) { setKinStyle(t.dataset.kin); return; }
   if (t.dataset.jump) { var jt = document.getElementById(t.dataset.jump); if (jt) jt.scrollIntoView({ block: 'start' }); return; }
   if (t.dataset.tab) { showTab(t.dataset.tab); return; }
   if (t.dataset.goto) { e.preventDefault(); gotoPath(t.dataset.goto); return; }

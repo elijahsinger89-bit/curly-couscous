@@ -7,6 +7,20 @@ USE
   Fill the tabs, press Generate ZIP. The zip holds every NC file.
   Tab 5 (CMC) appears only while a step row has CMC ticked.
 
+MACHINE TYPE (tab 1, Machine & job)
+  Kinematics: "Machine type" (default) or "Axes by hand" (the two axis
+  boxes as before). Machine types:
+    Horizontal 4-axis, B only            B = rotary, no trunnion
+    Horizontal 5-axis, 5th in the table  A = trunnion, B = rotary (HF)
+    Horizontal / vertical 5-axis with a nutating or swivel head (F):
+      listed, "layout needed" until their kinematics are set up. Choosing
+      one stops Generate; use Axes by hand until then.
+  The machine type only sets the trunnion / rotary axes: the NC is the same
+  as with those axes by hand, apart from the KINEMATICS comment.
+  Axes by hand starts from the machine type's axes. Jobs saved before
+  1.7.0 open as HF (A/B), 4-axis B (no trunnion, B) or Axes by hand
+  (anything else). The .json keeps the axes too, so older generators read it.
+
 SCREENS: PROBING (tab 2) AND CMC (tab 5)
   Each section is a card: boxes on the left in numbered groups, a picture
   and help on the right (above the boxes on a narrow window).

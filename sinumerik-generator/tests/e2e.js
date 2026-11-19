@@ -108,7 +108,13 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   /* 1. load the old-package job and generate */
   await loadJob('f1_old_package');
   check((await page.textContent('#jobLabel')).includes('02215800_001'), 'job loaded (header shows part number)');
-  check(await page.$eval('[data-path="config.trunnion"]', e => e.value) === 'A', 'loaded trunnion A into the form');
+  check(await page.$eval('[data-path="config.machineType"]', e => e.value) === 'HF', 'old A/B job loads as machine type HF');
+  check((await page.textContent('.kinaxes')).includes('A = trunnion (table), B = rotary'), 'machine type shows its axes');
+  await page.click('[data-kin="AXES"]');
+  check(await page.$eval('[data-path="config.trunnion"]', e => e.value) === 'A' && await page.$eval('[data-path="config.rotary"]', e => e.value) === 'B',
+        'Axes by hand starts from the machine type axes (A / B)');
+  await page.click('[data-kin="MACHINE"]');
+  check(await page.$eval('[data-path="config.machineType"]', e => e.value) === 'HF', 'back to Machine type: HF again');
   let d = await generate(false);
   check(!!d, 'Generate ZIP downloads a file');
   const z1 = path.join(out, 'f1.zip');
@@ -455,6 +461,29 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
       if (n !== 2) check(false, 'feature ' + f + ': two pictures (' + n + ')');
     }
     check(errors.length === 0, 'every feature draws without a page error');
+  }
+
+  /* 6f. 1.7.0 machine type */
+  {
+    await loadJob('f2_horizontal_inch');
+    check(await page.$eval('[data-path="config.machineType"]', e => e.value) === 'H4_B', 'old NONE/B job loads as machine type 4-axis B');
+    const opts = await page.$$eval('[data-path="config.machineType"] option', l => l.map(o => o.textContent));
+    check(opts.length === 6 && opts.filter(o => o.includes('layout needed')).length === 4, 'six machine types, four head machines marked layout needed');
+    await page.selectOption('[data-path="config.machineType"]', 'F_V_SWIVEL');
+    await page.click('#btnGenerate');
+    await page.waitForSelector('#msgs .msg');
+    check((await page.textContent('#msgs')).includes('layout not set up yet'), 'head machine without layout: error, nothing generated');
+    await page.selectOption('[data-path="config.machineType"]', 'HF');
+    check((await page.textContent('.kinaxes')).includes('A = trunnion'), 'HF selected: axes shown');
+    await page.click('nav.tabs button[data-tab="wcs"]');
+    check((await page.textContent('#tab-wcs thead')).includes('Trunnion A'), 'WCS table follows the machine type (Trunnion A)');
+    await page.click('nav.tabs button[data-tab="config"]');
+    await page.screenshot({ path: path.join(out, 'shot17_machine_light.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.screenshot({ path: path.join(out, 'shot17_machine_dark.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
+    await page.emulateMedia({ colorScheme: 'light' });
+    await page.click('[data-kin="AXES"]');
+    await page.screenshot({ path: path.join(out, 'shot17_axes_light.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
   }
 
   /* 7. screenshots for review */
