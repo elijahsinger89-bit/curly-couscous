@@ -1,7 +1,7 @@
 # tool_load_mda.py - the NC tools of the open document as one Sinumerik MDA program that creates every tool and sister on the
 # control (paste the file into MDA and cycle start).
 # Screens: 1 source: one joblist, all joblists, or every tool in the document
-#          2 per tool (10 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
+#          2 per tool (5 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
 #            (blank or 0 = no tool life monitoring)
 # Per tool and sister the program writes:
 #   R999=NEWT("<ID>",<sister>)        creates the tool; the control picks the internal T number and returns it in R999
@@ -27,7 +27,7 @@ OPEN_FILE  = True          # open the program in Notepad when done
 R_VAR      = "R999"        # R parameter that holds the T number NEWT returns
 UNIT       = "inch"        # units written to the control: "inch" or "mm"
 HD_MIN_IN  = 4.0           # HD: this value for every tool smaller than it, the tool diameter at or above it (inches)
-PER_SCREEN = 10            # tools per sisters / tool life screen
+PER_SCREEN = 5             # tools per sisters / tool life screen (2 rows each)
 # hyperMILL tool type -> Siemens tool type ($TC_DP1). Types not listed: matched by the words in KEYWORDS, else DEFAULT_TYPE.
 SIEMENS_TYPE = {
     "endMill": 120, "radiusMill": 120, "ballMill": 110, "lollipop": 110, "faceMill": 140, "facemill": 140,

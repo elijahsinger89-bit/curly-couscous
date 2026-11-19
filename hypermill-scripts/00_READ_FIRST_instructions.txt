@@ -317,7 +317,7 @@ TOOL LOAD MDA
 R999 holds the T number each NEWT returns. The generator never puts a CMC R block over R999.
 One Sinumerik MDA program that creates every tool and sister on the control: paste it into MDA and cycle start.
 Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
-  of the B programs it posted). 2 Per tool, 10 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
+  of the B programs it posted). 2 Per tool, 5 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
   no tool life monitoring). Both are remembered per tool ID (tool_load_mda_last.json) and offered next time.
 Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_DP1 = Siemens tool type, $TC_DP3 = gage
   length, $TC_TPC4 = HD (4.0 below 4 in, else the diameter), $TC_TPC5 = HL (gage length); with tool life: $TC_TP9=2,
