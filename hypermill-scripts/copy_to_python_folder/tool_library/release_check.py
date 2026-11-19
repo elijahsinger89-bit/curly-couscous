@@ -10,7 +10,7 @@
 import os
 import re
 
-VERSION = "2026-11-18"
+VERSION = "2026-11-19"
 HEADER_BYTES = 65536
 UCID_RE = re.compile(rb"ucid\(([0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})\)")
 CLEAN = "CC_RESULT 1"
@@ -84,10 +84,21 @@ class Ccrpt:
         except Exception as e:
             return "<not read: %s>" % e
 
+    def run_time(self, pof_folder, ucid):
+        """When Simulation Center wrote the result (the run), 'YYYY-MM-DD HH:MM'; '' when unknown."""
+        n = self._dirs.get(pof_folder, {}).get(ucid.lower() + ".ccrpt")
+        if n is None:
+            return ""
+        try:
+            import datetime
+            return datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(pof_folder, n))).strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            return ""
+
 
 def check_job(job, doc_folder, ccrpt):
     """dict(name, ok, reason, ucid, result)."""
-    r = dict(name=name_of(job), ok=False, reason="", ucid="", result="")
+    r = dict(name=name_of(job), ok=False, reason="", ucid="", result="", run="")
     status = enum_name(val(getattr(job, "Status", "")))
     pofs = enum_name(val(getattr(job, "POFStatus", "")))
     if status == "ERRORS":
@@ -112,6 +123,7 @@ def check_job(job, doc_folder, ccrpt):
         r["ok"] = True
     elif res == COLLISION:
         r["reason"] = R_COLLISION
+        r["run"] = ccrpt.run_time(os.path.dirname(pof), r["ucid"])
     else:
         r["reason"] = "unknown Simulation Center result %r" % res
     return r

@@ -241,6 +241,33 @@ check("B_G17_SLIDE_111_HF5  (more than one tool)" in rep and "G17 old name  (not
       "report: mixed and old-name compound jobs listed as not posted; notes skipped")
 check(os.path.exists(LOGP) and "FAIL B_G17_SLIDE_030_HF5" in open(LOGP).read(), "log written")
 
+# ---------------- one Simulation Center run with a collision marks many B programs: one line in the pop-up ----------------
+def build_run(n):
+    import uuid as _uuid
+    for x in os.listdir(POFDIR):
+        os.remove(os.path.join(POFDIR, x))
+    em = om.Tool("10047210", "End mill", "endMill", 0.4724)
+    cs = []
+    for i in range(n):
+        u = str(_uuid.uuid4())
+        cs.append(om.CompoundJob("B_G17_SLIDE_%03d_HF5" % (10 * (i + 2)), [PJob("%d: Contour" % (i + 1), em, pof(100 + i, u))]))
+        ccrpt(u, 0)                                   # the whole run had a collision
+    cs.append(om.CompoundJob("B_G17_SLIDE_%03d_HF5" % (10 * (n + 2)), [PJob("%d: Face" % (n + 1), em, pof(200, str(_uuid.uuid4())))]))
+    model = om.Model([om.JobList("Op10", cs)], inch=True)
+    model.JobListSet = PostSet(model.JobListSet.GetJobLists())
+    om._App.CurrentDocument = om.Document(DOC, model)
+    PostSet.calls = []
+
+
+build_run(30)
+m, left = run([ans(Action="Check only")])
+box = gui.BOXES[-1]
+check(left == 0 and "had a collision: 30 B programs marked (B_G17_SLIDE_020_HF5 ... B_G17_SLIDE_310_HF5)." in flat(box) and
+      "Simulate each B program on its own" in box and box.count("\n") < 16,
+      "30 B programs from one collision run: one line, not 30 (%d lines)" % (box.count("\n") + 1))
+check("Fail:" in box and "B_G17_SLIDE_320_HF5  " + rc.R_NOT_SIM in box, "other failures still listed per B program")
+check(sum(1 for x in gui.OUTPUT[-1].split("\n") if rc.R_COLLISION in x) == 30, "output window keeps the full list (30 collision lines)")
+
 # ---------------- check and post, failures: post nothing ----------------
 build()
 m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(0)])

@@ -182,6 +182,31 @@ def collect(bp, rc, chosen, part, machine, folder):
     return progs, left, problems
 
 
+def fail_lines(fails, r_collision):
+    """The fail list for the pop-up. B programs that fail only because their Simulation Center run had a collision are
+    one line per run: hyperMILL marks every toolpath of a run with the run's result, so the file can't say which one
+    collided. Every other failure is one line per B program. (The output window keeps the full list.)"""
+    runs, others = {}, []
+    for p in fails:
+        if p["failed"] and all(j["reason"] == r_collision for j in p["failed"]):
+            key = ", ".join(sorted(set(j.get("run") or "time unknown" for j in p["failed"])))
+            runs.setdefault(key, []).append(p["name"])
+        else:
+            others.append(p)
+    out = []
+    for key, names in runs.items():
+        out.append("Simulation Center run of %s had a collision: %d B program%s marked (%s)." % (
+            key, len(names), "" if len(names) == 1 else "s", names[0] if len(names) == 1 else names[0] + " ... " + names[-1]))
+        out.append("  hyperMILL marks every toolpath of a run; Simulation Center shows which one collided.")
+        out.append("  Simulate each B program on its own so a collision marks only that one.")
+    if others:
+        out.append("Fail:")
+        for p in others:
+            why = sorted(set(j["reason"] for j in p["failed"])) or ["no jobs"]
+            out.append("  %s  %s" % (p["name"], "; ".join(why)))
+    return out
+
+
 def report_lines(progs, left, problems, head):
     rep = [head, ""]
     for p in progs:
@@ -504,10 +529,7 @@ def run():
         fails = [p for p in progs if not p["ok"]]
         if fails:
             summary.append("")
-            summary.append("Fail:")
-            for p in fails:
-                why = sorted(set(j["reason"] for j in p["failed"])) or ["no jobs"]
-                summary.append("  %s  %s" % (p["name"], "; ".join(why)))
+            summary += fail_lines(fails, rc.R_COLLISION)
         longs = [p["name"] for p in progs if p["long"]]
         if longs:
             summary += ["", "WARNING - names over 24 characters (the generator refuses them):"] + ["  " + n for n in longs]

@@ -278,6 +278,8 @@ How the simulation is checked (tool_library\release_check.py, found with release
   run: CC_RESULT 1 = clean run, CC_RESULT 0 = the run had a collision (every toolpath of that run gets 0). Recalculating a
   job gives it a new id and hyperMILL deletes its .ccrpt, so a changed job shows "not simulated, or changed since".
   After fixing a collision, re-simulate the whole group: the others of that run keep CC_RESULT 0 until then.
+  Simulate each B program on its own: then a collision marks only that B program. The pop-up shows a collision run as one
+  line (the run's time, how many B programs it marked); the output window and the log keep the full list.
   The job tree's light bulb is the toolpath display, not a simulation status.
 Reasons shown: has errors / not calculated / no toolpath file / not simulated, or changed since it was simulated /
   Simulation Center run had a collision: fix it and re-simulate.
