@@ -309,7 +309,8 @@ C:\Users\Public\Documents\OPEN MIND). The NC files stay where hyperMILL posts th
     one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not
     installed, the message says so and only the tool sheet is skipped.
   - "Tool load MDA" (first screen, ticked by default): <DOCUMENT>_TOOL_LOAD.MPF for the tools of those B programs, made
-    by the installed tool_load_mda script (see TOOL LOAD MDA). Its screen asks sisters and tool life per tool; the tool life
+    by the installed tool_load_mda script (see TOOL LOAD MDA). Its screens ask sisters and tool life per tool (then tip and
+    cut direction of the turning tools); the tool life
     of tools whose B program counts with SETPIECE is labelled "tool life (SETPIECE)". Left blank, the message warns:
     without tool life monitoring ($TC_TP9=2, $TC_MOP13 / $TC_MOP4) the control does not count those pieces.
     Cancel on that screen: everything else is still done, the MDA is not written.
@@ -321,15 +322,24 @@ One Sinumerik MDA program that creates every tool and sister on the control: pas
 Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
   of the B programs it posted). 2 Per tool, 5 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
   no tool life monitoring). Both are remembered per tool ID (tool_load_mda_last.json) and offered next time.
+  3 Turning tools only, 5 per screen: tip direction (1-9) and cut direction (1-4, 3 = left arrow). Preset from the last
+  run (tool_load_mda_turning.json), else tip from hyperMILL's first cutting point (topLeft 2, bottomLeft 3, topRight 1,
+  bottomRight 4, right 5, top 6, left 7, bottom 8, center 9) and cut direction 3.
 Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_DP1 = Siemens tool type, $TC_DP3 = gage
   length, $TC_TPC4 = HD (4.0 below 4 in, else the diameter), $TC_TPC5 = HL (gage length); with tool life: $TC_TP9=2,
   $TC_MOP13 = $TC_MOP4 = pieces. Tool name on the control = the NC tool ID (Common > ID), the same name the B program
   list and the generator use.
+Turning tools (the NC tool has a turning cutting profile; hyperMILL type insertTtool used to load as a 120 end mill):
+  $TC_DP1 from the insert shape (rhombic 510, rhombic 75 deg or more 500, square / triangle 500, round 550, grooving 520,
+  parting 530, thread 540, else 500), $TC_DP2 = tip direction, $TC_DP3 = L1 = Setting length Z (radial, sign as hyperMILL
+  exports it), $TC_DP4 = L2 = Setting length X (axial), $TC_DP11 = cut direction. HD / HL as above. The setting lengths
+  come from the NC tool when set there, else from the tool. None found: L1 and L2 written as 0 (log says so).
 Each tool and sister is checked first (R999=GETT("<tool ID>",<sister>)): already on the control = left exactly as it is
 (measured length, remaining life), so running the program twice is safe. Only missing ones get NEWT, inside
 IF (R999<=0) ... ENDIF. (NEWT on an existing name and sister stops with alarm 14020.)
 Tools without a gage length are left out (listed in the log).
-Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types.
+Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types, turning
+tool types (TURN_TYPE), hyperMILL cutting point -> tip direction (TIP_FROM_HM), cut direction preset (TURN_CUT).
 Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND); from go_to_machine:
 <document folder>\go to machine\. Log: tool_load_mda_log.txt.
 
@@ -357,4 +367,5 @@ tool_library\job_types.py        toolpath types, their CreateJob codes and the t
 tool_library\machines.csv        machines and spindles
 tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export,
                                  go_to_machine)
-tool_load_mda\tool_load_mda.py   the SETTINGS block at the top: units, R999, HD minimum, hyperMILL -> Siemens tool types
+tool_load_mda\tool_load_mda.py   the SETTINGS block at the top: units, R999, HD minimum, hyperMILL -> Siemens tool types,
+                                 turning tool types, tip direction table, cut direction preset

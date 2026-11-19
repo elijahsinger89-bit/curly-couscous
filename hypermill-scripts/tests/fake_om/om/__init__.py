@@ -3,14 +3,19 @@ WRITES = []
 
 
 class Tool:
-    def __init__(self, tid, name=None, ttype="endMill", dia=0.5, unit="inch", gage=3.0):
+    def __init__(self, tid, name=None, ttype="endMill", dia=0.5, unit="inch", gage=3.0, xml=None):
         self.ID = tid
         self.Number = int(tid) if tid.isdigit() else 0
         self.Name = name or tid
         self.UUID = "{T-%s}" % tid
         self._type, self._dia, self._unit, self._gage = ttype, dia, unit, gage
+        self._xml = xml                       # a whole hyperMILL tool export (omtdx) written as it is
 
     def Export(self, path):
+        if self._xml is not None:
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(self._xml)
+            return True
         gage = '<param name="gageLength" value="%s"/>' % self._gage if self._gage is not None else ""
         with open(path, "w", encoding="utf-8") as f:
             f.write('<root><tools><tool type="%s"><param name="lengthOfUnit" value="%s"/>'

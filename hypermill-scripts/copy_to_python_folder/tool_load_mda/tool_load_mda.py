@@ -3,6 +3,7 @@
 # Screens: 1 source: one joblist, all joblists, or every tool in the document
 #          2 per tool (5 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
 #            (blank or 0 = no tool life monitoring)
+#          3 turning tools only (5 per screen): tip direction and cut direction
 # Per tool and sister the program writes:
 #   R999=GETT("<ID>",<sister>)        is that tool and sister already on the control? (-1 = no)
 #   IF (R999<=0) ... ENDIF            only then:
@@ -10,12 +11,19 @@
 #   $TC_TP8   = 2                       status: enabled
 #   $TC_DP1   = Siemens tool type       from the hyperMILL tool type (SIEMENS_TYPE below)
 #   $TC_DP3   = gage length             length 1
+#   turning tools (the NC tool has a turning cutting profile) instead:
+#   $TC_DP1   = 500-550                 from the insert shape (TURN_TYPE below)
+#   $TC_DP2   = tip direction 1-9       preset from hyperMILL's first cutting point (TIP_FROM_HM), chosen on screen 3
+#   $TC_DP3   = setting length Z        length 1, radial
+#   $TC_DP4   = setting length X        length 2, axial
+#   $TC_DP11  = cut direction           preset TURN_CUT (3 = the left arrow), chosen on screen 3
 #   $TC_TPC4  = HD                      HD_MIN for tools smaller than HD_MIN, the tool diameter at or above it
 #   $TC_TPC5  = HL                      gage length
 #   tool life entered: $TC_TP9 = 2 (piece count monitoring), $TC_MOP13 = $TC_MOP4 = pieces
 # Tool name on the control = the NC tool ID (Common > ID). A tool and sister already on the control are left exactly as
 # they are (measured length, remaining life): NEWT would stop with alarm 14020 on them. Running the program twice is safe.
-# The sisters and tool life entered are remembered per tool ID (tool_load_mda_last.json) and offered next time.
+# The sisters and tool life entered are remembered per tool ID (tool_load_mda_last.json) and offered next time; tip and
+# cut direction too (tool_load_mda_turning.json).
 # go_to_machine uses this script (tool_data, ask_counts, program, write_program, load_last, save_last) after posting;
 # there the tool life of tools whose B program counts with SETPIECE is marked "tool life (SETPIECE)".
 # Output: <document folder>\<document>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND\), opened in Notepad when done.
@@ -39,6 +47,18 @@ SIEMENS_TYPE = {
 KEYWORDS = (("spot", 220), ("center", 220), ("sink", 230), ("tap", 240), ("thread", 145), ("ream", 250), ("bor", 210),
             ("drill", 200), ("dril", 200), ("face", 140), ("ball", 110), ("chamfer", 155), ("slot", 150), ("disc", 150))
 DEFAULT_TYPE = 120
+# Turning tools: insert shape (hyperMILL insert type) -> Siemens type. Matched by the words, else TURN_DEFAULT.
+# rhombic: 500 roughing when the insert angle is ROUGH_ANGLE or more (80 deg), else 510 finishing.
+TURN_TYPE = (("round", 550), ("circ", 550), ("button", 550), ("groov", 520), ("plung", 520), ("part", 530),
+             ("thread", 540), ("square", 500), ("trian", 500), ("trigon", 500))
+TURN_DEFAULT = 500
+ROUGH_ANGLE = 75.0
+# hyperMILL cutting point position -> Siemens tip direction ($TC_DP2). Not found: TIP_DEFAULT.
+TIP_FROM_HM = {"topright": 1, "topleft": 2, "bottomleft": 3, "bottomright": 4, "right": 5, "top": 6, "left": 7,
+               "bottom": 8, "center": 9, "centre": 9}
+TIP_DEFAULT = 2
+TURN_CUT = 3               # cut direction ($TC_DP11) preset; 3 = the left arrow on the control
+CUT_OPTIONS = ("1", "2", "3 \u2190", "4")
 # ------------------------------------------
 
 MM = 25.4
@@ -86,10 +106,55 @@ def siemens_type(htype):
             return code
     return DEFAULT_TYPE
 
+def turn_type(insert, angle):
+    low = str(insert or "").lower()
+    if "rhomb" in low or "diamond" in low:
+        return 500 if (angle is not None and angle >= ROUGH_ANGLE) else 510
+    for word, code in TURN_TYPE:
+        if word in low:
+            return code
+    return TURN_DEFAULT
+
+def tip_of(pos):
+    return TIP_FROM_HM.get(re.sub(r"[^a-z]", "", str(pos or "").lower()))
+
+def _num(el, name):
+    x = el.find("param[@name='%s']" % name) if el is not None else None
+    return _f(x.get("value")) if x is not None else None
+
+def _turning(n, t, root, d):
+    """Turning data from the NC tool n and tool t: type, L1 / L2, hyperMILL cutting points."""
+    prof = n.findall("cuttingProfiles/cuttingProfile") if n is not None else []
+    turn = [c for c in prof if c.get("type") == "turning" and str(_num(c, "enabled")) != "0.0"]
+    setups = n.findall("turningSetups/turningSetup") if n is not None else []
+    if not (turn or (setups and not prof)):
+        return
+    d["turning"] = True
+    ins = root.find(".//inserts/insert")
+    d["insert"] = ins.get("type", "") if ins is not None else ""
+    d["stype"] = turn_type(d["insert"], _num(ins, "insertAngle"))
+    d["hm_pos"] = [str(_param(s, "cuttingEdgePosition")) for s in setups]
+    d["tip"] = (tip_of(d["hm_pos"][0]) if d["hm_pos"] else None) or TIP_DEFAULT
+    d["cut"] = TURN_CUT
+    # Setting length Z = radial (L1), X = axial (L2): the NC tool's when set there, else the tool's
+    for el in (n, t):
+        z, x = _num(el, "settingLengthZ"), _num(el, "settingLengthX")
+        if el is not None and (z or x):
+            unit = _param(el, "lengthOfUnit") or "inch"
+            d["l1"], d["l2"] = to_unit(z or 0.0, unit), to_unit(x or 0.0, unit)
+            d["l_from"] = "NC tool" if el is n else "tool"
+            break
+
+def _param(el, name):
+    x = el.find("param[@name='%s']" % name) if el is not None else None
+    return x.get("value") if x is not None else None
+
 def tool_data(tool):
-    """ID, gage length and diameter (in UNIT), hyperMILL tool type and NC tool name, from the tool's own export."""
+    """ID, gage length and diameter (in UNIT), hyperMILL tool type and NC tool name, from the tool's own export.
+    Turning tools also: turning=True, stype, l1 (radial), l2 (axial), tip, cut, hm_pos (hyperMILL cutting points)."""
     p = os.path.join(tempfile.gettempdir(), "tool_load_mda_%s.omtdx" % re.sub(r"[^A-Za-z0-9_.-]", "_", str(val(tool.Name)))[:60])
-    d = dict(id=str(val(tool.Number)), gage=None, dia=None, htype="", ncname=str(val(tool.Name)))
+    d = dict(id=str(val(tool.Number)), gage=None, dia=None, htype="", ncname=str(val(tool.Name)), turning=False,
+             stype=None, l1=None, l2=None, tip=None, cut=None, hm_pos=[], insert="", l_from="")
     try:
         if not tool.Export(p):
             log("export failed:", d["ncname"]); return d
@@ -109,6 +174,9 @@ def tool_data(tool):
             dia = t.find("param[@name='toolDiameter']")
             if dia is not None and _f(dia.get("value")) is not None:
                 d["dia"] = to_unit(_f(dia.get("value")), tu.get("value") if tu is not None else "inch")
+        _turning(n, t, root, d)
+        if d["stype"] is None:
+            d["stype"] = siemens_type(d["htype"])
     except Exception as e:
         log("export not read:", d["ncname"], str(e)[:120])
     finally:
@@ -152,8 +220,69 @@ def save_last(counts):
         log("last values not saved:", e)
 
 
+def turn_path():
+    return os.path.join(os.path.dirname(last_path()), "tool_load_mda_turning.json")
+
+
+def load_turn():
+    """{tool ID: (tip, cut)} from the last runs."""
+    try:
+        with open(turn_path(), encoding="utf-8") as f:
+            return {k: (int(v[0]), int(v[1])) for k, v in json.load(f).items()}
+    except Exception:
+        return {}
+
+
+def save_turn(vals):
+    d = load_turn()
+    d.update(vals)
+    try:
+        with open(turn_path(), "w", encoding="utf-8") as f:
+            json.dump({k: list(v) for k, v in d.items()}, f, indent=1)
+    except Exception as e:
+        log("turning values not saved:", e)
+
+
+def ask_turning(tools):
+    """Screen 3: tip direction and cut direction per turning tool, PER_SCREEN per screen. Preset: last run, else
+    hyperMILL. Sets t["tip"], t["cut"]. Returns False when cancelled."""
+    turn = [t for t in tools if t.get("turning")]
+    if not turn:
+        return True
+    g = _gui()
+    last = load_turn()
+    tips = [str(i) for i in range(1, 10)]
+
+    def labels(t):
+        hm = t["hm_pos"][0] if t["hm_pos"] else "none"
+        return "%s  tip direction (hyperMILL %s)" % (t["id"], hm), "%s  cut direction" % t["id"]
+
+    for start in range(0, len(turn), PER_SCREEN):
+        page = turn[start:start + PER_SCREEN]
+        dlg = g.InputDialog("%s | turning tools %d-%d of %d" % (TITLE, start + 1, start + len(page), len(turn)))
+        for t in page:
+            lt, lc = labels(t)
+            tip, cut = last.get(t["id"], (t["tip"], t["cut"]))
+            dlg.AddDropDown(lt, tips, defaultIndex=min(max(tip, 1), 9) - 1)
+            dlg.AddDropDown(lc, list(CUT_OPTIONS), defaultIndex=min(max(cut, 1), len(CUT_OPTIONS)) - 1)
+        ok, vals = dlg.Show()
+        if not ok:
+            return False
+        for t in page:
+            lt, lc = labels(t)
+            for key, label, opts in (("tip", lt, tips), ("cut", lc, list(CUT_OPTIONS))):
+                v = vals.get(label)
+                if isinstance(v, int) and not isinstance(v, bool):
+                    t[key] = v + 1 if 0 <= v < len(opts) else t[key]
+                elif v in opts:
+                    t[key] = opts.index(v) + 1
+    save_turn({t["id"]: (t["tip"], t["cut"]) for t in turn})
+    return True
+
+
 def ask_counts(tools, defaults=None, need_life=None):
-    """Sisters and tool life per tool, PER_SCREEN tools per screen. Returns {id: (sisters, life)} or None when cancelled.
+    """Sisters and tool life per tool, PER_SCREEN tools per screen, then the turning tools' screen (ask_turning) for
+    turning tools with sisters. Returns {id: (sisters, life)} or None when cancelled.
     defaults: {id: (sisters, life)} shown instead of 1 / blank. need_life: IDs whose tool life field is labelled
     "tool life (SETPIECE)" (their B program counts with SETPIECE, which needs tool life monitoring on the control)."""
     g = _gui()
@@ -191,6 +320,8 @@ def ask_counts(tools, defaults=None, need_life=None):
                 log("bad entry, left out:", t["id"], vals.get(ls), vals.get(ll))
                 sis, life = 0, 0
             out[t["id"]] = (sis, life)
+    if not ask_turning([t for t in tools if out.get(t["id"], (0, 0))[0] > 0]):
+        return None
     return out
 
 
@@ -213,7 +344,10 @@ def program(tools, counts, doc_name, source):
     f = lambda v: "%.4f" % v
     p = ["; TOOL LOAD - %s - %s - %s" % (doc_name, source, datetime.datetime.now().strftime("%Y-%m-%d %H:%M")),
          "; units %s | name = NC tool ID | HL = gage length | HD = %s below %s, else diameter" % (UNIT, f(hd_of(None)), f(hd_of(None))),
-         "; a tool and sister already on the control (GETT finds it) is left as it is; running this twice is safe", ""]
+         "; a tool and sister already on the control (GETT finds it) is left as it is; running this twice is safe"]
+    if any(t.get("turning") for t in tools):
+        p.append("; turning tools: L1 = setting length Z (radial), L2 = setting length X (axial), DP2 tip direction, DP11 cut direction")
+    p.append("")
     made = 0
     for t in tools:
         sis, life = counts.get(t["id"], (1, 0))
@@ -222,9 +356,15 @@ def program(tools, counts, doc_name, source):
                   "IF (%s<=0)" % R_VAR,
                   '  %s=NEWT("%s",%d)' % (R_VAR, t["id"], s),
                   "  $TC_TP8[%s]=2" % R_VAR,
-                  "  $TC_DP1[%s,1]=%d" % (R_VAR, siemens_type(t["htype"])),
-                  "  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["gage"])),
-                  "  $TC_TPC4[%s]=%s" % (R_VAR, f(hd_of(t["dia"]))),
+                  "  $TC_DP1[%s,1]=%d" % (R_VAR, t.get("stype") or siemens_type(t["htype"]))]
+            if t.get("turning"):
+                p += ["  $TC_DP2[%s,1]=%d" % (R_VAR, t["tip"]),
+                      "  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["l1"] or 0.0)),
+                      "  $TC_DP4[%s,1]=%s" % (R_VAR, f(t["l2"] or 0.0)),
+                      "  $TC_DP11[%s,1]=%d" % (R_VAR, t["cut"])]
+            else:
+                p += ["  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["gage"]))]
+            p += ["  $TC_TPC4[%s]=%s" % (R_VAR, f(hd_of(t["dia"]))),
                   "  $TC_TPC5[%s]=%s" % (R_VAR, f(t["gage"]))]
             if life:
                 p += ["  $TC_TP9[%s]=2" % R_VAR, "  $TC_MOP13[%s,1]=%d" % (R_VAR, life), "  $TC_MOP4[%s,1]=%d" % (R_VAR, life)]
@@ -275,7 +415,10 @@ def run():
             if d["gage"] is None:
                 log("no gage length, left out:", d["id"], d["ncname"]); continue
             ids.add(d["id"]); tools.append(d)
-            log("tool:", d["id"], "|", d["ncname"], "|", d["htype"], "-> type", siemens_type(d["htype"]), "| gage", d["gage"], "| dia", d["dia"])
+            log("tool:", d["id"], "|", d["ncname"], "|", d["htype"], "-> type", d["stype"], "| gage", d["gage"], "| dia", d["dia"])
+            if d["turning"]:
+                log("  turning:", d["insert"], "| L1", d["l1"], "L2", d["l2"], "from", d["l_from"] or "nowhere (written as 0)",
+                    "| hyperMILL cutting points", d["hm_pos"], "-> tip", d["tip"], "| cut", d["cut"])
         if not tools:
             info("None of the tools could be read. See tool_load_mda_log.txt."); return
         tools.sort(key=lambda d: (_f(d["id"]) is None, _f(d["id"]) or 0, d["id"]))

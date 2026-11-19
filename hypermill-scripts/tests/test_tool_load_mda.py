@@ -109,6 +109,71 @@ os.remove(MPF)
 m, left = run([lambda dlg: (True, {"Tools from": 2}), counts(M_10047210=("0", ""), M_50016110=("0", ""), M_90508390=("0", ""))])
 check(not os.path.exists(MPF) and "0 sisters" in gui.BOXES[-1], "every tool 0 sisters: no program")
 
+# turning tools: real hyperMILL export of 943580900 (trimmed), a milling-only export as the control case
+XML = open(os.path.join(HERE, "fixtures", "turning_943580900.omtdx"), encoding="utf-8").read()
+tt = T("943580900", "Semi & Finish Inner Tube ID", xml=XML)
+rough = T("956770900", "Rough OD", xml=XML.replace('"topLeft"', '"bottomLeft"', 1).replace('value="55"', 'value="80"'))
+groove = T("926480900", "Groove", xml=XML.replace('type="rhombic"', 'type="grooving"', 1))
+spec = importlib.util.spec_from_file_location("tlm3", SCRIPT)
+m3 = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(m3)
+d = m3.tool_data(tt)
+check(d["turning"] and d["stype"] == 510 and d["id"] == "943580900", "turning tool found from the turning cutting profile; 55 deg rhombic -> 510")
+check(abs(d["l1"] + 1.3826) < 1e-4 and abs(d["l2"] - 7.8585) < 1e-4 and d["l_from"] == "tool",
+      "L1 = setting length Z -1.3826 (radial), L2 = setting length X 7.8585 (axial); NC tool zeros skipped")
+check(d["hm_pos"] == ["topLeft", "bottomLeft"] and d["tip"] == 2 and d["cut"] == 3, "first cutting point topLeft -> tip 2, cut 3 preset")
+check(m3.tool_data(rough)["stype"] == 500 and m3.tool_data(rough)["tip"] == 3, "80 deg rhombic -> 500 roughing; bottomLeft -> tip 3")
+check(m3.tool_data(groove)["stype"] == 520, "grooving insert -> 520")
+check(not m3.tool_data(em)["turning"] and m3.tool_data(em)["stype"] == 120, "end mill is not a turning tool")
+check([m3.tip_of(x) for x in ("topRight", "topLeft", "bottomLeft", "bottomRight", "right", "top", "left", "bottom", "center", "?")]
+      == [1, 2, 3, 4, 5, 6, 7, 8, 9, None], "hyperMILL cutting point -> tip direction table")
+
+# whole run with a turning tool: screen 3 asks tip / cut; the user changes the cut direction of 943580900 to 4
+cs2 = [om.CompoundJob("B_040", [om.Job("6: Turn", tt), om.Job("7: Contour", em)])]
+om._App.CurrentDocument = om.Document(DOC, om.Model([om.JobList("Op20", cs2)]))
+if os.path.exists(MPF):
+    os.remove(MPF)
+
+
+def turn_screen(dlg):
+    d = dlg.defaults()
+    check(d.get("943580900  tip direction (hyperMILL topLeft)") == "2" and d.get("943580900  cut direction") == "3 \u2190",
+          "screen 3 preset: tip 2, cut 3 (left arrow)")
+    check(not any(k.startswith("M_10047210") for k in d), "screen 3 lists turning tools only")
+    d["943580900  cut direction"] = "4"
+    return True, d
+
+
+m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(M_10047210=("1", ""), **{"943580900": ("1", "")}), turn_screen])
+txt = open(MPF).read()
+blk = txt[txt.index('R999=GETT("943580900",1)'):]
+blk = blk[:blk.index("ENDIF")]
+check(left == 0 and "$TC_DP1[R999,1]=510" in blk and "$TC_DP2[R999,1]=2" in blk and "$TC_DP3[R999,1]=-1.3826" in blk
+      and "$TC_DP4[R999,1]=7.8585" in blk and "$TC_DP11[R999,1]=4" in blk, "turning tool: DP1 510, DP2 2, DP3 -1.3826, DP4 7.8585, DP11 4")
+check("$TC_TPC5[R999]=7.6710" in blk and "$TC_TPC4[R999]=4.0000" in blk, "turning tool: HL = gage length, HD = minimum")
+mill = txt[txt.index('R999=GETT("M_10047210",1)'):]
+mill = mill[:mill.index("ENDIF")]
+check("$TC_DP2" not in mill and "$TC_DP4" not in mill and "$TC_DP11" not in mill and "$TC_DP3[R999,1]=3.6614" in mill,
+      "milling tool unchanged: DP3 = gage length only")
+check("; turning tools: L1 = setting length Z (radial)" in txt, "header names the turning lengths")
+check(json.load(open(os.path.join(tmp, "tool_load_mda_turning.json"))).get("943580900") == [2, 4], "tip / cut remembered per tool ID")
+
+# next run offers the remembered cut direction; cancel on screen 3 = nothing written
+os.remove(MPF)
+
+
+def turn_cancel(dlg):
+    check(dlg.defaults().get("943580900  cut direction") == "4", "second run: remembered cut direction 4 offered")
+    return False, {}
+
+
+m, left = run([lambda dlg: (True, {"Tools from": 0}), lambda dlg: (True, dlg.defaults()), turn_cancel])
+check(not os.path.exists(MPF), "cancel on the turning screen: no program")
+
+# 0 sisters on the turning tool: no turning screen
+m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(**{"943580900": ("0", "")})])
+check(left == 0 and os.path.exists(MPF) and "943580900" not in open(MPF).read().split("\n", 4)[-1], "turning tool with 0 sisters: no screen 3, left out")
+
 shutil.rmtree(tmp, ignore_errors=True)
 print()
 print("FAILURES: %d" % len(fails) if fails else "ALL TOOL LOAD MDA CHECKS PASSED")
