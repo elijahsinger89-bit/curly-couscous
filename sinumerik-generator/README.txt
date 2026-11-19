@@ -193,10 +193,10 @@ MACHINE DATA
 
 FRAMEWORK REVISION (comment only, nothing is checked on the control)
   The fixed files - the 10 L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF -
-  are installed once per machine. Each carries "NEST FRAMEWORK REV 01" and
+  are installed once per machine. Each carries "NEST FRAMEWORK REV 02" and
   a revision table near the top (REV 00 = the Excel/VBA package). Job
   files (A_P1, C_P1_WO, C_P1_NESTS, probe program) say "NEEDS NEST
-  FRAMEWORK REV 01". If the machine shows a lower revision, install the
+  FRAMEWORK REV 02". If the machine shows a lower revision, install the
   fixed files from a new zip. The revision only goes up when an installed
   file changes; every job produces identical fixed files for the same
   units (metric and inch differ only in the retract clearance).
@@ -233,7 +233,8 @@ RESTART
   at that step and nest. For a new pallet set GV_STEP=0 first.
   Max breaks in a step: park and hold until reset (LOOP / M0).
 
-FIRST RUN ON THE MACHINE (prove-out, single block, low feed override)
+FIRST RUN ON THE MACHINE (prove-out, single block; probing at 100% feed
+  override: below 100% the Heller marks the measurement invalid, alarm 700749)
   1. Probe one nest. On an outside feature, watch the probe go DOWN by
      S_ID from the start height (negative S_ID lowers in G17).
   2. After probing, read $P_UIFR[5,X,FI] (nest 1). Not 0 = MD18600 works
@@ -253,6 +254,14 @@ BLUM MACROS (outside the Siemens manuals, not verified)
   BL9908_MOD must return 19.19 in its last parameter on a break and disable
   the tool. BL9902 and its ;NCG# lines in L_TOOL_MEAS are copied verbatim
   from the old package (inch values). S3750 is the laser speed in both.
+  Turning tools ($TC_DP1 500-599, REV 02): no spindle start. L_TOOL_MEAS and
+  L_TOOL_BRK align the tool with the posted B program's turning line
+  CYCLE800(0,"TURN_TRAFO",200,57,0,0,0,0,0,0,0,0,0,1,0,2) (gamma 0), then the
+  Blum tactile: BL9732(0) measures L1 + L2 (geometry), BL9732(2,tol,tol)
+  checks them against the break tolerance. A broken turning tool stops the
+  machine with the Blum error (no return code like BL9908_MOD). CYCLE800()
+  after. Blum refuses tip direction 5 and 9 (error 20). A tool used at
+  another gamma would need its own alignment line.
 
 TESTS (tests/, for whoever maintains the generator)
   node tests/run_fixtures.js OUT    engine on 10 fixture jobs (2 CMC, 1 swivel), bad

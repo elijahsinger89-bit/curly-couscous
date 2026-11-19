@@ -203,16 +203,19 @@ dl.live dd.bad { color: var(--bad); font-weight: 600; }
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.6.0';
+var GEN_VERSION = '1.6.1';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
    and add a row to FW_HISTORY (tests/framework_revNN.sha256 enforces it). */
-var FW_REV = '01';
+var FW_REV = '02';
 var FW_HISTORY = [
   ['00', '2026-11-11', ['EXCEL/VBA PACKAGE']],
   ['01', '2026-11-12', ['REBUILT AND CHECKED AGAINST THE SINUMERIK ONE',
-                        'MANUALS (NC PROGRAMMING, MEASURING CYCLES 07/2025)']]
+                        'MANUALS (NC PROGRAMMING, MEASURING CYCLES 07/2025)']],
+  ['02', '2026-11-19', ['L_TOOL_MEAS / L_TOOL_BRK: TURNING TOOLS ($TC_DP1',
+                        '500-599) NO SPINDLE START, TURN_TRAFO ALIGNMENT,',
+                        'BLUM TACTILE BL9732']]
 ];
 var MAX_NESTS = 32;
 var AXES = ['NONE', 'A', 'B', 'C'];
@@ -220,6 +223,10 @@ var XY_METHODS = ['SPLIT EXTERIOR', 'BORE', 'BOSS', 'RECT POCKET', 'RECT SPIGOT'
 var OUTSIDE = { 'SPLIT EXTERIOR': 1, 'BOSS': 1, 'RECT SPIGOT': 1 };
 var INSIDE = { 'BORE': 1, 'RECT POCKET': 1 };
 var LASER_RPM = 3750;               /* shop laser speed - fixed */
+/* turning tool alignment before the Blum tactile: the line the post writes
+   before turning (tool carrier TURN_TRAFO, _ST 200 = align turning tool, gamma 0) */
+var TURN_ALIGN = 'CYCLE800(0,"TURN_TRAFO",200,57,0,0,0,0,0,0,0,0,0,1,0,2)';
+var TURN_TEST = 'IF (($TC_DP1[LV_T,1]>=500) AND ($TC_DP1[LV_T,1]<600)) GOTOF ';
 var UNIT = {
   METRIC: { key: 'METRIC', dec: 3, g: 'G71', label: 'METRIC (MM)', u: 'mm',
             clr: 1, feed: 300, fa: 5, travel: 15, zTol: 0.1, xyTol: 0.1, outClr: 25, inMargin: 1 },
@@ -1542,6 +1549,12 @@ function fToolMeas(R) {
     '; OF THE SISTER GROUP, THEN BLUM BL9902 MEASURES IT.',
     '; S3750 = SHOP LASER SPEED.',
     ';',
+    '; TURNING TOOL ($TC_DP1 500-599): NO SPINDLE START. THE',
+    '; TOOL IS ALIGNED LIKE THE POSTED B PROGRAM DOES BEFORE',
+    '; TURNING (CYCLE800 TOOL CARRIER TURN_TRAFO, GAMMA 0), THEN',
+    '; THE BLUM TACTILE MEASURES L1 + L2 (BL9732 MMODE 0 =',
+    '; GEOMETRY), THEN CYCLE800() TAKES THE ALIGNMENT OFF.',
+    ';',
     '; THE ;NCG# LINES ARE THE BLUM SCREEN-FORM RECORD OF THE',
     '; BL9902 CALL BELOW. THEY ARE COPIED VERBATIM FROM THE',
     '; ORIGINAL PACKAGE (INCH VALUES). REGENERATE THEM WITH THE',
@@ -1550,6 +1563,7 @@ function fToolMeas(R) {
     '; PARAMETERS:',
     ';   LD_TNAME : TOOL NAME STRING',
     ';-------------------------------------------',
+    'DEF INT LV_T                       ;spindle tool T number',
     ';',
     '; CANCEL TRANSFORMATIONS',
     'CYCLE800()',
@@ -1558,9 +1572,14 @@ function fToolMeas(R) {
     '; SAFE POSITION',
     retract(R.clr),
     ';',
-    '; LOAD TOOL BY NAME AND SPIN FOR THE LASER',
+    '; LOAD TOOL BY NAME',
     'T=LD_TNAME',
     'M6',
+    'STOPRE',
+    'GETEXET(LV_T)',
+    TURN_TEST + '_TM_TURN',
+    ';',
+    '; SPIN FOR THE LASER',
     'S' + LASER_RPM,
     'M3',
     'STOPRE',
@@ -1575,7 +1594,18 @@ function fToolMeas(R) {
     ';',
     '; SAFE RETRACT AFTER MEASUREMENT',
     retract(R.clr),
+    'GOTOF _TM_END',
     ';',
+    '; TURNING TOOL: ALIGN, BLUM TACTILE L1 + L2, ALIGNMENT OFF',
+    '_TM_TURN:',
+    'D1',
+    TURN_ALIGN,
+    'BL9732(0)',
+    'STOPRE',
+    retract(R.clr),
+    'CYCLE800()',
+    ';',
+    '_TM_END:',
     '; CLEAR THE PIECE-COUNT LIST (NO DECREMENT)',
     'SETPIECE(0)',
     ';',
@@ -1604,6 +1634,12 @@ function fToolBrk(R) {
     ';',
     '; S3750 = SHOP LASER SPEED. M5/M9 HANDLED HERE.',
     ';',
+    '; TURNING TOOL ($TC_DP1 500-599): NO SPINDLE START. ALIGNED',
+    '; LIKE THE POSTED B PROGRAM (TURN_TRAFO, GAMMA 0), THEN THE',
+    '; BLUM TACTILE CHECKS L1 + L2 AGAINST LD_BRK_TOL (BL9732',
+    '; MMODE 2). A BROKEN TURNING TOOL STOPS THE MACHINE WITH THE',
+    '; BLUM ERROR (BL9732 HAS NO RETURN CODE LIKE BL9908_MOD).',
+    ';',
     '; PARAMETERS:',
     ';   LD_TNAME   : TOOL NAME (FOR THE MESSAGE)',
     ';   LD_BRK_TOL : BREAKAGE TOLERANCE (' + R.U.u.toUpperCase() + ')',
@@ -1612,6 +1648,7 @@ function fToolBrk(R) {
     ';-------------------------------------------',
     ';',
     'DEF REAL LV_EC                     ;BLUM ERROR CODE',
+    'DEF INT LV_T                       ;spindle tool T number',
     ';',
     'LV_EC=0',
     ';',
@@ -1626,6 +1663,9 @@ function fToolBrk(R) {
     '; STOP SPINDLE AND COOLANT',
     'M5',
     'M9',
+    'STOPRE',
+    'GETEXET(LV_T)',
+    TURN_TEST + '_TB_TURN',
     ';',
     '; SPIN TOOL FOR LASER CHECK',
     'D1',
@@ -1644,6 +1684,20 @@ function fToolBrk(R) {
     '  M5',
     '  D1',
     'ENDIF',
+    'GOTOF _TB_END',
+    ';',
+    '; TURNING TOOL: ALIGN, BLUM TACTILE CHECK, ALIGNMENT OFF',
+    '_TB_TURN:',
+    'D1',
+    TURN_ALIGN,
+    'BL9732(2,LD_BRK_TOL,LD_BRK_TOL)',
+    'STOPRE',
+    retract(R.clr),
+    'CYCLE800()',
+    'SETPIECE(0)',
+    'D1',
+    ';',
+    '_TB_END:',
     'STOPRE',
     'RET',
     ';'
@@ -3103,6 +3157,12 @@ function fReadme(R) {
   r.push('  BL9908_MOD (L_TOOL_BRK) must return 19.19 in its last parameter on a');
   r.push('  break. BL9902 and its ;NCG# lines (L_TOOL_MEAS) are copied verbatim');
   r.push('  from the original package (inch values).');
+  r.push('  Turning tools ($TC_DP1 500-599): no spindle start. Aligned with');
+  r.push('  ' + TURN_ALIGN);
+  r.push('  (the posted B program\'s turning line, gamma 0), then the Blum tactile:');
+  r.push('  L_TOOL_MEAS BL9732(0) measures L1 + L2, L_TOOL_BRK BL9732(2,tol,tol)');
+  r.push('  checks them and stops the machine on a break. Tip direction 5 or 9 is');
+  r.push('  refused by Blum (error 20).');
   return r.join('\n') + '\n';
 }
 

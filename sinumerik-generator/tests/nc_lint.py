@@ -17,7 +17,7 @@ KEYWORDS = {
     'ENDFOR', 'REPEAT', 'M0', 'M1', 'M3', 'M5', 'M6', 'M8', 'M9', 'M19', 'D0', 'D1', 'G54', 'G70', 'G71',
 }
 # Subprograms / cycles called by name that exist on the control, not in the zip.
-EXTERNAL_CALLS = {'CYCLE800', 'CYCLE832', 'CYCLE977', 'CYCLE978', 'CYCLE979', 'BL9908_MOD', 'BL9902',
+EXTERNAL_CALLS = {'CYCLE800', 'CYCLE832', 'CYCLE977', 'CYCLE978', 'CYCLE979', 'BL9908_MOD', 'BL9902', 'BL9732',
                   'GROUP_BEGIN', 'GROUP_END', 'MSG', 'WRITE', 'GETEXET', 'SETPIECE', 'CALL'}
 LABEL_RE = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*):$')
 PROG_RE = re.compile(r'^[A-Za-z_][A-Za-z_][A-Za-z0-9_]{0,22}$')
