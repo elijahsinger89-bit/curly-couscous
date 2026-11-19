@@ -212,7 +212,7 @@ dl.live dd.bad { color: var(--bad); font-weight: 600; }
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.7.0';
+var GEN_VERSION = '1.7.1';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -1887,7 +1887,8 @@ function fBTemplate(R) {
     ';     AND ITS SISTERS)',
     ';  4. ORIENTS PER FACE WITH CYCLE800(0,"H",...) FROM CAM',
     ';  5. STARTS SPINDLE AND COOLANT (M3 Sxxxx, M8)',
-    ';  6. ENDS WITH THE BLOCK BELOW: STOP, CANCEL SWIVEL /',
+    ';  6. ENDS WITH THE BLOCK BELOW: STOP, G97 (NO G96 LEFT ON AFTER',
+    ';     TURNING), CANCEL SWIVEL /',
     ';     HIGH-SPEED SETTINGS / TRANSFORMATION, SAFE Z, RET',
     ';===========================================',
     ';',
@@ -1898,6 +1899,7 @@ function fBTemplate(R) {
     ';--- PROGRAM END (KEEP) ---',
     'M5',
     'M9',
+    'G97',
     'CYCLE800()',
     'CYCLE832()',
     'TRAFOOF',
