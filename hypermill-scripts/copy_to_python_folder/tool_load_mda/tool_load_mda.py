@@ -3,7 +3,7 @@
 # Screens: 1 source: one joblist, all joblists, or every tool in the document
 #          2 per tool (5 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
 #            (blank or 0 = no tool life monitoring)
-#          3 turning tools only (5 per screen): tip direction and cut direction
+#          3 turning tools only (5 per screen): tip direction, and cut direction for 500 / 510
 # Per tool and sister the program writes:
 #   R999=GETT("<ID>",<sister>)        is that tool and sister already on the control? (-1 = no)
 #   IF (R999<=0) ... ENDIF            only then:
@@ -16,7 +16,8 @@
 #   $TC_DP2   = tip direction 1-9       preset from hyperMILL's first cutting point (TIP_FROM_HM), chosen on screen 3
 #   $TC_DP3   = setting length Z        length 1, radial
 #   $TC_DP4   = setting length X        length 2, axial
-#   $TC_DP11  = cut direction           preset TURN_CUT (3 = the left arrow), chosen on screen 3
+#   $TC_DP11  = cut direction           500 / 510 only: 1 down, 2 up, 3 left, 4 right (arrows on the control). It must
+#                                       point to the tip's corner (CUT_OK), else the screen asks again
 #   $TC_TPC4  = HD                      HD_MIN for tools smaller than HD_MIN, the tool diameter at or above it
 #   $TC_TPC5  = HL                      gage length
 #   tool life entered: $TC_TP9 = 2 (piece count monitoring), $TC_MOP13 = $TC_MOP4 = pieces
@@ -57,8 +58,14 @@ ROUGH_ANGLE = 75.0
 TIP_FROM_HM = {"topright": 1, "topleft": 2, "bottomleft": 3, "bottomright": 4, "right": 5, "top": 6, "left": 7,
                "bottom": 8, "center": 9, "centre": 9}
 TIP_DEFAULT = 2
-TURN_CUT = 3               # cut direction ($TC_DP11) preset; 3 = the left arrow on the control
-CUT_OPTIONS = ("1", "2", "3 \u2190", "4")
+# Cut direction ($TC_DP11), only for these types (the control shows no arrow on the others)
+CUT_TYPES = (500, 510)
+CUT_OPTIONS = ("1 \u2193", "2 \u2191", "3 \u2190", "4 \u2192")      # down, up, left, right
+# Tip 1 upper right, 2 upper left, 3 lower left, 4 lower right: the arrow must point to that corner (else the control
+# shows a warning). Tips 5-9 are not checked.
+CUT_OK = {1: (2, 4), 2: (2, 3), 3: (1, 3), 4: (1, 4)}
+CUT_PRESET = {1: 2, 2: 3, 3: 3, 4: 1}
+TURN_CUT = 3               # cut direction preset for tips 5-9
 # ------------------------------------------
 
 MM = 25.4
@@ -115,6 +122,12 @@ def turn_type(insert, angle):
             return code
     return TURN_DEFAULT
 
+def cut_ok(tip, cut):
+    return cut in CUT_OK.get(tip, (1, 2, 3, 4))
+
+def cut_preset(tip):
+    return CUT_PRESET.get(tip, TURN_CUT)
+
 def tip_of(pos):
     return TIP_FROM_HM.get(re.sub(r"[^a-z]", "", str(pos or "").lower()))
 
@@ -135,7 +148,7 @@ def _turning(n, t, root, d):
     d["stype"] = turn_type(d["insert"], _num(ins, "insertAngle"))
     d["hm_pos"] = [str(_param(s, "cuttingEdgePosition")) for s in setups]
     d["tip"] = (tip_of(d["hm_pos"][0]) if d["hm_pos"] else None) or TIP_DEFAULT
-    d["cut"] = TURN_CUT
+    d["cut"] = cut_preset(d["tip"]) if d["stype"] in CUT_TYPES else None
     # Setting length Z = radial (L1), X = axial (L2): the NC tool's when set there, else the tool's
     for el in (n, t):
         z, x = _num(el, "settingLengthZ"), _num(el, "settingLengthX")
@@ -244,39 +257,58 @@ def save_turn(vals):
 
 
 def ask_turning(tools):
-    """Screen 3: tip direction and cut direction per turning tool, PER_SCREEN per screen. Preset: last run, else
-    hyperMILL. Sets t["tip"], t["cut"]. Returns False when cancelled."""
+    """Screen 3: tip direction (and cut direction for 500 / 510) per turning tool, PER_SCREEN per screen. Preset: last
+    run when the pair is allowed, else hyperMILL. A cut direction that does not point to the tip: message, same screen
+    again. Sets t["tip"], t["cut"]. Returns False when cancelled."""
     turn = [t for t in tools if t.get("turning")]
     if not turn:
         return True
     g = _gui()
     last = load_turn()
     tips = [str(i) for i in range(1, 10)]
+    cuts = list(CUT_OPTIONS)
+    for t in turn:
+        tip, cut = last.get(t["id"], (t["tip"], t.get("cut") or 0))
+        if 1 <= tip <= 9:
+            t["tip"] = tip
+        if t.get("cut") is not None:
+            t["cut"] = cut if (1 <= cut <= len(cuts) and cut_ok(t["tip"], cut)) else cut_preset(t["tip"])
+    allowed = "arrow to the tip: " + "  ".join("%d %s" % (k, "".join(cuts[c - 1][-1] for c in v)) for k, v in sorted(CUT_OK.items()))
 
     def labels(t):
         hm = t["hm_pos"][0] if t["hm_pos"] else "none"
         return "%s  tip direction (hyperMILL %s)" % (t["id"], hm), "%s  cut direction" % t["id"]
 
+    def pick(v, opts, cur):
+        if isinstance(v, int) and not isinstance(v, bool):
+            return v + 1 if 0 <= v < len(opts) else cur
+        return opts.index(v) + 1 if v in opts else cur
+
     for start in range(0, len(turn), PER_SCREEN):
         page = turn[start:start + PER_SCREEN]
-        dlg = g.InputDialog("%s | turning tools %d-%d of %d" % (TITLE, start + 1, start + len(page), len(turn)))
-        for t in page:
-            lt, lc = labels(t)
-            tip, cut = last.get(t["id"], (t["tip"], t["cut"]))
-            dlg.AddDropDown(lt, tips, defaultIndex=min(max(tip, 1), 9) - 1)
-            dlg.AddDropDown(lc, list(CUT_OPTIONS), defaultIndex=min(max(cut, 1), len(CUT_OPTIONS)) - 1)
-        ok, vals = dlg.Show()
-        if not ok:
-            return False
-        for t in page:
-            lt, lc = labels(t)
-            for key, label, opts in (("tip", lt, tips), ("cut", lc, list(CUT_OPTIONS))):
-                v = vals.get(label)
-                if isinstance(v, int) and not isinstance(v, bool):
-                    t[key] = v + 1 if 0 <= v < len(opts) else t[key]
-                elif v in opts:
-                    t[key] = opts.index(v) + 1
-    save_turn({t["id"]: (t["tip"], t["cut"]) for t in turn})
+        while True:
+            dlg = g.InputDialog("%s | turning tools %d-%d of %d | %s" % (TITLE, start + 1, start + len(page), len(turn), allowed))
+            for t in page:
+                lt, lc = labels(t)
+                dlg.AddDropDown(lt, tips, defaultIndex=t["tip"] - 1)
+                if t.get("cut") is not None:
+                    dlg.AddDropDown(lc, cuts, defaultIndex=t["cut"] - 1)
+            ok, vals = dlg.Show()
+            if not ok:
+                return False
+            bad = []
+            for t in page:
+                lt, lc = labels(t)
+                t["tip"] = pick(vals.get(lt), tips, t["tip"])
+                if t.get("cut") is not None:
+                    t["cut"] = pick(vals.get(lc), cuts, t["cut"])
+                    if not cut_ok(t["tip"], t["cut"]):
+                        bad.append("%s: tip %d takes cut %s" % (t["id"], t["tip"], " or ".join(cuts[c - 1] for c in CUT_OK[t["tip"]])))
+            if not bad:
+                break
+            log("cut direction does not point to the tip, asked again:", bad)
+            info("The cut direction must point to the tip, else the control shows a warning:\n" + "\n".join(bad))
+    save_turn({t["id"]: (t["tip"], t.get("cut") or 0) for t in turn})
     return True
 
 
@@ -360,8 +392,9 @@ def program(tools, counts, doc_name, source):
             if t.get("turning"):
                 p += ["  $TC_DP2[%s,1]=%d" % (R_VAR, t["tip"]),
                       "  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["l1"] or 0.0)),
-                      "  $TC_DP4[%s,1]=%s" % (R_VAR, f(t["l2"] or 0.0)),
-                      "  $TC_DP11[%s,1]=%d" % (R_VAR, t["cut"])]
+                      "  $TC_DP4[%s,1]=%s" % (R_VAR, f(t["l2"] or 0.0))]
+                if t.get("cut"):
+                    p += ["  $TC_DP11[%s,1]=%d" % (R_VAR, t["cut"])]
             else:
                 p += ["  $TC_DP3[%s,1]=%s" % (R_VAR, f(t["gage"]))]
             p += ["  $TC_TPC4[%s]=%s" % (R_VAR, f(hd_of(t["dia"]))),

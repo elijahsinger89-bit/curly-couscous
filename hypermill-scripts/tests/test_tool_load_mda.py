@@ -122,13 +122,21 @@ check(d["turning"] and d["stype"] == 510 and d["id"] == "943580900", "turning to
 check(abs(d["l1"] + 1.3826) < 1e-4 and abs(d["l2"] - 7.8585) < 1e-4 and d["l_from"] == "tool",
       "L1 = setting length Z -1.3826 (radial), L2 = setting length X 7.8585 (axial); NC tool zeros skipped")
 check(d["hm_pos"] == ["topLeft", "bottomLeft"] and d["tip"] == 2 and d["cut"] == 3, "first cutting point topLeft -> tip 2, cut 3 preset")
-check(m3.tool_data(rough)["stype"] == 500 and m3.tool_data(rough)["tip"] == 3, "80 deg rhombic -> 500 roughing; bottomLeft -> tip 3")
-check(m3.tool_data(groove)["stype"] == 520, "grooving insert -> 520")
+check(m3.tool_data(rough)["stype"] == 500 and m3.tool_data(rough)["tip"] == 3 and m3.tool_data(rough)["cut"] == 3,
+      "80 deg rhombic -> 500 roughing; bottomLeft -> tip 3, cut 3")
+gd = m3.tool_data(groove)
+check(gd["stype"] == 520 and gd["cut"] is None, "grooving insert -> 520, no cut direction")
+gtxt, _ = m3.program([gd], {gd["id"]: (1, 0)}, "doc", "test")
+check("$TC_DP2[R999,1]=2" in gtxt and "$TC_DP11" not in gtxt, "grooving tool: tip direction written, no DP11")
+# the four cases from the control: (tip, cut) 2+up, 3+left, 2+left OK; 1+down = warning triangle; 4+down OK
+check([m3.cut_ok(a, b) for a, b in ((2, 2), (3, 3), (2, 3), (1, 1), (4, 1))] == [True, True, True, False, True],
+      "allowed pairs: 2 up, 3 left, 2 left, 4 down; 1 down refused")
+check([m3.cut_preset(i) for i in (1, 2, 3, 4)] == [2, 3, 3, 1], "cut preset per tip: 1 up, 2 left, 3 left, 4 down")
 check(not m3.tool_data(em)["turning"] and m3.tool_data(em)["stype"] == 120, "end mill is not a turning tool")
 check([m3.tip_of(x) for x in ("topRight", "topLeft", "bottomLeft", "bottomRight", "right", "top", "left", "bottom", "center", "?")]
       == [1, 2, 3, 4, 5, 6, 7, 8, 9, None], "hyperMILL cutting point -> tip direction table")
 
-# whole run with a turning tool: screen 3 asks tip / cut; the user changes the cut direction of 943580900 to 4
+# whole run with a turning tool: screen 3 asks tip / cut; 1 (down) with tip 2 is refused and asked again; then 2 (up)
 cs2 = [om.CompoundJob("B_040", [om.Job("6: Turn", tt), om.Job("7: Contour", em)])]
 om._App.CurrentDocument = om.Document(DOC, om.Model([om.JobList("Op20", cs2)]))
 if os.path.exists(MPF):
@@ -140,30 +148,39 @@ def turn_screen(dlg):
     check(d.get("943580900  tip direction (hyperMILL topLeft)") == "2" and d.get("943580900  cut direction") == "3 \u2190",
           "screen 3 preset: tip 2, cut 3 (left arrow)")
     check(not any(k.startswith("M_10047210") for k in d), "screen 3 lists turning tools only")
-    d["943580900  cut direction"] = "4"
+    check("1 \u2191\u2192  2 \u2191\u2190  3 \u2193\u2190  4 \u2193\u2192" in dlg.title, "screen 3 title lists the allowed arrows")
+    d["943580900  cut direction"] = "1 \u2193"
     return True, d
 
 
-m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(M_10047210=("1", ""), **{"943580900": ("1", "")}), turn_screen])
+def turn_again(dlg):
+    d = dlg.defaults()
+    check("tip 2 takes cut 2 \u2191 or 3 \u2190" in gui.BOXES[-1], "bad pair: message names the allowed arrows")
+    check(d.get("943580900  cut direction") == "1 \u2193", "same screen again, entry kept")
+    d["943580900  cut direction"] = "2 \u2191"
+    return True, d
+
+
+m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(M_10047210=("1", ""), **{"943580900": ("1", "")}), turn_screen, turn_again])
 txt = open(MPF).read()
 blk = txt[txt.index('R999=GETT("943580900",1)'):]
 blk = blk[:blk.index("ENDIF")]
 check(left == 0 and "$TC_DP1[R999,1]=510" in blk and "$TC_DP2[R999,1]=2" in blk and "$TC_DP3[R999,1]=-1.3826" in blk
-      and "$TC_DP4[R999,1]=7.8585" in blk and "$TC_DP11[R999,1]=4" in blk, "turning tool: DP1 510, DP2 2, DP3 -1.3826, DP4 7.8585, DP11 4")
+      and "$TC_DP4[R999,1]=7.8585" in blk and "$TC_DP11[R999,1]=2" in blk, "turning tool: DP1 510, DP2 2, DP3 -1.3826, DP4 7.8585, DP11 2")
 check("$TC_TPC5[R999]=7.6710" in blk and "$TC_TPC4[R999]=4.0000" in blk, "turning tool: HL = gage length, HD = minimum")
 mill = txt[txt.index('R999=GETT("M_10047210",1)'):]
 mill = mill[:mill.index("ENDIF")]
 check("$TC_DP2" not in mill and "$TC_DP4" not in mill and "$TC_DP11" not in mill and "$TC_DP3[R999,1]=3.6614" in mill,
       "milling tool unchanged: DP3 = gage length only")
 check("; turning tools: L1 = setting length Z (radial)" in txt, "header names the turning lengths")
-check(json.load(open(os.path.join(tmp, "tool_load_mda_turning.json"))).get("943580900") == [2, 4], "tip / cut remembered per tool ID")
+check(json.load(open(os.path.join(tmp, "tool_load_mda_turning.json"))).get("943580900") == [2, 2], "tip / cut remembered per tool ID")
 
 # next run offers the remembered cut direction; cancel on screen 3 = nothing written
 os.remove(MPF)
 
 
 def turn_cancel(dlg):
-    check(dlg.defaults().get("943580900  cut direction") == "4", "second run: remembered cut direction 4 offered")
+    check(dlg.defaults().get("943580900  cut direction") == "2 \u2191", "second run: remembered cut direction 2 (up) offered")
     return False, {}
 
 

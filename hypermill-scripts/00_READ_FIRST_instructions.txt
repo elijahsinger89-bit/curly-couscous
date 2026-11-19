@@ -322,9 +322,13 @@ One Sinumerik MDA program that creates every tool and sister on the control: pas
 Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
   of the B programs it posted). 2 Per tool, 5 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
   no tool life monitoring). Both are remembered per tool ID (tool_load_mda_last.json) and offered next time.
-  3 Turning tools only, 5 per screen: tip direction (1-9) and cut direction (1-4, 3 = left arrow). Preset from the last
-  run (tool_load_mda_turning.json), else tip from hyperMILL's first cutting point (topLeft 2, bottomLeft 3, topRight 1,
-  bottomRight 4, right 5, top 6, left 7, bottom 8, center 9) and cut direction 3.
+  3 Turning tools only, 5 per screen: tip direction (1-9) and, for 500 roughing / 510 finishing only, cut direction
+  (1 down, 2 up, 3 left, 4 right: the arrows on the control). Tip 1 = upper right, 2 upper left, 3 lower left, 4 lower
+  right; the arrow must point to that corner (tip 1: up or right, 2: up or left, 3: down or left, 4: down or right),
+  else the control shows a warning triangle. A pair that does not: message, same screen again. Tips 5-9 not checked.
+  Preset: the last run (tool_load_mda_turning.json) when the pair is allowed, else tip from hyperMILL's first cutting
+  point (topLeft 2, bottomLeft 3, topRight 1, bottomRight 4, right 5, top 6, left 7, bottom 8, center 9) and cut
+  direction 1 up, 2 left, 3 left, 4 down.
 Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_DP1 = Siemens tool type, $TC_DP3 = gage
   length, $TC_TPC4 = HD (4.0 below 4 in, else the diameter), $TC_TPC5 = HL (gage length); with tool life: $TC_TP9=2,
   $TC_MOP13 = $TC_MOP4 = pieces. Tool name on the control = the NC tool ID (Common > ID), the same name the B program
@@ -332,14 +336,15 @@ Per tool and sister: R999=NEWT("<tool ID>",<sister>), $TC_TP8=2 (enabled), $TC_D
 Turning tools (the NC tool has a turning cutting profile; hyperMILL type insertTtool used to load as a 120 end mill):
   $TC_DP1 from the insert shape (rhombic 510, rhombic 75 deg or more 500, square / triangle 500, round 550, grooving 520,
   parting 530, thread 540, else 500), $TC_DP2 = tip direction, $TC_DP3 = L1 = Setting length Z (radial, sign as hyperMILL
-  exports it), $TC_DP4 = L2 = Setting length X (axial), $TC_DP11 = cut direction. HD / HL as above. The setting lengths
+  exports it), $TC_DP4 = L2 = Setting length X (axial), $TC_DP11 = cut direction (500 / 510 only). HD / HL as above. The setting lengths
   come from the NC tool when set there, else from the tool. None found: L1 and L2 written as 0 (log says so).
 Each tool and sister is checked first (R999=GETT("<tool ID>",<sister>)): already on the control = left exactly as it is
 (measured length, remaining life), so running the program twice is safe. Only missing ones get NEWT, inside
 IF (R999<=0) ... ENDIF. (NEWT on an existing name and sister stops with alarm 14020.)
 Tools without a gage length are left out (listed in the log).
 Settings at the top of tool_load_mda.py: units (inch / mm), R999, HD minimum, hyperMILL -> Siemens tool types, turning
-tool types (TURN_TYPE), hyperMILL cutting point -> tip direction (TIP_FROM_HM), cut direction preset (TURN_CUT).
+tool types (TURN_TYPE), hyperMILL cutting point -> tip direction (TIP_FROM_HM), allowed and preset cut directions
+(CUT_OK, CUT_PRESET), types with a cut direction (CUT_TYPES).
 Output: <document folder>\<DOCUMENT>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND); from go_to_machine:
 <document folder>\go to machine\. Log: tool_load_mda_log.txt.
 
@@ -368,4 +373,4 @@ tool_library\machines.csv        machines and spindles
 tool_library\brk_rules.csv       breakage / measuring presets per tool type and roughing / finishing (B program export,
                                  go_to_machine)
 tool_load_mda\tool_load_mda.py   the SETTINGS block at the top: units, R999, HD minimum, hyperMILL -> Siemens tool types,
-                                 turning tool types, tip direction table, cut direction preset
+                                 turning tool types, tip direction table, allowed / preset cut directions
