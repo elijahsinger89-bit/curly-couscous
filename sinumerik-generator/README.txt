@@ -7,6 +7,32 @@ USE
   Fill the tabs, press Generate ZIP. The zip holds every NC file.
   Tab 5 (CMC) appears only while a step row has CMC ticked.
 
+SCREENS: PROBING (tab 2) AND CMC (tab 5)
+  Each section is a card: boxes on the left in numbered groups, a picture
+  and help on the right (above the boxes on a narrow window).
+  Picture: top view and side cut of the feature as set (bore, boss, slot,
+    web, rectangle, arc, wall, floor, protection zone, swivel). The box you
+    click into is drawn in the highlight colour; under it: what the box is,
+    unit, default, example, what the machine does with it.
+  Live numbers: from the same math as the NC (expected size after the
+    first cut, travel down, start height, gap for the probe ball).
+  CMC card: What / Size / Where / How it cuts always open. "More settings"
+    (check window, correction limit, edge, wear field, radius/diameter,
+    +wear direction, back to the cutter, cleaning) is closed and opens on
+    its own when one of them has an error or a non-default value; its
+    heading line shows what is set. "What the machine does" lists the steps
+    with the job's numbers.
+  Probing tab: the strip at the top is the probe program in order (tool
+    call, swivel, health check, part check, Z datum, XY datum, swivel
+    back). Steps that are off are grey. Click a step to jump to its card.
+  Errors show under the box as well as in the list at the top.
+  Probe ball diameter (Common, optional): checked on the screen only, never
+    written to the NC. Warns when the ball does not fit between the
+    protection zone and the wall, or the probe depth is less than a ball
+    radius above a floor.
+  1.6.0 changed the screens only. A job .json saved by 1.5.0 loads and
+  generates the same NC (only the version line differs).
+
 PROBE SWIVEL (tab 2 for the probe step, each CMC card)
   Rotate, probe, swivel back. The probe program runs the CYCLE800 line right
   after the tool call (after G54 D1 and the nest rotary line), probes
@@ -88,9 +114,8 @@ CMC - CUT / MEASURE / CUT (tick CMC on a step row, fill its card on tab 5)
   the middle (the probe starts above it at the approach Z and lowers
   outside it), outside features = the wall around (a channel). Use it for
   an ID or OD inside a round channel.
-  Probe swivel: paste the CYCLE800(...) line of the CAM program (a block
-  number and comment are dropped). Blank = the nest face. With a swivel the
-  card's X / Y / Z are in that plane.
+  Probe swivel: see PROBE SWIVEL (AUTO, B PROGRAM, PASTE, ANGLES or NONE).
+  With a swivel the card's X / Y / Z are in that plane.
   Tool type: rotating = $TC_DP15 wear radius (floor: $TC_DP12 length 1),
   +wear leaves material. Turning = $TC_DP12 length 1 (face: $TC_DP13), you
   set what +wear does (larger / smaller) and radius or diameter. The field

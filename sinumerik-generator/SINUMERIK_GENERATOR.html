@@ -79,6 +79,80 @@ dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--p
 dialog::backdrop { background: rgba(0,0,0,.45); }
 dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
 .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; background: var(--off); color: var(--muted); font-size: 12px; }
+/* 1.6.0 cards: boxes left, picture and help right */
+:root { --hi: #d9480f; --hi-bg: #fff0e6; --metal: #c9ced6; --metal2: #e4e7ec; --zone: #e9d9b0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hi: #ff9f5a; --hi-bg: #3a2614; --metal: #4a5160; --metal2: #353b47; --zone: #5c4f2e; } }
+:root[data-theme="dark"] { --hi: #ff9f5a; --hi-bg: #3a2614; --metal: #4a5160; --metal2: #353b47; --zone: #5c4f2e; }
+.card2 { border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; overflow: hidden; scroll-margin-top: 80px; }
+.card2 > .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 9px 14px; border-bottom: 1px solid var(--line); background: var(--code); }
+.card2 > .head b { font-size: 15px; }
+.card2 > .head span { color: var(--muted); font-size: 13px; }
+.card2.offcard > .head { opacity: .7; }
+.card2 > .body { display: grid; grid-template-columns: minmax(0, 1fr) 440px; }
+@media (max-width: 980px) { .card2 > .body { grid-template-columns: 1fr; } .card2 .pic { order: -1; border-left: none !important; border-bottom: 1px solid var(--line); } }
+.card2 .form { padding: 12px 14px; min-width: 0; }
+.grp { margin-bottom: 12px; }
+.grp h3 { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 0 0 6px; }
+.grp h3 .n { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 12px; flex: none; }
+.grp .row, details.more .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 12px; align-items: start; }
+.grp .row .wide, details.more .row .wide { grid-column: 1 / -1; }
+label.f.focus { color: var(--hi); font-weight: 600; }
+label.f.focus input, label.f.focus select { outline: 2px solid var(--hi); border-color: var(--hi); background: var(--hi-bg); }
+label.f .hint { font-size: 11px; color: var(--muted); font-weight: 400; }
+label.f .ferr { font-size: 11px; color: var(--bad); font-weight: 400; }
+label.f.chk { padding-top: 18px; }
+details.more { border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; margin-top: 4px; }
+details.more summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+details.more .sum { font-weight: 400; color: var(--muted); margin-left: 6px; }
+details.more[open] .row { margin-top: 8px; }
+.warnline { margin-top: 6px; font-size: 12px; color: var(--warn); background: var(--warn-bg); border-radius: 6px; padding: 5px 8px; }
+.card2 .pic { border-left: 1px solid var(--line); padding: 12px 14px; }
+.card2 .views { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.card2 .views.one { grid-template-columns: minmax(0, 300px); justify-content: center; }
+.card2 .vt { font-size: 11px; color: var(--muted); text-align: center; margin-top: 2px; }
+.card2 .vt.vth { color: var(--hi); font-weight: 600; }
+.card2 svg { width: 100%; height: auto; display: block; }
+.help { margin-top: 10px; border-left: 3px solid var(--hi); background: var(--hi-bg); padding: 8px 10px; border-radius: 0 6px 6px 0; }
+.help b { color: var(--hi); }
+.help p { margin: 4px 0 0; font-size: 13px; }
+dl.live { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12px; }
+dl.live dt { color: var(--muted); }
+dl.live dd { margin: 0; font-variant-numeric: tabular-nums; }
+dl.live dd.ok { color: var(--ok); }
+dl.live dd.bad { color: var(--bad); font-weight: 600; }
+.does { border-top: 1px solid var(--line); padding: 10px 14px 12px; background: var(--code); }
+.does h3 { font-size: 13px; margin: 0 0 4px; }
+.does ol { margin: 0; padding-left: 20px; font-size: 13px; }
+.strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 4px; }
+.strip .step { border: 1px solid var(--accent); color: var(--accent); background: transparent; border-radius: 16px; padding: 3px 11px; font-size: 12px; font-weight: 600; }
+.strip .step.off { border-color: var(--line); color: var(--muted); font-weight: 400; text-decoration: line-through; }
+.strip .arrow { color: var(--muted); }
+.card2 svg .metal { fill: var(--metal); stroke: var(--ink); stroke-width: 1.2; }
+.card2 svg .metal2 { fill: var(--metal2); stroke: var(--ink); stroke-width: 1.2; }
+.card2 svg .metalhi { stroke: var(--hi); stroke-width: 2.6; }
+.card2 svg .cavity { fill: var(--panel); }
+.card2 svg .zone { fill: var(--zone); stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; }
+.card2 svg .zoneline { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.card2 svg .zonehi { stroke: var(--hi); stroke-width: 2.4; }
+.card2 svg .line { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.card2 svg .cavity.line { fill: var(--panel); }
+.card2 svg .thin { stroke: var(--muted); stroke-width: 1; fill: none; }
+.card2 svg .dash { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 5 4; fill: none; }
+.card2 svg .hi { stroke: var(--hi); stroke-width: 2.4; fill: none; }
+.card2 svg .cavity.hi { fill: var(--panel); }
+.card2 svg .dashhi { stroke-dasharray: 6 4; }
+.card2 svg .thinhi { stroke-width: 1.2; }
+.card2 svg .hifill { fill: var(--hi); }
+.card2 svg .acc { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+.card2 svg .accfill { fill: var(--accent); }
+.card2 svg .probe { fill: var(--panel); stroke: var(--ink); stroke-width: 1.4; }
+.card2 svg .probehi { stroke: var(--hi); stroke-width: 2.4; }
+.card2 svg .band { fill: var(--accent); opacity: .12; stroke: var(--accent); stroke-dasharray: 3 3; }
+.card2 svg .bandhi { fill: var(--hi); opacity: .2; stroke: var(--hi); }
+.card2 svg text { fill: var(--ink); font: 11px system-ui, sans-serif; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
+.card2 svg text.m { fill: var(--muted); }
+.card2 svg text.h { fill: var(--hi); font-weight: 700; }
+.card2 svg text.a { fill: var(--accent); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -129,7 +203,7 @@ dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.5.0';
+var GEN_VERSION = '1.6.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -191,7 +265,9 @@ function defaultJob() {
       probeZ: '', xyTol: '', approachClr: '',
       health: false, hX: '', hY: '', hStartZ: '', hTargetZ: '', hFeed: '',
       /* probe swivel (probe step) and the shared swivel settings (probe step + CMC) */
-      swMode: 'NONE', swFrom: '', swLine: '', swA: '', swB: '', swC: '', swBlock: '', swDir: '', swPrnum: ''
+      swMode: 'NONE', swFrom: '', swLine: '', swA: '', swB: '', swC: '', swBlock: '', swDir: '', swPrnum: '',
+      /* probe ball diameter: only for the checks on the screen, never written to the NC */
+      ballDia: ''
     },
     /* CMC R parameters: first R of the first CMC block (50 per CMC step), R count on the control (MD28050),
        tool carrier for TCA (spindle) */
@@ -946,6 +1022,8 @@ function validate(job) {
   /* probing */
   if (ps.enabled) validateProbe(job, err, needNum);
   if (ps.enabled) { var psw = swivelFrom(probeSwivelSrc(job), job); if (psw.err) err(psw.where, 'Probe swivel: ' + psw.err); }
+  var bd = job.probing.ballDia;
+  if (!isBlank(bd) && (!isNum(bd) || num(bd) <= 0)) err('probing.ballDia', 'Probe ball diameter must be a number > 0 (or blank)');
   var swp = job.probing.swPrnum;
   if (!isBlank(swp) && (!isInt(swp) || num(swp) < 1 || num(swp) > 40)) err('probing.swPrnum', 'Probe data set for swivelled measuring must be 1-40 (MC S_PRNUM)');
   /* CMC cards (errors block generating, warnings are shown) */
@@ -1069,6 +1147,18 @@ function validateCmc(job, err, warn) {
       warn(p + 'cmc', tag + 'the B program has ' + num(s.jobs) + ' toolpaths; CMC re-cuts every one of them. Keep the CMC toolpath alone in its compound job.');
     if (s.cmcTool !== 'TURNING' && d.kind !== 'floor' && s.rcomp === 'NO')
       warn(p + 'cmc', tag + 'the posted B program has no G41/G42: radius wear ($TC_DP15) has no effect without cutter compensation.');
+    /* probe ball checks (ball diameter entered on tab 2) */
+    var ball = isNum(job.probing.ballDia) && num(job.probing.ballDia) > 0 ? num(job.probing.ballDia) : 0;
+    if (ball && isNum(s.cmcNom) && isNum(s.cmcStock)) {
+      var cb = cmcResolve(s, U);
+      if (cb.zone > 0 && (d.kind === 'size' || d.kind === 'rect')) {
+        var half = Math.abs(cb.E - cb.zone) / 4;
+        if (half - ball / 2 <= 0)
+          warn(p + 'cmc', tag + 'the probe ball (' + compact(ball, 4) + ') does not fit between the protection zone and the expected ' + (d.inside ? 'wall' : 'feature') + ': ' + compact(half * 2, 4) + ' of room at the test plunge.');
+      }
+      if ((d.kind === 'wall' || d.kind === 'floor') && clrIn - ball / 2 <= 0)
+        warn(p + 'cmc', tag + 'the probe ball (' + compact(ball, 4) + ') is bigger than twice the start clearance (' + compact(clrIn, 4) + '): it would start against the surface.');
+    }
   });
 }
 function validateProbe(job, err, needNum) {
@@ -3147,27 +3237,36 @@ function setPath(o, p, v) {
 function U() { return S.UNIT[job.config.units === 'INCH' ? 'INCH' : 'METRIC']; }
 
 /* ---- field builders ---- */
+/* label classes: focus = the box you are in (highlighted with its picture), wide = full row */
+function fcls(path, opts) { return 'f' + (path === focusPath ? ' focus' : '') + (opts && opts.wide ? ' wide' : ''); }
+/* the error of this box under it (the long prefix "CMC step 570: " is in the list at the top already) */
+function ferr(path) {
+  var m = errPaths[path];
+  if (!m || m === 1) return '';
+  return '<span class="ferr">' + esc(String(m).replace(/^(CMC step [^:]+|Step row \d+|CMC probe \(tab 2\)|Probe swivel|CMC|Probe tool):\s*/, '')) + '</span>';
+}
 function txt(path, label, opts) {
   opts = opts || {};
   var v = getPath(job, path);
-  return '<label class="f">' + esc(label) +
+  return '<label class="' + fcls(path, opts) + '">' + esc(label) +
     '<input type="text" data-path="' + path + '" value="' + esc(v) + '"' +
     (opts.ph !== undefined ? ' placeholder="' + esc(opts.ph) + '"' : '') +
     (opts.dis ? ' disabled' : '') + (opts.w ? ' style="width:' + opts.w + '"' : '') +
-    (errPaths[path] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label>';
+    (errPaths[path] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off">' +
+    (opts.hint ? '<span class="hint">' + esc(opts.hint) + '</span>' : '') + ferr(path) + '</label>';
 }
 function chk(path, label, opts) {
   opts = opts || {};
-  return '<label class="f chk"><input type="checkbox" data-path="' + path + '"' + (getPath(job, path) ? ' checked' : '') +
-    (opts.dis ? ' disabled' : '') + '>' + esc(label) + '</label>';
+  return '<label class="' + fcls(path, opts) + ' chk"><input type="checkbox" data-path="' + path + '"' + (getPath(job, path) ? ' checked' : '') +
+    (opts.dis ? ' disabled' : '') + '>' + esc(label) + ferr(path) + '</label>';
 }
 function sel(path, label, options, opts) {
   opts = opts || {};
   var v = getPath(job, path);
-  return '<label class="f">' + esc(label) + '<select data-path="' + path + '"' + (opts.dis ? ' disabled' : '') +
+  return '<label class="' + fcls(path, opts) + '">' + esc(label) + '<select data-path="' + path + '"' + (opts.dis ? ' disabled' : '') +
     (errPaths[path] ? ' class="err"' : '') + '>' +
     options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('') +
-    '</select></label>';
+    '</select>' + ferr(path) + '</label>';
 }
 function cellTxt(path, opts) {
   opts = opts || {};
@@ -3266,70 +3365,573 @@ function builderNote() {
 }
 
 /* ---- tab: probing ---- */
+/* ================= 1.6.0 screens: cards with a picture and help (probing tab, CMC tab) =================
+   Every card: boxes on the left in numbered groups, on the right a drawing of what the boxes mean (our own SVG,
+   in the idea of the SINUMERIK cycle help pictures), the help for the box you are in, and live numbers.
+   Nothing here changes the job data: every box keeps its data-path.                                        */
+var focusPath = '';
+var moreOpen = {};                  /* CMC card -> "More settings" opened / closed by hand */
+function n4(v) { return S.compact(v, U().dec); }
+function nd(v) { return isFinite(v) ? n4(v) : '?'; }
+function gv(path) { return getPath(job, path); }
+function numOr(v, d) { return S.isNum(v) ? S.num(v) : d; }
+function probeConst() {
+  var p = job.probing, u = U();
+  var fa = numOr(p.searchDist, u.fa);
+  return { fa: fa, clrIn: S.isBlank(p.approachClr) ? fa + u.inMargin : numOr(p.approachClr, fa + u.inMargin),
+           clrOut: S.isBlank(p.approachClr) ? u.outClr : numOr(p.approachClr, u.outClr),
+           ball: S.isNum(p.ballDia) && S.num(p.ballDia) > 0 ? S.num(p.ballDia) : 0 };
+}
+function grp(n, title, inner) {
+  return '<div class="grp"><h3><span class="n">' + n + '</span>' + esc(title) + '</h3><div class="row">' + inner + '</div></div>';
+}
+function card(key, head, form, bottom, extraCls, attrs) {
+  return '<div class="card2' + (extraCls ? ' ' + extraCls : '') + '" data-pic="' + key + '"' + (attrs || '') + '>' +
+    '<div class="head">' + head + '</div><div class="body"><div class="form">' + form + '</div>' +
+    '<div class="pic">' + picPanel(key) + '</div></div>' + (bottom || '') + '</div>';
+}
+function refreshPic(c) {
+  var pic = c.querySelector('.pic');
+  if (pic) pic.innerHTML = picPanel(c.dataset.pic);
+  c.querySelectorAll('label.f.focus').forEach(function (l) { l.classList.remove('focus'); });
+  var el = focusPath ? c.querySelector('[data-path="' + focusPath + '"]') : null;
+  var lab = el && el.closest('label.f');
+  if (lab) lab.classList.add('focus');
+}
+document.addEventListener('focusin', function (e) {
+  var el = e.target, p = el && el.dataset && el.dataset.path;
+  if (!p || p === focusPath) return;
+  focusPath = p;
+  var c = el.closest('[data-pic]');
+  if (c) refreshPic(c);
+});
+document.addEventListener('toggle', function (e) {
+  var d = e.target;
+  if (d && d.classList && d.classList.contains('more') && d.dataset.row !== undefined) moreOpen[d.dataset.row] = d.open;
+}, true);
+
+/* ---------------- drawings ---------------- */
+var VB = '0 0 220 240';
+function svgv(body, label) { return '<svg viewBox="' + VB + '" role="img" aria-label="' + esc(label) + '">' + body + '</svg>'; }
+function tx(x, y, s, cls, anchor) {
+  return '<text x="' + x + '" y="' + y + '"' + (cls ? ' class="' + cls + '"' : '') + (anchor ? ' text-anchor="' + anchor + '"' : '') + '>' + esc(s) + '</text>';
+}
+function ln(x1, y1, x2, y2, cls) { return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" class="' + cls + '"/>'; }
+function arrow(x1, y1, x2, y2, cls) {
+  var a = Math.atan2(y2 - y1, x2 - x1), s = 6;
+  var p1 = (x2 - s * Math.cos(a - 0.45)) + ',' + (y2 - s * Math.sin(a - 0.45)), p2 = (x2 - s * Math.cos(a + 0.45)) + ',' + (y2 - s * Math.sin(a + 0.45));
+  return ln(x1, y1, x2, y2, cls) + '<polygon points="' + x2 + ',' + y2 + ' ' + p1 + ' ' + p2 + '" class="' + (cls === 'hi' ? 'hifill' : 'accfill') + '"/>';
+}
+function cross(x, y, cls) { return ln(x - 7, y, x + 7, y, cls) + ln(x, y - 7, x, y + 7, cls); }
+function probeAt(x, y, cls) { return ln(x, y - 22, x, y - 5, 'line') + '<circle cx="' + x + '" cy="' + y + '" r="5" class="probe' + (cls ? ' ' + cls : '') + '"/>'; }
+function legend(nomLabel, afterLabel, hiNom, hiAfter) {
+  return ln(12, 212, 34, 212, hiNom ? 'hi' : 'line') + tx(40, 216, nomLabel, hiNom ? 'h' : '') +
+    (afterLabel ? ln(12, 230, 34, 230, hiAfter ? 'hi dashhi' : 'dash') + tx(40, 234, afterLabel, hiAfter ? 'h' : 'm') : '');
+}
+function badge(text, hi) { return ''; }
+/* "about X -90" from the decoded swivel text: only rotations that are not 0 */
+function swShort(text) {
+  var out = [], re = /about ([XYZ]) (-?[0-9.]+)/g, m;
+  while ((m = re.exec(text))) if (Number(m[2]) !== 0) out.push('about ' + m[1] + ' ' + m[2]);
+  return out.length ? out.join(', ') : String(text).replace(/^data block [^,]*, /, '').replace(/, direction.*$/, '');
+}
+/* top view. o: { shape: circle|slotX|slotY|rect|arc|wallX|wallY|point, inside, zone, hi: {...}, nom, after, zoneTxt,
+   plunge: [x,y] or null, arcA0, arcInc, arcN, side (+/-), sw }                                               */
+function topView(o) {
+  var b = '', h = o.hi || {}, cx = 110, cy = 104;
+  var nomC = h.nom ? 'hi' : 'line', aftC = h.after ? 'hi dashhi' : 'dash', zoneC = h.zone ? 'zone zonehi' : 'zone', zoneL = h.zone ? 'zoneline zonehi' : 'zoneline';
+  var arr = h.arrows ? 'hi' : 'acc';
+  if (o.shape === 'circle' || o.shape === 'arc') {
+    if (o.inside) {
+      b += '<rect x="8" y="14" width="204" height="180" rx="6" class="metal"/>';
+      b += '<circle cx="110" cy="104" r="86" class="cavity ' + nomC + '"/>' + '<circle cx="110" cy="104" r="80" class="' + aftC + '"/>';
+      if (o.zone) b += '<circle cx="110" cy="104" r="54" class="' + zoneC + '"/>' + tx(110, 86, 'protection zone', 'm', 'middle') + tx(110, 128, o.zoneTxt, 'm', 'middle');
+    } else {
+      if (o.zone) b += '<circle cx="110" cy="104" r="94" class="' + zoneL + '"/>' + tx(110, 22, 'zone ' + o.zoneTxt + ' (wall around)', 'm', 'middle');
+      b += '<circle cx="110" cy="104" r="68" class="' + aftC + '"/>' + '<circle cx="110" cy="104" r="62" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>';
+    }
+    var angs = [0, 90, 180, 270];
+    if (o.shape === 'arc') { angs = []; for (var k = 0; k < o.arcN; k++) angs.push(o.arcA0 + k * o.arcInc); }
+    angs.forEach(function (a) {
+      var r = a * Math.PI / 180, c = Math.cos(r), s = -Math.sin(r);
+      var r1 = o.inside ? (o.zone ? 62 : 40) : 90, r2 = o.inside ? 78 : 70;
+      b += arrow(cx + r1 * c, cy + r1 * s, cx + r2 * c, cy + r2 * s, arr);
+    });
+    if (o.shape === 'arc') b += tx(110, 200, 'start ' + o.arcA0 + '°, ' + o.arcInc + '° apart', h.arrows ? 'h' : 'm', 'middle');
+  } else if (o.shape === 'slotX' || o.shape === 'slotY') {
+    var vx = o.shape === 'slotX';
+    if (o.inside) {
+      b += '<rect x="8" y="14" width="204" height="180" rx="6" class="metal"/>';
+      b += vx ? '<rect x="50" y="14" width="120" height="180" class="cavity ' + nomC + '"/>' + ln(56, 14, 56, 194, aftC) + ln(164, 14, 164, 194, aftC)
+              : '<rect x="8" y="54" width="204" height="100" class="cavity ' + nomC + '"/>' + ln(8, 60, 212, 60, aftC) + ln(8, 148, 212, 148, aftC);
+      if (o.zone) b += vx ? '<rect x="88" y="14" width="44" height="180" class="' + zoneC + '"/>' : '<rect x="8" y="86" width="204" height="36" class="' + zoneC + '"/>';
+      b += vx ? arrow(o.zone ? 76 : 96, 104, 60, 104, arr) + arrow(o.zone ? 144 : 124, 104, 160, 104, arr)
+              : arrow(110, o.zone ? 80 : 94, 110, 64, arr) + arrow(110, o.zone ? 128 : 114, 110, 144, arr);
+    } else {
+      if (o.zone) b += vx ? ln(16, 14, 16, 194, zoneL) + ln(204, 14, 204, 194, zoneL) : ln(8, 22, 212, 22, zoneL) + ln(8, 186, 212, 186, zoneL);
+      b += vx ? ln(64, 14, 64, 194, aftC) + ln(156, 14, 156, 194, aftC) + '<rect x="70" y="14" width="80" height="180" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>'
+              : ln(8, 58, 212, 58, aftC) + ln(8, 150, 212, 150, aftC) + '<rect x="8" y="64" width="204" height="80" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>';
+      b += vx ? arrow(26, 104, 62, 104, arr) + arrow(194, 104, 158, 104, arr) : arrow(110, 30, 110, 56, arr) + arrow(110, 178, 110, 152, arr);
+    }
+  } else if (o.shape === 'rect') {
+    if (o.inside) {
+      b += '<rect x="8" y="14" width="204" height="180" rx="6" class="metal"/>' + '<rect x="30" y="40" width="160" height="128" class="cavity ' + nomC + '"/>' +
+        '<rect x="36" y="46" width="148" height="116" class="' + aftC + '"/>';
+      if (o.zone) b += '<rect x="76" y="80" width="68" height="48" class="' + zoneC + '"/>';
+      b += arrow(o.zone ? 70 : 96, 104, 40, 104, arr) + arrow(o.zone ? 150 : 124, 104, 180, 104, arr) + arrow(110, o.zone ? 76 : 92, 110, 50, arr) + arrow(110, o.zone ? 132 : 116, 110, 158, arr);
+    } else {
+      if (o.zone) b += '<rect x="14" y="20" width="192" height="168" class="' + zoneL + '"/>';
+      b += '<rect x="44" y="52" width="132" height="104" class="' + aftC + '"/>' + '<rect x="50" y="58" width="120" height="92" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>';
+      b += arrow(24, 104, 42, 104, arr) + arrow(196, 104, 178, 104, arr) + arrow(110, 30, 110, 50, arr) + arrow(110, 178, 110, 158, arr);
+    }
+  } else if (o.shape === 'wallX' || o.shape === 'wallY') {
+    var plus = o.side !== '-', vx2 = o.shape === 'wallX', sc = h.side ? 'metal metalhi' : 'metal';
+    if (vx2) {
+      b += plus ? '<rect x="120" y="14" width="92" height="180" class="' + sc + '"/>' + ln(114, 14, 114, 194, aftC) + ln(120, 14, 120, 194, nomC)
+                : '<rect x="8" y="14" width="92" height="180" class="' + sc + '"/>' + ln(106, 14, 106, 194, aftC) + ln(100, 14, 100, 194, nomC);
+      b += plus ? probeAt(70, 104, '') + arrow(78, 104, 110, 104, arr) : probeAt(150, 104, '') + arrow(142, 104, 110, 104, arr);
+      b += tx(plus ? 166 : 54, 30, 'material', 'm', 'middle');
+    } else {
+      b += plus ? '<rect x="8" y="14" width="204" height="76" class="' + sc + '"/>' + ln(8, 96, 212, 96, aftC) + ln(8, 90, 212, 90, nomC)
+                : '<rect x="8" y="118" width="204" height="76" class="' + sc + '"/>' + ln(8, 112, 212, 112, aftC) + ln(8, 118, 212, 118, nomC);
+      b += plus ? probeAt(110, 150, '') + arrow(110, 142, 110, 100, arr) : probeAt(110, 64, '') + arrow(110, 72, 110, 108, arr);
+      b += tx(110, plus ? 34 : 178, 'material', 'm', 'middle');
+    }
+  } else {
+    b += '<rect x="8" y="14" width="204" height="180" rx="6" class="metal"/>';
+  }
+  if (o.shape !== 'wallX' && o.shape !== 'wallY') b += cross(110, 104, h.centre ? 'hi' : 'line');
+  if (o.plunge) {
+    var px = 110 + o.plunge[0], py = 104 - o.plunge[1];
+    b += '<circle cx="' + px + '" cy="' + py + '" r="5" class="hifill"/>' + ln(px + 2, py - 5, 196, 24, 'hi thinhi') + tx(214, 22, 'test plunge', 'h', 'end');
+  }
+  b += legend(o.nom, o.after, h.nom, h.after);
+  return svgv(b + badge(o.sw, h.sw), 'view from above');
+}
+/* side cut. o: { type: inside|outside|wall|floor|surface, zone, hi, app, top, depth, sid, side, floorTxt, sw } */
+function sideView(o) {
+  var b = '', h = o.hi || {};
+  var appC = h.app ? 'hi' : 'dash', depC = h.depth ? 'hi dashhi' : 'dash';
+  if (o.type === 'inside') {
+    b += '<rect x="8" y="62" width="44" height="140" class="metal"/><rect x="168" y="62" width="44" height="140" class="metal"/>' +
+      '<rect x="52" y="182" width="116" height="20" class="metal"/>';
+    if (o.zone) b += '<rect x="72" y="62" width="76" height="120" class="metal2 ' + (h.zone ? 'zonehi' : '') + '"/>' + tx(110, 172, 'island', 'm', 'middle');
+    b += ln(4, 24, 216, 24, appC) + tx(6, 19, o.app, h.app ? 'h' : '');
+    b += ln(4, 62, 216, 62, 'thin') + tx(6, 57, 'top', 'm');
+    b += ln(52, 142, 168, 142, depC) + tx(110, 128, o.depth, h.depth ? 'h' : 'm', 'middle');
+    if (o.zone) {
+      b += probeAt(110, 24, '') + arrow(160, 29, 160, 137, h.depth || h.sid ? 'hi' : 'acc') + '<circle cx="160" cy="142" r="5" class="probe"/>' +
+        tx(154, 46, o.sid, h.depth || h.sid ? 'h' : 'a', 'end');
+    } else {
+      b += probeAt(110, 24, '') + arrow(110, 30, 110, 136, h.depth ? 'hi' : 'acc') + '<circle cx="110" cy="142" r="5" class="probe"/>' +
+        arrow(116, 142, 160, 142, 'acc') + arrow(104, 142, 60, 142, 'acc');
+    }
+    b += tx(6, 226, o.floorTxt || 'floor: stay a ball radius above it', 'm');
+  } else if (o.type === 'outside') {
+    b += '<rect x="8" y="182" width="204" height="20" class="metal"/><rect x="62" y="62" width="96" height="120" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>';
+    if (o.zone) b += '<rect x="8" y="62" width="22" height="120" class="metal2 ' + (h.zone ? 'zonehi' : '') + '"/><rect x="190" y="62" width="22" height="120" class="metal2 ' + (h.zone ? 'zonehi' : '') + '"/>';
+    b += ln(4, 24, 216, 24, appC) + tx(6, 19, o.app, h.app ? 'h' : '');
+    b += ln(4, 62, 216, 62, 'thin') + tx(6, 57, 'top', 'm');
+    b += ln(4, 142, 216, 142, depC) + tx(64, 138, o.depth, h.depth ? 'h' : 'm');
+    b += probeAt(110, 24, '') + arrow(176, 29, 176, 137, h.depth || h.sid ? 'hi' : 'acc') + '<circle cx="176" cy="142" r="5" class="probe"/>' +
+      arrow(170, 142, 162, 142, 'acc') + tx(172, 50, o.sid, h.depth || h.sid ? 'h' : 'a', 'end');
+  } else if (o.type === 'wall') {
+    var plus = o.side !== '-';
+    b += plus ? '<rect x="120" y="62" width="92" height="140" class="metal ' + (h.side ? 'metalhi' : '') + '"/>' : '<rect x="8" y="62" width="92" height="140" class="metal ' + (h.side ? 'metalhi' : '') + '"/>';
+    b += ln(4, 24, 216, 24, appC) + tx(plus ? 6 : 214, 19, o.app, h.app ? 'h' : '', plus ? '' : 'end');
+    b += ln(4, 142, 216, 142, depC) + tx(plus ? 6 : 214, 137, o.depth, h.depth ? 'h' : 'm', plus ? '' : 'end');
+    var x = plus ? 70 : 150;
+    b += probeAt(x, 24, '') + arrow(x, 30, x, 136, h.depth ? 'hi' : 'acc') + '<circle cx="' + x + '" cy="142" r="5" class="probe"/>' +
+      arrow(plus ? 76 : 144, 142, plus ? 114 : 106, 142, 'acc');
+  } else if (o.type === 'floor' || o.type === 'surface') {
+    b += '<rect x="8" y="150" width="204" height="52" class="metal ' + (h.nom ? 'metalhi' : '') + '"/>';
+    if (o.type === 'floor') b += ln(8, 140, 212, 140, h.after ? 'hi dashhi' : 'dash') + tx(212, 136, 'after the 1st cut', h.after ? 'h' : 'm', 'end');
+    b += ln(4, 24, 216, 24, appC) + tx(6, 19, o.app, h.app ? 'h' : '');
+    b += ln(110, 96, 216, 96, h.start ? 'hi dashhi' : 'dash') + tx(214, 92, o.start, h.start ? 'h' : 'm', 'end');
+    b += probeAt(110, 24, '') + arrow(110, 30, 110, 90, h.start ? 'hi' : 'acc') + '<circle cx="110" cy="96" r="5" class="probe"/>' +
+      arrow(110, 102, 110, o.type === 'floor' ? 134 : 144, 'acc');
+    b += tx(110, 174, o.nomTxt, h.nom ? 'h' : '', 'middle');
+    if (o.band) b += '<rect x="130" y="' + (150 - 16) + '" width="70" height="32" class="band ' + (h.band ? 'bandhi' : '') + '"/>' + tx(165, 214, o.band, h.band ? 'h' : 'm', 'middle');
+  }
+  return svgv(b + badge(o.sw, h.sw), 'side cut');
+}
+
+/* ---------------- help for every box ---------------- */
+function helpCmc(key, s, g) {
+  var u = U().u, d = g.d, inside = d && d.inside;
+  var H = {
+    cmcTool: ['Tool type', 'Rotating = a milling cutter: its wear radius $TC_DP15 changes the size (floors: wear length $TC_DP12). Turning = a turning tool: wear length $TC_DP12 (faces $TC_DP13), and you say what +wear does to the size.'],
+    cmcFeature: ['Feature', 'What the probe measures. Inside features (bore, slot, pocket) get smaller with more material, outside features (boss, web, spigot) get bigger. Walls and floors are one position.'],
+    cmcSide: ['Material on the side', 'Which side of the wall the material is on (+ or - of the axis). The probe comes in from the other, free side and probes toward the wall.'],
+    cmcNom: ['Nominal', 'The finished size from the drawing. The final cut aims for it and verify checks against it. ' + (g.c ? 'Here ' + nd(g.c.nom) + ' ' + u + '.' : '')],
+    cmcNomY: ['Nominal length Y', 'The finished length in Y. X and Y are measured in one cycle; the correction uses their mean.'],
+    cmcTolP: ['Tolerance +', 'How far over nominal is still OK. ' + (inside ? 'For an inside feature, over the + side means too big: material is gone, the nest is scrap.' : 'For an outside feature, over + means material left: it can be re-cut.')],
+    cmcTolM: ['Tolerance -', 'How far under nominal is still OK. ' + (inside ? 'For an inside feature, under - means material left: it can be re-cut.' : 'For an outside feature, under - means material is gone: the nest is scrap.')],
+    cmcStock: ['First-cut wear', 'Wear put on the tool for the first cut so it leaves this much material (per side for a radius wear). The probe measures what is there, then the final cut takes the rest with the corrected wear. ' + (g.c ? 'Here: wear ' + nd(g.c.w1) + ' on $TC_' + g.c.field + ', expected ' + nd(g.c.E) + '.' : '')],
+    cmcVerify: ['Verify', 'Measure again after the final cut, against nominal.'],
+    cmcOut: ['If out after verify', 'Material still left after the final cut: RE-CUT with a new correction (up to the max re-cuts, then it holds), or ACCEPT and write it to the CMC log.'],
+    cmcMaxTry: ['Max re-cuts', 'How many extra cuts before the machine holds (M0) and asks.'],
+    cmcSign: ['+wear makes the size', 'Turning only: does a + wear value make the measured size larger or smaller? A boring bar with +L1 usually makes the bore bigger.'],
+    cmcUnit: ['Wear in', 'Turning only: is the wear value a radius (per side) or a diameter.'],
+    cmcX: ['Centre / point X', 'In the nest\'s G54 (in the swivelled plane when a swivel is set).'],
+    cmcY: ['Centre / point Y', 'In the nest\'s G54 (in the swivelled plane when a swivel is set).'],
+    cmcZ: ['Probe depth Z', 'Height of the probe ball centre while it measures' + (g.sw ? ', in the swivelled plane' : '') + '. ' + (g.c ? 'Here Z' + nd(g.c.z) + '. ' : '') + 'The probe goes down with MEAS=1 and holds (M0) if it touches anything on the way. Keep it more than a ball radius above the floor.'],
+    cmcAppZ: ['Approach Z', 'Height the probe comes in at, clear of the part. ' + (g.lowers ? 'The measuring cycle lowers from here to the probe depth (S_ID).' : 'The probe goes straight down from here to the probe depth.')],
+    cmcZone: ['Protection zone', inside ? 'Diameter / width of an island in the middle of the feature. The probe starts above it at the approach Z and lowers outside it, between the island and the wall. Blank = no island.'
+                                        : 'Diameter / width of the wall around the feature (a channel). The cycle shortens its path so the probe lowers inside the channel. Blank = open around it.'],
+    cmcZoneY: ['Protection zone Y', 'The zone in Y for a rectangle. Blank = same as X.'],
+    cmcPoints: ['Measuring points', '3 or 4 points on the circle segment. 4 is more accurate.'],
+    cmcStartAng: ['Start angle', 'Angle of the first point, from +X, counter-clockwise.'],
+    cmcIncAng: ['Angle between points', 'Spacing of the points; the sign sets the direction. Max 90 for 4 points, 120 for 3.'],
+    cmcSwMode: ['Probe swivel', 'The plane the probe measures in. AUTO = the plane of this step\'s own B program; NONE = the nest face; or pick a B program, paste a CYCLE800 line, or type the angles.'],
+    cmcSwFrom: ['Plane of B program', 'Use the CYCLE800 plane go_to_machine found in that posted B program.'],
+    cmcSwivel: ['CYCLE800 line', 'Paste the CYCLE800(...) line from the CAM program; block number and comment are dropped.'],
+    cmcSwA: ['About X (A)', 'Rotation about X in degrees, e.g. -90.'], cmcSwB: ['About Y (B)', 'Rotation about Y in degrees.'], cmcSwC: ['About Z (C)', 'Rotation about Z in degrees.'],
+    cmcWindow: ['Check window', 'If the first measurement is further than this from the expected size, the machine holds: chip on the probe, wrong feature, broken cutter. Blank = the first-cut wear.'],
+    cmcLimit: ['Correction limit', 'The biggest correction the machine applies on its own. Bigger = it holds and asks.'],
+    cmcEdge: ['Edge (D)', 'Cutting edge whose wear is changed.'],
+    cmcField: ['Wear field', 'Which wear value is written. AUTO = $TC_DP15 for rotating tools (floors $TC_DP12), $TC_DP12 for turning (faces $TC_DP13).'],
+    cmcReturn: ['Back to the cutter', 'TCA brings back the same sister that made the first cut. T M6 loads the tool by name (the active sister).'],
+    cmcClean: ['Probe cleaning', 'Nothing, an M code (air blast) or M0 so the operator cleans the probe and the feature before measuring.'],
+    cmcCleanM: ['Cleaning M code', 'For example M50 (air blast).']
+  };
+  return H[key] || null;
+}
+function helpProbe(key) {
+  var u = U().u, c = probeConst();
+  var H = {
+    tool: ['Probe tool name', 'Tool name of the probe on the control. The probe step and every CMC measurement load it with T="name" M6.'],
+    limitClear: ['Limit clearance', 'The probe retracts to the top of Z travel minus this, between moves.'],
+    feed: ['Probe feed', 'Feed for the MEAS moves (part check, test plunges), ' + u + '/min.'],
+    searchDist: ['Measuring path S_FA', 'How far the cycle searches either side of the expected surface. Here ' + nd(c.fa) + '. S_TSA (safe area) = the same.'],
+    prnum: ['Probe data set', 'S_PRNUM: which calibration of the probe the cycles use (1-40).'],
+    probeOnM: ['Probe-on M code', 'M code that switches the probe on before measuring, e.g. M56. Blank if it is always on.'],
+    approachClr: ['Approach clearance', 'How far from the surface the probe starts. Blank = S_FA + ' + S.compact(U().inMargin, 4) + ' (' + nd(c.clrIn) + ') for surfaces and inside features.'],
+    ballDia: ['Probe ball diameter', 'Only for the checks on the screen (does the ball fit between a protection zone and the wall). Not written to the NC.'],
+    swMode: ['Probe step swivel', 'The plane the whole probe program measures in: rotate, probe, swivel back with CYCLE800(). NONE = the nest face.'],
+    swFrom: ['Plane of B program', 'Use the CYCLE800 plane go_to_machine found in that posted B program.'],
+    swLine: ['CYCLE800 line', 'Paste the CYCLE800(...) line from the CAM program.'],
+    swA: ['About X (A)', 'Rotation about X in degrees, e.g. -90 for a part in a chuck on a horizontal machine.'], swB: ['About Y (B)', 'Rotation about Y in degrees.'], swC: ['About Z (C)', 'Rotation about Z in degrees.'],
+    swBlock: ['Swivel data block', 'Name of the machine\'s swivel data block for ANGLES, as in your CAM lines (e.g. H).'],
+    swDir: ['Direction', '_DIR of CYCLE800: which of two possible rotary positions to take. Your CAM posts use +1.'],
+    swPrnum: ['Probe data set when swivelled', 'Calibrate the probe in the swivelled position into its own data set and enter it here. Blank = the normal one.'],
+    health: ['Health check', 'Once per job: touch a known surface. No trigger = the probe is not working: retract and hold.'],
+    hX: ['Check X', 'Where the known surface is.'], hY: ['Check Y', 'Where the known surface is.'],
+    hStartZ: ['Start Z', 'Above the surface.'], hTargetZ: ['Target Z', 'Below the surface: the probe must trigger before it gets here.'], hFeed: ['Feed', 'Blank = the probe feed.'],
+    partCheck: ['Part check', 'Touch the part with MEAS=1. No trigger within the max travel = no part: nest status 2, nest skipped, no alarm.'],
+    maxTravel: ['Max probe travel', 'How far down the probe looks for the part.'], chkAlt: ['Alternate location', 'Check somewhere else than the Z datum point.'],
+    chkX: ['Check X', 'Alternate point.'], chkY: ['Check Y', 'Alternate point.'], chkZ: ['Start Z', 'Start height of the alternate check.'],
+    skipZ: ['Skip Z', 'No Z datum measurement.'],
+    zNom: ['Z nominal', 'Where the surface should be. CYCLE978 measures it and corrects the fine Z of the nest work offset.'],
+    zTol: ['Z tolerance', 'More than this off = nest status 2 and M0.'], zAlt: ['Alternate location', 'Measure Z somewhere else than the XY approach point.'],
+    zX: ['Z point X', ''], zY: ['Z point Y', ''], zZ: ['Start Z', 'More than S_FA above Z nominal.'],
+    xyMethod: ['XY method', 'Which feature sets X / Y. Outside features (split exterior, boss, rectangle spigot): the probe starts above and the cycle lowers itself. Inside features (bore, rectangle pocket): the probe goes down at the centre.'],
+    widthX: ['Width X', 'Width of the part / rib in X.'], widthY: ['Width Y', 'Width in Y.'],
+    diameter: ['Diameter', 'The diameter the cycle expects. It moves out to it + S_FA, lowers and probes at 4 points. The centre it finds goes into the fine X / Y of this nest\'s work offset.'],
+    appX: ['Centre X', 'Centre of the feature.'], appY: ['Centre Y', 'Centre of the feature.'],
+    probeZ: ['Probe depth Z', 'Height the probe measures at.'], xyTol: ['XY tolerance', 'More than this off = nest status 2 and M0.']
+  };
+  return H[key] || null;
+}
+function helpBox(h, fallback) {
+  var x = h || fallback;
+  if (!x) return '';
+  return '<div class="help"><b>' + esc(x[0]) + '</b>' + (x[1] ? '<p>' + esc(x[1]) + '</p>' : '') + '</div>';
+}
+function liveList(rows) {
+  return rows.length ? '<dl class="live">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd' + (r[2] ? ' class="' + r[2] + '"' : '') + '>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>' : '';
+}
+
+/* ---------------- CMC geometry for the picture, live numbers and "what the machine does" ---------------- */
+function cmcGeom(i) {
+  var s = job.steps[i], d = S.CMC_DEF[s.cmcFeature] || S.CMC_DEF.BORE, P = probeConst();
+  var g = { s: s, d: d, c: null, sw: null, lowers: false };
+  var sw = S.swivelFrom(S.cmcSwivelSrc(s, i), job);
+  g.sw = sw.line ? sw : null;
+  g.swErr = sw.err;
+  if (!S.isNum(s.cmcNom) || !S.isNum(s.cmcStock)) return g;
+  var c = S.cmcResolve(s, U());
+  g.c = c;
+  var zone = c.zone > 0, kind = d.kind;
+  g.lowers = (kind === 'size' || kind === 'rect') && (!d.inside || zone);
+  if (g.lowers && isFinite(c.z) && isFinite(c.appZ)) g.sid = c.z - c.appZ;
+  if ((kind === 'size' || kind === 'rect') && (zone || !d.inside)) {
+    var off = zone ? (c.E + c.zone) / 4 : c.E / 2 + P.fa;
+    g.plunge = d.ma === 2 ? [0, off] : [off, 0];
+    g.plungeTxt = (d.ma === 2 ? 'X' + nd(c.x) + ' Y' + nd(c.y + off) : 'X' + nd(c.x + off) + ' Y' + nd(c.y));
+    if (zone) {
+      g.channel = Math.abs(c.E - c.zone) / 4;
+      if (P.ball) g.ballClear = g.channel - P.ball / 2;
+    }
+  }
+  if (kind === 'wall') g.start = c.E + (c.md === 1 ? -P.clrIn : P.clrIn);
+  if (kind === 'floor') g.start = c.E + P.clrIn;
+  return g;
+}
+function cmcLive(g) {
+  var c = g.c, rows = [];
+  if (!c) return [['Fill in', 'nominal and first-cut wear to see the numbers']];
+  var kind = g.d.kind, u = U().u;
+  rows.push(['Expected after the 1st cut', (S.cmcIsSize(kind) ? 'Ø' : '') + nd(c.E) + (kind === 'rect' ? ' x ' + nd(c.E2) : '') + ' (wear ' + nd(c.w1) + ' on $TC_' + c.field + (c.tool === 'TURNING' ? ', ' + c.unit.toLowerCase() : '') + ')']);
+  if (g.lowers) {
+    rows.push(['Start height', 'Z' + nd(c.appZ) + ' above the centre']);
+    rows.push(['Travel down', 'S_ID ' + nd(g.sid) + ' (Z' + nd(c.appZ) + ' → Z' + nd(c.z) + ')']);
+  } else if (kind === 'floor') {
+    rows.push(['Probe goes down to', 'Z' + nd(g.start) + ' (expected face + clearance), then measures down']);
+  } else if (kind === 'wall') {
+    rows.push(['Start', (g.d.ma === 1 ? 'X' : 'Y') + nd(g.start) + ' on the free side, at Z' + nd(c.z)]);
+  } else {
+    rows.push(['Down at the centre', 'Z' + nd(c.appZ) + ' → Z' + nd(c.z) + ' (MEAS, stops on contact)']);
+  }
+  if (g.plungeTxt) rows.push(['Test plunge', g.plungeTxt + (c.zone ? ', halfway between zone and wall' : ', where the cycle lowers')]);
+  if (g.channel !== undefined) {
+    if (g.ballClear !== undefined) rows.push(['Channel at the plunge', nd(g.channel) + ' each side · ball Ø' + nd(probeConst().ball) + (g.ballClear > 0 ? ' fits (' + nd(g.ballClear) + ' clear)' : ' does NOT fit'), g.ballClear > 0 ? 'ok' : 'bad']);
+    else rows.push(['Channel at the plunge', nd(g.channel) + ' each side (enter the ball Ø on tab 2 to check the fit)']);
+  }
+  rows.push(['Scrap when', 'measured ' + (c.m > 0 ? 'below ' + nd(c.nom - c.tolM) : 'above ' + nd(c.nom + c.tolP)) + ' (a re-cut can only remove)']);
+  rows.push(['Hold when', 'more than ' + nd(c.window) + ' from expected, or wear above ' + nd(c.limit)]);
+  return rows;
+}
+function cmcDoes(g, i) {
+  var c = g.c, s = g.s;
+  if (!c) return '';
+  var kind = g.d.kind, li = [];
+  li.push('First cut with wear ' + nd(c.w1) + ' on $TC_' + c.field + ' (leaves ' + nd(c.stock) + ').');
+  var mv = g.lowers ? 'start at Z' + nd(c.appZ) + ' above X' + nd(c.x) + ' Y' + nd(c.y) + (g.plungeTxt ? ', test plunge at ' + g.plungeTxt + ' down to Z' + nd(c.z) + ' (stops on contact)' : '')
+    : kind === 'floor' ? 'down to Z' + nd(g.start) + ' at X' + nd(c.x) + ' Y' + nd(c.y) + ' (stops on contact)'
+    : kind === 'wall' ? 'down to Z' + nd(c.z) + ' at ' + (g.d.ma === 1 ? 'X' : 'Y') + nd(g.start) + ' (stops on contact)'
+    : 'down at X' + nd(c.x) + ' Y' + nd(c.y) + ' from Z' + nd(c.appZ) + ' to Z' + nd(c.z) + ' (stops on contact)';
+  li.push('Probe: ' + (g.sw ? 'swivel ' + swShort(g.sw.text) + ', ' : '') + mv + '.');
+  li.push('Measure ' + g.d.text.toLowerCase() + (c.zone ? ' with the protection zone' : '') + ': expected ' + nd(c.E) + (kind === 'rect' ? ' x ' + nd(c.E2) : '') + '.');
+  li.push((c.ret === 'TCA' ? 'Back to the same sister (TCA)' : 'Tool by name (T M6)') + ', final cut with the corrected wear.');
+  if (c.verify) li.push('Verify against ' + nd(c.nom) + ' +' + nd(c.tolP) + '/-' + nd(c.tolM) + '; material left: ' +
+    (c.out === 'ACCEPT' ? 'accepted and logged.' : 're-cut up to ' + c.maxTry + ' time' + (c.maxTry === 1 ? '' : 's') + ', then hold.'));
+  li.push((g.sw ? 'Swivel back, ' : '') + 'wear found on the edge put back, nest done.');
+  return '<div class="does"><h3>What the machine does, per nest</h3><ol>' + li.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol></div>';
+}
+function cmcPics(i) {
+  var g = cmcGeom(i), s = g.s, d = g.d, c = g.c, f = focusPath.split('.').pop();
+  var mine = focusPath.indexOf('steps.' + i + '.') === 0;
+  var key = mine ? f : '';
+  var hi = {
+    nom: /^cmc(Nom|NomY|TolP|TolM)$/.test(key), after: key === 'cmcStock', centre: /^cmc[XY]$/.test(key), zone: /^cmcZone/.test(key),
+    arrows: /^cmc(Points|StartAng|IncAng)$/.test(key), side: key === 'cmcSide', app: key === 'cmcAppZ', depth: key === 'cmcZ',
+    sw: /^cmcSw/.test(key) || key === 'cmcSwivel', start: key === 'cmcAppZ'
+  };
+  var kind = d.kind, shape = { size: d.mvar <= 2 ? 'circle' : (d.ma === 2 ? 'slotY' : 'slotX'), rect: 'rect', arc: 'arc', wall: d.ma === 1 ? 'wallX' : 'wallY', floor: 'point' }[kind];
+  var dia = S.cmcIsSize(kind) && kind !== 'rect' && d.mvar !== 3 && d.mvar !== 4 ? 'Ø' : '';
+  var nomTxt = c ? dia + nd(c.nom) + (kind === 'rect' ? ' x ' + nd(c.nomY) : '') + ' nominal (final)' : 'nominal (final)';
+  var aftTxt = c && kind !== 'floor' ? dia + nd(c.E) + (kind === 'rect' ? ' x ' + nd(c.E2) : '') + ' after the 1st cut' : (kind === 'floor' ? '' : 'after the 1st cut');
+  var swTxt = g.sw ? 'swivelled: ' + g.sw.text.replace(/^data block [^,]*, (axis by axis: )?/, '').replace(/, direction.*$/, '') : '';
+  var top = topView({ shape: shape, inside: !!d.inside, zone: c && c.zone > 0, hi: hi, nom: nomTxt, after: aftTxt,
+    zoneTxt: c && c.zone ? 'Ø' + nd(c.zone) : '', plunge: g.plunge ? [g.plunge[0] > 0 ? (c.zone ? (d.inside ? 68 : 80) : 82) : 0, g.plunge[1] > 0 ? (c.zone ? (d.inside ? 68 : 80) : 82) : 0] : null,
+    arcA0: c ? c.a0 : 0, arcInc: c && isFinite(c.inc) ? c.inc : 30, arcN: c ? c.points : 4, side: s.cmcSide, sw: swTxt });
+  var sideType = kind === 'wall' ? 'wall' : kind === 'floor' ? 'floor' : d.inside ? 'inside' : 'outside';
+  var side = sideView({ type: sideType, zone: c && c.zone > 0, hi: hi, app: 'Approach Z' + (c ? nd(c.appZ) : ''), depth: 'Probe depth Z' + (c ? nd(c.z) : ''),
+    sid: g.sid !== undefined ? 'S_ID ' + nd(g.sid) : 'S_ID', side: s.cmcSide, sw: '', start: c && g.start !== undefined ? 'start Z' + nd(g.start) : 'start',
+    nomTxt: c ? 'face Z' + nd(c.nom) : 'face' });
+  var h = helpCmc(key, s, g) || helpCmc('cmcFeature', s, g);
+  return '<div class="views"><div>' + top + '<div class="vt' + (hi.sw ? ' vth' : '') + '">From above' + (g.sw ? ' · swivelled ' + esc(swShort(g.sw.text)) : '') + '</div></div><div>' + side +
+    '<div class="vt">Side cut' + (g.sw ? ' · Z = tool axis after the swivel' : '') + '</div></div></div>' + helpBox(h) + liveList(cmcLive(g));
+}
+/* ---------------- probing pictures ---------------- */
+var PR_SECTION = {
+  common: /^(tool|limitClear|feed|searchDist|prnum|probeOnM|approachClr|ballDia)$/, swivel: /^sw/, health: /^(health|h[A-Z]\w*)$/,
+  part: /^(partCheck|maxTravel|chkAlt|chk[XYZ])$/, z: /^(skipZ|zNom|zTol|zAlt|z[XYZ])$/, xy: /^(xyMethod|widthX|widthY|diameter|app[XY]|probeZ|xyTol)$/
+};
+function probePics(sec) {
+  var p = job.probing, c = probeConst(), f = focusPath.indexOf('probing.') === 0 ? focusPath.split('.').pop() : '';
+  if (!PR_SECTION[sec] || !PR_SECTION[sec].test(f)) f = '';
+  var u = U(), b;
+  var swr = S.swivelFrom(S.probeSwivelSrc(job), job);
+  var swTxt = swr.line ? 'swivelled ' + swShort(swr.text) : '';
+  var swCap = swTxt ? ' · ' + swTxt : '';
+  if (sec === 'xy') {
+    var m = p.xyMethod, inside = m === 'BORE' || m === 'RECT POCKET';
+    var shape = m === 'BORE' || m === 'BOSS' ? 'circle' : m === 'SPLIT EXTERIOR' ? 'rect' : 'rect';
+    var hi = { nom: /^(widthX|widthY|diameter)$/.test(f), centre: /^app[XY]$/.test(f), depth: f === 'probeZ', app: f === 'approachClr', sw: false };
+    var nom = m === 'BORE' || m === 'BOSS' ? 'Ø' + (S.isNum(p.diameter) ? n4(S.num(p.diameter)) : '?') : (S.isNum(p.widthX) ? n4(S.num(p.widthX)) : '?') + ' x ' + (S.isNum(p.widthY) ? n4(S.num(p.widthY)) : '?');
+    var startZ = numOr(p.zNom, 0) + (inside ? c.clrIn : c.clrOut);
+    if (m === 'NONE') return '<p class="note">XY method NONE: no XY datum.</p>' + helpBox(helpProbe(f), helpProbe('xyMethod'));
+    var top = topView({ shape: shape, inside: inside, zone: false, hi: hi, nom: nom + (m === 'SPLIT EXTERIOR' ? ' (X rib, then Y rib)' : ''), after: '', sw: swTxt });
+    var side = sideView({ type: inside ? 'inside' : 'outside', zone: false, hi: hi, app: 'start Z' + n4(startZ), depth: 'Probe depth Z' + (S.isNum(p.probeZ) ? n4(S.num(p.probeZ)) : '?'),
+      sid: S.isNum(p.probeZ) ? 'S_ID ' + n4(S.num(p.probeZ) - startZ) : 'S_ID' });
+    return '<div class="views"><div>' + top + '<div class="vt">From above' + esc(swCap) + '</div></div><div>' + side + '<div class="vt">Side' + (inside ? ' · down at the centre' : ' · the cycle lowers outside') + '</div></div></div>' +
+      helpBox(helpProbe(f), helpProbe('xyMethod'));
+  }
+  if (sec === 'z' || sec === 'part' || sec === 'health') {
+    var hz = { nom: f === 'zNom', start: /^(zZ|chkZ|hStartZ)$/.test(f), band: f === 'zTol' || f === 'searchDist', app: false };
+    var zN = numOr(p.zNom, 0);
+    var sv = sideView({ type: 'surface', hi: hz, app: 'retract (top of Z - ' + n4(numOr(p.limitClear, u.clr)) + ')',
+      start: sec === 'health' ? 'start Z' + (S.isNum(p.hStartZ) ? n4(S.num(p.hStartZ)) : '?') : sec === 'part' ? 'start Z' + n4(p.chkAlt && S.isNum(p.chkZ) ? S.num(p.chkZ) : zN + c.clrIn) : 'start Z' + n4(p.zAlt && S.isNum(p.zZ) ? S.num(p.zZ) : zN + c.clrIn),
+      nomTxt: sec === 'health' ? 'known surface' : 'Z nominal ' + n4(zN), band: sec === 'z' ? 'S_FA ±' + n4(c.fa) : '', sw: swTxt, hi2: 0 });
+    var txt2 = sec === 'health' ? 'MEAS=1 down to the target Z: no trigger = probe faulty, hold' : sec === 'part' ? 'MEAS=1 down by the max travel (' + n4(numOr(p.maxTravel, u.travel)) + '): no trigger = no part' : 'CYCLE978 measures the surface and corrects the fine Z';
+    return '<div class="views one"><div>' + sv + '<div class="vt">' + esc(txt2 + swCap) + '</div></div></div>' + helpBox(helpProbe(f), helpProbe(sec === 'z' ? 'zNom' : sec === 'part' ? 'partCheck' : 'health'));
+  }
+  if (sec === 'swivel') {
+    var body = '';
+    var ok = !!swr.line;
+    body += '<rect x="30" y="120" width="160" height="80" rx="6" class="metal"/><circle cx="110" cy="96" r="26" class="metal2"/>' +
+      ln(110, 60, 110, 20, 'acc') + tx(116, 24, 'Z (tool axis)', 'a') + arrow(110, 160, 190, 160, 'acc') + tx(194, 156, 'X', 'a');
+    body += ok ? tx(110, 228, swTxt, /^sw/.test(f) ? 'h' : 'a', 'middle') : tx(110, 228, 'no swivel: nest face', 'm', 'middle');
+    if (ok) body += '<path d="M150 70 A 46 46 0 0 1 172 118" class="acc"/>' + tx(176, 92, 'rotate', 'a');
+    return '<div class="views one"><div>' + svgv(body, 'swivel') + '<div class="vt">Rotate, probe, swivel back with CYCLE800()</div></div></div>' +
+      helpBox(helpProbe(f), helpProbe('swMode'));
+  }
+  /* common */
+  var cb = '<rect x="8" y="150" width="204" height="52" class="metal"/>' + ln(110, 20, 110, 86, 'line') +
+    '<circle cx="110" cy="96" r="' + (f === 'ballDia' ? 12 : 10) + '" class="probe ' + (f === 'ballDia' ? 'probehi' : '') + '"/>' +
+    '<rect x="20" y="' + (150 - 22) + '" width="70" height="44" class="band ' + (f === 'searchDist' ? 'bandhi' : '') + '"/>' +
+    tx(55, 192, 'S_FA ±' + n4(c.fa), f === 'searchDist' ? 'h' : 'm', 'middle') +
+    arrow(150, 108, 150, 148, f === 'approachClr' ? 'hi' : 'acc') + tx(156, 132, 'start +' + n4(c.clrIn), f === 'approachClr' ? 'h' : 'a') + tx(110, 18, 'feed ' + n4(numOr(p.feed, u.feed)) + ' ' + u.u + '/min', f === 'feed' ? 'h' : 'm', 'middle') +
+    tx(110, 228, c.ball ? 'ball Ø' + n4(c.ball) : 'ball Ø: not entered (optional)', f === 'ballDia' ? 'h' : 'm', 'middle');
+  return '<div class="views one"><div>' + svgv(cb, 'probe') + '<div class="vt">Probe, search distance and start clearance</div></div></div>' + helpBox(helpProbe(f), helpProbe('tool'));
+}
+function picPanel(key) {
+  if (key.indexOf('cmc:') === 0) return cmcPics(Number(key.slice(4)));
+  if (key.indexOf('pr:') === 0) return probePics(key.slice(3));
+  return '';
+}
+
+/* ---------------- tab 2: probing ---------------- */
 function renderProbing() {
   var p = job.probing, u = U(), dis = !job.probeStep.enabled;
-  var faVal = S.isBlank(p.searchDist) ? u.fa : S.num(p.searchDist);
   var h = '';
-  if (dis) h += '<div class="msg warn">The probe step is off (tab 1). These settings are kept but not used.</div>';
-  h += '<h2>Common</h2><div class="grid">' +
-    txt('probing.tool', 'Probe tool name') +
-    txt('probing.limitClear', 'Limit clearance (' + u.u + ')', { ph: def(u.clr) }) +
-    txt('probing.feed', 'Probe feed (' + u.u + '/min)', { ph: def(u.feed) }) +
-    txt('probing.searchDist', 'Measuring path S_FA (' + u.u + ')', { ph: def(u.fa) }) +
-    txt('probing.prnum', 'Probe calibration data set (S_PRNUM)', { ph: '1' }) +
-    txt('probing.probeOnM', 'Probe-on M code (MEAS moves)', { ph: 'none' }) +
-    txt('probing.approachClr', 'Approach clearance (' + u.u + ')', { ph: 'auto' }) + '</div>';
-  h += '<p class="note">Approach clearance blank = auto: Z datum and inside features start S_FA + ' + S.compact(u.inMargin, 4) +
-    ' above Z nominal (' + S.compact(faVal + u.inMargin, 4) + '), outside features ' + S.compact(u.outClr, 4) +
-    ' above it. S_TSA (safe area) is set to S_FA.</p>';
-  h += '<h2>Swivel <span class="pill">CYCLE800</span></h2>';
-  h += swivelBox(S.probeSwivelSrc(job), S.SW_MODES, 'Probe step swivel');
-  h += '<p class="note">Rotate, probe, swivel back: the probe program runs CYCLE800 after the tool call, probes everything in that plane ' +
-    '(every X / Y / Z on this tab is then in the swivelled plane) and ends with CYCLE800(). B PROGRAM = the plane go_to_machine found ' +
-    'in that posted B program.</p>';
-  h += '<div class="box"><b>Swivel settings</b> <span class="pill">probe step and CMC</span><div class="grid" style="margin-top:6px">' +
-    txt('probing.swBlock', 'Swivel data block (ANGLES)', { ph: 'e.g. H' }) +
-    sel('probing.swDir', 'Direction (ANGLES)', ['', '+1', '-1']) +
-    txt('probing.swPrnum', 'Probe data set when swivelled (S_PRNUM)', { ph: 'same as above' }) + '</div>' +
-    '<p class="note">ANGLES writes CYCLE800(0,"block",0,57,0,0,0,X,Y,Z,0,0,0,direction,0,1): rotate about X, then Y, then Z. ' +
-    'Calibrate the probe in the swivelled position into its own data set.</p></div>';
-  h += '<h2>Probe health check <span class="pill">once per job</span></h2><div class="grid">' +
-    chk('probing.health', 'Enable') +
-    txt('probing.hX', 'Check X', { dis: !p.health }) + txt('probing.hY', 'Check Y', { dis: !p.health }) +
-    txt('probing.hStartZ', 'Start Z (above surface)', { dis: !p.health }) +
-    txt('probing.hTargetZ', 'Target Z (past surface)', { dis: !p.health }) +
-    txt('probing.hFeed', 'Feed', { dis: !p.health, ph: 'probe feed' }) + '</div>';
-  h += '<p class="note">MEAS=1 touch on a known surface in the first nest\'s G54. No trigger = retract and hold (LOOP / M0).' +
-    (p.swMode !== 'NONE' ? ' With the swivel on, these X / Y / Z are in the swivelled plane.' : '') + '</p>';
-  h += '<h2>Part existence check</h2><div class="grid">' +
-    chk('probing.partCheck', 'Enable') +
-    txt('probing.maxTravel', 'Max probe travel (' + u.u + ')', { dis: !p.partCheck, ph: def(u.travel) }) +
-    chk('probing.chkAlt', 'Use alternate location', { dis: !p.partCheck }) +
-    txt('probing.chkX', 'Alternate X', { dis: !p.partCheck || !p.chkAlt }) +
-    txt('probing.chkY', 'Alternate Y', { dis: !p.partCheck || !p.chkAlt }) +
-    txt('probing.chkZ', 'Alternate start Z', { dis: !p.partCheck || !p.chkAlt }) + '</div>';
-  h += '<p class="note">MEAS=1 touch from the start height down by the max travel. No trigger = no part: nest status 2, nest skipped, no alarm. ' +
-    'Default location = the Z datum location.</p>';
-  h += '<h2>Z datum <span class="pill">CYCLE978</span></h2><div class="grid">' +
-    chk('probing.skipZ', 'Skip Z probe') +
-    txt('probing.zNom', 'Z nominal (' + u.u + ')') +
-    txt('probing.zTol', 'Z tolerance (' + u.u + ')', { dis: p.skipZ, ph: def(u.zTol) }) +
-    chk('probing.zAlt', 'Use alternate location', { dis: p.skipZ && !p.partCheck }) +
-    txt('probing.zX', 'Alternate X', { dis: !p.zAlt }) + txt('probing.zY', 'Alternate Y', { dis: !p.zAlt }) +
-    txt('probing.zZ', 'Alternate start Z', { dis: !p.zAlt }) + '</div>';
-  h += '<p class="note">Default location = XY approach X/Y, start at Z nominal + clearance. Corrects the fine Z of the nest WO.</p>';
-  h += '<h2>XY datum <span class="pill">CYCLE977</span></h2><div class="grid">' +
-    sel('probing.xyMethod', 'XY method', S.XY_METHODS) +
-    txt('probing.widthX', 'Part width X', { dis: ['SPLIT EXTERIOR', 'RECT POCKET', 'RECT SPIGOT'].indexOf(p.xyMethod) < 0 }) +
-    txt('probing.widthY', 'Part width Y', { dis: ['SPLIT EXTERIOR', 'RECT POCKET', 'RECT SPIGOT'].indexOf(p.xyMethod) < 0 }) +
-    txt('probing.diameter', 'Diameter', { dis: ['BORE', 'BOSS'].indexOf(p.xyMethod) < 0 }) +
-    txt('probing.appX', 'Approach X (feature center)') + txt('probing.appY', 'Approach Y (feature center)') +
-    txt('probing.probeZ', 'Probe depth Z', { dis: p.xyMethod === 'NONE' }) +
-    txt('probing.xyTol', 'XY tolerance (' + u.u + ')', { dis: p.xyMethod === 'NONE', ph: def(u.xyTol) }) + '</div>';
-  h += '<p class="note">SPLIT EXTERIOR = 104 twice (X rib, Y rib), BOSS = 102, RECT SPIGOT = 106: outside. The probe starts above the ' +
-    'center and the cycle lowers to the probe depth itself (S_ID). BORE = 101, RECT POCKET = 105: inside. The probe feeds down to the probe depth ' +
-    'and the cycle measures sideways. The start point is the setpoint center (MC 3.13.2).</p>';
+  if (dis) h += '<div class="msg warn">The probe step is off (tab 1). Common, swivel settings and the ball Ø are still used by CMC.</div>';
+  var swr = S.swivelFrom(S.probeSwivelSrc(job), job);
+  var steps = [['pr-common', 'Tool call', true], ['pr-swivel', swr.line ? 'Swivel' : 'No swivel', !!swr.line], ['pr-health', 'Health check', p.health],
+    ['pr-part', 'Part check', p.partCheck], ['pr-z', 'Z datum', !p.skipZ], ['pr-xy', 'XY datum: ' + p.xyMethod, p.xyMethod !== 'NONE'], ['pr-swivel', 'Swivel back', !!swr.line]];
+  h += '<h2>Probe step <span class="pill">' + esc(job.probeStep.program || 'probe program') + ' · step ' + esc(job.probeStep.step) + '</span></h2>';
+  h += '<div class="strip">' + steps.map(function (s, k) {
+    return (k ? '<span class="arrow">→</span>' : '') + '<button type="button" class="step' + (s[2] ? '' : ' off') + '" data-jump="' + s[0] + '">' + esc(s[1]) + '</button>';
+  }).join('') + '</div>';
+  h += card('pr:common', '<b>Common</b><span>used by the probe step and every CMC measurement</span>',
+    grp(1, 'Probe', txt('probing.tool', 'Probe tool name') + txt('probing.prnum', 'Data set (S_PRNUM)', { ph: '1' }) +
+      txt('probing.probeOnM', 'Probe-on M code', { ph: 'none' }) + txt('probing.ballDia', 'Ball Ø (' + u.u + ', checks only)', { ph: 'optional' })) +
+    grp(2, 'Moves', txt('probing.feed', 'Feed (' + u.u + '/min)', { ph: def(u.feed) }) + txt('probing.searchDist', 'Measuring path S_FA (' + u.u + ')', { ph: def(u.fa) }) +
+      txt('probing.approachClr', 'Approach clearance (' + u.u + ')', { ph: 'auto' }) + txt('probing.limitClear', 'Limit clearance (' + u.u + ')', { ph: def(u.clr) })),
+    '', '', ' id="pr-common"');
+  h += card('pr:swivel', '<b>Swivel</b><span>CYCLE800 · rotate, probe, swivel back</span>',
+    grp(1, 'Plane', swivelBox(S.probeSwivelSrc(job), S.SW_MODES, 'Probe step swivel')) +
+    grp(2, 'Swivel settings (ANGLES, probe step and CMC)', txt('probing.swBlock', 'Swivel data block', { ph: 'e.g. H' }) +
+      sel('probing.swDir', 'Direction', ['', '+1', '-1']) + txt('probing.swPrnum', 'Data set when swivelled', { ph: 'same as Common' })),
+    '', '', ' id="pr-swivel"');
+  h += card('pr:health', '<b>Health check</b><span>once per job, first active nest</span>',
+    grp(1, 'On / off', chk('probing.health', 'Check the probe once per job')) +
+    (p.health ? grp(2, 'Where', txt('probing.hX', 'Check X') + txt('probing.hY', 'Check Y') + txt('probing.hStartZ', 'Start Z (above)') +
+      txt('probing.hTargetZ', 'Target Z (past the surface)') + txt('probing.hFeed', 'Feed', { ph: 'probe feed' })) : ''),
+    '', p.health ? '' : 'offcard', ' id="pr-health"');
+  h += card('pr:part', '<b>Part check</b><span>MEAS=1 touch · no trigger = no part</span>',
+    grp(1, 'On / off', chk('probing.partCheck', 'Check the part is there')) +
+    (p.partCheck ? grp(2, 'Where', txt('probing.maxTravel', 'Max probe travel (' + u.u + ')', { ph: def(u.travel) }) + chk('probing.chkAlt', 'Alternate location') +
+      (p.chkAlt ? txt('probing.chkX', 'Check X') + txt('probing.chkY', 'Check Y') + txt('probing.chkZ', 'Start Z') : '')) : ''),
+    '', p.partCheck ? '' : 'offcard', ' id="pr-part"');
+  h += card('pr:z', '<b>Z datum</b><span>CYCLE978 · corrects the fine Z of the nest WO</span>',
+    grp(1, 'On / off', chk('probing.skipZ', 'Skip the Z datum')) +
+    (!p.skipZ ? grp(2, 'Surface', txt('probing.zNom', 'Z nominal (' + u.u + ')') + txt('probing.zTol', 'Z tolerance (' + u.u + ')', { ph: def(u.zTol) })) +
+      grp(3, 'Where', chk('probing.zAlt', 'Alternate location') + (p.zAlt ? txt('probing.zX', 'Point X') + txt('probing.zY', 'Point Y') + txt('probing.zZ', 'Start Z') : '')) : ''),
+    '', p.skipZ ? 'offcard' : '', ' id="pr-z"');
+  var mt = p.xyMethod, wx = ['SPLIT EXTERIOR', 'RECT POCKET', 'RECT SPIGOT'].indexOf(mt) >= 0, di = mt === 'BORE' || mt === 'BOSS';
+  h += card('pr:xy', '<b>XY datum</b><span>CYCLE977 · corrects the fine X / Y of the nest WO</span>',
+    grp(1, 'What', sel('probing.xyMethod', 'Method', S.XY_METHODS) + (wx ? txt('probing.widthX', 'Width X (' + u.u + ')') + txt('probing.widthY', 'Width Y (' + u.u + ')') : '') +
+      (di ? txt('probing.diameter', 'Diameter (' + u.u + ')') : '')) +
+    (mt !== 'NONE' ? grp(2, 'Where', txt('probing.appX', 'Centre X') + txt('probing.appY', 'Centre Y') + txt('probing.probeZ', 'Probe depth Z')) +
+      grp(3, 'Check', txt('probing.xyTol', 'XY tolerance (' + u.u + ')', { ph: def(u.xyTol) })) : ''),
+    '', mt === 'NONE' ? 'offcard' : '', ' id="pr-xy"');
   $('#tab-probing').innerHTML = h;
+}
+
+/* ---------------- tab 5: CMC (shown only while a step row has CMC ticked) ---------------- */
+function cmcRows() { var r = []; job.steps.forEach(function (s, i) { if (s.cmc) r.push(i); }); return r; }
+function renderCmc() {
+  var rows = cmcRows();
+  var btn = $('#tabBtnCmc');
+  btn.hidden = !rows.length;
+  if (!rows.length) {
+    $('#tab-cmc').innerHTML = '';
+    if (btn.classList.contains('active')) showTab('config');
+    return;
+  }
+  var cr = job.cmcR, first = S.isInt(cr.first) ? S.num(cr.first) : NaN;
+  var v = S.validate(job);
+  var warnBy = {};
+  v.warnings.forEach(function (w) { (warnBy[w.path] = warnBy[w.path] || []).push(w.msg); });
+  var h = '<h2>CMC · cut / measure / cut <span class="pill">' + rows.length + ' step' + (rows.length === 1 ? '' : 's') + '</span></h2>';
+  h += '<p class="note">Each CMC step runs its CMC program per nest in place of the B program. Probe tool, feed, S_FA, probe-on M and the ball Ø come from tab 2. ' +
+    'Keep the CMC toolpath alone in its compound job.</p>';
+  h += '<div class="box"><b>R parameters</b> <span class="pill">kept through power-off</span><div class="grid" style="margin-top:6px">' +
+    txt('cmcR.first', 'First R number', { ph: '700' }) +
+    txt('cmcR.count', 'R parameters on the control (MD28050)', { ph: '1000' }) +
+    txt('cmcR.carrier', 'TCA tool carrier (spindle)', { ph: '1' }) + '</div>';
+  h += '<p class="note">' + S.CMC_BLOCK + ' R per CMC step: ' + rows.map(function (i, n) {
+    var s = job.steps[i], b = first + S.CMC_BLOCK * n;
+    return 'step ' + esc(s.step) + ' = ' + (isNaN(b) ? '?' : 'R' + b + '-R' + (b + S.CMC_BLOCK - 1));
+  }).join(', ') + '. R' + S.CMC_RESERVED_R.join(', R') + ' is used by tool_load_mda and is never in a CMC block. ' +
+    'Read MD28050 on the machine: R700 needs at least 750. Check no other program (tool change, Blum, OEM cycles, FIFO) uses this range.</p></div>';
+  rows.forEach(function (i) { h += cmcCard(i, warnBy); });
+  $('#tab-cmc').innerHTML = h;
+}
+var CMC_MORE = ['cmcWindow', 'cmcLimit', 'cmcEdge', 'cmcField', 'cmcReturn', 'cmcClean', 'cmcCleanM'];
+function cmcCard(i, warnBy) {
+  var s = job.steps[i], p = 'steps.' + i + '.', u = U();
+  var d = S.CMC_DEF[s.cmcFeature] || S.CMC_DEF.BORE, kind = d.kind, rect = kind === 'rect', size = S.cmcIsSize(kind);
+  var turning = s.cmcTool === 'TURNING';
+  var head = '<b>Step ' + esc(s.step) + '</b><span>' + esc(s.tool || 'no tool') + ' · ' + esc(s.program || 'no program') + '</span><span class="pill">' + esc(S.cmcName(s.step)) + '</span>';
+  var warns = (warnBy[p + 'cmc'] || []).map(function (m) { return '<div class="warnline">' + esc(m) + '</div>'; }).join('');
+  var nomLabel = { size: d.mvar <= 2 ? 'Nominal Ø' : 'Nominal width', rect: 'Nominal length X', arc: 'Nominal Ø',
+    wall: 'Nominal wall position ' + (d.ma === 1 ? 'X' : 'Y'), floor: 'Nominal face Z' }[kind];
+  var where = size ? 'Centre' : 'Point';
+  var form = '';
+  form += grp(1, 'What', sel(p + 'cmcTool', 'Tool type', S.CMC_TOOLS) + sel(p + 'cmcFeature', 'Feature', S.CMC_FEATURES) +
+    (kind === 'wall' ? sel(p + 'cmcSide', 'Material on the side', ['+', '-']) : ''));
+  form += grp(2, 'Size', txt(p + 'cmcNom', nomLabel + ' (' + u.u + ')') + (rect ? txt(p + 'cmcNomY', 'Nominal length Y (' + u.u + ')') : '') +
+    txt(p + 'cmcTolP', 'Tolerance + (' + u.u + ')') + txt(p + 'cmcTolM', 'Tolerance - (' + u.u + ')'));
+  form += grp(3, 'Where',
+    (kind === 'wall' && d.ma === 1 ? '' : txt(p + 'cmcX', where + ' X')) + (kind === 'wall' && d.ma === 2 ? '' : txt(p + 'cmcY', where + ' Y')) +
+    (kind === 'floor' ? '' : txt(p + 'cmcZ', 'Probe depth Z')) + txt(p + 'cmcAppZ', 'Approach Z') +
+    (d.cyc === 977 ? txt(p + 'cmcZone', (rect ? 'Protection zone X' : d.mvar <= 2 ? 'Protection zone Ø' : 'Protection zone width') + ' (' + u.u + ')', { ph: 'none', hint: d.inside ? 'island in the middle' : 'wall around' }) : '') +
+    (rect ? txt(p + 'cmcZoneY', 'Protection zone Y (' + u.u + ')', { ph: 'same as X' }) : '') +
+    (kind === 'arc' ? sel(p + 'cmcPoints', 'Measuring points', ['3', '4']) + txt(p + 'cmcStartAng', 'Start angle (deg)', { ph: '0' }) + txt(p + 'cmcIncAng', 'Angle between points') : '') +
+    swivelBox(S.cmcSwivelSrc(s, i), S.CMC_SW_MODES, 'Probe swivel'));
+  form += grp(4, 'How it cuts', txt(p + 'cmcStock', 'First-cut wear (' + u.u + ')', { ph: 'e.g. 0.002', hint: 'stock left for the measurement' }) +
+    (turning ? sel(p + 'cmcUnit', 'Wear in', ['RADIUS', 'DIAMETER']) + sel(p + 'cmcSign', '+wear makes the size', ['', 'LARGER', 'SMALLER']) : '') +
+    chk(p + 'cmcVerify', 'Verify after the final cut') +
+    (s.cmcVerify ? sel(p + 'cmcOut', 'If out after verify', ['RECUT', 'ACCEPT']) : '') +
+    (s.cmcVerify && s.cmcOut !== 'ACCEPT' ? txt(p + 'cmcMaxTry', 'Max re-cuts', { ph: '3' }) : ''));
+  /* More settings: closed unless opened by hand, an error, or a value that is not the default */
+  var nonDefault = !S.isBlank(s.cmcWindow) || !S.isBlank(s.cmcLimit) || (!S.isBlank(s.cmcEdge) && String(s.cmcEdge).trim() !== '1') ||
+    s.cmcField !== 'AUTO' || s.cmcReturn !== 'TCA' || s.cmcClean !== 'NONE';
+  var errIn = CMC_MORE.some(function (k) { return errPaths[p + k]; });
+  var open = errIn || (moreOpen[i] !== undefined ? moreOpen[i] : nonDefault);
+  var c = S.isNum(s.cmcNom) && S.isNum(s.cmcStock) ? S.cmcResolve(s, u) : null;
+  var sum = [s.cmcReturn, '$TC_' + (c ? c.field : S.cmcAutoField(turning ? 'TURNING' : 'ROTATING', kind)) + (turning ? ' ' + String(s.cmcUnit).toLowerCase() : ''),
+    'edge D' + (S.isBlank(s.cmcEdge) ? '1' : s.cmcEdge), 'window ' + (S.isBlank(s.cmcWindow) ? 'auto' + (c ? ' (' + nd(c.window) + ')' : '') : s.cmcWindow),
+    'limit ' + (S.isBlank(s.cmcLimit) ? nd(S.CMC_LIMIT[u.key]) : s.cmcLimit), s.cmcClean === 'NONE' ? 'no cleaning' : 'cleaning ' + (s.cmcClean === 'M CODE' ? s.cmcCleanM : 'M0')].join(' · ');
+  form += '<details class="more" data-row="' + i + '"' + (open ? ' open' : '') + '><summary>More settings<span class="sum">' + esc(sum) + '</span></summary><div class="row">' +
+    txt(p + 'cmcWindow', 'Check window (' + u.u + ')', { ph: 'auto = first-cut wear' }) +
+    txt(p + 'cmcLimit', 'Correction limit (' + u.u + ')', { ph: def(S.CMC_LIMIT[u.key]) }) +
+    txt(p + 'cmcEdge', 'Edge (D)', { ph: '1' }) +
+    sel(p + 'cmcField', 'Wear field (AUTO = ' + S.cmcAutoField(turning ? 'TURNING' : 'ROTATING', kind) + ')', S.CMC_FIELDS) +
+    sel(p + 'cmcReturn', 'Back to the cutter', ['TCA', 'T M6']) +
+    sel(p + 'cmcClean', 'Probe cleaning', S.CMC_CLEAN) +
+    (s.cmcClean === 'M CODE' ? txt(p + 'cmcCleanM', 'Cleaning M code', { ph: 'M50' }) : '') + '</div></details>';
+  form += warns;
+  return card('cmc:' + i, head, form, cmcDoes(cmcGeom(i), i), 'cmccard', ' data-cmc-row="' + i + '"');
+}
+/* swivel source box (probe step and CMC card): source, its fields only, the line that will be written */
+function swivelBox(src, modes, label) {
+  var P = src.paths, mode = src.mode;
+  var planes = job.steps.filter(function (s) { return s.planeState === 'ONE' && !S.isBlank(s.program); })
+    .map(function (s) { return String(s.program).trim(); });
+  var h = sel(P.mode, label, modes);
+  if (mode === 'B PROGRAM') h += sel(P.from, 'Plane of B program', [''].concat(planes));
+  if (mode === 'ANGLES') h += txt(P.angles[0], 'About X (A)', { ph: '0' }) + txt(P.angles[1], 'About Y (B)', { ph: '0' }) + txt(P.angles[2], 'About Z (C)', { ph: '0' });
+  if (mode === 'PASTE') h += txt(P.paste, 'CYCLE800 line from the CAM program', { ph: 'CYCLE800(0,"H",200000,54,...)', wide: true });
+  var r = S.swivelFrom(src, job);
+  if (r.err) h += '<p class="note swline wide" style="color:var(--bad)">' + esc(r.err) + '</p>';
+  else h += '<p class="note swline wide">' + (r.line ? '<code>' + esc(r.line) + '</code> = ' : '') + esc(r.text) + '</p>';
+  if (mode === 'B PROGRAM' && !planes.length) h += '<p class="note wide">No imported B program has a single plane yet: post through go_to_machine and Import B list.</p>';
+  return h;
 }
 
 /* ---- tab: work offsets ---- */
@@ -3378,111 +3980,6 @@ function renderOutput() {
   $('#tab-output').innerHTML = h;
 }
 
-/* ---- tab: CMC (shown only while a step row has CMC ticked) ---- */
-function cmcRows() { var r = []; job.steps.forEach(function (s, i) { if (s.cmc) r.push(i); }); return r; }
-function renderCmc() {
-  var rows = cmcRows(), u = U();
-  var btn = $('#tabBtnCmc');
-  btn.hidden = !rows.length;
-  if (!rows.length) {
-    $('#tab-cmc').innerHTML = '';
-    if (btn.classList.contains('active')) showTab('config');
-    return;
-  }
-  var cr = job.cmcR, first = S.isInt(cr.first) ? S.num(cr.first) : NaN;
-  var v = S.validate(job);
-  var warnBy = {};
-  v.warnings.forEach(function (w) { (warnBy[w.path] = warnBy[w.path] || []).push(w.msg); });
-  var h = '<h2>CMC · cut / measure / cut <span class="pill">' + rows.length + ' step' + (rows.length === 1 ? '' : 's') + '</span></h2>';
-  h += '<p class="note">Each CMC step runs its CMC program per nest in place of the B program: first cut with first-cut wear (leaves stock), ' +
-    'measure, final cut with the corrected wear, optional verify. Probe tool, feed, S_FA and probe-on M come from tab 2 ' +
-    '(the probe step itself can be off). Keep the CMC toolpath alone in its compound job.</p>';
-  h += '<div class="box"><b>R parameters</b> <span class="pill">kept through power-off</span><div class="grid" style="margin-top:6px">' +
-    txt('cmcR.first', 'First R number', { ph: '700' }) +
-    txt('cmcR.count', 'R parameters on the control (MD28050)', { ph: '1000' }) +
-    txt('cmcR.carrier', 'TCA tool carrier (spindle)', { ph: '1' }) + '</div>';
-  h += '<p class="note">' + S.CMC_BLOCK + ' R per CMC step: ' + rows.map(function (i, n) {
-    var s = job.steps[i], b = first + S.CMC_BLOCK * n;
-    return 'step ' + esc(s.step) + ' = ' + (isNaN(b) ? '?' : 'R' + b + '-R' + (b + S.CMC_BLOCK - 1));
-  }).join(', ') + '. R' + S.CMC_RESERVED_R.join(', R') + ' is used by tool_load_mda and is never in a CMC block. ' +
-    'Read MD28050 on the machine: R700 needs at least 750. Check no other program (tool change, Blum, OEM cycles, FIFO) uses this range.</p></div>';
-  rows.forEach(function (i) { h += cmcCard(i, warnBy); });
-  $('#tab-cmc').innerHTML = h;
-}
-function cmcCard(i, warnBy) {
-  var s = job.steps[i], p = 'steps.' + i + '.', u = U();
-  var d = S.CMC_DEF[s.cmcFeature] || S.CMC_DEF.BORE, kind = d.kind, rect = kind === 'rect', size = S.cmcIsSize(kind);
-  var turning = s.cmcTool === 'TURNING';
-  var h = '<div class="box cmccard" data-cmc-row="' + i + '"><b>Step ' + esc(s.step) + '</b> · ' + esc(s.tool || 'no tool') + ' · ' + esc(s.program || 'no program') +
-    ' <span class="pill">' + esc(S.cmcName(s.step)) + '</span>';
-  (warnBy[p + 'cmc'] || []).forEach(function (m) { h += '<div class="msg warn" style="margin-top:6px">' + esc(m) + '</div>'; });
-  var nomLabel = { size: d.mvar <= 2 ? 'Nominal diameter' : 'Nominal width', rect: 'Nominal length X', arc: 'Nominal diameter',
-    wall: 'Nominal wall position ' + (d.ma === 1 ? 'X' : 'Y'), floor: 'Nominal face position Z' }[kind];
-  h += '<div class="grid" style="margin-top:6px">' +
-    sel(p + 'cmcTool', 'Tool type', S.CMC_TOOLS) +
-    sel(p + 'cmcFeature', 'Feature', S.CMC_FEATURES) +
-    (kind === 'wall' ? sel(p + 'cmcSide', 'Material on the side', ['+', '-']) : '') +
-    txt(p + 'cmcNom', nomLabel + ' (' + u.u + ')') +
-    (rect ? txt(p + 'cmcNomY', 'Nominal length Y (' + u.u + ')') : '') +
-    txt(p + 'cmcTolP', 'Tolerance + (' + u.u + ')') + txt(p + 'cmcTolM', 'Tolerance - (' + u.u + ')') +
-    txt(p + 'cmcStock', 'First-cut wear (' + u.u + ')', { ph: 'leaves stock' }) +
-    txt(p + 'cmcWindow', 'Check window (' + u.u + ')', { ph: 'auto = first-cut wear' }) +
-    txt(p + 'cmcLimit', 'Correction limit (' + u.u + ')', { ph: def(S.CMC_LIMIT[u.key]) }) + '</div>';
-  h += '<div class="grid" style="margin-top:6px">' +
-    txt(p + 'cmcEdge', 'Edge (D)', { ph: '1' }) +
-    sel(p + 'cmcField', 'Wear field (AUTO = ' + S.cmcAutoField(turning ? 'TURNING' : 'ROTATING', kind) + ')', S.CMC_FIELDS) +
-    (turning ? sel(p + 'cmcUnit', 'Wear in', ['RADIUS', 'DIAMETER']) + sel(p + 'cmcSign', '+wear makes the measured value', ['', 'LARGER', 'SMALLER']) : '') +
-    sel(p + 'cmcReturn', 'Back to the cutter', ['TCA', 'T M6']) + '</div>';
-  var where = size ? 'Centre' : 'Point';
-  h += '<div class="grid" style="margin-top:6px">' +
-    (kind === 'wall' && d.ma === 1 ? '' : txt(p + 'cmcX', where + ' X')) +
-    (kind === 'wall' && d.ma === 2 ? '' : txt(p + 'cmcY', where + ' Y')) +
-    (kind === 'floor' ? '' : txt(p + 'cmcZ', 'Probe depth Z')) +
-    txt(p + 'cmcAppZ', 'Approach Z (clear above)') +
-    (d.cyc === 977 ? txt(p + 'cmcZone', (rect ? 'Protection zone X' : d.mvar <= 2 ? 'Protection zone diameter' : 'Protection zone width') + ' (' + u.u + ')', { ph: 'none' }) : '') +
-    (rect ? txt(p + 'cmcZoneY', 'Protection zone Y (' + u.u + ')', { ph: 'same as X' }) : '') +
-    (kind === 'arc' ? sel(p + 'cmcPoints', 'Measuring points', ['3', '4']) + txt(p + 'cmcStartAng', 'Start angle (deg)', { ph: '0' }) +
-      txt(p + 'cmcIncAng', 'Angle between points (deg, sign = direction)') : '') + '</div>';
-  h += swivelBox(S.cmcSwivelSrc(s, i), S.CMC_SW_MODES, 'Probe swivel');
-  h += '<div class="grid" style="margin-top:6px">' +
-    sel(p + 'cmcClean', 'Probe cleaning', S.CMC_CLEAN) +
-    (s.cmcClean === 'M CODE' ? txt(p + 'cmcCleanM', 'Cleaning M code', { ph: 'M50' }) : '') +
-    chk(p + 'cmcVerify', 'Verify after the final cut') +
-    (s.cmcVerify ? sel(p + 'cmcOut', 'Out of tolerance after verify', ['RECUT', 'ACCEPT']) : '') +
-    (s.cmcVerify && s.cmcOut !== 'ACCEPT' ? txt(p + 'cmcMaxTry', 'Max re-cuts', { ph: '3' }) : '') + '</div>';
-  h += '<p class="note">' + esc(cmcSummary(s, kind)) + '</p>';
-  if (d.cyc === 977) h += '<p class="note">Protection zone: inside features = an island in the middle (the probe starts above it at the approach Z ' +
-    'and lowers outside it); outside features = the wall around (channel). Blank = none.</p>';
-  return h + '</div>';
-}
-/* swivel source box (probe step and CMC card): source, its fields only, the line that will be written */
-function swivelBox(src, modes, label) {
-  var P = src.paths, mode = src.mode;
-  var planes = job.steps.filter(function (s) { return s.planeState === 'ONE' && !S.isBlank(s.program); })
-    .map(function (s) { return String(s.program).trim(); });
-  var h = '<div class="grid" style="margin-top:6px">' + sel(P.mode, label, modes);
-  if (mode === 'B PROGRAM') h += sel(P.from, 'Plane of B program', [''].concat(planes));
-  if (mode === 'ANGLES') h += txt(P.angles[0], 'About X (A, deg)', { ph: '0' }) + txt(P.angles[1], 'About Y (B, deg)', { ph: '0' }) +
-    txt(P.angles[2], 'About Z (C, deg)', { ph: '0' });
-  if (mode === 'PASTE') h += '<label class="f" style="grid-column:1/-1">CYCLE800 line from the CAM program' +
-    '<input type="text" data-path="' + P.paste + '" value="' + esc(getPath(job, P.paste)) + '" placeholder="CYCLE800(0,&quot;H&quot;,200000,54,...)"' +
-    (errPaths[P.paste] ? ' class="err"' : '') + ' spellcheck="false" autocomplete="off"></label>';
-  h += '</div>';
-  var r = S.swivelFrom(src, job);
-  if (r.err) h += '<p class="note swline" style="color:var(--bad)">' + esc(r.err) + '</p>';
-  else h += '<p class="note swline">' + (r.line ? '<code>' + esc(r.line) + '</code> = ' : '') + esc(r.text) + '</p>';
-  if (mode === 'B PROGRAM' && !planes.length) h += '<p class="note">No imported B program has a single plane yet: post through go_to_machine and Import B list.</p>';
-  return h;
-}
-function cmcSummary(s, kind) {
-  if (!S.isNum(s.cmcNom) || !S.isNum(s.cmcStock)) return 'Fill in nominal and first-cut wear to see the first cut.';
-  var c = S.cmcResolve(s, U()), n = function (v) { return S.compact(v, U().dec + 2); };
-  return 'First cut with CMC wear ' + n(c.w1) + ' on $TC_' + c.field + ' -> expected ' + n(c.E) + (kind === 'rect' ? ' x ' + n(c.E2) : '') +
-    '. Correction = wear used + (nominal - measured) / (' + n(c.div) + ')' + (kind === 'rect' ? ', mean of X and Y' : '') +
-    '. Scrap when the measurement is past nominal ' + (c.m > 0 ? '- ' + n(c.tolM) : '+ ' + n(c.tolP)) +
-    '. Hold (M0) when it is more than ' + n(c.window) + ' from expected or the wear exceeds ' + n(c.limit) + '.';
-}
-
 function renderAll() {
   renderConfig(); renderProbing(); renderWcs(); renderOutput(); renderCmc();
   var part = S.ascii(job.header.part);
@@ -3518,7 +4015,7 @@ function gotoPath(path) {
 function runValidate() {
   var v = S.validate(job);
   errPaths = {};
-  v.errors.forEach(function (e) { errPaths[e.path] = 1; });
+  v.errors.forEach(function (e) { if (!errPaths[e.path]) errPaths[e.path] = e.msg; });
   renderAll();
   return v;
 }
@@ -3621,7 +4118,7 @@ function saveBlob(blob, name) {
 }
 
 /* ---- edits ---- */
-var STRUCT = /^(config\.|probeStep\.enabled|probing\.(xyMethod|partCheck|chkAlt|skipZ|zAlt|health|searchDist|sw\w+)$|steps\.\d+\.(brk|meas|setpiece|step|tool|program|cmc\w*)$|cmcR\.)/;
+var STRUCT = /^(config\.|probeStep\.|probing\.\w+$|steps\.\d+\.(brk|meas|setpiece|step|tool|program|cmc\w*)$|cmcR\.)/;
 function onEdit(e) {
   var el = e.target;
   if (el.dataset && el.dataset.col) {
@@ -3636,7 +4133,11 @@ function onEdit(e) {
   var v = el.type === 'checkbox' ? el.checked : el.value;
   setPath(job, p, v);
   dirty = true;
-  if (errPaths[p] && e.type === 'input') { delete errPaths[p]; el.classList.remove('err'); }
+  if (errPaths[p] && e.type === 'input') {
+    delete errPaths[p]; el.classList.remove('err');
+    var fe = el.closest('label') && el.closest('label').querySelector('.ferr'); if (fe) fe.remove();
+  }
+  if (e.type === 'input') { var pc = el.closest('[data-pic]'); if (pc) refreshPic(pc); }
   if (/^(header\.(part|machine)|builder\.)/.test(p)) {   /* live, no re-render */
     var bn = $('#builderNote'); if (bn) bn.innerHTML = builderNote();
     var part = S.ascii(job.header.part);
@@ -3678,8 +4179,9 @@ function doRender() {
   if (a) { var b = document.querySelector('[data-path="' + a + '"]'); if (b) b.focus(); }
 }
 function onClick(e) {
-  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto]');
+  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto],[data-jump]');
   if (!t) return;
+  if (t.dataset.jump) { var jt = document.getElementById(t.dataset.jump); if (jt) jt.scrollIntoView({ block: 'start' }); return; }
   if (t.dataset.tab) { showTab(t.dataset.tab); return; }
   if (t.dataset.goto) { e.preventDefault(); gotoPath(t.dataset.goto); return; }
   if (t.dataset.file !== undefined) { selFile = Number(t.dataset.file); renderOutput(); return; }

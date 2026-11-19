@@ -389,6 +389,74 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     }
   }
 
+  /* 6e. 1.6.0 screens: picture and help follow the box you are in, More settings, errors under the box, strip */
+  {
+    await loadJob('f10_swivel');
+    /* your step 570: turning bore 5.721, zone 5, probe depth Z-1, approach Z1, swivel A-90, ball 0.118 */
+    await page.evaluate(() => {
+      const j = window.SNG_UI.getJob();
+      Object.assign(j.steps[2], { step: '570', tool: '943580900', program: 'B_00984602_025_570_HF5', cmcTool: 'TURNING', cmcFeature: 'BORE', cmcSign: 'LARGER',
+        cmcUnit: 'RADIUS', cmcNom: '5.721', cmcTolP: '.001', cmcTolM: '.001', cmcStock: '.002', cmcX: '0', cmcY: '0', cmcZ: '-1', cmcAppZ: '1', cmcZone: '5',
+        cmcSwMode: 'ANGLES', cmcSwA: '-90', cmcSwivel: '', cmcVerify: true, cmcOut: 'RECUT', cmcMaxTry: '1', cmcClean: 'NONE' });
+      j.probing.ballDia = '.118';
+      window.SNG_UI.setJob(j);
+    });
+    await page.click('#tabBtnCmc');
+    const card = '.cmccard[data-cmc-row="2"]';
+    check(await page.$eval(card + ' details.more', d => !d.open), 'More settings closed by default');
+    await page.click(card + ' [data-path="steps.2.cmcZ"]');
+    check((await page.textContent(card + ' .help b')) === 'Probe depth Z' && (await page.textContent(card + ' .help')).includes('Z-1'),
+          'clicking Probe depth Z shows its help with the value');
+    check(await page.$eval(card + ' label.f.focus', l => l.textContent.startsWith('Probe depth Z')) &&
+          await page.$eval(card + ' svg', () => true) && (await page.$$eval(card + ' .pic svg .hi', l => l.length)) > 0, 'the box and its part of the picture are highlighted');
+    const live = await page.textContent(card + ' dl.live');
+    check(live.includes('Ø5.717') && live.includes('S_ID -2') && live.includes('X2.6793') && live.includes('fits (0.1203 clear)'),
+          'live numbers: expected Ø5.717, S_ID -2, test plunge X2.6793, ball fits: ' + live.replace(/\s+/g, ' ').slice(0, 300));
+    check((await page.textContent(card + ' .does')).includes('re-cut up to 1 time, then hold'), 'What the machine does: verify and re-cut');
+    check((await page.textContent(card + ' .vt')).includes('swivelled about X -90'), 'swivel shown under the picture (about X -90)');
+    await page.click(card + ' [data-path="steps.2.cmcZone"]');
+    check((await page.textContent(card + ' .help b')) === 'Protection zone' && (await page.textContent(card + ' .help')).includes('island'), 'zone help explains the island');
+    await page.screenshot({ path: path.join(out, 'shot16_cmc_light.png'), fullPage: false, clip: { x: 0, y: 0, width: 1360, height: 900 } });
+    await page.$eval(card, el => el.scrollIntoView());
+    await page.screenshot({ path: path.join(out, 'shot16_cmc_card.png'), fullPage: false });
+    /* more settings opens on a non-default value and on an error */
+    await page.evaluate(() => { const j = window.SNG_UI.getJob(); j.steps[2].cmcEdge = '0'; window.SNG_UI.setJob(j); });
+    await page.click('#tabBtnCmc');
+    check(await page.$eval(card + ' details.more', d => d.open), 'More settings open when a value in it is not the default');
+    d = await generate(false);
+    check(d === null && (await page.textContent(card + ' details.more .ferr')).includes('edge (D number) must be 1-9'), 'the error shows under the box inside More settings');
+    await page.evaluate(() => { const j = window.SNG_UI.getJob(); j.steps[2].cmcEdge = '1'; j.probing.ballDia = '1.0'; window.SNG_UI.setJob(j); });
+    await page.click('#tabBtnCmc');
+    check((await page.textContent(card)).includes('does not fit between the protection zone') && (await page.textContent(card + ' dl.live')).includes('does NOT fit'),
+          'ball 1.0 does not fit: warning on the card and in the live numbers');
+    /* probing tab: strip, jumps, help scoped to its card */
+    await page.click('nav.tabs button[data-tab="probing"]');
+    const strip = await page.$$eval('#tab-probing .strip .step', l => l.map(b => [b.textContent, b.classList.contains('off')]));
+    check(JSON.stringify(strip) === JSON.stringify([['Tool call', false], ['Swivel', false], ['Health check', true], ['Part check', true], ['Z datum', false],
+          ['XY datum: BOSS', false], ['Swivel back', false]]), 'sequence strip: health and part check greyed ' + JSON.stringify(strip));
+    await page.click('#tab-probing [data-path="probing.diameter"]');
+    check((await page.textContent('#pr-xy .help b')) === 'Diameter' && (await page.textContent('#pr-z .help b')) !== 'Diameter', 'probing help only on the card of the box');
+    await page.click('#tab-probing .strip .step:has-text("Z datum")');
+    await page.waitForTimeout(400);
+    check(await page.$eval('#pr-z', el => { const r = el.getBoundingClientRect(); return r.top < 200 && r.top > -10; }), 'strip jumps to the Z datum card (' + await page.$eval('#pr-z', el => Math.round(el.getBoundingClientRect().top)) + ')');
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: path.join(out, 'shot16_probing_light.png'), fullPage: true });
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.screenshot({ path: path.join(out, 'shot16_probing_dark.png'), fullPage: true });
+    await page.click('#tabBtnCmc');
+    await page.$eval(card, el => el.scrollIntoView());
+    await page.screenshot({ path: path.join(out, 'shot16_cmc_card_dark.png'), fullPage: false });
+    await page.emulateMedia({ colorScheme: 'light' });
+    /* every picture of every feature draws */
+    for (const f of ['BORE', 'BOSS', 'SLOT X', 'SLOT Y', 'WEB X', 'WEB Y', 'RECT POCKET', 'RECT SPIGOT', 'BORE ARC', 'BOSS ARC', 'WALL X', 'WALL Y', 'FLOOR Z']) {
+      await page.evaluate(ft => { const j = window.SNG_UI.getJob(); j.steps[2].cmcFeature = ft; j.steps[2].cmcNomY = '3'; j.steps[2].cmcIncAng = '30'; window.SNG_UI.setJob(j); }, f);
+      await page.click('#tabBtnCmc');
+      const n = await page.$$eval(card + ' .pic svg', l => l.length);
+      if (n !== 2) check(false, 'feature ' + f + ': two pictures (' + n + ')');
+    }
+    check(errors.length === 0, 'every feature draws without a page error');
+  }
+
   /* 7. screenshots for review */
   await loadJob('f1_old_package');
   await page.screenshot({ path: path.join(out, 'shot_config.png'), fullPage: true });
