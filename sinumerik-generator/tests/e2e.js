@@ -530,8 +530,12 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     check(await barTop() === 0 && (await page.evaluate(() => window.scrollY)) > 300, 'scrolled down the step table: the bar stays at the top');
     await page.fill('[data-path="steps.2.tool"]', 'EM_0375X');
     check(!(await page.$eval('#dirtyDot', e => e.hidden)), 'an edit shows UNSAVED');
+    /* 1.11.0 HELLER look: logo in bar and footer, one-row bar with UNSAVED at 1360 px, big step number follows the step */
+    check((await page.$$('header.nav svg.logo, footer.foot svg.logo')).length === 2, 'HELLER logo in the top bar and the footer');
+    check((await page.$eval('header.nav', e => e.offsetHeight)) < 80, 'top bar stays one row with UNSAVED showing (1360 px)');
     await page.click('nav.tabs button[data-tab="probing"]');
     check((await page.evaluate(() => window.scrollY)) === 0, 'a step click from far down opens the page at its top');
+    check((await page.textContent('#phNum')) === '02' && (await page.textContent('#phEyebrow')) === 'Probing', 'page head shows step 02 and its name');
     await page.click('nav.tabs button[data-tab="output"]');
     await page.click('[data-act="preview"]');
     await page.waitForSelector('.flist li');

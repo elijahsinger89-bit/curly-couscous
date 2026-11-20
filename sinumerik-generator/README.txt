@@ -6,10 +6,12 @@ USE
   Firefox: no server, no internet, no install.
   Fill steps 01-03 (05 when CMC is on), then on 04 Output press Generate
   ZIP. The zip holds every NC file.
-  Screen: the dark top bar stays on top while you scroll. It holds:
-    the steps 01 Config & steps / 02 Probing / 03 Work offsets / 04 Output
-      / 05 CMC (amber line = the open one; a step opens at its top)
-    JOB name, amber UNSAVED = changes not saved to the job file yet
+  Screen (HELLER look, 1.11.0): the dark top bar stays on top while you
+  scroll. It holds:
+    the step tiles 01 Config & steps / 02 Probing / 03 Work offsets /
+      04 Output / 05 CMC (blue tile = the open one; a step opens at its top)
+    JOB name, red UNSAVED = changes not saved to the job file yet (on a
+      narrow screen the name is cut short with ... and UNSAVED is the red dot)
     File: New job, Open... (Ctrl+O), Save (Ctrl+S). New job and Open ask
       first when there are unsaved changes: Save first / Discard / Cancel.
     Validate: checks the whole job from any step.
