@@ -1,0 +1,5 @@
+{
+    "ShowContent": false,
+    "StartupFile": "job_processing.py",
+    "Type": "Script"
+}

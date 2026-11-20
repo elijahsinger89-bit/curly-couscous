@@ -3,6 +3,10 @@ hyperMILL AUTOMATION PACKAGE - INSTRUCTIONS
 
 WHAT IS IN THIS PACKAGE
 copy_to_python_folder
+  job_processing   BUTTON 1, the front-of-job menu: Tools (wizard / selector / generator / search), Part wizard 1 / 2,
+                   Tool numbering, Holder attacher (not built yet), B program rename, Restore job names, Show toolpaths
+                   of one tool (icon: job_processing.png)
+  go_to_machine    BUTTON 2, the job-end menu (see below)
   part_wizard_1    builds the toolpaths of a part (no tools, no macros)
   part_wizard_2    puts a library tool and its cutting data in every toolpath
   tool_center      one command for building tools: tool wizard, tool selector or tool generator (icon: tool_center.png)
@@ -40,13 +44,24 @@ INSTALL
 2. Delete the old tool_wizard and tool_selector folders there (tool_center replaces both), and tool_wizard.py and
    tool_selector.py inside tool_center (tool_flow.py replaces them).
 3. Restart hyperMILL so it re-reads the python folder.
-4. Button: tool_center\tool_center.png (32 x 32; tool_center.ico for dialogs that want an .ico).
+4. Two buttons do everything:
+     job_processing\job_processing.png  (Job processing: building the job)
+     go_to_machine\go_to_machine.png    (Go to machine: posting and the job-end documents)
+   Every script still works from its own button, but the two menus open them all; once both are proven the single
+   buttons below can go (keep the folders: the menus load them).
+   Single buttons: tool_center\tool_center.png (32 x 32; tool_center.ico for dialogs that want an .ico).
    Button: b_program_rename\b_program_rename.png (32 x 32; b_program_rename.ico).
    Button: go_to_machine\go_to_machine.png (32 x 32; go_to_machine.ico).
    Button: tool_load_mda\tool_load_mda.png (32 x 32; tool_load_mda.ico).
    Button: restore_job_names\restore_job_names.png (32 x 32; restore_job_names.ico).
    Button: show_tool_toolpaths\show_tool_toolpaths.png (32 x 32; show_tool_toolpaths.ico).
 
+
+JOB PROCESSING (button 1)
+Screen: What - Tools / Part wizard 1 / Part wizard 2 / Tool numbering / Holder attacher (not built yet) / B program rename /
+Restore job names / Show toolpaths of one tool. The chosen script is loaded from its own folder every time and runs exactly
+as from its own button (its own screens, its own log). The last choice is offered first. A script that is not installed:
+the message names the folder to copy. Log: job_processing_log.txt.
 
 THE PART FLOW
 -------------
