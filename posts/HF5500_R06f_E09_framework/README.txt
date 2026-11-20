@@ -33,19 +33,16 @@ CHANGES
       G17 G40 G60 G70 G90 G94 M40 / CYCLE800() / TRAFOOF / TRANS
     20 Nov 2026 fix: G97 is out of this block. G94 and G97 are the same
     G group on SINUMERIK (group 15, feed type): both in one block = alarm
-    12060 "same G group programmed repeatedly". G94 alone switches G96 off.
+    12060 "same G group programmed repeatedly". The block is the shop's own
+    line again, without G0 and G500.
   StartEnd\pgm_end.txt (program end, RET follows from final_M)
     Removed: the X / Y move to the + limits and A=DC(0) B=DC(0) after
     every nest (the next nest swivels straight back with CYCLE800).
-    Added: M5, G94 (a turning program could leave G96 on, and the
-    framework's next S3750 M3 for the laser would be read as surface
-    speed; G94 switches G96 off and sets feed per minute), CYCLE832(),
-    CYCLE800(), TRAFOOF.
+    Added: M5, CYCLE832(), CYCLE800(), TRAFOOF.
       G0 G53 G17 G90 Z=$MA_POS_LIMIT_PLUS[AX3]-.04 D0
-      M5 / M9 / G94 / CYCLE832() / CYCLE800() / TRAFOOF
-    20 Nov 2026 fix: was G97. On SINUMERIK G97 = constant cutting rate
-    off WITH feed per revolution, so it left feed per rev on after every
-    B program.
+      M5 / M9 / CYCLE832() / CYCLE800() / TRAFOOF
+    20 Nov 2026: the G97 that was here is gone (not in the shop's post;
+    the next B program's start block sets G94 again).
   Every other file in this zip
     Only the line that printed the template's own file name was removed
     ("; sP.txt", "; --- files_x\ToolChange\TC_bgn.txt ---", ...). Every
@@ -59,7 +56,7 @@ CHECK AFTER POSTING
   - No "; ...txt" file-name lines, no M01, no G500, no $P_SEARCH.
   - The tool call reads ; T="..." and ; M6 BY THE FRAMEWORK.
   - The start: G17 G40 G60 G70 G90 G94 M40 (no G97).
-  - The end: Z retract, M5, M9, G94, CYCLE832(), CYCLE800(), TRAFOOF, RET.
+  - The end: Z retract, M5, M9, CYCLE832(), CYCLE800(), TRAFOOF, RET (no G97).
 
 ON THE MACHINE (first run, single block)
   - Two nests of one step: no stop between nests, the table goes straight

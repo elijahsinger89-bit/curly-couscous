@@ -374,7 +374,7 @@ footer.foot svg.logo { height: 11px; width: auto; color: #ffffff; }
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.11.1';
+var GEN_VERSION = '1.11.2';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -2066,15 +2066,14 @@ function fBTemplate(R) {
     ';     AND ITS SISTERS)',
     hh ? ';  4. ORIENTS PER FACE WITH CYCLE800(...) FROM CAM (HEAD)' : ';  4. ORIENTS PER FACE WITH CYCLE800(0,"H",...) FROM CAM',
     ';  5. STARTS SPINDLE AND COOLANT (M3 Sxxxx, M8)',
-    ';  6. ENDS WITH THE BLOCK BELOW: STOP, G94 (G96 / FEED PER REV',
-    ';     OFF AFTER TURNING), CANCEL SWIVEL /'
+    ';  6. ENDS WITH THE BLOCK BELOW: STOP, CANCEL SWIVEL /'
   ];
   if (hh) o.push(';     HIGH-SPEED SETTINGS / TRANSFORMATION, SAFE Z,',
                  ';     HEAD HOME ' + headWord(R) + ' (THE LASER IN L_TOOL_MEAS /',
                  ';     L_TOOL_BRK MEASURES THERE), RET');
   else o.push(';     HIGH-SPEED SETTINGS / TRANSFORMATION, SAFE Z, RET');
   o.push(';===========================================', ';', 'G54 D1', ';', ';--- CAM TOOLPATH GOES HERE ---', ';',
-         ';--- PROGRAM END (KEEP) ---', 'M5', 'M9', 'G94', 'CYCLE800()', 'CYCLE832()', 'TRAFOOF', retract(R.clr));
+         ';--- PROGRAM END (KEEP) ---', 'M5', 'M9', 'CYCLE800()', 'CYCLE832()', 'TRAFOOF', retract(R.clr));
   if (hh) o.push(hh);
   o.push('RET', ';');
   return text(o);

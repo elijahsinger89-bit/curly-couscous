@@ -257,7 +257,7 @@ B_ PROGRAMS
   The probe program is generated complete.
   HF5500 post (hyperMILL R06f_E09): posts/HF5500_R06f_E09_framework holds
   start / end templates that write this contract (header block, no M01,
-  no home move after each nest, M5 M9 G94 and resets at the end).
+  no home move after each nest, M5 M9 and resets at the end; no G97).
 
 WHAT CHANGED FROM THE OLD PACKAGE (all from the SINUMERIK ONE manuals)
   - One-line IF is only defined for GOTOx (NC PM 4.1.5.2). IF ... SETPIECE,
