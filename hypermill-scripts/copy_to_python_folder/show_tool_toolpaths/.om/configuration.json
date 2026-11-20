@@ -1,0 +1,5 @@
+{
+    "ShowContent": false,
+    "StartupFile": "show_tool_toolpaths.py",
+    "Type": "Script"
+}

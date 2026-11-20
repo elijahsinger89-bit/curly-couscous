@@ -17,6 +17,8 @@ copy_to_python_folder
                    its own; go_to_machine uses it after posting (icon: tool_load_mda.png)
   restore_job_names puts every toolpath's name back to its number and toolpath type ("2: 3D Optimized Roughing")
                    (icon: restore_job_names.png)
+  show_tool_toolpaths turns on the toolpath display (light bulb) of every toolpath of one tool
+                   (icon: show_tool_toolpaths.png)
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
                    B program name rule (b_programs.py)
@@ -35,6 +37,7 @@ INSTALL
    Button: go_to_machine\go_to_machine.png (32 x 32; go_to_machine.ico).
    Button: tool_load_mda\tool_load_mda.png (32 x 32; tool_load_mda.ico).
    Button: restore_job_names\restore_job_names.png (32 x 32; restore_job_names.ico).
+   Button: show_tool_toolpaths\show_tool_toolpaths.png (32 x 32; show_tool_toolpaths.ico).
 
 
 THE PART FLOW
@@ -360,6 +363,19 @@ Compound jobs (B programs, dividers) keep their names. Toolpaths already named r
 number or a type is listed and left alone.
 Log: restore_job_names_log.txt holds old -> new for every toolpath, so a name can be typed back, and for every toolpath
 left alone what it holds (ID, *JOBID, cycle names).
+
+SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths)
+Turns on the light bulb (toolpath display) of every toolpath that uses one tool.
+Screen: Joblist (one or all), Tool (T<ID>  name  - number of toolpaths), Show:
+  This tool only   this tool's toolpaths on, every other toolpath off
+  Add this tool    this tool's toolpaths on, the others stay as they are
+  Everything on    every toolpath on
+Compound jobs (B programs) holding a toolpath of the tool are turned on too.
+Nothing else in the job changes (no settings, no recalculation).
+FIRST RUN: the light bulb is not in our hyperMILL API notes. The script looks for it on the toolpath, in its property set,
+on its job tree node, then with Unhide / Hide, and uses the first that works (the log says which). If it says "not
+found", or the light bulbs do not change, send show_tool_toolpaths_log.txt: it lists what a toolpath offers.
+Log: show_tool_toolpaths_log.txt (written line by line; if hyperMILL freezes, close it and send the log anyway).
 
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
