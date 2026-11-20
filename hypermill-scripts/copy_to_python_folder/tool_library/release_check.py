@@ -10,7 +10,7 @@
 import os
 import re
 
-VERSION = "2026-11-19"
+VERSION = "2026-11-21"
 HEADER_BYTES = 65536
 UCID_RE = re.compile(rb"ucid\(([0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12})\)")
 CLEAN = "CC_RESULT 1"
@@ -117,13 +117,14 @@ def check_job(job, doc_folder, ccrpt):
         return r
     res = ccrpt.result(os.path.dirname(pof), r["ucid"])
     r["result"] = res or ""
+    if res is not None:
+        r["run"] = ccrpt.run_time(os.path.dirname(pof), r["ucid"])      # Simulation Center date (setup sheet, collisions)
     if res is None:
         r["reason"] = R_NOT_SIM
     elif res == CLEAN:
         r["ok"] = True
     elif res == COLLISION:
         r["reason"] = R_COLLISION
-        r["run"] = ccrpt.run_time(os.path.dirname(pof), r["ucid"])
     else:
         r["reason"] = "unknown Simulation Center result %r" % res
     return r

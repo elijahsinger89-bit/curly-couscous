@@ -10,8 +10,9 @@ copy_to_python_folder
                    (icon: b_program_rename.png)
   b_program_export writes the B program list (B programs + tool + breakage presets) for the SINUMERIK generator
                    (go_to_machine writes the same list after posting; this one runs on its own)
-  go_to_machine    checks every B program (calculated, no errors, run through Simulation Center without a collision
-                   since its last change), posts them, writes the B program list, the tool sheet and the tool load MDA
+  go_to_machine    the job-end menu: Validation / Production / Pick functions. Checks every B program (calculated,
+                   no errors, run through Simulation Center without a collision since its last change), posts them,
+                   writes the B program list, tool load MDA, order sheet, sister tool sheet, NC master setup
                    (icon: go_to_machine.png)
   tool_load_mda    one MDA program that creates every tool and sister on the control (NEWT by tool ID), runnable on
                    its own; go_to_machine uses it after posting (icon: tool_load_mda.png)
@@ -276,10 +277,20 @@ rule for the part and machine given. Nothing is written when a step number is us
 WARNING (the list is still written): a B program name over 24 characters. The generator refuses it until it is renamed.
 Log: b_program_export_log.txt.
 
-GO TO MACHINE
-Screen: Joblist (one, or All joblists), Part number, Machine (start on the last B program rename), Action:
-  Check only      every B program OK or FAIL with the reason per job; nothing posted, nothing written
-  Check and post  the same check, then posts and writes the B program list
+GO TO MACHINE (the job-end menu)
+Screen 1: Joblist (one, or All joblists), Part number, Machine (start on the last B program rename), Package:
+  Validation      bare minimum to prove the job on the machine: post, B program list, tool load MDA with NO sisters,
+                  order sheet (1 of each tool, holder, collet), sister tool sheet to fill in during prove-out
+  Production      everything once the job is proved: post, B program list, tool load MDA WITH sisters and tool life,
+                  order sheet (1 + sisters), NC master setup sheet
+  Pick functions  tick only what you want
+Screen 2: the functions, ticked by the package; untick or tick any: Post the B programs / B program list (generator) /
+  Tool load MDA / Order sheet / Sister tool sheet / NC master setup sheet. Programmer (remembered). Production and Pick
+  functions also: Sister sheet (sisters, tool life), preset to the newest go to machine\VALIDATION_*\*_SISTERS.xlsx.
+  Nothing ticked = check only (every B program OK or FAIL with the reason; nothing posted, nothing written).
+Sisters = extra tools everywhere (0 = the tool only). Validation: 0 for every tool. Production: from the sister sheet you
+  filled in (Sisters, Tool Life columns); none found = it stops before posting and says so. Pick functions: from the
+  sister sheet when one is given, else the tool load MDA screens ask.
 A B program is a compound job named B_<part>_<step>_<machine>. It passes when every job in it:
   - is calculated (POF status up to date) and has no errors
   - has been run through Simulation Center without a collision since its last change
@@ -300,30 +311,38 @@ Posting: all pass -> Post: No / Yes (No first). Some fail -> a WARNING with the 
 Stops before posting when a step number is used twice. Warns about names over 24 characters. Compound jobs with more
 than one tool, a job without a tool, or a name not in the B rule are listed and never posted. Notes are skipped.
   Tested 17 Nov 2026: CalculateNC posted exactly the B programs given, one NC\<B program>.mpf each, next to the document.
-After posting, in the folder "go to machine" in the document folder (made when needed; if it cannot be written:
-C:\Users\Public\Documents\OPEN MIND). The NC files stay where hyperMILL posts them:
+Output in <document folder>\go to machine\VALIDATION_<date> or PRODUCTION_<date> (Pick functions: go to machine);
+if it cannot be written: C:\Users\Public\Documents\OPEN MIND. The NC files stay where hyperMILL posts them.
   - When only some B programs were posted: "Include" - Only the ones posted (first) / All B programs. This sets what the
-    B program list and the tool sheet hold. B programs left out are listed in the B program list as "not posted", so the
+    B program list and the documents hold. B programs left out are listed in the B program list as "not posted", so the
     generator shows them and its main program does not call them.
   - <document>_B_PROGRAMS.json / .csv: the same list b_program_export writes. Generator: Import B list.
-    For each posted B program its NC file is read (comments and strings left out) and two keys are added:
-    radius_comp = G41/G42 found; r_params = the R parameters it uses. The message names B programs with R parameters,
-    R[...] with a computed number (cannot be checked) and B programs without G41/G42. The generator uses them for CMC:
-    it refuses a CMC R block that covers an R a B program uses, and warns when a CMC step corrects radius wear on a
-    program without G41/G42.
+    For each B program its NC file is read (the one just posted; not posting: the one already there; comments and
+    strings left out) and two keys are added: radius_comp = G41/G42 found; r_params = the R parameters it uses. The
+    message names B programs with R parameters, R[...] with a computed number (cannot be checked) and B programs without
+    G41/G42. The generator uses them for CMC: it refuses a CMC R block that covers an R a B program uses, and warns when
+    a CMC step corrects radius wear on a program without G41/G42.
     A third key, cycle800, holds the B program's CYCLE800 plane when it has exactly one ("" = none, nest face). Several
     different planes or only a turning-tool alignment store none (the message names them). The generator offers the
     plane as the probe swivel: probe step (rotate, probe, CYCLE800() back) and CMC.
-  - <document>_<joblist>_tool_order.csv: the tool sheet. Same columns and catalog lookup as the tool_order_list script
-    (go_to_machine uses the installed tool_order_list\tool_order_list.py, so layout changes there show up here too);
-    one row per tool of those B programs; "Toolpath names" = <B program>: <toolpath>. If tool_order_list is not
-    installed, the message says so and only the tool sheet is skipped.
-  - "Tool load MDA" (first screen, ticked by default): <DOCUMENT>_TOOL_LOAD.MPF for the tools of those B programs, made
-    by the installed tool_load_mda script (see TOOL LOAD MDA). Its screens ask sisters and tool life per tool (then tip and
-    cut direction of the turning tools); the tool life
-    of tools whose B program counts with SETPIECE is labelled "tool life (SETPIECE)". Left blank, the message warns:
-    without tool life monitoring ($TC_TP9=2, $TC_MOP13 / $TC_MOP4) the control does not count those pieces.
-    Cancel on that screen: everything else is still done, the MDA is not written.
+  - <DOCUMENT>_TOOL_LOAD.MPF for the tools of those B programs, made by the installed tool_load_mda script (see TOOL LOAD
+    MDA). Tools whose B program counts with SETPIECE and have no tool life: the message warns (without tool life
+    monitoring $TC_TP9=2, $TC_MOP13 / $TC_MOP4 the control does not count those pieces). Cancel on its screens:
+    everything else is still done, the MDA is not written.
+  - <document>_ORDER.xlsx: what to buy. One line per cutter, holder and collet / extension, same order no. on one line
+    with the quantities added (qty = 1 + sisters per tool). Yellow lines: order no. missing, taken from the tool name, or
+    a holder / extension still named "Holder" / "Extension": check before ordering.
+  - <document>_SISTERS.xlsx: your sister tool sheet with T No., EDP, description, dia, gage length filled in. Fill in
+    Sisters (extra tools) and Tool Life (pieces), save it in place; Production reads it.
+  - <document>_SETUP.docx: the NC master setup (TOOL LIST). Header: P/N, material type, machine, date, programmer,
+    hyperMILL sim date (the newest Simulation Center run of those B programs); REV, PART NAME, MTL and VERICUT DATE / BY
+    are left for you. One row per tool in the order they are first used: tool no., description (Common > Name), dia,
+    radius / angle, flute length, stick-out (= hyperMILL reach), QTY (1 + sisters), tool life, holder / collet /
+    extension. Template: tool_library\templates\NC_MASTER_SETUP.docx (made by docs\make_setup_template.py from your
+    blank; the logo goes in when you send it).
+  - The message also lists tools with no order no., tools without a holder in hyperMILL, and tool numbers that do not
+    follow the numbering standard (NUMBER_STANDARD at the top of go_to_machine.py).
+The old tool sheet (<document>_<joblist>_tool_order.csv from tool_order_list) is replaced by the order sheet.
 Log: go_to_machine_log.txt.
 
 TOOL LOAD MDA

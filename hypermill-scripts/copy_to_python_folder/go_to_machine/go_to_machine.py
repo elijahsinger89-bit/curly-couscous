@@ -1,44 +1,51 @@
-# go_to_machine.py - hyperMILL 35
-# Checks the B programs of a joblist and posts them, then writes the B program list for the SINUMERIK generator.
-# Screen: Joblist (one or all), Part number, Machine (defaults: the last B program rename), Action:
-#   Check only      lists every B program as OK or FAIL with the reason; posts and writes nothing
-#   Check and post  the same check, then posts with JobListSet.CalculateNC([compound job UUIDs]) and writes the list
+# go_to_machine.py - hyperMILL 35. The job-end menu: checks the B programs, posts them, writes what goes to the machine.
+# Screen 1: Joblist (one or all), Part number, Machine (defaults: the last B program rename), Package:
+#   Validation      bare minimum to prove the job: post, B program list, tool load MDA with NO sisters, order sheet
+#                   (1 of each tool and holder), sister tool sheet to fill in during prove-out
+#   Production      everything: post, B program list, tool load MDA WITH sisters and tool life, order sheet (1 + sisters),
+#                   NC master setup sheet. Sisters / tool life come from the filled sister tool sheet (the newest one in
+#                   go to machine\VALIDATION_*; its path can be changed). None found: stops before posting.
+#   Pick functions  nothing ticked: tick what you want. Without a sister sheet the tool load MDA asks sisters on screens.
+# Screen 2: the functions, ticked by the package (any can be unticked or ticked): Post the B programs, B program list,
+#   Tool load MDA, Order sheet, Sister tool sheet, NC master setup sheet; Programmer (remembered); Sister sheet (not for
+#   Validation). Nothing ticked = check only.
 # A B program is a compound job named B_<part>_<step>_<machine> (b_program_rename). It passes when every job in it:
 #   is calculated (POFStatus UP_TO_DATE), has no errors (Status not ERRORS), and has been run through Simulation Center
 #   without a collision since its last change (tool_library\release_check.py: POF header toolpath id -> POF\<id>.ccrpt
 #   "CC_RESULT 1").
-# When B programs fail: a warning with the list, then Post: No - post nothing / Post all / Post only the ones that pass.
-# Stops without posting when a step number is used twice. Warns about names over 24 characters.
-# After posting (everything except the NC files goes into the "go to machine" folder in the document folder;
-# if it cannot be written: C:\Users\Public\Documents\OPEN MIND):
-#   - the NC files written or updated (document folder and its NC folder, before / after)
-#   - when only some B programs were posted: B program list and tool sheet: Only the posted ones / All B programs
+# Posting: when B programs fail, a warning with the list, then Post: No - post nothing / Post all / Post only the ones
+# that pass. Stops when a step number is used twice. Warns about names over 24 characters.
+# Output (NC files stay where the post writes them): <document folder>\go to machine\VALIDATION_<date> or
+# PRODUCTION_<date> (Pick functions: go to machine); if it cannot be written: C:\Users\Public\Documents\OPEN MIND.
+#   - when only some B programs were posted: B program list and documents: Only the posted ones / All B programs
 #   - <document>_B_PROGRAMS.json / .csv (tool_library\B_PROGRAM_LIST_FORMAT.txt) for the generator's Import B list;
-#     B programs left out are listed in it as "not posted"; for every posted B program the NC file is read:
-#     radius_comp = G41/G42 found (CMC radius wear needs cutter compensation), r_params = R parameters it uses
-#     (the generator keeps its CMC R blocks clear of them), cycle800 = the B program's CYCLE800 plane when it has
-#     exactly one ("" = none = nest face; several, or only a turning-tool alignment: cycle800_note SEVERAL / TURNING),
-#     offered by the generator as the probe swivel for the probe step and CMC
-#   - the tool sheet <document>_<joblist>_tool_order.csv: the columns and catalog lookup of the installed
-#     tool_order_list script (tool_order_list.py: catalog, tool_row), one row per tool of those B programs,
-#     "Toolpath names" = <B program>: <toolpath>
-#   - "Tool load MDA" ticked (first screen, on by default): <DOCUMENT>_TOOL_LOAD.MPF from the installed tool_load_mda
-#     script for the tools of those B programs: sisters and tool life per tool (remembered per tool ID), NEWT per sister.
-#     Tools of B programs that count with SETPIECE are marked "tool life (SETPIECE)"; left blank they get a warning,
-#     because the control only counts pieces with tool life monitoring ($TC_TP9=2, $TC_MOP13 / $TC_MOP4).
+#     B programs left out are listed in it as "not posted"; for every B program the NC file is read (posted now, or
+#     already there when not posting): radius_comp = G41/G42 found, r_params = R parameters it uses, cycle800 = its
+#     CYCLE800 plane when it has exactly one ("" = none = nest face; several, or only a turning-tool alignment:
+#     cycle800_note SEVERAL / TURNING)
+#   - <DOCUMENT>_TOOL_LOAD.MPF from the installed tool_load_mda script (sisters = extra tools). Tools of B programs that
+#     count with SETPIECE without a tool life get a warning (the control only counts pieces with tool life monitoring).
+#   - <document>_ORDER.xlsx, <document>_SISTERS.xlsx, <document>_SETUP.docx (tool_library\job_docs.py; templates in
+#     tool_library\templates). Tool numbers that do not follow NUMBER_STANDARD are listed.
 # Log: C:\Users\Public\Documents\OPEN MIND\go_to_machine_log.txt
-import os, re, csv, json, time, tempfile, traceback, datetime, importlib.util
+import os, re, csv, json, time, shutil, tempfile, traceback, datetime, importlib.util
 
 PY_DIR   = r"C:\Users\Public\Documents\OPEN MIND\python"
 OUT_DIR  = r"C:\Users\Public\Documents\OPEN MIND"
 HERE     = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.join(PY_DIR, "go_to_machine")
 LIB_DIRS = (os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool_library"))
-TOL_FILES = (os.path.join(PY_DIR, "tool_order_list", "tool_order_list.py"), os.path.join(HERE, "..", "tool_order_list", "tool_order_list.py"))
 TLM_FILES = (os.path.join(PY_DIR, "tool_load_mda", "tool_load_mda.py"), os.path.join(HERE, "..", "tool_load_mda", "tool_load_mda.py"))
-MDA_LABEL = "Tool load MDA"
-OUT_SUB  = "go to machine"          # folder in the document folder for the B program list, tool sheet and MDA
+NUMBER_STANDARD = "HELLER"          # tool_numbers.STANDARDS: tool IDs that do not follow it are listed
+OUT_SUB  = "go to machine"          # folder in the document folder for everything but the NC files
 TITLE    = "Go to machine"
-ACTIONS  = ["Check only", "Check and post"]
+PACKAGES = ["Validation", "Production", "Pick functions"]
+F_POST, F_BLIST, F_MDA = "Post the B programs", "B program list (generator)", "Tool load MDA"
+F_ORDER, F_SISTER, F_SETUP = "Order sheet", "Sister tool sheet", "NC master setup sheet"
+FUNCS = (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP)
+PRESET = {"Validation": (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER),
+          "Production": (F_POST, F_BLIST, F_MDA, F_ORDER, F_SETUP),
+          "Pick functions": ()}
+F_PROG, F_SHEET = "Programmer", "Sister sheet (sisters, tool life)"
 MAX_BOX_LINES = 30
 BOX_WIDTH = 90
 NC_EXT   = (".mpf", ".spf", ".nc", ".h", ".txt", ".ptp", ".cnc", ".iso", ".min")
@@ -223,65 +230,14 @@ def report_lines(progs, left, problems, head):
     return rep
 
 
-# ---------------- tool sheet ----------------
-def tool_sheet(progs, folder, out_folder, base, label):
-    """<base>_<label>_tool_order.csv from the installed tool_order_list script. Returns (path, rows, missing) or a
-    reason string when it was not written."""
-    p = next((os.path.normpath(f) for f in TOL_FILES if os.path.exists(os.path.normpath(f))), None)
-    if p is None:
-        return "tool_order_list.py not found in %s" % os.path.join(PY_DIR, "tool_order_list")
-    spec = importlib.util.spec_from_file_location("hm_tool_order_list", p)
-    tol = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(tol)
-    log("tool_order_list:", p)
-    used, order = {}, []
-    for pr in progs:
-        for j in list(pr["obj"].GetJobs()):
-            try:
-                t = j.GetTool()
-            except Exception:
-                t = None
-            if t is None:
-                continue
-            u = str(val(getattr(t, "UUID", "")) or val(getattr(t, "Name", ""))).strip("{}").upper()
-            if u not in used:
-                used[u] = (t, [])
-                order.append(u)
-            used[u][1].append("%s: %s" % (pr["name"], str(val(getattr(j, "Name", "")))))
-    if not order:
-        return "no tools in those B programs"
-    cat = tol.catalog()
-    rows = []
-    for u in order:
-        t, jobs = used[u]
-        try:
-            rows.append(tol.tool_row(t, jobs, cat))
-        except Exception:
-            log("tool sheet row FAILED:", val(getattr(t, "Name", "?")), traceback.format_exc()[-300:])
-    for ln in getattr(tol, "lines", []):
-        log("  tool_order_list:", ln)
-    if not rows:
-        return "no tool row could be read"
-    try:
-        rows.sort(key=lambda r: (r.get("Manufacturer", ""), r.get("Tool type", ""), tol._f(r.get("Diameter (in)")) or 0, r.get("Designation", "")))
-    except Exception:
-        pass
-    path = os.path.join(out_folder, "%s_%s_tool_order.csv" % (base, re.sub(r"[^A-Za-z0-9_-]", "_", label)))
-    with open(path, "w", newline="", encoding="utf-8-sig") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
-    missing = [r.get("Designation", "?") for r in rows if r.get("In tool_library", "yes") != "yes"]
-    log("tool sheet:", path, "|", len(rows), "tools |", len(missing), "not in tool_library:", missing)
-    return path, rows, missing
-
-
 # ---------------- tool load MDA ----------------
-def tool_mda(progs, setpiece_ids, folder, doc_name, label):
-    """<DOCUMENT>_TOOL_LOAD.MPF with the installed tool_load_mda script. Returns message lines."""
+def tool_mda(progs, setpiece_ids, folder, doc_name, label, table=None, ask=True):
+    """<DOCUMENT>_TOOL_LOAD.MPF with the installed tool_load_mda script. ask = sisters / tool life screens; else from
+    table {tool id: (sisters, life)} (sister sheet), missing = 0 sisters (only the turning tip / cut screen shows).
+    Returns (message lines, {tool id: (sisters, life)} or None)."""
     p = next((os.path.normpath(f) for f in TLM_FILES if os.path.exists(os.path.normpath(f))), None)
     if p is None:
-        return ["", "Tool load MDA not written: tool_load_mda.py not found in %s" % os.path.join(PY_DIR, "tool_load_mda")]
+        return ["", "Tool load MDA not written: tool_load_mda.py not found in %s" % os.path.join(PY_DIR, "tool_load_mda")], None
     spec = importlib.util.spec_from_file_location("hm_tool_load_mda", p)
     tlm = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(tlm)
@@ -313,14 +269,20 @@ def tool_mda(progs, setpiece_ids, folder, doc_name, label):
         log("  tool_load_mda:", ln)
     out = [""]
     if not tools:
-        return out + ["Tool load MDA not written: no tool could be read (no gage length: %s)" % (", ".join(no_gage) or "-")]
+        return out + ["Tool load MDA not written: no tool could be read (no gage length: %s)" % (", ".join(no_gage) or "-")], None
     tools.sort(key=lambda d: (tlm._f(d["id"]) is None, tlm._f(d["id"]) or 0, d["id"]))
     need = set(i for i in setpiece_ids if i in ids)
-    counts = tlm.ask_counts(tools, tlm.load_last(), need)
+    if ask:
+        counts = tlm.ask_counts(tools, tlm.load_last(), need)
+    else:
+        counts = tlm.fixed_counts(tools, table)
+        if not tlm.ask_turning(tools):
+            counts = None
     if counts is None:
         log("tool load MDA cancelled at sisters / tool life")
-        return out + ["Tool load MDA cancelled: not written."]
-    tlm.save_last(counts)
+        return out + ["Tool load MDA cancelled: not written."], None
+    if ask:
+        tlm.save_last(counts)
     text, made = tlm.program(tools, counts, doc_name, "go_to_machine " + label)
     path = tlm.write_program(text, folder, doc_name)
     extra = sum(counts.get(t["id"], (0, 0))[0] for t in tools)
@@ -332,7 +294,100 @@ def tool_mda(progs, setpiece_ids, folder, doc_name, label):
         out.append("  left out (no gage length): " + ", ".join(no_gage))
     if blank:
         out.append("  WARNING - SETPIECE counts these tools but no tool life was entered (the control will not count them): " + ", ".join(blank))
+    return out, counts
+
+
+# ---------------- job-end documents (tool_library: job_docs, tool_info, office_fill, tool_numbers) ----------------
+def load_docs_lib():
+    """job_docs and the modules it imports, fresh (hyperMILL keeps imported modules between runs)."""
+    import sys, importlib
+    p = lib_file("job_docs.py")
+    if p is None:
+        raise RuntimeError("job_docs.py not found in tool_library")
+    d = os.path.dirname(p)
+    if d not in sys.path:
+        sys.path.insert(0, d)
+    mods = {}
+    for n in ("tool_numbers", "office_fill", "tool_info", "job_docs"):
+        m = importlib.import_module(n)
+        if os.path.normcase(os.path.dirname(os.path.abspath(m.__file__))) != os.path.normcase(d):
+            sys.modules.pop(n, None)                  # another copy was imported first: use this folder's
+            m = importlib.import_module(n)
+        importlib.reload(m)
+        mods[n] = m
+    return mods
+
+
+def program_tools(progs):
+    """Tools of the B programs in the order they are first used (step order, job order)."""
+    out, seen = [], set()
+    for pr in sorted(progs, key=lambda p: p["step"]):
+        for j in list(pr["obj"].GetJobs()):
+            try:
+                t = j.GetTool()
+            except Exception:
+                t = None
+            if t is None:
+                continue
+            u = str(val(getattr(t, "UUID", "")) or val(getattr(t, "Name", "")))
+            if u not in seen:
+                seen.add(u)
+                out.append(t)
     return out
+
+
+def sim_date(progs):
+    """Newest Simulation Center run (yyyy-mm-dd) of the B programs' toolpaths, or ''."""
+    runs = [j.get("run") for p in progs for j in p.get("jobs", []) if j.get("run")]
+    return max(runs)[:10] if runs else ""
+
+
+def material_of(lists, names, scope):
+    for jl, n in zip(lists, names):
+        if scope in ("All joblists", n):
+            try:
+                m = val(getattr(jl, "Material", ""))
+                s = str(val(getattr(m, "Name", m)) or "").strip()
+                if s and not s.startswith("<"):
+                    return s
+            except Exception:
+                pass
+    return ""
+
+
+def newest_sister_sheet(folder):
+    """The newest *_SISTERS.xlsx in <document folder>\\go to machine\\VALIDATION_*, or ''."""
+    root = os.path.join(folder, OUT_SUB)
+    best = ("", 0.0)
+    try:
+        for d in os.listdir(root):
+            if not d.upper().startswith("VALIDATION_"):
+                continue
+            for n in os.listdir(os.path.join(root, d)):
+                if n.upper().endswith("_SISTERS.XLSX") and not n.startswith("~$"):
+                    p = os.path.join(root, d, n)
+                    t = os.path.getmtime(p)
+                    if t > best[1]:
+                        best = (p, t)
+    except Exception:
+        pass
+    return best[0]
+
+
+def last_settings():
+    try:
+        with open(os.path.join(out_dir(), "go_to_machine_last.json"), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def save_settings(d):
+    try:
+        with open(os.path.join(out_dir(), "go_to_machine_last.json"), "w", encoding="utf-8") as f:
+            json.dump(d, f, indent=1)
+    except Exception as e:
+        log("settings not saved:", e)
 
 
 # ---------------- posted NC file facts (for the generator's CMC checks) ----------------
@@ -490,36 +545,62 @@ def run():
         if not names:
             info("No joblists in this document."); return
         scopes = names + (["All joblists"] if len(names) > 1 else [])
-        last = last_rename()
+        last, st = last_rename(), last_settings()
         g = _gui()
         dlg = g.InputDialog(TITLE)
         dlg.AddDropDown("Joblist", scopes, defaultIndex=0)
         dlg.AddText("Part number", defaultValue=last.get("part", ""))
         dlg.AddText("Machine", defaultValue=last.get("machine", ""))
-        dlg.AddDropDown("Action", ACTIONS, defaultIndex=0)
-        dlg.AddBool(MDA_LABEL, defaultValue=True)
+        dlg.AddDropDown("Package", PACKAGES, defaultIndex=PACKAGES.index(st.get("package")) if st.get("package") in PACKAGES else 0)
         ok, v = dlg.Show()
         if not ok:
             log("cancelled"); return
         scope = scopes[pick_index(v.get("Joblist"), scopes)]
         part, machine = str(v.get("Part number", "")).strip(), str(v.get("Machine", "")).strip()
-        action = pick_index(v.get("Action"), ACTIONS)
-        want_mda = bool(v.get(MDA_LABEL, True))
-        log("joblist:", scope, "| part:", part, "| machine:", machine or "-", "| action:", ACTIONS[action], "| tool load MDA:", want_mda)
+        package = PACKAGES[pick_index(v.get("Package"), PACKAGES)]
         err = bp.input_errors(part, machine, "10", "10")
         if err:
             info("Fix these first:\n\n" + "\n".join(err)); return
+        # ---- screen 2: what to make (ticked by the package; untick or tick any) ----
+        dlg = g.InputDialog("%s | %s" % (TITLE, package) + ("" if package == "Pick functions" else " (untick what you do not want)"))
+        for f in FUNCS:
+            dlg.AddBool(f, defaultValue=f in PRESET[package])
+        dlg.AddText(F_PROG, defaultValue=st.get("programmer") or os.environ.get("USERNAME", ""))
+        if package != "Validation":
+            dlg.AddText(F_SHEET, defaultValue=newest_sister_sheet(folder))
+        ok, v = dlg.Show()
+        if not ok:
+            log("cancelled at the functions screen"); return
+        funcs = dict((f, bool(v.get(f))) for f in FUNCS)
+        programmer = str(v.get(F_PROG, "") or "").strip()
+        sheet_path = str(v.get(F_SHEET, "") or "").strip().strip('"') if package != "Validation" else ""
+        save_settings({"package": package, "programmer": programmer})
+        log("joblist:", scope, "| part:", part, "| machine:", machine or "-", "| package:", package, "|",
+            ", ".join(f for f in FUNCS if funcs[f]) or "check only", "| sister sheet:", sheet_path or "-")
+        # ---- sisters / tool life: validation 0, production the filled sister sheet ----
+        table, docs = None, {}
+        if package == "Production" and (funcs[F_MDA] or funcs[F_ORDER] or funcs[F_SETUP]) and not os.path.isfile(sheet_path):
+            info("Production needs the sister sheet filled in during validation (Sisters, Tool Life):\n%s\n\nRun Validation "
+                 "first, fill the sheet and save it, or give its path on the second screen." % (sheet_path or "(none found)"))
+            return
+        if sheet_path and os.path.isfile(sheet_path):
+            docs = load_docs_lib()
+            table, sprobs = docs["job_docs"].read_sister_sheet(sheet_path)
+            log("sister sheet:", sheet_path, "|", len(table), "tools |", sprobs)
+            if sprobs:
+                info("Sister sheet: these were read as 0:\n" + "\n".join(sprobs))
+        # ---- check ----
         chosen = [(n, [bp.classify(cj, n) for cj in bp.compound_jobs(jl)]) for jl, n in zip(lists, names)
                   if scope == "All joblists" or n == scope]
         progs, left, problems = collect(bp, rc, chosen, part, machine, folder)
         npass = sum(1 for p in progs if p["ok"])
         nfail = len(progs) - npass
-        rep = report_lines(progs, left, problems, "%s  %s  part %s  machine %s  %s" % (TITLE, scope, part, machine or "-", ACTIONS[action]))
+        rep = report_lines(progs, left, problems, "%s  %s  part %s  machine %s  %s" % (TITLE, scope, part, machine or "-", package))
         for ln in rep:
             log(ln)
         output("\n".join(rep))
         if not progs:
-            info("No compound job in %s is named B_%s_<step>%s. Run b_program_rename first." % (
+            info("No compound job in %s is named B_%s_<step>%s. Run B program rename (Job processing) first." % (
                 scope, part, ("_" + machine) if machine else "")); return
         summary = ["%d B program%s: %d pass, %d fail." % (len(progs), "" if len(progs) == 1 else "s", npass, nfail)]
         fails = [p for p in progs if not p["ok"]]
@@ -533,52 +614,59 @@ def run():
             summary += ["", "%d compound job%s not posted (not B programs): see the output window." % (len(left), "" if len(left) == 1 else "s")]
         twice = [x for x in problems if "used twice" in x]
         if twice:
-            info("\n".join(summary + ["", "Nothing posted. Fix these first (run b_program_rename):"] + twice)); return
-        if action == 0:
+            info("\n".join(summary + ["", "Nothing posted, nothing written. Fix these first (run B program rename):"] + twice)); return
+        if not any(funcs.values()):
             info("\n".join(summary + ["", "Check only: nothing posted, nothing written."])); return
 
         # ---- post ----
-        if nfail:
-            info("WARNING: %d of %d B programs fail the check.\n\n" % (nfail, len(progs)) + "\n".join(summary[2:] if len(summary) > 2 else summary))
-            opts = ["No - post nothing", "Post all %d (%d fail the check)" % (len(progs), nfail)]
-            if npass:
-                opts.append("Post only the %d that pass" % npass)
-            pick = choose(TITLE + " | WARNING: %d fail the check" % nfail, "Post", opts)
-            if pick == 0:
-                log("not posted (warning answered No)"); info("Nothing posted."); return
-            targets = progs if pick == 1 else [p for p in progs if p["ok"]]
-            if pick == 1:
-                log("POSTED WITH FAILURES:", ", ".join(p["name"] for p in fails))
+        msg, pick, targets = [], 0, progs
+        if funcs[F_POST]:
+            if nfail:
+                info("WARNING: %d of %d B programs fail the check.\n\n" % (nfail, len(progs)) + "\n".join(summary[2:] if len(summary) > 2 else summary))
+                opts = ["No - post nothing", "Post all %d (%d fail the check)" % (len(progs), nfail)]
+                if npass:
+                    opts.append("Post only the %d that pass" % npass)
+                pick = choose(TITLE + " | WARNING: %d fail the check" % nfail, "Post", opts)
+                if pick == 0:
+                    log("not posted (warning answered No)"); info("Nothing posted."); return
+                targets = progs if pick == 1 else [p for p in progs if p["ok"]]
+                if pick == 1:
+                    log("POSTED WITH FAILURES:", ", ".join(p["name"] for p in fails))
+            else:
+                pick = choose(TITLE + " | confirm", "Post", ["No - do not post", "Yes - post %d B program%s" % (len(progs), "" if len(progs) == 1 else "s")])
+                if pick != 1:
+                    log("not posted (confirm answered No)"); info("Nothing posted."); return
+            res, ok, written = post(model, targets, folder)
+            found = {stem(p): p for p in written}
+            missing = [p["name"] for p in targets if p["name"].lower() not in found]
+            if not ok:
+                msg.append("Posting failed: %s" % res)
+            else:
+                msg.append("Posted %d B program%s (CalculateNC returned %r)." % (len(targets), "" if len(targets) == 1 else "s", res))
+            msg.append("NC files written or updated: %d" % len(written))
+            msg += ["  " + os.path.relpath(p, folder) for p in written[:12]]
+            if missing:
+                msg += ["", "No NC file found for:"] + ["  " + n for n in missing]
+            if pick == 1 and nfail:
+                msg += ["", "Posted although %d fail the check." % nfail]
         else:
-            pick = choose(TITLE + " | confirm", "Post", ["No - do not post", "Yes - post %d B program%s" % (len(progs), "" if len(progs) == 1 else "s")])
-            if pick != 1:
-                log("not posted (confirm answered No)"); info("Nothing posted."); return
-            targets = progs
-        res, ok, written = post(model, targets, folder)
-        found = {stem(p): p for p in written}
-        missing = [p["name"] for p in targets if p["name"].lower() not in found]
-        msg = []
-        if not ok:
-            msg.append("Posting failed: %s" % res)
-        else:
-            msg.append("Posted %d B program%s (CalculateNC returned %r)." % (len(targets), "" if len(targets) == 1 else "s", res))
-        msg.append("NC files written or updated: %d" % len(written))
-        msg += ["  " + os.path.relpath(p, folder) for p in written[:12]]
-        if missing:
-            msg += ["", "No NC file found for:"] + ["  " + n for n in missing]
-        if pick == 1 and nfail:
-            msg += ["", "Posted although %d fail the check." % nfail]
-        # ---- what the B program list and the tool sheet hold ----
+            found = {stem(p): p for p in snapshot(folder) if p.lower().endswith(NC_EXT)}
+            msg.append("Not posted (%s unticked). NC facts read from the NC files already there (%d)." % (F_POST, len(found)))
+            if nfail:
+                msg.append("%d of %d B programs fail the check (see the output window)." % (nfail, len(progs)))
+        # ---- what the list and the documents hold ----
         scope_progs = targets
         if len(targets) != len(progs):
             inc = ["Only the %d posted" % len(targets), "All %d B programs" % len(progs)]
-            if choose(TITLE + " | B program list and tool sheet", "Include", inc) == 1:
+            if choose(TITLE + " | B program list and documents", "Include", inc) == 1:
                 scope_progs = progs
-            log("B program list and tool sheet:", "all B programs" if scope_progs is progs else "only the posted ones")
+            log("B program list and documents:", "all B programs" if scope_progs is progs else "only the posted ones")
         keep = set(p["name"] for p in scope_progs)
         dropped = [p for p in progs if p["name"] not in keep]
         drop_names = set(p["name"] for p in dropped)
-        dest = os.path.join(folder, OUT_SUB) if folder else ""
+        today = datetime.date.today().strftime("%Y-%m-%d")
+        sub = {"Validation": "VALIDATION_", "Production": "PRODUCTION_"}.get(package)
+        dest = os.path.join(folder, OUT_SUB, sub + today) if (folder and sub) else (os.path.join(folder, OUT_SUB) if folder else "")
         if dest:
             try:
                 os.makedirs(dest, exist_ok=True)
@@ -587,48 +675,57 @@ def run():
         if not dest or not writable(dest):
             dest = out_dir()
         log("output folder:", dest)
+        msg += ["", "Output folder: " + dest]
         base = os.path.splitext(path.replace("\\", "/").split("/")[-1])[0] or "document"
+        label = "all" if scope == "All joblists" else scope
         # ---- B program list for the generator ----
-        rules_path = lib_file("brk_rules.csv")
-        rules = bp.load_rules(rules_path) if rules_path else []
-        chosen_x = [(n, [e for e in es if e["name"] not in drop_names]) for n, es in chosen]
-        data, xproblems = bp.build_export(chosen_x, part, machine, inch, rules, path,
-                                          datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        for p in dropped:
-            data["refused"].append(dict(name=p["name"], joblist=p["joblist"], reason="not posted: failed the go-to-machine check"))
-        try:
-            facts = add_nc_facts(data["steps"], found)
-        except Exception:
-            log("NC facts FAILED:", traceback.format_exc())
-            facts = []
-        if data["steps"] and not any("used twice" in x for x in xproblems):
-            pj, pc = bp.write_export(data, dest, base)
-            log("B program list:", pj, "|", pc)
-            msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
-            msg += ["  " + x for x in facts]
-        for x in xproblems:
-            log("export:", x)
-        # ---- tool sheet ----
-        try:
-            ts = tool_sheet(scope_progs, folder, dest, base, "all" if scope == "All joblists" else scope)
-        except Exception:
-            log("tool sheet FAILED:", traceback.format_exc())
-            ts = "failed (see go_to_machine_log.txt)"
-        if isinstance(ts, tuple):
-            tp, trows, tmissing = ts
-            msg += ["", "Tool sheet: %d tool%s" % (len(trows), "" if len(trows) == 1 else "s"), "  " + tp]
-            if tmissing:
-                msg.append("  not in tool_library: " + ", ".join(tmissing[:8]))
-        else:
-            msg += ["", "Tool sheet not written: " + ts]
+        data = {"steps": [], "refused": []}
+        if funcs[F_BLIST] or funcs[F_MDA]:
+            rules_path = lib_file("brk_rules.csv")
+            rules = bp.load_rules(rules_path) if rules_path else []
+            chosen_x = [(n, [e for e in es if e["name"] not in drop_names]) for n, es in chosen]
+            data, xproblems = bp.build_export(chosen_x, part, machine, inch, rules, path,
+                                              datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            for x in xproblems:
+                log("export:", x)
+            if funcs[F_BLIST]:
+                for p in dropped:
+                    data["refused"].append(dict(name=p["name"], joblist=p["joblist"], reason="not posted: failed the go-to-machine check"))
+                try:
+                    facts = add_nc_facts(data["steps"], found)
+                except Exception:
+                    log("NC facts FAILED:", traceback.format_exc())
+                    facts = []
+                if data["steps"] and not any("used twice" in x for x in xproblems):
+                    pj, pc = bp.write_export(data, dest, base)
+                    log("B program list:", pj, "|", pc)
+                    msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
+                    msg += ["  " + x for x in facts]
         # ---- tool load MDA ----
-        if want_mda:
+        counts = None
+        if funcs[F_MDA]:
             setpiece_ids = set(s["tool"] for s in data["steps"] if s.get("setpiece"))
             try:
-                msg += tool_mda(scope_progs, setpiece_ids, dest, base, "all" if scope == "All joblists" else scope)
+                mlines, counts = tool_mda(scope_progs, setpiece_ids, dest, base, label,
+                                          table=None if package == "Validation" else table,
+                                          ask=(package == "Pick functions" and table is None))
+                msg += mlines
             except Exception:
                 log("tool load MDA FAILED:", traceback.format_exc())
                 msg += ["", "Tool load MDA failed (see go_to_machine_log.txt)."]
+        if package == "Validation":
+            counts = {}
+        elif counts is None:
+            counts = table or {}
+        # ---- documents ----
+        if funcs[F_ORDER] or funcs[F_SISTER] or funcs[F_SETUP]:
+            try:
+                msg += documents(scope_progs, funcs, counts, dest, base, package, today, dict(
+                    part=part, machine=machine, material_type=material_of(lists, names, scope), date=today,
+                    programmer=programmer, sim_date=sim_date(scope_progs), job=base, program=label), docs or None)
+            except Exception:
+                log("documents FAILED:", traceback.format_exc())
+                msg += ["", "Documents failed (see go_to_machine_log.txt)."]
         for ln in msg:
             log(ln)
         info("\n".join(msg))
@@ -644,6 +741,40 @@ def run():
                 f.write("\n".join(lines) + "\n")
         except Exception:
             pass
+
+
+def documents(progs, funcs, counts, dest, base, package, today, header, docs=None):
+    """Order sheet, sister tool sheet, NC master setup for the tools of progs. Returns message lines."""
+    docs = docs or load_docs_lib()
+    jd, ti, tn = docs["job_docs"], docs["tool_info"], docs["tool_numbers"]
+    tmpd = tempfile.mkdtemp(prefix="gtm_tools_")
+    infos = [ti.read(t, tmpd) for t in program_tools(progs)]
+    for i in infos:
+        log("tool:", i["id"], "|", ti.description(i), "| order", i["order_code"] or "-", "(%s)" % (i["order_from"] or "none"),
+            "| reach", i["reach"], "| holders", [h["name"] for h in i["holders"]], "| missing", i["missing"])
+    out = ["", "Documents: %d tool%s" % (len(infos), "" if len(infos) == 1 else "s")]
+    if funcs.get(F_ORDER):
+        p, n, marked = jd.order_sheet(os.path.join(dest, base + "_ORDER.xlsx"), infos, counts,
+                                      "TOOL ORDER - %s - %s - %s" % (header.get("part") or base, package.upper(), today))
+        out += ["  Order sheet: %d line%s%s" % (n, "" if n == 1 else "s", (", %d to check (yellow)" % marked) if marked else ""), "    " + p]
+    if funcs.get(F_SISTER):
+        p = jd.sister_sheet(os.path.join(dest, base + "_SISTERS.xlsx"), infos, header)
+        out += ["  Sister tool sheet: fill Sisters (extra tools) and Tool Life, save; Production reads it", "    " + p]
+    if funcs.get(F_SETUP):
+        p = jd.setup_sheet(os.path.join(dest, base + "_SETUP.docx"), infos, header, counts)
+        out += ["  NC master setup: QTY = 1 + sisters" + ("" if counts else " (no sister counts: QTY 1)"), "    " + p]
+    no_order = [i["id"] for i in infos if not i["order_code"] or i["order_from"] == "Tool name"]
+    if no_order:
+        out.append("  Order no. missing or taken from the tool name: " + ", ".join(no_order[:10]) + (" ..." if len(no_order) > 10 else ""))
+    no_holder = [i["id"] for i in infos if "holder" in i["missing"]]
+    if no_holder:
+        out.append("  No holder in hyperMILL (holder / stick-out blank): " + ", ".join(no_holder[:10]) + (" ..." if len(no_holder) > 10 else ""))
+    off = [i["id"] for i in infos if not tn.follows(i["id"], NUMBER_STANDARD)[0]]
+    if off:
+        out.append("  Tool numbers not in the %s standard (Tool numbering, Job processing): %d - %s" % (
+            NUMBER_STANDARD, len(off), ", ".join(off[:6]) + (" ..." if len(off) > 6 else "")))
+    shutil.rmtree(tmpd, ignore_errors=True)
+    return out
 
 
 if __name__ == "__main__":

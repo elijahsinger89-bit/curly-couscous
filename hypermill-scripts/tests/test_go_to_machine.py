@@ -19,8 +19,6 @@ import csv                     # noqa: E402
 
 SCRIPT = os.path.join(ROOT, "copy_to_python_folder", "go_to_machine", "go_to_machine.py")
 LIB = os.path.join(ROOT, "copy_to_python_folder", "tool_library")
-TOL = os.path.join(HERE, "fake_tool_order_list", "tool_order_list.py")
-TOL_FILES = [TOL]
 TLM = os.path.join(ROOT, "copy_to_python_folder", "tool_load_mda", "tool_load_mda.py")
 TLM_FILES = [TLM]
 fails = []
@@ -169,7 +167,6 @@ def run(answers):
     spec = importlib.util.spec_from_file_location("gtm_under_test", SCRIPT)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
-    m.TOL_FILES = tuple(TOL_FILES)
     m.TLM_FILES = tuple(TLM_FILES)
     m.run()
     left = len(gui.SCRIPT)
@@ -185,7 +182,7 @@ def nc_files():
 LOGP = os.path.join(tmp, "go_to_machine_log.txt")
 OUTDIR = os.path.join(DOCDIR, "go to machine")   # every output except the NC files
 BLIST = os.path.join(OUTDIR, "G17_SLIDE_OP10_B_PROGRAMS.json")
-SHEET = os.path.join(OUTDIR, "G17_SLIDE_OP10_Op10_tool_order.csv")
+ORDER = os.path.join(OUTDIR, "G17_SLIDE_OP10_ORDER.xlsx")
 MPF = os.path.join(OUTDIR, "G17_SLIDE_OP10_TOOL_LOAD.MPF")
 
 
@@ -201,9 +198,41 @@ def counts(**by_id):
     return f
 
 
-def sheet():
-    with open(SHEET, encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
+sys.path.insert(0, LIB)
+import office_fill as OF   # noqa: E402
+F_POST, F_BLIST, F_MDA = "Post the B programs", "B program list (generator)", "Tool load MDA"
+F_ORDER, F_SISTER, F_SETUP = "Order sheet", "Sister tool sheet", "NC master setup sheet"
+F_PROG, F_SHEET = "Programmer", "Sister sheet (sisters, tool life)"
+
+
+def funcs(*ticked, **text):
+    """Answer screen 2: tick these functions (the rest unticked); text = {label: value} for Programmer / Sister sheet."""
+    def f(dlg):
+        d = dlg.defaults()
+        for k in (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP):
+            d[k] = k in ticked
+        d.update(text)
+        return True, d
+    return f
+
+
+def keep():
+    return lambda dlg: (True, dlg.defaults())
+
+
+PICK = ans(Package="Pick functions")
+CHECK_ONLY = [PICK, funcs()]
+
+
+def order_rows(path=None):
+    """Order sheet lines as dicts (header row 4)."""
+    v = OF.xlsx_values(path or ORDER)
+    head = [v.get("%s4" % c) for c in "ABCDEFGH"]
+    out, r = [], 5
+    while v.get("A%d" % r):
+        out.append({h: v.get("%s%d" % (c, r), "") for h, c in zip(head, "ABCDEFGH")})
+        r += 1
+    return out
 
 # ---------------- release_check on its own ----------------
 spec = importlib.util.spec_from_file_location("rc_under_test", os.path.join(LIB, "release_check.py"))
@@ -229,10 +258,10 @@ check("unknown Simulation Center result 'CC_RESULT 7'" in rc.check_job(j5ok, DOC
 
 # ---------------- check only ----------------
 build()
-m, left = run([ans(Action="Check only")])
+m, left = run(CHECK_ONLY)
 box = flat(gui.BOXES[-1])
 rep = "\n".join(gui.OUTPUT)
-check(left == 0 and PostSet.calls == [] and nc_files() == [] and not os.path.exists(BLIST), "check only: nothing posted, nothing written")
+check(left == 0 and PostSet.calls == [] and nc_files() == [] and not os.path.exists(BLIST), "pick functions, nothing ticked: check only, nothing written")
 check("4 B programs: 1 pass, 3 fail." in box and "Check only: nothing posted" in box, "check only: counts in the message")
 check("OK   B_G17_SLIDE_010_HF5" in rep and "FAIL B_G17_SLIDE_020_HF5" in rep, "report: OK / FAIL per B program")
 check("3: Drill: " + rc.R_COLLISION in rep and "4: Face: " + rc.R_NOT_SIM in rep, "report: reason per failing job")
@@ -240,6 +269,12 @@ check("5: Face finish: not calculated (NEEDS_CALCULATION)" in rep and "6: Face e
 check("B_G17_SLIDE_111_HF5  (more than one tool)" in rep and "G17 old name  (not a B program name" in rep and "notes" not in rep,
       "report: mixed and old-name compound jobs listed as not posted; notes skipped")
 check(os.path.exists(LOGP) and "FAIL B_G17_SLIDE_030_HF5" in open(LOGP).read(), "log written")
+s1 = gui.SHOWN[0][1]
+check([f[1] for f in s1] == ["Joblist", "Part number", "Machine", "Package"] and s1[3][2][0] == ["Validation", "Production", "Pick functions"],
+      "screen 1: joblist, part, machine, package (Validation / Production / Pick functions)")
+s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
+check(all(s2[k] is False for k in (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP)) and F_SHEET in s2 and F_PROG in s2,
+      "screen 2 (pick functions): every function unticked, programmer and sister sheet fields")
 
 # ---------------- one Simulation Center run with a collision marks many B programs: one line in the pop-up ----------------
 def build_run(n):
@@ -260,7 +295,7 @@ def build_run(n):
 
 
 build_run(30)
-m, left = run([ans(Action="Check only")])
+m, left = run(CHECK_ONLY)
 box = gui.BOXES[-1]
 check(left == 0 and "had a collision: 30 B programs marked (B_G17_SLIDE_020_HF5 ... B_G17_SLIDE_310_HF5)." in flat(box) and
       "Simulate each B program on its own" in box and box.count("\n") < 16,
@@ -268,9 +303,9 @@ check(left == 0 and "had a collision: 30 B programs marked (B_G17_SLIDE_020_HF5 
 check("Fail:" in box and "B_G17_SLIDE_320_HF5  " + rc.R_NOT_SIM in box, "other failures still listed per B program")
 check(sum(1 for x in gui.OUTPUT[-1].split("\n") if rc.R_COLLISION in x) == 30, "output window keeps the full list (30 collision lines)")
 
-# ---------------- check and post, failures: post nothing ----------------
+# ---------------- post, failures: post nothing ----------------
 build()
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(0)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(0)])
 check(left == 0 and PostSet.calls == [] and "Nothing posted." in gui.BOXES[-1], "warning answered No: nothing posted")
 check(any("WARNING: 3 of 4 B programs fail the check." in b for b in gui.BOXES), "warning box before the choice")
 opts = gui.SHOWN[-1][1][0][2][0]
@@ -279,48 +314,48 @@ check(gui.SHOWN[-1][0].endswith("WARNING: 3 fail the check"), "warning dialog ti
 
 # ---------------- post only the ones that pass, list: only the posted ----------------
 cs = build()
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(2), include_pick(0)])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_ORDER), post_pick(2), include_pick(0)])
 box = flat(gui.BOXES[-1])
 check(left == 0 and PostSet.calls == [[cs[1].UUID]], "post only passing: CalculateNC with the one passing compound job UUID")
 check(nc_files() == ["B_G17_SLIDE_010_HF5.mpf"] and "NC files written or updated: 1" in box and "NC/B_G17_SLIDE_010_HF5.mpf" in box.replace("\\", "/"),
       "post: written NC file found and listed")
 check("No NC file found" not in box and "Posted 1 B program (CalculateNC returned True)." in box, "post: message")
 inc = gui.SHOWN[-1]
-check(inc[0].endswith("B program list and tool sheet") and inc[1][0][2][0] == ["Only the 1 posted", "All 4 B programs"],
-      "only some posted: asks what the list and tool sheet hold (only posted first)")
+check(inc[0].endswith("B program list and documents") and inc[1][0][2][0] == ["Only the 1 posted", "All 4 B programs"],
+      "only some posted: asks what the list and documents hold (only posted first)")
 data = json.load(open(BLIST))
 check([s["step"] for s in data["steps"]] == [10] and "B program list for the generator (Import B list): 1 B program" in box,
       "list: only the posted B program")
 nposted = [r["name"] for r in data["refused"] if r["reason"].startswith("not posted")]
 check(nposted == ["B_G17_SLIDE_020_HF5", "B_G17_SLIDE_030_HF5", "B_G17_SLIDE_040_HF5"], "list: the 3 not posted listed as refused 'not posted'")
-rows = sheet()
-check(len(rows) == 1 and rows[0]["Designation"] == "End mill" and rows[0]["Manufacturer"] == "Walter" and
-      rows[0]["Toolpath names"] == "B_G17_SLIDE_010_HF5: 1: Contour ; B_G17_SLIDE_010_HF5: 2: Contour finish" and rows[0]["Toolpaths using it"] == "2",
-      "tool sheet: the posted B program's one tool, its toolpaths named by B program")
-check("Tool sheet: 1 tool" in box and "G17_SLIDE_OP10_Op10_tool_order.csv" in box, "message: tool sheet path")
+rows = order_rows()
+check(len(rows) == 1 and rows[0]["Description"] == "End mill" and rows[0]["Qty"] == 1 and rows[0]["For tool"] == "10047210"
+      and rows[0]["Check"] == "order no. is the tool name: check", "order sheet: the posted B program's one tool, qty 1, order no. flagged")
+check("Order sheet: 1 line, 1 to check (yellow)" in box and "G17_SLIDE_OP10_ORDER.xlsx" in box, "message: order sheet path")
 
 # ---------------- post only the ones that pass, list: all ----------------
 cs = build()
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(2), include_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_ORDER), post_pick(2), include_pick(1)])
 data = json.load(open(BLIST))
 check(left == 0 and PostSet.calls == [[cs[1].UUID]] and [s["step"] for s in data["steps"]] == [10, 20, 30, 40],
       "list: all B programs when chosen (only 010 posted)")
 check(not any(r["reason"].startswith("not posted") for r in data["refused"]), "list: nothing marked not posted")
-rows = sheet()
-check(sorted(r["Designation"] for r in rows) == ["Drill", "End mill", "Face"] and "not in tool_library: " in flat(gui.BOXES[-1]),
-      "tool sheet: every tool of the 4 B programs; tools not in tool_library named")
+rows = order_rows()
+check(sorted(r["Description"] for r in rows) == ["Drill", "End mill", "Face"], "order sheet: every tool of the 4 B programs")
+box = flat(gui.BOXES[-1])
+check("Tool numbers not in the HELLER standard" in box and "No holder in hyperMILL" in box, "message: tool numbers and holders to fix")
 
 # ---------------- post all ----------------
 cs = build()
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_ORDER), post_pick(1)])
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and len(nc_files()) == 4, "post all: 4 UUIDs, 4 NC files")
 check("Posted although 3 fail the check." in flat(gui.BOXES[-1]), "post all: message says posted with failures")
 check("POSTED WITH FAILURES" in open(LOGP).read(), "post all: log records the override")
-check(len(gui.SHOWN) == 2 and len(sheet()) == 3, "post all: no list question; tool sheet with all 3 tools")
-check(os.path.exists(BLIST) and os.path.exists(SHEET) and
-      not [n for n in os.listdir(DOCDIR) if n.endswith((".json", ".csv", ".MPF"))] and
+check(len(gui.SHOWN) == 3 and len(order_rows()) == 3, "post all: no list question; order sheet with all 3 tools")
+check(os.path.exists(BLIST) and os.path.exists(ORDER) and
+      not [n for n in os.listdir(DOCDIR) if n.endswith((".json", ".csv", ".MPF", ".xlsx"))] and
       ("go to machine" + os.sep + "G17_SLIDE_OP10_B_PROGRAMS.json") in gui.BOXES[-1],
-      "outputs in <document folder>\\go to machine, none next to the document; NC files stay in NC")
+      "pick functions: outputs in <document folder>\\go to machine, none next to the document; NC files stay in NC")
 facts = {s["program"]: (s.get("radius_comp"), s.get("r_params")) for s in json.load(open(BLIST))["steps"]}
 check(facts == {"B_G17_SLIDE_010_HF5": (True, [1, 12]), "B_G17_SLIDE_020_HF5": (False, []), "B_G17_SLIDE_030_HF5": (True, [2]),
                 "B_G17_SLIDE_040_HF5": (False, [])},
@@ -338,43 +373,51 @@ csvrow = [r for r in csv.DictReader(open(BLIST[:-5] + ".csv", encoding="utf-8-si
 check(csvrow["cycle800"].startswith("CYCLE800(1,") , "csv: cycle800 column")
 check(csvrow["radius_comp"] == "True" and csvrow["r_params"] == "1 12", "csv: radius_comp and r_params columns")
 
+# ---------------- not posting: list and NC facts from the NC files already there ----------------
+build(all_pass=True)
+os.makedirs(os.path.join(DOCDIR, "NC"), exist_ok=True)
+with open(os.path.join(DOCDIR, "NC", "B_G17_SLIDE_010_HF5.mpf"), "w") as f:
+    f.write(NC_TEXT["B_G17_SLIDE_010_HF5"])
+m, left = run([PICK, funcs(F_BLIST)])
+facts = {s["program"]: s.get("radius_comp") for s in json.load(open(BLIST))["steps"]}
+check(left == 0 and PostSet.calls == [] and facts["B_G17_SLIDE_010_HF5"] is True and "Not posted (Post the B programs unticked)" in gui.BOXES[-1],
+      "list without posting: NC facts from the NC file already there")
+
 # ---------------- everything passes: confirm ----------------
 cs = build(all_pass=True)
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
 check(gui.SHOWN[-1][0].endswith("confirm") and gui.SHOWN[-1][1][0][2][0] == ["No - do not post", "Yes - post 4 B programs"],
       "all pass: plain confirm, No first")
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and not any(b.startswith("WARNING") for b in gui.BOXES), "all pass: posted, no warning")
 build(all_pass=True)
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(0)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(0)])
 check(PostSet.calls == [] and "Nothing posted." in gui.BOXES[-1], "all pass, confirm No: nothing posted")
 
 # ---------------- duplicate step: stop ----------------
 build(dup=True)
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False)])
-check(left == 0 and PostSet.calls == [] and "Nothing posted. Fix these first" in flat(gui.BOXES[-1]) and "used twice" in gui.BOXES[-1],
+m, left = run([PICK, funcs(F_POST, F_BLIST)])
+check(left == 0 and PostSet.calls == [] and "Nothing posted, nothing written. Fix these first" in flat(gui.BOXES[-1]) and "used twice" in gui.BOXES[-1],
       "step used twice: stops before posting")
 
 # ---------------- CalculateNC fails / writes nothing ----------------
 build(all_pass=True)
 PostSet.mode = "raise"
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
 check("Posting failed: RuntimeError: post processor not found" in flat(gui.BOXES[-1]), "CalculateNC error reported")
 build(all_pass=True)
 PostSet.mode = "nothing"
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
 check("No NC file found for:" in gui.BOXES[-1] and "B_G17_SLIDE_040_HF5" in gui.BOXES[-1], "CalculateNC wrote nothing: B programs without an NC file listed")
 PostSet.mode = "write"
 
-# ---------------- tool load MDA ----------------
+# ---------------- tool load MDA (pick functions, no sister sheet: screens) ----------------
 for f in ("tool_load_mda_last.json",):
     if os.path.exists(os.path.join(tmp, f)):
         os.remove(os.path.join(tmp, f))
 cs = build(all_pass=True)
-m, left = run([ans(Action="Check and post"), post_pick(1), counts(**{"10047210": ("2", "50"), "905083900": ("0", "")})])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), post_pick(1), counts(**{"10047210": ("2", "50"), "905083900": ("0", "")})])
 box = flat(gui.BOXES[-1])
 labels = [f[1] for f in gui.SHOWN[-1][1]]
-check(left == 0 and gui.SHOWN[0][1][-1][:2] == ("bool", "Tool load MDA") and gui.SHOWN[0][1][-1][2] is True,
-      "first screen: Tool load MDA, ticked by default")
 check(gui.SHOWN[-1][0].startswith("Tool load MDA | tools 1-3 of 3") and "10047210  D0.4724  tool life (SETPIECE)" in labels,
       "MDA screen after posting: the 3 tools of the B programs, SETPIECE tools marked")
 txt = open(MPF).read()
@@ -387,45 +430,91 @@ check("left out" not in box and "WARNING - SETPIECE counts these tools but no to
 check(json.load(open(os.path.join(tmp, "tool_load_mda_last.json"))).get("10047210") == [2, 50], "MDA values remembered")
 
 build(all_pass=True)
-m, left = run([ans(Action="Check and post"), post_pick(1), lambda dlg: (True, dlg.defaults())])
+m, left = run([PICK, funcs(F_POST, F_MDA, **{F_SHEET: ""}), post_pick(1), keep()])
 fields = {f[1]: f[2] for f in gui.SHOWN[-1][1]}
 check(fields.get("10047210  D0.4724  sisters") == "2" and fields.get("10047210  D0.4724  tool life (SETPIECE)") == "50",
       "second run: remembered sisters and tool life offered")
 
 build(all_pass=True)
-m, left = run([ans(Action="Check and post"), post_pick(1), lambda dlg: (False, {})])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), post_pick(1), lambda dlg: (False, {})])
 check(left == 0 and "Tool load MDA cancelled: not written." in flat(gui.BOXES[-1]) and not os.path.exists(MPF) and os.path.exists(BLIST),
-      "MDA screen cancelled: posted, list and sheet written, no MDA")
+      "MDA screen cancelled: posted, list written, no MDA")
 
 build(all_pass=True)
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
 check(left == 0 and not os.path.exists(MPF) and "Tool load MDA" not in gui.BOXES[-1], "MDA unticked: no screen, no program")
 
 build(all_pass=True)
 TLM_FILES[:] = [os.path.join(tmp, "nowhere", "tool_load_mda.py")]
-m, left = run([ans(Action="Check and post"), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_MDA), post_pick(1)])
 check(left == 0 and "Tool load MDA not written: tool_load_mda.py not found" in flat(gui.BOXES[-1]), "tool_load_mda missing: says so")
 TLM_FILES[:] = [TLM]
 
-build()
-m, left = run([ans(Action="Check only")])
-check(left == 0 and not os.path.exists(MPF), "check only: no MDA screen")
+# ---------------- Validation: post, list, MDA without sisters, order sheet qty 1, sister sheet ----------------
+import datetime   # noqa: E402
+import openpyxl   # noqa: E402
+TODAY = datetime.date.today().strftime("%Y-%m-%d")
+VAL = os.path.join(OUTDIR, "VALIDATION_" + TODAY)
+PROD = os.path.join(OUTDIR, "PRODUCTION_" + TODAY)
+cs = build(all_pass=True)
+m, left = run([ans(Package="Validation"), funcs(F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, **{F_PROG: "ES"}), post_pick(1)])
+s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
+check([k for k in (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP) if s2[k]] == [F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER]
+      and F_SHEET not in s2, "Validation preset: post, list, MDA, order sheet, sister sheet ticked; no setup sheet; no sister sheet field")
+vfiles = sorted(os.listdir(VAL)) if os.path.isdir(VAL) else []
+check(left == 0 and vfiles == ["G17_SLIDE_OP10_B_PROGRAMS.csv", "G17_SLIDE_OP10_B_PROGRAMS.json", "G17_SLIDE_OP10_ORDER.xlsx",
+                               "G17_SLIDE_OP10_SISTERS.xlsx", "G17_SLIDE_OP10_TOOL_LOAD.MPF"],
+      "Validation files in go to machine\\VALIDATION_<date>: %s" % vfiles)
+vt = open(os.path.join(VAL, "G17_SLIDE_OP10_TOOL_LOAD.MPF")).read()
+check(vt.count("=NEWT(") == 3 and "$TC_MOP13" not in vt and not any(t[0].startswith("Tool load MDA | tools") for t in gui.SHOWN),
+      "Validation MDA: one of each tool, no tool life, no sisters screen")
+check(all(r["Qty"] == 1 for r in order_rows(os.path.join(VAL, "G17_SLIDE_OP10_ORDER.xlsx"))), "Validation order sheet: qty 1 each")
+SIS = os.path.join(VAL, "G17_SLIDE_OP10_SISTERS.xlsx")
+ws = openpyxl.load_workbook(SIS).active
+check(ws["A12"].value == "10047210" and ws["A13"].value == "11039410" and ws["A14"].value == "905083900" and ws["B7"].value == "ES"
+      and ws["G12"].value is None, "sister sheet: tools in first-use order, programmer, Sisters left to fill")
+# filled in during prove-out (Excel)
+wb = openpyxl.load_workbook(SIS)
+wb.active["G12"] = 2; wb.active["I12"] = 50; wb.active["G14"] = 1
+wb.save(SIS)
 
-# ---------------- tool_order_list not installed ----------------
+# ---------------- Production: sister sheet read, MDA with sisters, order 1 + sisters, setup sheet ----------------
+saved_sheet = open(SIS, "rb").read()
+build(all_pass=True)                                  # build() clears "go to machine": put the filled sheet back
+os.makedirs(VAL, exist_ok=True)
+open(SIS, "wb").write(saved_sheet)
+m, left = run([ans(Package="Production"), keep(), post_pick(1)])
+s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
+check(s2.get(F_SHEET) == SIS and s2[F_SETUP] and not s2[F_SISTER] and s2.get(F_PROG) == "ES",
+      "Production preset: setup sheet on, sister sheet off, the newest validation sister sheet offered, programmer remembered")
+pt = open(os.path.join(PROD, "G17_SLIDE_OP10_TOOL_LOAD.MPF")).read()
+check(pt.count('NEWT("10047210",') == 3 and pt.count('NEWT("905083900",') == 2 and pt.count("$TC_MOP13[R999,1]=50") == 3
+      and not any(t[0].startswith("Tool load MDA | tools") for t in gui.SHOWN),
+      "Production MDA from the sheet: end mill + 2, face mill + 1, tool life 50, no screens")
+qty = {r["For tool"]: r["Qty"] for r in order_rows(os.path.join(PROD, "G17_SLIDE_OP10_ORDER.xlsx"))}
+check(qty == {"10047210": 3, "11039410": 1, "905083900": 2}, "Production order sheet: 1 + sisters %s" % qty)
+import docx   # noqa: E402
+sd = docx.Document(os.path.join(PROD, "G17_SLIDE_OP10_SETUP.docx"))
+t1 = sd.tables[1]
+check([c.text.strip() for c in t1.rows[1].cells][:2] == ["10047210", "End mill"] and t1.rows[1].cells[6].text.strip() == "3"
+      and t1.rows[1].cells[7].text.strip() == "50", "setup sheet: end mill QTY 3, tool life 50")
+
+check(("HYPERMILL SIM DATE: " + TODAY) in sd.tables[0].rows[0].cells[-1].text and "P/N: G17_SLIDE" in sd.tables[0].rows[0].cells[1].text,
+      "setup sheet header: P/N and the Simulation Center date")
+
+# production without a sister sheet: stops before posting
+shutil.rmtree(VAL, ignore_errors=True)
 build(all_pass=True)
-TOL_FILES[:] = [os.path.join(tmp, "nowhere", "tool_order_list.py")]
-m, left = run([ans(Action="Check and post", Tool_load_MDA=False), post_pick(1)])
-check("Tool sheet not written: tool_order_list.py not found" in flat(gui.BOXES[-1]) and not os.path.exists(SHEET) and os.path.exists(BLIST),
-      "tool_order_list missing: B list still written, tool sheet skipped with the reason")
-TOL_FILES[:] = [TOL]
+m, left = run([ans(Package="Production"), keep()])
+check(left == 0 and PostSet.calls == [] and "Production needs the sister sheet" in gui.BOXES[-1], "Production without a sister sheet: stops, nothing posted")
 
 # ---------------- input errors and no B programs ----------------
 build()
 m, left = run([ans(Part_number="G17-SLIDE")])
 check("Fix these first" in gui.BOXES[-1] and PostSet.calls == [], "part number with - refused")
 build()
-m, left = run([ans(Machine="F5000")])
-check("Run b_program_rename first" in gui.BOXES[-1], "no B programs for that machine: says so")
+m, left = run([ans(Machine="F5000"), funcs()])
+check("Run B program rename" in gui.BOXES[-1], "no B programs for that machine: says so")
 
 shutil.rmtree(tmp, ignore_errors=True)
 print()
