@@ -94,9 +94,11 @@ def plain_rpr(src, bold=False, size_halfpts=None):
     """Run properties without bold, letter spacing, scaling, kerning or raised / lowered text; bold / size when asked."""
     src = re.sub(r"<w:(?:b|bCs|spacing|w|kern|position)(?:\s[^>]*)?/>", "", src)
     src = re.sub(r"<w:(ins|del|rPrChange)\b.*?(?:/>|</w:\1>)", "", src, flags=re.S)
-    if size_halfpts:
+    if size_halfpts:                                        # Word wants the schema order: sz / szCs before these
         src = re.sub(r"<w:szCs?(?:\s[^>]*)?/>", "", src)
-        src = src.replace("</w:rPr>", '<w:sz w:val="%d"/><w:szCs w:val="%d"/></w:rPr>' % (size_halfpts, size_halfpts))
+        sz = '<w:sz w:val="%d"/><w:szCs w:val="%d"/>' % (size_halfpts, size_halfpts)
+        m = re.search(r"<w:(?:highlight|u|effect|bdr|shd|fitText|vertAlign|rtl|cs|em|lang|eastAsianLayout|specVanish|oMath)\b", src)
+        src = src[:m.start()] + sz + src[m.start():] if m else src.replace("</w:rPr>", sz + "</w:rPr>")
     if bold:
         src = src.replace("<w:rPr>", "<w:rPr><w:b/><w:bCs/>", 1)
     return src
@@ -199,7 +201,7 @@ def fill_table(s, index, data, prototype=1, blank=2, min_rows=11, rpr=None):
 
 def add_footer_note(s, text, size_halfpts=14):
     """Footer part s with a centred small paragraph of text at its end."""
-    p = ('<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0"/></w:pPr>%s</w:p>'
+    p = ('<w:p><w:pPr><w:spacing w:before="0" w:after="0"/><w:jc w:val="center"/></w:pPr>%s</w:p>'
          % run(text, '<w:rPr><w:sz w:val="%d"/><w:szCs w:val="%d"/></w:rPr>' % (size_halfpts, size_halfpts)))
     k = s.rfind("</w:ftr>")
     return s[:k] + p + s[k:]
@@ -270,6 +272,23 @@ def xlsx_set(sheet, ref, value, style=None):
     if k is None:
         k = sheet.find("</sheetData>")
     return sheet[:k] + '<row r="%d">%s</row>' % (rn, new) + sheet[k:]
+
+
+def xlsx_formula(sheet, ref, formula, style=None):
+    """Sheet xml with a formula at ref (Excel calculates it when the file opens). An existing formula is left alone."""
+    sheet = xlsx_set(sheet, ref, None, style)              # the cell exists (empty, styled) unless it holds a formula
+    m = re.search(r'<c r="%s"(?=[\s/>])[^>]*?/>' % ref, sheet)
+    if not m:
+        return sheet
+    return sheet[:m.start()] + m.group(0)[:-2] + "><f>%s</f></c>" % escape(formula) + sheet[m.end():]
+
+
+def row_styles(sheet, rn):
+    """{column letter: style index} of the cells in row rn."""
+    m = re.search(r'<row r="%d"(?=[\s>/])[^>]*>(.*?)</row>' % rn, sheet, re.S)
+    if not m:
+        return {}
+    return {c: s for c, s in re.findall(r'<c r="([A-Z]+)%d"[^>]*?\ss="(\d+)"' % rn, m.group(1))}
 
 
 def recalc_on_open(workbook):
