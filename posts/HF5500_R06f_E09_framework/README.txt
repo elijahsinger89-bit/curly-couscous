@@ -29,16 +29,23 @@ CHANGES
   StartEnd\pgm_bgn_2.txt (program start)
     Removed: M01 (stopped at every nest with optional stop on), STOPRE,
     the empty IF $P_SEARCH ... ENDIF block, G500 (deselected the G54 that
-    C_P1_LOAD_WO just set), G0. Added: G97.
-      G17 G40 G60 G70 G90 G94 G97 M40 / CYCLE800() / TRAFOOF / TRANS
+    C_P1_LOAD_WO just set), G0.
+      G17 G40 G60 G70 G90 G94 M40 / CYCLE800() / TRAFOOF / TRANS
+    20 Nov 2026 fix: G97 is out of this block. G94 and G97 are the same
+    G group on SINUMERIK (group 15, feed type): both in one block = alarm
+    12060 "same G group programmed repeatedly". G94 alone switches G96 off.
   StartEnd\pgm_end.txt (program end, RET follows from final_M)
     Removed: the X / Y move to the + limits and A=DC(0) B=DC(0) after
     every nest (the next nest swivels straight back with CYCLE800).
-    Added: M5, G97 (a turning program could leave G96 on, and the
+    Added: M5, G94 (a turning program could leave G96 on, and the
     framework's next S3750 M3 for the laser would be read as surface
-    speed), CYCLE832(), CYCLE800(), TRAFOOF.
+    speed; G94 switches G96 off and sets feed per minute), CYCLE832(),
+    CYCLE800(), TRAFOOF.
       G0 G53 G17 G90 Z=$MA_POS_LIMIT_PLUS[AX3]-.04 D0
-      M5 / M9 / G97 / CYCLE832() / CYCLE800() / TRAFOOF
+      M5 / M9 / G94 / CYCLE832() / CYCLE800() / TRAFOOF
+    20 Nov 2026 fix: was G97. On SINUMERIK G97 = constant cutting rate
+    off WITH feed per revolution, so it left feed per rev on after every
+    B program.
   Every other file in this zip
     Only the line that printed the template's own file name was removed
     ("; sP.txt", "; --- files_x\ToolChange\TC_bgn.txt ---", ...). Every
@@ -51,7 +58,8 @@ CHECK AFTER POSTING
     from pgm_bgn.txt (those variables may only be set inside a job).
   - No "; ...txt" file-name lines, no M01, no G500, no $P_SEARCH.
   - The tool call reads ; T="..." and ; M6 BY THE FRAMEWORK.
-  - The end: Z retract, M5, M9, G97, CYCLE832(), CYCLE800(), TRAFOOF, RET.
+  - The start: G17 G40 G60 G70 G90 G94 M40 (no G97).
+  - The end: Z retract, M5, M9, G94, CYCLE832(), CYCLE800(), TRAFOOF, RET.
 
 ON THE MACHINE (first run, single block)
   - Two nests of one step: no stop between nests, the table goes straight

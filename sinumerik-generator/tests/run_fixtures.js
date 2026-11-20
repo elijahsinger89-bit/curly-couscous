@@ -149,6 +149,9 @@ if (process.argv.includes('--write-hashes')) {
     if (/D0\nG0 B0\nRET\n/.test(vB) && /D0\nG0 C-180\nRET\n/.test(hB) && /D0\nRET\n/.test(fB) && vB.includes('HEAD HOME B0'))
       console.log('ok   B_TEMPLATE: head home before RET on head machines only');
     else fail('B_TEMPLATE head home');
+    if ([vB, hB, fB].every(t => /\nM5\nM9\nG94\nCYCLE800\(\)\n/.test(t) && !/^G97\b/m.test(t)))
+      console.log('ok   B_TEMPLATE end: G94 (switches G96 off, feed per minute), no G97 (feed per rev on SINUMERIK)');
+    else fail('B_TEMPLATE end G94');
     if (fixed(v) === fixed(hf) && fixed(h) === fixed(G('f8_cmc_milling')))
       console.log('ok   nutating machines use the same fixed files (framework REV ' + S.FW_REV + ')');
     else fail('nutating fixed files differ from the table machines');

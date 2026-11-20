@@ -21,6 +21,18 @@ EXTERNAL_CALLS = {'CYCLE800', 'CYCLE832', 'CYCLE977', 'CYCLE978', 'CYCLE979', 'B
                   'GROUP_BEGIN', 'GROUP_END', 'MSG', 'WRITE', 'GETEXET', 'SETPIECE', 'CALL'}
 LABEL_RE = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*):$')
 PROG_RE = re.compile(r'^[A-Za-z_][A-Za-z_][A-Za-z0-9_]{0,22}$')
+G_RE = re.compile(r'(?<![A-Z0-9_$.\[])G(\d+)(?![0-9])')
+# SINUMERIK modal G groups that a block may hold only once (G94 / G97 are both group 15: feed type)
+G_GROUPS = {
+    '1 motion': {0, 1, 2, 3},
+    '6 plane': {17, 18, 19},
+    '7 cutter compensation': {40, 41, 42},
+    '8 settable frame': set([54, 55, 56, 57] + list(range(500, 600))),
+    '10 exact stop / path': {60, 64, 641, 642, 643, 644, 645},
+    '13 inch / metric': {70, 71, 700, 710},
+    '14 absolute / incremental': {90, 91},
+    '15 feed type': {93, 94, 95, 96, 97, 931, 942, 952, 961, 962, 971, 972, 973},
+}
 OPS_WORD = {'AND', 'OR', 'NOT', 'XOR', 'B_AND', 'B_OR', 'B_NOT', 'B_XOR', 'DIV', 'MOD'}
 FUNCS = {'ABS', 'ROUND', 'TRUNC', 'SQRT', 'SIN', 'COS'}
 
@@ -157,6 +169,14 @@ def lint_file(path, sigs, progs, findings, cycles=frozenset()):
             bad('unbalanced double quote', i)
         if c:
             code.append((i, c))
+
+    # one G code per G group in a block (alarm 12060 "same G group programmed repeatedly")
+    for ln, c in code:
+        gs = [int(g) for g in G_RE.findall(re.sub(r'"[^"]*"', '""', c.upper()))]
+        for gname, members in G_GROUPS.items():
+            hit = [g for g in gs if g in members]
+            if len(hit) > 1:
+                bad('G%s in one block: same G group (%s) twice, alarm 12060' % (' G'.join(str(g) for g in hit), gname), ln)
 
     labels = {}
     for idx, (ln, c) in enumerate(code):
