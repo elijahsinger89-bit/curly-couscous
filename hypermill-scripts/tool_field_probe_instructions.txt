@@ -1,0 +1,33 @@
+TOOL FIELD PROBE - for tool numbering, the holder attacher and the job-end documents
+
+What it is for
+  - The name of the Ordering code field and the holder / extension blocks in a
+    tool's own export.
+  - Which tool fields Python can change in place (ID, Number, Name, Comment ...)
+    and whether ToolSet.Rename works.
+  - Whether a job can be given another tool (Job.SetToolByUUID / SetTool).
+  - Whether openpyxl / docx are installed in hyperMILL's Python.
+
+Install
+  Copy copy_to_python_folder\tool_field_probe into
+  C:\Users\Public\Documents\OPEN MIND\python and restart hyperMILL.
+
+Run
+  1. Save a COPY of a document that has tools with holders (one with an
+     extension or collet if you have one). Open the copy.
+  2. Run tool_field_probe.
+     Tool:        a tool WITH a holder (and extension if you have one)
+     Second tool: any other tool (used for the job tool-swap test)
+     Try writes:  tick it
+  3. Send both files from C:\Users\Public\Documents\OPEN MIND:
+       tool_field_probe_log.txt
+       tool_field_probe_export.xml
+
+What it changes
+  Unticked: nothing.
+  Ticked: the picked tool's fields get a test value and are put back; the tool
+  is renamed and renamed back; one job using the tool gets the second tool and
+  then its own tool back. That job may need recalculating afterwards, which is
+  why this runs on a copy. Close the copy without saving.
+  The log is written line by line; if hyperMILL freezes, close it and send the
+  log anyway.
