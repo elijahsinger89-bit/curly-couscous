@@ -16,6 +16,13 @@ ROUGH_ACTF_MAX = 2.5  # cap on the axial chip-thinning factor
 ROUGH_FZ_FACTOR = 1.0 # extra multiplier on the high-feed roughing chip load (1.0 = standards only)
 USE_EXTENSION = True   # head/tip drills are built as head + Extension (neck and flange); set False for a single-body tool
 MAX_RPM = 12000.0     # spindle speed limit; speeds above it are cut back and the feed follows (set by part_wizard_step1 and batch_apply_strategy)
+ORDERING_PARAM = ""    # name of the tool's Ordering code field in a tool export (from the tool_field_probe log); "" = not written yet
+COMMON_NAME = True     # Common > Name = short description (".750 BR R.03 6FL L1.50"); False = "M_<number>" as before
+
+import sys
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+import tool_numbers    # numbering standard (M_ / T_ type codes); the scripts reload it with the other tool_library modules
 
 def _guid():
     return str(uuid.uuid4())
@@ -38,8 +45,8 @@ def _setp(el, name, value):
     ET.SubElement(el, "param", {"name": name, "value": str(value)})
 
 def nc_code(type_code, dia_in, variant=1, copy=0):
-    """M_ + 2-digit type + 4-digit diameter in thousandths of an inch + variant + copy."""
-    return "%02d%04d%d%d" % (type_code, int(round(dia_in * 1000)), variant, copy)
+    """M_ + 2-digit type + 4-digit diameter in thousandths of an inch + variant + copy (digits only, tool_numbers.mill_id)."""
+    return tool_numbers.mill_id(type_code, dia_in, variant, copy)[2:]
 
 def material_group(material):
     for r in load_rows("material_map.csv"):
@@ -873,6 +880,35 @@ def tool_by_name(ts, name):
             return t
     return None
 
+def order_code(row):
+    """What is ordered: the EDP / Material Number (Kennametal, GARR), else the designation (Walter tables have no EDP)."""
+    return str(row.get("edp") or "").strip() or str(row.get("designation") or "").strip()
+
+def finish_fields(path, type_code, dia_in, row):
+    """Tool page fields the standard asks for, on a built tool file: Common > Name = short description (COMMON_NAME),
+    Tool > Ordering code = order_code(row) (once ORDERING_PARAM is known). Returns the description written, or ''."""
+    try:
+        tree = ET.parse(path)
+    except Exception:
+        return ""
+    root = tree.getroot()
+    desc = ""
+    nct = root.find(".//ncTools/ncTool")
+    if COMMON_NAME and nct is not None:
+        mm = lambda k: _f(row.get(k)) / MM if _f(row.get(k)) else 0.0
+        cr = _f(row.get("corner_r_in")) or mm("corner_r_mm")
+        loc = _f(row.get("flute_len_in")) or mm("flute_len_mm")
+        try:
+            desc = tool_numbers.describe(type_code, dia_in, corner_r=cr, flutes=row.get("flutes"), loc=loc, thread=row.get("thread"))
+            nct.set("name", desc)
+        except Exception:
+            desc = ""
+    tool = root.find(".//tools/tool")
+    if ORDERING_PARAM and tool is not None and order_code(row):
+        _setp(tool, ORDERING_PARAM, order_code(row))
+    tree.write(path, encoding="utf-8", xml_declaration=True)
+    return desc
+
 class JobTools:
     """Hands out M_ numbers for this job only. Nothing is read from earlier jobs."""
     def __init__(self):
@@ -957,15 +993,22 @@ def get_or_create(model, kind, row, type_code, jt, outdir=None, material=None, p
     existing = None if force_new else tool_by_name(ts, row["designation"])
     if existing is not None:
         return existing, "existing"
+    type_code = tool_numbers.workbook_code(kind, type_code, row)    # catalog type_code -> the standard's code
     dia = _f(row["dia_in"]) or _f(row["dia_mm"]) / MM
-    num = jt.number(type_code, dia, row["designation"])
+    try:
+        num = jt.number(type_code, dia, row["designation"])
+    except ValueError as e:                  # more than 9 tools of one type and diameter, or a size the code cannot hold
+        return None, "no tool number: %s" % e
     used = set(int(t.Number) for t in ts.GetTools())
-    while num in used:                       # number already taken by another tool in this document
+    while num in used:                       # number already taken by another tool in this document: next variant
         jt.seen[(type_code, int(round(dia * 1000)))].append(row["designation"] + "#")
         num += 10
+        if (num // 10) % 10 == 0:            # variant went past 9 (it would run into the diameter digits)
+            return None, "no free tool number for type %02d, diameter %.4f in (variants 1-9 all used)" % (type_code, dia)
     outdir = outdir or os.path.join(tempfile.gettempdir(), "tool_builder")
     os.makedirs(outdir, exist_ok=True)
     p = build_xml(kind, row, num, os.path.join(outdir, "%s.omtdx" % row["designation"].replace("/", "_")), material, purposes)
+    finish_fields(p, type_code, dia, row)
     add_user_sets(p, material)
     t = ts.ImportTool(p)
     if t is None:

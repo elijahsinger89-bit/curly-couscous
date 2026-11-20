@@ -82,7 +82,7 @@ def load_lib(folder):
     import sys, importlib
     if folder not in sys.path:
         sys.path.insert(0, folder)
-    for n in ("tool_builder", "tool_lookup", "hole_tools", "tool_catalog", "tool_usage", "hole_jobs", "job_settings", "job_types", "machine_pick"):
+    for n in ("tool_numbers", "tool_builder", "tool_lookup", "hole_tools", "tool_catalog", "tool_usage", "hole_jobs", "job_settings", "job_types", "machine_pick"):
         m = importlib.import_module(n)
         importlib.reload(m)
         LIB[n] = m

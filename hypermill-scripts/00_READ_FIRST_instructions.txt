@@ -384,6 +384,21 @@ on its job tree node, then with Unhide / Hide, and uses the first that works (th
 found", or the light bulbs do not change, send show_tool_toolpaths_log.txt: it lists what a toolpath offers.
 Log: show_tool_toolpaths_log.txt (written line by line; if hyperMILL freezes, close it and send the log anyway).
 
+TOOL NUMBERS AND TOOL PAGE FIELDS (tools the scripts build)
+Numbering standard (Heller, tool_library\tool_numbers.py): M_[type 2][diameter 4][variant 1][copy 1], e.g. M_11050010 =
+bullnose .500, variant 1. Diameter in thousandths of an inch. Variant 1-9 = another tool of the same type and size (corner
+radius, reach, holder ...). Copy stays 0: sisters share the name on the control. Turning: T_[type][ISO 2][hand][variant][copy].
+Type codes follow the standard's table (face mill 40, shoulder mill 43, hi-feed / copy 42, slot / disc 46, T-slot 30,
+insert drill 52, spot drill 53, centre drill 54, boring 61, reamer 60, cut tap 70, form tap 71, thread mill 72); tools built
+before 21 Nov 2026 may still carry the old catalog codes. The 10th tool of one type and diameter is refused (variants 1-9).
+Company X (9-digit code): not set up yet.
+A new tool gets:
+  Common   NC-Number = the digits, ID = M_<digits>, Name = short description (".750 BR R.03 6FL L1.50")
+  Tool     Name = catalog designation, Comment = manufacturer / family / grade / EDP (as before), Manufacturer
+  Ordering code (EDP, Walter: designation): written once its field name is known (tool_field_probe); until then the
+           job-end documents read the EDP from the Tool comment
+Settings at the top of tool_builder.py: COMMON_NAME (False = Common Name "M_<digits>" as before), ORDERING_PARAM.
+
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
 rpm caps every speed; the feed follows at the same chip load. The last choice is remembered for all scripts.

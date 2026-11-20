@@ -75,6 +75,8 @@ def joblist_material(model):
     try:
         if LIB_DIR not in sys.path:
             sys.path.insert(0, LIB_DIR)
+        import tool_numbers
+        importlib.reload(tool_numbers)
         import tool_builder as tb
         importlib.reload(tb)
         known = [r["hypermill_material"] for r in tb.load_rows("material_map.csv")]

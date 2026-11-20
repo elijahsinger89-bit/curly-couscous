@@ -85,7 +85,7 @@ def load_lib(folder):
     if folder not in sys.path:
         sys.path.insert(0, folder)
     out = {}
-    for n in ("tool_builder", "tool_lookup", "hole_tools", "tool_catalog", "tool_usage"):
+    for n in ("tool_numbers", "tool_builder", "tool_lookup", "hole_tools", "tool_catalog", "tool_usage"):
         m = importlib.import_module(n)
         importlib.reload(m)       # hyperMILL keeps imported modules between runs
         out[n] = m
