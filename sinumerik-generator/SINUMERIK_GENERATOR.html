@@ -274,7 +274,6 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="actions" id="navActions">
       <button id="btnLoad" type="button">Load job…</button>
       <input type="file" id="fileLoad" accept=".json,application/json" hidden>
-      <button id="btnBList" type="button" title="Pre-fill from the hyperMILL B program list (_B_PROGRAMS.json)">Import B list…</button>
       <input type="file" id="fileBList" accept=".json,application/json" hidden>
       <button id="btnSave" type="button">Save job</button>
       <button id="btnValidate" type="button">Validate</button>
@@ -326,7 +325,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.9.0';
+var GEN_VERSION = '1.9.1';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -3582,10 +3581,21 @@ function renderConfig() {
     txt('probeStep.step', 'Probe step #', { dis: !job.probeStep.enabled }) +
     txt('probeStep.program', 'Probe program name (generated)', { dis: !job.probeStep.enabled, ph: 'B_PART_001' }) +
     '</div><p class="note">The probe tool and every probing setting are on tab 2.</p></div>';
-  h += '<div class="box"><b>Step builder</b><div class="grid" style="margin-top:6px">' +
-    txt('builder.first', 'First step') + txt('builder.last', 'Last step') + txt('builder.inc', 'Increment') +
-    '<div style="display:flex;align-items:flex-end"><button type="button" data-act="build">Build steps</button></div></div>' +
-    '<p class="note" id="builderNote">' + builderNote() + '</p></div>';
+  var imp = stepSrc === 'IMPORT';
+  h += '<div class="box"><div class="kintoggle" role="group" aria-label="Steps from"><span>Steps from</span>' +
+    '<button type="button" data-src="BUILDER" aria-pressed="' + !imp + '"' + (!imp ? ' class="on"' : '') + '>Step builder</button>' +
+    '<button type="button" data-src="IMPORT" aria-pressed="' + imp + '"' + (imp ? ' class="on"' : '') + '>Import B list</button></div>' +
+    (imp
+      ? '<div class="actions"><button type="button" id="btnBList" data-act="blist" class="primary" ' +
+          'title="Pre-fill from the hyperMILL B program list (_B_PROGRAMS.json)">Import B list…</button></div>' +
+        '<p class="note">Pick &lt;document&gt;_B_PROGRAMS.json from hyperMILL (go_to_machine: the "go to machine" folder; ' +
+          'b_program_export: next to the document). Fills the step table, tools, breakage settings and the Header part / machine. ' +
+          'Asks before it overwrites rows or switches units.</p>'
+      : '<div class="grid">' +
+          txt('builder.first', 'First step') + txt('builder.last', 'Last step') + txt('builder.inc', 'Increment') +
+          '<div style="display:flex;align-items:flex-end"><button type="button" data-act="build">Build steps</button></div></div>' +
+        '<p class="note" id="builderNote">' + builderNote() + '</p>') +
+    '</div>';
   h += '<div class="tblwrap" style="margin-top:10px"><table class="t"><thead><tr>' +
     '<th>Step #</th><th>Tool name</th><th>Brk tol (' + U().u + ')</th><th>Cutting program</th>' +
     colHead('meas', 'Measure') + colHead('measAlways', 'Always') + colHead('brk', 'Brk check') + '<th>Max brk</th>' +
@@ -4504,6 +4514,14 @@ function doRender() {
 }
 /* Machine type <-> Axes by hand. Axes by hand starts from the machine type's axes; back to Machine
    type picks the type with those axes when there is one. */
+/* where the step table comes from (tab 1, Step sequence): BUILDER or IMPORT. Page setting, not in the job;
+   the last choice is remembered in this browser. */
+var stepSrc = (function () { try { return localStorage.getItem('sng.stepSrc') === 'IMPORT' ? 'IMPORT' : 'BUILDER'; } catch (ex) { return 'BUILDER'; } })();
+function setStepSrc(v) {
+  stepSrc = v === 'IMPORT' ? 'IMPORT' : 'BUILDER';
+  try { localStorage.setItem('sng.stepSrc', stepSrc); } catch (ex) { /* not kept */ }
+  renderConfig();
+}
 function setKinStyle(style) {
   var c = job.config;
   if (style === c.kinStyle) return;
@@ -4514,9 +4532,10 @@ function setKinStyle(style) {
   renderAll();
 }
 function onClick(e) {
-  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto],[data-jump],[data-kin]');
+  var t = e.target.closest('[data-act],[data-tab],[data-file],[data-goto],[data-jump],[data-kin],[data-src]');
   if (!t) return;
   if (t.dataset.kin) { setKinStyle(t.dataset.kin); return; }
+  if (t.dataset.src) { setStepSrc(t.dataset.src); return; }
   if (t.dataset.jump) { var jt = document.getElementById(t.dataset.jump); if (jt) jt.scrollIntoView({ block: 'start' }); return; }
   if (t.dataset.tab) { showTab(t.dataset.tab); return; }
   if (t.dataset.goto) { e.preventDefault(); gotoPath(t.dataset.goto); return; }
@@ -4540,6 +4559,7 @@ function onClick(e) {
     dirty = true; renderAll();
     showMsgs(r.unnamed.length ? 'warn' : 'ok', 'Filled ' + r.filled + ' blank program name' + (r.filled === 1 ? '' : 's') + '.' + namesMsg(r));
   } else if (act === 'build') { runBuilder(); }
+  else if (act === 'blist') { $('#fileBList').value = ''; $('#fileBList').click(); }
   else if (act === 'preview') { build(false); }
   else if (act === 'zip') { build(true); }
   else if (act === 'dlone' && lastFiles) {
@@ -4662,7 +4682,6 @@ setHead('config');
 $('#btnSave').addEventListener('click', saveJob);
 $('#btnLoad').addEventListener('click', function () { $('#fileLoad').value = ''; $('#fileLoad').click(); });
 $('#fileLoad').addEventListener('change', function () { if (this.files && this.files[0]) loadJob(this.files[0]); });
-$('#btnBList').addEventListener('click', function () { $('#fileBList').value = ''; $('#fileBList').click(); });
 $('#fileBList').addEventListener('change', function () { if (this.files && this.files[0]) importBList(this.files[0]); });
 window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
 window.SNG_UI = { getJob: function () { return job; }, setJob: function (j) { job = S.normalizeJob(j); errPaths = {}; lastFiles = null; renderAll(); } };

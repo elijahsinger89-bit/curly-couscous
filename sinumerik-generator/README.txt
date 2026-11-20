@@ -5,8 +5,8 @@ USE
   Double-click SINUMERIK_GENERATOR.html. It runs offline in Chrome, Edge or
   Firefox: no server, no internet, no install.
   Fill the tabs, press Generate ZIP. The zip holds every NC file.
-  Screen: dark top bar = job buttons (Load, Import B list, Save, Validate,
-  Generate ZIP; on a narrow window behind MENU). Under it the steps
+  Screen: dark top bar = job buttons (Load, Save, Validate, Generate ZIP;
+  on a narrow window behind MENU). Under it the steps
   01 Config & steps / 02 Probing / 03 Work offsets / 04 Output / 05 CMC
   (the amber line marks the open one). Everything you fill in is on the
   white panels below.
@@ -120,7 +120,9 @@ STEP TABLE CHECKBOXES (tab 1)
   Always acts only on rows with Measure on.
 
 IMPORT B LIST (from hyperMILL)
-  Import B list..., pick <document>_B_PROGRAMS.json written by the hyperMILL
+  Tab 1, Step sequence: "Steps from" = Import B list (the other choice is
+  the Step builder; the page remembers the last one). Press Import B
+  list..., pick <document>_B_PROGRAMS.json written by the hyperMILL
   b_program_export script (next to the document) or go_to_machine (after
   posting, in the "go to machine" folder of the document folder). Format:
   B_PROGRAM_LIST_FORMAT.txt.

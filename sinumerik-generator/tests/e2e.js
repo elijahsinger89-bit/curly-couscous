@@ -208,6 +208,9 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     p2.on('pageerror', e => errors.push(String(e)));
     p2.on('dialog', d => d.dismiss());
     await p2.goto(page_url);
+    check(!(await p2.$('header.nav #btnBList')) && !(await p2.$('#btnBList')), 'Import B list is not in the top bar; Step builder shows first');
+    await p2.click('[data-src="IMPORT"]');
+    check(!!(await p2.$('#tab-config #btnBList')) && !(await p2.$('[data-act="build"]')), 'Steps from Import B list: import button, no builder');
     const sample = path.join(here, 'fixtures', 'b_list_sample.json');
     const importIt = async () => {
       const [fc] = await Promise.all([p2.waitForEvent('filechooser'), p2.click('#btnBList')]);
