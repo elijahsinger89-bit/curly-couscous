@@ -256,8 +256,8 @@ B_ PROGRAMS
   with CYCLE800(0,"H",...), end with the block in the template.
   The probe program is generated complete.
   HF5500 post (hyperMILL R06f_E09): posts/HF5500_R06f_E09_framework holds
-  start / end templates that write this contract (header block, no M01,
-  no home move after each nest, M5 M9 and resets at the end; no G97).
+  comment-only changes to the post templates (header comment block, no
+  file-name echo lines). The post writers' code is unchanged.
 
 WHAT CHANGED FROM THE OLD PACKAGE (all from the SINUMERIK ONE manuals)
   - One-line IF is only defined for GOTOx (NC PM 4.1.5.2). IF ... SETPIECE,
