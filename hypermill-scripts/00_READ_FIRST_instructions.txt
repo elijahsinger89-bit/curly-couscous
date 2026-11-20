@@ -355,7 +355,8 @@ if it cannot be written: C:\Users\Public\Documents\OPEN MIND. The NC files stay 
     are left for you. One row per tool in the order they are first used: tool no., description (Common > Name), dia,
     radius / angle, flute length, stick-out (= hyperMILL reach), QTY (1 + sisters), tool life, holder / collet /
     extension. Template: tool_library\templates\NC_MASTER_SETUP.docx (made by docs\make_setup_template.py from your
-    blank; the logo goes in when you send it).
+    blank). The HELLER logo is in the top-left cell above NC SETUP (docs\heller_logo.png, from the official vector logo
+    docs\heller_logo.svg).
   - The message also lists tools with no order no., tools without a holder in hyperMILL, and tool numbers that do not
     follow the numbering standard (NUMBER_STANDARD at the top of go_to_machine.py).
 The old tool sheet (<document>_<joblist>_tool_order.csv from tool_order_list) is replaced by the order sheet.
