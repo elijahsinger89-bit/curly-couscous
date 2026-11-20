@@ -407,17 +407,20 @@ number or a type is listed and left alone.
 Log: restore_job_names_log.txt holds old -> new for every toolpath, so a name can be typed back, and for every toolpath
 left alone what it holds (ID, *JOBID, cycle names).
 
-SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths)
+SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths, v2)
 Turns on the light bulb (toolpath display) of every toolpath that uses one tool.
 Screen: Joblist (one or all), Tool (T<ID>  name  - number of toolpaths), Show:
   This tool only   this tool's toolpaths on, every other toolpath off
   Add this tool    this tool's toolpaths on, the others stay as they are
   Everything on    every toolpath on
-Compound jobs (B programs) holding a toolpath of the tool are turned on too.
-Nothing else in the job changes (no settings, no recalculation).
-FIRST RUN: the light bulb is not in our hyperMILL API notes. The script looks for it on the toolpath, in its property set,
-on its job tree node, then with Unhide / Hide, and uses the first that works (the log says which). If it says "not
-found", or the light bulbs do not change, send show_tool_toolpaths_log.txt: it lists what a toolpath offers.
+Compound jobs (B programs) holding a toolpath of the tool are switched too.
+The light bulb is the job setting *SHOW_NCPATH ('1' on), else the property ShowNCPaths (v1 log, 20 Nov 2026). Before it
+changes anything it lists, in the output window and the log, every toolpath that reads on: a bulb turned on by hand must
+be in that list.
+Safety: one toolpath (one with a Simulation Center result) is switched alone first and checked: still calculated, same
+status and toolpath id, Simulation Center result still there. If hyperMILL counted the switch as a change, that one is
+switched back, nothing else is touched, and the message says what changed (re-simulate that B program if its result is
+gone). First run: on a scratch copy.
 Log: show_tool_toolpaths_log.txt (written line by line; if hyperMILL freezes, close it and send the log anyway).
 
 TOOL NUMBERS AND TOOL PAGE FIELDS (tools the scripts build)
