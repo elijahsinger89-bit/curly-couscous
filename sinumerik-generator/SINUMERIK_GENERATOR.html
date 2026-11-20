@@ -43,32 +43,49 @@ button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--amber-g); }
 button.small { font-size: 0.78rem; padding: 0.22rem 0.6rem; }
 .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
-/* ---- 1. nav bar ---- */
+/* ---- 1. fixed top bar: title, steps 01-05, job file, Validate ---- */
 header.nav { position: sticky; top: 0; z-index: 10; background: var(--g-900); border-bottom: 1px solid var(--g-950); }
-header.nav .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; min-height: 54px; padding-top: 8px; padding-bottom: 8px; }
-.brand { display: flex; align-items: center; gap: 10px; color: #ffffff; font-weight: 600; font-size: 1rem; white-space: nowrap; }
+header.nav .wrap { display: flex; flex-wrap: wrap; align-items: center; column-gap: 16px; }
+header.nav .brand, header.nav .jobfile, header.nav .actions, header.nav .filemenu { min-height: 54px; display: flex; align-items: center; }
+.brand { gap: 10px; color: #ffffff; font-weight: 600; font-size: 1rem; white-space: nowrap; }
 .brand i { width: 10px; height: 10px; background: var(--amber); display: inline-block; }
-.ntag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--s-500);
-  border: 1px solid var(--s-900); border-radius: 3px; padding: 2px 7px; white-space: nowrap; }
 header.nav .spacer { flex: 1; }
-#jobLabel { color: var(--s-500); font: 0.8rem var(--mono); white-space: nowrap; }
+header.nav nav.tabs { align-self: stretch; align-items: stretch; gap: 20px; margin-left: 16px; min-height: 54px; }
+header.nav nav.tabs button { display: flex; align-items: center; padding: 2px 0 0; }
+.jobfile { gap: 10px; }
+.jobfile .jl { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--s-600); }
+#jobLabel { color: #ffffff; font: 600 0.84rem var(--mono); white-space: nowrap; }
+.jobfile .dot { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+.jobfile .dot[hidden] { display: none; }
+.filemenu { position: relative; }
+.filemenu summary { list-style: none; cursor: pointer; color: var(--s-200); border: 1px solid var(--s-800); border-radius: 4px; padding: 6px 12px;
+  font-weight: 600; font-size: 0.9rem; user-select: none; }
+.filemenu summary::-webkit-details-marker { display: none; }
+.filemenu summary::after { content: " \25BE"; color: var(--s-500); }
+.filemenu summary:hover, .filemenu[open] summary { background: var(--g-800); border-color: var(--s-700); color: #ffffff; }
+.filemenu summary:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--amber-g); }
+.filemenu .menu { position: absolute; right: 0; top: calc(100% - 4px); background: var(--panel); border: 1px solid var(--s-300); border-radius: 4px;
+  box-shadow: 0 10px 28px rgba(16, 19, 23, 0.25); min-width: 220px; padding: 4px 0; z-index: 20; }
+.filemenu .menu button { display: flex; justify-content: space-between; gap: 16px; width: 100%; border: 0; border-radius: 0; background: none;
+  color: var(--ink); font-weight: 500; padding: 8px 14px; }
+.filemenu .menu button:hover, .filemenu .menu button:focus-visible { background: var(--amber-t); color: var(--ink); box-shadow: none; }
+.filemenu .menu kbd { font: 0.74rem var(--mono); color: var(--s-600); }
 header.nav .actions button { color: var(--s-200); border-color: var(--s-800); }
 header.nav .actions button:hover { background: var(--g-800); border-color: var(--s-700); color: #ffffff; }
-header.nav .actions button.primary { background: var(--amber); border-color: var(--amber); color: #15181c; }
-header.nav .actions button.primary:hover { background: var(--amber-h); border-color: var(--amber-h); }
-#btnMenu { display: none; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--s-200); border-color: var(--s-800); }
+/* the bar's height (set by the page) keeps jumps and focused boxes clear of it */
+html { scroll-padding-top: calc(var(--barh, 56px) + 12px); }
 @media (max-width: 760px) {
-  #btnMenu { display: inline-block; }
-  header.nav .actions { display: none; width: 100%; padding-bottom: 4px; }
-  header.nav.open .actions { display: flex; }
-  header.nav .ntag { display: none; }
+  header.nav .brand { min-height: 46px; }
+  header.nav .jobfile, header.nav .actions, header.nav .filemenu { min-height: 46px; }
+  header.nav nav.tabs { order: 5; width: 100%; margin-left: 0; min-height: 40px; }
+  .jobfile .jl { display: none; }
 }
 
 /* ---- 2. page head band + step strip ---- */
 .phead { background-color: var(--g-850); border-bottom: 1px solid var(--g-800);
   background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 24px 24px; padding: 22px 0 calc(2.25rem + 20px); }
+  background-size: 24px 24px; padding: 18px 0 calc(2.25rem + 16px); }
 .phead .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 32px; }
 .phead .wrap > * { min-width: 0; max-width: 100%; }
 .eyebrow { color: var(--amber); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -266,19 +283,25 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 <header class="nav">
   <div class="wrap">
     <div class="brand"><i></i>SINUMERIK ONE Program Generator</div>
-    <span class="ntag" id="verTag"></span>
-    <span class="ntag" id="fwTag"></span>
+    <nav class="tabs" role="tablist">
+      <button type="button" data-tab="config" class="active"><span class="no">01</span>Config &amp; steps</button>
+      <button type="button" data-tab="probing"><span class="no">02</span>Probing</button>
+      <button type="button" data-tab="wcs"><span class="no">03</span>Work offsets</button>
+      <button type="button" data-tab="output"><span class="no">04</span>Output</button>
+      <button type="button" data-tab="cmc" id="tabBtnCmc" hidden><span class="no">05</span>CMC</button>
+    </nav>
     <span class="spacer"></span>
-    <span id="jobLabel"></span>
-    <button id="btnMenu" type="button" aria-expanded="false" aria-controls="navActions">Menu</button>
-    <div class="actions" id="navActions">
-      <button id="btnLoad" type="button">Load job…</button>
-      <input type="file" id="fileLoad" accept=".json,application/json" hidden>
-      <input type="file" id="fileBList" accept=".json,application/json" hidden>
-      <button id="btnSave" type="button">Save job</button>
-      <button id="btnValidate" type="button">Validate</button>
-      <button id="btnGenerate" type="button" class="primary">Generate ZIP</button>
+    <div class="jobfile">
+      <span class="jl">Job</span><span id="jobLabel"></span><span class="dot" id="dirtyDot" hidden>&#9679; unsaved</span>
     </div>
+    <details class="filemenu"><summary>File</summary><div class="menu">
+      <button id="btnNew" type="button">New job <kbd></kbd></button>
+      <button id="btnLoad" type="button">Open… <kbd>Ctrl+O</kbd></button>
+      <button id="btnSave" type="button">Save <kbd>Ctrl+S</kbd></button>
+    </div></details>
+    <input type="file" id="fileLoad" accept=".json,application/json" hidden>
+    <input type="file" id="fileBList" accept=".json,application/json" hidden>
+    <div class="actions"><button id="btnValidate" type="button">Validate</button></div>
   </div>
 </header>
 <section class="phead">
@@ -288,13 +311,6 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       <h1 id="phTitle">Machine, nests and step sequence</h1>
       <p id="phSub">Tombstone / single-part nest framework. Offline: nothing leaves this PC.</p>
     </div>
-    <nav class="tabs" role="tablist">
-      <button type="button" data-tab="config" class="active"><span class="no">01</span>Config &amp; steps</button>
-      <button type="button" data-tab="probing"><span class="no">02</span>Probing</button>
-      <button type="button" data-tab="wcs"><span class="no">03</span>Work offsets</button>
-      <button type="button" data-tab="output"><span class="no">04</span>Output</button>
-      <button type="button" data-tab="cmc" id="tabBtnCmc" hidden><span class="no">05</span>CMC</button>
-    </nav>
   </div>
 </section>
 <main class="wrap">
@@ -325,7 +341,7 @@ footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.9.1';
+var GEN_VERSION = '1.10.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -3480,7 +3496,11 @@ G.SNG = {
 'use strict';
 var S = window.SNG;
 var job = S.defaultJob();
-var dirty = false;
+/* unsaved: changed since the last Save / Open / New job (amber UNSAVED, close-page warning).
+   stale: changed since the last preview (04 Output tag). changed() sets both. */
+var unsaved = false, stale = false;
+function updDot() { var d = $('#dirtyDot'); if (d) d.hidden = !unsaved; }
+function changed() { unsaved = true; stale = true; updDot(); }
 var lastFiles = null, selFile = 0;
 var errPaths = {};
 
@@ -4249,7 +4269,7 @@ function renderWcs() {
 function renderOutput() {
   var h = '<h2>Files <span class="pill">' + (lastFiles ? lastFiles.length + ' files' : 'not built yet') + '</span></h2>' +
     '<div class="actions" style="margin-bottom:10px"><button type="button" data-act="preview">Preview files</button>' +
-    '<button type="button" data-act="zip" class="primary">Generate ZIP</button>' +
+    '<button type="button" id="btnGenerate" data-act="zip" class="primary">Generate ZIP</button>' +
     (lastFiles ? '<button type="button" data-act="dlone">Download this file</button>' : '') + '</div>';
   if (!lastFiles) {
     h += '<p class="note">Press Preview files to build every NC file and read it here before saving. Generate ZIP builds and downloads them all.</p>';
@@ -4262,7 +4282,7 @@ function renderOutput() {
       (dir ? ' <span class="dir">' + esc(dir) + '/</span>' : '') + '</span><span class="dir">' + f.text.split('\n').length + ' ln</span></li>';
   });
   h += '</ul><div class="viewer"><div class="vh"><b>' + esc(lastFiles[selFile].path) + '</b>' +
-    '<span class="pill">' + (dirty ? 'form changed since this preview' : 'current') + '</span></div><pre>';
+    '<span class="pill">' + (stale ? 'form changed since this preview' : 'current') + '</span></div><pre>';
   var lines = lastFiles[selFile].text.replace(/\n$/, '').split('\n');
   h += lines.map(function (l, i) { return '<span class="ln">' + (i + 1) + '</span>' + esc(l); }).join('\n');
   h += '</pre></div></div>';
@@ -4315,7 +4335,7 @@ function setHead(name) {
 function renderAll() {
   renderConfig(); renderProbing(); renderWcs(); renderOutput(); renderCmc();
   var part = S.ascii(job.header.part);
-  $('#jobLabel').textContent = part ? 'Job ' + part : '';
+  $('#jobLabel').textContent = part || 'untitled';
 }
 
 /* ---- messages ---- */
@@ -4325,6 +4345,7 @@ function showMsgs(kind, title, items) {
     return '<li>' + (e.path ? '<a href="#" data-goto="' + esc(e.path) + '">' + esc(e.msg) + '</a>' : esc(e.msg || e)) + '</li>'; }).join('') + '</ul>';
   h += '</div>';
   $('#msgs').innerHTML = h;
+  if ($('#msgs').getBoundingClientRect().top < $('header.nav').offsetHeight) $('#msgs').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 function clearMsgs() { $('#msgs').innerHTML = ''; }
 function tabOf(path) {
@@ -4334,9 +4355,11 @@ function tabOf(path) {
   return 'config';
 }
 function showTab(name) {
+  var was = document.querySelector('.tab.active');
   document.querySelectorAll('nav.tabs button').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
   document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('active', t.id === 'tab-' + name); });
   setHead(name);
+  if (!was || was.id !== 'tab-' + name) window.scrollTo(0, 0);
 }
 function gotoPath(path) {
   showTab(tabOf(path));
@@ -4412,7 +4435,7 @@ function runBuilder() {
     var r = S.buildSteps(job, mode);
     if (r.error) { showMsgs('bad', 'Step builder: ' + r.error); return null; }
     job.steps = r.steps; job.probeStep.program = r.probeProgram;
-    dirty = true; errPaths = {}; renderAll(); showTab('config');
+    changed(); errPaths = {}; renderAll(); showTab('config');
     var msg = (mode === 'keep' ? 'Kept every existing row and added ' + r.added + ' of ' + range + '.'
       : 'Step table rebuilt: ' + range + '.') + ' Fill in tool, breakage tolerance and life per row.' + namesMsg(r);
     showMsgs(r.unnamed.length ? 'warn' : 'ok', msg);
@@ -4429,7 +4452,7 @@ function build(download) {
   return gate.then(function (yes) {
     if (!yes) { showMsgs('warn', 'Generation stopped. Fill in the blank work offsets on tab 3, then generate again.'); return null; }
     var g = S.generate(job);
-    lastFiles = g.files; selFile = 0; dirty = false;
+    lastFiles = g.files; selFile = 0; stale = false;
     var wtxt = v.warnings.length ? ' CMC warnings: ' + v.warnings.map(function (w) { return w.msg; }).join(' ') : '';
     if (download) {
       var z = S.makeZip(g.files);
@@ -4457,7 +4480,7 @@ function onEdit(e) {
   if (el.dataset && el.dataset.col) {
     if (e.type !== 'change') return;
     S.setColumn(job.steps, el.dataset.col, el.checked);
-    dirty = true;
+    changed();
     scheduleRender();
     return;
   }
@@ -4465,7 +4488,7 @@ function onEdit(e) {
   if (!p) return;
   var v = el.type === 'checkbox' ? el.checked : el.value;
   setPath(job, p, v);
-  dirty = true;
+  changed();
   if (errPaths[p] && e.type === 'input') {
     delete errPaths[p]; el.classList.remove('err');
     var fe = el.closest('label') && el.closest('label').querySelector('.ferr'); if (fe) fe.remove();
@@ -4474,7 +4497,7 @@ function onEdit(e) {
   if (/^(header\.(part|machine)|builder\.)/.test(p)) {   /* live, no re-render */
     var bn = $('#builderNote'); if (bn) bn.innerHTML = builderNote();
     var part = S.ascii(job.header.part);
-    $('#jobLabel').textContent = part ? 'Job ' + part : '';
+    $('#jobLabel').textContent = part || 'untitled';
   }
   if (e.type !== 'change') return;
   if (p === 'config.faces' || p === 'config.nestsPerFace') {
@@ -4528,7 +4551,7 @@ function setKinStyle(style) {
   if (style === 'MACHINE') { var mt = S.machineFromAxes(c.trunnion, c.rotary); if (mt) c.machineType = mt.key; }
   c.kinStyle = style;
   S.syncKin(c);
-  dirty = true; errPaths = {};
+  changed(); errPaths = {};
   renderAll();
 }
 function onClick(e) {
@@ -4544,19 +4567,19 @@ function onClick(e) {
   if (act === 'add') {
     var last = job.steps.length ? S.num(job.steps[job.steps.length - 1].step) : NaN;
     var next = isNaN(last) ? 10 : Math.floor(last / 10) * 10 + 10;
-    job.steps.push(S.blankStep(next)); dirty = true; renderAll();
+    job.steps.push(S.blankStep(next)); changed(); renderAll();
   } else if (act === 'del') {
     if (job.steps.length <= 1) { showMsgs('warn', 'A job needs at least one cutting step.'); return; }
-    job.steps.splice(i, 1); dirty = true; errPaths = {}; renderAll();
+    job.steps.splice(i, 1); changed(); errPaths = {}; renderAll();
   } else if (act === 'up' && i > 0) {
-    var a = job.steps[i - 1]; job.steps[i - 1] = job.steps[i]; job.steps[i] = a; dirty = true; errPaths = {}; renderAll();
+    var a = job.steps[i - 1]; job.steps[i - 1] = job.steps[i]; job.steps[i] = a; changed(); errPaths = {}; renderAll();
   } else if (act === 'down' && i < job.steps.length - 1) {
-    var b = job.steps[i + 1]; job.steps[i + 1] = job.steps[i]; job.steps[i] = b; dirty = true; errPaths = {}; renderAll();
+    var b = job.steps[i + 1]; job.steps[i + 1] = job.steps[i]; job.steps[i] = b; changed(); errPaths = {}; renderAll();
   } else if (act === 'names') {
     var r = S.fillNames(job);
     if (r.error) { showMsgs('bad', r.error); return; }
     job.steps = r.steps; job.probeStep.program = r.probeProgram;
-    dirty = true; renderAll();
+    changed(); renderAll();
     showMsgs(r.unnamed.length ? 'warn' : 'ok', 'Filled ' + r.filled + ' blank program name' + (r.filled === 1 ? '' : 's') + '.' + namesMsg(r));
   } else if (act === 'build') { runBuilder(); }
   else if (act === 'blist') { $('#fileBList').value = ''; $('#fileBList').click(); }
@@ -4572,8 +4595,8 @@ function onClick(e) {
 function saveJob() {
   var name = (S.ascii(job.header.part).replace(/[^A-Za-z0-9_-]+/g, '_') || 'JOB') + '_job.json';
   saveBlob(new Blob([JSON.stringify(job, null, 2) + '\n'], { type: 'application/json' }), name);
-  dirty = false;
-  showMsgs('ok', 'Saved ' + name + '. Load it with Load job… to reopen this job.');
+  unsaved = false; updDot();
+  showMsgs('ok', 'Saved ' + name + '. File > Open… reopens it.');
 }
 function loadJob(file) {
   var r = new FileReader();
@@ -4581,7 +4604,7 @@ function loadJob(file) {
     try {
       var obj = JSON.parse(String(r.result));
       if (!obj || obj.format !== 'SINUMERIK_ONE_GENERATOR_JOB') throw new Error('not a job file saved by this generator');
-      job = S.normalizeJob(obj); errPaths = {}; lastFiles = null; dirty = false;
+      job = S.normalizeJob(obj); errPaths = {}; lastFiles = null; stale = false; unsaved = false; updDot();
       renderAll(); showTab('config');
       showMsgs('ok', 'Loaded ' + file.name + '.');
     } catch (ex) { showMsgs('bad', 'Could not load ' + file.name + ': ' + ex.message); }
@@ -4637,7 +4660,7 @@ function runImport(fname, L) {
         }
         var ap = S.applyBList(job, L, mode);
         job.steps = ap.steps; job.probeStep.program = ap.probeProgram;
-        dirty = true; lastFiles = null;
+        changed(); lastFiles = null;
         var v = runValidate();
         showTab('config');
         var blank = L.steps.filter(function (s) { return s.brk && S.isBlank(s.brkTol); }).length;
@@ -4665,26 +4688,53 @@ $('#btnValidate').addEventListener('click', function () {
   else if (v.warnings.length) showMsgs('warn', 'Valid. CMC warnings (' + v.warnings.length + '):', v.warnings);
   else showMsgs('ok', 'Validation passed.');
 });
-$('#btnGenerate').addEventListener('click', function () { build(true); });
-$('#btnMenu').addEventListener('click', function () {
-  var open = !$('header.nav').classList.contains('open');
-  $('header.nav').classList.toggle('open', open);
-  this.setAttribute('aria-expanded', String(open));
-});
-$('#navActions').addEventListener('click', function (e) {
-  if (e.target.closest('button')) { $('header.nav').classList.remove('open'); $('#btnMenu').setAttribute('aria-expanded', 'false'); }
-});
-$('#verTag').textContent = 'Version ' + S.GEN_VERSION;
-$('#fwTag').textContent = 'Framework REV ' + S.FW_REV;
 $('#footL').textContent = 'SINUMERIK ONE Program Generator ' + S.GEN_VERSION + ' | Nest framework REV ' + S.FW_REV + ' | Offline';
 $('#footR').textContent = String(new Date().getFullYear());
 setHead('config');
-$('#btnSave').addEventListener('click', saveJob);
-$('#btnLoad').addEventListener('click', function () { $('#fileLoad').value = ''; $('#fileLoad').click(); });
+/* ---- File menu: New job, Open..., Save (Ctrl+O, Ctrl+S) ---- */
+function closeMenu() { $('.filemenu').open = false; }
+/* unsaved changes: ask before they are replaced. Resolves 'go' or 'cancel'. */
+function askUnsaved(what) {
+  if (!unsaved) return Promise.resolve('go');
+  return askChoice('Unsaved changes', ['This job has changes that are not saved.', what], [
+    { label: 'Save first', value: 'save', primary: true }, { label: 'Discard', value: 'discard' }, { label: 'Cancel', value: 'cancel' }
+  ], 'cancel').then(function (v) {
+    if (v === 'save') { saveJob(); return 'go'; }
+    return v === 'discard' ? 'go' : 'cancel';
+  });
+}
+function newJob() {
+  askUnsaved('New job starts again from a blank page.').then(function (v) {
+    if (v !== 'go') return;
+    job = S.defaultJob(); errPaths = {}; lastFiles = null; stale = false; unsaved = false;
+    renderAll(); showTab('config'); updDot();
+    showMsgs('ok', 'New job. Start with the Header and the machine type.');
+  });
+}
+function openJob() {
+  askUnsaved('Open replaces it with the job you pick.').then(function (v) {
+    if (v === 'go') { $('#fileLoad').value = ''; $('#fileLoad').click(); }
+  });
+}
+$('#btnNew').addEventListener('click', function () { closeMenu(); newJob(); });
+$('#btnLoad').addEventListener('click', function () { closeMenu(); openJob(); });
+$('#btnSave').addEventListener('click', function () { closeMenu(); saveJob(); });
+document.addEventListener('click', function (e) { if (!e.target.closest('.filemenu')) closeMenu(); });
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') { closeMenu(); return; }
+  if (!(e.ctrlKey || e.metaKey) || e.altKey || $('#dlg').open) return;
+  var k = e.key.toLowerCase();
+  if (k === 's') { e.preventDefault(); closeMenu(); saveJob(); }
+  else if (k === 'o') { e.preventDefault(); closeMenu(); openJob(); }
+});
+/* the bar's height for scroll-padding (it wraps to two rows on a narrow window) */
+function setBarH() { document.documentElement.style.setProperty('--barh', $('header.nav').offsetHeight + 'px'); }
+window.addEventListener('resize', setBarH);
+setBarH();
 $('#fileLoad').addEventListener('change', function () { if (this.files && this.files[0]) loadJob(this.files[0]); });
 $('#fileBList').addEventListener('change', function () { if (this.files && this.files[0]) importBList(this.files[0]); });
-window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
-window.SNG_UI = { getJob: function () { return job; }, setJob: function (j) { job = S.normalizeJob(j); errPaths = {}; lastFiles = null; renderAll(); } };
+window.addEventListener('beforeunload', function (e) { if (unsaved) { e.preventDefault(); e.returnValue = ''; } });
+window.SNG_UI = { getJob: function () { return job; }, setJob: function (j) { job = S.normalizeJob(j); errPaths = {}; lastFiles = null; unsaved = false; stale = false; renderAll(); updDot(); } };
 renderAll();
 })();
 </script>

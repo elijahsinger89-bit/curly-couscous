@@ -35,13 +35,24 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   await page.goto(page_url);
   check(await page.title() === 'SINUMERIK ONE Generator', 'page opens from file://');
 
+  /* 1.10.0: Open / Save / New job are in the File menu; Open asks first when the job is unsaved (answer: discard) */
+  async function fileMenu(pg, id) { await pg.click('.filemenu summary'); await pg.click(id); }
+  async function openChooser(pg) {
+    const fcP = pg.waitForEvent('filechooser');
+    await fileMenu(pg, '#btnLoad');
+    await pg.waitForTimeout(50);
+    if (await pg.$('#dlg[open]')) await pg.click('#dlg button[data-choice="discard"]');
+    return fcP;
+  }
   async function loadJob(name) {
-    const [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#btnLoad')]);
+    const fc = await openChooser(page);
     await fc.setFiles(fx(name));
     await page.waitForSelector('.msg.ok');
   }
+  /* Generate ZIP lives on 04 Output only */
   async function generate(expectDialog, answer) {
     const dl = page.waitForEvent('download', { timeout: 5000 }).catch(() => null);
+    await page.click('nav.tabs button[data-tab="output"]');
     await page.click('#btnGenerate');
     if (expectDialog) {
       await page.waitForSelector('#dlg[open]');
@@ -176,7 +187,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   /* 6. save -> load round trip */
   await loadJob('f2_horizontal_inch');
   const sp = page.waitForEvent('download');
-  await page.click('#btnSave');
+  await fileMenu(page, '#btnSave');
   const sd = await sp;
   const saved = path.join(out, 'saved_job.json');
   await sd.saveAs(saved);
@@ -188,7 +199,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
   check(back.builder && back.builder.first === '10' && back.builder.inc === '10', 'saved JSON carries the builder fields');
   d = await generate(false);
   await d.saveAs(path.join(out, 'f2a.zip'));
-  const [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click('#btnLoad')]);
+  const fc = await openChooser(page);
   await fc.setFiles(saved);
   await page.waitForSelector('.msg.ok');
   d = await generate(false);
@@ -347,7 +358,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
       check(lint.status === 0, 'CMC zip passes the NC lint ' + (lint.status ? lint.stdout.slice(-400) : ''));
     }
     const sp2 = page.waitForEvent('download');
-    await page.click('#btnSave');
+    await fileMenu(page, '#btnSave');
     const sd2 = await sp2;
     const saved2 = path.join(out, 'saved_cmc.json');
     await sd2.saveAs(saved2);
@@ -473,9 +484,11 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     const opts = await page.$$eval('[data-path="config.machineType"] option', l => l.map(o => o.textContent));
     check(opts.length === 6 && opts.filter(o => o.includes('layout needed')).length === 2, 'six machine types, the two swivel heads marked layout needed');
     await page.selectOption('[data-path="config.machineType"]', 'F_V_SWIVEL');
+    await page.click('nav.tabs button[data-tab="output"]');
     await page.click('#btnGenerate');
     await page.waitForSelector('#msgs .msg');
     check((await page.textContent('#msgs')).includes('layout not set up yet'), 'head machine without layout: error, nothing generated');
+    await page.click('nav.tabs button[data-tab="config"]');
     await page.selectOption('[data-path="config.machineType"]', 'HF');
     check((await page.textContent('.kinaxes')).includes('A = trunnion'), 'HF selected: axes shown');
     await page.click('nav.tabs button[data-tab="wcs"]');
@@ -503,6 +516,66 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     check((await page.textContent('#tab-output')).includes('G0 C-180'), 'horizontal nutating: B_TEMPLATE ends with G0 C-180');
     await page.click('nav.tabs button[data-tab="config"]');
     await page.screenshot({ path: path.join(out, 'shot18_nutating_light.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
+  }
+
+  /* 6g. 1.10.0 fixed top bar, File menu, unsaved */
+  {
+    await loadJob('f8_cmc_milling');
+    const barTop = () => page.$eval('header.nav', e => Math.round(e.getBoundingClientRect().top));
+    check(!(await page.$('header.nav #btnGenerate')) && !!(await page.$('#tab-output #btnGenerate, [data-act="zip"]')) && !(await page.$('#tab-config #btnGenerate')),
+          'Generate ZIP is only on 04 Output');
+    check(await page.$eval('#dirtyDot', e => e.hidden), 'opened job: no UNSAVED');
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(100);
+    check(await barTop() === 0 && (await page.evaluate(() => window.scrollY)) > 300, 'scrolled down the step table: the bar stays at the top');
+    await page.fill('[data-path="steps.2.tool"]', 'EM_0375X');
+    check(!(await page.$eval('#dirtyDot', e => e.hidden)), 'an edit shows UNSAVED');
+    await page.click('nav.tabs button[data-tab="probing"]');
+    check((await page.evaluate(() => window.scrollY)) === 0, 'a step click from far down opens the page at its top');
+    await page.click('nav.tabs button[data-tab="output"]');
+    await page.click('[data-act="preview"]');
+    await page.waitForSelector('.flist li');
+    check(!(await page.$eval('#dirtyDot', e => e.hidden)) && (await page.textContent('.viewer .vh')).includes('current'),
+          'a preview does not clear UNSAVED (the preview tag says current)');
+    await page.click('nav.tabs button[data-tab="config"]');
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.click('#btnValidate');
+    await page.waitForTimeout(900);
+    const mt = await page.$eval('#msgs', e => e.getBoundingClientRect().top);
+    const bh = await page.$eval('header.nav', e => e.offsetHeight);
+    check(mt >= bh - 1 && mt < 400, 'Validate from far down scrolls up to its result (' + Math.round(mt) + ' px)');
+    let dlP = page.waitForEvent('download');
+    await page.keyboard.press('Control+s');
+    await dlP;
+    check(await page.$eval('#dirtyDot', e => e.hidden), 'Ctrl+S saves and clears UNSAVED');
+    await page.fill('[data-path="header.material"]', '4140');
+    await fileMenu(page, '#btnNew');
+    await page.waitForSelector('#dlg[open]');
+    check((await page.textContent('#dlgTitle')) === 'Unsaved changes', 'New job with unsaved changes asks first');
+    await page.click('#dlg button[data-choice="cancel"]');
+    check(await page.$eval('[data-path="header.material"]', e => e.value) === '4140', 'New job: Cancel keeps the job');
+    await fileMenu(page, '#btnNew');
+    await page.waitForSelector('#dlg[open]');
+    await page.click('#dlg button[data-choice="discard"]');
+    await page.waitForTimeout(100);
+    check(await page.$eval('[data-path="header.part"]', e => e.value) === '' && (await page.textContent('#jobLabel')) === 'untitled' &&
+          await page.$eval('#dirtyDot', e => e.hidden), 'New job: Discard starts a blank job (untitled, no UNSAVED)');
+    await page.fill('[data-path="header.part"]', 'X1');
+    await fileMenu(page, '#btnLoad');
+    await page.waitForSelector('#dlg[open]');
+    check((await page.textContent('#dlgBody')).includes('Open replaces it'), 'Open with unsaved changes asks first');
+    await page.click('#dlg button[data-choice="cancel"]');
+    dlP = page.waitForEvent('download');
+    await fileMenu(page, '#btnSave');
+    await dlP;
+    check(await page.$eval('#dirtyDot', e => e.hidden), 'File > Save clears UNSAVED');
+    await page.screenshot({ path: path.join(out, 'shot19_topbar.png'), clip: { x: 0, y: 0, width: 1360, height: 300 } });
+    await page.setViewportSize({ width: 390, height: 800 });
+    await page.waitForTimeout(100);
+    const ov = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    const vis = await page.evaluate(() => ['.filemenu summary', '#btnValidate'].every(q => { const r = document.querySelector(q).getBoundingClientRect(); return r.width > 0 && r.right <= window.innerWidth + 1; }));
+    check(ov <= 0 && vis, '390 px wide: no sideways page scroll, File and Validate visible');
+    await page.setViewportSize({ width: 1360, height: 900 });
   }
 
   /* 7. screenshots for review */

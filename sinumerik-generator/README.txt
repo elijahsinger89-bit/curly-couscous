@@ -4,12 +4,17 @@ SINUMERIK ONE PROGRAM GENERATOR
 USE
   Double-click SINUMERIK_GENERATOR.html. It runs offline in Chrome, Edge or
   Firefox: no server, no internet, no install.
-  Fill the tabs, press Generate ZIP. The zip holds every NC file.
-  Screen: dark top bar = job buttons (Load, Save, Validate, Generate ZIP;
-  on a narrow window behind MENU). Under it the steps
-  01 Config & steps / 02 Probing / 03 Work offsets / 04 Output / 05 CMC
-  (the amber line marks the open one). Everything you fill in is on the
-  white panels below.
+  Fill steps 01-03 (05 when CMC is on), then on 04 Output press Generate
+  ZIP. The zip holds every NC file.
+  Screen: the dark top bar stays on top while you scroll. It holds:
+    the steps 01 Config & steps / 02 Probing / 03 Work offsets / 04 Output
+      / 05 CMC (amber line = the open one; a step opens at its top)
+    JOB name, amber UNSAVED = changes not saved to the job file yet
+    File: New job, Open... (Ctrl+O), Save (Ctrl+S). New job and Open ask
+      first when there are unsaved changes: Save first / Discard / Cancel.
+    Validate: checks the whole job from any step.
+  Generate ZIP is on 04 Output only, with Preview files and Download this
+  file. Everything you fill in is on the white panels below.
   Tab 5 (CMC) appears only while a step row has CMC ticked.
 
 MACHINE TYPE (tab 1, Machine & job)
@@ -96,7 +101,7 @@ PROBE SWIVEL (tab 2 for the probe step, each CMC card)
   swivelled position (blank = the normal one).
   1.4.0 jobs: a CMC card keeps its pasted line (PASTE) or nest face (NONE).
   Tab 4 previews every file before saving; "Download this file" saves one.
-  Save job writes the whole form to a .json file; Load job reopens it.
+  File > Save writes the whole form to a .json file; File > Open reopens it.
   The .json file is the input store (it replaces the Excel sheets).
   Blank work offset X/Y/Z: you are asked Yes/No before anything is written.
 
