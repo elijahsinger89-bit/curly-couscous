@@ -1,0 +1,108 @@
+family,usage,score,quote,source,page
+142B,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,149
+142B,rough,2,High velocity - high metal removal rate,GARR_CATALOG_USA.pdf,149
+142B,slot,1,Milling guide 142M/143M: Slotting / Pocket Milling ae 1xD,GARR_CATALOG_USA.pdf,295
+142M,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,149
+142M,rough,2,High velocity - high metal removal rate,GARR_CATALOG_USA.pdf,149
+142M,slot,1,Milling guide 142M/143M: Slotting / Pocket Milling ae 1xD,GARR_CATALOG_USA.pdf,295
+142R,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,149
+142R,rough,2,High velocity - high metal removal rate,GARR_CATALOG_USA.pdf,149
+142R,slot,1,Milling guide 142M/143M: Slotting / Pocket Milling ae 1xD,GARR_CATALOG_USA.pdf,295
+143M,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,153
+143M,rough,2,High velocity - high metal removal rate,GARR_CATALOG_USA.pdf,153
+143M,slot,1,Milling guide 142M/143M: Slotting / Pocket Milling ae 1xD,GARR_CATALOG_USA.pdf,295
+143R,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,153
+143R,rough,2,High velocity - high metal removal rate,GARR_CATALOG_USA.pdf,153
+143R,slot,1,Milling guide 142M/143M: Slotting / Pocket Milling ae 1xD,GARR_CATALOG_USA.pdf,295
+210D,slot,1,Diamond coated guide: Slotting ap 5% ae 1xD,GARR_CATALOG_USA.pdf,321
+210RD,slot,1,Diamond coated guide: Slotting ap 5% ae 1xD,GARR_CATALOG_USA.pdf,321
+242M,slot,2,Excellent choice for slotting,GARR_CATALOG_USA.pdf,195
+246M,finish_wall,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+246M,finish_floor,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+246MA,finish_wall,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+246MA,finish_floor,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+246MC,finish_wall,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+246MC,finish_floor,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+253M,slot,1,Slots stainless steel at an axial depth of 25% of diameter,GARR_CATALOG_USA.pdf,196
+253M,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+253M,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+253MA,slot,1,Slots stainless steel at an axial depth of 25% of diameter,GARR_CATALOG_USA.pdf,196
+253MA,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+253MA,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+253MC,slot,1,Slots stainless steel at an axial depth of 25% of diameter,GARR_CATALOG_USA.pdf,196
+253MC,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+253MC,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+255MC,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+255MC,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+273M,profile3d,2,Excellent for holding draft angles in mold and die applications,GARR_CATALOG_USA.pdf,247
+280M,slot,2,Excellent for keyways,GARR_CATALOG_USA.pdf,270
+290M,slot,2,Excellent for keyways,GARR_CATALOG_USA.pdf,270
+310D,slot,1,Diamond coated guide: Slotting ap 5% ae 1xD,GARR_CATALOG_USA.pdf,321
+350MX,rough,1,Die mold cutter guide: Roughing ap 15-25% ae 20-30% of Dia.,GARR_CATALOG_USA.pdf,318
+350MX,semi,1,Die mold cutter guide: Semi-Finishing ap 5-8% ae 2-5% of Dia.,GARR_CATALOG_USA.pdf,318
+350MX,profile3d,2,Die Mold Cutter - Ball End; Recommended for die mold applications,GARR_CATALOG_USA.pdf,208
+373M,profile3d,2,Excellent for holding draft angles in mold and die applications,GARR_CATALOG_USA.pdf,247
+545BA,slot,1,High Rc finishers guide: Slotting / Pocket Milling ap 5% ae 1xD,GARR_CATALOG_USA.pdf,316
+545BA,finish_wall,1,High Rc finishers guide: Profiling / Side Milling ap 1xD ae 5% of Dia.,GARR_CATALOG_USA.pdf,316
+545BA,profile3d,2,"High performance, High Rc finisher, Ball end",RECOMMENDED-1.pdf,6
+545MA,slot,1,High Rc finishers guide: Slotting / Pocket Milling ap 5% ae 1xD,GARR_CATALOG_USA.pdf,316
+545MA,finish_wall,2,"High performance, High Rc finisher, Square end",RECOMMENDED-1.pdf,6
+545MA,finish_floor,2,"High performance, High Rc finisher, Square end",RECOMMENDED-1.pdf,6
+545RA,slot,1,High Rc finishers guide: Slotting / Pocket Milling ap 5% ae 1xD,GARR_CATALOG_USA.pdf,316
+545RA,finish_wall,2,"High performance, High Rc finisher, Corner radius",RECOMMENDED-1.pdf,6
+545RA,finish_floor,2,"High performance, High Rc finisher, Corner radius",RECOMMENDED-1.pdf,6
+610D,slot,1,Diamond coated guide: Slotting ap 5% ae 1xD,GARR_CATALOG_USA.pdf,321
+710D,slot,1,Diamond coated guide: Slotting ap 5% ae 1xD,GARR_CATALOG_USA.pdf,321
+842M,slot,2,Excellent choice for slotting,GARR_CATALOG_USA.pdf,195
+846M,finish_wall,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+846M,finish_floor,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+846MA,finish_wall,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+846MA,finish_floor,2,High performance finishing in a variety of steels,GARR_CATALOG_USA.pdf,203
+853M,slot,1,Slots stainless steel at an axial depth of 25% of diameter,GARR_CATALOG_USA.pdf,196
+853M,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+853M,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+853MA,slot,1,Slots stainless steel at an axial depth of 25% of diameter,GARR_CATALOG_USA.pdf,196
+853MA,finish_wall,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+853MA,finish_floor,2,Profiling and finishing,RECOMMENDED-1.pdf,1
+950MX,rough,1,Die mold cutter guide: Roughing ap 15-25% ae 20-30% of Dia.,GARR_CATALOG_USA.pdf,319
+950MX,semi,1,Die mold cutter guide: Semi-Finishing ap 5-8% ae 2-5% of Dia.,GARR_CATALOG_USA.pdf,319
+950MX,profile3d,2,Die Mold Cutter - Ball End; Recommended for die mold applications,GARR_CATALOG_USA.pdf,208
+A3,hem,2,Engineered for High Efficiency Milling of Aluminum,GARR_CATALOG_USA.pdf,143
+A3,rough,2,"High velocity, 3 flute, High metal removal rate",RECOMMENDED-1.pdf,1
+A3,slot,1,Milling guide A3: Slotting / Pocket Milling ap up to 1xD ae 1xD,GARR_CATALOG_USA.pdf,296
+A3,finish_wall,1,"Milling guide A3: Finishing axial = max LOC, radial = 2.5%xD",GARR_CATALOG_USA.pdf,296
+A3,finish_floor,1,Improved end geometry provides superior floor finishes,GARR_CATALOG_USA.pdf,143
+ARC,rough,2,Designed for roughing Aluminum Alloys,GARR_CATALOG_USA.pdf,116
+ARC,slot,1,Milling guide ARC: Slotting ap 1xD ae 1xD,GARR_CATALOG_USA.pdf,297
+G3,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,121
+G3,slot,1,Milling guide X3/G3: Slotting ap 0.5-1xD ae 1xD,GARR_CATALOG_USA.pdf,300
+G5,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,125
+G7,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,131
+G7C,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,135
+G9,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,139
+G9C,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,141
+H-45,slot,1,H-45 guide: Slotting / Pocket Milling ap 0.3xR ae 1xD,GARR_CATALOG_USA.pdf,320
+H-45,profile3d,2,Recommended for die mold applications,GARR_CATALOG_USA.pdf,207
+V4B,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,161
+V4B,slot,1,Milling guide V4: Slotting / Pocket Milling ap up to 1.5xD ae 1xD,GARR_CATALOG_USA.pdf,310
+V4R,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,161
+V4R,slot,1,Milling guide V4: Slotting / Pocket Milling ap up to 1.5xD ae 1xD,GARR_CATALOG_USA.pdf,310
+V4S,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,161
+V4S,slot,1,Milling guide V4: Slotting / Pocket Milling ap up to 1.5xD ae 1xD,GARR_CATALOG_USA.pdf,310
+V5,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,174
+V5,slot,1,Variable flute design helps with chip evacuation in slots and pockets,GARR_CATALOG_USA.pdf,174
+V5C,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,180
+V5C,slot,1,Variable flute design helps with chip evacuation in slots and pockets,GARR_CATALOG_USA.pdf,180
+VHM,rough,2,Staggered Flute Knuckle Rougher / Ripper,GARR_CATALOG_USA.pdf,118
+VHM,slot,1,Milling guide VHM: Slotting ap 0.5xD ae 1xD,GARR_CATALOG_USA.pdf,298
+VRX,hem,2,Excellent for High Efficiency Milling,GARR_CATALOG_USA.pdf,182
+VRX,slot,1,Milling guide VRX: Slotting / Pocket Milling ap up to 1.5xD ae 1xD,GARR_CATALOG_USA.pdf,308
+VRX,finish_wall,1,High Rc finishers guide: Profiling / Side Milling ap 1xD ae 5% of Dia.,GARR_CATALOG_USA.pdf,316
+VRX-6,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,193
+X3,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,121
+X3,slot,1,Milling guide X3/G3: Slotting ap 0.5-1xD ae 1xD,GARR_CATALOG_USA.pdf,300
+X5,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,125
+X7,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,131
+X7C,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,135
+X9,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,139
+X9C,hem,2,Engineered for High Efficiency Milling,GARR_CATALOG_USA.pdf,141

@@ -1,0 +1,12 @@
+manufacturer,family,designation,type,point_angle,cutting_material,dia_mm,dia_in,inch_mark,oal_mm,flute_len_mm,depth_max_mm,shank_dia_mm,iso_P,iso_M,iso_K,iso_N,iso_S,iso_H,tier,tier_rank,type_code,unit_system,source,page
+Kennametal,B501,B501Z04000,NC spot drill,120,Solid carbide K10,4.0,0.1575,,54,7,7,6,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B501,B501Z06000,NC spot drill,120,Solid carbide K10,6.0,0.2362,,54,9,9,6,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B501,B501Z10000,NC spot drill,120,Solid carbide K10,10.0,0.3937,,66,12,12,10,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B501,B501Z12000,NC spot drill,120,Solid carbide K10,12.0,0.4724,,73,14,14,12,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z04000,NC spot drill,90,Solid carbide K10,4.0,0.1575,,54,7,7,4,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z06000,NC spot drill,90,Solid carbide K10,6.0,0.2362,,54,9,9,6,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z08000,NC spot drill,90,Solid carbide K10,8.0,0.315,,58,11,11,8,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z10000,NC spot drill,90,Solid carbide K10,10.0,0.3937,,66,12,12,10,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z12000,NC spot drill,90,Solid carbide K10,12.0,0.4724,,73,14,14,12,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z16000,NC spot drill,90,Solid carbide K10,16.0,0.6299,,82,16,16,16,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144
+Kennametal,B505,B505Z20000,NC spot drill,90,Solid carbide K10,20.0,0.7874,,92,18,18,20,2,0,2,0,0,0,Standard,2,51,metric,Master_Catalog_2018_Vol2_Inch.pdf,G144

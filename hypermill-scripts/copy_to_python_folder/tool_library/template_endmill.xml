@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="35.1" srcURL="sqlite://C:\TEMP\OPEN MIND\hyperMILL\b08_000002020391E4E8_doc.db" srcGuid="48959367-bd2e-4f82-9eac-5c856688111a" srcType="document" masterGuid="03445e81-3d0b-4eb1-a007-2725d63a22d4" files="endmill_files">
+  <container main-obj="NCTools" main-obj-name="11100011">
+    <formulas>
+      <formula name="fF" type="feedrate">
+        <param name="formula" value="fz*z*n"/>
+        <param name="comment" value="Default feedrate formula."/>
+        <param name="objGuid" value="2f1496c6-441e-4695-89aa-2a73da261ccf"/>
+      </formula>
+      <formula name="fFreduced" type="feedrate">
+        <param name="formula" value="fz*z*n*0.7"/>
+        <param name="comment" value="Default formula for reduced feedrate."/>
+        <param name="objGuid" value="7c981c1b-7fbe-4b5d-8ac3-cbb1aa6f1054"/>
+      </formula>
+      <formula name="fSinch" type="speed">
+        <param name="formula" value="(Vc*12)/(d*pi)"/>
+        <param name="comment" value="Default inch spindle RPM formula."/>
+        <param name="objGuid" value="b20430b0-fdbd-4eac-91a2-1a317bcecb67"/>
+      </formula>
+    </formulas>
+    <materials>
+      <material type="legacy" name="N - Aluminum">
+        <param name="objGuid" value="9d5c09de-b6cd-4f4b-bcc5-cc344bbbb85e"/>
+        <param name="chippingClass" value="unknown"/>
+      </material>
+      <material type="legacy" name="N - Copper">
+        <param name="objGuid" value="b48f1cf9-7d82-4a27-bdef-971e64893cb7"/>
+        <param name="chippingClass" value="unknown"/>
+      </material>
+      <material type="legacy" name="N - Brass">
+        <param name="objGuid" value="c46ee19e-bfc6-4962-953b-b4c2ad07dc0c"/>
+        <param name="chippingClass" value="unknown"/>
+      </material>
+      <material type="legacy" name="N - Bronze">
+        <param name="objGuid" value="33c97ced-48c3-49d8-979d-1a3fc01f1453"/>
+        <param name="chippingClass" value="unknown"/>
+      </material>
+    </materials>
+    <couplings/>
+    <tools>
+      <tool type="radiusMill" name="Kennametal - AADE1000J3ERA - KenCut AL">
+        <param name="hmbState" value="unlinked"/>
+        <param name="comment" value="3866068"/>
+        <param name="objGuid" value="cc7cc4ba-3e93-4f7b-ac52-9bd1685f1982"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolTotalLength" value="6"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <coupling type="unknown">
+          <param name="objGuid" value="e72b3fbd-6cca-4354-908a-6233965c906d"/>
+        </coupling>
+        <param name="cuttingEdges" value="3"/>
+        <param name="cuttingLength" value="3.25"/>
+        <param name="toolShaftType" value="parametric"/>
+        <param name="toolShaftDiameter" value="1"/>
+        <param name="toolShaftChamferDefMode" value="length"/>
+        <param name="toolShaftChamferLength" value="0.04"/>
+        <param name="toolShaftChamferAbsPos" value="3.29"/>
+        <param name="toolShaftChamferAngle" value="0"/>
+        <param name="toolDiameter" value="1"/>
+        <param name="taperHeight" value="3.25"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="2000"/>
+            <param name="cuttingSpeed" value="10"/>
+            <param name="planeFeedrate" value="8"/>
+            <param name="zFeedrate" value="2"/>
+            <param name="feedratePerEdge" value="0.02"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="4"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Aluminum"/>
+            <param name="purpose" value="Rough - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="6264.338560097"/>
+            <param name="cuttingSpeed" value="1640"/>
+            <param name="planeFeedrate" value="135.3097128980952"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0072"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="94.71679902866666"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Aluminum"/>
+            <param name="purpose" value="Slotting - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="6264.338560097"/>
+            <param name="cuttingSpeed" value="1640"/>
+            <param name="planeFeedrate" value="108.9994909456878"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0058"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="1"/>
+            <param name="cuttingLength" value="1"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="76.29964366198145"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Aluminum"/>
+            <param name="purpose" value="Finish-2D-Radial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="18793.015680291"/>
+            <param name="cuttingSpeed" value="4920"/>
+            <param name="planeFeedrate" value="202.9645693471428"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0036"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.02"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="142.075198543"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Aluminum"/>
+            <param name="purpose" value="Finish-2D-Axial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="18793.015680291"/>
+            <param name="cuttingSpeed" value="4920"/>
+            <param name="planeFeedrate" value="202.9645693471428"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0036"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="0.02"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="142.075198543"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Copper"/>
+            <param name="purpose" value="Rough - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="94.57241366429369"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0063"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="66.20068956500558"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Copper"/>
+            <param name="purpose" value="Slotting - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="75.05747116213784"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.005"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="1"/>
+            <param name="cuttingLength" value="1"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="52.54022981349649"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Copper"/>
+            <param name="purpose" value="Finish-2D-Radial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.02"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Copper"/>
+            <param name="purpose" value="Finish-2D-Axial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="0.02"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Brass"/>
+            <param name="purpose" value="Rough - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="94.57241366429369"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0063"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="66.20068956500558"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Brass"/>
+            <param name="purpose" value="Slotting - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="75.05747116213784"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.005"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="1"/>
+            <param name="cuttingLength" value="1"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="52.54022981349649"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Brass"/>
+            <param name="purpose" value="Finish-2D-Radial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.02"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Brass"/>
+            <param name="purpose" value="Finish-2D-Axial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="0.02"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Bronze"/>
+            <param name="purpose" value="Rough - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="94.57241366429369"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0063"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="66.20068956500558"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Bronze"/>
+            <param name="purpose" value="Slotting - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="5003.83141080919"/>
+            <param name="cuttingSpeed" value="1310"/>
+            <param name="planeFeedrate" value="75.05747116213784"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.005"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="1"/>
+            <param name="cuttingLength" value="1"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="52.54022981349649"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Bronze"/>
+            <param name="purpose" value="Finish-2D-Radial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.02"/>
+            <param name="cuttingLength" value="1.5"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+          <tecset type="milling">
+            <param name="material" value="N - Bronze"/>
+            <param name="purpose" value="Finish-2D-Axial - usage 1"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="9396.507840145501"/>
+            <param name="cuttingSpeed" value="2460"/>
+            <param name="planeFeedrate" value="90.20647526539682"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.0032"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0.5"/>
+            <param name="cuttingLength" value="0.02"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="63.14453268577777"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+        </tecsets>
+        <param name="radialRakeAngle" value="0"/>
+        <param name="helixAngle" value="0"/>
+        <param name="cuttingEdgeDistribution" value="equal"/>
+        <param name="cuttingEdgeTreatment" value="0"/>
+        <param name="collar" value="1"/>
+        <param name="tipDiameter" value="1"/>
+        <param name="tapered" value="0"/>
+        <param name="taperAngle" value="0"/>
+        <param name="cornerRadius" value="0.015"/>
+        <param name="coreDiameter" value="0"/>
+        <param name="coreHeight" value="0"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="11100011" id="11100011" name="M_11100011">
+        <param name="hmbState" value="unlinked"/>
+        <param name="comment" value="3866068"/>
+        <param name="objGuid" value="1b70c3db-f7b9-4970-994c-0cb988a48aa8"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="6"/>
+        <param name="gageLength" value="6"/>
+        <param name="toolReference" value="tip"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <param name="manualToolChange" value="0"/>
+        <components>
+          <component type="tool" name="Kennametal - AADE1000J3ERA - KenCut AL"/>
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Aluminum" purpose="Rough - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Aluminum" purpose="Slotting - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Aluminum" purpose="Finish-2D-Radial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Aluminum" purpose="Finish-2D-Axial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Copper" purpose="Rough - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Copper" purpose="Slotting - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Copper" purpose="Finish-2D-Radial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Copper" purpose="Finish-2D-Axial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Brass" purpose="Rough - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Brass" purpose="Slotting - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Brass" purpose="Finish-2D-Radial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Brass" purpose="Finish-2D-Axial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Bronze" purpose="Rough - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Bronze" purpose="Slotting - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Bronze" purpose="Finish-2D-Radial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+          <cuttingProfile material="N - Bronze" purpose="Finish-2D-Axial - usage 1" type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+        </cuttingProfiles>
+        <coupling type="unknown">
+          <param name="objGuid" value="e72b3fbd-6cca-4354-908a-6233965c906d"/>
+        </coupling>
+      </ncTool>
+    </ncTools>
+    <docObject type="ncTool">
+      <param name="externalObjectGuid" value="300ed866-a743-0ded-2e00-567ca190fe54"/>
+      <param name="externalObjectType" value="ncTool"/>
+      <param name="scope" value="external"/>
+      <param name="state" value="upToDate"/>
+      <param name="lastStateUpdate" value="20261016T101625"/>
+      <param name="locked" value="0"/>
+      <param name="localObject" value="11100011"/>
+    </docObject>
+  </container>
+</omtdx>

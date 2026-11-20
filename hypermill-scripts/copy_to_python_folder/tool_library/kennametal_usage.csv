@@ -1,0 +1,232 @@
+family,usage,score,quote,source,page
+5230VS09,rough,2,"(T127) ideal for rough machining of steel, alloyed steel, stainless steel, titanium and HTA",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1482
+5230VS09,slot,2,(T127) 5230VS09 and 5230VS12 cutter series is perfectly suited for profiling and full slotting,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1482
+5230VS09 5230VS12,rough,2,"(T127) ideal for rough machining of steel, alloyed steel, stainless steel, titanium and HTA",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1482
+5230VS09 5230VS12,slot,2,(T127) 5230VS09 and 5230VS12 cutter series is perfectly suited for profiling and full slotting,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1482
+5505VX,rough,2,(V111) roughing ball nose cutters are ideal for roughing and semi-finishing profiles and complex contours,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1646
+5505VX,semi,2,(V111) ideal for roughing and semi-finishing profiles and complex contours,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1646
+5505VX,profile3d,2,(V111) Rough to semi-finish profiling and contour milling; Copy/3D Contour Milling,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1646
+7713VR10,rough,1,(V97) excellent for roughing and semi-finishing of all materials,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1632
+7713VR10,semi,1,(V97) excellent for roughing and semi-finishing of all materials,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1632
+7713VR10,profile3d,2,(V97) 7713VR10 Copy/Contour Milling Cutter: turbine blade machining and copy/contour milling applications,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1632
+7792VXP06 7792VXD09,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+AADE,rough,2,Tool Selector [AADE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+AADE,slot,2,Tool Selector [AADE]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+AADE,finish_wall,1,Tool Selector [AADE]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,110
+AADF,rough,2,Tool Selector [ABDF/AADF]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+AADF,slot,2,Tool Selector [ABDF/AADF]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+AADF,finish_wall,1,Tool Selector [ABDF/AADF]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDE,hem,1,Tool Selector [ABDE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDE,rough,2,Tool Selector [ABDE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDE,slot,2,Tool Selector [ABDE]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDE,finish_wall,1,Tool Selector [ABDE]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDF,hem,1,Tool Selector [MaxiMet/KenCut AL]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+ABDF,rough,2,Tool Selector [ABDF/AADF]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDF,slot,2,Tool Selector [ABDF/AADF]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ABDF,finish_wall,1,Tool Selector [ABDF/AADF]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,110
+ALCB,hem,1,Tool Selector [KenCut AQ]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCB,rough,2,Tool Selector [KenCut AQ]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCB,slot,2,Tool Selector [KenCut AQ]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCB,finish_wall,2,Tool Selector [KenCut AQ]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCB,finish_floor,1,Tool Selector [KenCut AQ]: Additional operation = face milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCC,hem,1,Tool Selector [KenCut AQ]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCC,rough,2,Tool Selector [KenCut AQ]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCC,slot,2,Tool Selector [KenCut AQ]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCC,finish_wall,2,Tool Selector [KenCut AQ]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCC,finish_floor,1,Tool Selector [KenCut AQ]: Additional operation = face milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCR,hem,1,Tool Selector [KenCut AQ]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCR,rough,2,Tool Selector [KenCut AQ]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCR,slot,2,Tool Selector [KenCut AQ]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCR,finish_wall,2,Tool Selector [KenCut AQ]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALCR,finish_floor,1,Tool Selector [KenCut AQ]: Additional operation = face milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSB,hem,1,Tool Selector [KenCut AQ]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSB,rough,2,Tool Selector [KenCut AQ]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSB,slot,2,Tool Selector [KenCut AQ]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSB,finish_wall,2,Tool Selector [KenCut AQ]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSB,finish_floor,1,Tool Selector [KenCut AQ]: Additional operation = face milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSR,hem,1,Tool Selector [KenCut AQ]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSR,rough,2,Tool Selector [KenCut AQ]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSR,slot,2,Tool Selector [KenCut AQ]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSR,finish_wall,2,Tool Selector [KenCut AQ]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,111
+ALSR,finish_floor,1,Tool Selector [KenCut AQ]: Additional operation = face milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,111
+AMVM,slot,1,AluMax VM Applications: Slotting,Fall_2026_Innovations_Catalog_Inch.pdf,183
+Dodeka™ 45°,finish_floor,1,(S21) Wiper insert for excellent surface floor finish,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1248
+Dodeka™ Mini 30° Dodeka™ High-Feed (HF) 75°,rough,1,(S17) High feed rates for rough face milling,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1244
+Dodeka™ Mini 45°,finish_floor,1,(S11) Wiper insert for fine finishing aluminum,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1238
+EADE,rough,2,Tool Selector [EADE 4FL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,132
+EADE,slot,2,4-flute version for pocketing and slotting,Solid_End_Milling_Master_Catalog_Inch.pdf,134
+EADE,profile3d,1,Tool Selector [EADE 6FL]: Additional operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,132
+F1AA,rough,2,Tool Selector [F1AA...WS-M]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F1AA,slot,2,Tool Selector [F1AA...WS-M]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F1AA,finish_wall,1,Tool Selector [F1AA...WS-M]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F2AA,hem,1,Tool Selector [MaxiMet/KenCut AL]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F2AA,rough,2,Tool Selector [MaxiMet/KenCut AL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F2AA,slot,2,Tool Selector [MaxiMet/KenCut AL]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F2AA,finish_wall,1,Tool Selector [MaxiMet/KenCut AL]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,112
+F2AU,slot,2,Tool Selector [KenCut KS]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,140
+F2AU,finish_wall,2,Tool Selector [KenCut KS]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,140
+F3AA,hem,1,Tool Selector [F3AA]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3AA,rough,2,Tool Selector [F3AA]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3AA,slot,2,Tool Selector [F3AA]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3AA,finish_wall,1,Tool Selector [F3AA]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3AU,slot,2,Tool Selector [KenCut KS]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,140
+F3AU,finish_wall,2,Tool Selector [KenCut KS]: Finisher = Primary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,140
+F3BA,rough,2,Tool Selector [F3BA]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3BA,slot,2,Tool Selector [F3BA]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,113
+F3BH,rough,2,Tool Selector [KenCut RR]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F3BH,slot,2,Tool Selector [KenCut RR]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F3BH,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+F3BS,rough,2,Tool Selector [KenCut RR]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F3BS,slot,2,Tool Selector [KenCut RR]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F3BS,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+F4BJ,rough,2,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F4BJ,slot,2,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F4BJ,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+F4BJ,finish_wall,1,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F5BJ,rough,2,Tool Selector [KenCut RR]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F5BJ,slot,2,Tool Selector [KenCut RR]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F5BJ,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+F6BJ,rough,2,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F6BJ,slot,2,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+F6BJ,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+F6BJ,finish_wall,1,Tool Selector [KenCut RR F4BJ-DL/F4BJ-F6BJ-DL]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Metric.pdf,90
+Fix-Perfect™ 20° • Cast Iron Fix-Perfect™ 0° • Cas,rough,2,(S62) Fix-Perfect Cast Iron Rougher and Finisher; Roughing and Finishing in One Tool,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1290
+Fix-Perfect™ 20° • Cast Iron Fix-Perfect™ 0° • Cas,finish_floor,2,(S62) Fix-Perfect Cast Iron Rougher and Finisher; Best-in-Class Fine-Finishing Concept,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1290
+Fix-Perfect™ 20° • Cast Iron Fix-Perfect™ 20° • Ca,rough,2,(S62) Fix-Perfect Cast Iron Rougher and Finisher; Roughing and Finishing in One Tool,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1290
+Fix-Perfect™ 20° • Cast Iron Fix-Perfect™ 20° • Ca,finish_floor,2,(S62) Fix-Perfect Cast Iron Rougher and Finisher; Best-in-Class Fine-Finishing Concept,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1290
+Fix-Perfect™ • Aluminum,rough,2,(S121) Roughing and finishing in one tool,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1348
+Fix-Perfect™ • Aluminum,finish_floor,2,(S121) Roughing and finishing in one tool; Produces excellent finish and flatness,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1348
+GOPR,hem,1,Tool Selector [GOPR4CH/RA/SE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,155
+GOPR,rough,2,Tool Selector [GOPR4CH/RA/SE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,155
+GOPR,slot,1,Tool Selector [GOPR4CH/RA/SE]: Additional operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,155
+GOPR,finish_wall,1,Tool Selector [GOPR4CH/RA/SE]: Finisher = Secondary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Metric.pdf,155
+GOPR,profile3d,2,Tool Selector [GOPR4BN]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,155
+H1TE,hem,1,Tool Selector [H1TE4CH/RA/SE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,12
+H1TE,rough,2,Tool Selector [H1TE4CH/RA/SE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,12
+H1TE,slot,2,Tool Selector [H1TE4CH/RA/SE]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,12
+H1TE,finish_wall,1,Tool Selector [H1TE4CH/RA/SE]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,12
+H1TE,profile3d,2,Tool Selector [H1TE4BN..R-L]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,12
+H2TE,hem,1,Tool Selector [H2TE5SE/RA]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+H2TE,rough,2,Tool Selector [H2TE5SE/RA]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+H2TE,slot,1,Tool Selector [H2TE5SE/RA]: Additional operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+H2TE,finish_wall,1,Tool Selector [H2TE5SE/RA]: Finisher = Secondary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,13
+HA2L,hem,1,Tool Selector [HA2L5RA/SE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,16
+HA2L,semi,2,HARVI II Long: 5-flute end mill for semi-finishing and finishing of thin walls and deep pockets,Solid_End_Milling_Master_Catalog_Inch.pdf,47
+HA2L,finish_wall,2,Tool Selector [HA2L5RA/SE]: Finisher = Primary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,16
+HA3A,hem,1,Tool Selector [HA3A6RA]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,15
+HA3A,rough,2,Tool Selector [HA3A6RA]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,15
+HA3A,finish_wall,1,Tool Selector [HA3A6RA]: Finisher = Secondary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,15
+HA3A,profile3d,2,Tool Selector [HA3A6BN]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,15
+HA3R,hem,1,Tool Selector [HA3R6RA/SE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,14
+HA3R,rough,2,Tool Selector [HA3R6RA/SE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,14
+HA3R,finish_wall,2,Tool Selector [HA3R6RA/SE]: Finisher = Primary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Metric.pdf,15
+HA3R,profile3d,2,Tool Selector [HA3R6BN]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,14
+HA4R,hem,1,Tool Selector [HA4R8RA/SE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,16
+HA4R,rough,2,HARVI IV: 8-flute end mill for roughing and finishing in high-temp alloys,Solid_End_Milling_Master_Catalog_Inch.pdf,47
+HA4R,slot,1,HARVI IV Side Milling/Slotting - Application Data,Solid_End_Milling_Master_Catalog_Inch.pdf,79
+HA4R,finish_wall,2,Tool Selector [HA4R8RA/SE]: Finisher = Primary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,16
+HPRS,rough,2,Tool Selector [HPRSS/MDRHEC/HPRST]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,99
+HPRS,slot,2,Tool Selector [HPRSS/MDRHEC/HPRST]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,99
+HPRS,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Inch.pdf,101
+HexaCut™ 30° • Cast Iron,rough,2,(S74) Primary Application: specifically engineered for rough and semi-finish face milling of cast iron,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1302
+HexaCut™ 30° • Cast Iron,semi,2,(S74) Primary Application: specifically engineered for rough and semi-finish face milling of cast iron,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1302
+HexaCut™ 30° • Cast Iron,finish_floor,1,"(S83) Setup for Finishing: finishing wiper insert, Ra 1,6",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1310
+HexaCut™ Series HexaCut™ 45° • Cast Iron,rough,2,(S74) Primary Application: specifically engineered for rough and semi-finish face milling of cast iron,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1302
+HexaCut™ Series HexaCut™ 45° • Cast Iron,semi,2,(S74) Primary Application: specifically engineered for rough and semi-finish face milling of cast iron,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1302
+KBDM Series,rough,2,"(S103) Roughing, semi-finishing, and fine-finishing with one platform",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1330
+KBDM Series,semi,2,"(S103) Roughing, semi-finishing, and fine-finishing with one platform",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1330
+KBDM Series,finish_floor,2,"(S103) Roughing, semi-finishing, and fine-finishing with one platform",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1330
+KHDA,rough,2,6-flute solid carbide end mill for high-feed roughing and finishing of medium and hard steels,Solid_End_Milling_Master_Catalog_Inch.pdf,143
+KHDA,profile3d,2,Tool Selector [KenFeed]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,141
+KMDA,rough,2,6-flute solid carbide end mill for high-feed roughing and finishing of medium and hard steels,Solid_End_Milling_Master_Catalog_Inch.pdf,143
+KMDA,profile3d,2,Tool Selector [KenFeed]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,141
+KOR5,hem,2,Tool Selector section: DYNAMIC MILLING,Solid_End_Milling_Master_Catalog_Inch.pdf,17
+KOR5,rough,2,Tool Selector [KOR5]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,17
+KOR5,finish_wall,1,Tool Selector [KOR5]: Finisher = Secondary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,17
+KOR6,hem,2,Tool Selector section: DYNAMIC MILLING,Solid_End_Milling_Master_Catalog_Inch.pdf,17
+KOR6,rough,2,Tool Selector [KOR6]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,17
+KOR6,finish_wall,1,Applications: Side Milling/Shoulder Milling: Finishing,Solid_End_Milling_Master_Catalog_Inch.pdf,82
+KSOM™,rough,1,(S52) -GB medium geometry for roughing and finishing operations on all materials,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1280
+KSOM™,finish_floor,1,(S52) -GB medium geometry for roughing and finishing operations,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1280
+KSOM™ Mini,rough,1,(S46) -GB medium geometry for roughing and finishing operations on all materials,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1274
+KSOM™ Mini,finish_floor,1,(S45) Super soft cutting effect for superior surface floor finishing,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1272
+KSRM™ RCGT64,rough,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RCGT64,semi,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RCGT64,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+KSRM™ RCGT64 KSRM™ RCGT86,rough,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RCGT64 KSRM™ RCGT86,semi,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RCGT64 KSRM™ RCGT86,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+KSRM™ RP.T1204,rough,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1204,semi,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1204,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+KSRM™ RP.T1204 KSRM™ RP.T1605,rough,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1204 KSRM™ RP.T1605,semi,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1204 KSRM™ RP.T1605,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+KSRM™ RP.T1605 KSRM™ RP.T43,rough,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1605 KSRM™ RP.T43,semi,1,(V67) KSRM: Roughing and semi-finishing operations with lower cutting forces,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1602
+KSRM™ RP.T1605 KSRM™ RP.T43,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+KSSM 0° • IC 10mm,slot,1,"(T107) KSSM platform covers face milling, shoulder milling, slotting, profiling, and Z-axis",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1462
+KSSM 0° • IC 10mm KSSM 0° • IC 12mm,slot,1,"(T107) KSSM platform covers face milling, shoulder milling, slotting, profiling, and Z-axis",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1462
+"KSSM™ • 1/2"" IC • Adjustable KSSM™ • 1/2"" IC",slot,2,"(U37) Slot Milling: KSSM slotting cutters, adjustable widths; Neutral (Full Slotting)",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1530
+KSSM™ • IC 10 • Fixed Width,slot,2,(U25) Slotting Cutter Primary Application: KSSM fixed-width slotting cutters,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1518
+KSSR™ 6°,rough,2,(S1 contents) KSSR - Cast Iron - Roughing and Finishing 6 deg Lead,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1229
+KSSR™ 6°,finish_floor,2,(S1 contents) KSSR - Cast Iron - Roughing and Finishing 6 deg Lead,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1229
+KTMS™,slot,2,(U3) Slotting Cutter Primary Application: KTMS slotting cutters produce T slots,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1496
+KVNS™ A2™,slot,2,(U7) Slotting Cutter Primary Application; excellent for all flat-bottom slotting and cut-off operations,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1500
+KenFeed™ 2X Series,rough,2,(V35) Primary Application: superior metal removal and productivity through high feed rates in roughing operations,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1570
+KenFeed™ 2X Series,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+MDRH,rough,2,Tool Selector [HPRSS/MDRHEC/HPRST]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,99
+MDRH,slot,2,Tool Selector [HPRSS/MDRHEC/HPRST]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,99
+MDRH,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Inch.pdf,101
+MEGA 45° • Heavy-Duty Face Milling MEGA 45° • Heav,finish_floor,1,(S93) Integrated wiper facets for excellent floor finish,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1320
+MEGA 90° • Heavy-Duty Face Milling MEGA 90° • Heav,finish_floor,1,"(S97) MEGA 60 and 90: integrated wiper facets, floor finish",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1324
+MEMM,rough,1,Applications: Side Milling/Shoulder Milling: Roughing,Solid_End_Milling_Master_Catalog_Metric.pdf,102
+MEMM,slot,1,"Applications: Slotting; precision applications like side milling, slotting, pocket milling",Solid_End_Milling_Master_Catalog_Metric.pdf,102
+Mill 1-10™,slot,1,"(T29) Primary Application: works in shoulder, ramp, slot, plunge, and helical milling",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1384
+Mill 1-14™,slot,1,"(T49) Mill 1-14 cutters can be used for profiling, slotting, ramping, helical interpolation",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1404
+Mill 1-14™ Helical,slot,1,"(T63) Slot and Profile; helical ramping from solid, slotting, contouring",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1418
+Mill 1-18™,slot,1,"(T75) Mill 1-18 cutters can be used for profiling, slotting, ramping, helical interpolation, plunging",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1430
+Mill 1-7™,rough,1,(T23) Mill 1-7 tools provide solutions for roughing and finishing operations,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1378
+Mill 1-7™,slot,1,"(T23) covers multiple applications, including ramping, slotting, and plunging",Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1378
+Mill 1-7™,semi,1,(T25) Medium roughing and semi-finishing,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1380
+Mill 1-7™,finish_wall,1,(T23) Mill 1-7 tools provide solutions for roughing and finishing operations,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1378
+Mill 16™,rough,2,(S28) Primary Application: specially-made platform for rough milling of components ... in cast iron,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1256
+Mill 16™,semi,1,(S28) Semi-finishing and light machining; (S33) ANENLE = semi-finishing with improved surface floor finish,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1256
+Mill 4™ Series,rough,1,(T5) One tool for all applications: from roughing to finishing,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1360
+Mill 4™ Series,finish_wall,1,(T5) from roughing to finishing; Superior wall and surface finish capabilities,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1360
+ROCM,slot,2,ROCO Applications PRIMARY: Slotting,Spring_2026_Innovations_Catalog_Inch.pdf,7
+ROCS,slot,2,ROCO Applications PRIMARY: Slotting,Spring_2026_Innovations_Catalog_Inch.pdf,7
+RUDC,rough,2,Tool Selector [KenCut RR]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+RUDC,slot,2,Tool Selector [KenCut RR]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Metric.pdf,90
+RUDC,semi,1,Roughing and semi-finishing for fewer tool changes,Solid_End_Milling_Master_Catalog_Metric.pdf,93
+Rodeka™ 12,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+Rodeka™ 12X,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+Rodeka™ 16,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219
+SFRH,rough,2,Tool Selector [SFRHEC]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+SFRH,slot,2,Tool Selector [SFRHEC]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,110
+UCDE,hem,1,Tool Selector [UCDE/UDDE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UCDE,rough,2,Tool Selector [UCDE/UDDE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UCDE,slot,2,Tool Selector [UCDE/UDDE]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UCDE,finish_wall,1,Tool Selector [UCDE/UDDE]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UDDE,hem,1,Tool Selector [UCDE/UDDE]: Additional operation = trochoidal milling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UDDE,rough,2,Tool Selector [UCDE/UDDE]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UDDE,slot,2,Tool Selector [UCDE/UDDE]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UDDE,finish_wall,1,Tool Selector [UCDE/UDDE]: Finisher = Secondary (main op slotting),Solid_End_Milling_Master_Catalog_Inch.pdf,13
+UEBC,rough,2,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEBC,slot,1,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Additional operation = slotting: ball nose icon,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEBC,finish_wall,1,GOmill: end mills for roughing and finishing in multiple materials,Solid_End_Milling_Master_Catalog_Metric.pdf,156
+UEBC,profile3d,2,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEBD,rough,2,Tool Selector [GOmill UEBD 2FL/3FL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,151
+UEBD,slot,1,Tool Selector [GOmill UEBD 2FL/3FL]: Additional operation = slotting: ball nose icon,Solid_End_Milling_Master_Catalog_Inch.pdf,151
+UEBD,finish_wall,1,GOmill: end mills for roughing and finishing in multiple materials,Solid_End_Milling_Master_Catalog_Inch.pdf,152
+UEBD,profile3d,2,Tool Selector [GOmill UEBD 2FL/3FL]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Inch.pdf,151
+UEBE,rough,2,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEBE,slot,1,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Additional operation = slotting: ball nose icon,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEBE,finish_wall,1,GOmill: end mills for roughing and finishing in multiple materials,Solid_End_Milling_Master_Catalog_Metric.pdf,156
+UEBE,profile3d,2,Tool Selector [GOmill UEBC 2FL/UEBE 3FL]: Main operation = 3D profiling icon,Solid_End_Milling_Master_Catalog_Metric.pdf,154
+UEDE,rough,2,Tool Selector [GOmill UEDE 3FL]: Rougher = Primary,Solid_End_Milling_Master_Catalog_Inch.pdf,151
+UEDE,slot,2,Tool Selector [GOmill UEDE 4FL]: Main operation = slotting icon,Solid_End_Milling_Master_Catalog_Inch.pdf,151
+UEDE,finish_wall,1,Tool Selector [GOmill UEDE 3FL]: Finisher = Secondary (main op side/shoulder milling),Solid_End_Milling_Master_Catalog_Inch.pdf,151
+Z-Axis Plunge Mill,rough,2,(V139) Primary Application: improve metal removal rates in roughing applications,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1674
+Z-Axis Plunge Mill,slot,2,(V139) Ideally suited for rough slotting applications,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1674
+Z-Axis Plunge Mill,profile3d,1,(R12) Application Selection Guide - Copy Mills,Master_Catalog_2018_Vol__2_Rotating_Tools_English_Inch.pdf,1219

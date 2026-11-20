@@ -1,0 +1,1553 @@
+page,family,grade,thread_range,group,vc_mpm,fz_mm,ae_note
+C39,TC610,WB10RD,Dc<=3,P1,115,0.015,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,P1,115,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P1,115,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P1,115,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P1,115,0.015,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,P1,115,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P1,115,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P1,115,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P1,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P1,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P1,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P2,155,0.012,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,P2,155,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P2,155,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P2,155,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P2,155,0.012,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,P2,155,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P2,155,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P2,155,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P2,105,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P2,105,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P2,105,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P3,130,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P3,130,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P3,130,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P3,130,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P3,130,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P3,130,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P3,130,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P3,130,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P3,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P3,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P3,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P4,130,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P4,130,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P4,130,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P4,130,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P4,130,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P4,130,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P4,130,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P4,130,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P4,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P4,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P4,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P5,95,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P5,95,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P5,95,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P5,95,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P5,95,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P5,95,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P5,95,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P5,95,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P5,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P5,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P5,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P6,130,0.012,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,P6,130,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P6,130,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P6,130,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P6,130,0.012,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,P6,130,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P6,130,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P6,130,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P6,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P6,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P6,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P7,130,0.012,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,P7,130,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P7,130,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P7,130,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P7,130,0.012,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,P7,130,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P7,130,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P7,130,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P7,86,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P7,86,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P7,86,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P8,80,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P8,80,0.04,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P8,80,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P8,80,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P8,80,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P8,80,0.04,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P8,80,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P8,80,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P8,100,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P8,100,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P8,100,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P9,75,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P9,75,0.04,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P9,75,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P9,75,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P9,75,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P9,75,0.04,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P9,75,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P9,75,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P9,90,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P9,90,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P9,90,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P10,65,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P10,65,0.04,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,P10,65,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P10,65,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P10,65,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P10,65,0.04,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,P10,65,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P10,65,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P10,70,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P10,70,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P10,70,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P11,150,0.025,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,P11,150,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,P11,150,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P11,150,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P11,150,0.025,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,P11,150,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,P11,150,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P11,150,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P11,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P11,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P11,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P12,110,0.03,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,P12,110,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,P12,110,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P12,110,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P12,110,0.03,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,P12,110,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,P12,110,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P12,110,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P12,95,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P12,95,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P12,95,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P13,90,0.03,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,P13,90,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,P13,90,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P13,90,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P13,90,0.03,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,P13,90,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,P13,90,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P13,90,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P13,80,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P13,80,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P13,80,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P14,55,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,P14,55,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,P14,55,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,P14,55,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,P14,55,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,P14,55,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,P14,55,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,P14,55,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P14,80,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P14,80,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P14,80,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,P15,45,0.03,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,P15,45,0.075,radial cuts: 3
+C39,TC610,WB10RD,Dc>7-9,P15,45,0.095,radial cuts: 2
+C39,TC610,WB10RD,Dc>9,P15,45,0.1,radial cuts: 2
+C39,TC611,WB10RD,Dc<=3,P15,45,0.03,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,P15,45,0.075,radial cuts: 3
+C39,TC611,WB10RD,Dc>7-9,P15,45,0.095,radial cuts: 2
+C39,TC611,WB10RD,Dc>9,P15,45,0.1,radial cuts: 2
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,P15,65,0.015,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,P15,65,0.045,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,P15,65,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,M1,55,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,M1,55,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,M1,55,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,M1,55,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,M1,55,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,M1,55,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,M1,55,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,M1,55,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,M1,90,0.01,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,M1,90,0.035,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,M1,90,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,M2,40,0.02,radial cuts: 4
+C39,TC610,WB10RD,Dc>3-7,M2,40,0.04,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,M2,40,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,M2,40,0.1,radial cuts: 2
+C39,TC611,WB10RD,Dc<=3,M2,40,0.02,radial cuts: 4
+C39,TC611,WB10RD,Dc>3-7,M2,40,0.04,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,M2,40,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,M2,40,0.1,radial cuts: 2
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,M2,60,0.01,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,M2,60,0.035,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,M2,60,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,M3,45,0.013,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,M3,45,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,M3,45,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,M3,45,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,M3,45,0.013,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,M3,45,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,M3,45,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,M3,45,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,M3,60,0.01,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,M3,60,0.035,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,M3,60,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K1,105,0.02,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,K1,105,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K1,105,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K1,105,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K1,105,0.02,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,K1,105,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K1,105,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K1,105,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K1,130,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K1,130,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K1,130,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K2,100,0.025,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,K2,100,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K2,100,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K2,100,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K2,100,0.025,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,K2,100,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K2,100,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K2,100,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K2,130,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K2,130,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K2,130,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K3,130,0.02,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,K3,130,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K3,130,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K3,130,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K3,130,0.02,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,K3,130,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K3,130,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K3,130,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K3,125,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K3,125,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K3,125,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K4,110,0.025,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,K4,110,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K4,110,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K4,110,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K4,110,0.025,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,K4,110,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K4,110,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K4,110,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K4,130,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K4,130,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K4,130,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K5,105,0.02,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,K5,105,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K5,105,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K5,105,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K5,105,0.02,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,K5,105,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K5,105,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K5,105,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K5,115,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K5,115,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K5,115,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K6,100,0.02,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,K6,100,0.04,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K6,100,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K6,100,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K6,100,0.02,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,K6,100,0.04,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K6,100,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K6,100,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K6,120,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K6,120,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K6,120,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,K7,85,0.025,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,K7,85,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,K7,85,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,K7,85,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,K7,85,0.025,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,K7,85,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,K7,85,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,K7,85,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,K7,115,0.017,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,K7,115,0.05,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,K7,115,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N1,210,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N1,210,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N1,210,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N1,210,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N1,210,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N1,210,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N1,210,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N1,210,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N1,135,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N1,135,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N1,135,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N2,210,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N2,210,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N2,210,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N2,210,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N2,210,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N2,210,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N2,210,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N2,210,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N2,130,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N2,130,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N2,130,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N3,165,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N3,165,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N3,165,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N3,165,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N3,165,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N3,165,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N3,165,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N3,165,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N3,120,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N3,120,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N3,120,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N4,165,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N4,165,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N4,165,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N4,165,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N4,165,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N4,165,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N4,165,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N4,165,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N4,120,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N4,120,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N4,120,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N5,145,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N5,145,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N5,145,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N5,145,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N5,145,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N5,145,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N5,145,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N5,145,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N5,125,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N5,125,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N5,125,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N6,220,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N6,220,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N6,220,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N6,220,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N6,220,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N6,220,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N6,220,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N6,220,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N6,130,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N6,130,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N6,130,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N7,140,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N7,140,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N7,140,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N7,140,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N7,140,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N7,140,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N7,140,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N7,140,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N7,125,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N7,125,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N7,125,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N8,190,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N8,190,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N8,190,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N8,190,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N8,190,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N8,190,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N8,190,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N8,190,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N8,115,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N8,115,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N8,115,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N9,160,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N9,160,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N9,160,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N9,160,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N9,160,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N9,160,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N9,160,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N9,160,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N9,125,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N9,125,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N9,125,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,N10,50,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,N10,50,0.075,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,N10,50,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,N10,50,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,N10,50,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,N10,50,0.075,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,N10,50,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,N10,50,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,N10,60,0.02,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,N10,60,0.055,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,N10,60,0.1,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S1,35,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S1,35,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,S1,35,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S1,35,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S1,35,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S1,35,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,S1,35,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S1,35,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S1,40,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S1,40,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S1,40,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S2,25,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S2,25,0.05,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,S2,25,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S2,25,0.085,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S2,25,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S2,25,0.05,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,S2,25,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S2,25,0.085,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S2,30,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S2,30,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S2,30,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S3,40,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S3,40,0.05,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,S3,40,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S3,40,0.09,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S3,40,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S3,40,0.05,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,S3,40,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S3,40,0.09,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S3,40,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S3,40,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S3,40,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S4,25,0.02,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,S4,25,0.05,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,S4,25,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S4,25,0.1,radial cuts: 2
+C39,TC611,WB10RD,Dc<=3,S4,25,0.02,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,S4,25,0.05,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,S4,25,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S4,25,0.1,radial cuts: 2
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S4,25,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S4,25,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S4,25,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S5,25,0.013,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S5,25,0.05,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,S5,25,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S5,25,0.1,radial cuts: 2
+C39,TC611,WB10RD,Dc<=3,S5,25,0.013,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S5,25,0.05,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,S5,25,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S5,25,0.1,radial cuts: 2
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S5,25,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S5,25,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S5,25,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S6,40,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,S6,40,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,S6,40,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S6,40,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S6,40,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,S6,40,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,S6,40,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S6,40,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S6,65,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S6,65,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S6,65,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S7,40,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S7,40,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,S7,40,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S7,40,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S7,40,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S7,40,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,S7,40,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S7,40,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S7,40,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S7,40,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S7,40,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S8,20,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S8,20,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,S8,20,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S8,20,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S8,20,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S8,20,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,S8,20,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S8,20,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S8,30,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S8,30,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S8,30,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S9,50,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S9,50,0.03,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,S9,50,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S9,50,0.09,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S9,50,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S9,50,0.03,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,S9,50,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S9,50,0.09,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S9,40,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S9,40,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S9,40,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,S10,60,0.015,radial cuts: 2
+C39,TC610,WB10RD,Dc>3-7,S10,60,0.05,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,S10,60,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,S10,60,0.09,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,S10,60,0.015,radial cuts: 2
+C39,TC611,WB10RD,Dc>3-7,S10,60,0.05,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,S10,60,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,S10,60,0.09,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,S10,40,0.012,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,S10,40,0.033,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,S10,40,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,H1,55,0.02,radial cuts: 3
+C39,TC610,WB10RD,Dc>3-7,H1,55,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,H1,55,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,H1,55,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,H1,55,0.02,radial cuts: 3
+C39,TC611,WB10RD,Dc>3-7,H1,55,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,H1,55,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,H1,55,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc<=3,H2,35,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,H2,35,0.045,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,H2,35,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,H2,35,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,H2,35,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,H2,35,0.045,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,H2,35,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,H2,35,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc<=3,H3,30,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,H3,30,0.06,radial cuts: 3
+C39,TC610,WB10RD,Dc>7-9,H3,30,0.08,radial cuts: 3
+C39,TC610,WB10RD,Dc>9,H3,30,0.1,radial cuts: 3
+C39,TC611,WB10RD,Dc<=3,H3,30,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,H3,30,0.06,radial cuts: 3
+C39,TC611,WB10RD,Dc>7-9,H3,30,0.08,radial cuts: 3
+C39,TC611,WB10RD,Dc>9,H3,30,0.1,radial cuts: 3
+C39,TC610,WB10RD,Dc<=3,H4,60,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,H4,60,0.065,radial cuts: 2
+C39,TC610,WB10RD,Dc>7-9,H4,60,0.07,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,H4,60,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,H4,60,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,H4,60,0.065,radial cuts: 2
+C39,TC611,WB10RD,Dc>7-9,H4,60,0.07,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,H4,60,0.1,radial cuts: 1
+C39,TC610,WB10RD,Dc<=3,O1,290,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,O1,290,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O1,290,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O1,290,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,O1,290,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O1,290,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O1,290,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O1,290,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O1,285,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O1,285,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O1,285,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,O2,145,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,O2,145,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O2,145,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O2,145,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,O2,145,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O2,145,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O2,145,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O2,145,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O2,140,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O2,140,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O2,140,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc<=3,O3,65,0.011,radial cuts: 1
+C39,TC610,WB10RD,Dc>3-7,O3,65,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O3,65,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O3,65,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc<=3,O3,65,0.011,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O3,65,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O3,65,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O3,65,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O3,65,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O3,65,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O3,65,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc>3-7,O4,65,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O4,65,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O4,65,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O4,65,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O4,65,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O4,65,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O4,65,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O4,65,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O4,65,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc>3-7,O5,65,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O5,65,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O5,65,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O5,65,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O5,65,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O5,65,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O5,65,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O5,65,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O5,65,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC610,WB10RD,Dc>3-7,O6,215,0.035,radial cuts: 1
+C39,TC610,WB10RD,Dc>7-9,O6,215,0.05,radial cuts: 1
+C39,TC610,WB10RD,Dc>9,O6,215,0.1,radial cuts: 1
+C39,TC611,WB10RD,Dc>3-7,O6,215,0.035,radial cuts: 1
+C39,TC611,WB10RD,Dc>7-9,O6,215,0.05,radial cuts: 1
+C39,TC611,WB10RD,Dc>9,O6,215,0.1,radial cuts: 1
+C39,TC630,WB10TJ/WB10RA,Dc<=1.5,O6,215,0.011,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>1.5-3,O6,215,0.032,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C39,TC630,WB10TJ/WB10RA,Dc>3,O6,215,0.075,radial cuts: 1; 3xDN tools with Dc<1.6 mm: reduce fz 30-50%
+C41,TC620,WB10TJ,Dc<=6,P1,115,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P1,115,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P1,115,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P1,136,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P1,136,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P1,136,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P1,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P1,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P1,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P2,155,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P2,155,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P2,155,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P2,183,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P2,183,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P2,183,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P2,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P2,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P2,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P3,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P3,130,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P3,130,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P3,153,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P3,153,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P3,153,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P3,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P3,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P3,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P4,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P4,130,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P4,130,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P4,153,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P4,153,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P4,153,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P4,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P4,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P4,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P5,95,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P5,95,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P5,95,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P5,112,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P5,112,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P5,112,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P5,200,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P5,200,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P5,200,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P6,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P6,130,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P6,130,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P6,153,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P6,153,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P6,153,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P6,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P6,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P6,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P7,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P7,130,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P7,130,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P7,153,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P7,153,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P7,153,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P7,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P7,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P7,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P8,80,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P8,80,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P8,80,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P8,94,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P8,94,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P8,94,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P8,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P8,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P8,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P9,75,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P9,75,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P9,75,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P9,89,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P9,89,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P9,89,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P9,200,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P9,200,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P9,200,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P10,65,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P10,65,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P10,65,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P10,77,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P10,77,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P10,77,0.13,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,P10,70,0.015,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,P10,70,0.03,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,P10,70,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,P10,200,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P10,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P10,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P11,150,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P11,150,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P11,150,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P11,177,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P11,177,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P11,177,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P11,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P11,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P11,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P12,110,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P12,110,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P12,110,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P12,130,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P12,130,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P12,130,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P12,200,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P12,200,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P12,200,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P13,90,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P13,90,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P13,90,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P13,106,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P13,106,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P13,106,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P13,200,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P13,200,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P13,200,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P14,55,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P14,55,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P14,55,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P14,65,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P14,65,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P14,65,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P14,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P14,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P14,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,P15,45,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,P15,45,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,P15,45,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,P15,53,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,P15,53,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,P15,53,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,P15,200,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,P15,200,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,P15,200,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,M1,70,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,M1,70,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,M1,70,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,M1,83,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,M1,83,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,M1,83,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,M1,150,0.025,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,M1,150,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,M1,150,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,M2,40,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,M2,40,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,M2,40,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,M2,47,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,M2,47,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,M2,47,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,M2,150,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,M2,150,0.035,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,M2,150,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,M3,45,0.04,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,M3,45,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,M3,45,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,M3,53,0.04,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,M3,53,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,M3,53,0.1,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,M3,150,0.025,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,M3,150,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,M3,150,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K1,105,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K1,105,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K1,105,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K1,124,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K1,124,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K1,124,0.17,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K1,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K1,90,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K1,90,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K1,240,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K1,240,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K1,240,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K2,100,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K2,100,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K2,100,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K2,118,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K2,118,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K2,118,0.17,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K2,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K2,90,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K2,90,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K2,240,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K2,240,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K2,240,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K3,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K3,130,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K3,130,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K3,153,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K3,153,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K3,153,0.17,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K3,100,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K3,100,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K3,100,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K3,180,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K3,180,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K3,180,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K4,110,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K4,110,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K4,110,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K4,130,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K4,130,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K4,130,0.15,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K4,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K4,90,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K4,90,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K4,180,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K4,180,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K4,180,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K5,105,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K5,105,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K5,105,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K5,124,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K5,124,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K5,124,0.15,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K5,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K5,90,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K5,90,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K5,240,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K5,240,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K5,240,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K6,100,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K6,100,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K6,100,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K6,118,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K6,118,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K6,118,0.15,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K6,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K6,90,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K6,90,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K6,240,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K6,240,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K6,240,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,K7,85,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,K7,85,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,K7,85,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,K7,100,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,K7,100,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,K7,100,0.15,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,K7,80,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,K7,80,0.045,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,K7,80,0.07,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,K7,240,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,K7,240,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,K7,240,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N1,130,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N1,130,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N1,130,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N1,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N1,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N1,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N1,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N1,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N1,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N2,140,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N2,140,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N2,140,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N2,160,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N2,160,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N2,160,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N2,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N2,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N2,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N3,135,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N3,135,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N3,135,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N3,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N3,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N3,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N3,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N3,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N3,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N4,135,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N4,135,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N4,135,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N4,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N4,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N4,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N4,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N4,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N4,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N5,135,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N5,135,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N5,135,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N5,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N5,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N5,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N5,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N5,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N5,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N6,140,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N6,140,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N6,140,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N6,160,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N6,160,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N6,160,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N6,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N6,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N6,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N7,135,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N7,135,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N7,135,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N7,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N7,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N7,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N7,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N7,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N7,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N8,125,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N8,125,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N8,125,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N8,140,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N8,140,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N8,140,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N8,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N8,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N8,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N9,135,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N9,135,0.12,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N9,135,0.17,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N9,155,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N9,155,0.12,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N9,155,0.17,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N9,230,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N9,230,0.1,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N9,230,0.15,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,N10,65,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,N10,65,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,N10,65,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,N10,75,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,N10,75,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,N10,75,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,N10,230,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,N10,230,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,N10,230,0.12,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S1,35,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S1,35,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S1,35,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S1,41,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S1,41,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S1,41,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S1,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S1,90,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S1,90,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S2,25,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S2,25,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S2,25,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S2,30,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S2,30,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S2,30,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S2,60,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S2,60,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S2,60,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S3,40,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S3,40,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S3,40,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S3,47,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S3,47,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S3,47,0.15,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S3,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S3,90,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S3,90,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S4,25,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S4,25,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S4,25,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S4,30,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S4,30,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S4,30,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S4,60,0.016,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S4,60,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S4,60,0.06,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S5,25,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S5,25,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S5,25,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S5,30,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S5,30,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S5,30,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S5,65,0.016,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S5,65,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S5,65,0.06,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S6,40,0.07,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S6,40,0.11,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S6,40,0.15,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S6,47,0.07,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S6,47,0.11,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S6,47,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S6,120,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S6,120,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S6,120,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S7,40,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S7,40,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S7,40,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S7,47,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S7,47,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S7,47,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S7,90,0.016,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S7,90,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S7,90,0.06,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S8,20,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S8,20,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S8,20,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S8,24,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S8,24,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S8,24,0.13,radial cuts: 1
+C41,TC645,WB10TJ,Dc<=4,S8,60,0.016,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S8,60,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S8,60,0.06,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S9,50,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S9,50,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S9,50,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S9,59,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S9,59,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S9,59,0.13,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,S9,30,0.01,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,S9,30,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,S9,30,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,S9,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S9,90,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S9,90,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,S10,60,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,S10,60,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,S10,60,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,S10,71,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,S10,71,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,S10,71,0.13,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,S10,30,0.01,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,S10,30,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,S10,30,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc<=4,S10,90,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>4-8,S10,90,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC645,WB10TJ,Dc>8,S10,90,0.08,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,H1,55,0.05,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,H1,55,0.09,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,H1,55,0.13,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,H1,65,0.05,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,H1,65,0.09,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,H1,65,0.13,radial cuts: 1
+C41,TC685,WB10RC,Dc<=4,H1,55,0.012,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,H1,55,0.03,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,H1,55,0.05,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc<=4,H2,50,0.01,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,H2,50,0.022,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,H2,50,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc<=4,H3,45,0.008,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,H3,45,0.02,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,H3,45,0.03,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc<=4,H4,50,0.01,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>4-8,H4,50,0.022,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC685,WB10RC,Dc>8,H4,50,0.04,radial cuts: 1; left-hand cutter; reduce vc approx. 30% for through holes
+C41,TC620,WB10TJ,Dc<=6,O1,290,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O1,290,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O1,290,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O1,342,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O1,342,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O1,342,0.14,radial cuts: 1
+C41,TC620,WB10TJ,Dc<=6,O2,145,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O2,145,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O2,145,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O2,177,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O2,177,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O2,177,0.14,radial cuts: 1
+C41,TC620,WB10TJ,Dc<=6,O3,65,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O3,65,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O3,65,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O3,77,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O3,77,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O3,77,0.14,radial cuts: 1
+C41,TC620,WB10TJ,Dc<=6,O4,65,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O4,65,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O4,65,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O4,77,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O4,77,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O4,77,0.14,radial cuts: 1
+C41,TC620,WB10TJ,Dc<=6,O5,65,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O5,65,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O5,65,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O5,77,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O5,77,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O5,77,0.14,radial cuts: 1
+C41,TC620,WB10TJ,Dc<=6,O6,215,0.06,radial cuts: 1
+C41,TC620,WB10TJ,Dc>6-12,O6,215,0.1,radial cuts: 1
+C41,TC620,WB10TJ,Dc>12,O6,215,0.14,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc<=6,O6,254,0.06,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>6-12,O6,254,0.1,radial cuts: 1
+C41,TC620 DeVibe,WB10TJ,Dc>12,O6,254,0.14,radial cuts: 1
+C43,TME,TICN,Dc<=3,P1,115,0.015,radial cuts: 1
+C43,TME,TICN,Dc>3-7,P1,115,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P1,115,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P1,115,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P1,115,0.015,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,P1,115,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P1,115,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P1,115,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P2,155,0.012,radial cuts: 1
+C43,TME,TICN,Dc>3-7,P2,155,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P2,155,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P2,155,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P2,155,0.012,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,P2,155,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P2,155,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P2,155,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P3,130,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P3,130,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P3,130,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P3,130,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P3,130,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P3,130,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P3,130,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P3,130,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P4,130,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P4,130,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P4,130,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P4,130,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P4,130,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P4,130,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P4,130,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P4,130,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P5,95,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P5,95,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P5,95,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P5,95,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P5,95,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P5,95,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P5,95,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P5,95,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P6,130,0.012,radial cuts: 1
+C43,TME,TICN,Dc>3-7,P6,130,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P6,130,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P6,130,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P6,130,0.012,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,P6,130,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P6,130,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P6,130,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P7,130,0.012,radial cuts: 1
+C43,TME,TICN,Dc>3-7,P7,130,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P7,130,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P7,130,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P7,130,0.012,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,P7,130,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P7,130,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P7,130,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P8,80,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P8,80,0.04,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P8,80,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P8,80,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P8,80,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P8,80,0.04,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P8,80,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P8,80,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P9,75,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P9,75,0.04,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P9,75,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P9,75,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P9,75,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P9,75,0.04,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P9,75,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P9,75,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P10,65,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P10,65,0.04,radial cuts: 1
+C43,TME,TICN,Dc>7-9,P10,65,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P10,65,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P10,65,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P10,65,0.04,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,P10,65,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P10,65,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P11,150,0.025,radial cuts: 3
+C43,TME,TICN,Dc>3-7,P11,150,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,P11,150,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P11,150,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P11,150,0.025,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,P11,150,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,P11,150,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P11,150,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P12,110,0.03,radial cuts: 3
+C43,TME,TICN,Dc>3-7,P12,110,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,P12,110,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P12,110,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P12,110,0.03,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,P12,110,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,P12,110,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P12,110,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P13,90,0.03,radial cuts: 3
+C43,TME,TICN,Dc>3-7,P13,90,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,P13,90,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P13,90,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P13,90,0.03,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,P13,90,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,P13,90,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P13,90,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P14,55,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,P14,55,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,P14,55,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,P14,55,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,P14,55,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,P14,55,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,P14,55,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,P14,55,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,P15,45,0.03,radial cuts: 3
+C43,TME,TICN,Dc>3-7,P15,45,0.075,radial cuts: 3
+C43,TME,TICN,Dc>7-9,P15,45,0.095,radial cuts: 2
+C43,TME,TICN,Dc>9,P15,45,0.1,radial cuts: 2
+C43,TMG,TICN,Dc<=3,P15,45,0.03,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,P15,45,0.075,radial cuts: 3
+C43,TMG,TICN,Dc>7-9,P15,45,0.095,radial cuts: 2
+C43,TMG,TICN,Dc>9,P15,45,0.1,radial cuts: 2
+C43,TME,TICN,Dc<=3,M1,55,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,M1,55,0.03,radial cuts: 1
+C43,TME,TICN,Dc>7-9,M1,55,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,M1,55,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,M1,55,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,M1,55,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,M1,55,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,M1,55,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,M2,40,0.02,radial cuts: 4
+C43,TME,TICN,Dc>3-7,M2,40,0.04,radial cuts: 2
+C43,TME,TICN,Dc>7-9,M2,40,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,M2,40,0.1,radial cuts: 2
+C43,TMG,TICN,Dc<=3,M2,40,0.02,radial cuts: 4
+C43,TMG,TICN,Dc>3-7,M2,40,0.04,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,M2,40,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,M2,40,0.1,radial cuts: 2
+C43,TME,TICN,Dc<=3,M3,45,0.013,radial cuts: 2
+C43,TME,TICN,Dc>3-7,M3,45,0.03,radial cuts: 1
+C43,TME,TICN,Dc>7-9,M3,45,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,M3,45,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,M3,45,0.013,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,M3,45,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,M3,45,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,M3,45,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,K1,105,0.02,radial cuts: 1
+C43,TME,TICN,Dc>3-7,K1,105,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K1,105,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K1,105,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K1,105,0.02,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,K1,105,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K1,105,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K1,105,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K1,85,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K1,85,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K1,85,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K2,100,0.025,radial cuts: 2
+C43,TME,TICN,Dc>3-7,K2,100,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K2,100,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K2,100,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K2,100,0.025,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,K2,100,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K2,100,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K2,100,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K2,85,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K2,85,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K2,85,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K3,130,0.02,radial cuts: 1
+C43,TME,TICN,Dc>3-7,K3,130,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K3,130,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K3,130,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K3,130,0.02,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,K3,130,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K3,130,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K3,130,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K3,105,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K3,105,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K3,105,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K4,110,0.025,radial cuts: 2
+C43,TME,TICN,Dc>3-7,K4,110,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K4,110,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K4,110,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K4,110,0.025,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,K4,110,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K4,110,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K4,110,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K4,90,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K4,90,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K4,90,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K5,105,0.02,radial cuts: 1
+C43,TME,TICN,Dc>3-7,K5,105,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K5,105,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K5,105,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K5,105,0.02,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,K5,105,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K5,105,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K5,105,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K5,85,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K5,85,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K5,85,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K6,100,0.02,radial cuts: 2
+C43,TME,TICN,Dc>3-7,K6,100,0.04,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K6,100,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K6,100,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K6,100,0.02,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,K6,100,0.04,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K6,100,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K6,100,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K6,85,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K6,85,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K6,85,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,K7,85,0.025,radial cuts: 2
+C43,TME,TICN,Dc>3-7,K7,85,0.05,radial cuts: 1
+C43,TME,TICN,Dc>7-9,K7,85,0.075,radial cuts: 1
+C43,TME,TICN,Dc>9,K7,85,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,K7,85,0.025,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,K7,85,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,K7,85,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>9,K7,85,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,K7,75,0.04,"f 0,12 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,K7,75,0.06,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,K7,75,0.095,"f 0,3 mm/rev"
+C43,TME,TICN,Dc<=3,N1,400,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N1,400,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N1,400,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N1,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N1,400,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N1,400,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N1,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N1,400,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N1,400,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N1,400,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N1,400,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N2,400,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N2,400,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N2,400,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N2,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N2,400,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N2,400,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N2,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N2,400,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N2,400,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N2,400,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N2,400,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N3,400,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N3,400,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N3,400,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N3,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N3,400,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N3,400,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N3,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N3,400,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N3,400,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N3,400,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N3,400,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N4,400,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N4,400,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N4,400,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N4,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N4,400,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N4,400,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N4,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N4,400,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N4,400,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N4,400,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N4,400,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N5,170,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N5,170,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N5,170,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N5,170,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N5,170,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N5,170,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N5,170,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N5,170,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N5,195,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N5,195,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N5,195,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N6,400,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N6,400,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N6,400,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N6,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N6,400,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N6,400,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N6,400,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N6,400,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,N6,480,0.07,"f 0,2 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,N6,480,0.12,"f 0,3 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,N6,480,0.17,"f 0,4 mm/rev"
+C43,TME,TICN,Dc<=3,N7,360,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N7,360,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N7,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N7,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N7,360,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N7,360,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N7,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N7,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,N8,360,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N8,360,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N8,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N8,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N8,360,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N8,360,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N8,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N8,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,N9,360,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N9,360,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N9,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N9,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N9,360,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N9,360,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N9,360,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N9,360,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,N10,50,0.03,radial cuts: 1
+C43,TME,TICN,Dc>3-7,N10,50,0.075,radial cuts: 1
+C43,TME,TICN,Dc>7-9,N10,50,0.1,radial cuts: 1
+C43,TME,TICN,Dc>9,N10,50,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,N10,50,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,N10,50,0.075,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,N10,50,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>9,N10,50,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,S1,35,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S1,35,0.03,radial cuts: 1
+C43,TME,TICN,Dc>7-9,S1,35,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S1,35,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S1,35,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S1,35,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,S1,35,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S1,35,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,S2,25,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S2,25,0.05,radial cuts: 2
+C43,TME,TICN,Dc>7-9,S2,25,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S2,25,0.085,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S2,25,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S2,25,0.05,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,S2,25,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S2,25,0.085,radial cuts: 1
+C43,TME,TICN,Dc<=3,S3,40,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S3,40,0.05,radial cuts: 2
+C43,TME,TICN,Dc>7-9,S3,40,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S3,40,0.09,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S3,40,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S3,40,0.05,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,S3,40,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S3,40,0.09,radial cuts: 1
+C43,TME,TICN,Dc<=3,S4,25,0.02,radial cuts: 3
+C43,TME,TICN,Dc>3-7,S4,25,0.05,radial cuts: 2
+C43,TME,TICN,Dc>7-9,S4,25,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S4,25,0.1,radial cuts: 2
+C43,TMG,TICN,Dc<=3,S4,25,0.02,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,S4,25,0.05,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,S4,25,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S4,25,0.1,radial cuts: 2
+C43,TME,TICN,Dc<=3,S5,25,0.013,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S5,25,0.05,radial cuts: 2
+C43,TME,TICN,Dc>7-9,S5,25,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S5,25,0.1,radial cuts: 2
+C43,TMG,TICN,Dc<=3,S5,25,0.013,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S5,25,0.05,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,S5,25,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S5,25,0.1,radial cuts: 2
+C43,TME,TICN,Dc<=3,S6,40,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,S6,40,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,S6,40,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S6,40,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S6,40,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,S6,40,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,S6,40,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S6,40,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,S7,40,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S7,40,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,S7,40,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S7,40,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S7,40,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S7,40,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,S7,40,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S7,40,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,S8,20,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S8,20,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,S8,20,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S8,20,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S8,20,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S8,20,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,S8,20,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S8,20,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,S9,50,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S9,50,0.03,radial cuts: 1
+C43,TME,TICN,Dc>7-9,S9,50,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S9,50,0.09,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S9,50,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S9,50,0.03,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,S9,50,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S9,50,0.09,radial cuts: 1
+C43,TME,TICN,Dc<=3,S10,60,0.015,radial cuts: 2
+C43,TME,TICN,Dc>3-7,S10,60,0.05,radial cuts: 2
+C43,TME,TICN,Dc>7-9,S10,60,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,S10,60,0.09,radial cuts: 1
+C43,TMG,TICN,Dc<=3,S10,60,0.015,radial cuts: 2
+C43,TMG,TICN,Dc>3-7,S10,60,0.05,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,S10,60,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,S10,60,0.09,radial cuts: 1
+C43,TME,TICN,Dc<=3,H1,55,0.02,radial cuts: 3
+C43,TME,TICN,Dc>3-7,H1,55,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,H1,55,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,H1,55,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,H1,55,0.02,radial cuts: 3
+C43,TMG,TICN,Dc>3-7,H1,55,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,H1,55,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,H1,55,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,H2,35,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,H2,35,0.045,radial cuts: 1
+C43,TME,TICN,Dc>7-9,H2,35,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,H2,35,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,H2,35,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,H2,35,0.045,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,H2,35,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,H2,35,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,H3,30,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,H3,30,0.06,radial cuts: 3
+C43,TME,TICN,Dc>7-9,H3,30,0.08,radial cuts: 3
+C43,TME,TICN,Dc>9,H3,30,0.1,radial cuts: 3
+C43,TMG,TICN,Dc<=3,H3,30,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,H3,30,0.06,radial cuts: 3
+C43,TMG,TICN,Dc>7-9,H3,30,0.08,radial cuts: 3
+C43,TMG,TICN,Dc>9,H3,30,0.1,radial cuts: 3
+C43,TME,TICN,Dc<=3,H4,60,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,H4,60,0.065,radial cuts: 2
+C43,TME,TICN,Dc>7-9,H4,60,0.07,radial cuts: 1
+C43,TME,TICN,Dc>9,H4,60,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,H4,60,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,H4,60,0.065,radial cuts: 2
+C43,TMG,TICN,Dc>7-9,H4,60,0.07,radial cuts: 1
+C43,TMG,TICN,Dc>9,H4,60,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,O1,290,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O1,290,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O1,290,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O1,290,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,O1,290,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O1,290,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O1,290,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O1,290,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,O2,145,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O2,145,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O2,145,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O2,145,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,O2,145,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O2,145,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O2,145,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O2,145,0.1,radial cuts: 1
+C43,TME,TICN,Dc<=3,O3,65,0.011,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O3,65,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O3,65,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O3,65,0.1,radial cuts: 1
+C43,TMG,TICN,Dc<=3,O3,65,0.011,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O3,65,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O3,65,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O3,65,0.1,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O4,65,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O4,65,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O4,65,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O4,65,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O4,65,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O4,65,0.1,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O5,65,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O5,65,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O5,65,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O5,65,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O5,65,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O5,65,0.1,radial cuts: 1
+C43,TME,TICN,Dc>3-7,O6,215,0.035,radial cuts: 1
+C43,TME,TICN,Dc>7-9,O6,215,0.05,radial cuts: 1
+C43,TME,TICN,Dc>9,O6,215,0.1,radial cuts: 1
+C43,TMG,TICN,Dc>3-7,O6,215,0.035,radial cuts: 1
+C43,TMG,TICN,Dc>7-9,O6,215,0.05,radial cuts: 1
+C43,TMG,TICN,Dc>9,O6,215,0.1,radial cuts: 1
+C43,TMD,NHC/TAX,Dc<=5,O6,175,0.025,"f 0,1 mm/rev"
+C43,TMD,NHC/TAX,Dc>5-10,O6,175,0.045,"f 0,15 mm/rev"
+C43,TMD,NHC/TAX,Dc>10,O6,175,0.06,"f 0,2 mm/rev"

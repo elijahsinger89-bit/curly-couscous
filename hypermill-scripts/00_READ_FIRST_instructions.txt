@@ -24,8 +24,15 @@ copy_to_python_folder
                    B program name rule (b_programs.py)
   icons            part and boundary pictures for part_wizard_1
 
+Also in this folder (not copied into hyperMILL):
+  docs\hyperMILL_design_notes.md  the decisions behind every script: numbering standard, tool page fields, tecsets,
+                                  holder plan, what was tested in hyperMILL
+  macro_database\ISO_materials_dummy_macros.db  loads the 23 ISO material class names into hyperMILL (not tested yet)
+  copy_to_python_folder\tool_library\templates  NC master setup (Word) and sister tool sheet (Excel) templates
+
 Nothing else is needed. The old scripts (part_wizard_step1, step2, direct, batch_apply_strategy, hole_plan, set_hole_properties,
-shop_feeds, strategies, probes) are replaced and stay in your archive. The macro databases are not used by anything here.
+shop_feeds, strategies, probes) are replaced and stay in your archive. No script makes toolpaths from macros; a macro
+database is still loaded in hyperMILL only for the 23 ISO material class names the scripts look for (see docs).
 
 INSTALL
 1. Copy everything inside copy_to_python_folder into C:\Users\Public\Documents\OPEN MIND\python

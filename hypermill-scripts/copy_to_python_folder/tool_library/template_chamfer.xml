@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="35.1" srcURL="sqlite://C:\TEMP\OPEN MIND\hyperMILL\4320_000001DB7E9EF068_doc.db" srcGuid="947fe814-ec84-424c-b0a4-9f7594394af3" srcType="document" masterGuid="03445e81-3d0b-4eb1-a007-2725d63a22d4" files="chamfertool_files">
+  <container main-obj="NCTools" main-obj-name="150029">
+    <couplings/>
+    <tools>
+      <tool type="chamferedcutter" name="Chamfered Cutter">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="3a669acd-04e8-4bd0-a56e-7bb3bd2e3fa9"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolTotalLength" value="2.952756"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <param name="cuttingEdges" value="4"/>
+        <param name="cuttingLength" value="0"/>
+        <param name="toolShaftType" value="none"/>
+        <param name="toolDiameter" value="0.23622"/>
+        <param name="taperHeight" value="2.952756"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="2000"/>
+            <param name="cuttingSpeed" value="10"/>
+            <param name="planeFeedrate" value="200"/>
+            <param name="zFeedrate" value="50"/>
+            <param name="feedratePerEdge" value="0.5"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="100"/>
+          </tecset>
+        </tecsets>
+        <param name="radialRakeAngle" value="0"/>
+        <param name="helixAngle" value="0"/>
+        <param name="cuttingEdgeDistribution" value="equal"/>
+        <param name="cuttingEdgeTreatment" value="0"/>
+        <param name="allowPlunge" value="1"/>
+        <param name="tipDiameter" value="0.03937"/>
+        <param name="chamferAngle" value="45"/>
+        <param name="nominalDiameter" value="0.137795"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="150029" id="150029" name="Chamfered Cutter">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="41d537f0-6685-42a1-b65a-48912d1220dc"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="2.952756"/>
+        <param name="gageLength" value="2.952756"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <param name="manualToolChange" value="0"/>
+        <components>
+          <component type="tool" name="Chamfered Cutter"/>
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+        </cuttingProfiles>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+      </ncTool>
+    </ncTools>
+    <docObject type="ncTool">
+      <param name="externalObjectGuid" value="00000000-0000-0000-0000-000000000000"/>
+      <param name="externalObjectType" value="unknown"/>
+      <param name="scope" value="local"/>
+      <param name="state" value="local"/>
+      <param name="lastStateUpdate" value="20261016T115755"/>
+      <param name="locked" value="0"/>
+      <param name="localObject" value="150029"/>
+    </docObject>
+  </container>
+</omtdx>
