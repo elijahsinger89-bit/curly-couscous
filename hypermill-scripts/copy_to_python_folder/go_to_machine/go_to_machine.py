@@ -322,16 +322,12 @@ def tool_mda(progs, setpiece_ids, folder, doc_name, label):
         return out + ["Tool load MDA cancelled: not written."]
     tlm.save_last(counts)
     text, made = tlm.program(tools, counts, doc_name, "go_to_machine " + label)
-    if not made:
-        return out + ["Tool load MDA: every tool set to 0 sisters, not written."]
     path = tlm.write_program(text, folder, doc_name)
-    left = [t["id"] for t in tools if counts.get(t["id"], (1, 0))[0] == 0]
-    blank = [t["id"] for t in tools if t["id"] in need and counts.get(t["id"], (1, 0))[0] > 0 and counts.get(t["id"], (1, 0))[1] == 0]
-    log("tool load MDA:", path, "|", made, "tool entries |", len(tools), "tools | left out:", left, "| no gage:", no_gage, "| SETPIECE without tool life:", blank)
-    out += ["Tool load MDA: %d tool entr%s (%d tool%s) - paste into MDA, cycle start:" % (
-        made, "y" if made == 1 else "ies", len(tools) - len(left), "" if len(tools) - len(left) == 1 else "s"), "  " + path]
-    if left:
-        out.append("  left out (0 sisters): " + ", ".join(left))
+    extra = sum(counts.get(t["id"], (0, 0))[0] for t in tools)
+    blank = [t["id"] for t in tools if t["id"] in need and counts.get(t["id"], (0, 0))[1] == 0]
+    log("tool load MDA:", path, "|", made, "tool entries |", len(tools), "tools |", extra, "extra sisters | no gage:", no_gage, "| SETPIECE without tool life:", blank)
+    out += ["Tool load MDA: %d tool%s + %d extra sister%s (%d entr%s) - paste into MDA, cycle start:" % (
+        len(tools), "" if len(tools) == 1 else "s", extra, "" if extra == 1 else "s", made, "y" if made == 1 else "ies"), "  " + path]
     if no_gage:
         out.append("  left out (no gage length): " + ", ".join(no_gage))
     if blank:

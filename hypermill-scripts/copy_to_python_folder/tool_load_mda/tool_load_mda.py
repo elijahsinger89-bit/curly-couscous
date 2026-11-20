@@ -1,8 +1,8 @@
 # tool_load_mda.py - the NC tools of the open document as one Sinumerik MDA program that creates every tool and sister on the
 # control (paste the file into MDA and cycle start).
 # Screens: 1 source: one joblist, all joblists, or every tool in the document
-#          2 per tool (5 tools per screen): number of sisters (default 1, 0 = leave the tool out) and tool life in pieces
-#            (blank or 0 = no tool life monitoring)
+#          2 per tool (5 tools per screen): sisters = EXTRA tools (default 0 = the tool only, 1 = two tools on the
+#            control) and tool life in pieces (blank or 0 = no tool life monitoring)
 #          3 turning tools only (5 per screen): tip direction, and cut direction for 500 / 510
 # Per tool and sister the program writes:
 #   R999=GETT("<ID>",<sister>)        is that tool and sister already on the control? (-1 = no)
@@ -24,9 +24,10 @@
 # Tool name on the control = the NC tool ID (Common > ID). A tool and sister already on the control are left exactly as
 # they are (measured length, remaining life): NEWT would stop with alarm 14020 on them. Running the program twice is safe.
 # The sisters and tool life entered are remembered per tool ID (tool_load_mda_last.json) and offered next time; tip and
-# cut direction too (tool_load_mda_turning.json).
-# go_to_machine uses this script (tool_data, ask_counts, program, write_program, load_last, save_last) after posting;
-# there the tool life of tools whose B program counts with SETPIECE is marked "tool life (SETPIECE)".
+# cut direction too (tool_load_mda_turning.json). Files from before 21 Nov 2026 held the total number of tools: they are
+# read as extras (total - 1) once and saved in the new form.
+# go_to_machine uses this script (tool_data, ask_counts, fixed_counts, program, write_program, load_last, save_last) after
+# posting; there the tool life of tools whose B program counts with SETPIECE is marked "tool life (SETPIECE)".
 # Output: <document folder>\<document>_TOOL_LOAD.MPF (else C:\Users\Public\Documents\OPEN MIND\), opened in Notepad when done.
 # Log: C:\Users\Public\Documents\OPEN MIND\tool_load_mda_log.txt
 import os, re, json, tempfile, traceback, datetime
@@ -214,13 +215,30 @@ def last_path():
     return os.path.join(OUT_DIR if os.path.isdir(OUT_DIR) else tempfile.gettempdir(), "tool_load_mda_last.json")
 
 
+FORMAT_KEY, FORMAT = "_sisters", "extras"     # marks a tool_load_mda_last.json that holds extras, not totals
+
+
 def load_last():
-    """{tool ID: (sisters, life)} from the last runs."""
+    """{tool ID: (sisters, life)} from the last runs; sisters = extra tools. A file without the format mark holds totals
+    (before 21 Nov 2026): read as total - 1."""
     try:
         with open(last_path(), encoding="utf-8") as f:
-            return {k: (int(v[0]), int(v[1])) for k, v in json.load(f).items()}
+            raw = json.load(f)
     except Exception:
         return {}
+    old = raw.get(FORMAT_KEY) != FORMAT
+    out = {}
+    for k, v in raw.items():
+        if k == FORMAT_KEY:
+            continue
+        try:
+            s, life = int(v[0]), int(v[1])
+        except Exception:
+            continue
+        out[k] = (max(0, s - 1) if old else s, life)
+    if old and out:
+        log("tool_load_mda_last.json held totals: read as extras (total - 1)")
+    return out
 
 
 def save_last(counts):
@@ -228,9 +246,22 @@ def save_last(counts):
     d.update(counts)
     try:
         with open(last_path(), "w", encoding="utf-8") as f:
-            json.dump({k: list(v) for k, v in d.items()}, f, indent=1)
+            data = {FORMAT_KEY: FORMAT}
+            data.update({k: list(v) for k, v in d.items()})
+            json.dump(data, f, indent=1)
     except Exception as e:
         log("last values not saved:", e)
+
+
+def fixed_counts(tools, table=None):
+    """{id: (sisters, life)} without screens: from table {id: (sisters, life)} (the filled sister sheet), else 0 sisters
+    and no tool life (validation: one of each tool)."""
+    table = table or {}
+    out = {}
+    for t in tools:
+        s, life = table.get(t["id"], (0, 0))
+        out[t["id"]] = (max(0, int(s or 0)), max(0, int(life or 0)))
+    return out
 
 
 def turn_path():
@@ -313,9 +344,9 @@ def ask_turning(tools):
 
 
 def ask_counts(tools, defaults=None, need_life=None):
-    """Sisters and tool life per tool, PER_SCREEN tools per screen, then the turning tools' screen (ask_turning) for
-    turning tools with sisters. Returns {id: (sisters, life)} or None when cancelled.
-    defaults: {id: (sisters, life)} shown instead of 1 / blank. need_life: IDs whose tool life field is labelled
+    """Sisters (extra tools: 0 = the tool only) and tool life per tool, PER_SCREEN tools per screen, then the turning
+    tools' screen (ask_turning). Returns {id: (sisters, life)} or None when cancelled.
+    defaults: {id: (sisters, life)} shown instead of 0 / blank. need_life: IDs whose tool life field is labelled
     "tool life (SETPIECE)" (their B program counts with SETPIECE, which needs tool life monitoring on the control)."""
     g = _gui()
     defaults = defaults or {}
@@ -328,10 +359,11 @@ def ask_counts(tools, defaults=None, need_life=None):
 
     for start in range(0, len(tools), PER_SCREEN):
         page = tools[start:start + PER_SCREEN]
-        dlg = g.InputDialog("%s | tools %d-%d of %d" % (TITLE, start + 1, start + len(page), len(tools)))
+        dlg = g.InputDialog("%s | tools %d-%d of %d | sisters = extra tools (0 = this tool only, 1 = two)" % (
+            TITLE, start + 1, start + len(page), len(tools)))
         for t in page:
             ls, ll = labels(t)
-            sis, life = defaults.get(t["id"], (1, 0))
+            sis, life = defaults.get(t["id"], (0, 0))
             dlg.AddText(ls, defaultValue=str(sis))
             dlg.AddText(ll, defaultValue=str(life) if life else "")
         ok, vals = dlg.Show()
@@ -348,11 +380,11 @@ def ask_counts(tools, defaults=None, need_life=None):
             sis = num(ls)
             life = num(ll)
             if sis is None or life is None:
-                info("%s: sisters and tool life must be whole numbers. Tool left out." % t["id"])
-                log("bad entry, left out:", t["id"], vals.get(ls), vals.get(ll))
+                info("%s: sisters and tool life must be whole numbers. Written with 0 sisters and no tool life." % t["id"])
+                log("bad entry, 0 sisters / no tool life:", t["id"], vals.get(ls), vals.get(ll))
                 sis, life = 0, 0
             out[t["id"]] = (sis, life)
-    if not ask_turning([t for t in tools if out.get(t["id"], (0, 0))[0] > 0]):
+    if not ask_turning(tools):
         return None
     return out
 
@@ -382,8 +414,8 @@ def program(tools, counts, doc_name, source):
     p.append("")
     made = 0
     for t in tools:
-        sis, life = counts.get(t["id"], (1, 0))
-        for s in range(1, sis + 1):
+        sis, life = counts.get(t["id"], (0, 0))
+        for s in range(1, sis + 2):            # the tool (DUPLO 1) and its extra sisters (DUPLO 2 ...)
             p += ['%s=GETT("%s",%d)' % (R_VAR, t["id"], s),
                   "IF (%s<=0)" % R_VAR,
                   '  %s=NEWT("%s",%d)' % (R_VAR, t["id"], s),
@@ -468,13 +500,11 @@ def run():
         except Exception:
             pass
         text, made = program(tools, counts, doc_name, source)
-        if not made:
-            info("Every tool was set to 0 sisters. No program written."); return
         path = write_program(text, folder, doc_name)
-        left =[t["id"] for t in tools if counts.get(t["id"], (1, 0))[0] == 0]
-        log("written:", path, "|", made, "tool entries |", len(tools), "tools |", "left out (0 sisters):", left)
-        info("%d tool(s) with sisters written to:\n%s\n\nPaste it into MDA and cycle start.%s" % (
-            made, path, ("\nLeft out (0 sisters): " + ", ".join(left)) if left else ""))
+        extra = sum(counts.get(t["id"], (0, 0))[0] for t in tools)
+        log("written:", path, "|", made, "tool entries |", len(tools), "tools |", extra, "extra sisters")
+        info("%d tools and %d extra sister%s (%d entries) written to:\n%s\n\nPaste it into MDA and cycle start." % (
+            len(tools), extra, "" if extra == 1 else "s", made, path))
         if OPEN_FILE:
             try:
                 import subprocess

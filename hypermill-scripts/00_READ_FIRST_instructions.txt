@@ -330,8 +330,9 @@ TOOL LOAD MDA
 R999 holds the T number each NEWT returns. The generator never puts a CMC R block over R999.
 One Sinumerik MDA program that creates every tool and sister on the control: paste it into MDA and cycle start.
 Screens: 1 Tools from: one joblist, All joblists, or All tools in the document (go_to_machine skips this: it uses the tools
-  of the B programs it posted). 2 Per tool, 5 per screen: sisters (0 = leave the tool out) and tool life in pieces (blank =
-  no tool life monitoring). Both are remembered per tool ID (tool_load_mda_last.json) and offered next time.
+  of the B programs it posted). 2 Per tool, 5 per screen: sisters = EXTRA tools (0 = the tool only, 1 = two tools; every
+  tool is loaded at least once) and tool life in pieces (blank = no tool life monitoring). Both are remembered per tool ID
+  (tool_load_mda_last.json) and offered next time. Files from before 21 Nov 2026 held the total: read once as total - 1.
   3 Turning tools only, 5 per screen: tip direction (1-9) and, for 500 roughing / 510 finishing only, cut direction
   (1 down, 2 up, 3 left, 4 right: the arrows on the control). Tip 1 = upper right, 2 upper left, 3 lower left, 4 lower
   right; the arrow must point to that corner (tip 1: up or right, 2: up or left, 3: down or left, 4: down or right),

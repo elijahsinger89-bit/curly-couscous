@@ -71,19 +71,21 @@ def run(answers):
 m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(M_10047210=("2", "50"), M_90508390=("1", ""))])
 check(left == 0 and os.path.exists(MPF), "program written next to the document")
 txt = open(MPF).read()
-check(txt.count('NEWT("M_10047210",') == 2 and 'R999=NEWT("M_10047210",2)' in txt and 'R999=NEWT("M_50016110",1)' in txt,
-      "NEWT per sister: 2 for the end mill, 1 (default) for the drill")
-check(txt.count("$TC_MOP13[R999,1]=50") == 2 and txt.count("$TC_TP9[R999]=2") == 2, "tool life 50 on both end mill sisters")
+check(txt.count('NEWT("M_10047210",') == 3 and 'R999=NEWT("M_10047210",3)' in txt and txt.count('NEWT("M_50016110",') == 1,
+      "sisters = extras: end mill + 2 sisters = 3 NEWT (DUPLO 1-3), drill default 0 sisters = 1")
+check(txt.count('NEWT("M_90508390",') == 2, "face mill 1 sister = 2 tools")
+check(txt.count("$TC_MOP13[R999,1]=50") == 3 and txt.count("$TC_TP9[R999]=2") == 3, "tool life 50 on all three end mills")
 check("$TC_DP1[R999,1]=120" in txt and "$TC_DP1[R999,1]=200" in txt and "$TC_DP1[R999,1]=140" in txt, "Siemens types 120 / 200 / 140")
 check("$TC_DP3[R999,1]=4.7244" in txt and "$TC_TPC4[R999]=4.0000" in txt, "metric face mill: gage 120 mm -> 4.7244 in, HD 4.0 below 4 in")
 check("M_NOGAGE" not in txt and txt.rstrip().endswith("M30"), "tool without a gage length left out; ends with M30")
-check(txt.count('R999=GETT("M_10047210",2)') == 1 and txt.count("IF (R999<=0)") == txt.count("ENDIF") == txt.count("=NEWT(") == 4,
+check(txt.count('R999=GETT("M_10047210",2)') == 1 and txt.count("IF (R999<=0)") == txt.count("ENDIF") == txt.count("=NEWT(") == 6,
       "every tool and sister: GETT first, NEWT only inside IF (R999<=0) ... ENDIF (already on the control = left as it is)")
 i = txt.index('R999=GETT("M_50016110",1)')
 check(txt[i:].split("\n")[1] == "IF (R999<=0)" and txt[i:].split("\n")[2] == '  R999=NEWT("M_50016110",1)', "GETT, IF, NEWT in that order")
 check("written to" in gui.BOXES[-1] and "Paste it into MDA" in gui.BOXES[-1], "final message")
 last = json.load(open(os.path.join(tmp, "tool_load_mda_last.json")))
-check(last.get("M_10047210") == [2, 50] and last.get("M_50016110") == [1, 0], "sisters and tool life remembered per tool ID")
+check(last.get("M_10047210") == [2, 50] and last.get("M_50016110") == [0, 0] and last.get("_sisters") == "extras",
+      "sisters (extras) and tool life remembered per tool ID, file marked as extras")
 
 # second run: the remembered values are the defaults
 m, left = run([lambda dlg: (True, {"Tools from": 0}), lambda dlg: (True, dlg.defaults())])
@@ -102,12 +104,26 @@ tools = [m2.tool_data(em), m2.tool_data(dr)]
 c = m2.ask_counts(tools, {}, {"M_50016110"})
 labels = [f[1] for f in gui.SHOWN[-1][1]]
 check("M_50016110  D0.1614  tool life (SETPIECE)" in labels and "M_10047210  D0.4724  tool life" in labels, "SETPIECE tools labelled")
-check(c == {"M_10047210": (1, 0), "M_50016110": (1, 0)}, "defaults: 1 sister, no tool life")
+check(c == {"M_10047210": (0, 0), "M_50016110": (0, 0)}, "defaults: 0 sisters (the tool only), no tool life")
+check("sisters = extra tools (0 = this tool only, 1 = two)" in gui.SHOWN[-1][0], "screen title says sisters are extra tools")
+check(m2.fixed_counts(tools, {"M_10047210": (2, 40)}) == {"M_10047210": (2, 40), "M_50016110": (0, 0)},
+      "fixed_counts: from the sister sheet, else 0 sisters / no life")
 
-# all tools in the document; 0 sisters everywhere -> nothing written
+# all tools in the document; 0 sisters everywhere -> every tool once
 os.remove(MPF)
 m, left = run([lambda dlg: (True, {"Tools from": 2}), counts(M_10047210=("0", ""), M_50016110=("0", ""), M_90508390=("0", ""))])
-check(not os.path.exists(MPF) and "0 sisters" in gui.BOXES[-1], "every tool 0 sisters: no program")
+t0 = open(MPF).read()
+check(t0.count("=NEWT(") == 3 and "3 tools and 0 extra sisters" in gui.BOXES[-1], "every tool 0 sisters: each tool once, nothing left out")
+
+# a remembered file from before (totals): read as extras once, saved marked
+with open(os.path.join(tmp, "tool_load_mda_last.json"), "w") as f:
+    json.dump({"M_10047210": [3, 10], "M_50016110": [1, 0], "M_OLD0": [0, 0]}, f)
+spec = importlib.util.spec_from_file_location("tlm_old", SCRIPT)
+mo = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(mo)
+check(mo.load_last() == {"M_10047210": (2, 10), "M_50016110": (0, 0), "M_OLD0": (0, 0)}, "old totals read as extras (3 -> 2, 1 -> 0, 0 -> 0)")
+mo.save_last({})
+check(mo.load_last()["M_10047210"] == (2, 10), "saved in the new form: not converted twice")
 
 # turning tools: real hyperMILL export of 943580900 (trimmed), a milling-only export as the control case
 XML = open(os.path.join(HERE, "fixtures", "turning_943580900.omtdx"), encoding="utf-8").read()
@@ -187,9 +203,9 @@ def turn_cancel(dlg):
 m, left = run([lambda dlg: (True, {"Tools from": 0}), lambda dlg: (True, dlg.defaults()), turn_cancel])
 check(not os.path.exists(MPF), "cancel on the turning screen: no program")
 
-# 0 sisters on the turning tool: no turning screen
-m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(**{"943580900": ("0", "")})])
-check(left == 0 and os.path.exists(MPF) and "943580900" not in open(MPF).read().split("\n", 4)[-1], "turning tool with 0 sisters: no screen 3, left out")
+# 0 sisters on the turning tool: it is still loaded once, so screen 3 still asks tip / cut
+m, left = run([lambda dlg: (True, {"Tools from": 0}), counts(**{"943580900": ("0", "")}), lambda dlg: (True, dlg.defaults())])
+check(left == 0 and open(MPF).read().count('NEWT("943580900",') == 1, "turning tool with 0 sisters: screen 3 asked, loaded once")
 
 shutil.rmtree(tmp, ignore_errors=True)
 print()

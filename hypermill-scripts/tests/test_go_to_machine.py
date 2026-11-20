@@ -378,12 +378,12 @@ check(left == 0 and gui.SHOWN[0][1][-1][:2] == ("bool", "Tool load MDA") and gui
 check(gui.SHOWN[-1][0].startswith("Tool load MDA | tools 1-3 of 3") and "10047210  D0.4724  tool life (SETPIECE)" in labels,
       "MDA screen after posting: the 3 tools of the B programs, SETPIECE tools marked")
 txt = open(MPF).read()
-check(txt.count('NEWT("10047210",') == 2 and 'NEWT("11039410",1)' in txt and "905083900" not in txt,
-      "MDA: 2 sisters of the end mill, 1 drill, face mill left out (0 sisters)")
-check(txt.count("$TC_MOP13[R999,1]=50") == 2 and "go_to_machine Op10" in txt, "MDA: tool life 50 on the end mill; source in the header")
-check("Tool load MDA: 3 tool entries (2 tools)" in box and "G17_SLIDE_OP10_TOOL_LOAD.MPF" in box, "message: MDA path and counts")
-check("left out (0 sisters): 905083900" in box and "WARNING - SETPIECE counts these tools but no tool life was entered" in box
-      and "11039410" in box.split("WARNING - SETPIECE")[1], "message: left out and SETPIECE-without-tool-life warning")
+check(txt.count('NEWT("10047210",') == 3 and txt.count('NEWT("11039410",') == 1 and txt.count('NEWT("905083900",') == 1,
+      "MDA (sisters = extras): end mill + 2 = 3, drill 1, face mill 0 sisters = 1 (not left out)")
+check(txt.count("$TC_MOP13[R999,1]=50") == 3 and "go_to_machine Op10" in txt, "MDA: tool life 50 on the end mills; source in the header")
+check("Tool load MDA: 3 tools + 2 extra sisters (5 entries)" in box and "G17_SLIDE_OP10_TOOL_LOAD.MPF" in box, "message: MDA path and counts")
+check("left out" not in box and "WARNING - SETPIECE counts these tools but no tool life was entered" in box
+      and "11039410" in box.split("WARNING - SETPIECE")[1], "message: nothing left out; SETPIECE-without-tool-life warning")
 check(json.load(open(os.path.join(tmp, "tool_load_mda_last.json"))).get("10047210") == [2, 50], "MDA values remembered")
 
 build(all_pass=True)
