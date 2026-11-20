@@ -14,7 +14,7 @@
 # tool_load_mda writes into NEWT).
 import re
 
-VERSION = "2026-11-18"
+VERSION = "2026-11-20"
 MAX_NAME = 24
 MAX_STEP = 9999
 PROBE_STEP = 1
@@ -277,6 +277,17 @@ def step_of(name, part, machine):
     """Step number from a B program name with this part and machine, else None."""
     m = re.match(r"^B_%s_(\d{3,4})%s$" % (re.escape(part), ("_" + re.escape(machine)) if machine else ""), name)
     return int(m.group(1)) if m else None
+
+
+# the step is the last group of 3-4 digits that is followed by a machine (holding a letter) or by nothing
+_NAME_RE = re.compile(r"^B_([A-Za-z0-9_]+)_(\d{3,4})(?:_([A-Za-z0-9_]*[A-Za-z][A-Za-z0-9_]*))?$")
+
+
+def parse_name(name):
+    """(part, step, machine) from B_<part>_<step>_<machine> or B_<part>_<step>; None when it is not a B program name.
+    B_00948602_025_010_HF5 -> ('00948602_025', 10, 'HF5'); B_00948602_025_010 -> ('00948602_025', 10, '')."""
+    m = _NAME_RE.match(str(name or "").strip())
+    return (m.group(1), int(m.group(2)), m.group(3) or "") if m else None
 
 
 def _f(x):

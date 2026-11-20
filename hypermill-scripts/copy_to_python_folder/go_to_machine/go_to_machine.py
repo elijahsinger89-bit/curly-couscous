@@ -1,10 +1,12 @@
 # go_to_machine.py - hyperMILL 35. The job-end menu: checks the B programs, posts them, writes what goes to the machine.
-# Screen 1: Joblist (one or all), Part number, Machine (defaults: the last B program rename), Package:
+# Screen 1: Joblist (one or all), Part number, Machine (defaults: the part / machine most B program names in this
+#   document use; none = the last B program rename), Package:
 #   Validation      bare minimum to prove the job: post, B program list, tool load MDA with NO sisters, order sheet
 #                   (1 of each tool and holder), sister tool sheet to fill in during prove-out
 #   Production      everything: post, B program list, tool load MDA WITH sisters and tool life, order sheet (1 + sisters),
 #                   NC master setup sheet. Sisters / tool life come from the filled sister tool sheet (the newest one in
-#                   go to machine\VALIDATION_*; its path can be changed). None found: stops before posting.
+#                   go to machine\VALIDATION_* that has values; its path can be changed). None found: stops before
+#                   posting. Tools of the job that are not on the sheet are listed (they get 0 sisters, no tool life).
 #   Pick functions  nothing ticked: tick what you want. Without a sister sheet the tool load MDA asks sisters on screens.
 # Screen 2: the functions, ticked by the package (any can be unticked or ticked): Post the B programs, B program list,
 #   Tool load MDA, Order sheet, Sister tool sheet, NC master setup sheet; Programmer (remembered); Sister sheet (not for
@@ -13,8 +15,9 @@
 #   is calculated (POFStatus UP_TO_DATE), has no errors (Status not ERRORS), and has been run through Simulation Center
 #   without a collision since its last change (tool_library\release_check.py: POF header toolpath id -> POF\<id>.ccrpt
 #   "CC_RESULT 1").
-# Posting: when B programs fail, a warning with the list, then Post: No - post nothing / Post all / Post only the ones
-# that pass. Stops when a step number is used twice. Warns about names over 24 characters.
+# Posting: when every B program passes, it posts (no confirm: the Post tick is the decision). When some fail, a warning
+# with the list, then Post: No - post nothing / Post all / Post only the ones that pass. Stops when a step number is
+# used twice. Warns about names over 24 characters.
 # Output (NC files stay where the post writes them): <document folder>\go to machine\VALIDATION_<date> or
 # PRODUCTION_<date> (Pick functions: go to machine); if it cannot be written: C:\Users\Public\Documents\OPEN MIND.
 #   - when only some B programs were posted: B program list and documents: Only the posted ones / All B programs
@@ -26,8 +29,12 @@
 #   - <DOCUMENT>_TOOL_LOAD.MPF from the installed tool_load_mda script (sisters = extra tools). Tools of B programs that
 #     count with SETPIECE without a tool life get a warning (the control only counts pieces with tool life monitoring).
 #   - <document>_ORDER.xlsx, <document>_SISTERS.xlsx, <document>_SETUP.docx (tool_library\job_docs.py; templates in
-#     tool_library\templates). Tool numbers that do not follow NUMBER_STANDARD are listed.
-# Log: C:\Users\Public\Documents\OPEN MIND\go_to_machine_log.txt
+#     tool_library\templates). Tool numbers that do not follow NUMBER_STANDARD are listed. A new sister sheet gets the
+#     Sisters / Tool Life of the newest filled one (a re-run keeps what was filled in). A file open in Excel / Word is
+#     named in the message; the other files are still written.
+#   - go_to_machine_log.txt: every run into that folder is added to it (what was checked, posted, written).
+# The output folder opens in Explorer at the end when something was written (OPEN_FOLDER).
+# Log: C:\Users\Public\Documents\OPEN MIND\go_to_machine_log.txt (last run)
 import os, re, csv, json, time, shutil, tempfile, traceback, datetime, importlib.util
 
 PY_DIR   = r"C:\Users\Public\Documents\OPEN MIND\python"
@@ -37,6 +44,7 @@ LIB_DIRS = (os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool
 TLM_FILES = (os.path.join(PY_DIR, "tool_load_mda", "tool_load_mda.py"), os.path.join(HERE, "..", "tool_load_mda", "tool_load_mda.py"))
 NUMBER_STANDARD = "HELLER"          # tool_numbers.STANDARDS: tool IDs that do not follow it are listed
 OUT_SUB  = "go to machine"          # folder in the document folder for everything but the NC files
+OPEN_FOLDER = True                  # open the output folder in Explorer at the end when something was written
 TITLE    = "Go to machine"
 PACKAGES = ["Validation", "Production", "Pick functions"]
 F_POST, F_BLIST, F_MDA = "Post the B programs", "B program list (generator)", "Tool load MDA"
@@ -51,6 +59,7 @@ BOX_WIDTH = 90
 NC_EXT   = (".mpf", ".spf", ".nc", ".h", ".txt", ".ptp", ".cnc", ".iso", ".min")
 
 lines = []
+_dest = [None]          # output folder of this run (the log is added to it)
 
 
 def log(*a):
@@ -294,6 +303,11 @@ def tool_mda(progs, setpiece_ids, folder, doc_name, label, table=None, ask=True)
         out.append("  left out (no gage length): " + ", ".join(no_gage))
     if blank:
         out.append("  WARNING - SETPIECE counts these tools but no tool life was entered (the control will not count them): " + ", ".join(blank))
+    if not ask and table is not None:
+        off = [t["id"] for t in tools if t["id"] not in table]
+        if off:
+            log("not on the sister sheet:", off)
+            out.append("  WARNING - not on the sister sheet (0 sisters, no tool life): " + ", ".join(off))
     return out, counts
 
 
@@ -355,10 +369,17 @@ def material_of(lists, names, scope):
     return ""
 
 
-def newest_sister_sheet(folder):
-    """The newest *_SISTERS.xlsx in <document folder>\\go to machine\\VALIDATION_*, or ''."""
+def filled(table):
+    """{tool id: (sisters, life)} -> the entries with a value (blank rows of a sister sheet read as (0, 0))."""
+    return dict((k, v) for k, v in (table or {}).items() if v[0] or v[1])
+
+
+def newest_sister_sheet(folder, jd=None):
+    """The newest *_SISTERS.xlsx in <document folder>\\go to machine\\VALIDATION_* that has Sisters or Tool Life filled
+    in (read with jd = job_docs); none filled, or jd None = the newest; none at all = ''. A blank sheet written by a
+    later Validation run is passed over."""
     root = os.path.join(folder, OUT_SUB)
-    best = ("", 0.0)
+    found = []
     try:
         for d in os.listdir(root):
             if not d.upper().startswith("VALIDATION_"):
@@ -366,12 +387,39 @@ def newest_sister_sheet(folder):
             for n in os.listdir(os.path.join(root, d)):
                 if n.upper().endswith("_SISTERS.XLSX") and not n.startswith("~$"):
                     p = os.path.join(root, d, n)
-                    t = os.path.getmtime(p)
-                    if t > best[1]:
-                        best = (p, t)
+                    found.append((os.path.getmtime(p), p))
     except Exception:
         pass
-    return best[0]
+    found.sort(reverse=True)
+    if jd is not None:
+        for _, p in found:
+            try:
+                if filled(jd.read_sister_sheet(p)[0]):
+                    return p
+            except Exception as e:
+                log("sister sheet not read:", p, e)
+    return found[0][1] if found else ""
+
+
+def doc_part_machine(bp, lists):
+    """(part, machine) that most B program names in the document use, or None (no B program names)."""
+    seen = {}
+    for jl in lists:
+        for cj in bp.compound_jobs(jl):
+            p = bp.parse_name(bp.get_name(cj))
+            if p:
+                seen[(p[0], p[2])] = seen.get((p[0], p[2]), 0) + 1
+    return max(sorted(seen), key=lambda k: seen[k]) if seen else None
+
+
+def locked_text(e):
+    """Message for a file Windows would not let us write (open in Excel / Word)."""
+    f = getattr(e, "filename", "") or ""
+    return "%s is open (Excel / Word?): close it and run again. Not written." % (os.path.basename(f) or "A file")
+
+
+def is_locked(e):
+    return isinstance(e, PermissionError) or getattr(e, "errno", None) == 13
 
 
 def last_settings():
@@ -526,7 +574,28 @@ def post(model, targets, folder):
     return res, ok, written
 
 
+def wrote_since(folder, t0):
+    """Any file in folder written since t0 (this run)."""
+    try:
+        return any(os.path.getmtime(os.path.join(folder, n)) >= t0 - 2 for n in os.listdir(folder)
+                   if os.path.isfile(os.path.join(folder, n)))
+    except Exception:
+        return False
+
+
+def open_folder(folder):
+    try:
+        if hasattr(os, "startfile"):
+            os.startfile(folder)
+            log("opened:", folder)
+    except Exception as e:
+        log("folder not opened:", e)
+
+
 def run():
+    del lines[:]
+    _dest[0] = None
+    t0 = time.time()
     try:
         bp = load_lib("b_programs.py", "hm_b_programs")
         rc = load_lib("release_check.py", "hm_release_check")
@@ -546,11 +615,14 @@ def run():
             info("No joblists in this document."); return
         scopes = names + (["All joblists"] if len(names) > 1 else [])
         last, st = last_rename(), last_settings()
+        dm = doc_part_machine(bp, lists)
+        part0, mach0 = dm if dm else (last.get("part", ""), last.get("machine", ""))
+        log("part / machine offered:", part0, mach0 or "-", "(this document's B programs)" if dm else "(last B program rename)")
         g = _gui()
         dlg = g.InputDialog(TITLE)
         dlg.AddDropDown("Joblist", scopes, defaultIndex=0)
-        dlg.AddText("Part number", defaultValue=last.get("part", ""))
-        dlg.AddText("Machine", defaultValue=last.get("machine", ""))
+        dlg.AddText("Part number", defaultValue=part0)
+        dlg.AddText("Machine", defaultValue=mach0)
         dlg.AddDropDown("Package", PACKAGES, defaultIndex=PACKAGES.index(st.get("package")) if st.get("package") in PACKAGES else 0)
         ok, v = dlg.Show()
         if not ok:
@@ -561,13 +633,19 @@ def run():
         err = bp.input_errors(part, machine, "10", "10")
         if err:
             info("Fix these first:\n\n" + "\n".join(err)); return
+        try:
+            docs = load_docs_lib()
+        except Exception as e:
+            docs = {}
+            log("tool_library documents not loaded:", e)
+        jd = docs.get("job_docs")
         # ---- screen 2: what to make (ticked by the package; untick or tick any) ----
         dlg = g.InputDialog("%s | %s" % (TITLE, package) + ("" if package == "Pick functions" else " (untick what you do not want)"))
         for f in FUNCS:
             dlg.AddBool(f, defaultValue=f in PRESET[package])
         dlg.AddText(F_PROG, defaultValue=st.get("programmer") or os.environ.get("USERNAME", ""))
         if package != "Validation":
-            dlg.AddText(F_SHEET, defaultValue=newest_sister_sheet(folder))
+            dlg.AddText(F_SHEET, defaultValue=newest_sister_sheet(folder, jd))
         ok, v = dlg.Show()
         if not ok:
             log("cancelled at the functions screen"); return
@@ -578,17 +656,21 @@ def run():
         log("joblist:", scope, "| part:", part, "| machine:", machine or "-", "| package:", package, "|",
             ", ".join(f for f in FUNCS if funcs[f]) or "check only", "| sister sheet:", sheet_path or "-")
         # ---- sisters / tool life: validation 0, production the filled sister sheet ----
-        table, docs = None, {}
+        table, early = None, []
         if package == "Production" and (funcs[F_MDA] or funcs[F_ORDER] or funcs[F_SETUP]) and not os.path.isfile(sheet_path):
             info("Production needs the sister sheet filled in during validation (Sisters, Tool Life):\n%s\n\nRun Validation "
                  "first, fill the sheet and save it, or give its path on the second screen." % (sheet_path or "(none found)"))
             return
         if sheet_path and os.path.isfile(sheet_path):
-            docs = load_docs_lib()
-            table, sprobs = docs["job_docs"].read_sister_sheet(sheet_path)
-            log("sister sheet:", sheet_path, "|", len(table), "tools |", sprobs)
+            if jd is None:
+                raise RuntimeError("job_docs.py not found in tool_library: the sister sheet cannot be read")
+            table, sprobs = jd.read_sister_sheet(sheet_path)
+            log("sister sheet:", sheet_path, "|", len(table), "tools |", len(filled(table)), "filled |", sprobs)
             if sprobs:
                 info("Sister sheet: these were read as 0:\n" + "\n".join(sprobs))
+            if not filled(table):
+                early += ["WARNING - the sister sheet has no Sisters or Tool Life filled in (every tool: 0 sisters, no tool life):",
+                          "  " + sheet_path, ""]
         # ---- check ----
         chosen = [(n, [bp.classify(cj, n) for cj in bp.compound_jobs(jl)]) for jl, n in zip(lists, names)
                   if scope == "All joblists" or n == scope]
@@ -619,7 +701,8 @@ def run():
             info("\n".join(summary + ["", "Check only: nothing posted, nothing written."])); return
 
         # ---- post ----
-        msg, pick, targets = [], 0, progs
+        msg, pick, targets = list(early), 0, progs
+        detail = []                                         # file lists and NC facts: output window and log only
         if funcs[F_POST]:
             if nfail:
                 info("WARNING: %d of %d B programs fail the check.\n\n" % (nfail, len(progs)) + "\n".join(summary[2:] if len(summary) > 2 else summary))
@@ -632,10 +715,6 @@ def run():
                 targets = progs if pick == 1 else [p for p in progs if p["ok"]]
                 if pick == 1:
                     log("POSTED WITH FAILURES:", ", ".join(p["name"] for p in fails))
-            else:
-                pick = choose(TITLE + " | confirm", "Post", ["No - do not post", "Yes - post %d B program%s" % (len(progs), "" if len(progs) == 1 else "s")])
-                if pick != 1:
-                    log("not posted (confirm answered No)"); info("Nothing posted."); return
             res, ok, written = post(model, targets, folder)
             found = {stem(p): p for p in written}
             missing = [p["name"] for p in targets if p["name"].lower() not in found]
@@ -644,7 +723,8 @@ def run():
             else:
                 msg.append("Posted %d B program%s (CalculateNC returned %r)." % (len(targets), "" if len(targets) == 1 else "s", res))
             msg.append("NC files written or updated: %d" % len(written))
-            msg += ["  " + os.path.relpath(p, folder) for p in written[:12]]
+            detail += ["  " + os.path.relpath(p, folder) for p in written[:12]]
+            msg += detail[-min(len(written), 12):] if written else []
             if missing:
                 msg += ["", "No NC file found for:"] + ["  " + n for n in missing]
             if pick == 1 and nfail:
@@ -674,6 +754,7 @@ def run():
                 log("cannot create", dest, e)
         if not dest or not writable(dest):
             dest = out_dir()
+        _dest[0] = dest
         log("output folder:", dest)
         msg += ["", "Output folder: " + dest]
         base = os.path.splitext(path.replace("\\", "/").split("/")[-1])[0] or "document"
@@ -697,10 +778,17 @@ def run():
                     log("NC facts FAILED:", traceback.format_exc())
                     facts = []
                 if data["steps"] and not any("used twice" in x for x in xproblems):
-                    pj, pc = bp.write_export(data, dest, base)
-                    log("B program list:", pj, "|", pc)
-                    msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
-                    msg += ["  " + x for x in facts]
+                    try:
+                        pj, pc = bp.write_export(data, dest, base)
+                        log("B program list:", pj, "|", pc)
+                        msg += ["", "B program list for the generator (Import B list): %d B program%s" % (len(data["steps"]), "" if len(data["steps"]) == 1 else "s"), "  " + pj]
+                        detail += ["  " + x for x in facts]
+                        msg += ["  " + x for x in facts]
+                    except OSError as e:
+                        if not is_locked(e):
+                            raise
+                        log("B program list locked:", e)
+                        msg += ["", "B program list: " + locked_text(e)]
         # ---- tool load MDA ----
         counts = None
         if funcs[F_MDA]:
@@ -719,16 +807,38 @@ def run():
             counts = table or {}
         # ---- documents ----
         if funcs[F_ORDER] or funcs[F_SISTER] or funcs[F_SETUP]:
+            carry = None
+            if funcs[F_SISTER] and jd is not None:          # read before anything is written (a same-day re-run)
+                src, t = (sheet_path, filled(table)) if filled(table) else ("", {})
+                if not src:
+                    src = newest_sister_sheet(folder, jd)
+                    try:
+                        t = filled(jd.read_sister_sheet(src)[0]) if src else {}
+                    except Exception as e:
+                        log("sister sheet not read:", src, e)
+                        t = {}
+                if t:
+                    carry = (src, t)
+                    log("sister sheet values carried over from:", src, "|", len(t), "tools")
             try:
                 msg += documents(scope_progs, funcs, counts, dest, base, package, today, dict(
                     part=part, machine=machine, material_type=material_of(lists, names, scope), date=today,
-                    programmer=programmer, sim_date=sim_date(scope_progs), job=base, program=label), docs or None)
+                    programmer=programmer, sim_date=sim_date(scope_progs), job=base, program=label), docs or None,
+                    carry=carry, sheet_table=table if (table is not None and not funcs[F_MDA]) else None)
             except Exception:
                 log("documents FAILED:", traceback.format_exc())
                 msg += ["", "Documents failed (see go_to_machine_log.txt)."]
         for ln in msg:
             log(ln)
-        info("\n".join(msg))
+        output("\n".join(rep + ["", "-" * 70] + msg))       # the full message stays in the output window
+        # warnings and files that could not be written go first: the pop-up is cut at MAX_BOX_LINES
+        top = [ln for ln in msg if ln.strip().startswith("WARNING") or "close it and run again" in ln]
+        rest = [ln for ln in msg if ln not in top and ln not in detail]
+        if detail:
+            rest.append("(NC file list and NC facts: output window)")
+        info("\n".join((["CHECK:"] + ["  " + ln.strip() for ln in top] + [""] if top else []) + rest))
+        if OPEN_FOLDER and dest and wrote_since(dest, t0):
+            open_folder(dest)
     except Exception:
         log("FAILED:", traceback.format_exc())
         try:
@@ -741,10 +851,18 @@ def run():
                 f.write("\n".join(lines) + "\n")
         except Exception:
             pass
+        try:                                                # every run into an output folder is added to its log
+            if _dest[0] and os.path.normcase(os.path.abspath(_dest[0])) != os.path.normcase(os.path.abspath(out_dir())):
+                with open(os.path.join(_dest[0], "go_to_machine_log.txt"), "a", encoding="utf-8") as f:
+                    f.write("=" * 78 + "\n" + "\n".join(lines) + "\n\n")
+        except Exception:
+            pass
 
 
-def documents(progs, funcs, counts, dest, base, package, today, header, docs=None):
-    """Order sheet, sister tool sheet, NC master setup for the tools of progs. Returns message lines."""
+def documents(progs, funcs, counts, dest, base, package, today, header, docs=None, carry=None, sheet_table=None):
+    """Order sheet, sister tool sheet, NC master setup for the tools of progs. carry = (sheet path, {tool id: (sisters,
+    life)}) pre-fills the new sister sheet; sheet_table = the sister sheet read (its missing tools are listed). A file
+    open in Excel / Word is named; the others are still written. Returns message lines."""
     docs = docs or load_docs_lib()
     jd, ti, tn = docs["job_docs"], docs["tool_info"], docs["tool_numbers"]
     tmpd = tempfile.mkdtemp(prefix="gtm_tools_")
@@ -753,16 +871,39 @@ def documents(progs, funcs, counts, dest, base, package, today, header, docs=Non
         log("tool:", i["id"], "|", ti.description(i), "| order", i["order_code"] or "-", "(%s)" % (i["order_from"] or "none"),
             "| reach", i["reach"], "| holders", [h["name"] for h in i["holders"]], "| missing", i["missing"])
     out = ["", "Documents: %d tool%s" % (len(infos), "" if len(infos) == 1 else "s")]
+
+    def write(what, fn):
+        try:
+            return fn()
+        except OSError as e:
+            if not is_locked(e):
+                raise
+            log(what, "locked:", e)
+            out.append("  %s: %s" % (what, locked_text(e)))
+            return None
+
     if funcs.get(F_ORDER):
-        p, n, marked = jd.order_sheet(os.path.join(dest, base + "_ORDER.xlsx"), infos, counts,
-                                      "TOOL ORDER - %s - %s - %s" % (header.get("part") or base, package.upper(), today))
-        out += ["  Order sheet: %d line%s%s" % (n, "" if n == 1 else "s", (", %d to check (yellow)" % marked) if marked else ""), "    " + p]
+        r = write("Order sheet", lambda: jd.order_sheet(os.path.join(dest, base + "_ORDER.xlsx"), infos, counts,
+                                                        "TOOL ORDER - %s - %s - %s" % (header.get("part") or base, package.upper(), today)))
+        if r:
+            p, n, marked = r
+            out += ["  Order sheet: %d line%s%s" % (n, "" if n == 1 else "s", (", %d to check (yellow)" % marked) if marked else ""), "    " + p]
     if funcs.get(F_SISTER):
-        p = jd.sister_sheet(os.path.join(dest, base + "_SISTERS.xlsx"), infos, header)
-        out += ["  Sister tool sheet: fill Sisters (extra tools) and Tool Life, save; Production reads it", "    " + p]
+        pre = carry[1] if carry else None
+        p = write("Sister tool sheet", lambda: jd.sister_sheet(os.path.join(dest, base + "_SISTERS.xlsx"), infos, header, pre))
+        if p:
+            out += ["  Sister tool sheet: fill Sisters (extra tools) and Tool Life, save; Production reads it", "    " + p]
+            if carry:
+                n = sum(1 for i in infos if i["id"] in carry[1])
+                out.append("    Sisters / Tool Life carried over for %d of %d tools from %s" % (n, len(infos), carry[0]))
     if funcs.get(F_SETUP):
-        p = jd.setup_sheet(os.path.join(dest, base + "_SETUP.docx"), infos, header, counts)
-        out += ["  NC master setup: QTY = 1 + sisters" + ("" if counts else " (no sister counts: QTY 1)"), "    " + p]
+        p = write("NC master setup", lambda: jd.setup_sheet(os.path.join(dest, base + "_SETUP.docx"), infos, header, counts))
+        if p:
+            out += ["  NC master setup: QTY = 1 + sisters" + ("" if counts else " (no sister counts: QTY 1)"), "    " + p]
+    if sheet_table is not None:
+        off = [i["id"] for i in infos if i["id"] not in sheet_table]
+        if off:
+            out.append("  WARNING - not on the sister sheet (0 sisters, no tool life): " + ", ".join(off))
     no_order = [i["id"] for i in infos if not i["order_code"] or i["order_from"] == "Tool name"]
     if no_order:
         out.append("  Order no. missing or taken from the tool name: " + ", ".join(no_order[:10]) + (" ..." if len(no_order) > 10 else ""))

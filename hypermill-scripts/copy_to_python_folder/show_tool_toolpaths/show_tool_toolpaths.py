@@ -1,5 +1,12 @@
-# show_tool_toolpaths.py - hyperMILL 35 (v2). Turns on the toolpath display (the light bulb in the job tree) for every
-# toolpath of one tool.
+# show_tool_toolpaths.py - hyperMILL 35 (v3). Turns on the toolpath display (the light bulb in the job tree) for every
+# toolpath of one tool - once the light bulb is found. Until then (SWITCH = False) it is the BULB FINDER and writes nothing:
+#   v2 log (20 Nov 2026): writing *SHOW_NCPATH set the test toolpath to NEEDS_CALCULATION, so *SHOW_NCPATH (and
+#   ShowNCPaths, which mirrors it) is a calculation setting, not the light bulb. Switching is off.
+#   Bulb finder: every run reads every toolpath, compound job and joblist (job settings, properties, and the plain values
+#   of their members and Get / Is / Has functions), plus the document, and saves it. The next run on the same document
+#   lists every value that changed in between.
+#   Use: run it, turn ONE light bulb on (or off) in the job list and nothing else, run it again, send the log.
+# The switching below (v2) runs only with SWITCH = True and the bulb's field set in CFG_KEY / PROP_KEY.
 # Screen: Joblist (one or all), Tool (T<ID>  name  - number of toolpaths), Show:
 #   "This tool only"   this tool's toolpaths on, every other toolpath off
 #   "Add this tool"    this tool's toolpaths on, the others left as they are
@@ -17,6 +24,7 @@
 import os, re, sys, tempfile, traceback, datetime, importlib.util
 
 # ---------------- SETTINGS ----------------
+SWITCH = False                 # False = bulb finder (reads only). True = switch bulbs (v2) once the field is known
 OUT_DIR = r"C:\Users\Public\Documents\OPEN MIND"
 CFG_KEY = "*SHOW_NCPATH"       # job setting for the light bulb
 PROP_KEY = "ShowNCPaths"       # job property, the second candidate
@@ -28,6 +36,10 @@ HERE = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() els
 LIB_DIRS = [os.path.join(PY_DIR, "tool_library"), os.path.join(HERE, "..", "tool_library")]
 TITLE = "Show toolpaths of one tool"
 LOGNAME = "show_tool_toolpaths_log.txt"
+SNAPNAME = "show_tool_toolpaths_snapshot.json"
+GETTER = re.compile(r"^(Get|Is|Has)[A-Z]")
+NO_CALL = {"GetTool", "GetJobs", "GetCompoundJobs", "GetJobLists", "GetJobTreeNodes", "GetTools", "GetCfgParameters",
+           "GetProperties", "GetProperty"}
 MODES = ["This tool only", "Add this tool", "Everything on"]
 lines = []
 _f = [None]
@@ -136,6 +148,157 @@ def tree(jl):
     return out
 
 
+# ---------------- bulb finder (reads only) ----------------
+class _NotSimple(object):
+    pass
+
+
+NOT_SIMPLE = _NotSimple()
+
+
+def simple(v):
+    """bool / int / float / str / None as they are, an enum as 'Type.NAME'; anything else NOT_SIMPLE."""
+    if v is None or isinstance(v, (bool, int, str)):
+        return v
+    if isinstance(v, float):
+        return round(v, 6)
+    if hasattr(v, "name") and type(v).__module__ != "builtins" and isinstance(getattr(v, "name", None), str):
+        return "%s.%s" % (type(v).__name__, v.name)
+    return NOT_SIMPLE
+
+
+def members(obj):
+    """Plain values of obj's attributes and of its Get / Is / Has functions that need no argument."""
+    out = {}
+    for n in dir(obj):
+        if n.startswith("_"):
+            continue
+        try:
+            v = getattr(obj, n)
+        except Exception:
+            continue
+        if callable(v):
+            if not GETTER.match(n) or n in NO_CALL:
+                continue
+            try:
+                v = v()
+            except Exception:
+                continue
+        sv = simple(v)
+        if sv is not NOT_SIMPLE:
+            out["m." + n] = sv
+    return out
+
+
+def cfg_values(obj):
+    try:
+        return dict(("cfg." + str(k), str(v)) for k, v in dict(obj.GetCfgParameters()).items())
+    except Exception:
+        return {}
+
+
+def prop_values(obj):
+    """Job properties from PropertySet.GetProperties(): a dict, or a list of names / objects with Name (and Value)."""
+    out = {}
+    try:
+        ps = val(getattr(obj, "PropertySet"))
+        items = ps.GetProperties()
+    except Exception:
+        return out
+    try:
+        pairs = list(items.items()) if isinstance(items, dict) else [
+            (it, None) if isinstance(it, str) else (text(getattr(it, "Name", "")) or str(it), getattr(it, "Value", None)) for it in items]
+    except Exception:
+        return out
+    for name, v in pairs:
+        if v is None:
+            try:
+                v = obj.GetProperty(name)
+            except Exception:
+                v = None
+        sv = simple(v)
+        out["prop." + str(name)] = str(v) if sv is NOT_SIMPLE else sv
+    return out
+
+
+def read_all(doc):
+    """{key: {"what": label, "values": {...}}} for the document, its model, every joblist, compound job and toolpath."""
+    objs = {}
+
+    def add(key, what, obj, deep):
+        log("  reading:", what)                     # line by line: if hyperMILL freezes, the log shows where
+        vals = members(obj)
+        if deep:
+            vals.update(cfg_values(obj))
+            vals.update(prop_values(obj))
+        objs[key] = {"what": what, "values": vals}
+
+    add("document", "document", doc, False)
+    model = doc.CamModel
+    add("model", "CAM model", model, False)
+    add("joblistset", "joblist set", model.JobListSet, False)
+    for jl in model.JobListSet.GetJobLists():
+        jn = text(getattr(jl, "Name", ""))
+        add("joblist|" + jn, "joblist " + jn, jl, True)
+        for cj, js in tree(jl):
+            if cj is not None:
+                add("compound|" + key_of(cj), "compound job " + text(getattr(cj, "Name", "")), cj, True)
+            for j in js:
+                add("toolpath|" + key_of(j), "toolpath " + text(getattr(j, "Name", "")), j, True)
+    return objs
+
+
+def changes(prev, cur):
+    """Lines 'what | value: old -> new' for every value that differs between two snapshots."""
+    out = []
+    for k, o in cur.items():
+        p = prev.get(k)
+        if p is None:
+            continue
+        a, b = p["values"], o["values"]
+        for vk in sorted(set(a) | set(b)):
+            if a.get(vk, "<none>") != b.get(vk, "<none>"):
+                out.append("%s | %s: %r -> %r" % (o["what"], vk, a.get(vk, "<none>"), b.get(vk, "<none>")))
+    return out
+
+
+def finder(doc, path):
+    import json
+    snap_path = os.path.join(OUT_DIR if os.path.isdir(OUT_DIR) else tempfile.gettempdir(), SNAPNAME)
+    cur = read_all(doc)
+    ntp = sum(1 for k in cur if k.startswith("toolpath|"))
+    nval = sum(len(o["values"]) for o in cur.values())
+    log("bulb finder (reads only): %d objects, %d toolpaths, %d values read" % (len(cur), ntp, nval))
+    prev = None
+    try:
+        with open(snap_path, encoding="utf-8") as f:
+            prev = json.load(f)
+    except Exception:
+        pass
+    stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        with open(snap_path, "w", encoding="utf-8") as f:
+            json.dump({"document": path, "time": stamp, "objects": cur}, f)
+    except Exception as e:
+        log("snapshot not saved:", e)
+    if not prev or prev.get("document") != path:
+        log("first run on this document: snapshot saved")
+        info("Bulb finder (changes nothing): %d toolpaths read and saved.\n\nNow turn ONE light bulb on (or off) in the job "
+             "list, nothing else, and run this again." % ntp)
+        return
+    ch = changes(prev.get("objects", {}), cur)
+    log("changed since %s: %d" % (prev.get("time"), len(ch)))
+    for c in ch:
+        log("  " + c)
+    output("\n".join(["%s - bulb finder: changed since %s (%d)" % (TITLE, prev.get("time"), len(ch))] + ch))
+    if ch:
+        info("Changed since the run at %s: %d value%s.\n\n%s%s\n\nSend %s." % (
+            prev.get("time"), len(ch), "" if len(ch) == 1 else "s", "\n".join(ch[:12]), "\n..." if len(ch) > 12 else "", LOGNAME))
+    else:
+        info("Nothing changed since the run at %s.\n\nIf a light bulb was switched in between, it is not in anything this "
+             "script can read. Send %s." % (prev.get("time"), LOGNAME))
+
+
 # ---------------- the light bulb ----------------
 def on_value(v):
     """True / False / None (unknown) for a bulb value: '1' / '0', True / False, 1 / 0."""
@@ -229,13 +392,16 @@ def run():
         _f[0] = None
     try:
         import om
-        log(TITLE, "v2", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        log(TITLE, "v3", datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         doc = om.Application().CurrentDocument
         if doc is None:
             info("No document open."); return
         path = text(doc.FullPath)
         folder = os.path.dirname(path)
         log("document:", path)
+        if not SWITCH:
+            finder(doc, path)
+            return
         lists = list(doc.CamModel.JobListSet.GetJobLists())
         names = [text(jl.Name) for jl in lists]
         if not names:

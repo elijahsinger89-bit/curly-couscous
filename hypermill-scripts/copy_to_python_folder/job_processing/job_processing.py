@@ -7,7 +7,7 @@
 #   Holder attacher       not built yet
 #   B program rename      compound jobs -> B_<part>_<step>_<machine>
 #   Restore job names     toolpath names back to "<number>: <toolpath type>"
-#   Show toolpaths of one tool   light bulb on for one tool's toolpaths
+#   Show toolpaths of one tool   light bulb on for one tool's toolpaths (for now: the read-only bulb finder)
 # The chosen script is loaded from its own folder every time (hyperMILL keeps imported modules between runs) and its
 # run() is called: it works exactly as when started from its own button. The last choice is offered first next time.
 # Go to machine (posting, MDA, order / sister / setup sheets) is the other button.
@@ -28,7 +28,7 @@ MENU = [
     ("Holder attacher (not built yet)", None, None),
     ("B program rename: compound jobs to B_part_step_machine", "b_program_rename", "b_program_rename.py"),
     ("Restore job names: number and toolpath type", "restore_job_names", "restore_job_names.py"),
-    ("Show toolpaths of one tool (light bulb)", "show_tool_toolpaths", "show_tool_toolpaths.py"),
+    ("Show toolpaths of one tool (finding the light bulb, read-only)", "show_tool_toolpaths", "show_tool_toolpaths.py"),
 ]
 lines = []
 

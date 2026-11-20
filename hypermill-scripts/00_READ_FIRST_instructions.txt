@@ -23,7 +23,8 @@ copy_to_python_folder
                    its own; go_to_machine uses it after posting (icon: tool_load_mda.png)
   restore_job_names puts every toolpath's name back to its number and toolpath type ("2: 3D Optimized Roughing")
                    (icon: restore_job_names.png)
-  show_tool_toolpaths turns on the toolpath display (light bulb) of every toolpath of one tool
+  show_tool_toolpaths turns on the toolpath display (light bulb) of every toolpath of one tool (for now: the
+                   read-only bulb finder, see SHOW TOOLPATHS)
                    (icon: show_tool_toolpaths.png)
   tool_library     everything the scripts share: tool tables and cutting data (Walter, Kennametal, GARR), machines,
                    part plans (strategies.py), job settings (job_settings.json), toolpath types (job_types.py),
@@ -294,7 +295,8 @@ WARNING (the list is still written): a B program name over 24 characters. The ge
 Log: b_program_export_log.txt.
 
 GO TO MACHINE (the job-end menu)
-Screen 1: Joblist (one, or All joblists), Part number, Machine (start on the last B program rename), Package:
+Screen 1: Joblist (one, or All joblists), Part number, Machine (start on the part / machine most B program names in this
+  document use; a document without B program names: the last B program rename), Package:
   Validation      bare minimum to prove the job on the machine: post, B program list, tool load MDA with NO sisters,
                   order sheet (1 of each tool, holder, collet), sister tool sheet to fill in during prove-out
   Production      everything once the job is proved: post, B program list, tool load MDA WITH sisters and tool life,
@@ -302,11 +304,13 @@ Screen 1: Joblist (one, or All joblists), Part number, Machine (start on the las
   Pick functions  tick only what you want
 Screen 2: the functions, ticked by the package; untick or tick any: Post the B programs / B program list (generator) /
   Tool load MDA / Order sheet / Sister tool sheet / NC master setup sheet. Programmer (remembered). Production and Pick
-  functions also: Sister sheet (sisters, tool life), preset to the newest go to machine\VALIDATION_*\*_SISTERS.xlsx.
+  functions also: Sister sheet (sisters, tool life), preset to the newest go to machine\VALIDATION_*\*_SISTERS.xlsx
+  that has Sisters or Tool Life filled in (a newer blank one from a later Validation run is passed over).
   Nothing ticked = check only (every B program OK or FAIL with the reason; nothing posted, nothing written).
 Sisters = extra tools everywhere (0 = the tool only). Validation: 0 for every tool. Production: from the sister sheet you
-  filled in (Sisters, Tool Life columns); none found = it stops before posting and says so. Pick functions: from the
-  sister sheet when one is given, else the tool load MDA screens ask.
+  filled in (Sisters, Tool Life columns); none found = it stops before posting and says so. Tools of the job that are
+  not on the sheet are listed (WARNING: 0 sisters, no tool life); a sheet with nothing filled in gets a WARNING too.
+  Pick functions: from the sister sheet when one is given, else the tool load MDA screens ask.
 A B program is a compound job named B_<part>_<step>_<machine>. It passes when every job in it:
   - is calculated (POF status up to date) and has no errors
   - has been run through Simulation Center without a collision since its last change
@@ -320,7 +324,8 @@ How the simulation is checked (tool_library\release_check.py, found with release
   The job tree's light bulb is the toolpath display, not a simulation status.
 Reasons shown: has errors / not calculated / no toolpath file / not simulated, or changed since it was simulated /
   Simulation Center run had a collision: fix it and re-simulate.
-Posting: all pass -> Post: No / Yes (No first). Some fail -> a WARNING with the list, then Post: No - post nothing /
+Posting: all pass -> posted (no confirm: ticking Post is the decision). Some fail -> a WARNING with the list, then
+  Post: No - post nothing /
   Post all (the log records "POSTED WITH FAILURES") / Post only the ones that pass.
   Posted with JobListSet.CalculateNC(compound job UUIDs). The message lists the NC files written or updated in the
   document folder and its NC folder, and any B program without a new NC file.
@@ -349,7 +354,8 @@ if it cannot be written: C:\Users\Public\Documents\OPEN MIND. The NC files stay 
     with the quantities added (qty = 1 + sisters per tool). Yellow lines: order no. missing, taken from the tool name, or
     a holder / extension still named "Holder" / "Extension": check before ordering.
   - <document>_SISTERS.xlsx: your sister tool sheet with T No., EDP, description, dia, gage length filled in. Fill in
-    Sisters (extra tools) and Tool Life (pieces), save it in place; Production reads it.
+    Sisters (extra tools) and Tool Life (pieces), save it in place; Production reads it. Running Validation again (same
+    day or later) carries Sisters / Tool Life over from the newest filled sheet: what you filled in is not lost.
   - <document>_SETUP.docx: the NC master setup (TOOL LIST). Header: P/N, material type, machine, date, programmer,
     hyperMILL sim date (the newest Simulation Center run of those B programs); REV, PART NAME, MTL and VERICUT DATE / BY
     are left for you. One row per tool in the order they are first used: tool no., description (Common > Name), dia,
@@ -359,8 +365,14 @@ if it cannot be written: C:\Users\Public\Documents\OPEN MIND. The NC files stay 
     docs\heller_logo.svg).
   - The message also lists tools with no order no., tools without a holder in hyperMILL, and tool numbers that do not
     follow the numbering standard (NUMBER_STANDARD at the top of go_to_machine.py).
+  - A sheet or list open in Excel / Word cannot be written: the message names it (close it and run again); the other
+    files are still written.
+  - go_to_machine_log.txt: every run into that folder is added to it (check results, what was posted, POSTED WITH
+    FAILURES, files written): the record of the package.
+The pop-up starts with CHECK: (warnings, files not written); the NC file list and NC facts are in the output window.
+At the end the output folder opens in Explorer when something was written (OPEN_FOLDER = False at the top: off).
 The old tool sheet (<document>_<joblist>_tool_order.csv from tool_order_list) is replaced by the order sheet.
-Log: go_to_machine_log.txt.
+Log: go_to_machine_log.txt (OPEN MIND: the last run; the output folder: every run into it).
 
 TOOL LOAD MDA
 R999 holds the T number each NEWT returns. The generator never puts a CMC R block over R999.
@@ -408,14 +420,23 @@ number or a type is listed and left alone.
 Log: restore_job_names_log.txt holds old -> new for every toolpath, so a name can be typed back, and for every toolpath
 left alone what it holds (ID, *JOBID, cycle names).
 
-SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths, v2)
+SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths, v3) - FOR NOW: BULB FINDER, READ-ONLY
+The v2 log (20 Nov 2026) showed *SHOW_NCPATH is NOT the light bulb: writing it set the test toolpath to NEEDS_CALCULATION
+(ShowNCPaths mirrors it). Switching is off (SWITCH = False) until the bulb is found; v3 writes nothing.
+Bulb finder: each run reads every toolpath, compound job and joblist (job settings, properties, plain member values) and
+the document, and saves it (show_tool_toolpaths_snapshot.json in OPEN MIND). The next run on the same document lists
+every value that changed in between (message, output window, log).
+  1. Run it (Job processing > Show toolpaths of one tool).  2. Turn ONE light bulb on or off in the job list, nothing
+  else.  3. Run it again.  4. Send show_tool_toolpaths_log.txt.
+The toolpath the v2 safety test touched (if any) needs recalculating and its B program re-simulating.
+Once the field is known, switching comes back (SWITCH = True) as described below, with the safety test.
 Turns on the light bulb (toolpath display) of every toolpath that uses one tool.
 Screen: Joblist (one or all), Tool (T<ID>  name  - number of toolpaths), Show:
   This tool only   this tool's toolpaths on, every other toolpath off
   Add this tool    this tool's toolpaths on, the others stay as they are
   Everything on    every toolpath on
 Compound jobs (B programs) holding a toolpath of the tool are switched too.
-The light bulb is the job setting *SHOW_NCPATH ('1' on), else the property ShowNCPaths (v1 log, 20 Nov 2026). Before it
+v2 used the job setting *SHOW_NCPATH, else the property ShowNCPaths (wrong: see above). Before it
 changes anything it lists, in the output window and the log, every toolpath that reads on: a bulb turned on by hand must
 be in that list.
 Safety: one toolpath (one with a Simulation Center result) is switched alone first and checked: still calculated, same

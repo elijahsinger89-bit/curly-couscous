@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Headless test of show_tool_toolpaths.py v2 (fake om in tests/fake_om): the light bulb is the job setting *SHOW_NCPATH
-(else the property ShowNCPaths); one toolpath is switched first and checked. Run: python3 tests/test_show_tool_toolpaths.py"""
+"""Headless test of show_tool_toolpaths.py (fake om in tests/fake_om).
+v3 default (SWITCH = False): the bulb finder reads only and lists what changed between two runs.
+v2 switching (SWITCH = True, kept for when the bulb is found): one toolpath switched first and checked.
+Run: python3 tests/test_show_tool_toolpaths.py"""
 import os
 import sys
 import enum
@@ -118,12 +120,13 @@ def build(job_cls=CJob, hand_on=1, comp_key=True, simulated=True):
     return j, cs
 
 
-def run(tool_index, show):
-    gui.SCRIPT[:] = [lambda d: (True, dict(d.defaults(), Tool=tool_index, Show=show))]
+def run(tool_index, show, switch=True):
+    gui.SCRIPT[:] = [lambda d: (True, dict(d.defaults(), Tool=tool_index, Show=show))] if switch else []
     gui.BOXES.clear(); gui.SHOWN.clear(); gui.OUTPUT.clear()
     spec = importlib.util.spec_from_file_location("stt_under_test", SCRIPT)
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
+    m.SWITCH = switch
     m.run()
     with open(LOG, encoding="utf-8") as f:
         return f.read()
@@ -131,6 +134,28 @@ def run(tool_index, show):
 
 on = lambda x: x._cfg.get("*SHOW_NCPATH")
 T1 = 1          # tools sorted by ID: 0 = T903080900, 1 = T905080900
+
+# ---- v3 default: bulb finder, reads only ----
+SNAP = os.path.join(tmp, "show_tool_toolpaths_snapshot.json")
+j, cs = build()
+for x in j:
+    x.ShowInTree = False                     # stands in for the unknown light bulb field
+lg = run(0, "", switch=False)
+check(not gui.SHOWN and os.path.exists(SNAP) and gui.BOXES[0].startswith("Bulb finder (changes nothing): 5 toolpaths read and saved"),
+      "first run: no screens, snapshot saved, asks to switch ONE bulb and run again")
+check(sum(x.sets for x in j) == 0 and [on(x) for x in j] == ["0", "1", "0", "0", "0"], "finder writes nothing")
+check("v3" in lg and "bulb finder (reads only)" in lg, "log says v3, reads only")
+j[3].ShowInTree = True                       # the user turns one bulb on
+lg = run(0, "", switch=False)
+check(gui.BOXES[0].startswith("Changed since the run at") and "toolpath 4: Finish | m.ShowInTree: False -> True" in gui.BOXES[0]
+      and ": 1 value." in gui.BOXES[0], "second run: exactly the one field that changed, on that toolpath")
+check("toolpath 4: Finish | m.ShowInTree: False -> True" in lg and "changed since" in "\n".join(gui.OUTPUT), "change in the log and the output window")
+lg = run(0, "", switch=False)
+check(gui.BOXES[0].startswith("Nothing changed since the run at"), "third run, nothing switched: says nothing changed")
+check(sum(x.sets for x in j) == 0, "three finder runs: still nothing written")
+os.remove(SNAP)
+
+# ---- v2 switching (SWITCH = True) ----
 
 # ---- the hand-turned bulb confirms *SHOW_NCPATH; this tool only
 j, cs = build()

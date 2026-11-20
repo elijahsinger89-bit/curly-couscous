@@ -7,6 +7,8 @@ import sys
 import enum
 import json
 import shutil
+import time
+import zipfile
 import tempfile
 import importlib.util
 
@@ -222,6 +224,8 @@ def keep():
 
 PICK = ans(Package="Pick functions")
 CHECK_ONLY = [PICK, funcs()]
+OPENED = []
+os.startfile = lambda p: OPENED.append(p)          # Windows only: recorded here instead of opening Explorer
 
 
 def order_rows(path=None):
@@ -256,6 +260,15 @@ with open(os.path.join(POFDIR, UC["e"] + ".ccrpt"), "w") as f:
 j5ok = PJob("x", None, os.path.join(POFDIR, "Op10_5.pof"))
 check("unknown Simulation Center result 'CC_RESULT 7'" in rc.check_job(j5ok, DOCDIR, rc.Ccrpt())["reason"], "unknown result text shown")
 
+# ---------------- b_programs.parse_name ----------------
+spec = importlib.util.spec_from_file_location("bp_under_test", os.path.join(LIB, "b_programs.py"))
+bpm = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(bpm)
+pn = [bpm.parse_name(n) for n in ("B_00948602_025_010_HF5", "B_00948602_025_010", "B_X_1000_HF5", "B_ABC_100_020_HF5",
+                                  "B_P_010_HF_5", "B_P_10_HF5", "C_P1_PROBE", "G17 old name", "")]
+check(pn == [("00948602_025", 10, "HF5"), ("00948602_025", 10, ""), ("X", 1000, "HF5"), ("ABC_100", 20, "HF5"),
+             ("P", 10, "HF_5"), None, None, None, None], "parse_name: part with _, no machine, 4-digit step, not B names %s" % pn)
+
 # ---------------- check only ----------------
 build()
 m, left = run(CHECK_ONLY)
@@ -269,12 +282,32 @@ check("5: Face finish: not calculated (NEEDS_CALCULATION)" in rep and "6: Face e
 check("B_G17_SLIDE_111_HF5  (more than one tool)" in rep and "G17 old name  (not a B program name" in rep and "notes" not in rep,
       "report: mixed and old-name compound jobs listed as not posted; notes skipped")
 check(os.path.exists(LOGP) and "FAIL B_G17_SLIDE_030_HF5" in open(LOGP).read(), "log written")
+check(OPENED == [] and not os.path.exists(OUTDIR), "check only: no output folder, nothing opened")
 s1 = gui.SHOWN[0][1]
 check([f[1] for f in s1] == ["Joblist", "Part number", "Machine", "Package"] and s1[3][2][0] == ["Validation", "Production", "Pick functions"],
       "screen 1: joblist, part, machine, package (Validation / Production / Pick functions)")
 s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
 check(all(s2[k] is False for k in (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP)) and F_SHEET in s2 and F_PROG in s2,
       "screen 2 (pick functions): every function unticked, programmer and sister sheet fields")
+
+# ---------------- part / machine offered from this document's B program names ----------------
+RENAME_LAST = os.path.join(tmp, "b_program_rename_last.json")
+json.dump({"part": "OTHER_JOB", "machine": "F5"}, open(RENAME_LAST, "w"))
+build()
+m, left = run(CHECK_ONLY)
+s1 = {f[1]: f[2] for f in gui.SHOWN[0][1]}
+check(s1["Part number"] == "G17_SLIDE" and s1["Machine"] == "HF5" and "4 B programs: 1 pass, 3 fail." in flat(gui.BOXES[-1]),
+      "part / machine from this document (the last rename was another job)")
+om._App.CurrentDocument = om.Document(DOC, om.Model([om.JobList("Op10", [om.CompoundJob("no B names", [])])], inch=True))
+gui.SCRIPT[:] = [lambda dlg: (False, {})]
+gui.SHOWN.clear()
+spec = importlib.util.spec_from_file_location("gtm_defaults", SCRIPT)
+md = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(md)
+md.run()
+s1 = {f[1]: f[2] for f in gui.SHOWN[0][1]}
+check(s1["Part number"] == "OTHER_JOB" and s1["Machine"] == "F5", "no B program names in the document: the last rename offered")
+json.dump({"part": "G17_SLIDE", "machine": "HF5"}, open(RENAME_LAST, "w"))
 
 # ---------------- one Simulation Center run with a collision marks many B programs: one line in the pop-up ----------------
 def build_run(n):
@@ -317,8 +350,8 @@ cs = build()
 m, left = run([PICK, funcs(F_POST, F_BLIST, F_ORDER), post_pick(2), include_pick(0)])
 box = flat(gui.BOXES[-1])
 check(left == 0 and PostSet.calls == [[cs[1].UUID]], "post only passing: CalculateNC with the one passing compound job UUID")
-check(nc_files() == ["B_G17_SLIDE_010_HF5.mpf"] and "NC files written or updated: 1" in box and "NC/B_G17_SLIDE_010_HF5.mpf" in box.replace("\\", "/"),
-      "post: written NC file found and listed")
+check(nc_files() == ["B_G17_SLIDE_010_HF5.mpf"] and "NC files written or updated: 1" in box and "NC/B_G17_SLIDE_010_HF5.mpf" in flat(gui.OUTPUT[-1]).replace("\\", "/")
+      and "NC file list and NC facts: output window" in box, "post: written NC file found, listed in the output window")
 check("No NC file found" not in box and "Posted 1 B program (CalculateNC returned True)." in box, "post: message")
 inc = gui.SHOWN[-1]
 check(inc[0].endswith("B program list and documents") and inc[1][0][2][0] == ["Only the 1 posted", "All 4 B programs"],
@@ -360,7 +393,7 @@ facts = {s["program"]: (s.get("radius_comp"), s.get("r_params")) for s in json.l
 check(facts == {"B_G17_SLIDE_010_HF5": (True, [1, 12]), "B_G17_SLIDE_020_HF5": (False, []), "B_G17_SLIDE_030_HF5": (True, [2]),
                 "B_G17_SLIDE_040_HF5": (False, [])},
       "posted NC read: G41/G42 and R numbers (comments, strings, CR= and G40 ignored) %s" % facts)
-box = flat(gui.BOXES[-1])
+box = flat(gui.OUTPUT[-1])
 check("R parameters in posted B programs" in box and "B_G17_SLIDE_010_HF5 (R1, R12)" in box and "R[...] with a computed number" in box and
       "No G41/G42" in box, "message: R parameters, indirect R and missing G41/G42 named")
 pl = {s["program"]: (s.get("cycle800"), s.get("cycle800_note")) for s in json.load(open(BLIST))["steps"]}
@@ -383,15 +416,13 @@ facts = {s["program"]: s.get("radius_comp") for s in json.load(open(BLIST))["ste
 check(left == 0 and PostSet.calls == [] and facts["B_G17_SLIDE_010_HF5"] is True and "Not posted (Post the B programs unticked)" in gui.BOXES[-1],
       "list without posting: NC facts from the NC file already there")
 
-# ---------------- everything passes: confirm ----------------
+# ---------------- everything passes: posted without a confirm (the Post tick is the decision) ----------------
 cs = build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
-check(gui.SHOWN[-1][0].endswith("confirm") and gui.SHOWN[-1][1][0][2][0] == ["No - do not post", "Yes - post 4 B programs"],
-      "all pass: plain confirm, No first")
+OPENED.clear()
+m, left = run([PICK, funcs(F_POST, F_BLIST)])
+check(left == 0 and len(gui.SHOWN) == 2 and not any("confirm" in t[0] for t in gui.SHOWN), "all pass: no confirm screen (2 screens only)")
 check(PostSet.calls == [[c.UUID for c in cs[1:5]]] and not any(b.startswith("WARNING") for b in gui.BOXES), "all pass: posted, no warning")
-build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(0)])
-check(PostSet.calls == [] and "Nothing posted." in gui.BOXES[-1], "all pass, confirm No: nothing posted")
+check(OPENED == [OUTDIR], "output folder opened at the end (something was written)")
 
 # ---------------- duplicate step: stop ----------------
 build(dup=True)
@@ -402,11 +433,11 @@ check(left == 0 and PostSet.calls == [] and "Nothing posted, nothing written. Fi
 # ---------------- CalculateNC fails / writes nothing ----------------
 build(all_pass=True)
 PostSet.mode = "raise"
-m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST)])
 check("Posting failed: RuntimeError: post processor not found" in flat(gui.BOXES[-1]), "CalculateNC error reported")
 build(all_pass=True)
 PostSet.mode = "nothing"
-m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST)])
 check("No NC file found for:" in gui.BOXES[-1] and "B_G17_SLIDE_040_HF5" in gui.BOXES[-1], "CalculateNC wrote nothing: B programs without an NC file listed")
 PostSet.mode = "write"
 
@@ -415,7 +446,7 @@ for f in ("tool_load_mda_last.json",):
     if os.path.exists(os.path.join(tmp, f)):
         os.remove(os.path.join(tmp, f))
 cs = build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), post_pick(1), counts(**{"10047210": ("2", "50"), "905083900": ("0", "")})])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), counts(**{"10047210": ("2", "50"), "905083900": ("0", "")})])
 box = flat(gui.BOXES[-1])
 labels = [f[1] for f in gui.SHOWN[-1][1]]
 check(gui.SHOWN[-1][0].startswith("Tool load MDA | tools 1-3 of 3") and "10047210  D0.4724  tool life (SETPIECE)" in labels,
@@ -430,23 +461,23 @@ check("left out" not in box and "WARNING - SETPIECE counts these tools but no to
 check(json.load(open(os.path.join(tmp, "tool_load_mda_last.json"))).get("10047210") == [2, 50], "MDA values remembered")
 
 build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_MDA, **{F_SHEET: ""}), post_pick(1), keep()])
+m, left = run([PICK, funcs(F_POST, F_MDA, **{F_SHEET: ""}), keep()])
 fields = {f[1]: f[2] for f in gui.SHOWN[-1][1]}
 check(fields.get("10047210  D0.4724  sisters") == "2" and fields.get("10047210  D0.4724  tool life (SETPIECE)") == "50",
       "second run: remembered sisters and tool life offered")
 
 build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), post_pick(1), lambda dlg: (False, {})])
+m, left = run([PICK, funcs(F_POST, F_BLIST, F_MDA, **{F_SHEET: ""}), lambda dlg: (False, {})])
 check(left == 0 and "Tool load MDA cancelled: not written." in flat(gui.BOXES[-1]) and not os.path.exists(MPF) and os.path.exists(BLIST),
       "MDA screen cancelled: posted, list written, no MDA")
 
 build(all_pass=True)
-m, left = run([PICK, funcs(F_POST, F_BLIST), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_BLIST)])
 check(left == 0 and not os.path.exists(MPF) and "Tool load MDA" not in gui.BOXES[-1], "MDA unticked: no screen, no program")
 
 build(all_pass=True)
 TLM_FILES[:] = [os.path.join(tmp, "nowhere", "tool_load_mda.py")]
-m, left = run([PICK, funcs(F_POST, F_MDA), post_pick(1)])
+m, left = run([PICK, funcs(F_POST, F_MDA)])
 check(left == 0 and "Tool load MDA not written: tool_load_mda.py not found" in flat(gui.BOXES[-1]), "tool_load_mda missing: says so")
 TLM_FILES[:] = [TLM]
 
@@ -457,14 +488,17 @@ TODAY = datetime.date.today().strftime("%Y-%m-%d")
 VAL = os.path.join(OUTDIR, "VALIDATION_" + TODAY)
 PROD = os.path.join(OUTDIR, "PRODUCTION_" + TODAY)
 cs = build(all_pass=True)
-m, left = run([ans(Package="Validation"), funcs(F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, **{F_PROG: "ES"}), post_pick(1)])
+m, left = run([ans(Package="Validation"), funcs(F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, **{F_PROG: "ES"})])
 s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
 check([k for k in (F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER, F_SETUP) if s2[k]] == [F_POST, F_BLIST, F_MDA, F_ORDER, F_SISTER]
       and F_SHEET not in s2, "Validation preset: post, list, MDA, order sheet, sister sheet ticked; no setup sheet; no sister sheet field")
 vfiles = sorted(os.listdir(VAL)) if os.path.isdir(VAL) else []
 check(left == 0 and vfiles == ["G17_SLIDE_OP10_B_PROGRAMS.csv", "G17_SLIDE_OP10_B_PROGRAMS.json", "G17_SLIDE_OP10_ORDER.xlsx",
-                               "G17_SLIDE_OP10_SISTERS.xlsx", "G17_SLIDE_OP10_TOOL_LOAD.MPF"],
-      "Validation files in go to machine\\VALIDATION_<date>: %s" % vfiles)
+                               "G17_SLIDE_OP10_SISTERS.xlsx", "G17_SLIDE_OP10_TOOL_LOAD.MPF", "go_to_machine_log.txt"],
+      "Validation files in go to machine\\VALIDATION_<date> (with the run log): %s" % vfiles)
+VLOG = os.path.join(VAL, "go_to_machine_log.txt")
+check("OK   B_G17_SLIDE_010_HF5" in open(VLOG).read() and "Posted 4 B programs" in open(VLOG).read() and OPENED[-1] == VAL,
+      "run log in the output folder (check + post); the folder opened")
 vt = open(os.path.join(VAL, "G17_SLIDE_OP10_TOOL_LOAD.MPF")).read()
 check(vt.count("=NEWT(") == 3 and "$TC_MOP13" not in vt and not any(t[0].startswith("Tool load MDA | tools") for t in gui.SHOWN),
       "Validation MDA: one of each tool, no tool life, no sisters screen")
@@ -478,12 +512,26 @@ wb = openpyxl.load_workbook(SIS)
 wb.active["G12"] = 2; wb.active["I12"] = 50; wb.active["G14"] = 1
 wb.save(SIS)
 
+# ---------------- Validation again the same day: what was filled in is kept ----------------
+saved_sheet = open(SIS, "rb").read()
+build(all_pass=True)                                  # build() clears "go to machine": put the filled sheet back
+os.makedirs(VAL, exist_ok=True)
+open(SIS, "wb").write(saved_sheet)
+open(VLOG, "w").write("first run\n")
+m, left = run([ans(Package="Validation"), keep()])
+ws = openpyxl.load_workbook(SIS).active
+check(left == 0 and ws["G12"].value == 2 and ws["I12"].value == 50 and ws["G14"].value == 1 and ws["G13"].value is None,
+      "same-day Validation re-run: Sisters / Tool Life kept in the new sheet; blank stays blank")
+check("Sisters / Tool Life carried over for 2 of 3 tools from" in flat(gui.BOXES[-1]), "message: carried over, from where")
+lg = open(VLOG).read()
+check(lg.startswith("first run") and lg.count("=" * 78) == 1, "the second run is added to the folder's log (first kept)")
+
 # ---------------- Production: sister sheet read, MDA with sisters, order 1 + sisters, setup sheet ----------------
 saved_sheet = open(SIS, "rb").read()
 build(all_pass=True)                                  # build() clears "go to machine": put the filled sheet back
 os.makedirs(VAL, exist_ok=True)
 open(SIS, "wb").write(saved_sheet)
-m, left = run([ans(Package="Production"), keep(), post_pick(1)])
+m, left = run([ans(Package="Production"), keep()])
 s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
 check(s2.get(F_SHEET) == SIS and s2[F_SETUP] and not s2[F_SISTER] and s2.get(F_PROG) == "ES",
       "Production preset: setup sheet on, sister sheet off, the newest validation sister sheet offered, programmer remembered")
@@ -501,6 +549,53 @@ check([c.text.strip() for c in t1.rows[1].cells][:2] == ["10047210", "End mill"]
 
 check(("HYPERMILL SIM DATE: " + TODAY) in sd.tables[0].rows[0].cells[-1].text and "P/N: G17_SLIDE" in sd.tables[0].rows[0].cells[1].text,
       "setup sheet header: P/N and the Simulation Center date")
+
+# ---------------- a newer blank sheet (Validation another day) is passed over; missing tool listed ----------------
+saved_sheet = open(SIS, "rb").read()
+build(all_pass=True)
+OLD = os.path.join(OUTDIR, "VALIDATION_2000-01-01")
+OLDSIS = os.path.join(OLD, "G17_SLIDE_OP10_SISTERS.xlsx")
+os.makedirs(OLD)
+open(OLDSIS, "wb").write(saved_sheet)
+wb = openpyxl.load_workbook(OLDSIS)
+wb.active["A13"] = "99999"                            # the drill is not on this sheet
+wb.save(OLDSIS)
+os.utime(OLDSIS, (time.time() - 86400, time.time() - 86400))
+os.makedirs(VAL, exist_ok=True)
+shutil.copy(os.path.join(LIB, "templates", "Sister_Tool_Sheet.xlsx"), SIS)   # newer, nothing filled in
+m, left = run([ans(Package="Production"), keep()])
+s2 = {f[1]: f[2] for f in gui.SHOWN[1][1]}
+box = flat(gui.BOXES[-1])
+check(left == 0 and s2.get(F_SHEET) == OLDSIS, "Production offers the filled sheet, not the newer blank one")
+pt = open(os.path.join(PROD, "G17_SLIDE_OP10_TOOL_LOAD.MPF")).read()
+check(pt.count('NEWT("10047210",') == 3, "Production MDA from the filled sheet (end mill + 2)")
+check(box.count("not on the sister sheet") == 1 and "WARNING - not on the sister sheet (0 sisters, no tool life): 11039410" in box,
+      "tool missing from the sheet listed once")
+
+# ---------------- a document open in Word: named, the others still written ----------------
+build(all_pass=True)
+os.makedirs(OLD)
+open(OLDSIS, "wb").write(saved_sheet)
+real_zf = zipfile.ZipFile
+
+
+def locked_zf(path, mode="r", *a, **k):
+    if mode == "w" and str(path).endswith("_SETUP.docx"):
+        raise PermissionError(13, "Permission denied", str(path))
+    return real_zf(path, mode, *a, **k)
+
+
+zipfile.ZipFile = locked_zf
+try:
+    m, left = run([ans(Package="Production"), keep()])
+finally:
+    zipfile.ZipFile = real_zf
+box = flat(gui.BOXES[-1])
+check(left == 0 and "NC master setup: G17_SLIDE_OP10_SETUP.docx is open (Excel / Word?): close it and run again. Not written." in box
+      and os.path.exists(os.path.join(PROD, "G17_SLIDE_OP10_ORDER.xlsx")) and "Documents failed" not in box,
+      "setup sheet open in Word: named in the message; the order sheet still written")
+check(gui.BOXES[-1].startswith("CHECK:") and "G17_SLIDE_OP10_SETUP.docx is open" in "\n".join(gui.BOXES[-1].split("\n")[:6]),
+      "pop-up: warnings and files not written come first (the box is cut at 30 lines)")
 
 # production without a sister sheet: stops before posting
 shutil.rmtree(VAL, ignore_errors=True)
