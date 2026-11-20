@@ -468,7 +468,7 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     await loadJob('f2_horizontal_inch');
     check(await page.$eval('[data-path="config.machineType"]', e => e.value) === 'H4_B', 'old NONE/B job loads as machine type 4-axis B');
     const opts = await page.$$eval('[data-path="config.machineType"] option', l => l.map(o => o.textContent));
-    check(opts.length === 6 && opts.filter(o => o.includes('layout needed')).length === 4, 'six machine types, four head machines marked layout needed');
+    check(opts.length === 6 && opts.filter(o => o.includes('layout needed')).length === 2, 'six machine types, the two swivel heads marked layout needed');
     await page.selectOption('[data-path="config.machineType"]', 'F_V_SWIVEL');
     await page.click('#btnGenerate');
     await page.waitForSelector('#msgs .msg');
@@ -484,6 +484,22 @@ function check(cond, msg) { if (cond) console.log('ok   ' + msg); else { failure
     await page.emulateMedia({ colorScheme: 'light' });
     await page.click('[data-kin="AXES"]');
     await page.screenshot({ path: path.join(out, 'shot17_axes_light.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
+    await page.click('[data-kin="MACHINE"]');
+    /* 1.8.0 nutating head */
+    await page.selectOption('[data-path="config.machineType"]', 'F_V_NUT');
+    check((await page.textContent('.kinaxes')).includes('B = nutating head'), 'vertical nutating: axes shown');
+    await page.click('nav.tabs button[data-tab="wcs"]');
+    const th = await page.textContent('#tab-wcs thead');
+    check(th.includes('Trunnion NONE') && th.includes('Table C'), 'vertical nutating: WCS table has Table C, no trunnion');
+    await page.click('nav.tabs button[data-tab="config"]');
+    await page.selectOption('[data-path="config.machineType"]', 'F_H_NUT');
+    await page.click('nav.tabs button[data-tab="output"]');
+    await page.click('[data-act="preview"]');
+    await page.waitForSelector('.flist li');
+    await page.click('.flist li:has-text("B_TEMPLATE.SPF")');
+    check((await page.textContent('#tab-output')).includes('G0 C-180'), 'horizontal nutating: B_TEMPLATE ends with G0 C-180');
+    await page.click('nav.tabs button[data-tab="config"]');
+    await page.screenshot({ path: path.join(out, 'shot18_nutating_light.png'), clip: { x: 0, y: 0, width: 1360, height: 560 } });
   }
 
   /* 7. screenshots for review */

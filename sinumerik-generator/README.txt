@@ -12,11 +12,32 @@ MACHINE TYPE (tab 1, Machine & job)
   boxes as before). Machine types:
     Horizontal 4-axis, B only            B = rotary, no trunnion
     Horizontal 5-axis, 5th in the table  A = trunnion, B = rotary (HF)
-    Horizontal / vertical 5-axis with a nutating or swivel head (F):
-      listed, "layout needed" until their kinematics are set up. Choosing
-      one stops Generate; use Axes by hand until then.
-  The machine type only sets the trunnion / rotary axes: the NC is the same
-  as with those axes by hand, apart from the KINEMATICS comment.
+    Vertical 5-axis, nutating head (F)   B = head (-70 to +250), C = table
+    Horizontal 5-axis, nutating head (F) C = head (-250 to +100), B = table
+    Horizontal / vertical 5-axis with a swivel head (F): listed, "layout
+      needed" until their kinematics are set up. Choosing one stops
+      Generate; use Axes by hand until then.
+  Table machines: the machine type only sets the trunnion / rotary axes:
+  the NC is the same as with those axes by hand, apart from the KINEMATICS
+  comment.
+  Nutating head (45 deg, same machine, axis names only differ):
+    vertical    B0 = spindle vertical (along Z), B180 = horizontal
+    horizontal  C0 = spindle vertical, C-180 = horizontal (along Z)
+    Head home = spindle along Z: B0 (vertical), C-180 (horizontal).
+    - The work offset holds the table angle only (C or B), never the head.
+    - The probe and CMC programs command table 0 + head home after the
+      tool call (vertical: C0 B0, horizontal: B0 C-180), then their
+      CYCLE800 plane if one is set, and end at head home.
+    - Every B program must end with the head at home (B_TEMPLATE end block:
+      G0 B0 / G0 C-180 after the Z retract). L_TOOL_MEAS and L_TOOL_BRK
+      measure on the laser without moving the head.
+    - The L_ cycles, C_P1_HOME, C_P1_LOAD_WO and UGUD.DEF are the same as
+      on the table machines (framework REV 02).
+    - Nest face without a swivel = spindle along Z: on the vertical
+      machine that is the table top. Side faces need a CYCLE800 plane
+      (tab 2 swivel / CMC swivel).
+    FIRST RUN on a head machine: check the laser measures with the head at
+    home, and the head-home move after the tool change is clear.
   Axes by hand starts from the machine type's axes. Jobs saved before
   1.7.0 open as HF (A/B), 4-axis B (no trunnion, B) or Axes by hand
   (anything else). The .json keeps the axes too, so older generators read it.

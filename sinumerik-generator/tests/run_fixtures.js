@@ -117,12 +117,53 @@ if (process.argv.includes('--write-hashes')) {
   if (kin(rt) === kin(a)) console.log('ok   machine type survives save / load'); else fail('machine type round trip ' + kin(rt));
 }
 
+/* ---- nutating head machines (1.8.0): table axis in the WO, head home in the job programs only ---- */
+{
+  const G = id => gens.find(g => g.id === id);
+  const txt = (g, p) => (g.files.find(f => f.path === p) || { text: '' }).text;
+  const fixed = g => g.files.filter(f => isFixed(f.path)).map(f => f.path + '\n' + f.text).join('\n');
+  const hf = G('f10_swivel'), v = G('f11_nut_vertical'), h = G('f12_nut_horizontal');
+  if (!v || !h) fail('nutating fixtures missing');
+  else {
+    const vWO = txt(v, 'WKS/C_P1_WO.SPF'), hWO = txt(h, 'WKS/C_P1_WO.SPF');
+    if (/,C,TR\]=/.test(vWO) && !/,[AB],TR\]=/.test(vWO)) console.log('ok   vertical nutating: table C in the WO, no head B in the WO');
+    else fail('vertical nutating WO axes');
+    if (/,B,TR\]=/.test(hWO) && !/,[AC],TR\]=/.test(hWO)) console.log('ok   horizontal nutating: table B in the WO, no head C in the WO');
+    else fail('horizontal nutating WO axes');
+    if (vWO.includes('B = HEAD (B0 = SPINDLE ALONG Z), C = TABLE') && hWO.includes('C = HEAD (C-180 = SPINDLE ALONG Z), B = TABLE'))
+      console.log('ok   nutating KINEMATICS comments');
+    else fail('nutating KINEMATICS comments');
+    const vProbe = v.files.filter(f => isJob(f.path)).map(f => f.text).find(t => /;--- TOOL CALL ---/.test(t) && /PROBE_END:/.test(t)) || '';
+    const hProbe = h.files.filter(f => isJob(f.path)).map(f => f.text).find(t => /;--- TOOL CALL ---/.test(t) && /PROBE_END:/.test(t)) || '';
+    if (/\nC0 B0 +;table to the nest angle \(in the WO\), head home\n/.test(vProbe) && /\nG0 B0 +;head home: the laser measures there\n;\nRET\n/.test(vProbe))
+      console.log('ok   vertical probe program: C0 B0 after the tool call, G0 B0 before RET');
+    else fail('vertical probe program head lines');
+    if (/\nB0 C-180 +;table to the nest angle \(in the WO\), head home\n/.test(hProbe) && /\nG0 C-180 +;head home: the laser measures there\n;\nRET\n/.test(hProbe))
+      console.log('ok   horizontal probe program: B0 C-180 after the tool call, G0 C-180 before RET');
+    else fail('horizontal probe program head lines');
+    const hCmcM = h.files.filter(f => /_M\.SPF$/.test(f.path)).map(f => f.text);
+    if (hCmcM.length && hCmcM.every(t => /\nB0 C-180 /.test(t) && /\nG0 C-180 +;head home: the laser measures there\n;\nRET\n/.test(t)))
+      console.log('ok   horizontal CMC measure programs: head home after the tool call and before RET');
+    else fail('horizontal CMC measure head lines');
+    const vB = txt(v, 'WKS/B_TEMPLATE.SPF'), hB = txt(h, 'WKS/B_TEMPLATE.SPF'), fB = txt(hf, 'WKS/B_TEMPLATE.SPF');
+    if (/D0\nG0 B0\nRET\n/.test(vB) && /D0\nG0 C-180\nRET\n/.test(hB) && /D0\nRET\n/.test(fB) && vB.includes('HEAD HOME B0'))
+      console.log('ok   B_TEMPLATE: head home before RET on head machines only');
+    else fail('B_TEMPLATE head home');
+    if (fixed(v) === fixed(hf) && fixed(h) === fixed(G('f8_cmc_milling')))
+      console.log('ok   nutating machines use the same fixed files (framework REV ' + S.FW_REV + ')');
+    else fail('nutating fixed files differ from the table machines');
+    if (S.machineFromAxes('NONE', 'B').key === 'H4_B' && S.machineFromAxes('NONE', 'C') === null)
+      console.log('ok   axes by hand -> machine type never picks a head machine');
+    else fail('machineFromAxes picked a head machine');
+  }
+}
+
 /* ---- validator must reject broken jobs ---- */
 const base = () => S.normalizeJob(JSON.parse(fs.readFileSync(path.join(here, 'fixtures', 'f1_old_package.json'), 'utf8')));
 const negatives = [
   ['tombstone without rotary', j => { j.config.kinStyle = 'AXES'; j.config.rotary = 'NONE'; }, 'config.rotary'],
   ['trunnion equals rotary', j => { j.config.kinStyle = 'AXES'; j.config.trunnion = 'B'; }, 'config.trunnion'],
-  ['head machine without its layout', j => { j.config.machineType = 'F_H_NUT'; }, 'config.machineType'],
+  ['head machine without its layout', j => { j.config.machineType = 'F_H_SWIVEL'; }, 'config.machineType'],
   ['unknown machine type', j => { j.config.machineType = 'XYZ'; }, 'config.machineType'],
   ['total above faces x nests', j => { j.config.totalNests = '9'; }, 'config.totalNests'],
   ['total above 32', j => { j.config.faces = '8'; j.config.nestsPerFace = '5'; j.config.totalNests = '40'; }, 'config.totalNests'],
