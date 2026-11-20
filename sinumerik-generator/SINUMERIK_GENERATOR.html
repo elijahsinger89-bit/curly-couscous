@@ -6,136 +6,230 @@
 <title>SINUMERIK ONE Generator</title>
 <style>
 :root {
-  --bg: #f4f5f7; --panel: #ffffff; --ink: #1d2330; --muted: #5d6677; --line: #d5d9e0;
-  --accent: #0b6e8a; --accent-ink: #ffffff; --bad: #b3261e; --bad-bg: #fdecea; --warn: #8a5a00;
-  --warn-bg: #fff4dc; --ok: #1e7a3c; --ok-bg: #e7f5ec; --field: #ffffff; --off: #eceef2; --code: #f7f8fa;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #14171c; --panel: #1c2027; --ink: #e3e6eb; --muted: #9aa3b2; --line: #343a45;
-    --accent: #3fa7c4; --accent-ink: #0d1014; --bad: #ff8a80; --bad-bg: #3a1d1b; --warn: #f0c060;
-    --warn-bg: #3a3018; --ok: #7fd49a; --ok-bg: #1b3324; --field: #232831; --off: #2a2f38; --code: #171a20;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #14171c; --panel: #1c2027; --ink: #e3e6eb; --muted: #9aa3b2; --line: #343a45;
-  --accent: #3fa7c4; --accent-ink: #0d1014; --bad: #ff8a80; --bad-bg: #3a1d1b; --warn: #f0c060;
-  --warn-bg: #3a3018; --ok: #7fd49a; --ok-bg: #1b3324; --field: #232831; --off: #2a2f38; --code: #171a20;
+  /* graphite bands (nav, page head, footer only) */
+  --g-950: #101317; --g-900: #161a1f; --g-850: #1d2228; --g-800: #262c34;
+  /* steel */
+  --s-900: #333a43; --s-800: #414953; --s-700: #56616e; --s-600: #727d8a; --s-500: #9ca5b0;
+  --s-300: #cfd5dc; --s-200: #e4e8ec; --s-100: #f0f2f5;
+  /* canvas, panels, text */
+  --canvas: #e6e9ed; --panel: #ffffff; --pbody: #f7f8fa; --ink: #1c2127; --muted: #5a646f;
+  /* the one accent */
+  --amber: #d4922e; --amber-h: #c2842a; --amber-a: #ab7422; --amber-d: #8a5c15; --amber-t: #f7ecda;
+  --amber-b: #e6c38c; --amber-g: rgba(212, 146, 46, 0.22);
+  --sans: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --mono: "Cascadia Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+  /* names the page code and the pictures use */
+  --bg: var(--canvas); --line: var(--s-300); --accent: var(--s-800); --accent-ink: #ffffff;
+  --bad: #b3261e; --bad-bg: #fbeceb; --warn: var(--amber-d); --warn-bg: var(--amber-t);
+  --ok: #1e7a3c; --ok-bg: #e9f5ed; --field: #ffffff; --off: var(--s-100); --code: var(--pbody);
+  --hi: var(--amber-a); --hi-bg: var(--amber-t); --metal: #c9ced6; --metal2: #e4e7ec; --zone: #ecdcb8;
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
-header.top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-  padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
-header.top h1 { font-size: 17px; margin: 0; }
-header.top .sub { color: var(--muted); font-size: 12px; }
-.actions { display: flex; flex-wrap: wrap; gap: 8px; }
-button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); background: var(--field); color: var(--ink); border-radius: 6px; cursor: pointer; }
-button:hover { border-color: var(--accent); }
-button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
-button.small { padding: 2px 8px; font-size: 12px; }
-nav.tabs { display: flex; gap: 4px; padding: 8px 16px 0; overflow-x: auto; }
-nav.tabs button { border-radius: 6px 6px 0 0; border-bottom: none; background: transparent; color: var(--muted); }
-nav.tabs button.active { background: var(--panel); color: var(--ink); border-color: var(--line); font-weight: 600; }
-main { padding: 0 16px 32px; }
-.tab { display: none; background: var(--panel); border: 1px solid var(--line); border-radius: 0 8px 8px 8px; padding: 16px; }
-.tab.active { display: block; }
-h2 { font-size: 15px; margin: 18px 0 8px; }
+html { font-size: 15px; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--canvas); color: var(--ink);
+  font: 0.93rem/1.45 var(--sans); }
+.wrap { width: 100%; max-width: 1680px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 640px) { .wrap { padding: 0 16px; } }
+
+/* ---- buttons ---- */
+button { font: 600 0.9rem/1.2 var(--sans); padding: 0.45rem 0.9rem; border: 1px solid var(--s-500); background: transparent;
+  color: var(--s-800); border-radius: 4px; cursor: pointer; white-space: nowrap; }
+button:hover { background: var(--g-800); border-color: var(--g-800); color: #ffffff; }
+button.primary { background: var(--amber); border-color: var(--amber); color: #15181c; }
+button.primary:hover { background: var(--amber-h); border-color: var(--amber-h); color: #15181c; }
+button.primary:active { background: var(--amber-a); border-color: var(--amber-a); }
+button:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--amber-g); }
+button.small { font-size: 0.78rem; padding: 0.22rem 0.6rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* ---- 1. nav bar ---- */
+header.nav { position: sticky; top: 0; z-index: 10; background: var(--g-900); border-bottom: 1px solid var(--g-950); }
+header.nav .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; min-height: 54px; padding-top: 8px; padding-bottom: 8px; }
+.brand { display: flex; align-items: center; gap: 10px; color: #ffffff; font-weight: 600; font-size: 1rem; white-space: nowrap; }
+.brand i { width: 10px; height: 10px; background: var(--amber); display: inline-block; }
+.ntag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--s-500);
+  border: 1px solid var(--s-900); border-radius: 3px; padding: 2px 7px; white-space: nowrap; }
+header.nav .spacer { flex: 1; }
+#jobLabel { color: var(--s-500); font: 0.8rem var(--mono); white-space: nowrap; }
+header.nav .actions button { color: var(--s-200); border-color: var(--s-800); }
+header.nav .actions button:hover { background: var(--g-800); border-color: var(--s-700); color: #ffffff; }
+header.nav .actions button.primary { background: var(--amber); border-color: var(--amber); color: #15181c; }
+header.nav .actions button.primary:hover { background: var(--amber-h); border-color: var(--amber-h); }
+#btnMenu { display: none; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--s-200); border-color: var(--s-800); }
+@media (max-width: 760px) {
+  #btnMenu { display: inline-block; }
+  header.nav .actions { display: none; width: 100%; padding-bottom: 4px; }
+  header.nav.open .actions { display: flex; }
+  header.nav .ntag { display: none; }
+}
+
+/* ---- 2. page head band + step strip ---- */
+.phead { background-color: var(--g-850); border-bottom: 1px solid var(--g-800);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px; padding: 22px 0 calc(2.25rem + 20px); }
+.phead .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 32px; }
+.phead .wrap > * { min-width: 0; max-width: 100%; }
+.eyebrow { color: var(--amber); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.phead h1 { color: #ffffff; font-size: 1.45rem; font-weight: 600; margin: 4px 0 2px; }
+.phead p { color: var(--s-500); margin: 0; font-size: 0.88rem; }
+nav.tabs { display: flex; gap: 22px; overflow-x: auto; }
+nav.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 6px 0;
+  color: var(--s-500); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+nav.tabs button .no { font-family: var(--mono); color: var(--s-600); margin-right: 6px; }
+nav.tabs button:hover { background: none; color: #ffffff; }
+nav.tabs button.active { color: #ffffff; border-bottom-color: var(--amber); }
+nav.tabs button.active .no { color: var(--amber); }
+nav.tabs button:focus-visible { box-shadow: none; outline: 2px solid var(--amber-g); }
+
+/* ---- 3. workspace: panels on the light canvas ---- */
+main.wrap { flex: 1; margin-top: -2.25rem; padding-bottom: 32px; }
+#msgs:empty { display: none; }
+.tab { display: none; }
+.tab.active { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.tab.active > * { grid-column: 1 / -1; min-width: 0; }
+.tab.active > .panel[data-span="5"] { grid-column: span 5; }
+.tab.active > .panel[data-span="7"] { grid-column: span 7; }
+@media (max-width: 1180px) { .tab.active > .panel[data-span] { grid-column: 1 / -1; } }
+.panel, .card2 { background: var(--panel); border: 1px solid var(--s-300); border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(16, 19, 23, 0.06), 0 6px 18px rgba(16, 19, 23, 0.05); }
+.panel > .ph { padding: 12px 16px; border-bottom: 1px solid var(--s-200); }
+.panel > .ph h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0; font-size: 0.98rem; font-weight: 600; }
+.panel > .pb { padding: 14px 16px 16px; background: var(--pbody); border-radius: 0 0 4px 4px; }
+.panel > .pb:first-child { border-radius: 4px; }
+.panel > .pb > :first-child { margin-top: 0; }
+h2 { font-size: 0.98rem; margin: 18px 0 8px; }
 h2:first-child { margin-top: 0; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 16px; }
-label.f { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); }
-label.f.chk { flex-direction: row; align-items: center; gap: 6px; color: var(--ink); font-size: 13px; }
-input, select { font: inherit; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 5px; padding: 5px 7px; min-width: 0; }
-input[type=checkbox] { width: 16px; height: 16px; }
-input:disabled, select:disabled { background: var(--off); color: var(--muted); }
+
+/* tags */
+.pill { display: inline-block; padding: 2px 7px; border-radius: 3px; background: var(--amber-t); border: 1px solid var(--amber-b);
+  color: var(--amber-d); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle; }
+
+/* fields */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px 16px; }
+label.f { display: flex; flex-direction: column; gap: 4px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--s-700); }
+label.f .hint, label.f .ferr { text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 0.74rem; }
+label.f .hint { color: var(--muted); }
+label.f .ferr { color: var(--bad); }
+label.f.chk { flex-direction: row; align-items: center; gap: 8px; color: var(--ink); font-size: 0.88rem; font-weight: 500;
+  letter-spacing: 0; text-transform: none; }
+input, select { font: 0.9rem/1.3 var(--sans); color: var(--ink); background: var(--field); border: 1px solid var(--s-300);
+  border-radius: 4px; padding: 6px 8px; min-width: 0; text-transform: none; letter-spacing: 0; }
+input:hover, select:hover { border-color: var(--s-500); }
+input:focus, select:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-g); }
+input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--amber-a); }
+input:disabled, select:disabled { background: var(--s-100); color: var(--s-600); border-color: var(--s-200); }
 input.err, select.err { border-color: var(--bad); background: var(--bad-bg); }
-.note { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
-.box { border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-top: 10px; }
-.tblwrap { overflow-x: auto; }
-table.t { border-collapse: collapse; width: 100%; font-size: 13px; }
-table.t th, table.t td { border-bottom: 1px solid var(--line); padding: 4px 5px; text-align: left; white-space: nowrap; }
-table.t th { color: var(--muted); font-weight: 600; font-size: 12px; }
-table.t input[type=text] { width: 100%; min-width: 64px; }
+.note { color: var(--muted); font-size: 0.82rem; margin: 6px 0 0; }
+.box { border: 1px solid var(--s-300); border-radius: 4px; padding: 12px 14px; margin-top: 12px; background: var(--panel); }
+.grid > label.f.wide { grid-column: span 2; }
+@media (max-width: 520px) { .grid > label.f.wide { grid-column: auto; } }
+
+/* machine type toggle + axes readout */
+.kintoggle { display: flex; align-items: center; margin: 0 0 12px; }
+.kintoggle span { color: var(--s-700); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 12px; }
+.kintoggle button { border-radius: 0; margin: 0; border-color: var(--s-300); background: var(--panel); color: var(--s-700); font-size: 0.82rem; padding: 6px 14px; }
+.kintoggle button:hover { background: var(--s-100); border-color: var(--s-500); color: var(--ink); }
+.kintoggle button:first-of-type { border-radius: 4px 0 0 4px; }
+.kintoggle button:last-of-type { border-radius: 0 4px 4px 0; border-left: 0; }
+.kintoggle button.on, .kintoggle button.on:hover { background: var(--amber-t); border-color: var(--amber); color: var(--amber-d); }
+.kinaxes { display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; font-size: 0.86rem; }
+.kinaxes span { color: var(--s-700); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.kinaxes b { font-weight: 600; }
+
+/* tables */
+.tblwrap { overflow-x: auto; border: 1px solid var(--s-300); border-radius: 4px; background: var(--panel); }
+table.t { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+table.t th, table.t td { border-bottom: 1px solid var(--s-200); padding: 5px 6px; text-align: left; white-space: nowrap; }
+table.t tbody tr:last-child td { border-bottom: 0; }
+table.t th { background: var(--s-100); border-bottom-color: var(--s-300); color: var(--s-700); font-weight: 600; font-size: 0.64rem;
+  letter-spacing: 0.08em; text-transform: uppercase; }
+table.t input[type=text] { width: 100%; min-width: 64px; font-family: var(--mono); font-size: 0.82rem; padding: 4px 6px; }
 table.t td.c, table.t th.c { text-align: center; }
 table.t th input.colall { margin: 3px 0 0; }
-table.t td.ro { color: var(--muted); font-variant-numeric: tabular-nums; }
-#msgs { margin: 10px 16px 0; }
-.msg { border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; border: 1px solid; }
-.msg.bad { background: var(--bad-bg); border-color: var(--bad); }
-.msg.ok { background: var(--ok-bg); border-color: var(--ok); }
-.msg.warn { background: var(--warn-bg); border-color: var(--warn); }
+table.t td.ro { color: var(--muted); font-family: var(--mono); font-size: 0.82rem; }
+
+/* notices */
+.msg { border-radius: 4px; padding: 10px 14px; margin-bottom: 12px; border: 1px solid; background: var(--panel); }
+.msg.bad { background: var(--bad-bg); border-color: #dd8d86; }
+.msg.ok { background: var(--ok-bg); border-color: #8cc5a0; }
+.msg.warn { background: var(--amber-t); border-color: var(--amber); }
 .msg ul { margin: 6px 0 0; padding-left: 20px; }
 .msg a { color: inherit; }
-.out { display: grid; grid-template-columns: minmax(200px, 280px) 1fr; gap: 12px; }
+.warnline { margin-top: 6px; font-size: 0.8rem; color: var(--amber-d); background: var(--amber-t); border: 1px solid var(--amber-b); border-radius: 4px; padding: 5px 8px; }
+
+/* output: file list + NC viewer */
+.out { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: 16px; margin-top: 4px; }
 @media (max-width: 760px) { .out { grid-template-columns: 1fr; } }
-.flist { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 8px; max-height: 70vh; overflow: auto; }
-.flist li { padding: 6px 10px; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
-.flist li.sel { background: var(--off); font-weight: 600; }
-.flist .dir { color: var(--muted); font-size: 11px; }
-.viewer { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
-.viewer .vh { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 10px; border-bottom: 1px solid var(--line); }
-.viewer pre { margin: 0; padding: 8px 0; background: var(--code); max-height: 70vh; overflow: auto; font: 12.5px/1.45 ui-monospace, Consolas, "Courier New", monospace; }
-.viewer pre span.ln { display: inline-block; width: 4.2em; padding-right: 10px; text-align: right; color: var(--muted); user-select: none; }
-dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); max-width: 560px; width: calc(100% - 32px); }
-dialog::backdrop { background: rgba(0,0,0,.45); }
-dialog .btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
-.kintoggle { display: flex; align-items: center; gap: 0; margin: 0 0 10px; }
-.kintoggle span { color: var(--muted); font-size: 12px; margin-right: 10px; }
-.kintoggle button { border-radius: 0; margin: 0; }
-.kintoggle button:first-of-type { border-radius: 6px 0 0 6px; }
-.kintoggle button:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
-.kintoggle button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
-.grid > label.f.wide { grid-column: span 2; }
-.kinaxes { display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; font-size: 13px; }
-.kinaxes span { color: var(--muted); font-size: 12px; }
-.pill { display: inline-block; padding: 1px 8px; border-radius: 10px; background: var(--off); color: var(--muted); font-size: 12px; }
-/* 1.6.0 cards: boxes left, picture and help right */
-:root { --hi: #d9480f; --hi-bg: #fff0e6; --metal: #c9ced6; --metal2: #e4e7ec; --zone: #e9d9b0; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hi: #ff9f5a; --hi-bg: #3a2614; --metal: #4a5160; --metal2: #353b47; --zone: #5c4f2e; } }
-:root[data-theme="dark"] { --hi: #ff9f5a; --hi-bg: #3a2614; --metal: #4a5160; --metal2: #353b47; --zone: #5c4f2e; }
-.card2 { border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; overflow: hidden; scroll-margin-top: 80px; }
-.card2 > .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 9px 14px; border-bottom: 1px solid var(--line); background: var(--code); }
-.card2 > .head b { font-size: 15px; }
-.card2 > .head span { color: var(--muted); font-size: 13px; }
+.flist { list-style: none; margin: 0; padding: 0; border: 1px solid var(--s-300); border-radius: 4px; background: var(--panel); max-height: 70vh; overflow: auto; }
+.flist li { padding: 7px 10px; border-bottom: 1px solid var(--s-200); cursor: pointer; display: flex; justify-content: space-between; gap: 8px; font: 0.82rem var(--mono); }
+.flist li:hover { background: var(--s-100); }
+.flist li.sel { background: var(--amber-t); box-shadow: inset 3px 0 0 var(--amber); font-weight: 600; }
+.flist .dir { color: var(--muted); font-size: 0.72rem; font-weight: 400; }
+.viewer { border: 1px solid var(--s-300); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; background: var(--panel); }
+.viewer .vh { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--s-200); }
+.viewer .vh b { font: 600 0.85rem var(--mono); }
+.viewer pre { margin: 0; padding: 8px 0; background: var(--pbody); max-height: 70vh; overflow: auto; font: 0.8rem/1.5 var(--mono); }
+.viewer pre span.ln { display: inline-block; width: 4.2em; padding-right: 12px; text-align: right; color: var(--s-500); user-select: none; }
+
+/* dialog */
+dialog { border: 1px solid var(--s-300); border-radius: 4px; background: var(--panel); color: var(--ink); max-width: 560px; width: calc(100% - 32px);
+  padding: 0; box-shadow: 0 16px 48px rgba(16, 19, 23, 0.28); }
+dialog::backdrop { background: rgba(16, 19, 23, 0.55); }
+dialog h2 { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--s-200); }
+#dlgBody { padding: 12px 16px; background: var(--pbody); }
+#dlgBody p { margin: 0 0 8px; }
+dialog .btns { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--s-200); }
+
+/* ---- cards (probing, CMC): boxes left, picture and help right ---- */
+.card2 { overflow: hidden; scroll-margin-top: 72px; border-top: 3px solid var(--g-800); }
+.card2.offcard { border-top-color: var(--s-500); }
+.card2 > .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 11px 16px; border-bottom: 1px solid var(--s-200); }
+.card2 > .head b { font-size: 0.98rem; }
+.card2 > .head span { color: var(--muted); font-size: 0.84rem; }
 .card2.offcard > .head { opacity: .7; }
 .card2 > .body { display: grid; grid-template-columns: minmax(0, 1fr) 440px; }
-@media (max-width: 980px) { .card2 > .body { grid-template-columns: 1fr; } .card2 .pic { order: -1; border-left: none !important; border-bottom: 1px solid var(--line); } }
-.card2 .form { padding: 12px 14px; min-width: 0; }
-.grp { margin-bottom: 12px; }
-.grp h3 { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 0 0 6px; }
-.grp h3 .n { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 12px; flex: none; }
-.grp .row, details.more .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 12px; align-items: start; }
+@media (max-width: 980px) { .card2 > .body { grid-template-columns: 1fr; } .card2 .pic { order: -1; border-left: none !important; border-bottom: 1px solid var(--s-200); } }
+.card2 .form { padding: 14px 16px; min-width: 0; background: var(--pbody); }
+.grp { margin-bottom: 14px; }
+.grp h3, .does h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: var(--s-700); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; }
+.grp h3::after, .does h3::after { content: ""; flex: 1; height: 1px; background: var(--s-300); }
+.grp h3 .n { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 3px; background: var(--g-800); color: #ffffff;
+  font: 600 0.68rem var(--mono); letter-spacing: 0; flex: none; }
+.grp .row, details.more .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px 12px; align-items: start; }
 .grp .row .wide, details.more .row .wide { grid-column: 1 / -1; }
-label.f.focus { color: var(--hi); font-weight: 600; }
-label.f.focus input, label.f.focus select { outline: 2px solid var(--hi); border-color: var(--hi); background: var(--hi-bg); }
-label.f .hint { font-size: 11px; color: var(--muted); font-weight: 400; }
-label.f .ferr { font-size: 11px; color: var(--bad); font-weight: 400; }
+label.f.focus { color: var(--amber-d); }
+label.f.focus input, label.f.focus select { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-g); background: #fffdf8; }
 label.f.chk { padding-top: 18px; }
-details.more { border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; margin-top: 4px; }
-details.more summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+details.more { border: 1px dashed var(--s-300); border-radius: 4px; padding: 8px 10px; margin-top: 4px; background: var(--panel); }
+details.more summary { cursor: pointer; font-weight: 600; font-size: 0.86rem; }
 details.more .sum { font-weight: 400; color: var(--muted); margin-left: 6px; }
 details.more[open] .row { margin-top: 8px; }
-.warnline { margin-top: 6px; font-size: 12px; color: var(--warn); background: var(--warn-bg); border-radius: 6px; padding: 5px 8px; }
-.card2 .pic { border-left: 1px solid var(--line); padding: 12px 14px; }
+.card2 .pic { border-left: 1px solid var(--s-200); padding: 14px 16px; background: var(--panel); }
 .card2 .views { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .card2 .views.one { grid-template-columns: minmax(0, 300px); justify-content: center; }
-.card2 .vt { font-size: 11px; color: var(--muted); text-align: center; margin-top: 2px; }
-.card2 .vt.vth { color: var(--hi); font-weight: 600; }
+.card2 .vt { font-size: 0.68rem; color: var(--s-600); text-align: center; margin-top: 2px; letter-spacing: 0.06em; text-transform: uppercase; }
+.card2 .vt.vth { color: var(--amber-d); font-weight: 600; }
 .card2 svg { width: 100%; height: auto; display: block; }
-.help { margin-top: 10px; border-left: 3px solid var(--hi); background: var(--hi-bg); padding: 8px 10px; border-radius: 0 6px 6px 0; }
-.help b { color: var(--hi); }
-.help p { margin: 4px 0 0; font-size: 13px; }
-dl.live { margin: 10px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12px; }
+.help { margin-top: 12px; border: 1px solid var(--amber-b); border-left: 3px solid var(--amber); background: var(--amber-t); padding: 8px 10px; border-radius: 0 4px 4px 0; }
+.help b { color: var(--amber-d); }
+.help p { margin: 4px 0 0; font-size: 0.84rem; }
+dl.live { margin: 12px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 0.8rem; }
 dl.live dt { color: var(--muted); }
-dl.live dd { margin: 0; font-variant-numeric: tabular-nums; }
+dl.live dd { margin: 0; font-family: var(--mono); }
 dl.live dd.ok { color: var(--ok); }
 dl.live dd.bad { color: var(--bad); font-weight: 600; }
-.does { border-top: 1px solid var(--line); padding: 10px 14px 12px; background: var(--code); }
-.does h3 { font-size: 13px; margin: 0 0 4px; }
-.does ol { margin: 0; padding-left: 20px; font-size: 13px; }
-.strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 4px; }
-.strip .step { border: 1px solid var(--accent); color: var(--accent); background: transparent; border-radius: 16px; padding: 3px 11px; font-size: 12px; font-weight: 600; }
-.strip .step.off { border-color: var(--line); color: var(--muted); font-weight: 400; text-decoration: line-through; }
-.strip .arrow { color: var(--muted); }
+.does { border-top: 1px solid var(--s-200); padding: 12px 16px 14px; background: var(--panel); }
+.does ol { margin: 0; padding-left: 20px; font-size: 0.86rem; }
+.strip { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 2px 0; }
+.strip .step { border: 1px solid var(--amber-b); color: var(--amber-d); background: var(--amber-t); border-radius: 3px; padding: 4px 10px;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.strip .step:hover { border-color: var(--amber); background: var(--amber-t); color: var(--amber-d); }
+.strip .step.off { border-color: var(--s-300); background: var(--s-100); color: var(--s-600); text-decoration: line-through; }
+.strip .arrow { color: var(--s-500); }
 .card2 svg .metal { fill: var(--metal); stroke: var(--ink); stroke-width: 1.2; }
 .card2 svg .metal2 { fill: var(--metal2); stroke: var(--ink); stroke-width: 1.2; }
 .card2 svg .metalhi { stroke: var(--hi); stroke-width: 2.6; }
@@ -158,43 +252,63 @@ dl.live dd.bad { color: var(--bad); font-weight: 600; }
 .card2 svg .probehi { stroke: var(--hi); stroke-width: 2.4; }
 .card2 svg .band { fill: var(--accent); opacity: .12; stroke: var(--accent); stroke-dasharray: 3 3; }
 .card2 svg .bandhi { fill: var(--hi); opacity: .2; stroke: var(--hi); }
-.card2 svg text { fill: var(--ink); font: 11px system-ui, sans-serif; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
+.card2 svg text { fill: var(--ink); font: 11px var(--sans); paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
 .card2 svg text.m { fill: var(--muted); }
-.card2 svg text.h { fill: var(--hi); font-weight: 700; }
+.card2 svg text.h { fill: var(--amber-d); font-weight: 700; }
 .card2 svg text.a { fill: var(--accent); font-weight: 600; }
+
+/* ---- 4. footer ---- */
+footer.foot { background: var(--g-950); color: var(--s-600); font-size: 0.76rem; }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding-top: 12px; padding-bottom: 12px; }
 </style>
 </head>
 <body>
-<header class="top">
-  <div>
-    <h1>SINUMERIK ONE Program Generator</h1>
-    <div class="sub">Tombstone / single-part nest framework. Offline. <span id="jobLabel"></span></div>
-  </div>
-  <div class="actions">
-    <button id="btnLoad" type="button">Load job…</button>
-    <input type="file" id="fileLoad" accept=".json,application/json" hidden>
-    <button id="btnBList" type="button" title="Pre-fill from the hyperMILL B program list (_B_PROGRAMS.json)">Import B list…</button>
-    <input type="file" id="fileBList" accept=".json,application/json" hidden>
-    <button id="btnSave" type="button">Save job</button>
-    <button id="btnValidate" type="button">Validate</button>
-    <button id="btnGenerate" type="button" class="primary">Generate ZIP</button>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><i></i>SINUMERIK ONE Program Generator</div>
+    <span class="ntag" id="verTag"></span>
+    <span class="ntag" id="fwTag"></span>
+    <span class="spacer"></span>
+    <span id="jobLabel"></span>
+    <button id="btnMenu" type="button" aria-expanded="false" aria-controls="navActions">Menu</button>
+    <div class="actions" id="navActions">
+      <button id="btnLoad" type="button">Load job…</button>
+      <input type="file" id="fileLoad" accept=".json,application/json" hidden>
+      <button id="btnBList" type="button" title="Pre-fill from the hyperMILL B program list (_B_PROGRAMS.json)">Import B list…</button>
+      <input type="file" id="fileBList" accept=".json,application/json" hidden>
+      <button id="btnSave" type="button">Save job</button>
+      <button id="btnValidate" type="button">Validate</button>
+      <button id="btnGenerate" type="button" class="primary">Generate ZIP</button>
+    </div>
   </div>
 </header>
-<nav class="tabs" role="tablist">
-  <button type="button" data-tab="config" class="active">1 · Config &amp; steps</button>
-  <button type="button" data-tab="probing">2 · Probing</button>
-  <button type="button" data-tab="wcs">3 · Work offsets</button>
-  <button type="button" data-tab="output">4 · Output</button>
-  <button type="button" data-tab="cmc" id="tabBtnCmc" hidden>5 · CMC</button>
-</nav>
-<div id="msgs"></div>
-<main>
+<section class="phead">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" id="phEyebrow">Step 01 - Config &amp; steps</div>
+      <h1 id="phTitle">Machine, nests and step sequence</h1>
+      <p id="phSub">Tombstone / single-part nest framework. Offline: nothing leaves this PC.</p>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button type="button" data-tab="config" class="active"><span class="no">01</span>Config &amp; steps</button>
+      <button type="button" data-tab="probing"><span class="no">02</span>Probing</button>
+      <button type="button" data-tab="wcs"><span class="no">03</span>Work offsets</button>
+      <button type="button" data-tab="output"><span class="no">04</span>Output</button>
+      <button type="button" data-tab="cmc" id="tabBtnCmc" hidden><span class="no">05</span>CMC</button>
+    </nav>
+  </div>
+</section>
+<main class="wrap">
+  <div id="msgs"></div>
   <section class="tab active" id="tab-config"></section>
   <section class="tab" id="tab-probing"></section>
   <section class="tab" id="tab-wcs"></section>
   <section class="tab" id="tab-output"></section>
   <section class="tab" id="tab-cmc"></section>
 </main>
+<footer class="foot">
+  <div class="wrap"><span id="footL">SINUMERIK ONE Program Generator | Nest framework | Offline</span><span id="footR"></span></div>
+</footer>
 <dialog id="dlg">
   <h2 id="dlgTitle"></h2>
   <div id="dlgBody"></div>
@@ -212,7 +326,7 @@ dl.live dd.bad { color: var(--bad); font-weight: 600; }
 (function (G) {
 'use strict';
 
-var GEN_VERSION = '1.8.0';
+var GEN_VERSION = '1.9.0';
 /* Framework revision of the fixed files installed once per machine
    (L_ cycles, C_P1_HOME, C_P1_LOAD_WO, UGUD.DEF). Comment only.
    RULE: any change to the code or text of a fixed file means bump FW_REV
@@ -3441,11 +3555,11 @@ function def(v) { return S.compact(v, 4) + ' (auto)'; }
 function renderConfig() {
   var c = job.config, single = c.mode === 'SINGLE PART';
   var h = '';
-  h += '<h2>Header <span class="pill">comments + program names</span></h2><div class="grid">' +
+  h += '<h2 data-span="5">Header <span class="pill">comments + program names</span></h2><div class="grid">' +
     txt('header.part', 'Part number') + txt('header.material', 'Material') + txt('header.stock', 'Stock') +
     txt('header.machine', 'Machine') + txt('header.programmer', 'Programmer') + '</div>';
   var mach = c.kinStyle !== 'AXES', mt = S.machineType(c.machineType);
-  h += '<h2>Machine &amp; job</h2>' +
+  h += '<h2 data-span="7">Machine &amp; job</h2>' +
     '<div class="kintoggle" role="group" aria-label="Kinematics"><span>Kinematics</span>' +
     '<button type="button" data-kin="MACHINE" aria-pressed="' + mach + '"' + (mach ? ' class="on"' : '') + '>Machine type</button>' +
     '<button type="button" data-kin="AXES" aria-pressed="' + !mach + '"' + (!mach ? ' class="on"' : '') + '>Axes by hand</button></div>' +
@@ -3502,7 +3616,7 @@ function renderConfig() {
     '$TC_TP8 bit 7 "tool was in use" is 0). Life count = pieces SETPIECE counts per good nest. ' +
     'The box under a column name turns that column on or off for every row (dash = mixed). ' +
     'CMC = cut / measure / cut: the step gets a card on tab 5.</p>';
-  $('#tab-config').innerHTML = h;
+  setTab('config', h);
   document.querySelectorAll('#tab-config [data-col]').forEach(function (el) {
     el.indeterminate = S.colState(job.steps, el.dataset.col) === 'some';
   });
@@ -4002,7 +4116,7 @@ function renderProbing() {
     (mt !== 'NONE' ? grp(2, 'Where', txt('probing.appX', 'Centre X') + txt('probing.appY', 'Centre Y') + txt('probing.probeZ', 'Probe depth Z')) +
       grp(3, 'Check', txt('probing.xyTol', 'XY tolerance (' + u.u + ')', { ph: def(u.xyTol) })) : ''),
     '', mt === 'NONE' ? 'offcard' : '', ' id="pr-xy"');
-  $('#tab-probing').innerHTML = h;
+  setTab('probing', h);
 }
 
 /* ---------------- tab 5: CMC (shown only while a step row has CMC ticked) ---------------- */
@@ -4012,7 +4126,7 @@ function renderCmc() {
   var btn = $('#tabBtnCmc');
   btn.hidden = !rows.length;
   if (!rows.length) {
-    $('#tab-cmc').innerHTML = '';
+    setTab('cmc', '');
     if (btn.classList.contains('active')) showTab('config');
     return;
   }
@@ -4033,7 +4147,7 @@ function renderCmc() {
   }).join(', ') + '. R' + S.CMC_RESERVED_R.join(', R') + ' is used by tool_load_mda and is never in a CMC block. ' +
     'Read MD28050 on the machine: R700 needs at least 750. Check no other program (tool change, Blum, OEM cycles, FIFO) uses this range.</p></div>';
   rows.forEach(function (i) { h += cmcCard(i, warnBy); });
-  $('#tab-cmc').innerHTML = h;
+  setTab('cmc', h);
 }
 var CMC_MORE = ['cmcWindow', 'cmcLimit', 'cmcEdge', 'cmcField', 'cmcReturn', 'cmcClean', 'cmcCleanM'];
 function cmcCard(i, warnBy) {
@@ -4103,7 +4217,7 @@ function renderWcs() {
   var R = S.resolve(job), c = { trunnion: R.trunnion, rotary: R.rotary };
   var n = R.nests.length;
   var h = '<h2>Work offsets <span class="pill">' + n + ' nest' + (n === 1 ? '' : 's') + '</span></h2>';
-  if (!n) { $('#tab-wcs').innerHTML = h + '<p class="note">Set a valid nest count on tab 1.</p>'; return; }
+  if (!n) { setTab('wcs', h + '<p class="note">Set a valid nest count on tab 1.</p>'); return; }
   h += '<p class="note">X / Y / Z in ' + U().u + ' (machine position of the nest with the table at its face). ' +
     'Blank X/Y/Z writes 0.000 = machine zero; you will be asked before generating. Angles in degrees; blank = the default shown.</p>';
   h += '<div class="tblwrap"><table class="t"><thead><tr><th>Nest</th><th>Face</th><th>WO</th><th>X</th><th>Y</th><th>Z</th>' +
@@ -4118,17 +4232,18 @@ function renderWcs() {
       '<td>' + cellTxt(p + 'notes', { size: 160 }) + '</td></tr>';
   });
   h += '</tbody></table></div>';
-  $('#tab-wcs').innerHTML = h;
+  setTab('wcs', h);
 }
 
 /* ---- tab: output ---- */
 function renderOutput() {
-  var h = '<div class="actions" style="margin-bottom:10px"><button type="button" data-act="preview">Preview files</button>' +
+  var h = '<h2>Files <span class="pill">' + (lastFiles ? lastFiles.length + ' files' : 'not built yet') + '</span></h2>' +
+    '<div class="actions" style="margin-bottom:10px"><button type="button" data-act="preview">Preview files</button>' +
     '<button type="button" data-act="zip" class="primary">Generate ZIP</button>' +
     (lastFiles ? '<button type="button" data-act="dlone">Download this file</button>' : '') + '</div>';
   if (!lastFiles) {
     h += '<p class="note">Press Preview files to build every NC file and read it here before saving. Generate ZIP builds and downloads them all.</p>';
-    $('#tab-output').innerHTML = h; return;
+    setTab('output', h); return;
   }
   h += '<div class="out"><ul class="flist">';
   lastFiles.forEach(function (f, i) {
@@ -4141,13 +4256,56 @@ function renderOutput() {
   var lines = lastFiles[selFile].text.replace(/\n$/, '').split('\n');
   h += lines.map(function (l, i) { return '<span class="ln">' + (i + 1) + '</span>' + esc(l); }).join('\n');
   h += '</pre></div></div>';
-  $('#tab-output').innerHTML = h;
+  setTab('output', h);
+}
+
+/* ---- page layout: each tab is a 12-column grid of panels on the light canvas.
+   An h2 starts a panel (head = the h2 and its tags, body = what follows up to the next h2).
+   Cards (.card2) and notices (.msg) stay panels / bars of their own. data-span on the h2 = columns. */
+function setTab(name, html) {
+  var el = $('#tab-' + name);
+  el.innerHTML = html;
+  var kids = Array.prototype.slice.call(el.childNodes), body = null;
+  kids.forEach(function (k) {
+    if (k.nodeType === 3 && !k.textContent.trim()) { el.removeChild(k); return; }
+    if (k.nodeType === 1 && k.tagName === 'H2') {
+      var panel = document.createElement('div'), ph = document.createElement('div');
+      panel.className = 'panel'; ph.className = 'ph';
+      if (k.dataset.span) panel.dataset.span = k.dataset.span;
+      body = document.createElement('div'); body.className = 'pb';
+      el.insertBefore(panel, k);
+      ph.appendChild(k); panel.appendChild(ph); panel.appendChild(body);
+      return;
+    }
+    if (k.nodeType === 1 && (k.classList.contains('card2') || k.classList.contains('msg'))) { body = null; return; }
+    if (!body) {
+      var p2 = document.createElement('div');
+      p2.className = 'panel';
+      body = document.createElement('div'); body.className = 'pb';
+      p2.appendChild(body);
+      el.insertBefore(p2, k);
+    }
+    body.appendChild(k);
+  });
+}
+var TAB_INFO = {
+  config: ['01', 'Config & steps', 'Machine, nests and step sequence', 'Header, machine type, nest count and the steps the framework runs on every nest.'],
+  probing: ['02', 'Probing', 'Probe step and checks', 'How each nest is found and checked before the first cut. Click a box to see it on the picture.'],
+  wcs: ['03', 'Work offsets', 'Nest work offsets', 'Machine position and table angle of every nest. Nest 1 = G505.'],
+  output: ['04', 'Output', 'Preview and generate', 'Read every NC file before it goes to the machine, then download the zip.'],
+  cmc: ['05', 'CMC', 'Cut / measure / cut', 'Measuring cards for the steps with CMC ticked on tab 1.']
+};
+function setHead(name) {
+  var t = TAB_INFO[name] || TAB_INFO.config;
+  $('#phEyebrow').textContent = 'Step ' + t[0] + ' - ' + t[1];
+  $('#phTitle').textContent = t[2];
+  $('#phSub').textContent = t[3];
 }
 
 function renderAll() {
   renderConfig(); renderProbing(); renderWcs(); renderOutput(); renderCmc();
   var part = S.ascii(job.header.part);
-  $('#jobLabel').textContent = part ? '· Job ' + part : '';
+  $('#jobLabel').textContent = part ? 'Job ' + part : '';
 }
 
 /* ---- messages ---- */
@@ -4168,6 +4326,7 @@ function tabOf(path) {
 function showTab(name) {
   document.querySelectorAll('nav.tabs button').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
   document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('active', t.id === 'tab-' + name); });
+  setHead(name);
 }
 function gotoPath(path) {
   showTab(tabOf(path));
@@ -4305,7 +4464,7 @@ function onEdit(e) {
   if (/^(header\.(part|machine)|builder\.)/.test(p)) {   /* live, no re-render */
     var bn = $('#builderNote'); if (bn) bn.innerHTML = builderNote();
     var part = S.ascii(job.header.part);
-    $('#jobLabel').textContent = part ? '· Job ' + part : '';
+    $('#jobLabel').textContent = part ? 'Job ' + part : '';
   }
   if (e.type !== 'change') return;
   if (p === 'config.faces' || p === 'config.nestsPerFace') {
@@ -4487,6 +4646,19 @@ $('#btnValidate').addEventListener('click', function () {
   else showMsgs('ok', 'Validation passed.');
 });
 $('#btnGenerate').addEventListener('click', function () { build(true); });
+$('#btnMenu').addEventListener('click', function () {
+  var open = !$('header.nav').classList.contains('open');
+  $('header.nav').classList.toggle('open', open);
+  this.setAttribute('aria-expanded', String(open));
+});
+$('#navActions').addEventListener('click', function (e) {
+  if (e.target.closest('button')) { $('header.nav').classList.remove('open'); $('#btnMenu').setAttribute('aria-expanded', 'false'); }
+});
+$('#verTag').textContent = 'Version ' + S.GEN_VERSION;
+$('#fwTag').textContent = 'Framework REV ' + S.FW_REV;
+$('#footL').textContent = 'SINUMERIK ONE Program Generator ' + S.GEN_VERSION + ' | Nest framework REV ' + S.FW_REV + ' | Offline';
+$('#footR').textContent = String(new Date().getFullYear());
+setHead('config');
 $('#btnSave').addEventListener('click', saveJob);
 $('#btnLoad').addEventListener('click', function () { $('#fileLoad').value = ''; $('#fileLoad').click(); });
 $('#fileLoad').addEventListener('change', function () { if (this.files && this.files[0]) loadJob(this.files[0]); });

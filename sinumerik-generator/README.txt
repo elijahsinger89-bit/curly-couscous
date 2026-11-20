@@ -5,6 +5,11 @@ USE
   Double-click SINUMERIK_GENERATOR.html. It runs offline in Chrome, Edge or
   Firefox: no server, no internet, no install.
   Fill the tabs, press Generate ZIP. The zip holds every NC file.
+  Screen: dark top bar = job buttons (Load, Import B list, Save, Validate,
+  Generate ZIP; on a narrow window behind MENU). Under it the steps
+  01 Config & steps / 02 Probing / 03 Work offsets / 04 Output / 05 CMC
+  (the amber line marks the open one). Everything you fill in is on the
+  white panels below.
   Tab 5 (CMC) appears only while a step row has CMC ticked.
 
 MACHINE TYPE (tab 1, Machine & job)
