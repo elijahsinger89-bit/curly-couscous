@@ -7,6 +7,7 @@ copy_to_python_folder
                    Tool numbering, Holder attacher (not built yet), B program rename, Restore job names, Show toolpaths
                    of one tool (icon: job_processing.png)
   go_to_machine    BUTTON 2, the job-end menu (see below)
+  tool_numbering   renumbers the document's tools to the numbering standard (list first, apply after the probe)
   part_wizard_1    builds the toolpaths of a part (no tools, no macros)
   part_wizard_2    puts a library tool and its cutting data in every toolpath
   tool_center      one command for building tools: tool wizard, tool selector or tool generator (icon: tool_center.png)
@@ -433,6 +434,20 @@ A new tool gets:
   Ordering code (EDP, Walter: designation): written once its field name is known (tool_field_probe); until then the
            job-end documents read the EDP from the Tool comment
 Settings at the top of tool_builder.py: COMMON_NAME (False = Common Name "M_<digits>" as before), ORDERING_PARAM.
+
+TOOL NUMBERING (Job processing > Tool numbering)
+Screen 1: Standard (HELLER; COMPANY_X: rule not set yet), Tools from (one joblist, All joblists, All tools in the
+document), Apply (unticked = list only, the default). Per tool:
+  kept       the ID follows the standard and its type / diameter match the tool
+  milling    new M_ number: the type from its old M_ number when it has one, else from the hyperMILL tool type and size
+             (flat 10, bullnose 11, ball 12, chamfer 13, drill 50, spot 53, centre 54, reamer 60, thread mill 72, ...)
+  asked      a radius mill over 1.25 in (face / hi-feed mill built as a bullnose?), a tap (cut 70 / form 71), and every
+             turning tool (type, insert ISO letters - guessed from the insert designation - and hand R / L / N)
+Variant = the first free one among every tool of the document (two .500 bullnoses: M_11050010, M_11050020); copy 0.
+The list (old -> new, why) goes to the output window and tool_numbering_log.txt.
+Apply: NOT SET UP YET. It writes NC-Number and ID through temporary numbers first (hyperMILL refuses duplicate
+NC-Numbers), once the tool_field_probe log shows those fields can be written (APPLY_METHOD at the top of the script).
+After renumbering: post again and make a new tool load MDA and B program list - the old ones hold the old names.
 
 MACHINE AND SPINDLE
 machines.csv in tool_library: HF3500, HF5500, F5000, F6000, F8000, F10000, F14000, F16000 and their spindles. The spindle's max
