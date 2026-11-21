@@ -2,8 +2,13 @@ HF5500 POST (R06f_E09_mmf) - COMMENT CHANGES FOR THE NEST FRAMEWORK
 ===================================================================
 
 RULE
-  Only comments are changed. Every code line is exactly as the post
-  writers made it (checked line by line against the original files_x).
+  Only comments are changed, plus the code changes the shop asked for
+  (listed below). Every other code line is exactly as the post writers
+  made it (checked line by line against the original files_x).
+
+CODE CHANGES ASKED FOR
+  21 Nov 2026  pgm_bgn_2.txt: M01 ; OPTIONAL STOP removed (the framework
+               has its own debug stop).
 
 INSTALL
   1. Back up the whole post folder (R06f_E09_mmf).
@@ -20,9 +25,10 @@ CHANGES (comments only)
     REV 02, the B program rules, a revision control block.
   StartEnd\pgm_bgn_2.txt
     One comment line added on top: "; --- B PROGRAM START (NEST
-    FRAMEWORK, CALLED PER NEST) ---". Code unchanged:
+    FRAMEWORK, CALLED PER NEST) ---". Code unchanged except the M01
+    (see CODE CHANGES ASKED FOR):
       G0 G17 G40 G60 G70 G90 G94 G500 M40 / CYCLE800() / TRAFOOF / TRANS /
-      M01 / STOPRE / IF $P_SEARCH==TRUE ... ENDIF
+      STOPRE / IF $P_SEARCH==TRUE ... ENDIF
   StartEnd\pgm_end.txt
     The two file-name comment lines replaced by "; --- B PROGRAM END:
     BACK TO L_RUN_NESTS ---". Code unchanged:
