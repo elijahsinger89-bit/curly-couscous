@@ -1,0 +1,177 @@
+family,usage,score,quote,source,page
+F1675 Brazed,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,296
+F1675 Brazed,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,296
+F1678 Brazed,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,294
+F1682 Brazed,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,295
+F1682 Brazed,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,295
+F2239,profile3d,2,Copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,702
+F2239B,profile3d,2,Copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,702
+F2252,slot,2,Slotting cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,630
+F2334R,profile3d,2,Copy milling cutters with round inserts (product heading),General_Catalogue_D_Edition_2026.pdf,682
+F2339,profile3d,2,Copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,704
+F4041,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,556
+F4041,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,556
+F4041,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,556
+F4042,rough,1,Roughing/finishing combinations (kappa 90): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F4042,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,564
+F4042,finish_floor,1,Roughing/finishing combinations (kappa 90): finishing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F4042R,rough,1,Roughing/finishing combinations (kappa 90): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F4042R,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,560
+F4042R,finish_floor,1,Roughing/finishing combinations (kappa 90): finishing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F4045,rough,1,Roughing/finishing combinations (kappa 45): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+F4045,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,456
+F4053,slot,2,Slotting cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,640
+F4153,slot,2,Slotting cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,642
+F4253,slot,2,Slotting cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,646
+F5041,rough,1,Roughing/finishing combinations (kappa 90): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F5041,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,544
+F5041,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,544
+F5041,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,544
+F5055,slot,2,Parting and slitting cutters; section: Slot milling,General_Catalogue_D_Edition_2026.pdf,648
+F5141,rough,1,Roughing/finishing combinations (kappa 90): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+F5141,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,548
+F5141,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,548
+F5141,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,548
+F5241,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,554
+F5241,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,554
+F5241,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,554
+M2025,rough,1,Roughing/finishing combinations (kappa 42): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M2025,finish_floor,2,Octagonal Finishing Face Mill (product heading),General_Catalogue_D_Edition_2026.pdf,460
+M2026,rough,1,Roughing/finishing combinations (kappa 42): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M2026,finish_floor,2,Octagonal Finishing Face Mill (product heading),General_Catalogue_D_Edition_2026.pdf,460
+M2131,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,534
+M2331,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,538
+M2471,profile3d,2,Copy milling cutter with round inserts (product heading),General_Catalogue_D_Edition_2026.pdf,676
+M2472,profile3d,2,Copy milling cutter with round inserts (product heading),General_Catalogue_D_Edition_2026.pdf,678
+M2473,profile3d,2,Copy milling cutter with round inserts (product heading),General_Catalogue_D_Edition_2026.pdf,680
+M3024,rough,1,Roughing/finishing combinations (kappa 45): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M3024,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,444
+M4003,rough,1,Roughing/finishing combinations (kappa 45): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M4003,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,436
+M4132,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,528
+M4132,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,528
+M4132,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,528
+M4575,slot,2,T-slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,722
+M5004,rough,1,Roughing/finishing combinations (kappa 43): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M5004,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,400
+M5009,rough,1,Roughing/finishing combinations (kappa 45): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,192
+M5009,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,410
+M5011,rough,1,Roughing/finishing combinations (kappa 75): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+M5011,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,422
+M5012,rough,1,Roughing/finishing combinations (kappa 88): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+M5012,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,426
+M5130,rough,1,Roughing/finishing combinations (kappa 90): roughing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+M5130,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,494
+M5130,finish_floor,1,Roughing/finishing combinations (kappa 90): finishing insert,5d2fc54f-Technical_Compendium___Milling_2025.pdf,193
+M5137,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,520
+M5460,profile3d,2,Designation key type 60: Copy milling cutter for finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,197
+M5468,profile3d,2,Round insert milling cutters; section: Copy milling cutter (product heading),General_Catalogue_D_Edition_2026.pdf,652
+MC075,slot,2,Ceramic shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,305
+MC128,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,247
+MC128,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,247
+MC128 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,43
+MC128 Advance,semi,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MC128 Advance,finish_wall,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MC128 Advance,finish_floor,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MC166 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,47
+MC166 Advance,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,47
+MC187 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,66
+MC187 Advance,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,66
+MC213 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,179
+MC230,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,153
+MC230,rough,1,Designation key type 30: HPC geometry; HPC is a milling strategy for roughing (p61),5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MC230,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,146
+MC230 Advance,hem,2,"Shoulder milling, full slotting, ramping and dynamic milling",5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MC230 Advance,rough,2,The top choice for universal application in roughing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MC230 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,144
+MC230 Advance,finish_wall,2,The top choice for universal application in roughing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MC230 Advance,finish_floor,2,The top choice for universal application in roughing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MC233 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,177
+MC251 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,90
+MC267,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,254
+MC267 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,96
+MC268 Advance,rough,2,"Designation key type 68: Aluminium, roughing profile",5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MC268 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,103
+MC275,slot,2,Ceramic shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,304
+MC281 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,121
+MC319 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,183
+MC320,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,261
+MC320 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,184
+MC326,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,139
+MC326 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,127
+MC331,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,158
+MC331,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,158
+MC331 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,158
+MC331 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,158
+MC333,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,164
+MC333 Advance,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,163
+MC333 Advance,slot,1,slot milling icon,General_Catalogue_D_Edition_2026.pdf,163
+MC341 Supreme,rough,1,Designation key type 41: HPC geometry; HPC is a milling strategy for roughing (p61),5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MC341 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,73
+MC377 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,113
+MC388 Advance,rough,1,Designation key type 88: HPC geometry; HPC is a milling strategy for roughing (p61),5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MC388 Advance,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,115
+MC413 Advance,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,215
+MC416 Advance,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,212
+MC430,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,262
+MC467 Advance,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,221
+MC716 Advance,slot,1,keyway milling icon,General_Catalogue_D_Edition_2026.pdf,181
+MC726 Supreme,slot,1,keyway milling icon,General_Catalogue_D_Edition_2026.pdf,143
+MD128,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,245
+MD128,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,245
+MD128 Supreme,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,41
+MD128 Supreme,semi,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MD128 Supreme,finish_wall,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MD128 Supreme,finish_floor,2,Universal application for semi-finishing and finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,9
+MD133 Supreme,hem,2,Dynamic milling: Walter recommends ... the MD133 Supreme solid carbide milling cutter,5d2fc54f-Technical_Compendium___Milling_2025.pdf,63
+MD173 Supreme,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,59
+MD177 Supreme,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,52
+MD177 Supreme,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,52
+MD265 Supreme,rough,2,Designation key type 65: RAPAX G30 roughing profile,5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MD265 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,101
+MD266,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,94
+MD266 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,92
+MD340,rough,1,Designation key type 40: HPC geometry; HPC is a milling strategy for roughing (p61),5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+MD340,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,249
+MD340 Supreme,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,83
+MD340 Supreme,rough,2,For roughing with maximum metal removal rates and for finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MD340 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,76
+MD340 Supreme,finish_wall,2,For roughing with maximum metal removal rates and for finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MD340 Supreme,finish_floor,2,For roughing with maximum metal removal rates and for finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,8
+MD344 Supreme,slot,1,plunging (row of plunges) icon,General_Catalogue_D_Edition_2026.pdf,75
+MD370,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,251
+MD377 Supreme,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,112
+MD480,profile3d,2,Solid carbide mini ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,204
+MD480 Advance,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,206
+MD838,rough,1,Circle segment cutters: standard ae values for Roughing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD838,semi,1,Circle segment cutters: standard ae values for Semi-finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD838,profile3d,1,copy milling icon,General_Catalogue_D_Edition_2026.pdf,276
+MD838 Supreme,rough,1,Circle segment cutters: standard ae values for Roughing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD838 Supreme,semi,1,Circle segment cutters: standard ae values for Semi-finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD838 Supreme,profile3d,1,copy milling icon,General_Catalogue_D_Edition_2026.pdf,228
+MD839 Supreme,rough,1,Circle segment cutters: standard ae values for Roughing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD839 Supreme,semi,1,Circle segment cutters: standard ae values for Semi-finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD839 Supreme,profile3d,1,copy milling icon,General_Catalogue_D_Edition_2026.pdf,229
+MD880 Advance,rough,1,Circle segment cutters: standard ae values for Roughing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD880 Advance,semi,1,Circle segment cutters: standard ae values for Semi-finishing,5d2fc54f-Technical_Compendium___Milling_2025.pdf,58
+MD880 Advance,profile3d,1,copy milling icon,General_Catalogue_D_Edition_2026.pdf,230
+ME232 Perform,hem,1,dynamic (trochoidal) milling icon,General_Catalogue_D_Edition_2026.pdf,201
+ME232 Perform,rough,1,Designation key type 32: HPC geometry; HPC is a milling strategy for roughing (p61),5d2fc54f-Technical_Compendium___Milling_2025.pdf,68
+ME232 Perform,slot,2,Solid carbide shoulder/slot milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,187
+ME232 Perform,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,202
+ME432 Perform,profile3d,2,Solid carbide ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,218
+MG510,slot,2,Solid carbide circular milling cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,279
+MG515,slot,2,Solid carbide circular milling cutters for slot milling (product heading),General_Catalogue_D_Edition_2026.pdf,283
+MG520,slot,2,Circular milling cutters for circlip grooving; section: Slot milling,General_Catalogue_D_Edition_2026.pdf,284
+MP060,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,302
+MP160 PCD,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,301
+MP160 PCD,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,301
+MP170 PCD,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,300
+MP170 PCD,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,300
+MP260 PCD,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,299
+MP260 PCD,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,299
+MP270 PCD,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,298
+MP270 PCD,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,298
+MP271 PCD,finish_wall,1,shoulder milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,297
+MP271 PCD,finish_floor,1,face milling with finish-surface symbol icon,General_Catalogue_D_Edition_2026.pdf,297
+MP470 PCD,profile3d,2,PCD ball-nose copy milling cutters (product heading),General_Catalogue_D_Edition_2026.pdf,303

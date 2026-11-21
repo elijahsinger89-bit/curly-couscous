@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<omtdx version="35.1" srcType="document">
+  <container main-obj="NCTools" main-obj-name="943580900">
+    <inserts>
+      <insert type="rhombic" name="Rhombic insert">
+        <param name="cuttingMaterial" value="Solid carbide" />
+        <param name="lengthOfUnit" value="inch" />
+        <param name="mountingType" value="A" />
+        <param name="insertThickness" value="0.15625" />
+        <param name="cornerRadius" value="0.0312" />
+        <param name="insertAngle" value="55" />
+        <param name="insertHeight" value="0.375" />
+        <param name="insertLength" value="0.457790470785546" />
+        <param name="clearanceAngle" value="0" />
+      </insert>
+    </inserts>
+    <toolHolders>
+      <toolHolder name="T35" type="unknown">
+        <param name="comment" value="DCGT 11 T3 08 - UM S205" />
+        <param name="lengthOfUnit" value="inch" />
+        <param name="extrusionThickness" value="0" />
+        <param name="usePolyeder" value="1" />
+        <insertSupport type="rhombic">
+          <param name="lengthOfUnit" value="inch" />
+          <param name="fixedGeom" value="1" />
+          <param name="clampingType" value="P" />
+          <param name="insertThickness" value="0.15625" />
+          <param name="insertAngle" value="55" />
+          <param name="insertHeight" value="0.375" />
+          <param name="insertLength" value="0.457790470785546" />
+        </insertSupport>
+        <param name="sideOfInsert" value="left" />
+        <param name="cuttingEdgeOrientation" value="0" />
+        <param name="yOffset" value="0" />
+        <param name="insertInclinedAxisDistance" value="-1.051849411973618" />
+        <param name="insertInclinedShaftDistance" value="7.671052007748267" />
+        <param name="insertInclinedYDistance" value="0.02083405962486063" />
+        <param name="insertOrientationAngle" value="0.005878043500600858" />
+        <param name="insertRakeAngle" value="3.582121578862901" />
+        <param name="insertInclinationAngle" value="-0.1879763538006014" />
+        <param name="insertApproachAngle" value="0" />
+        <param name="insertReversed" value="0" />
+        <param name="mountingDirection" value="left" />
+        <param name="mountingDirectionAngle" value="0" />
+        <param name="spindleRotation" value="counterClockwise" />
+        <param name="spindleSpeedFactor" value="1" />
+        <param name="feedrateFactor" value="1" />
+        <param name="cuttingWidthFactor" value="1" />
+        <param name="cuttingLengthFactor" value="1" />
+        <param name="maxSpindleSpeed" value="0" />
+        <param name="maxFeedrate" value="0" />
+        <param name="coolantThrough" value="unknown" />
+      </toolHolder>
+    </toolHolders>
+    <tools>
+      <tool type="insertTtool" name="Semi &amp; Finish Inner Tube ID">
+        <param name="comment" value="DCGT 11 T3 08 - UM S205" />
+        <param name="cuttingMaterial" value="Solid carbide" />
+        <param name="lengthOfUnit" value="inch" />
+        <param name="toolTotalLength" value="7.67101706423676" />
+        <param name="spindleRotation" value="counterClockwise" />
+        <param name="insert" value="Rhombic insert" />
+        <param name="toolHolder" value="T35" />
+        <param name="settingLengthZ" value="-1.382632156499795" />
+        <param name="settingLengthX" value="7.85851706423676" />
+        <param name="flatAxisDist" value="-1.051182650054202" />
+        <param name="flatShankDist" value="7.67101706423676" />
+        <param name="flatYDist" value="-0.0004885537825876397" />
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="943580900" id="943580900" name="Semi &amp; Finish Inner Tube ID">
+        <param name="lengthOfUnit" value="inch" />
+        <param name="toolLength" value="0" />
+        <param name="gageLength" value="7.671016951076669" />
+        <param name="settingLengthZ" value="0" />
+        <param name="settingLengthX" value="0" />
+        <param name="spindleSpeedFactor" value="1" />
+        <param name="feedrateFactor" value="1" />
+        <param name="cuttingLengthFactor" value="1" />
+        <param name="maxSpindleSpeed" value="500" />
+        <param name="maxFeedrate" value="0" />
+        <param name="breakageCheck" value="0" />
+        <param name="manualToolChange" value="0" />
+        <components>
+          <component type="tool" name="Semi &amp; Finish Inner Tube ID" />
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="turning">
+            <param name="enabled" value="1" />
+          </cuttingProfile>
+        </cuttingProfiles>
+        <turningSetups>
+          <turningSetup name="Cutting point">
+            <param name="lengthOfUnit" value="inch" />
+            <param name="toolAngle" value="0" />
+            <param name="toolReference" value="orthogonalGaugePoint" />
+            <param name="freeXOffset" value="0.3314495064455935" />
+            <param name="freeZOffset" value="-0.1875000000000002" />
+            <param name="cuttingEdgePosition" value="topLeft" />
+            <param name="cRegister" value="1" />
+            <param name="invertTool" value="1" />
+          </turningSetup>
+          <turningSetup name="Cutting point_1">
+            <param name="lengthOfUnit" value="inch" />
+            <param name="toolAngle" value="0" />
+            <param name="toolReference" value="orthogonalGaugePoint" />
+            <param name="freeXOffset" value="-0.3314495064455935" />
+            <param name="freeZOffset" value="-0.1875000000000002" />
+            <param name="cuttingEdgePosition" value="bottomLeft" />
+            <param name="cRegister" value="1" />
+            <param name="invertTool" value="0" />
+          </turningSetup>
+        </turningSetups>
+      </ncTool>
+    </ncTools>
+  </container>
+</omtdx>

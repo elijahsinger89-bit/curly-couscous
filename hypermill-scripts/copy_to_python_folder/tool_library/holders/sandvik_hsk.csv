@@ -1,0 +1,210 @@
+maker,interface,machine_side,family,design,note,page,table,ordering_code,CZCMS,CZCWS,TRMAX,CNSC,CXSC,DSGN,DCONMS,DBC,DCONWS,LSC,LF,LB1,LB2,LB3,LB4,LB5,BD1,BD2,BD3,BD4,BD5,BHTA1,BHTA2,BHTA3,CRNT,RPMX
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C3-390.410-50 075A,50,C3,,1,1,2,50.0,,32.0,,75.0,49.0,75.0,,,,,50.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C4-390.410-50 080A,50,C4,,1,1,2,50.0,,40.0,,80.0,54.0,80.0,,,,,50.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C3-390.410-63 075C,63,C3,,1,1,2,63.0,,32.0,,75.0,49.0,75.0,,,,,63.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C4-390.410-63 080C,63,C4,,1,1,2,63.0,,40.0,,80.0,54.0,80.0,,,,,63.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C5-390.410-63 090C,63,C5,,1,1,2,63.0,,50.0,,90.0,64.0,90.0,,,,,63.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C4-390.410-80 090,80,C4,,1,1,2,80.0,,40.0,,90.0,64.0,90.0,,,,,80.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C5-390.410-80 095,80,C5,,1,1,2,80.0,,50.0,,95.0,69.0,95.0,,,,,80.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C6-390.410-80 110,80,C6,,1,1,2,80.0,,63.0,,110.0,84.0,110.0,,,,,80.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C3-390.410-100 080A,100,C3,,1,1,7,100.0,,32.0,,80.0,43.0,51.0,80.0,,,,32.0,100.0,,,,45°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C4-390.410-100 090A,100,C4,,1,1,2,100.0,,40.0,,90.0,61.0,90.0,,,,,100.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C5-390.410-100 100A,100,C5,,1,1,2,100.0,,50.0,,100.0,71.0,100.0,,,,,100.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C6-390.410-100 110A,100,C6,,1,1,2,100.0,,63.0,,110.0,81.0,110.0,,,,,100.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C8-390.410-100 120A,100,C8,,1,1,2,100.0,,80.0,,120.0,91.0,120.0,,,,,100.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C10-390.410-100 155,100,C10,,1,1,1,100.0,,100.0,,155.0,155.0,,,,,,,,,,,,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C4-390.410-125 095,125,C4,,1,1,7,125.0,,40.0,,95.0,46.0,66.0,95.0,,,,40.0,125.0,,,,45°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C5-390.410-125 105,125,C5,,1,1,7,125.0,,50.0,,105.0,66.0,76.0,105.0,,,,50.0,125.0,,,,45°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C6-390.410-125 120,125,C6,,1,1,2,125.0,,63.0,,120.0,91.0,120.0,,,,,125.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C8-390.410-125 130,125,C8,,1,1,2,125.0,,80.0,,130.0,101.0,130.0,,,,,125.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C10-390.410-125 160,125,C10,,1,1,2,125.0,,100.0,,160.0,131.0,160.0,,,,,125.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C6-390.410-160 125,160,C6,,1,1,2,160.0,,63.0,,125.0,94.0,125.0,,,,,160.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C8-390.410-160 135,160,C8,,1,1,2,160.0,,80.0,,135.0,104.0,135.0,,,,,160.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,,,378,1,C10-390.410-160 160,160,C10,,1,1,2,160.0,,100.0,,160.0,129.0,160.0,,,,,160.0,,,,,0°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C3-390.410-100080HD,100,C3,,1,1,,100.0,,32.0,,80.0,20.0,51.0,,,,,,,,,,41°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C4-390.410-100090HD,100,C4,,1,1,,100.0,,40.0,,90.0,20.0,61.0,,,,,,,,,,29°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C5-390.410-100100HD,100,C5,,1,1,,100.0,,50.0,,100.0,30.0,71.0,,,,,,,,,,23°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C6-390.410-100110HD,100,C6,,1,1,,100.0,,63.0,,110.0,30.0,81.0,,,,,,,,,,12°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C4-390.410-125095HD,125,C4,,1,1,,125.0,,40.0,,95.0,20.0,66.0,,,,,,,,,,36°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C5-390.410-125105HD,125,C5,,1,1,,125.0,,50.0,,105.0,20.0,76.0,,,,,,,,,,27°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C6-390.410-125120HD,125,C6,,1,1,,125.0,,63.0,,120.0,30.0,91.0,,,,,,,,,,20°,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor,Heavy Duty design,,378,2,C8-390.410-125130HD,125,C8,,1,1,,125.0,,80.0,,130.0,30.0,101.0,,,,,,,,,,11°,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C3-390.419-40 065,40,C3,,1,1,2,40.0,,32.0,,65.0,45.0,65.0,,,,,40.0,,,,,,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C4-390.419-40 075,40,C4,,1,1,1,40.0,,40.0,,75.0,75.0,,,,,,,,,,,,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C5-390.419-63 090,63,C5,,1,1,2,63.0,,50.0,,90.0,64.0,90.0,,,,,63.0,,,,,,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C6-390.419-63 110,63,C6,,1,1,1,63.0,,63.0,,110.0,110.0,,,,,,,,,,,,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C6-390.419-100 110,100,C6,,1,1,2,100.0,,63.0,,110.0,81.0,110.0,,,,,100.0,,,,,,,,
+Sandvik,HSK,HSK A/C/T,HSK to Coromant Capto® adaptor,,,379,3,C8-390.419-100 120,100,C8,,1,1,2,100.0,,80.0,,120.0,91.0,120.0,,,,,100.0,,,,,,,,
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor with Quick change,,,380,4,HA06-QC-C5-115,63,C5,,1,1,,63.0,,50.0,,115.0,88.0,,,,,,,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor with Quick change,,,380,4,HA10-QC-C6-135,100,C6,,1,1,,100.0,,63.0,,135.0,105.0,,,,,,,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Coromant Capto® adaptor with Quick change,,,380,4,HA10-QC-C8-165,100,C8,,1,1,,100.0,,80.0,,165.0,135.0,,,,,,,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-40 10 040,40,E10,,1,1,,40.0,,9.6,,40.0,13.0,20.0,,,,,,,,,,59°,,,30000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-40 12 043,40,E12,,1,1,,40.0,,11.6,,43.0,16.3,23.0,,,,,,,,,,58°,,,30000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-40 16 048,40,E16,,1,1,,40.0,,15.4,,48.0,21.9,28.0,,,,,,,,,,55°,,,30000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-40 20 045,40,E20,,1,1,,40.0,,19.2,,45.0,19.4,25.0,,,,,,,,,,50°,,,30000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-50 10 047,50,E10,,1,1,,50.0,,9.6,,47.0,13.0,21.0,,,,,,,,,,63°,,,25000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-50 12 050,50,E12,,1,1,,50.0,,11.6,,50.0,16.3,24.0,,,,,,,,,,62°,,,25000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-50 16 055,50,E16,,1,1,,50.0,,15.4,,55.0,21.8,29.0,,,,,,,,,,60°,,,25000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-50 20 052,50,E20,,1,1,,50.0,,19.2,,52.0,19.3,26.0,,,,,,,,,,58°,,,25000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-50 25 057,50,E25,,1,1,,50.0,,24.1,,57.0,24.9,31.0,,,,,,,,,,54°,,,25000
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-63 10 049,63,E10,,1,1,,63.0,,9.6,,49.0,13.5,23.0,,,,,,,,,,66°,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-63 12 051,63,E12,,1,1,,63.0,,11.6,,51.0,15.8,25.0,,,,,,,,,,65°,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-63 16 056,63,E16,,1,1,,63.0,,15.4,,56.0,21.3,30.0,,,,,,,,,,65°,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-63 20 053,63,E20,,1,1,,63.0,,19.2,,53.0,18.8,27.0,,,,,,,,,,63°,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Short design,,381,5,392.410EH-63 25 059,63,E25,,1,1,,63.0,,24.1,,59.0,25.5,33.0,,,,,,,,,,61°,,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-63 10 062,63,E10,,1,1,,63.0,,9.6,,62.0,10.0,27.9,36.0,,,,,14.6,,,,8°,66°,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-63 12 068,63,E12,,1,1,,63.0,,11.6,,68.0,12.0,34.3,42.0,,,,,17.9,,,,8°,65°,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-63 16 078,63,E16,,1,1,,63.0,,15.4,,78.0,16.0,45.1,52.0,,,,,23.6,,,,8°,64°,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-63 20 091,63,E20,,1,1,,63.0,,19.2,,91.0,20.0,59.0,65.0,,,,,30.1,,,,8°,61°,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-63 25 105,63,E25,,1,1,,63.0,,24.1,,105.0,25.0,74.0,79.0,,,,,37.6,,,,8°,54°,,20500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-100 20 100,100,E20,,1,1,,100.0,,19.2,,100.0,20.0,60.3,71.0,,,,,30.5,,,,8°,70°,,12500
+Sandvik,HSK,HSK A/C,HSK to Coromant EH adaptor,Long design,,381,6,392.410EH-100 25 115,100,E25,,1,1,,100.0,,24.1,,115.0,25.0,76.4,86.0,,,,,38.6,,,,8°,70°,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C-4016050,40,16,,1,4,2,40.0,,16.0,,50.0,30.0,50.0,,,,32.0,40.0,,,,,,,,30000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C-4022050,40,22,,1,4,1,40.0,,22.0,,50.0,50.0,,,,,48.0,,,,,,,,,30000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C-5016050,50,16,,1,4,2,50.0,,16.0,,50.0,24.0,50.0,,,,32.0,50.0,,,,,,,,25000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C-5022060,50,22,,1,4,2,50.0,,22.0,,60.0,34.0,60.0,,,,48.0,50.0,,,,,,,,25000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C6316050,63,16,,1,4,2,63.0,,16.0,,50.0,24.0,50.0,,,,32.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C6322050,63,22,,1,4,2,63.0,,22.0,,50.0,24.0,50.0,,,,50.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C6327060,63,27,,1,4,2,63.0,,27.0,,60.0,24.0,60.0,,,,60.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C6332060,63,32,,1,4,1,63.0,,32.0,,60.0,60.0,,,,,78.0,,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C6340060M,63,40S,,1,4,1,63.0,66.7,40.0,,60.0,60.0,,,,,87.0,,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C8022050,80,22,,1,4,2,80.0,,22.0,,50.0,24.0,50.0,,,,50.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C8027050,80,27,,1,4,2,80.0,,27.0,,50.0,24.0,50.0,,,,60.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C8032060,80,32,,1,4,2,80.0,,32.0,,60.0,34.0,60.0,,,,78.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C8040060,80,40,,1,4,1,80.0,,40.0,,60.0,60.0,,,,,87.0,,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C10022100,100,22,,1,4,2,100.0,,22.0,,100.0,71.0,100.0,,,,50.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C10027100,100,27,,1,4,2,100.0,,27.0,,100.0,71.0,100.0,,,,60.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C10032100,100,32,,1,4,2,100.0,,32.0,,100.0,71.0,100.0,,,,78.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C10040100M,100,40S,,1,4,2,100.0,66.7,40.0,,100.0,71.0,100.0,,,,87.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C12532100,125,32,,1,4,2,125.0,,32.0,,100.0,71.0,100.0,,,,78.0,125.0,,,,,,,,9500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,Coolant through arbor,382,7,392.41005C12540100M,125,40S,,1,4,2,125.0,66.7,40.0,,100.0,71.0,100.0,,,,87.0,125.0,,,,,,,,9500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,,382,8,392.41005-10060075,100,60,,,,1,100.0,101.6,60.0,,75.0,,,,,,130.0,,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to arbor adaptor,,,382,8,392.41005-12560085,125,60,,,,1,125.0,101.6,60.0,,85.0,,,,,,130.0,,,,,,,,,9500
+Sandvik,HSK,HSK A/C,HSK to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,383,9,HA06-X10-032-055,63,X10,,1,3,2,63.0,22.0,10.0,2,55.0,28.0,55.0,,,,32.0,63.0,,,,,,,,12000
+Sandvik,HSK,HSK A/C,HSK to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,383,9,HA06-X22-040-060,63,X22,,1,3,2,63.0,32.0,22.0,2,60.0,33.0,60.0,,,,40.0,63.0,,,,,,,,11000
+Sandvik,HSK,HSK A/C,HSK to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,383,9,HA06-X32-063-080,63,X32,,1,3,1,63.0,45.0,32.0,2,80.0,80.0,,,,,63.0,,,,,,,,,10000
+Sandvik,HSK,HSK A/C,HSK to VL adaptor,,,383,10,390.410-100 80 090,100,80,,1,1,,100.0,,80.0,,90.0,61.0,,,,,,,,,,,,,,
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 08 065B,63,8,,1,1,6,63.0,,8.0,,65.0,2.0,39.0,65.0,,,24.0,28.0,63.0,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 10 065B,63,10,,1,1,6,63.0,,10.0,,65.0,2.0,39.0,65.0,,,31.0,35.0,63.0,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 12 080B,63,12,,1,1,6,63.0,,12.0,,80.0,2.0,54.0,80.0,,,38.0,42.0,63.0,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 16 080B,63,16,,1,1,6,63.0,,16.0,,80.0,2.0,54.0,80.0,,,44.0,48.0,63.0,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 20 080B,63,20,,1,1,6,63.0,,20.0,,80.0,4.0,54.0,80.0,,,44.0,52.0,63.0,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 25 110B,63,25,,1,1,3,63.0,,25.0,,110.0,5.0,110.0,,,,55.0,65.0,,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-63 32 110B,63,32,,1,1,3,63.0,,32.0,,110.0,5.0,110.0,,,,62.0,72.0,,,,45°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 12 080A,100,12,,1,1,6,100.0,,12.0,,80.0,5.0,51.0,80.0,,,32.0,42.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 16 100A,100,16,,1,1,6,100.0,,16.0,,100.0,5.0,71.0,100.0,,,32.0,42.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 20 100A,100,20,,1,1,6,100.0,,20.0,,100.0,5.0,71.0,100.0,,,42.0,52.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 25 100A,100,25,,1,1,6,100.0,,25.0,,100.0,8.0,71.0,100.0,,,49.0,65.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 32 100A,100,32,,1,1,6,100.0,,32.0,,100.0,8.0,71.0,100.0,,,56.0,72.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,384,11,392.41020-100 40 120A,100,40,,1,1,6,100.0,,40.0,,120.0,8.0,91.0,120.0,,,74.0,90.0,100.0,,,45°,,,,12500
+Sandvik,HSK,HSK A/C/T,HSK to MDI adaptor,,,385,12,HT06-DM20-N-042,63,MDI-20,,1,1,2,63.0,,20.0,,42.0,26.0,52.0,,,,49.7,63.0,,,,,,,,20000
+Sandvik,HSK,HSK A/C/T,HSK to MDI adaptor,,,385,12,HT06-DM25-N-050,63,MDI-25,,1,1,2,63.0,,25.0,,50.0,34.0,60.0,,,,62.7,63.0,,,,,,,,20000
+Sandvik,HSK,HSK A/C/T,HSK to MDI adaptor,,,385,12,HT06-DM32-N-050,63,MDI-32,,1,1,1,63.0,,32.0,,50.0,60.0,,,,,67.7,,,,,,,,,20000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-63 16 080B,63,16,,1,1,2,63.0,,16.0,49,80.0,54.0,80.0,,,,36.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-63 20 080B,63,20,,1,1,2,63.0,,20.0,51,80.0,54.0,80.0,,,,40.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-63 25 090B,63,25,,1,1,2,63.0,,25.0,57,90.0,64.0,90.0,,,,45.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-63 32 090B,63,32,,1,1,2,63.0,,32.0,61,90.0,64.0,90.0,,,,52.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-63 40 110,63,40,,1,1,1,63.0,,40.0,71,110.0,110.0,,,,,65.0,,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-80 20 085,80,20,,1,1,2,80.0,,20.0,51,85.0,59.0,85.0,,,,40.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-80 25 090,80,25,,1,1,2,80.0,,25.0,57,90.0,64.0,90.0,,,,45.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-80 32 095,80,32,,1,1,2,80.0,,32.0,61,95.0,69.0,95.0,,,,52.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-80 40 110,80,40,,1,1,2,80.0,,40.0,71,110.0,84.0,110.0,,,,65.0,80.0,,,,,,,,14000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 16 090A,100,16,,1,1,2,100.0,,16.0,49,90.0,61.0,90.0,,,,36.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 20 090A,100,20,,1,1,2,100.0,,20.0,51,90.0,61.0,90.0,,,,40.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 25 100A,100,25,,1,1,2,100.0,,25.0,57,100.0,71.0,100.0,,,,45.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 32 100A,100,32,,1,1,2,100.0,,32.0,61,100.0,71.0,100.0,,,,52.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 40 110A,100,40,,1,1,2,100.0,,40.0,71,110.0,81.0,110.0,,,,65.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adaptor,,,386,13,392.41027-100 50 120,100,50,,1,1,2,100.0,,50.0,81,120.0,91.0,120.0,,,,75.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adjustable adaptor,,,386,14,392.410277-63 01 060B,63,1,,1,1,,63.0,,78.0,,60.0,84.6,,,,,86.0,,,,,,,,,12000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adjustable adaptor,,,386,14,392.410277-100 02 065A,100,2,,1,1,,100.0,,98.0,,65.0,89.6,,,,,106.0,,,,,,,,,9000
+Sandvik,HSK,HSK A/C,HSK to ISO 9766 adjustable adaptor,,,386,14,392.410277-100 03 085A,100,3,,1,1,,100.0,,136.0,,85.0,95.0,,,,,140.0,,,,,,,,,6000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA06-HD-20-104,63,20,,1,1,6,63.0,,20.0,51,104.0,17.8,78.0,104.0,,,50.0,55.0,62.9,,,8°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA06-HD-25-110,63,25,,1,1,3,63.0,,25.0,57,110.0,18.8,110.0,,,,57.0,65.0,,,,12°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA06-HD-32-112,63,32,,1,1,3,63.0,,32.0,61,112.0,18.8,112.0,,,,68.0,76.0,,,,12°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA08-HD-32-110,80,32,,1,1,6,80.0,,32.0,61,110.0,18.8,84.0,110.0,,,68.0,76.0,80.0,,,12°,,,,14000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA10-HD-20-100,100,20,,1,1,6,100.0,,20.0,51,100.0,17.8,71.0,100.0,,,50.0,55.0,99.9,,,8°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA10-HD-25-106,100,25,,1,1,6,100.0,,25.0,57,106.0,18.8,77.0,106.0,,,57.0,65.0,99.9,,,12°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA10-HD-32-110,100,32,,1,1,6,100.0,,32.0,61,110.0,18.8,81.0,110.0,,,68.0,76.0,99.9,,,12°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Heavy Duty design,,387,15,930-HA10-HD-32-180,100,32,,1,1,6,100.0,,32.0,61,180.0,18.8,151.0,180.0,,,68.0,76.0,100.0,,,12°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA04-S-06-070,40,6,,1,1,,40.0,,6.0,37,70.0,11.3,33.2,50.0,,,22.0,26.0,32.0,,,10°,,,,30000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA04-S-08-070,40,8,,1,1,,40.0,,8.0,37,70.0,11.3,35.3,50.0,,,24.0,28.0,32.0,,,10°,,,,30000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA04-S-10-075,40,10,,1,1,,40.0,,10.0,41,75.0,11.3,39.6,55.0,,,26.0,30.0,32.0,,,10°,,,,30000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA04-S-12-080,40,12,,1,1,,40.0,,12.0,46,80.0,11.3,41.0,60.0,,,28.0,32.0,33.5,,,10°,,,,30000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA05-S-06-074,50,6,,1,1,,50.0,,6.0,37,74.0,11.3,30.2,48.0,,,22.0,26.0,40.0,,,10°,,,,25000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA05-S-08-074,50,8,,1,1,,50.0,,8.0,37,74.0,11.3,30.2,48.0,,,24.0,28.0,40.0,,,10°,,,,25000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA05-S-10-080,50,10,,1,1,,50.0,,10.0,41,80.0,11.3,34.2,54.0,,,26.0,30.0,40.0,,,10°,,,,25000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA05-S-12-085,50,12,,1,1,,50.0,,12.0,46,85.0,11.3,38.2,59.0,,,28.0,32.0,40.0,,,10°,,,,25000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA06-S-06-074,63,6,,1,1,,63.0,,6.0,37,74.0,11.3,30.2,48.0,,,22.0,26.0,40.0,,,10°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA06-S-08-074,63,8,,1,1,,63.0,,8.0,37,74.0,11.3,30.2,48.0,,,24.0,28.0,40.0,,,10°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA06-S-10-080,63,10,,1,1,,63.0,,10.0,41,80.0,11.3,34.2,54.0,,,26.0,30.0,40.0,,,10°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA06-S-12-090,63,12,,1,1,,63.0,,12.0,46,90.0,11.3,38.2,64.0,,,28.0,32.0,50.0,,,10°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA06-S-20-100,63,20,,1,1,,63.0,,20.0,51,100.0,16.0,49.2,74.0,,,38.0,42.0,50.0,,,7°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA10-S-12-095,100,12,,1,1,,100.0,,12.0,46,95.0,11.3,38.2,66.0,,,28.0,32.0,50.0,,,10°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,16,930-HA10-S-20-100,100,20,,1,1,,100.0,,20.0,51,100.0,16.0,49.2,71.0,,,38.0,42.0,50.0,,,7°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA04-S-12-096,40,12,,1,1,,40.0,,12.0,46,96.0,11.3,38.2,,,,28.0,32.0,,,,10°,,,,40000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA05-S-20-090,50,20,,1,1,,50.0,,20.0,51,90.0,16.0,64.0,,,,37.6,41.5,,,,7°,,,,25000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA05-S-20-110,50,20,,1,1,,50.0,,20.0,51,110.0,16.0,49.2,,,,38.0,42.0,,,,7°,,,,36000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA06-S-25-108,63,25,,1,1,,63.0,,25.0,57,108.0,12.9,81.1,,,,45.0,50.0,,,,11°,,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA08-S-25-110,80,25,,1,1,,80.0,,25.0,57,110.0,12.9,83.1,,,,45.0,50.0,,,,11°,,,,14000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Slender design,,388,17,930-HA10-S-25-110,100,25,,1,1,,100.0,,25.0,57,110.0,12.9,80.1,,,,45.0,50.0,,,,11°,,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-06-094,63,6,,1,1,,63.0,,6.0,37,94.0,45.8,52.1,68.0,94.0,,14.5,14.5,40.0,63.0,,,62°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-08-094,63,8,,1,1,,63.0,,8.0,37,94.0,45.8,65.5,94.0,,,17.5,40.0,63.0,,,,0°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-10-104,63,10,,1,1,,63.0,,10.0,41,104.0,55.8,75.5,104.0,,,20.0,40.0,63.0,,,,0°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-10-144,63,10,,1,1,,63.0,,10.0,41,144.0,95.8,115.5,144.0,,,20.0,40.0,63.0,,,,0°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-12-109,63,12,,1,1,,63.0,,12.0,46,109.0,60.8,66.4,83.0,109.0,,22.0,22.0,40.0,63.0,,,55°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA06-P-12-144,63,12,,1,1,,63.0,,12.0,46,144.0,95.8,101.4,118.0,144.0,,22.0,22.0,40.0,63.0,,,55°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA10-P-12-115,100,12,,1,1,,100.0,,12.0,46,115.0,60.8,66.4,86.0,115.0,,22.0,22.0,40.0,100.0,,,55°,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,18,930-HA10-P-12-150,100,12,,1,1,,100.0,,12.0,46,150.0,95.8,101.4,121.0,150.0,,22.0,22.0,40.0,100.0,,,55°,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,19,930-HA06-P-20-163,63,20,,1,1,,63.0,,20.0,51,163.0,60.0,108.0,137.0,,,32.0,,42.0,,,,6°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,19,930-HA10-P-20-170,100,20,,1,1,,100.0,,20.0,51,170.0,60.0,108.0,141.0,,,32.0,,42.0,,,,6°,,,10000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,20,930-HA06-P-12-194,63,12,,1,1,,63.0,,12.0,46,194.0,50.0,75.0,145.8,168.0,,22.0,,26.0,40.0,,,4°,,,20000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 930,Pencil design,,389,20,930-HA10-P-12-200,100,12,,1,1,,100.0,,12.0,46,200.0,50.0,75.0,145.8,171.0,,22.0,,26.0,40.0,,,4°,,,10000
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH06Q-S-080,63,6,,1,1,,63.0,,6.0,22,80.0,38.1,54.0,,,,21.0,27.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH06Q-S-120,63,6,,1,1,,63.0,,6.0,22,120.0,38.1,94.0,,,,21.0,27.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH08Q-S-080,63,8,,1,1,,63.0,,8.0,26,80.0,38.1,54.0,,,,21.0,27.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH08Q-S-120,63,8,,1,1,,63.0,,8.0,26,120.0,38.1,94.0,,,,21.0,27.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH10Q-S-085,63,10,,1,1,,63.0,,10.0,31,85.0,50.8,59.0,,,,24.0,32.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH10Q-S-120,63,10,,1,1,,63.0,,10.0,31,120.0,50.8,94.0,,,,24.0,32.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH12Q-S-090,63,12,,1,1,,63.0,,12.0,34,90.0,50.8,64.0,,,,24.0,32.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH12Q-S-120,63,12,,1,1,,63.0,,12.0,34,120.0,50.8,94.0,,,,24.0,32.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH16Q-S-095,63,16,,1,1,,63.0,,16.0,39,95.0,44.4,69.0,,,,27.0,34.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH16Q-S-120,63,16,,1,1,,63.0,,16.0,39,120.0,44.4,94.0,,,,27.0,34.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH20Q-S-100,63,20,,1,1,,63.0,,20.0,41,100.0,57.2,74.0,,,,33.0,42.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH20Q-S-120,63,20,,1,1,,63.0,,20.0,41,120.0,57.2,94.0,,,,33.0,42.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH25Q-S-115,63,25,,1,1,,63.0,,25.0,47,115.0,57.2,89.0,,,,44.0,53.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA06-SH32Q-S-120,63,32,,1,1,,63.0,,32.0,51,120.0,57.2,94.0,,,,44.0,53.0,,,,4°,,,,20500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH06Q-S-085,100,6,,1,1,,100.0,,6.0,22,85.0,38.1,56.0,,,,21.0,27.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH06Q-S-120,100,6,,1,1,,100.0,,6.0,22,120.0,38.1,91.0,,,,21.0,27.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH08Q-S-085,100,8,,1,1,,100.0,,8.0,26,85.0,38.1,56.0,,,,21.0,27.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH08Q-S-120,100,8,,1,1,,100.0,,8.0,26,120.0,38.1,91.0,,,,21.0,27.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH10Q-S-090,100,10,,1,1,,100.0,,10.0,31,90.0,50.8,61.0,,,,24.0,32.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH10Q-S-120,100,10,,1,1,,100.0,,10.0,31,120.0,50.8,91.0,,,,24.0,32.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH12Q-S-095,100,12,,1,1,,100.0,,12.0,34,95.0,50.8,66.0,,,,24.0,32.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH12Q-S-120,100,12,,1,1,,100.0,,12.0,34,120.0,50.8,91.0,,,,24.0,32.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH16Q-S-100,100,16,,1,1,,100.0,,16.0,39,100.0,44.4,71.0,,,,27.0,34.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH16Q-S-130,100,16,,1,1,,100.0,,16.0,39,130.0,44.4,101.0,,,,27.0,34.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH20Q-S-105,100,20,,1,1,,100.0,,20.0,41,105.0,57.2,76.0,,,,33.0,42.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH20Q-S-130,100,20,,1,1,,100.0,,20.0,41,130.0,57.2,101.0,,,,33.0,42.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH25Q-S-115,100,25,,1,1,,100.0,,25.0,47,115.0,57.2,86.0,,,,44.0,53.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to shrink fit chuck,,Internal coolant supply; For MQL machining,390,21,HA10-SH32Q-S-120,100,32,,1,1,,100.0,,32.0,51,120.0,57.2,91.0,,,,44.0,53.0,,,,4°,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-4025062,40,ER25,,1,1,1,40.0,,26.0,,50.0,62.0,,,,,42.0,,,,,,,,,30000
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-5032072,50,ER32,,1,1,1,50.0,,33.0,,59.0,72.0,,,,,50.0,,,,,,,,,25000
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-63 16 100,63,ER16,,1,1,2,63.0,,17.0,,89.4,71.0,100.0,,,,28.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-63 25 100,63,ER25,,1,1,2,63.0,,26.0,,88.0,74.0,100.0,,,,42.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-63 32 100B,63,ER32,,1,1,2,63.0,,33.0,,87.0,74.0,100.0,,,,50.0,63.0,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-63 40 120B,63,ER40,,1,1,1,63.0,,41.0,,105.0,120.0,,,,,63.0,,,,,,,,,20500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-100 32 100A,100,ER32,,1,1,2,100.0,,33.0,,87.0,71.0,100.0,,,,50.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-100 40 120A,100,ER40,,1,1,2,100.0,,41.0,,105.0,91.0,120.0,,,,63.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to ER collet chuck,,Workpiece side interface DIN 6499-B,390,22,392.41014-100 50 130A,100,ER50,,1,1,2,100.0,,52.0,,109.0,101.0,130.0,,,,78.0,100.0,,,,,,,,12500
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,391,23,970-HA06-32-131,63,ER32,M27,1,1,2,63.0,,32.8,,121.7,105.2,131.2,,,,50.0,63.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,391,23,970-HA06-40-160,63,ER40,M30,1,1,1,63.0,,41.0,,143.1,154.5,,,,,63.0,,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,391,23,970-HA10-32-138,100,ER32,M27,1,1,2,100.0,,32.8,,128.2,108.7,137.7,,,,50.0,100.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,391,23,970-HA10-40-164,100,ER40,M30,1,1,2,100.0,,40.8,,146.6,129.1,158.0,,,,63.0,100.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA06-20-108,63,ER20,M12,1,1,5,63.0,,20.8,,95.1,35.3,77.1,103.1,,,33.7,35.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA06Q-20-108,63,ER20,M12,1,1,5,63.0,,20.8,,95.1,40.3,82.1,108.1,,,33.7,34.6,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA06-25-128,63,ER25,M20,1,1,5,63.0,,25.8,,114.0,37.1,96.5,122.5,,,42.0,44.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA06Q-25-128,63,ER25,M20,1,1,5,63.0,,25.8,,114.0,43.2,101.5,127.5,,,41.7,44.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA10-20-115,100,ER20,M12,1,1,5,100.0,,20.8,,101.6,35.3,80.5,109.6,,,33.7,35.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA10Q-20-115,100,ER20,M12,1,1,5,100.0,,20.8,,101.6,40.7,85.6,114.6,,,33.7,34.6,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA10-25-134,100,ER25,M20,1,1,5,100.0,,25.8,,120.5,37.1,100.0,129.0,,,42.0,44.0,,,,,,,,8000
+Sandvik,HSK,HSK A/C,HSK to CoroChuck™ 970,,For MQL machining,391,24,970-HA10Q-25-134,100,ER25,M20,1,1,5,100.0,,25.8,,120.5,42.1,105.0,134.0,,,41.7,44.0,,,,,,,,8000

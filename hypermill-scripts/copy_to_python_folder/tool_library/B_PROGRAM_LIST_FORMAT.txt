@@ -1,0 +1,52 @@
+B PROGRAM LIST - FILE FORMAT (version 1)
+The same text sits in tool_library (hyperMILL side) and next to SINUMERIK_GENERATOR.html (generator side).
+Written by: b_program_export and go_to_machine (after posting), tool_library\b_programs.py build_export / write_export.
+Read by: SINUMERIK_GENERATOR.html, button "Import B list".
+
+FILES
+  <document>_B_PROGRAMS.json   the generator reads this one (UTF-8)
+  <document>_B_PROGRAMS.csv    the same steps for people (UTF-8 with BOM, opens in Excel; r_params space-separated)
+
+JSON
+  format     "SINUMERIK_B_PROGRAM_LIST"   the generator rejects any other value
+  version    1
+  created    "YYYY-MM-DD HH:MM:SS"
+  source     writer and version
+  document   full path of the hyperMILL document
+  joblists   joblist names exported, in order
+  part       part number used in the names (B_<part>_<step>_<machine>)
+  machine    machine designation used in the names ("" = none)
+  units      "INCH" or "METRIC" (the document's units; diameters and brk_tol are in these units)
+  steps      one entry per B program, in tree order:
+    step         integer, from the name
+    program      the B program name = the compound job name = the NC file name
+    tool         tool ID (Common > ID) = the tool name on the control (NEWT, T="...")
+    tool_name    hyperMILL tool name (information)
+    tool_type    hyperMILL tool export type (endMill, drilTool ...)
+    diameter     number or null, document units
+    jobs         number of jobs in the compound job
+    joblist      joblist name
+    brk          true/false  laser break check after each nest
+    brk_tol      string, document units; "" = not set (the generator asks for it)
+    meas         true/false  measure the tool on the laser
+    meas_always  true/false  measure before every nest (false = smart: new sisters only)
+    max_brk      integer, breaks in the step before the machine holds
+    life         integer, pieces SETPIECE counts per good nest
+    setpiece     true/false
+    rule         the brk_rules.csv row that set the presets (information)
+    radius_comp  true/false, go_to_machine only (after posting): G41/G42 found in the posted NC file.
+                 The generator warns when a CMC step corrects radius wear ($TC_DP15) on a program
+                 without cutter compensation. Missing = unknown (b_program_export, or no NC file found).
+    r_params     list of integers, go_to_machine only: the R parameters the posted NC file uses
+                 (comments and strings left out). The generator refuses a CMC R block that covers one.
+                 Missing = unknown.
+    cycle800     string, go_to_machine only: the B program's CYCLE800 plane when its NC file has exactly
+                 one (lines that differ only in retraction, direction or display mode count once;
+                 CYCLE800() deselects skipped). "" = no CYCLE800 plane (nest face).
+                 The generator offers it as the probe swivel (probe step, CMC: AUTO / B PROGRAM).
+    cycle800_note  "SEVERAL" = several different planes, "TURNING" = only a turning-tool alignment
+                 (3rd parameter hundreds digit 2 or 3); cycle800 is then missing. Both missing = unknown.
+  refused    compound jobs left out, with the reason:
+    name, joblist, reason   (more than one tool / a job has no tool / not a B program name)
+Notes (empty compound jobs) are not listed.
+Unknown keys are ignored by the reader, so later versions may add keys without breaking version 1 readers.

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="35.1" srcURL="sqlite://C:\TEMP\OPEN MIND\hyperMILL\13d48_0000019703AF69B8_doc.db" srcGuid="947fe814-ec84-424c-b0a4-9f7594394af3" srcType="document" masterGuid="03445e81-3d0b-4eb1-a007-2725d63a22d4" files="D5150_noExtension_files">
+  <container main-obj="NCTools" main-obj-name="1">
+    <couplings/>
+    <tools>
+      <tool type="drilTool" name="Drill Tool">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="34a22b6a-86b0-4082-82b1-0ac1e51b8ae3"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolTotalLength" value="2.02"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <param name="cuttingEdges" value="2"/>
+        <param name="cuttingLength" value="0.256"/>
+        <param name="toolShaftType" value="parametric"/>
+        <param name="toolShaftDiameter" value="0.787"/>
+        <param name="toolShaftChamferDefMode" value="length"/>
+        <param name="toolShaftChamferLength" value="0.375"/>
+        <param name="toolShaftChamferAbsPos" value="1.845"/>
+        <param name="toolShaftChamferAngle" value="22.7824057304817"/>
+        <param name="toolDiameter" value="0.472"/>
+        <param name="taperHeight" value="1.47"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="2000"/>
+            <param name="cuttingSpeed" value="10"/>
+            <param name="planeFeedrate" value="8"/>
+            <param name="zFeedrate" value="2"/>
+            <param name="feedratePerEdge" value="0.02"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="4"/>
+          </tecset>
+        </tecsets>
+        <param name="coneAngle" value="158"/>
+        <param name="centeringRequired" value="0"/>
+        <param name="noTipLength" value="1.974126247043498"/>
+        <param name="breakThroughLength" value="0"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="1" id="1" name="D5150 Example_NoExtension">
+        <param name="hmbState" value="unlinked"/>
+        <param name="comment" value="D5150-03-11.50F16-F"/>
+        <param name="objGuid" value="ea8a17c6-9e83-47ff-b31a-3af005eb6dbc"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="1.47"/>
+        <param name="gageLength" value="2.02"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <param name="manualToolChange" value="0"/>
+        <components>
+          <component type="tool" name="Drill Tool"/>
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+        </cuttingProfiles>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+      </ncTool>
+    </ncTools>
+    <docObject type="ncTool">
+      <param name="externalObjectGuid" value="00000000-0000-0000-0000-000000000000"/>
+      <param name="externalObjectType" value="unknown"/>
+      <param name="scope" value="local"/>
+      <param name="state" value="local"/>
+      <param name="lastStateUpdate" value="20261019T120235"/>
+      <param name="locked" value="0"/>
+      <param name="localObject" value="1"/>
+    </docObject>
+  </container>
+</omtdx>

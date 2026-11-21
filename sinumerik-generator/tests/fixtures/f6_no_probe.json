@@ -1,0 +1,347 @@
+{
+  "format": "SINUMERIK_ONE_GENERATOR_JOB",
+  "version": 1,
+  "header": {
+    "part": "NOPROBE",
+    "material": "",
+    "stock": "",
+    "machine": "",
+    "programmer": ""
+  },
+  "config": {
+    "units": "INCH",
+    "trunnion": "NONE",
+    "rotary": "B",
+    "mode": "TOMBSTONE",
+    "faces": "2",
+    "nestsPerFace": "2",
+    "totalNests": "4"
+  },
+  "probeStep": {
+    "enabled": false,
+    "step": "1",
+    "program": ""
+  },
+  "steps": [
+    {
+      "step": "10",
+      "tool": "EM_0500",
+      "brkTol": "0.01",
+      "program": "B_NOPROBE_010",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    },
+    {
+      "step": "20",
+      "tool": "DR_0250",
+      "brkTol": "0.01",
+      "program": "B_NOPROBE_020",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    }
+  ],
+  "probing": {
+    "tool": "PROBE",
+    "limitClear": "",
+    "feed": "",
+    "searchDist": "",
+    "prnum": "1",
+    "probeOnM": "M56",
+    "partCheck": true,
+    "maxTravel": "",
+    "chkAlt": false,
+    "chkX": "",
+    "chkY": "",
+    "chkZ": "",
+    "skipZ": false,
+    "zAlt": false,
+    "zX": "",
+    "zY": "",
+    "zZ": "",
+    "zNom": "0",
+    "zTol": "",
+    "xyMethod": "SPLIT EXTERIOR",
+    "widthX": "",
+    "widthY": "",
+    "diameter": "",
+    "appX": "0",
+    "appY": "0",
+    "probeZ": "",
+    "xyTol": "",
+    "approachClr": "",
+    "health": false,
+    "hX": "",
+    "hY": "",
+    "hStartZ": "",
+    "hTargetZ": "",
+    "hFeed": ""
+  },
+  "wcs": [
+    {
+      "x": "1",
+      "y": "2",
+      "z": "3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "1",
+      "y": "2",
+      "z": "3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "1",
+      "y": "2",
+      "z": "3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "1",
+      "y": "2",
+      "z": "3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    }
+  ]
+}

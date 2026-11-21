@@ -1,0 +1,491 @@
+maker,interface,machine_side,family,design,note,page,table,ordering_code,CZCMS,CZCWS,TRMAX,CNSC,CXSC,DSGN,DCONMS,DBC,DCONWS,LSC,LF,LB1,LB2,LB3,LB4,LB5,BD1,BD2,BD3,BD4,BD5,BHTA1,BHTA2,BHTA3,CRNT,RPMX
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C3-391.01-32 060A,C3,C3,,3,1,,32.0,,32.0,,60.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C3-391.01-32 080A,C3,C3,,3,1,,32.0,,32.0,,80.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C3-391.01-32 095,C3,C3,,3,1,,32.0,,32.0,,95.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C4-391.01-40 060A,C4,C4,,3,1,,40.0,,40.0,,60.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C4-391.01-40 080A,C4,C4,,3,1,,40.0,,40.0,,80.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C4-391.01-40 120,C4,C4,,3,1,,40.0,,40.0,,120.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C5-391.01-50 080A,C5,C5,,3,1,,50.0,,50.0,,80.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C5-391.01-50 100A,C5,C5,,3,1,,50.0,,50.0,,100.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C5-391.01-50 150,C5,C5,,3,1,,50.0,,50.0,,150.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C6-391.01-63 100A,C6,C6,,3,1,,63.0,,63.0,,100.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C6-391.01-63 140A,C6,C6,,3,1,,63.0,,63.0,,140.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C6-391.01-63 185,C6,C6,,3,1,,63.0,,63.0,,185.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C8-391.01-80 100A,C8,C8,,3,1,,80.0,,80.0,,100.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C8-391.01-80 125A,C8,C8,,3,1,,80.0,,80.0,,125.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C8-391.01-80 200,C8,C8,,3,1,,80.0,,80.0,,200.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C10-391.01-100 140,C10,C10,,3,1,,100.0,,100.0,,140.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,,,354,1,C10-391.01-100 200,C10,C10,,3,1,,100.0,,100.0,,200.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,"Short design, for segment clamping only",,354,2,C3-391.01-32 035,C3,C3,,3,1,,32.0,,32.0,,35.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,"Short design, for segment clamping only",,354,2,C4-391.01-40 040,C4,C4,,3,1,,40.0,,40.0,,40.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,"Short design, for segment clamping only",,354,2,C5-391.01-50 050,C5,C5,,3,1,,50.0,,50.0,,50.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,"Short design, for segment clamping only",,354,2,C6-391.01-63 060,C6,C6,,3,1,,63.0,,63.0,,60.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® extension adaptor,"Short design, for segment clamping only",,354,2,C8-391.01-80 065,C8,C8,,3,1,,80.0,,80.0,,65.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,,Coromant Capto® extension adaptor with Quick,,,355,3,C4-QC-C4-085,C4,C4,,3,1,,40.0,,40.0,,85.0,,,,,,,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® extension adaptor with Quick,,,355,3,C5-QC-C5-100,C5,C5,,3,1,,50.0,,50.0,,100.0,,,,,,,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® extension adaptor with Quick,,,355,3,C6-QC-C6-115,C6,C6,,3,1,,63.0,,63.0,,115.0,,,,,,,,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® extension adaptor with Quick,,,355,3,C8-QC-C8-145,C8,C8,,3,1,,80.0,,80.0,,145.0,,,,,,,,,,,,,,,14000
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor with Quick,,,355,4,C5-QC-C4-085,C5,C4,,3,1,,50.0,,40.0,,85.0,60.5,,,,,,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor with Quick,,,355,4,C6-QC-C5-100,C6,C5,,3,1,,63.0,,50.0,,100.0,73.0,,,,,,,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor with Quick,,,355,4,C8-QC-C6-120,C8,C6,,3,1,,80.0,,63.0,,120.0,84.5,,,,,,,,,,,,,,14000
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor with Quick,,,355,4,C10-QC-C8-150,C10,C8,,3,1,,100.0,,80.0,,150.0,108.0,,,,,,,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C4-391.02-32 055A,C4,C3,,3,1,,40.0,,32.0,,55.0,31.0,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C4-391.02-32 120,C4,C3,,3,1,,40.0,,32.0,,120.0,95.7,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C5-391.02-32 060A,C5,C3,,3,1,,50.0,,32.0,,60.0,34.8,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C5-391.02-32 120,C5,C3,,3,1,,50.0,,32.0,,120.0,94.4,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C5-391.02-40 065A,C5,C4,,3,1,,50.0,,40.0,,65.0,40.0,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C5-391.02-40 140,C5,C4,,3,1,,50.0,,40.0,,140.0,115.5,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-32 070A,C6,C3,,3,1,,63.0,,32.0,,70.0,39.0,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-32 125,C6,C3,,3,1,,63.0,,32.0,,125.0,95.6,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-40 080A,C6,C4,,3,1,,63.0,,40.0,,80.0,51.4,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-40 145,C6,C4,,3,1,,63.0,,40.0,,145.0,116.7,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-50 080A,C6,C5,,3,1,,63.0,,50.0,,80.0,51.5,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C6-391.02-50 175,C6,C5,,3,1,,63.0,,50.0,,175.0,148.1,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-32 060B,C8,C3,,3,1,,80.0,,32.0,,60.0,20.7,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-32 135,C8,C3,,3,1,,80.0,,32.0,,135.0,95.7,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-40 070B,C8,C4,,3,1,,80.0,,40.0,,70.0,31.4,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-40 155,C8,C4,,3,1,,80.0,,40.0,,155.0,116.4,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-50 080B,C8,C5,,3,1,,80.0,,50.0,,80.0,42.8,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-50 185,C8,C5,,3,1,,80.0,,50.0,,185.0,147.8,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-63 080B,C8,C6,,3,1,,80.0,,63.0,,80.0,44.5,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C8-391.02-63 200,C8,C6,,3,1,,80.0,,63.0,,200.0,164.5,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C10-391.02-63 200,C10,C6,,3,1,,100.0,,63.0,,200.0,155.8,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,5,C10-391.02-80 200,C10,C8,,3,1,,100.0,,80.0,,200.0,158.1,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C8-391.02-63 120A,C8,C6,,3,1,,80.0,,63.0,,120.0,10.0,89.2,,,,,,,,,,6°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C10-391.02-32 085,C10,C3,,3,1,,100.0,,32.0,,85.0,36.7,48.2,,,,,,,,,,71°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C10-391.02-40 090,C10,C4,,3,1,,100.0,,40.0,,90.0,42.7,53.2,,,,,,,,,,71°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C10-391.02-50 095,C10,C5,,3,1,,100.0,,50.0,,95.0,49.1,58.2,,,,,,,,,,70°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C10-391.02-63 095,C10,C6,,3,1,,100.0,,63.0,,95.0,50.8,58.2,,,,,,,,,,68°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® reduction adaptor,,,356,6,C10-391.02-80 100,C10,C8,,3,1,,100.0,,80.0,,100.0,58.1,63.2,,,,,,,,,,63°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C4-391.02-32 070A,C4,C3,,3,1,,40.0,,32.0,,70.0,10.0,59.2,,,,,,,,,,6°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C5-391.02-32 150,C5,C3,,3,1,,50.0,,32.0,,150.0,5.0,129.2,,,,,,,,,,4°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C5-391.02-40 085A,C5,C4,,3,1,,50.0,,40.0,,85.0,10.0,64.2,,,,,,,,,,5°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C6-391.02-32 185,C6,C3,,3,1,,63.0,,32.0,,185.0,5.0,162.2,,,,,,,,,,6°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C6-391.02-40 185,C6,C4,,3,1,,63.0,,40.0,,185.0,5.0,162.2,,,,,,,,,,4°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C6-391.02-50 110A,C6,C5,,3,1,,63.0,,50.0,,110.0,10.0,87.2,,,,,,,,,,5°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C8-391.02-40 200,C8,C4,,3,1,,80.0,,40.0,,200.0,5.0,169.2,,,,,,,,,,7°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,,,357,7,C8-391.02-50 200,C8,C5,,3,1,,80.0,,50.0,,200.0,5.0,169.2,,,,,,,,,,5°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C5-391.02-32 033A,C5,C3,,3,1,2,50.0,,32.0,,33.0,5.0,33.0,,,,,50.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C5-391.02-40 040A,C5,C4,,3,1,2,50.0,,40.0,,40.0,15.0,40.0,,,,,50.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C6-391.02-32 032,C6,C3,,3,1,2,63.0,,32.0,,32.0,6.0,32.0,,,,,63.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C6-391.02-40 040,C6,C4,,3,1,2,63.0,,40.0,,40.0,11.0,40.0,,,,,63.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C6-391.02-50 050A,C6,C5,,3,1,2,63.0,,50.0,,50.0,20.0,50.0,,,,,63.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C8-391.02-50 045A,C8,C5,,3,1,2,80.0,,50.0,,45.0,5.0,45.0,,,,,80.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C8-391.02-63 055A,C8,C6,,3,1,2,80.0,,63.0,,55.0,15.0,55.0,,,,,80.0,,,,,0°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C10-391.02-63 055,C10,C6,,3,1,7,100.0,,63.0,,55.0,14.0,19.0,55.0,,,,63.0,100.0,,,,75°,,,
+Sandvik,CAPTO,,Coromant Capto® reduction adaptor,"Short design, for segment clamping only",,357,8,C10-391.02-80 065,C10,C8,,3,1,7,100.0,,80.0,,65.0,25.4,29.0,65.0,,,,80.0,100.0,,,,70°,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C3-391.EH-10 035,C3,E10,,3,1,,32.0,,9.6,,35.0,13.2,20.0,,,,,,,,,,58°,,,40000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C3-391.EH-12 038,C3,E12,,3,1,,32.0,,11.6,,38.0,16.4,23.0,,,,,,,,,,57°,,,40000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C3-391.EH-16 043,C3,E16,,3,1,,32.0,,15.4,,43.0,21.9,28.0,,,,,,,,,,53°,,,40000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C4-391.EH-10 041,C4,E10,,3,1,,40.0,,9.6,,41.0,13.1,21.0,,,,,,,,,,62°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C4-391.EH-12 044,C4,E12,,3,1,,40.0,,11.6,,44.0,16.4,24.0,,,,,,,,,,61°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C4-391.EH-16 049,C4,E16,,3,1,,40.0,,15.4,,49.0,21.9,29.0,,,,,,,,,,59°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C4-391.EH-20 046,C4,E20,,3,1,,40.0,,19.2,,46.0,19.4,26.0,,,,,,,,,,57°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C4-391.EH-25 051,C4,E25,,3,1,,40.0,,24.1,,51.0,25.0,31.0,,,,,,,,,,53°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C5-391.EH-10 042,C5,E10,,3,1,,50.0,,9.6,,42.0,12.8,22.0,,,,,,,,,,65°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C5-391.EH-12 045,C5,E12,,3,1,,50.0,,11.6,,45.0,16.0,25.0,,,,,,,,,,64°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C5-391.EH-16 050,C5,E16,,3,1,,50.0,,15.4,,50.0,21.5,30.0,,,,,,,,,,63°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C5-391.EH-20 047,C5,E20,,3,1,,50.0,,19.2,,47.0,19.0,27.0,,,,,,,,,,62°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C5-391.EH-25 052,C5,E25,,3,1,,50.0,,24.1,,52.0,24.7,32.0,,,,,,,,,,60°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C6-391.EH-10 046,C6,E10,,3,1,,63.0,,9.6,,46.0,13.0,24.0,,,,,,,,,,67°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C6-391.EH-12 049,C6,E12,,3,1,,63.0,,11.6,,49.0,16.3,27.0,,,,,,,,,,67°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C6-391.EH-16 054,C6,E16,,3,1,,63.0,,15.4,,54.0,21.8,32.0,,,,,,,,,,66°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C6-391.EH-20 051,C6,E20,,3,1,,63.0,,19.2,,51.0,19.3,29.0,,,,,,,,,,66°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,Short design,,358,9,C6-391.EH-25 056,C6,E25,,3,1,,63.0,,24.1,,56.0,25.0,34.0,,,,,,,,,,65°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C3-391.EH-10 026,C3,E10,,3,1,,32.0,,9.6,,26.0,13.0,18.0,,,,,,,,,,45°,,,40000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C3-391.EH-12 029,C3,E12,,3,1,,32.0,,11.6,,29.0,16.0,21.0,,,,,,,,,,45°,,,40000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C3-391.EH-16 027,C3,E16,,3,1,,32.0,,15.4,,27.0,14.0,19.0,,,,,,,,,,45°,,,55000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C3-391.EH-20 031,C3,E20,,3,1,,32.0,,19.2,,31.0,18.0,23.0,,,,,,,,,,45°,,,55000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C4-391.EH-10 026,C4,E10,,3,1,,40.0,,9.6,,26.0,13.0,18.0,,,,,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C4-391.EH-12 029,C4,E12,,3,1,,40.0,,11.6,,29.0,16.0,21.0,,,,,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C4-391.EH-16 035,C4,E16,,3,1,,40.0,,15.4,,35.0,22.0,27.0,,,,,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C4-391.EH-20 031,C4,E20,,3,1,,40.0,,19.2,,31.0,18.0,23.0,,,,,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C4-391.EH-25 038,C4,E25,,3,1,,40.0,,24.1,,38.0,25.0,30.0,,,,,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C5-391.EH-10 026,C5,E10,,3,1,,50.0,,9.6,,26.0,13.0,18.0,,,,,,,,,,45°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C5-391.EH-12 029,C5,E12,,3,1,,50.0,,11.6,,29.0,16.0,21.0,,,,,,,,,,45°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C5-391.EH-16 035,C5,E16,,3,1,,50.0,,15.4,,35.0,22.0,27.0,,,,,,,,,,45°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C5-391.EH-20 031,C5,E20,,3,1,,50.0,,19.2,,31.0,18.0,23.0,,,,,,,,,,45°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Coromant EH adaptor,"Short design, for segment clamping only",,358,10,C5-391.EH-25 038,C5,E25,,3,1,,50.0,,24.1,,38.0,25.0,30.0,,,,,,,,,,45°,,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C3-391.EH-10 049,C3,E10,,3,1,,32.0,,9.6,,49.0,10.0,28.5,34.0,,,,,14.8,,,,8°,57°,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C3-391.EH-12 054,C3,E12,,3,1,,32.0,,11.6,,54.0,12.0,33.9,39.0,,,,,17.8,,,,8°,54°,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C3-391.EH-16 065,C3,E16,,3,1,,32.0,,15.4,,65.0,16.0,45.7,50.0,,,,,23.8,,,,8°,44°,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C4-391.EH-10 055,C4,E10,,3,1,,40.0,,9.6,,55.0,10.0,28.5,32.6,,,,,22.1,,,,8°,62°,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C4-391.EH-12 060,C4,E12,,3,1,,40.0,,11.6,,60.0,12.0,33.9,40.0,,,,,17.7,,,,8°,61°,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C4-391.EH-16 071,C4,E16,,3,1,,40.0,,15.4,,71.0,16.0,45.7,51.0,,,,,23.7,,,,8°,56°,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C4-391.EH-20 084,C4,E20,,3,1,,40.0,,19.2,,84.0,20.0,59.6,64.0,,,,,30.3,,,,8°,47°,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C4-391.EH-25 074,C4,E25,,3,1,,40.0,,24.1,,74.0,25.0,49.6,54.0,,,,,31.0,,,,8°,45°,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C5-391.EH-10 056,C5,E10,,3,1,,50.0,,9.6,,56.0,10.0,28.1,36.0,,,,,14.7,,,,8°,65°,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C5-391.EH-12 061,C5,E12,,3,1,,50.0,,11.6,,61.0,12.0,33.5,41.0,,,,,17.6,,,,8°,65°,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C5-391.EH-16 072,C5,E16,,3,1,,50.0,,15.4,,72.0,16.0,45.3,52.0,,,,,23.6,,,,8°,63°,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C5-391.EH-20 085,C5,E20,,3,1,,50.0,,19.2,,85.0,20.0,59.2,65.0,,,,,30.2,,,,8°,59°,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C5-391.EH-25 100,C5,E25,,3,1,,50.0,,24.1,,100.0,25.0,75.3,80.0,,,,,38.2,,,,8°,51°,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C6-391.EH-10 060,C6,E10,,3,1,,63.0,,9.6,,60.0,10.0,28.4,38.0,,,,,14.8,,,,8°,68°,,20000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C6-391.EH-12 065,C6,E12,,3,1,,63.0,,11.6,,65.0,12.0,33.8,43.0,,,,,17.7,,,,8°,67°,,20000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C6-391.EH-16 076,C6,E16,,3,1,,63.0,,15.4,,76.0,16.0,45.6,54.0,,,,,23.7,,,,8°,66°,,20000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C6-391.EH-20 088,C6,E20,,3,1,,63.0,,19.2,,88.0,20.0,58.4,66.0,,,,,30.0,,,,8°,65°,,20000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C6-391.EH-25 103,C6,E25,,3,1,,63.0,,24.1,,103.0,25.0,74.5,81.0,,,,,38.0,,,,8°,62°,,20000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C8-391.EH-20 100,C8,E20,,3,1,,80.0,,19.2,,100.0,20.0,60.2,70.0,,,,,30.5,,,,8°,68°,,14000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long design,,359,11,C8-391.EH-25 114,C8,E25,,3,1,,80.0,,24.1,,114.0,25.0,75.3,84.0,,,,,38.2,,,,8°,68°,,14000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C3-391.EH-10 143,C3,E10,,3,1,,32.0,,9.6,,143.0,128.0,,,,,,,,,,5°,,,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C3-391.EH-12 132,C3,E12,,3,1,,32.0,,11.6,,132.0,117.0,,,,,,,,,,5°,,,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C3-391.EH-16 110,C3,E16,,3,1,,32.0,,15.4,,110.0,95.0,,,,,,,,,,5°,,,,40000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C4-391.EH-10 128,C4,E10,,3,1,,40.0,,9.6,,128.0,108.0,,,,,,,,,,8°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C4-391.EH-12 121,C4,E12,,3,1,,40.0,,11.6,,121.0,101.0,,,,,,,,,,8°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C4-391.EH-16 160,C4,E16,,3,1,,40.0,,15.4,,160.0,140.0,,,,,,,,,,5°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C4-391.EH-20 139,C4,E20,,3,1,,40.0,,19.2,,139.0,119.0,,,,,,,,,,5°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C5-391.EH-16 143,C5,E16,,3,1,,50.0,,15.4,,143.0,123.0,,,,,,,,,,8°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to Coromant EH adaptor,Long conical design,,359,12,C5-391.EH-20 130,C5,E20,,3,1,,50.0,,19.2,,130.0,110.0,,,,,,,,,,8°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C3-391.05C-16 030,C3,16,,3,4,1,32.0,,16.0,,30.0,30.0,,,,,32.0,,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C4-391.05C-16 032,C4,16,,3,4,2,40.0,,16.0,,32.0,10.0,32.0,,,,32.0,40.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C4-391.05C-16 055,C4,16,,3,4,2,40.0,,16.0,,55.0,33.0,55.0,,,,32.0,40.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C4-391.05C-22 025,C4,22,,3,4,1,40.0,,22.0,,25.0,25.0,,,,,40.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C4-391.05C-22 055,C4,22,,3,4,1,40.0,,22.0,,55.0,55.0,,,,,40.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-16 035,C5,16,,3,4,2,50.0,,16.0,,35.0,10.0,35.0,,,,32.0,50.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-16 070,C5,16,,3,4,2,50.0,,16.0,,70.0,44.8,70.0,,,,32.0,50.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-22 025M,C5,22,,3,4,1,50.0,,22.0,,25.0,25.0,,,,,50.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-22 070,C5,22,,3,4,2,50.0,,22.0,,70.0,47.0,70.0,,,,40.0,50.0,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-27 025M,C5,27,,3,4,1,50.0,,27.0,,25.0,25.0,,,,,56.0,,,,,,,,,17000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C5-391.05C-32 040,C5,32,,3,4,1,50.0,,32.0,,40.0,40.0,,,,,63.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-16 040,C6,16,,3,4,2,63.0,,16.0,,40.0,10.0,40.0,,,,32.0,63.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-22 025M,C6,22,,3,4,1,63.0,,22.0,,25.0,25.0,,,,,63.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-22 080,C6,22,,3,4,2,63.0,,22.0,,80.0,40.0,80.0,,,,40.0,63.0,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-27 025M,C6,27,,3,4,1,63.0,,27.0,,25.0,25.0,,,,,63.0,,,,,,,,,17000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-27 080,C6,27,,3,4,2,63.0,,27.0,,80.0,55.0,80.0,,,,50.0,63.0,,,,,,,,17000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-32 025M,C6,32,,3,4,1,63.0,,32.0,,25.0,25.0,,,,,65.0,,,,,,,,,16000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C6-391.05C-40 050M,C6,40S,,3,4,1,63.0,66.7,40.0,,50.0,50.0,,,,,87.0,,,,,,,,,17000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-16 050,C8,16,,3,4,2,80.0,,16.0,,50.0,10.0,50.0,,,,32.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-22 030M,C8,22,,3,4,1,80.0,,22.0,,30.0,30.0,,,,,80.0,,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-22 090,C8,22,,3,4,2,80.0,,22.0,,90.0,45.0,90.0,,,,40.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-27 030M,C8,27,,3,4,1,80.0,,27.0,,30.0,30.0,,,,,80.0,,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-27 090,C8,27,,3,4,2,80.0,,27.0,,90.0,50.0,90.0,,,,50.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-32 030M,C8,32,,3,4,1,80.0,,32.0,,30.0,30.0,,,,,80.0,,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C8-391.05C-40 060M,C8,40S,,3,4,1,80.0,66.7,40.0,,60.0,60.0,,,,,87.0,,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C10-391.05C-27 075,C10,27,,3,4,2,100.0,,27.0,,75.0,29.0,75.0,,,,60.0,100.0,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C10-391.05C-32 075,C10,32,,3,4,2,100.0,,32.0,,75.0,33.0,75.0,,,,78.0,100.0,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,Coolant through arbor,360,13,C10-391.05C-40 040M,C10,40S,,3,4,1,100.0,66.7,40.0,,40.0,40.0,,,,,100.0,,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,,360,14,C8-391.05-60 060,C8,60,,,,,80.0,101.6,60.0,,60.0,,,,,,130.0,,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor adaptor,,,360,14,C10-391.05-60 075,C10,60,,,,,100.0,101.6,60.0,,75.0,,,,,,130.0,,,,,,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C4-391.05C-16 120,C4,16,,3,4,7,40.0,,16.0,,120.0,22.0,100.0,120.0,,,32.0,32.0,40.0,,,0°,2°,,,18000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C5-391.05C-22 150,C5,22,,3,4,7,50.0,,22.0,,150.0,12.0,130.0,150.0,,,40.0,40.0,50.0,,,0°,2°,,,16000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C6-391.05C-22 120,C6,22,,3,4,3,63.0,,22.0,,120.0,98.0,120.0,,,,55.0,63.0,,,,2°,0°,,,16000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C6-391.05C-22 190,C6,22,,3,4,3,63.0,,22.0,,190.0,168.0,190.0,,,,55.0,63.0,,,,1°,0°,,,14000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C8-391.05C-27 150,C8,27,,3,4,3,80.0,,27.0,,150.0,120.0,150.0,,,,65.0,80.0,,,,3°,0°,,,12000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,15,C8-391.05C-27 240,C8,27,,3,4,3,80.0,,27.0,,240.0,210.0,240.0,,,,65.0,80.0,,,,2°,0°,,,10000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,16,C6-391.07C-32 030,C6,32,,3,3,,63.0,,32.0,20,25.0,,,,,,65.0,,,,,,,,,12000
+Sandvik,CAPTO,,Coromant Capto® to arbor adaptor,,,361,16,C8-391.07C-40 060,C8,40S,,3,3,,80.0,66.7,40.0,23,60.0,,,,,,87.0,,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C3-X10-032-040,C3,X10,,3,3,1,32.0,22.0,10.0,2,40.0,40.0,,,,,32.0,,,,,,,,,12000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C4-X10-032-050,C4,X10,,3,3,2,40.0,22.0,10.0,2,50.0,25.5,50.0,,,,32.0,40.0,,,,,,,,12000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C4-X22-040-050,C4,X22,,3,3,1,40.0,32.0,22.0,2,50.0,50.0,,,,,40.0,,,,,,,,,11000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C5-X22-040-060,C5,X22,,3,3,2,50.0,32.0,22.0,2,60.0,35.0,60.0,,,,40.0,50.0,,,,,,,,11000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C5-X32-063-070,C5,X32,,3,3,1,50.0,45.0,32.0,2,70.0,70.0,,,,,63.0,,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C6-X32-063-070,C6,X32,,3,3,1,63.0,45.0,32.0,2,70.0,70.0,,,,,63.0,,,,,,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C6-X40-080-090,C6,X40,,3,3,1,63.0,63.0,40.0,2,90.0,90.0,,,,,80.0,,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to arbor with driving screws adaptor,,For CoroMill® QD with internal coolant supply,362,17,C8-X40-080-095,C8,X40,,3,3,1,80.0,63.0,40.0,2,95.0,95.0,,,,,80.0,,,,,,,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C3-391.10-16 020,C3,16,,3,1,3,32.0,,16.0,30,20.0,5.0,20.0,,,,28.0,32.0,,,,21°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C4-391.10-16 025,C4,16,,3,1,3,40.0,,16.0,30,25.0,5.0,25.0,,,,28.0,40.0,,,,50°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C4-391.10-22 025,C4,22,,3,1,3,40.0,,22.0,40,25.0,5.0,25.0,,,,36.0,40.0,,,,22°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C4-391.10-27 025,C4,27,,3,1,1,40.0,,27.0,60,25.0,25.0,,,,,40.0,,,,,,,,,7000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C5-391.10-22 025,C5,22,,3,1,3,50.0,,22.0,40,25.0,5.1,25.0,,,,36.0,50.0,,,,54°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C5-391.10-27 025,C5,27,,3,1,3,50.0,,27.0,60,25.0,5.0,25.0,,,,43.0,50.0,,,,35°,0°,,,7000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C5-391.10-32 025,C5,32,,3,1,1,50.0,,32.0,60,25.0,25.0,,,,,50.0,,,,,,,,,6000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C6-391.10-16 030,C6,16,,3,1,3,63.0,,16.0,30,30.0,7.8,30.0,,,,28.0,63.0,,,,66°,0°,,,10000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C6-391.10-22 030,C6,22,,3,1,3,63.0,,22.0,40,30.0,7.9,30.0,,,,36.0,63.0,,,,59°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C6-391.10-27 030,C6,27,,3,1,3,63.0,,27.0,60,30.0,7.8,30.0,,,,43.0,63.0,,,,52°,0°,,,7000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C6-391.10-32 025,C6,32,,3,1,3,63.0,,32.0,60,25.0,3.0,25.0,,,,48.0,63.0,,,,68°,0°,,,6000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C6-391.10-40 025,C6,40,,3,1,3,63.0,,40.0,60,25.0,3.0,25.0,,,,56.0,63.0,,,,49°,0°,,,5000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-22 040,C8,22,,3,1,3,80.0,,22.0,40,40.0,10.2,40.0,,,,36.0,80.0,,,,65°,0°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-27 030,C8,27,,3,1,3,80.0,,27.0,60,30.0,7.8,30.0,,,,43.0,80.0,,,,67°,0°,,,7000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-32 030,C8,32,,3,1,3,80.0,,32.0,60,30.0,7.6,30.0,,,,48.0,80.0,,,,64°,0°,,,6000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-40 030,C8,40,,3,1,3,80.0,,40.0,60,30.0,7.9,30.0,,,,56.0,80.0,,,,56°,0°,,,5000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-50 030,C8,50,,3,1,3,80.0,,50.0,60,30.0,3.0,30.0,,,,70.0,80.0,,,,58°,0°,,,4500
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C8-391.10-60 030,C8,60,,3,1,1,80.0,,60.0,60,30.0,30.0,,,,,80.0,,,,,,,,,4000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C10-391.10-32 065,C10,32,,3,1,7,100.0,,32.0,60,65.0,20.0,29.0,65.0,,,48.0,48.0,100.0,,,0°,71°,,,6000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C10-391.10-40 070,C10,40,,3,1,7,100.0,,40.0,60,70.0,25.0,34.0,70.0,,,56.0,56.0,100.0,,,0°,67°,,,5000
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C10-391.10-50 055,C10,50,,3,1,7,100.0,,50.0,80,55.0,10.0,19.0,55.0,,,70.0,70.0,100.0,,,0°,59°,,,4500
+Sandvik,CAPTO,,Coromant Capto® to side and face mill arbor adaptor,,,363,18,C10-391.10-60 040,C10,60,,3,1,3,100.0,,60.0,90,40.0,4.0,40.0,,,,84.0,100.0,,,,63°,0°,,,4000
+Sandvik,CAPTO,,Coromant Capto® to VL adaptor,,,363,19,C8-391.01-V80 065,C8,80,,3,1,,80.0,,80.0,,65.0,,,,,,,,,,,,,,,
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C3-391.20-06 045A,C3,6,,3,1,14,32.0,,6.0,,46.0,4.0,27.5,29.5,46.0,,17.0,25.0,25.0,32.0,,45°,,60°,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C3-391.20-08 045A,C3,8,,3,1,14,32.0,,8.0,,46.0,4.0,29.0,31.0,46.0,,20.0,28.0,28.0,32.0,,45°,,45°,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C3-391.20-10 050,C3,10,,3,1,3,32.0,,10.0,,50.0,4.0,50.0,,,,27.0,35.0,,,,45°,,,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C3-391.20-12 055,C3,12,,3,1,3,32.0,,12.0,,55.0,5.0,55.0,,,,32.0,42.0,,,,45°,,,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-06 050,C4,6,,3,1,14,40.0,,6.0,,50.0,4.0,25.5,29.8,50.0,,17.0,25.0,25.0,40.0,,45°,,60°,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-08 050,C4,8,,3,1,14,40.0,,8.0,,50.0,4.0,26.5,32.5,50.0,,20.0,28.0,28.0,40.0,,45°,,45°,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-10 050A,C4,10,,3,1,14,40.0,,10.0,,51.0,4.0,29.6,31.0,51.0,,27.0,35.0,35.0,40.0,,45°,,60°,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-12 055A,C4,12,,3,1,3,40.0,,12.0,,56.0,5.0,56.0,,,,32.0,42.0,,,,45°,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-14 055,C4,14,,3,1,3,40.0,,14.0,,55.0,5.0,55.0,,,,34.0,44.0,,,,45°,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C4-391.20-16 055,C4,16,,3,1,3,40.0,,16.0,,55.0,5.0,55.0,,,,38.0,48.0,,,,45°,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-06 050,C5,6,,3,1,14,50.0,,6.0,,50.0,4.0,25.5,30.0,50.0,,17.0,25.0,25.0,50.0,,45°,,70°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-08 050,C5,8,,3,1,14,50.0,,8.0,,50.0,4.0,26.0,30.0,50.0,,20.0,28.0,28.0,50.0,,45°,,70°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-10 055,C5,10,,3,1,14,50.0,,10.0,,55.0,4.0,27.5,35.0,55.0,,27.0,35.0,35.0,50.0,,45°,,45°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-12 060,C5,12,,3,1,14,50.0,,12.0,,60.0,5.0,36.0,40.0,60.0,,32.0,42.0,42.0,50.0,,45°,,45°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-14 060,C5,14,,3,1,14,50.0,,14.0,,60.0,5.0,37.0,40.0,60.0,,34.0,44.0,44.0,50.0,,45°,,45°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-16 060,C5,16,,3,1,14,50.0,,16.0,,60.0,5.0,39.0,40.0,60.0,,38.0,48.0,48.0,50.0,,45°,,45°,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-18 060,C5,18,,3,1,3,50.0,,18.0,,60.0,5.0,60.0,,,,40.0,50.0,,,,45°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-20 060,C5,20,,3,1,3,50.0,,20.0,,60.0,5.0,60.0,,,,42.0,52.0,,,,45°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C5-391.20-25 080,C5,25,,3,1,3,50.0,,25.0,,80.0,8.0,80.0,,,,49.0,65.0,,,,45°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-06 055,C6,6,,3,1,14,63.0,,6.0,,55.0,4.0,25.0,32.7,55.0,,17.0,25.0,25.0,63.0,,45°,,68°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-08 055,C6,8,,3,1,14,63.0,,8.0,,55.0,4.0,26.0,33.1,55.0,,20.0,28.0,28.0,63.0,,45°,,68°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-10 060,C6,10,,3,1,14,63.0,,10.0,,60.0,4.0,30.0,38.1,60.0,,27.0,35.0,35.0,63.0,,45°,,60°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-12 060,C6,12,,3,1,14,63.0,,12.0,,60.0,5.0,33.0,37.9,60.0,,32.0,42.0,42.0,63.0,,45°,,65°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-14 060,C6,14,,3,1,14,63.0,,14.0,,60.0,5.0,33.5,37.9,60.0,,34.0,44.0,44.0,63.0,,45°,,65°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-16 065,C6,16,,3,1,14,63.0,,16.0,,65.0,5.0,35.5,43.0,65.0,,38.0,48.0,48.0,63.0,,45°,,45°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-18 065,C6,18,,3,1,14,63.0,,18.0,,65.0,5.0,39.0,42.7,65.0,,40.0,50.0,50.0,63.0,,45°,,60°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-20 065,C6,20,,3,1,14,63.0,,20.0,,65.0,5.0,37.5,43.0,65.0,,42.0,52.0,52.0,63.0,,45°,,45°,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-25 080,C6,25,,3,1,3,63.0,,25.0,,80.0,8.0,80.0,,,,49.0,65.0,,,,45°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-32 090,C6,32,,3,1,3,63.0,,32.0,,90.0,8.0,90.0,,,,56.0,72.0,,,,45°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C6-391.20-40 100,C6,40,,3,1,3,63.0,,40.0,,100.0,8.0,100.0,,,,74.0,90.0,,,,45°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-06 070,C8,6,,3,1,14,80.0,,6.0,,70.0,4.0,27.0,40.0,70.0,,17.0,25.0,25.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-08 070,C8,8,,3,1,14,80.0,,8.0,,70.0,4.0,28.0,40.0,70.0,,20.0,28.0,28.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-10 070,C8,10,,3,1,14,80.0,,10.0,,70.0,4.0,29.5,40.0,70.0,,27.0,35.0,35.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-12 070,C8,12,,3,1,14,80.0,,12.0,,70.0,5.0,31.0,40.0,70.0,,32.0,42.0,42.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-14 070,C8,14,,3,1,14,80.0,,14.0,,70.0,5.0,31.6,40.0,70.0,,34.0,44.0,44.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-16 070,C8,16,,3,1,14,80.0,,16.0,,70.0,5.0,33.0,40.0,70.0,,38.0,48.0,48.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-18 070,C8,18,,3,1,14,80.0,,18.0,,70.0,5.0,33.0,40.0,70.0,,40.0,50.0,50.0,80.0,,45°,,65°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-20 070,C8,20,,3,1,14,80.0,,20.0,,70.0,5.0,35.5,40.0,70.0,,42.0,52.0,52.0,80.0,,45°,,70°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-25 080,C8,25,,3,1,14,80.0,,25.0,,80.0,8.0,53.7,58.0,80.0,,49.0,65.0,65.0,80.0,,45°,,60°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-32 080,C8,32,,3,1,14,80.0,,32.0,,80.0,8.0,55.7,58.0,80.0,,56.0,72.0,72.0,80.0,,45°,,60°,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-40 110,C8,40,,3,1,3,80.0,,40.0,,110.0,8.0,110.0,,,,74.0,90.0,,,,45°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to Weldon adaptor,,Workpiece side interface DIN 6535-HB and DIN 1835-B,364,20,C8-391.20-50 120,C8,50,,3,1,3,80.0,,50.0,,120.0,8.0,120.0,,,,84.0,100.0,,,,45°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C3-DM20-N-032,C3,MDI-20,,3,1,1,32.0,,20.0,,32.0,42.0,,,,,49.7,,,,,,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C4-DM20-N-028,C4,MDI-20,,3,1,1,40.0,,20.0,,28.0,38.0,,,,,49.7,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C4-DM25-N-035,C4,MDI-25,,3,1,1,40.0,,25.0,,35.0,45.0,,,,,62.7,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C4-DM32-N-042,C4,MDI-32,,3,1,1,40.0,,32.0,,42.0,52.0,,,,,67.7,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C5-DM20-N-028,C5,MDI-20,,3,1,2,50.0,,20.0,,28.0,18.0,38.0,,,,49.7,50.0,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C5-DM25-N-030,C5,MDI-25,,3,1,1,50.0,,25.0,,30.0,40.0,,,,,62.7,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C5-DM32-N-035,C5,MDI-32,,3,1,1,50.0,,32.0,,35.0,45.0,,,,,67.7,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C5-DM40-N-040,C5,MDI-40,,3,1,1,50.0,,40.0,,40.0,52.0,,,,,79.7,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C6-DM20-N-033,C6,MDI-20,,3,1,2,63.0,,20.0,,33.0,18.0,43.0,,,,49.7,63.0,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C6-DM25-N-030,C6,MDI-25,,3,1,2,63.0,,25.0,,30.0,18.0,40.0,,,,62.7,63.0,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C6-DM32-N-030,C6,MDI-32,,3,1,1,63.0,,32.0,,30.0,40.0,,,,,67.7,,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C6-DM40-N-040,C6,MDI-40,,3,1,1,63.0,,40.0,,40.0,52.0,,,,,79.7,,,,,,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C8-DM32-N-040,C8,MDI-32,,3,1,2,80.0,,32.0,,40.0,18.0,50.0,,,,67.7,80.0,,,,,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to MDI adaptor,,,365,21,C8-DM40-N-040,C8,MDI-40,,3,1,2,80.0,,40.0,,40.0,22.0,52.0,,,,79.7,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C3-391.27-16 056,C3,16,,3,1,1,32.0,,16.0,49,56.0,56.0,,,,,36.0,,,,,,,,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C3-391.27-20 060,C3,20,,3,1,1,32.0,,20.0,51,60.0,60.0,,,,,40.0,,,,,,,,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C3-391.27-25 080,C3,25,,3,1,1,32.0,,25.0,57,80.0,80.0,,,,,45.0,,,,,,,,,32000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C4-391.27-16 056,C4,16,,3,1,7,40.0,,16.0,49,56.0,32.5,36.0,56.0,,,36.0,36.0,40.0,,,,30°,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C4-391.27-20 060,C4,20,,3,1,1,40.0,,20.0,51,60.0,60.0,,,,,40.0,,,,,,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C4-391.27-25 077,C4,25,,3,1,1,40.0,,25.0,57,77.0,77.0,,,,,45.0,,,,,,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C4-391.27-32 088,C4,32,,3,1,1,40.0,,32.0,61,88.0,88.0,,,,,52.0,,,,,,,,,30000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C5-391.27-16 065,C5,16,,3,1,7,50.0,,16.0,49,65.0,41.7,45.0,65.0,,,36.0,36.0,50.0,,,,65°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C5-391.27-20 060,C5,20,,3,1,7,50.0,,20.0,51,60.0,37.7,40.0,60.0,,,40.0,40.0,50.0,,,,65°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C5-391.27-25 071,C5,25,,3,1,7,50.0,,25.0,57,71.0,46.7,51.0,71.0,,,45.0,45.0,50.0,,,,30°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C5-391.27-32 075,C5,32,,3,1,1,50.0,,32.0,61,75.0,75.0,,,,,52.0,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C5-391.27-40 100,C5,40,,3,1,1,50.0,,40.0,71,100.0,100.0,,,,,65.0,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-16 070,C6,16,,3,1,7,63.0,,16.0,49,70.0,43.0,47.9,70.0,,,36.0,36.0,63.0,,,,70°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-20 070,C6,20,,3,1,7,63.0,,20.0,51,70.0,43.8,48.0,70.0,,,40.0,40.0,63.0,,,,70°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-25 070A,C6,25,,3,1,7,63.0,,25.0,57,72.0,45.8,50.0,72.0,,,45.0,45.0,63.0,,,,65°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-32 075,C6,32,,3,1,7,63.0,,32.0,61,75.0,49.8,53.0,75.0,,,52.0,52.0,63.0,,,,60°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-40 085,C6,40,,3,1,1,63.0,,40.0,71,85.0,85.0,,,,,65.0,,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C6-391.27-50 115,C6,50,,3,1,1,63.0,,50.0,81,115.0,115.0,,,,,75.0,,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-16 080,C8,16,,3,1,7,80.0,,16.0,49,80.0,42.0,50.0,80.0,,,36.0,36.0,80.0,,,,70°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-20 080,C8,20,,3,1,7,80.0,,20.0,51,80.0,43.8,49.9,80.0,,,40.0,40.0,80.0,,,,73°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-25 085,C8,25,,3,1,7,80.0,,25.0,57,85.0,49.8,55.1,85.0,,,45.0,45.0,80.0,,,,73°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-32 090,C8,32,,3,1,7,80.0,,32.0,61,90.0,53.8,60.0,90.0,,,52.0,52.0,80.0,,,,66°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-40 095,C8,40,,3,1,7,80.0,,40.0,71,95.0,62.8,65.1,95.0,,,65.0,65.0,80.0,,,,73°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ISO 9766 adaptor,,,366,22,C8-391.27-50 100,C8,50,,3,1,7,80.0,,50.0,81,100.0,68.6,70.0,100.0,,,75.0,75.0,80.0,,,,61°,,,14000
+Sandvik,CAPTO,,Coromant Capto® to Weldon / ISO 9766 adaptor,,,367,23,C10-391.23-20 090,C10,20,,3,1,14,100.0,,20.0,,90.0,5.0,42.0,54.0,90.0,,42.0,52.0,52.0,100.0,,45°,,63°,,10000
+Sandvik,CAPTO,,Coromant Capto® to Weldon / ISO 9766 adaptor,,,367,23,C10-391.23-25 105,C10,25,,3,1,14,100.0,,25.0,,105.0,8.0,61.0,69.0,105.0,,49.0,65.0,65.0,100.0,,45°,,65°,,10000
+Sandvik,CAPTO,,Coromant Capto® to Weldon / ISO 9766 adaptor,,,367,23,C10-391.23-32 110,C10,32,,3,1,14,100.0,,32.0,,110.0,8.0,66.0,74.0,110.0,,56.0,72.0,72.0,100.0,,45°,,60°,,10000
+Sandvik,CAPTO,,Coromant Capto® to Weldon / ISO 9766 adaptor,,,367,23,C10-391.23-40 115,C10,40,,3,1,14,100.0,,40.0,,115.0,8.0,76.0,79.0,115.0,,74.0,90.0,90.0,100.0,,45°,,59°,,10000
+Sandvik,CAPTO,,Coromant Capto® to Weldon / ISO 9766 adaptor,,,367,23,C10-391.23-50 120,C10,50,,3,1,3,100.0,,50.0,,120.0,8.0,120.0,,,,84.0,100.0,,,,45°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to CoroMill® 327 adaptor,"Short design, for segment clamping only",,367,24,C3-391.327-09 035,C3,09,,,,,32.0,,9.0,,35.0,22.0,,,,,,,,,,,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to CoroMill® 327 adaptor,"Short design, for segment clamping only",,367,24,C4-391.327-09 035,C4,09,,,,,40.0,,9.0,,35.0,22.0,,,,,,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroMill® 327 adaptor,"Short design, for segment clamping only",,367,24,C4-391.327-12 043,C4,12,,,,,40.0,,12.0,,43.0,30.0,,,,,,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroMill® 327 adaptor,"Short design, for segment clamping only",,367,24,C5-391.327-12 043,C5,12,,,,,50.0,,12.0,,43.0,30.0,,,,,,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroMill® 327 adaptor,"Short design, for segment clamping only",,367,24,C5-391.327-14 048,C5,14,,,,,50.0,,14.3,,48.0,35.0,,,,,,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C4-HD-20-084,C4,20,,3,1,3,40.0,,20.0,51,84.0,17.8,84.0,,,,50.0,55.0,,,,8°,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C5-HD-20-082,C5,20,,3,1,3,50.0,,20.0,51,82.0,17.8,82.0,,,,50.0,55.0,,,,8°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C5-HD-25-088,C5,25,,3,1,3,50.0,,25.0,57,88.0,18.8,88.0,,,,57.0,65.0,,,,12°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C6-HD-20-084,C6,20,,3,1,6,63.0,,20.0,51,84.0,17.8,59.0,84.0,,,50.0,55.0,63.0,,,8°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C6-HD-25-087,C6,25,,3,1,3,63.0,,25.0,57,87.0,18.8,87.0,,,,57.0,65.0,,,,12°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C6-HD-25-150,C6,25,,3,1,3,63.0,,25.0,57,150.0,18.8,150.0,,,,57.0,65.0,,,,12°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C6-HD-32-091,C6,32,,3,1,3,63.0,,32.0,61,91.0,18.8,91.0,,,,68.0,76.0,,,,12°,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C8-HD-20-097,C8,20,,3,1,6,80.0,,20.0,51,97.0,17.8,62.0,97.0,,,50.0,55.0,80.0,,,8°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C8-HD-25-097,C8,25,,3,1,6,80.0,,25.0,57,97.0,18.8,63.0,97.0,,,57.0,65.0,80.0,,,12°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C8-HD-32-085,C8,32,,3,1,6,80.0,,32.0,61,85.0,18.8,53.3,85.0,,,67.8,76.0,80.0,,,12°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C8-HD-32-180,C8,32,,3,1,6,80.0,,32.0,61,180.0,18.8,148.0,180.0,,,68.0,76.0,80.0,,,12°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C10-HD-20-102,C10,20,,3,1,6,100.0,,20.0,51,102.0,17.8,59.0,102.0,,,50.0,55.0,100.0,,,8°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C10-HD-25-105,C10,25,,3,1,6,100.0,,25.0,57,105.0,18.8,63.0,105.0,,,57.0,65.0,100.0,,,12°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Heavy Duty design,,368,25,930-C10-HD-32-098,C10,32,,3,1,6,100.0,,32.0,61,98.0,18.8,56.2,98.0,,,67.8,76.0,100.0,,,12°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C3-S-06-064,C3,6,,3,1,6,32.0,,6.0,37,64.0,11.3,33.2,64.0,,,22.0,26.0,32.0,,,10°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C3-S-08-065,C3,8,,3,1,6,32.0,,8.0,37,65.0,11.3,35.3,65.0,,,24.0,28.0,32.0,,,10°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C3-S-10-070,C3,10,,3,1,6,32.0,,10.0,41,70.0,11.3,39.6,70.0,,,26.0,30.0,32.0,,,10°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C3-S-12-074,C3,12,,3,1,3,32.0,,12.0,46,74.0,11.3,74.0,,,,28.0,32.0,,,,10°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C4-S-06-066,C4,6,,3,1,6,40.0,,6.0,37,66.0,11.3,30.2,66.0,,,22.0,26.0,40.0,,,10°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C4-S-08-066,C4,8,,3,1,6,40.0,,8.0,37,66.0,11.3,30.2,66.0,,,24.0,28.0,40.0,,,10°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C4-S-10-072,C4,10,,3,1,6,40.0,,10.0,41,72.0,11.3,34.2,72.0,,,26.0,30.0,40.0,,,10°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C4-S-12-080A,C4,12,,3,1,6,40.0,,12.0,46,80.0,11.3,40.0,80.0,,,28.0,32.0,40.0,,,15°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C4-S-20-090A,C4,20,,3,1,3,40.0,,20.0,51,90.0,16.0,90.0,,,,38.0,42.0,,,,7°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-06-068,C5,6,,3,1,6,50.0,,6.0,37,68.0,11.3,30.2,68.0,,,22.0,26.0,50.0,,,10°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-08-070,C5,8,,3,1,6,50.0,,8.0,37,70.0,11.3,32.2,70.0,,,24.0,28.0,50.0,,,10°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-10-072,C5,10,,3,1,6,50.0,,10.0,41,72.0,11.3,34.2,72.0,,,26.0,30.0,50.0,,,10°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-12-075,C5,12,,3,1,6,50.0,,12.0,46,75.0,11.3,38.2,75.0,,,28.0,32.0,50.0,,,10°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-20-085,C5,20,,3,1,6,50.0,,20.0,51,85.0,16.0,49.2,85.0,,,38.0,42.0,50.0,,,7°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-20-125,C5,20,,3,1,6,50.0,,20.0,51,125.0,16.0,49.2,125.0,,,38.0,42.0,50.0,,,7°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C5-S-25-091,C5,25,,3,1,3,50.0,,25.0,57,91.0,12.9,91.0,,,,45.0,50.0,,,,11°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C6-S-25-098,C6,25,,3,1,6,63.0,,25.0,57,98.0,12.9,72.1,98.0,,,45.0,50.0,63.0,,,11°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,26,930-C8-S-25-108,C8,25,,3,1,6,80.0,,25.0,57,108.0,12.9,72.0,108.0,,,45.0,50.0,80.0,,,11°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-06-074,C6,6,,3,1,10,63.0,,6.0,37,74.0,11.3,30.2,48.1,,,22.0,26.0,50.0,,,10°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-08-076,C6,8,,3,1,10,63.0,,8.0,37,76.0,11.3,32.2,50.1,,,24.0,28.0,50.0,,,10°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-10-078,C6,10,,3,1,10,63.0,,10.0,41,78.0,11.3,34.2,52.1,,,26.0,30.0,50.0,,,10°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-12-082,C6,12,,3,1,10,63.0,,12.0,46,82.0,11.3,38.2,56.0,,,28.0,32.0,50.0,,,10°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-20-091,C6,20,,3,1,10,63.0,,20.0,51,91.0,16.0,49.2,65.1,,,38.0,42.0,50.0,,,7°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C6-S-20-150,C6,20,,3,1,10,63.0,,20.0,51,150.0,16.0,49.2,66.8,,,38.0,42.0,50.0,,,7°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C8-S-12-094,C8,12,,3,1,10,80.0,,12.0,46,94.0,11.3,38.2,59.0,,,28.0,32.0,50.0,,,10°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C8-S-20-103,C8,20,,3,1,10,80.0,,20.0,51,103.0,16.0,49.2,68.0,,,38.0,42.0,50.0,,,7°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Slender design,,369,27,930-C8-S-20-175,C8,20,,3,1,10,80.0,,20.0,51,175.0,16.0,49.2,70.0,,,38.0,42.0,50.0,,,7°,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-06-085,C4,6,,3,1,2,40.0,,6.0,37,85.0,45.8,85.0,,,,14.5,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-08-085,C4,8,,3,1,2,40.0,,8.0,37,85.0,45.8,85.0,,,,17.5,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-10-095,C4,10,,3,1,2,40.0,,10.0,41,95.0,55.8,95.0,,,,20.0,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-10-135,C4,10,,3,1,2,40.0,,10.0,41,135.0,95.8,135.0,,,,20.0,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-12-100,C4,12,,3,1,2,40.0,,12.0,46,100.0,60.8,100.0,,,,22.0,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C4-P-12-135,C4,12,,3,1,2,40.0,,12.0,46,135.0,95.8,135.0,,,,22.0,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-06-088,C5,6,,3,1,5,50.0,,6.0,37,88.0,47.9,65.0,88.0,,,14.5,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-08-088,C5,8,,3,1,5,50.0,,8.0,37,88.0,45.8,64.9,88.0,,,17.5,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-10-098,C5,10,,3,1,5,50.0,,10.0,41,98.0,55.8,74.9,98.0,,,20.0,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-10-138,C5,10,,3,1,5,50.0,,10.0,41,138.0,95.8,114.9,138.0,,,20.0,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-12-103,C5,12,,3,1,5,50.0,,12.0,46,103.0,60.8,80.0,103.0,,,22.0,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C5-P-12-138,C5,12,,3,1,5,50.0,,12.0,46,138.0,95.8,115.0,138.0,,,22.0,40.0,50.0,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-06-091,C6,6,,3,1,5,63.0,,6.0,37,91.0,47.9,64.9,91.0,,,14.5,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-08-091,C6,8,,3,1,5,63.0,,8.0,37,91.0,45.8,64.9,91.0,,,17.5,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-10-102,C6,10,,3,1,5,63.0,,10.0,41,102.0,55.8,75.0,102.0,,,20.0,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-10-142,C6,10,,3,1,5,63.0,,10.0,41,142.0,95.8,115.0,142.0,,,20.0,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-12-107,C6,12,,3,1,5,63.0,,12.0,46,107.0,60.8,80.0,107.0,,,22.0,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C6-P-12-142,C6,12,,3,1,5,63.0,,12.0,46,142.0,95.8,115.0,142.0,,,22.0,40.0,63.0,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C8-P-12-120,C8,12,,3,1,5,80.0,,12.0,46,120.0,60.8,83.0,120.0,,,22.0,40.0,80.0,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,28,930-C8-P-12-155,C8,12,,3,1,5,80.0,,12.0,46,155.0,95.8,118.0,155.0,,,22.0,40.0,80.0,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,Pencil design,,370,29,930-C4-P-20-160,C4,20,,3,1,,40.0,,20.0,51,160.0,60.0,108.0,,,,32.0,,42.0,,,,5°,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C4-P-12-185,C4,12,,3,1,11,40.0,,12.0,46,185.0,50.0,75.0,145.8,,,22.0,,26.0,,,,4°,,,39000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C5-P-20-151,C5,20,,3,1,11,50.0,,20.0,51,151.0,60.0,108.0,128.0,,,32.0,,42.0,,,,6°,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C5-P-20-231,C5,20,,3,1,11,50.0,,20.0,51,231.0,60.0,188.0,208.0,,,32.0,,42.0,,,,2°,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C6-P-20-155,C6,20,,3,1,11,63.0,,20.0,51,155.0,60.0,108.0,128.1,,,32.0,,42.0,,,,6°,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C6-P-20-235,C6,20,,3,1,11,63.0,,20.0,51,235.0,60.0,188.0,208.1,,,32.0,,42.0,,,,2°,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C8-P-20-165,C8,20,,3,1,11,80.0,,20.0,51,165.0,60.0,108.0,128.1,,,32.0,,42.0,,,,6°,,,14000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,30,930-C8-P-20-245,C8,20,,3,1,11,80.0,,20.0,51,245.0,60.0,188.0,208.1,,,32.0,,42.0,,,,2°,,,14000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,31,930-C5-P-12-188,C5,12,,3,1,17,50.0,,12.0,46,188.0,50.0,75.0,145.8,167.0,,22.0,,26.0,40.0,,,4°,,,28000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,31,930-C6-P-12-192,C6,12,,3,1,17,63.0,,12.0,46,192.0,50.0,75.0,145.8,167.0,,22.0,,26.0,40.0,,,4°,,,20000
+Sandvik,CAPTO,,Coromant Capto® to CoroChuck™ 930,Pencil design,,371,31,930-C8-P-12-205,C8,12,,3,1,17,80.0,,12.0,46,205.0,50.0,75.0,145.8,170.0,,22.0,,26.0,40.0,,,4°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,,For driven tool holders; Segment clamping and manual tool change only,372,32,930-C3-T-12-046,C3,12,,3,1,6,32.0,,12.0,46,46.0,11.3,22.8,46.0,,,28.0,32.0,48.0,,,10°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,,For driven tool holders; Segment clamping and manual tool change only,372,32,930-C4-T-12-042,C4,12,,3,1,6,40.0,,12.0,46,42.0,11.3,17.0,42.0,,,28.0,32.0,48.0,,,10°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,,For driven tool holders; Segment clamping and manual tool change only,372,32,930-C4-T-20-058,C4,20,,3,1,6,40.0,,20.0,51,58.0,16.0,34.3,58.0,,,38.1,42.0,57.0,,,7°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,,For driven tool holders; Segment clamping and manual tool change only,372,32,930-C5-T-12-040,C5,12,,3,1,10,50.0,,12.0,46,40.0,11.3,16.1,32.0,40.0,,28.0,32.0,48.0,50.0,,10°,,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 930,,For driven tool holders; Segment clamping and manual tool change only,372,32,930-C5-T-20-046,C5,20,,3,1,6,50.0,,20.0,51,46.0,11.3,22.1,46.0,,,38.1,42.0,57.0,,,10°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-06 075,C4,6,,3,1,,40.0,,6.0,,75.0,44.1,55.0,,,,20.0,27.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-08 075,C4,8,,3,1,,40.0,,8.0,,75.0,44.1,55.0,,,,20.0,27.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-10 075,C4,10,,3,1,,40.0,,10.0,,75.0,50.5,55.0,,,,24.0,32.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-12 075,C4,12,,3,1,,40.0,,12.0,,75.0,50.5,55.0,,,,24.0,32.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-14 080,C4,14,,3,1,,40.0,,14.0,,80.0,44.1,60.0,,,,27.0,34.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C4-391.19-16 080,C4,16,,3,1,,40.0,,16.0,,80.0,44.1,60.0,,,,27.0,34.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-06 075,C5,6,,3,1,,50.0,,6.0,,75.0,44.1,55.0,,,,20.0,27.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-08 075,C5,8,,3,1,,50.0,,8.0,,75.0,43.9,55.0,,,,20.0,27.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-10 075,C5,10,,3,1,,50.0,,10.0,,75.0,50.2,55.0,,,,24.0,32.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-12 075,C5,12,,3,1,,50.0,,12.0,,75.0,50.2,55.0,,,,24.0,32.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-14 080,C5,14,,3,1,,50.0,,14.0,,80.0,44.1,60.0,,,,27.0,34.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-16 080,C5,16,,3,1,,50.0,,16.0,,80.0,44.1,60.0,,,,27.0,34.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-18 080,C5,18,,3,1,,50.0,,18.0,,80.0,56.9,60.0,,,,33.0,42.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C5-391.19-20 085,C5,20,,3,1,,50.0,,20.0,,85.0,56.9,65.0,,,,33.0,42.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-06 080,C6,6,,3,1,,63.0,,6.0,,80.0,44.1,58.0,,,,20.0,27.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-08 080,C6,8,,3,1,,63.0,,8.0,,80.0,44.1,58.0,,,,20.0,27.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-10 080,C6,10,,3,1,,63.0,,10.0,,80.0,50.5,58.0,,,,24.0,32.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-12 080,C6,12,,3,1,,63.0,,12.0,,80.0,50.5,58.0,,,,24.0,32.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-14 085,C6,14,,3,1,,63.0,,14.0,,85.0,44.1,63.0,,,,27.0,34.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-16 085,C6,16,,3,1,,63.0,,16.0,,85.0,44.1,63.0,,,,27.0,34.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-18 085,C6,18,,3,1,,63.0,,18.0,,85.0,56.9,63.0,,,,33.0,42.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-20 085,C6,20,,3,1,,63.0,,20.0,,85.0,56.9,63.0,,,,33.0,42.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-25 090,C6,25,,3,1,,63.0,,25.0,,90.0,56.9,68.0,,,,44.0,53.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C6-391.19-32 095,C6,32,,3,1,,63.0,,32.0,,95.0,56.9,73.0,,,,44.0,53.0,,,,4°,,,,20000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C8-391.19-10 090,C8,10,,3,1,,80.0,,10.0,,90.0,50.2,60.0,,,,24.0,32.0,,,,4°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C8-391.19-12 090,C8,12,,3,1,,80.0,,12.0,,90.0,50.2,60.0,,,,24.0,32.0,,,,4°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C8-391.19-16 095,C8,16,,3,1,,80.0,,16.0,,95.0,43.8,65.0,,,,27.0,34.0,,,,4°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C8-391.19-20 095,C8,20,,3,1,,80.0,,20.0,,95.0,56.5,65.0,,,,33.0,42.0,,,,4°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C8-391.19-25 100,C8,25,,3,1,,80.0,,25.0,,100.0,56.5,70.0,,,,44.0,53.0,,,,4°,,,,14000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C10-391.19-12 095,C10,12,,3,1,,100.0,,12.0,,95.0,50.5,59.0,,,,24.0,32.0,,,,4°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C10-391.19-16 100,C10,16,,3,1,,100.0,,16.0,,100.0,44.1,64.0,,,,27.0,34.0,,,,4°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C10-391.19-20 100,C10,20,,3,1,,100.0,,20.0,,100.0,56.9,64.0,,,,33.0,42.0,,,,4°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Short design,,373,33,C10-391.19-25 110,C10,25,,3,1,,100.0,,25.0,,110.0,56.9,74.0,,,,44.0,53.0,,,,4°,,,,10000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C3-391.19-06 118,C3,6,,3,1,,32.0,,6.0,,118.0,103.0,,,,,14.0,32.0,,,,5°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C3-391.19-08 107,C3,8,,3,1,,32.0,,8.0,,107.0,92.0,,,,,16.0,32.0,,,,5°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C3-391.19-10 095,C3,10,,3,1,,32.0,,10.0,,95.0,80.0,,,,,18.0,32.0,,,,5°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C3-391.19-12 084,C3,12,,3,1,,32.0,,12.0,,84.0,69.0,,,,,20.0,32.0,,,,5°,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C4-391.19-12 135,C4,12,,3,1,,40.0,,12.0,,135.0,115.0,,,,,20.0,40.0,,,,5°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C4-391.19-16 112,C4,16,,3,1,,40.0,,16.0,,112.0,92.0,,,,,24.0,40.0,,,,5°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C4-391.19-18 080,C4,18,,3,1,,40.0,,18.0,,80.0,56.9,,,,,33.0,42.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C4-391.19-20 085,C4,20,,3,1,,40.0,,20.0,,85.0,56.9,,,,,33.0,42.0,,,,4°,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C5-391.19-20 146,C5,20,,3,1,,50.0,,20.0,,146.0,126.0,,,,,28.0,50.0,,,,5°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C5-391.19-25 090,C5,25,,3,1,,50.0,,25.0,,90.0,56.9,,,,,44.0,53.0,,,,4°,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to shrink fit chuck,Long conical design,,373,34,C5-391.19-25 118,C5,25,,3,1,,50.0,,25.0,,118.0,98.0,,,,,33.0,50.0,,,,5°,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C3-391.14-16 045,C3,ER16,,3,1,2,32.0,,17.0,,34.4,29.0,45.0,,,,28.0,32.0,,,,,,,,55000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C3-391.14-20 045,C3,ER20,,3,1,1,32.0,,21.0,,33.5,45.0,,,,,33.7,,,,,,,,,55000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C4-391.14-20 052,C4,ER20,,3,1,2,40.0,,21.0,,40.5,30.8,52.0,,,,33.7,40.0,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C4-391.14-25 052,C4,ER25,,3,1,1,40.0,,26.0,,40.0,52.0,,,,,42.0,,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C4-391.14-32 054,C4,ER32,,3,1,1,40.0,,33.0,,41.0,54.0,,,,,50.0,,,,,,,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C5-391.14-20 055,C5,ER20,,3,1,2,50.0,,21.0,,43.5,31.1,55.0,,,,33.7,50.0,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C5-391.14-25 055,C5,ER25,,3,1,2,50.0,,26.0,,43.0,33.0,55.0,,,,42.0,50.0,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C5-391.14-32 057,C5,ER32,,3,1,1,50.0,,33.0,,44.0,57.0,,,,,50.0,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C5-391.14-32 100,C5,ER32,,3,1,1,50.0,,33.0,,87.0,100.0,,,,,50.0,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C5-391.14-40 060,C5,ER40,,3,1,1,50.0,,41.0,,45.0,60.0,,,,,63.0,,,,,,,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-25 060,C6,ER25,,3,1,2,63.0,,26.0,,48.0,32.9,60.0,,,,42.0,63.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-25 100,C6,ER25,,3,1,2,63.0,,26.0,,88.0,75.0,100.0,,,,42.0,63.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-32 060,C6,ER32,,3,1,2,63.0,,33.0,,47.0,35.3,60.0,,,,50.0,63.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-32 100,C6,ER32,,3,1,2,63.0,,33.0,,87.0,75.0,100.0,,,,50.0,63.0,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-40 065,C6,ER40,,3,1,1,63.0,,41.0,,50.0,65.0,,,,,63.0,,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C6-391.14-40 130,C6,ER40,,3,1,1,63.0,,41.0,,115.0,130.0,,,,,63.0,,,,,,,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C8-391.14-20 065,C8,ER20,,3,1,2,80.0,,21.0,,53.5,29.9,65.0,,,,35.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C8-391.14-25 070,C8,ER25,,3,1,2,80.0,,26.0,,58.0,32.4,70.0,,,,42.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C8-391.14-32 070,C8,ER32,,3,1,2,80.0,,33.0,,57.0,35.0,70.0,,,,50.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C8-391.14-40 070,C8,ER40,,3,1,2,80.0,,41.0,,55.0,38.0,70.0,,,,63.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,Workpiece side interface DIN 6499-B,374,35,C8-391.14-50 080,C8,ER50,,3,1,2,80.0,,52.0,,59.0,50.0,80.0,,,,78.0,80.0,,,,,,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C4-391.14-16 070,C4,ER16,,3,1,,40.0,,17.0,,59.4,44.0,50.0,70.0,,,28.0,,,,,,45°,,,39000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C5-391.14-16 100,C5,ER16,,3,1,,50.0,,17.0,,89.4,60.0,80.0,100.0,,,28.0,,,,,,29°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C5-391.14-20 100,C5,ER20,,3,1,,50.0,,21.0,,88.5,55.0,80.0,100.0,,,35.0,,,,,,16°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C5-391.14-20 130,C5,ER20,,3,1,,50.0,,21.0,,118.5,55.0,109.9,130.0,,,35.0,,,,,,7°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C5-391.14-25 100,C5,ER25,,3,1,,50.0,,26.0,,88.0,65.0,80.0,100.0,,,42.0,,,,,,14°,,,28000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C6-391.14-16 100,C6,ER16,,3,1,,63.0,,17.0,,89.4,60.0,78.0,100.0,,,28.0,,,,,,44°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C6-391.14-20 060,C6,ER20,,3,1,,63.0,,21.0,,48.5,31.1,38.0,60.0,,,33.7,,,,,,65°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C6-391.14-25 130,C6,ER25,,3,1,,63.0,,26.0,,118.0,65.0,108.0,130.0,,,42.0,,,,,,13°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C6-391.14-25 160,C6,ER25,,3,1,,63.0,,26.0,,148.0,65.0,138.0,160.0,,,42.0,,,,,,8°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C6-391.14-32 130,C6,ER32,,3,1,,63.0,,33.0,,117.0,75.0,108.0,130.0,,,50.0,,,,,,11°,,,20000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C8-391.14-32 160,C8,ER32,,3,1,,80.0,,33.0,,147.0,75.0,130.0,160.0,,,50.0,,,,,,15°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C8-391.14-40 160,C8,ER40,,3,1,,80.0,,41.0,,145.0,95.0,130.0,160.0,,,63.0,,,,,,13°,,,14000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C10-391.14-32 160,C10,ER32,,3,1,,100.0,,33.0,,147.0,75.0,124.0,160.0,,,50.0,,,,,,27°,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C10-391.14-40 160,C10,ER40,,3,1,,100.0,,41.0,,145.0,95.0,124.0,160.0,,,63.0,,,,,,32°,,,10000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to ER collet chuck,,,374,36,C10-391.14-50 160,C10,ER50,,3,1,,100.0,,52.0,,139.0,100.0,124.0,160.0,,,80.0,,,,,,22°,,,10000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C3-391.14-16 035,C3,ER16,,3,1,2,32.0,,17.0,,24.0,26.6,34.6,,,,28.0,32.0,,,,,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C3-391.14-20 036,C3,ER20,,3,1,1,32.0,,21.0,,24.5,36.0,,,,,33.7,,,,,,,,,55000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C4-391.14-16 035,C4,ER16,,3,1,2,40.0,,17.0,,24.0,26.6,34.6,,,,28.0,40.0,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C4-391.14-20 035,C4,ER20,,3,1,2,40.0,,21.0,,23.5,27.0,35.0,,,,33.7,40.0,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C4-391.14-25 038,C4,ER25,,3,1,1,40.0,,26.0,,26.0,38.0,,,,,42.0,,,,,,,,,39000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C5-391.14-20 036,C5,ER20,,3,1,2,50.0,,21.0,,24.0,27.5,35.5,,,,35.0,50.0,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C5-391.14-25 037,C5,ER25,,3,1,2,50.0,,26.0,,25.0,29.0,37.0,,,,42.0,50.0,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to ER collet chuck,"Short design, for segment clamping only",Workpiece side interface DIN 6499-B,375,37,C5-391.14-32 045,C5,ER32,,3,1,1,50.0,,33.0,,32.0,45.0,,,,,50.0,,,,,,,,,28000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C3-391.32-08 076,C3,8 - 1,,3,1,8,32.0,,,,76.0,3.0,19.1,76.0,,,9.9,24.1,36.0,,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C3-391.32-13 102,C3,1 - 13,,3,1,8,32.0,,,,96.0,6.0,22.2,102.0,,,15.7,38.1,50.0,,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C4-391.32-08 077,C4,8 - 1,,3,1,16,40.0,,,,77.0,3.0,19.1,55.8,77.0,,9.9,24.1,36.0,40.0,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C4-391.32-13 104,C4,1 - 13,,3,1,8,40.0,,,,98.0,6.0,22.2,104.0,,,15.7,38.1,50.0,,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C5-391.32-08 079,C5,8 - 1,,3,1,16,50.0,,,,76.0,3.0,19.1,53.6,79.0,,9.9,24.1,36.0,50.0,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C5-391.32-13 103,C5,1 - 13,,3,1,8,50.0,,,,97.0,6.0,22.2,103.0,,,15.7,38.1,50.0,,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C6-391.32-13 107,C6,1 - 13,,3,1,16,63.0,,,,101.0,6.0,22.2,79.8,107.0,,15.7,38.1,50.0,63.0,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C6-391.32-16 112,C6,16 - 1,,3,1,16,63.0,,,,106.0,6.0,22.2,88.4,112.0,,15.7,45.1,57.0,63.0,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C8-391.32-13 112,C8,1 - 13,,3,1,16,80.0,,,,106.0,6.0,22.2,77.1,112.0,,15.7,38.1,50.0,80.0,,19°,20°,,,8000
+Sandvik,CAPTO,,Coromant Capto® to drill chuck,,Internal and external coolant supply,375,38,C8-391.32-16 117,C8,16 - 1,,3,1,16,80.0,,,,111.0,6.0,31.2,84.2,117.0,,15.7,38.1,57.0,80.0,,19°,20°,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C3-11-078,C3,ER11,M5,3,1,5,32.0,,11.3,,74.2,24.1,63.0,78.0,,,18.7,23.5,32.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C3-20-102,C3,ER20,M12,3,1,2,32.0,,20.8,,89.2,35.3,97.2,,,,33.7,35.0,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C4-11-080,C4,ER11,M5,3,1,5,40.0,,11.3,,76.2,24.1,60.0,80.0,,,18.7,23.5,40.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C4-20-102,C4,ER20,M12,3,1,5,40.0,,20.8,,89.2,35.3,76.9,97.2,,,33.7,35.0,40.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C4-25-122,C4,ER25,M20,3,1,2,40.0,,25.8,,108.1,37.1,116.6,,,,42.0,44.0,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C5-20-103,C5,ER20,M12,3,1,5,50.0,,20.8,,89.7,35.3,77.6,97.7,,,33.7,35.0,50.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C5-25-122,C5,ER25,M20,3,1,5,50.0,,25.8,,108.6,37.1,97.1,117.1,,,42.0,44.0,50.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C5-40-154,C5,ER40,M30,3,1,1,50.0,,40.8,,137.2,148.6,,,,,63.0,,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C6-20-105,C6,ER20,M12,3,1,5,63.0,,20.8,,91.7,35.3,77.6,99.7,,,33.7,35.0,63.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C6-25-124,C6,ER25,M20,3,1,5,63.0,,25.8,,110.6,37.1,97.1,119.1,,,42.0,44.0,63.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C6-32-128,C6,ER32,M27,3,1,2,63.0,,32.8,,118.3,105.8,127.8,,,,50.0,63.0,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C6-40-154,C6,ER40,M30,3,1,1,63.0,,40.8,,136.7,148.1,,,,,63.0,,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C6-50-210,C6,ER50,M48,3,1,5,63.0,,52.0,,187.5,76.5,134.5,208.0,,,77.7,80.0,86.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C8-20-112,C8,ER20,M12,3,1,5,80.0,,20.8,,98.7,35.3,76.6,106.7,,,33.7,35.0,80.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C8-25-131,C8,ER25,M20,3,1,5,80.0,,25.8,,117.6,37.1,96.1,126.1,,,42.0,44.0,80.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C8-32-135,C8,ER32,M27,3,1,2,80.0,,32.8,,125.3,104.8,134.8,,,,50.0,80.0,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C8-40-161,C8,ER40,M30,3,1,2,80.0,,40.8,,143.7,125.1,155.1,,,,63.0,80.0,,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C8-50-215,C8,ER50,M48,3,1,5,80.0,,52.0,,192.0,76.5,134.5,212.5,,,77.7,80.0,86.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C10-25-143,C10,ER25,M20,3,1,5,100.0,,25.8,,129.6,37.1,102.1,138.1,,,42.0,44.0,100.0,,,,,,,8000
+Sandvik,CAPTO,Coromant Capto®,Coromant Capto® to CoroChuck™ 970,,Workpiece side interface DIN 6499-B,376,39,970-C10-40-173,C10,ER40,M30,3,1,2,100.0,,40.8,,155.7,131.1,167.1,,,,63.0,100.0,,,,,,,,8000

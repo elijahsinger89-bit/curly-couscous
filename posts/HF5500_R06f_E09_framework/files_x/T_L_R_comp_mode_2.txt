@@ -1,0 +1,2 @@
+; TOOL Length and Radius compensation
+; G_TOOL(-$hyperMILL_T_CR$,0)

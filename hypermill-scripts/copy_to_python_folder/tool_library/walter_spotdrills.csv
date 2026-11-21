@@ -1,0 +1,231 @@
+manufacturer,family,designation,type,point_angle,cutting_material,dia_mm,dia_in,inch_mark,oal_mm,flute_len_mm,depth_max_mm,shank_dia_mm,iso_P,iso_M,iso_K,iso_N,iso_S,iso_H,tier,tier_rank,type_code
+Walter,A1174,A1174-3,Spot drill,90,Solid carbide,3.0,0.1181,,46.0,11.0,11.0,3.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-4,Spot drill,90,Solid carbide,4.0,0.1575,,55.0,15.0,15.0,4.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-5,Spot drill,90,Solid carbide,5.0,0.1969,,62.0,16.0,16.0,5.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-6,Spot drill,90,Solid carbide,6.0,0.2362,,66.0,17.0,17.0,6.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-1/4IN,Spot drill,90,Solid carbide,6.35,0.25,1/4“,70.0,18.0,18.0,6.35,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-8,Spot drill,90,Solid carbide,8.0,0.315,,79.0,22.0,22.0,8.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-3/8IN,Spot drill,90,Solid carbide,9.525,0.375,3/8“,89.0,26.0,26.0,9.525,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-10,Spot drill,90,Solid carbide,10.0,0.3937,,89.0,26.0,26.0,10.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-12,Spot drill,90,Solid carbide,12.0,0.4724,,102.0,30.0,30.0,12.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-1/2IN,Spot drill,90,Solid carbide,12.7,0.5,1/2“,102.0,30.0,30.0,12.7,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-16,Spot drill,90,Solid carbide,16.0,0.6299,,115.0,34.0,34.0,16.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174,A1174-20,Spot drill,90,Solid carbide,20.0,0.7874,,131.0,40.0,40.0,20.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1115,A1115-4,Spot drill,90,HSS,4.0,0.1575,,55.0,18.0,18.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-5,Spot drill,90,HSS,5.0,0.1969,,62.0,21.0,21.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-6,Spot drill,90,HSS,6.0,0.2362,,66.0,22.0,22.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-8,Spot drill,90,HSS,8.0,0.315,,79.0,30.0,30.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-10,Spot drill,90,HSS,10.0,0.3937,,89.0,34.0,34.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-12,Spot drill,90,HSS,12.0,0.4724,,102.0,41.0,41.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-16,Spot drill,90,HSS,16.0,0.6299,,115.0,46.0,46.0,16.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115,A1115-20,Spot drill,90,HSS,20.0,0.7874,,131.0,53.0,53.0,20.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-2,Spot drill,90,HSS,2.0,0.0787,,40.0,8.0,8.0,2.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-3,Spot drill,90,HSS,3.0,0.1181,,50.0,10.0,10.0,3.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-4,Spot drill,90,HSS,4.0,0.1575,,52.0,12.0,12.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-5,Spot drill,90,HSS,5.0,0.1969,,60.0,15.0,15.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-6,Spot drill,90,HSS,6.0,0.2362,,66.0,20.0,20.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-1/4IN,Spot drill,90,HSS,6.35,0.25,1/4“,66.0,20.0,20.0,6.35,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-8,Spot drill,90,HSS,8.0,0.315,,79.0,25.0,25.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-3/8IN,Spot drill,90,HSS,9.525,0.375,3/8“,89.0,25.0,25.0,9.525,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-10,Spot drill,90,HSS,10.0,0.3937,,89.0,25.0,25.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-12,Spot drill,90,HSS,12.0,0.4724,,102.0,30.0,30.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-1/2IN,Spot drill,90,HSS,12.7,0.5,1/2“,102.0,35.0,35.0,12.7,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-14,Spot drill,90,HSS,14.0,0.5512,,115.0,35.0,35.0,14.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-5/8IN,Spot drill,90,HSS,15.875,0.625,5/8“,115.0,35.0,35.0,15.875,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-16,Spot drill,90,HSS,16.0,0.6299,,115.0,35.0,35.0,16.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-18,Spot drill,90,HSS,18.0,0.7087,,130.0,40.0,40.0,18.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-3/4IN,Spot drill,90,HSS,19.05,0.75,3/4“,131.0,40.0,40.0,19.05,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-20,Spot drill,90,HSS,20.0,0.7874,,131.0,40.0,40.0,20.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115S,A1115S-1IN,Spot drill,90,HSS,25.4,1.0,1.0“,138.0,45.0,45.0,25.4,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-4,Spot drill,90,HSS,4.0,0.1575,,100.0,12.0,12.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-5,Spot drill,90,HSS,5.0,0.1969,,120.0,15.0,15.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-6,Spot drill,90,HSS,6.0,0.2362,,140.0,20.0,20.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-1/4IN,Spot drill,90,HSS,6.35,0.25,1/4“,140.0,20.0,20.0,6.35,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-8,Spot drill,90,HSS,8.0,0.315,,140.0,25.0,25.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-3/8IN,Spot drill,90,HSS,9.525,0.375,3/8“,170.0,25.0,25.0,9.525,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-10,Spot drill,90,HSS,10.0,0.3937,,170.0,25.0,25.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-12,Spot drill,90,HSS,12.0,0.4724,,170.0,30.0,30.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-1/2IN,Spot drill,90,HSS,12.7,0.5,1/2“,170.0,30.0,30.0,12.7,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-5/8IN,Spot drill,90,HSS,15.875,0.625,5/8“,200.0,35.0,35.0,15.875,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-3/4IN,Spot drill,90,HSS,19.05,0.75,3/4“,200.0,40.0,40.0,19.05,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-20,Spot drill,90,HSS,20.0,0.7874,,200.0,40.0,40.0,20.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1115L,A1115L-1IN,Spot drill,90,HSS,25.4,1.0,1.0“,200.0,40.0,40.0,25.4,2,1,2,2,1,0,Perform,1,51
+Walter,A1174C,A1174C-3,Spot drill,120,Solid carbide,3.0,0.1181,,46.0,11.0,11.0,3.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-4,Spot drill,120,Solid carbide,4.0,0.1575,,55.0,15.0,15.0,4.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-5,Spot drill,120,Solid carbide,5.0,0.1969,,62.0,16.0,16.0,5.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-6,Spot drill,120,Solid carbide,6.0,0.2362,,66.0,17.0,17.0,6.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-1/4IN,Spot drill,120,Solid carbide,6.35,0.25,1/4“,70.0,18.0,18.0,6.35,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-8,Spot drill,120,Solid carbide,8.0,0.315,,79.0,22.0,22.0,8.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-3/8IN,Spot drill,120,Solid carbide,9.525,0.375,3/8“,89.0,26.0,26.0,9.525,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-10,Spot drill,120,Solid carbide,10.0,0.3937,,89.0,26.0,26.0,10.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-12,Spot drill,120,Solid carbide,12.0,0.4724,,102.0,30.0,30.0,12.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-1/2IN,Spot drill,120,Solid carbide,12.7,0.5,1/2“,102.0,30.0,30.0,12.7,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-16,Spot drill,120,Solid carbide,16.0,0.6299,,115.0,34.0,34.0,16.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1174C,A1174C-20,Spot drill,120,Solid carbide,20.0,0.7874,,131.0,40.0,40.0,20.0,0,0,1,2,2,0,Advance,2,51
+Walter,A1114,A1114-4,Spot drill,120,HSS,4.0,0.1575,,55.0,18.0,18.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-5,Spot drill,120,HSS,5.0,0.1969,,62.0,21.0,21.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-6,Spot drill,120,HSS,6.0,0.2362,,66.0,22.0,22.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-8,Spot drill,120,HSS,8.0,0.315,,79.0,30.0,30.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-10,Spot drill,120,HSS,10.0,0.3937,,89.0,34.0,34.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-12,Spot drill,120,HSS,12.0,0.4724,,102.0,41.0,41.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-16,Spot drill,120,HSS,16.0,0.6299,,115.0,46.0,46.0,16.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114,A1114-20,Spot drill,120,HSS,20.0,0.7874,,131.0,53.0,53.0,20.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-2,Spot drill,120,HSS,2.0,0.0787,,40.0,8.0,8.0,2.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-3,Spot drill,120,HSS,3.0,0.1181,,50.0,10.0,10.0,3.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-4,Spot drill,120,HSS,4.0,0.1575,,52.0,12.0,12.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-5,Spot drill,120,HSS,5.0,0.1969,,60.0,15.0,15.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-6,Spot drill,120,HSS,6.0,0.2362,,66.0,20.0,20.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-1/4IN,Spot drill,120,HSS,6.35,0.25,1/4“,66.0,20.0,20.0,6.35,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-8,Spot drill,120,HSS,8.0,0.315,,79.0,25.0,25.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-3/8IN,Spot drill,120,HSS,9.525,0.375,3/8“,89.0,25.0,25.0,9.525,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-10,Spot drill,120,HSS,10.0,0.3937,,89.0,25.0,25.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-12,Spot drill,120,HSS,12.0,0.4724,,102.0,30.0,30.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-1/2IN,Spot drill,120,HSS,12.7,0.5,1/2“,102.0,35.0,35.0,12.7,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-14,Spot drill,120,HSS,14.0,0.5512,,115.0,35.0,35.0,14.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-5/8IN,Spot drill,120,HSS,15.875,0.625,5/8“,115.0,35.0,35.0,15.875,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-3/4IN,Spot drill,120,HSS,19.05,0.75,3/4“,131.0,40.0,40.0,19.05,2,1,2,2,1,0,Perform,1,51
+Walter,A1114S,A1114S-1IN,Spot drill,120,HSS,25.4,1.0,1.0“,138.0,45.0,45.0,25.4,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-4,Spot drill,120,HSS,4.0,0.1575,,100.0,12.0,12.0,4.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-5,Spot drill,120,HSS,5.0,0.1969,,120.0,15.0,15.0,5.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-6,Spot drill,120,HSS,6.0,0.2362,,140.0,20.0,20.0,6.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-1/4IN,Spot drill,120,HSS,6.35,0.25,1/4“,140.0,20.0,20.0,6.35,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-8,Spot drill,120,HSS,8.0,0.315,,140.0,25.0,25.0,8.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-3/8IN,Spot drill,120,HSS,9.525,0.375,3/8“,170.0,25.0,25.0,9.525,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-10,Spot drill,120,HSS,10.0,0.3937,,170.0,25.0,25.0,10.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-12,Spot drill,120,HSS,12.0,0.4724,,170.0,30.0,30.0,12.0,2,1,2,2,1,0,Perform,1,51
+Walter,A1114L,A1114L-1/2IN,Spot drill,120,HSS,12.7,0.5,1/2“,170.0,30.0,30.0,12.7,2,1,2,2,1,0,Perform,1,51
+Walter,K1161XPL,K1161XPL-0.5,Centre drill,60,Solid carbide,0.5,0.0197,,25.0,2.0,2.0,3.15,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-0.8,Centre drill,60,Solid carbide,0.8,0.0315,,25.0,2.0,2.0,3.15,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-1,Centre drill,60,Solid carbide,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-1.25,Centre drill,60,Solid carbide,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-1.6,Centre drill,60,Solid carbide,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-2,Centre drill,60,Solid carbide,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-2.5,Centre drill,60,Solid carbide,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-3.15,Centre drill,60,Solid carbide,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-4,Centre drill,60,Solid carbide,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-5,Centre drill,60,Solid carbide,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161XPL,K1161XPL-6.3,Centre drill,60,Solid carbide,6.3,0.248,,71.0,15.75,15.75,16.0,2,2,2,2,2,2,Supreme,3,54
+Walter,K1161,K1161-0.5,Centre drill,60,Solid carbide,0.5,0.0197,,25.0,2.0,2.0,3.15,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-0.8,Centre drill,60,Solid carbide,0.8,0.0315,,25.0,2.0,2.0,3.15,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-1,Centre drill,60,Solid carbide,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-1.25,Centre drill,60,Solid carbide,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-1.6,Centre drill,60,Solid carbide,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-2,Centre drill,60,Solid carbide,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-2.5,Centre drill,60,Solid carbide,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-3.15,Centre drill,60,Solid carbide,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-4,Centre drill,60,Solid carbide,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-5,Centre drill,60,Solid carbide,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,1,Advance,2,54
+Walter,K1161,K1161-6.3,Centre drill,60,Solid carbide,6.3,0.248,,71.0,15.75,15.75,16.0,2,2,2,2,2,1,Advance,2,54
+Walter,K1111TIN,K1111TIN-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-1.25,Centre drill,60,HSS,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-1.6,Centre drill,60,HSS,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111TIN,K1111TIN-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-0.5,Centre drill,60,HSS,0.5,0.0197,,25.0,2.0,2.0,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-0.8,Centre drill,60,HSS,0.8,0.0315,,25.0,2.0,2.0,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-1.25,Centre drill,60,HSS,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-1.6,Centre drill,60,HSS,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-6.3,Centre drill,60,HSS,6.3,0.248,,71.0,15.75,15.75,16.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-8,Centre drill,60,HSS,8.0,0.315,,80.0,20.0,20.0,20.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-10,Centre drill,60,HSS,10.0,0.3937,,100.0,25.0,25.0,25.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1111,K1111-12.5,Centre drill,60,HSS,12.5,0.4921,,125.0,31.25,31.25,31.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1112,K1112-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1112,K1112-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1112,K1112-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1131,K1131-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1131,K1131-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1131,K1131-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-0.63,Centre drill,60,HSS,0.63,0.0248,,20.0,2.0,2.0,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-0.75,Centre drill,60,HSS,0.75,0.0295,,35.0,2.0,2.0,3.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-1.5,Centre drill,60,HSS,1.5,0.0591,,40.0,3.75,3.75,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-1.6,Centre drill,60,HSS,1.6,0.063,,40.0,4.0,4.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-2,Centre drill,60,HSS,2.0,0.0787,,45.0,5.0,5.0,6.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-2.5,Centre drill,60,HSS,2.5,0.0984,,50.0,6.25,6.25,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-3,Centre drill,60,HSS,3.0,0.1181,,56.0,7.5,7.5,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-3.15,Centre drill,60,HSS,3.15,0.124,,56.0,7.875,7.875,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-4,Centre drill,60,HSS,4.0,0.1575,,66.0,10.0,10.0,12.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-5,Centre drill,60,HSS,5.0,0.1969,,78.0,12.5,12.5,14.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1311,K1311-6,Centre drill,60,HSS,6.0,0.2362,,90.0,15.0,15.0,18.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-0.75X3.5,Centre drill,60,HSS,0.75,0.0295,,60.0,2.0,2.0,3.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-1X4,Centre drill,60,HSS,1.0,0.0394,,60.0,2.5,2.5,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-1.5X5,Centre drill,60,HSS,1.5,0.0591,,60.0,3.75,3.75,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-2X6,Centre drill,60,HSS,2.0,0.0787,,80.0,5.0,5.0,6.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-2.5X8,Centre drill,60,HSS,2.5,0.0984,,80.0,6.25,6.25,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-3X8,Centre drill,60,HSS,3.0,0.1181,,80.0,7.5,7.5,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-4X10,Centre drill,60,HSS,4.0,0.1575,,100.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411S,K1411S-5X14,Centre drill,60,HSS,5.0,0.1969,,120.0,12.5,12.5,14.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-0.75X3.5,Centre drill,60,HSS,0.75,0.0295,,120.0,2.0,2.0,3.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-1X4,Centre drill,60,HSS,1.0,0.0394,,120.0,2.5,2.5,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-1.5X5,Centre drill,60,HSS,1.5,0.0591,,120.0,3.75,3.75,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-2X6,Centre drill,60,HSS,2.0,0.0787,,120.0,5.0,5.0,6.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-2.5X8,Centre drill,60,HSS,2.5,0.0984,,120.0,6.25,6.25,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-3X8,Centre drill,60,HSS,3.0,0.1181,,120.0,7.5,7.5,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411M,K1411M-4X10,Centre drill,60,HSS,4.0,0.1575,,120.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411L,K1411L-2X5,Centre drill,60,HSS,2.0,0.0787,,200.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411L,K1411L-2.5X6.3,Centre drill,60,HSS,2.5,0.0984,,200.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1411L,K1411L-3.15X8,Centre drill,60,HSS,3.15,0.124,,200.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1411L,K1411L-4X10,Centre drill,60,HSS,4.0,0.1575,,200.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO.0,Centre drill,60,HSS,0.794,0.0313,1/32“,31.0,2.0,2.0,3.175,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO1,Centre drill,60,HSS,1.191,0.0469,3/64“,31.8,2.978,2.978,3.175,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO2,Centre drill,60,HSS,1.984,0.0781,5/64“,47.6,4.96,4.96,4.763,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO3,Centre drill,60,HSS,2.778,0.1094,7/64“,50.8,6.945,6.945,6.35,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO4,Centre drill,60,HSS,3.175,0.125,1/8“,54.0,7.938,7.938,7.938,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO5,Centre drill,60,HSS,4.763,0.1875,3/16“,69.9,11.907,11.907,11.113,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO6,Centre drill,60,HSS,5.556,0.2187,7/32“,76.2,13.89,13.89,12.7,2,2,2,2,2,0,Perform,1,54
+Walter,K1811,K1811-NO7,Centre drill,60,HSS,6.35,0.25,1/4“,82.6,15.875,15.875,15.875,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS1,Centre drill,60,HSS,1.191,0.0469,3/64“,38.1,2.978,2.978,3.175,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS2,Centre drill,60,HSS,1.588,0.0625,1/16“,44.5,3.97,3.97,4.763,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS3,Centre drill,60,HSS,2.381,0.0937,3/32“,50.8,5.952,5.952,6.35,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS4,Centre drill,60,HSS,3.175,0.125,1/8“,57.2,7.938,7.938,7.938,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS5,Centre drill,60,HSS,4.763,0.1875,3/16“,63.5,11.907,11.907,11.113,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS6,Centre drill,60,HSS,6.35,0.25,1/4“,76.2,15.875,15.875,15.875,2,2,2,2,2,0,Perform,1,54
+Walter,K1911,K1911-BS7,Centre drill,60,HSS,7.938,0.3125,5/16“,88.9,19.845,19.845,19.05,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-1.25,Centre drill,60,HSS,1.25,0.0492,,31.5,3.125,3.125,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-1.6,Centre drill,60,HSS,1.6,0.063,,35.5,4.0,4.0,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,11.2,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,14.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,18.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-6.3,Centre drill,60,HSS,6.3,0.248,,71.0,15.75,15.75,20.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-8,Centre drill,60,HSS,8.0,0.315,,80.0,20.0,20.0,25.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1215,K1215-10,Centre drill,60,HSS,10.0,0.3937,,100.0,25.0,25.0,31.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-1.25,Centre drill,60,HSS,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-1.6,Centre drill,60,HSS,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113TIN,K1113TIN-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-0.5,Centre drill,60,HSS,0.5,0.0197,,25.0,2.0,2.0,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-0.8,Centre drill,60,HSS,0.8,0.0315,,25.0,2.0,2.0,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-1.25,Centre drill,60,HSS,1.25,0.0492,,31.5,3.125,3.125,3.15,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-1.6,Centre drill,60,HSS,1.6,0.063,,35.5,4.0,4.0,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-2,Centre drill,60,HSS,2.0,0.0787,,40.0,5.0,5.0,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-2.5,Centre drill,60,HSS,2.5,0.0984,,45.0,6.25,6.25,6.3,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-5,Centre drill,60,HSS,5.0,0.1969,,63.0,12.5,12.5,12.5,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-6.3,Centre drill,60,HSS,6.3,0.248,,71.0,15.75,15.75,16.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1113,K1113-8,Centre drill,60,HSS,8.0,0.315,,80.0,20.0,20.0,20.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1114,K1114-3.15,Centre drill,60,HSS,3.15,0.124,,50.0,7.875,7.875,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1114,K1114-4,Centre drill,60,HSS,4.0,0.1575,,56.0,10.0,10.0,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-1,Centre drill,60,HSS,1.0,0.0394,,31.5,2.5,2.5,4.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-1.5,Centre drill,60,HSS,1.5,0.0591,,40.0,3.75,3.75,5.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-2,Centre drill,60,HSS,2.0,0.0787,,45.0,5.0,5.0,6.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-2.5,Centre drill,60,HSS,2.5,0.0984,,50.0,6.25,6.25,8.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-3,Centre drill,60,HSS,3.0,0.1181,,56.0,7.5,7.5,10.0,2,2,2,2,2,0,Perform,1,54
+Walter,K1313,K1313-4,Centre drill,60,HSS,4.0,0.1575,,66.0,10.0,10.0,12.0,2,2,2,2,2,0,Perform,1,54

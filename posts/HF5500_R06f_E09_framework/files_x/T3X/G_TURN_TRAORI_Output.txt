@@ -1,0 +1,1 @@
+G_TURN_TRAORI($hyperMILL_G_TURN_TRAORI_FCT$,$hyperMILL_Vcut$,$hyperMILL_Smax$,$hyperMILL_G_TURN_TRAORI_Rotation_dir$,$hyperMILL_G_TURN_TRAORI_FL$)

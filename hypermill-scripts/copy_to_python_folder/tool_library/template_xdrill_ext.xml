@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="35.1" srcURL="sqlite://C:\TEMP\OPEN MIND\hyperMILL\13d48_0000019703AF69B8_doc.db" srcGuid="947fe814-ec84-424c-b0a4-9f7594394af3" srcType="document" masterGuid="03445e81-3d0b-4eb1-a007-2725d63a22d4" files="d5150_withextension_files">
+  <container main-obj="NCTools" main-obj-name="2">
+    <couplings/>
+    <extensions>
+      <extension name="Extension">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="58fca0bf-e09b-47d0-b9b3-294986853236"/>
+        <coupling type="unknown" location="top">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <coupling type="unknown" location="bottom">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="coolantThrough" value="unknown"/>
+        <geometry name="Default" active="1" objGuid="c3d1fb0b-56f9-41e1-95c9-c7ed553c4339">
+          <cont2D>
+            <elem2D type="line" sx="0" sy="0" ex="0.22600000000000001" ey="0"/>
+            <elem2D type="line" ex="0.22600000000000001" ey="1.464"/>
+            <elem2D type="line" ex="0.39350000000000002" ey="1.6315"/>
+            <elem2D type="line" ex="0.39350000000000002" ey="1.7640000000000002"/>
+            <elem2D type="line" ex="0" ey="1.7640000000000002"/>
+          </cont2D>
+          <mountingPosition location="machineSide">
+            <param name="origin" value="0,1.7640000000000002,0"/>
+            <param name="xAxis" value="1,0,0"/>
+            <param name="yAxis" value="-0,-0,-1"/>
+            <param name="zAxis" value="0,1,0"/>
+          </mountingPosition>
+          <mountingPosition location="workpieceSide">
+            <param name="origin" value="0,0,0"/>
+            <param name="xAxis" value="1,0,0"/>
+            <param name="yAxis" value="-0,-0,-1"/>
+            <param name="zAxis" value="0,1,0"/>
+          </mountingPosition>
+        </geometry>
+      </extension>
+    </extensions>
+    <tools>
+      <tool type="drilTool" name="Drill Tool_1">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="b7fe5f6a-c4ec-466b-8ce1-7917ca57d0c1"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolTotalLength" value="0.256"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <param name="cuttingEdges" value="2"/>
+        <param name="cuttingLength" value="0"/>
+        <param name="toolShaftType" value="none"/>
+        <param name="toolDiameter" value="0.472"/>
+        <param name="taperHeight" value="0.256"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="2000"/>
+            <param name="cuttingSpeed" value="10"/>
+            <param name="planeFeedrate" value="8"/>
+            <param name="zFeedrate" value="2"/>
+            <param name="feedratePerEdge" value="0.02"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="4"/>
+          </tecset>
+        </tecsets>
+        <param name="coneAngle" value="158"/>
+        <param name="centeringRequired" value="0"/>
+        <param name="noTipLength" value="0.2101262470434984"/>
+        <param name="breakThroughLength" value="0"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="2" id="2" name="D5150_WithExtension">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="64a6383c-4753-4459-a9c6-d08304ce5f39"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="1.73"/>
+        <param name="gageLength" value="2.02"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <param name="manualToolChange" value="0"/>
+        <components>
+          <component type="extension" name="Extension" contour="Default"/>
+          <component type="tool" name="Drill Tool_1" reach="0.25600000000000001"/>
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+        </cuttingProfiles>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+      </ncTool>
+    </ncTools>
+    <docObject type="ncTool">
+      <param name="externalObjectGuid" value="00000000-0000-0000-0000-000000000000"/>
+      <param name="externalObjectType" value="unknown"/>
+      <param name="scope" value="local"/>
+      <param name="state" value="local"/>
+      <param name="lastStateUpdate" value="20261019T120549"/>
+      <param name="locked" value="0"/>
+      <param name="localObject" value="2"/>
+    </docObject>
+  </container>
+</omtdx>

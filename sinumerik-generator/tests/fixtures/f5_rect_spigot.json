@@ -1,0 +1,334 @@
+{
+  "format": "SINUMERIK_ONE_GENERATOR_JOB",
+  "version": 1,
+  "header": {
+    "part": "RS5",
+    "material": "",
+    "stock": "",
+    "machine": "",
+    "programmer": ""
+  },
+  "config": {
+    "units": "METRIC",
+    "trunnion": "NONE",
+    "rotary": "B",
+    "mode": "TOMBSTONE",
+    "faces": "2",
+    "nestsPerFace": "3",
+    "totalNests": "5"
+  },
+  "probeStep": {
+    "enabled": true,
+    "step": "1",
+    "program": "B_RS5_001"
+  },
+  "steps": [
+    {
+      "step": "10",
+      "tool": "EM_16",
+      "brkTol": "0.3",
+      "program": "B_RS5_010",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    }
+  ],
+  "probing": {
+    "tool": "PROBE",
+    "limitClear": "",
+    "feed": "",
+    "searchDist": "",
+    "prnum": "1",
+    "probeOnM": "M56",
+    "partCheck": true,
+    "maxTravel": "",
+    "chkAlt": false,
+    "chkX": "",
+    "chkY": "",
+    "chkZ": "",
+    "skipZ": false,
+    "zAlt": false,
+    "zX": "",
+    "zY": "",
+    "zZ": "",
+    "zNom": "0",
+    "zTol": "",
+    "xyMethod": "RECT SPIGOT",
+    "widthX": "60",
+    "widthY": "40",
+    "diameter": "",
+    "appX": "5",
+    "appY": "-5",
+    "probeZ": "-8",
+    "xyTol": "",
+    "approachClr": "",
+    "health": true,
+    "hX": "0",
+    "hY": "0",
+    "hStartZ": "10",
+    "hTargetZ": "-1",
+    "hFeed": "200"
+  },
+  "wcs": [
+    {
+      "x": "1",
+      "y": "2",
+      "z": "3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "4",
+      "y": "5",
+      "z": "6",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "7",
+      "y": "8",
+      "z": "9",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "10",
+      "y": "11",
+      "z": "12",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "13",
+      "y": "14",
+      "z": "15",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    }
+  ]
+}

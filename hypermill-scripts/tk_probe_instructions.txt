@@ -1,0 +1,30 @@
+TKINTER PROBE - can the holder screens use a real window instead of hyperMILL's input dialogs?
+
+What it is for
+  tkinter is Python's built-in window toolkit: drop-downs that refilter each
+  other, lists, buttons, and a drawing area (a picture of the holder stack).
+  hyperMILL runs its own Python, which may or may not include tkinter. This
+  probe finds out, and whether a window can run in a separate Python process
+  and hand the choice back to the hyperMILL script.
+
+Install
+  Copy copy_to_python_folder\tk_probe into
+  C:\Users\Public\Documents\OPEN MIND\python and restart hyperMILL.
+
+Run
+  1. Save your work (any document can be open; nothing in it is touched).
+  2. Run tk_probe.
+       A: window in a separate Python (safe)               ticked
+       B: window inside hyperMILL (save your work first)   unticked the first time
+  3. A demo window should open: manufacturer and holder drop-downs (the holder
+     list changes with the manufacturer), a stick-out box and a drawing of the
+     930-HA10-S-20-100 holder. Pick something, type a stick-out, press OK.
+  4. A message says what worked. Send
+       C:\Users\Public\Documents\OPEN MIND\tk_probe_log.txt
+  5. Optional, if A did not work: run it again with only B ticked. B opens the
+     same window inside hyperMILL itself; if hyperMILL freezes, close it and
+     send the log anyway.
+
+What it changes
+  Nothing in hyperMILL. It writes the log and a few temporary files in the
+  Windows temp folder. The log is written line by line.

@@ -1,0 +1,6 @@
+; * - T$hyperMILL_T$ R$hyperMILL_Tradius$ L$hyperMILL_Tlength$ $hyperMILL_Tcornerradius$ $hyperMILL_Tcomment$ $hyperMILL_Tcomment2$
+; $hyperMILL_OPERATION$
+; $hyperMILL_Jobcomment$
+; $hyperMILL_JobListName$
+; $hyperMILL_JobName$
+; ---

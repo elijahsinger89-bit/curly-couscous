@@ -1,0 +1,360 @@
+{
+  "format": "SINUMERIK_ONE_GENERATOR_JOB",
+  "version": 1,
+  "header": {
+    "part": "HX4410",
+    "material": "4140",
+    "stock": "",
+    "machine": "H500",
+    "programmer": "ES"
+  },
+  "config": {
+    "units": "INCH",
+    "trunnion": "NONE",
+    "rotary": "B",
+    "mode": "TOMBSTONE",
+    "faces": "4",
+    "nestsPerFace": "1",
+    "totalNests": "4"
+  },
+  "probeStep": {
+    "enabled": true,
+    "step": "1",
+    "program": "B_HX4410_001"
+  },
+  "steps": [
+    {
+      "step": "10",
+      "tool": "FM_3IN",
+      "brkTol": "0.02",
+      "program": "B_HX4410_010",
+      "meas": true,
+      "measAlways": true,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    },
+    {
+      "step": "20",
+      "tool": "DRILL_0250",
+      "brkTol": "",
+      "program": "B_HX4410_020",
+      "meas": false,
+      "measAlways": false,
+      "brk": false,
+      "maxBrk": "",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    },
+    {
+      "step": "30",
+      "tool": "TAP_1420",
+      "brkTol": "0.015",
+      "program": "B_HX4410_030",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": true,
+      "life": "",
+      "setpiece": false
+    }
+  ],
+  "probing": {
+    "tool": "PROBE",
+    "limitClear": "",
+    "feed": "",
+    "searchDist": "",
+    "prnum": "1",
+    "probeOnM": "M56",
+    "partCheck": true,
+    "maxTravel": "",
+    "chkAlt": false,
+    "chkX": "",
+    "chkY": "",
+    "chkZ": "",
+    "skipZ": false,
+    "zAlt": true,
+    "zX": "1.5",
+    "zY": "0",
+    "zZ": "0.5",
+    "zNom": "0",
+    "zTol": "",
+    "xyMethod": "BORE",
+    "widthX": "",
+    "widthY": "",
+    "diameter": "1.0",
+    "appX": "0",
+    "appY": "0",
+    "probeZ": "-0.25",
+    "xyTol": "",
+    "approachClr": "",
+    "health": true,
+    "hX": "2",
+    "hY": "2",
+    "hStartZ": "0.25",
+    "hTargetZ": "-0.05",
+    "hFeed": ""
+  },
+  "wcs": [
+    {
+      "x": "-12.3456",
+      "y": "8.25",
+      "z": "-15.5",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-12.3456",
+      "y": "8.25",
+      "z": "-15.5",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-12.3456",
+      "y": "8.25",
+      "z": "-15.5",
+      "trunnion": "",
+      "rotary": "179.995",
+      "notes": ""
+    },
+    {
+      "x": "-12.3456",
+      "y": "8.25",
+      "z": "-15.5",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "",
+      "z": "",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    }
+  ]
+}

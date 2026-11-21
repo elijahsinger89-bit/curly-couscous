@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="33" srcType="standard">
+  <container main-obj="NCTools" main-obj-name="1">
+    <formulas>
+      <formula name="fF" type="feedrate"><param name="formula" value="fz*z*n"/><param name="comment" value="Default feedrate formula."/></formula>
+      <formula name="fFreduced" type="feedrate"><param name="formula" value="fz*z*n*0.7"/><param name="comment" value="Default formula for reduced feedrate."/></formula>
+      <formula name="fSinch" type="speed"><param name="formula" value="(Vc*12)/(d*pi)"/><param name="comment" value="Default inch spindle RPM formula."/></formula>
+    </formulas>
+    <couplings/>
+    <tools>
+      <tool type="threadMill" name="TEMPLATE">
+        <param name="comment" value="TEMPLATE"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <param name="toolTotalLength" value="2.5"/>
+        <coupling type="unknown" location="top"/>
+        <param name="cuttingEdges" value="3"/>
+        <param name="cuttingLength" value="0.5"/>
+        <param name="toolShaftType" value="parametric"/>
+        <param name="toolShaftDiameter" value="0.25"/>
+        <param name="toolShaftChamferDefMode" value="length"/>
+        <param name="toolShaftChamferLength" value="0"/>
+        <param name="toolShaftChamferAbsPos" value="0.5000000000"/>
+        <param name="toolShaftChamferAngle" value="0.0000000000000"/>
+        <param name="toolDiameter" value="0.2"/>
+        <param name="taperHeight" value="0.5"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="material" value="N"/>
+            <param name="purpose" value="General - usage 3"/>
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="spindleSpeed" value="11459.1559"/>
+            <param name="planeFeedrate" value="103.1324"/>
+            <param name="cuttingSpeed" value="600"/>
+            <param name="coolants" value="1"/>
+            <param name="zFeedrate" value="500"/>
+            <param name="feedratePerEdge" value="0.003"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="72.1927"/>
+            <param name="planeFeedrateFormula" value="fF"/>
+            <param name="spindleSpeedFormula" value="fSinch"/>
+            <param name="reducedFeedrateFormula" value="fFreduced"/>
+          </tecset>
+        </tecsets>
+        <param name="threadMillTipType" value="fullThread"/>
+        <param name="threadApplication" value="internal"/>
+        <param name="collar" value="0"/>
+        <param name="tipDiameter" value="0"/>
+        <param name="minPitch" value="0.05"/>
+        <param name="maxPitch" value="0.05"/>
+        <param name="minorThreadDiameter" value="0.2"/>
+        <param name="noOfThreadProfiles" value="6"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="1" id="1" name="TEMPLATE">
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="0.5"/>
+        <param name="gageLength" value="2.5"/>
+        <param name="toolReference" value="tip"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <components><component type="tool" name="TEMPLATE"/></components>
+        <cuttingProfiles><cuttingProfile type="milling"/></cuttingProfiles>
+        <coupling type="unknown" location="machineSide"/>
+      </ncTool>
+    </ncTools>
+  </container>
+</omtdx>

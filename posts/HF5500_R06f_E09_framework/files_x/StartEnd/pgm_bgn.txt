@@ -1,0 +1,22 @@
+;===========================================
+; PROGRAM      : $hyperMILL_NCfile$.$hyperMILL_NCext$
+; PRG FUNCTION : $hyperMILL_Compound_JobName$ $hyperMILL_Compound_JobComment$
+; JOB LIST     : $hyperMILL_JobListName$
+; MACHINE      : HF5500
+; CONTROL      : SINUMERIK ONE
+; POSTED       : $hyperMILL_yyyy$-$hyperMILL_mm$-$hyperMILL_dd$ $hyperMILL_hours$:$hyperMILL_minutes$ BY HYPERMILL (R06F_E09 HF5500 PROD MACRO)
+; FRAMEWORK    : NEEDS NEST FRAMEWORK REV 02 - CALLED PER NEST BY L_RUN_NESTS
+;-------------------------------------------
+; B PROGRAM RULES (NEST FRAMEWORK):
+;  1. CUTS ONE NEST PER CALL (CALL LD_PROG, NO PARAMETERS)
+;  2. RUNS IN G54 (C_P1_LOAD_WO COPIES THE NEST WO INTO G54)
+;  3. NO T / M6 (THE FRAMEWORK LOADS THE TOOL AND ITS SISTERS)
+;  4. ORIENTS PER FACE WITH CYCLE800 FROM CAM
+;  5. STARTS ITS OWN SPINDLE AND COOLANT
+;  6. ENDS: Z RETRACT, M5, M9, G97, CYCLE832(), CYCLE800(), TRAFOOF, RET
+;--------------------
+;  REVISION CONTROL
+;--------------------
+; REV  DATE        BY            DESCRIPTION
+;  00  $hyperMILL_yyyy$-$hyperMILL_mm$-$hyperMILL_dd$  XXXX          POSTED
+;===========================================

@@ -1,0 +1,5 @@
+{
+    "ShowContent": false,
+    "StartupFile": "go_to_machine.py",
+    "Type": "Script"
+}

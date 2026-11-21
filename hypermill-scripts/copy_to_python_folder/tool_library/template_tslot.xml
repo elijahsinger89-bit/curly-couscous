@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omtdx version="35.1" srcURL="sqlite://C:\TEMP\OPEN MIND\hyperMILL\13d48_0000019703AF69B8_doc.db" srcGuid="947fe814-ec84-424c-b0a4-9f7594394af3" srcType="document" masterGuid="03445e81-3d0b-4eb1-a007-2725d63a22d4" files="tslotsharp_files">
+  <container main-obj="NCTools" main-obj-name="6">
+    <couplings/>
+    <tools>
+      <tool type="Tslotcutter" name="T-Slot Cutter">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="b7d848f6-4f5c-4721-9def-4abb4916afbd"/>
+        <param name="cuttingMaterial" value="Solid carbide"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolTotalLength" value="3.5"/>
+        <param name="spindleRotation" value="clockwise"/>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+        <param name="cuttingEdges" value="8"/>
+        <param name="cuttingLength" value="0.3125"/>
+        <param name="toolShaftType" value="parametric"/>
+        <param name="toolShaftDiameter" value="0.625"/>
+        <param name="toolShaftChamferDefMode" value="length"/>
+        <param name="toolShaftChamferLength" value="0.1875"/>
+        <param name="toolShaftChamferAbsPos" value="1.9375"/>
+        <param name="toolShaftChamferAngle" value="18.43494882292201"/>
+        <param name="toolDiameter" value="1.25"/>
+        <param name="taperHeight" value="1.75"/>
+        <tecsets>
+          <tecset type="milling">
+            <param name="lengthOfUnit" value="inch"/>
+            <param name="coolants" value="1"/>
+            <param name="spindleSpeed" value="2000"/>
+            <param name="cuttingSpeed" value="10"/>
+            <param name="planeFeedrate" value="8"/>
+            <param name="zFeedrate" value="2"/>
+            <param name="feedratePerEdge" value="0.02"/>
+            <param name="drillingFeedrate" value="0"/>
+            <param name="cuttingWidth" value="0"/>
+            <param name="cuttingLength" value="0"/>
+            <param name="maxRedFeedrateAngle" value="15"/>
+            <param name="plungeAngle" value="2"/>
+            <param name="reducedFeedrate" value="4"/>
+          </tecset>
+        </tecsets>
+        <param name="radialRakeAngle" value="0"/>
+        <param name="helixAngle" value="0"/>
+        <param name="cuttingEdgeDistribution" value="equal"/>
+        <param name="cuttingEdgeTreatment" value="0"/>
+        <param name="tipDiameter" value="0.5"/>
+        <param name="discHeight" value="0.3125"/>
+        <param name="upperCornerType" value="sharp"/>
+        <param name="upperChamferAngle" value="0"/>
+        <param name="upperChamferHeight" value="0"/>
+        <param name="upperCornerRadius" value="0"/>
+        <param name="lowerCornerType" value="sharp"/>
+        <param name="lowerChamferAngle" value="0"/>
+        <param name="lowerChamferHeight" value="0"/>
+        <param name="lowerCornerRadius" value="0"/>
+      </tool>
+    </tools>
+    <ncTools>
+      <ncTool ncNumber="6" id="6" name="T-Slot Cutter-sharp">
+        <param name="hmbState" value="unlinked"/>
+        <param name="objGuid" value="a530ad35-5a59-4617-9527-8e93fb491f76"/>
+        <param name="lengthOfUnit" value="inch"/>
+        <param name="toolLength" value="0"/>
+        <param name="usableLength" value="0"/>
+        <param name="clearanceLength" value="3.5"/>
+        <param name="gageLength" value="3.5"/>
+        <param name="spindleSpeedFactor" value="1"/>
+        <param name="feedrateFactor" value="1"/>
+        <param name="cuttingWidthFactor" value="1"/>
+        <param name="cuttingLengthFactor" value="1"/>
+        <param name="maxSpindleSpeed" value="0"/>
+        <param name="maxFeedrate" value="0"/>
+        <param name="breakageCheck" value="0"/>
+        <param name="manualToolChange" value="0"/>
+        <referencePoints>
+          <referencePoint type="tip" name="Tip" offset="0" diameter="1.25" cRegister="1"/>
+          <referencePoint type="discTop" name="Disc_top" offset="0.3125" diameter="1.25" cRegister="2"/>
+        </referencePoints>
+        <components>
+          <component type="tool" name="T-Slot Cutter"/>
+        </components>
+        <cuttingProfiles>
+          <cuttingProfile type="milling">
+            <param name="enabled" value="1"/>
+          </cuttingProfile>
+        </cuttingProfiles>
+        <coupling type="unknown">
+          <param name="objGuid" value="dc024495-db16-4155-8056-3cc82591ccbc"/>
+        </coupling>
+      </ncTool>
+    </ncTools>
+    <docObject type="ncTool">
+      <param name="externalObjectGuid" value="00000000-0000-0000-0000-000000000000"/>
+      <param name="externalObjectType" value="unknown"/>
+      <param name="scope" value="local"/>
+      <param name="state" value="local"/>
+      <param name="lastStateUpdate" value="20261019T123701"/>
+      <param name="locked" value="0"/>
+      <param name="localObject" value="6"/>
+    </docObject>
+  </container>
+</omtdx>

@@ -1,0 +1,360 @@
+{
+  "format": "SINUMERIK_ONE_GENERATOR_JOB",
+  "version": 1,
+  "header": {
+    "part": "TOMB32",
+    "material": "",
+    "stock": "",
+    "machine": "H630",
+    "programmer": ""
+  },
+  "config": {
+    "units": "METRIC",
+    "trunnion": "A",
+    "rotary": "C",
+    "mode": "TOMBSTONE",
+    "faces": "8",
+    "nestsPerFace": "4",
+    "totalNests": "32"
+  },
+  "probeStep": {
+    "enabled": true,
+    "step": "5",
+    "program": "B_TOMB32_005"
+  },
+  "steps": [
+    {
+      "step": "10",
+      "tool": "EM_10",
+      "brkTol": "0.3",
+      "program": "B_TOMB32_010",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    },
+    {
+      "step": "20",
+      "tool": "DR_6",
+      "brkTol": "0.2",
+      "program": "B_TOMB32_020",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    },
+    {
+      "step": "1000",
+      "tool": "CHAMFER",
+      "brkTol": "0.3",
+      "program": "B_TOMB32_1000",
+      "meas": true,
+      "measAlways": false,
+      "brk": true,
+      "maxBrk": "2",
+      "debug": false,
+      "life": "1",
+      "setpiece": true
+    }
+  ],
+  "probing": {
+    "tool": "PROBE",
+    "limitClear": "",
+    "feed": "",
+    "searchDist": "5",
+    "prnum": "1",
+    "probeOnM": "M56",
+    "partCheck": true,
+    "maxTravel": "",
+    "chkAlt": false,
+    "chkX": "",
+    "chkY": "",
+    "chkZ": "",
+    "skipZ": false,
+    "zAlt": true,
+    "zX": "60",
+    "zY": "0",
+    "zZ": "8",
+    "zNom": "0",
+    "zTol": "",
+    "xyMethod": "RECT POCKET",
+    "widthX": "40",
+    "widthY": "30",
+    "diameter": "",
+    "appX": "0",
+    "appY": "0",
+    "probeZ": "-6",
+    "xyTol": "",
+    "approachClr": "10",
+    "health": false,
+    "hX": "",
+    "hY": "",
+    "hStartZ": "",
+    "hTargetZ": "",
+    "hFeed": ""
+  },
+  "wcs": [
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.01",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.02",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.03",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.04",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.05",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.06",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.07",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.08",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.09",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.1",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.11",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.12",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.13",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.14",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.15",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.16",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "",
+      "y": "75.25",
+      "z": "-400.17",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.18",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.19",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.2",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.21",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.22",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.23",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.24",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.25",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.26",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.27",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.28",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-150",
+      "y": "75.25",
+      "z": "-400.29",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "0",
+      "y": "75.25",
+      "z": "-400.3",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "150",
+      "y": "75.25",
+      "z": "-400.31",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    },
+    {
+      "x": "-300",
+      "y": "75.25",
+      "z": "-400.32",
+      "trunnion": "",
+      "rotary": "",
+      "notes": ""
+    }
+  ]
+}

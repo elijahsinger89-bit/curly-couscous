@@ -1,0 +1,27 @@
+RELEASE PROBE v5 (read-only) - for the go-to-machine script
+
+What it is for
+  Which Simulation Center result (POF\<ucid>.ccrpt) belongs to which job.
+  Known so far: each simulated toolpath gets a .ccrpt named by a toolpath id
+  (ucid, not the job UUID); changing a job deletes its .ccrpt; regrouping
+  keeps it. v5 looks for each job's ucid:
+    - in the job's POF file (every GUID in it; each .ccrpt ucid as text or
+      UTF-16), read only
+    - in PofFile.GetCfgParameters(), read from a temporary COPY of the POF
+    - in the job's own settings
+    - the POF file's CRC32 against the crc values in the .omgcfg
+  The summary at the end lists each .ccrpt and the job it belongs to.
+
+Install
+  Copy copy_to_python_folder\release_probe into
+  C:\Users\Public\Documents\OPEN MIND\python (replace v4) and restart
+  hyperMILL.
+
+Run
+  Same document as v4, as it is now (4 .ccrpt files left). Run
+  release_probe and send the log.
+
+What it changes
+  Nothing in the document and nothing in the POF folder. No NC file is
+  written, nothing is calculated. The log is written line by line; if
+  hyperMILL freezes, close it and send the log anyway.

@@ -1,0 +1,7 @@
+; $hyperMILL_OPERATION$
+; $hyperMILL_Jobcomment$
+; $hyperMILL_JobListName$
+; $hyperMILL_Jobname$
+; $hyperMILL_Compound_JobName$
+; $hyperMILL_Compound_JobComment$
+; ---
