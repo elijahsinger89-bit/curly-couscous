@@ -217,6 +217,14 @@ def candidates():
         for n in ("pythonw.exe", "python.exe"):
             if d:
                 add(os.path.join(d, n), "next to hyperMILL's Python")
+    # hyperMILL's own interpreter (the one each script's .vscode\settings.json names), newest version first
+    shared = r"C:\Program Files\OPEN MIND\Shared"
+    try:
+        for v in sorted(os.listdir(shared), reverse=True):
+            for n in ("pythonw.exe", "python.exe"):
+                add(os.path.join(shared, v, "python", n), "hyperMILL's interpreter (Shared\\%s\\python)" % v)
+    except Exception:
+        pass
     for n in ("pythonw", "python", "py"):
         add(shutil.which(n) or "", "on PATH")
     return out
