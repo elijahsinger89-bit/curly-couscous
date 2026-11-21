@@ -420,6 +420,11 @@ number or a type is listed and left alone.
 Log: restore_job_names_log.txt holds old -> new for every toolpath, so a name can be typed back, and for every toolpath
 left alone what it holds (ID, *JOBID, cycle names).
 
+TKINTER PROBE (tk_probe, for the holder screens)
+Checks whether a real window (tkinter: linked drop-downs, a drawing of the holder) can be used instead of hyperMILL's
+input dialogs. A = the window in a separate Python process (safe, default); B = inside hyperMILL (save first).
+Changes nothing in hyperMILL. Steps: tk_probe_instructions.txt. Log: tk_probe_log.txt.
+
 SHOW TOOLPATHS OF ONE TOOL (show_tool_toolpaths, v3) - FOR NOW: BULB FINDER, READ-ONLY
 The v2 log (20 Nov 2026) showed *SHOW_NCPATH is NOT the light bulb: writing it set the test toolpath to NEEDS_CALCULATION
 (ShowNCPaths mirrors it). Switching is off (SWITCH = False) until the bulb is found; v3 writes nothing.
